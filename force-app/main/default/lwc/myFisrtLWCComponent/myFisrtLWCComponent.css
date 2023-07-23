@@ -1,0 +1,16 @@
+.backGroundcolor{
+    background-color:gold;
+    font-size: large;
+    color: black;
+}
+.redBackGroundcolor{
+    background-color:red;
+}
+.yellowBackGroundcolor{
+    background-color:yellow;
+}
+p{
+    color: black;
+    font-size: medium;
+    background-color:darkcyan;
+}

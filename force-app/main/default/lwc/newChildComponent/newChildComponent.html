@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Welcome to Child Component"> 
+        <lightning-checkbox-group name="Checkbox Group"
+                                  label="Checkbox Group"
+                                  options={options}
+                                  value={value}
+                                  onchange={handleChange}></lightning-checkbox-group>
+        </lightning-card>
+    <lightning-card title={getMessage}>
+
+    </lightning-card>
+    <template if:true={showRed}>
+        <div style= background-color:red;>---</div>
+    </template>
+    <template if:false={showRed}>
+        <div style= background-color:yellow;>---</div>
+    </template> 
+    <lightning-card title="From Parent to Child">
+    <p class="slds-p-around_medium"> Value of counterValue from Parent to child is: {counterValue}</p>
+    
+    <p> Prior Count: {priorCount}</p>
+    <p> Current Count: {currentCount}</p>
+
+    <p> Use following Buttons to Update New Count Value in Parent from Child </p>
+<lightning-button label="add" variant="Brand" onclick={addFunction} style="margin:10px;"> </lightning-button>
+<lightning-button label="sub" variant="Brand" onclick={subFunction} style="margin:10px;"> </lightning-button>
+<lightning-button label="Mul_by_2" data-factor="2" variant="Brand" onclick={mulFunction} style="margin:10px;"> </lightning-button>
+<lightning-button label="Mul_by_3" data-factor="3" variant="Brand" onclick={mulFunction} style="margin:10px;"> </lightning-button>
+
+</lightning-card>
+</template>

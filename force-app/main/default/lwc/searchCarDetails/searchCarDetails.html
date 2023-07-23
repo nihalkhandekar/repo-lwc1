@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Car Details">
+    <div class="slds-p-around_medium">
+        <lightning-input type="search" label="Search Car Details" 
+        placeholder="Type Car Details Here" onchange={handleSearch}></lightning-input> <br/><br/>
+        
+        <template  if:true={availableCars} >
+            <lightning-datatable 
+            key-field="Id"
+            data={availableCars}
+            columns={columns}
+            hide-checkbox-column="true"
+            show-row-number-column="true"
+            > 
+            </lightning-datatable>
+        </template>
+        <template if:true={error}>
+            {error}
+        </template>
+        </div> 
+    </lightning-card>
+</template>
