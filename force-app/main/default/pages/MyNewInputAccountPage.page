@@ -1,0 +1,51 @@
+<apex:page showHeader="true" sidebar="true" wizard="false" standardController="Account" lightningStylesheets="true">
+<h1> Static Resources(!$):</h1><br/>
+<b>{!$User.FirstName} {!$User.LastName}<br/>{!$User.Email}</b>
+<!-- tabStyle only attens tab properties -->
+<apex:sectionHeader title="Account Edit" subtitle="New Account"/> <!-- When we open new account, the top of the page contains section header.-->
+  <apex:form > <!-- When we want input type fields then apex:form attribute is used-->
+      <apex:pageBlock title="Account Edit" > <!-- When we write different sections it should be added inside pageBlock-->
+         <apex:pageBlockButtons >
+             <apex:commandButton value="Save Record" action="{!Save}"/>
+             <apex:commandButton value="Cancel Record" action="{!Cancel}"/>
+         </apex:pageBlockButtons> 
+          <apex:pageBlockSection title="Account Information" collapsible="False"> <!-- When you want to add Particular fields it should be added inside pageBlockSection with diff particular title -->
+              <apex:outputField value="{!Account.OwnerId}"/>
+              <apex:inputField value="{!Account.Name}"/>
+              <apex:inputField value="{!Account.CurrencyIsoCode}"/>
+              <apex:inputField value="{!Account.Industry}"/>
+              <apex:inputField value="{!Account.AccountNumber}"/>
+              <apex:inputField value="{!Account.Phone}"/>
+              <apex:inputField value="{!Account.Rating}"/>
+              <apex:inputField value="{!Account.AccountSource}"/>  
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection title="Address Information">
+              <apex:inputField value="{!Account.BillingStreet}"/>
+              <apex:inputField value="{!Account.ShippingStreet}"/>
+              <apex:inputField value="{!Account.BillingCity}"/>
+              <apex:inputField value="{!Account.ShippingCity}"/>              
+              <apex:inputField value="{!Account.BillingState}"/>
+              <apex:inputField value="{!Account.ShippingState}"/>
+              <apex:inputField value="{!Account.BillingPostalCode}"/>
+              <apex:inputField value="{!Account.ShippingPostalCode}"/>              
+              <apex:inputField value="{!Account.BillingCountry}"/>
+              <apex:inputField value="{!Account.ShippingCountry}"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="Additional Information">
+              <apex:inputField value="{!Account.CustomerPriority__c}"/>
+              <apex:inputField value="{!Account.SLA__c}"/>
+              <apex:inputField value="{!Account.SLAExpirationDate__c}"/>
+              <apex:inputField value="{!Account.SLASerialNumber__c}"/>
+              <apex:inputField value="{!Account.NumberofLocations__c}"/>
+              <apex:inputField value="{!Account.UpsellOpportunity__c}"/>
+              <apex:inputField value="{!Account.Active__c}"/>
+          </apex:pageBlockSection>  
+          
+          <apex:pageBlockSection title="Description Information">
+              <apex:inputField value="{!Account.Description}"/>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

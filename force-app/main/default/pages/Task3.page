@@ -1,0 +1,19 @@
+<apex:page controller="Task3" tabStyle="Account">
+   <apex:sectionHeader title="Custom Account Edit" subtitle="New Custom Account"/>
+    <apex:form >
+      <apex:pageBlock title="Custom Account Edit" >
+             <apex:pageBlockButtons >
+                 <apex:commandButton value="Custom Save" action="{!CustomSave}"/>
+                 <apex:commandButton value="Custom Cancel" action="{!CustomCancel}"/>
+             </apex:pageBlockButtons>
+          <apex:pageBlockSection title="Custom Account Information" >
+              <apex:inputField value="{!acc.Name}"/>
+              <apex:inputField value="{!acc.Type}"/>
+              <apex:inputField value="{!acc.Phone}"/>
+              <apex:inputField value="{!acc.rating}"/>
+              <apex:inputField value="{!acc.Industry}"/>
+              <apex:inputField value="{!acc.AccountNumber}"/>
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+    </apex:form>
+</apex:page>

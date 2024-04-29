@@ -1,0 +1,102 @@
+<template>
+    <lightning-card title="First Component"> 
+        <div class="backGroundcolor">{welcomeNote}</div>
+        <lightning-input type="text" value="Welcome" label="Enter Welcome Note10" onchange={handleChange}> </lightning-input>
+        <lightning-input type="checkbox"  label="Enter Welcome Note20" onchange={handleChangeCheckbox}> </lightning-input>
+        <lightning-input type="text"  label="Enter Welcome Note30" onchange={handleChange}> </lightning-input>
+        <lightning-input type="text"  label="Enter Welcome Note40" onchange={handleChange}> </lightning-input>
+
+        <template if:true={updateColor}>
+            <div class="redBackGroundcolor">{welcomeNote}</div>
+        </template>
+        <template if:false={updateColor}>
+            <div class="yellowBackGroundcolor">{welcomeNote}</div>
+        </template>
+        
+        <template  for:each={Students} for:item="Student">
+            <p key={Student}>{welcomeNote}{Student} </p>
+        </template>
+        
+        <template iterator:it={Students}>
+            <template if:true={it.first}> Welcome to our services</template>
+            <p key={it.value}> {it.first} {it.value} {it.last}</p>
+            <template if:true={it.last}> Thanks for visiting </template>
+        </template>
+        <template for:each={Teachers} for:item="Teacher">
+            <p key={Teacher.Name}> Name--{Teacher.Name} </p>  
+            <p key={Teacher.Subject}>Subject--{Teacher.Subject} </p>  
+            <p key={Teacher.Class}>Class--{Teacher.Class} </p>
+            <p key={Teacher.Qualification.Graduation}>Education--{Teacher.Qualification.Graduation} </p>
+        </template>
+        <template iterator:it={Teachers}>
+            <p key={it.value.Name}>--{it.value.Name} </p>
+            <p key={it.value.Subject}>--{it.value.Subject} </p>
+            <p key={it.value.Class}>--{it.value.Class} </p>
+            <p key={it.value.Qualification.Graduation}>--{it.value.Qualification.Graduation} </p>
+        </template>
+        
+    </lightning-card>
+
+    <!--learning new-->
+    <lightning-card title="Conditional Rendering" icon-name="custom:custom14">
+    <div if:true={result}>
+        <p> Welcome to programming</p>
+    </div>
+    <div if:false={result}>
+        <p> Loading.....</p>
+    </div> 
+
+    <lightning-input label="terms And conditions" 
+    type="checkbox" onchange={handleChange}>
+    
+    </lightning-input>
+    <div if:true={result}>
+        <p>
+            Subcribe to my channel
+        </p>
+        <p>
+            Like the video
+        </p>
+    </div>
+    <div if:false={result}>
+        <p>
+            Dont Comment
+        </p>
+    </div>
+    </lightning-card>
+    
+    <lightning-card title="Information Form">
+  <lightning-input type="text" label="Name" 
+  placeholder="Enter Your Name" onchange={handleChange2}>
+
+  </lightning-input> 
+  <lightning-input type="email" label="Email"
+  placeholder="Enter Your Email" onchange={handleChange2}>
+
+  </lightning-input>
+  <lightning-input type="password" label="Password"
+  placeholder="Enter your Password" onchange={handleChange2}>
+
+  </lightning-input>
+
+    <lightning-button variant="success" 
+    label="Submit form" onclick={handleClick}>
+  
+    </lightning-button>
+    
+    <div class="modal" if:true={showResult}>
+        <p> Name:{name}</p>
+        <p> Email:{email}</p>
+        <p> Password:{password}</p>
+    </div>
+</lightning-card>
+<div class="slds-p-around_medium">
+<lightning-input class="backGroundcolor" type="text" label="Search contact name" 
+placeholder="Type name here" onchange={handleSearch}></lightning-input>
+
+<template  if:true={viewData} for:each={viewData} for:item="res" >
+<lightning-card key={res.Id} title={res.Name} icon-name="standard:contact">
+</lightning-card>
+</template>
+</div>
+</template>

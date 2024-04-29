@@ -1,0 +1,15 @@
+<apex:page controller="MoreIncentive">
+  <apex:form >
+      <apex:pageBlock title="Incentive Information">
+            <apex:pageBlockButtons location="both" >
+            <apex:commandButton value="Save" action="{!save}"/>
+            <apex:commandButton value="Cancel" action="{!Cancel}"/>
+            </apex:pageBlockButtons>
+        <apex:pageblocksection >
+        <apex:inputField value="{!inc.Incentive_Amount__c}"/>
+        <apex:inputField value="{!inc.Type_of_Incentive__c}" required="true"/>
+        <apex:inputField value="{!inc.Date_of_Incentive__c}"/>
+        </apex:pageblocksection>
+      </apex:pageBlock>
+  </apex:form>              
+</apex:page>

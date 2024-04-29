@@ -1,0 +1,109 @@
+<apex:page standardController="Account" renderAs="PDf">
+<apex:image id="InvoiceLogo" value="{!$Resource.InvoiceLogo}" width="200" height="50" style="position:absolute;right:0"/>
+<br/><br/><br/><br/><br/>
+
+<table style="fornt-family: sans-serif; padding-bottom : 0px;">
+<tr>
+    <td style="font: 20px">
+    <b>Account Name</b>:
+    </td>
+    <td style="font: 20px; padding-left:1px ">
+    <apex:outputField value="{!Account.name}"> </apex:outputField>
+    </td>
+</tr>
+</table>
+<table>
+<tr>
+    <td>
+    <apex:repeat value="{!Account}" var="EmptyBox">
+    Billing Street: {!EmptyBox.BillingStreet}<br/>
+    Billing City: {!EmptyBox.BillingCity}<br/>
+    Billing State: {!EmptyBox.BillingState}<br/>
+    Billing PostalCode: {!EmptyBox.BillingPostalCode}<br/>
+    Billing Country: {!EmptyBox.BillingCountry}
+    </apex:repeat>
+    </td>  
+</tr>
+</table>    
+<br/>
+
+<table style="border: 0.5px solid #000000;" >
+<tr style="color: #000000; background-color: #87CEEB;">
+   <th style="font: 15px"> <b>Account Name</b>:</th>  
+   <th style="font: 15px; padding-left:0px "> <apex:outputField value="{!Account.name}"> </apex:outputField></th>
+   <th style="background-color: #87CEEB; padding-left:250px; padding-right:180px"> </th>  
+   <th style="font: 15px; padding-left:1px "> <b>Date</b>: </th> 
+   <td style="Text-align: right; font:15px;"> <apex:outputText value="{!DAY(TODAY())}-{!MONTH(TODAY())}-{!YEAR(TODAY())}"> </apex:outputtext></td> 
+</tr>
+</table>
+<br/>
+<table>
+<tr>
+    <th style="font: 15px"> <b> Bill to</b> </th>
+    <th style="padding-left:250px; padding-right:190px"> </th>  
+    <th style="font: 15px"> <b> Ship to</b> </th>
+</tr>
+</table>
+<table>
+<tr>
+    <td>   
+    <apex:repeat value="{!Account}" var="EmptyBox">
+    Billing Street: {!EmptyBox.BillingStreet}<br/>
+    Billing City: {!EmptyBox.BillingCity}<br/>
+    Billing State: {!EmptyBox.BillingState}<br/>
+    Billing PostalCode: {!EmptyBox.BillingPostalCode}<br/>
+    Billing Country: {!EmptyBox.BillingCountry}
+    </apex:repeat>
+    </td>
+    <td style="padding-left:150px; padding-right:150px">          
+    </td>
+    <td>
+    <apex:repeat value="{!Account}" var="EmptyBox">
+    Shipping Street: {!EmptyBox.ShippingStreet}<br/>
+    Shipping City: {!EmptyBox.ShippingCity}<br/>
+    Shipping State: {!EmptyBox.ShippingState}<br/>
+    Shipping PostalCode: {!EmptyBox.ShippingPostalCode}<br/>
+    Shipping Country: {!EmptyBox.ShippingCountry}
+    </apex:repeat>
+    </td>
+</tr>
+</table>
+<br/>
+<table style="fornt-family: sans-serif;" border="1">
+<tr style="color: #000000; background-color: #87CEEB; font: 15px">
+    <td style="Padding-right: 180px"> Name   </td>
+    <td style="Padding-right: 180px"> Email  </td>
+    <td style="Padding-right: 80px"> Phone  </td>
+    <td style="Padding-right: 90px"> Salary </td>
+</tr>
+
+<apex:repeat value="{!Account.contacts}" var="KhaliBox">
+<tr>
+<td>
+{!KhaliBox.name}
+</td>
+<td>
+{!KhaliBox.email}
+</td>
+<td>
+{!KhaliBox.phone}
+</td>
+<td>
+{!KhaliBox.Salary__c}
+</td>
+</tr>
+</apex:repeat>
+</table>
+
+<table style="font-size: 15px" >
+<tr>
+    <td style="padding-left:290px; padding-right:150px"> <!--Blank Space--> </td>
+    <td style="padding-left:0px; padding-right:20px"><b><u>Total Salary</u>: </b> </td>
+    <td style="padding-left:15px; padding-right:0px"><apex:outputField value="{!Account.Total_Salary_Amount_of_Contacts__c}"> </apex:outputField></td>
+</tr>
+</table>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+ <apex:image id="InvoicesLogo" value="{!$Resource.InvoiceLogo}" width="200" height="50" style="position:absolute;left:0"/>
+</apex:page>

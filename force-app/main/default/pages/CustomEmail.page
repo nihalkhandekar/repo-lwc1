@@ -1,0 +1,17 @@
+<apex:page controller="CustomEmail">
+ <apex:form >
+   <apex:pageBlock title="Send Opportunity & LineItem As Email">
+   <p style="text-align: center; font-size:20px; background-color: #87CEEB;"> Send Opportunity And LineItem as Email</p><br/><br/>
+   <apex:pageBlockSection >
+     <apex:inputText style="width: 350px" label="To Address:-" value="{!ToAddress}"/><br/>
+     <apex:inputText style="width: 350px" label="Cc Address:-" value="{!ccAddress}"/><br/>
+     <apex:inputText style="width: 350px" label="Subject:-" value="{!Subject}"/><br/>
+     <apex:inputTextarea style="width: 1000px" value="{!EmailBody}" richText="true"/><br/>
+   </apex:pageBlockSection>
+   
+   <apex:pageBlockButtons location="Bottom">
+     <apex:commandButton value="Send" action="{!SendEmail}"/>
+   </apex:pageBlockButtons>
+   </apex:pageBlock> 
+ </apex:form> 
+</apex:page>

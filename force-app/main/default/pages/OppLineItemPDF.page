@@ -1,0 +1,56 @@
+<apex:page controller="OppLineItemPDF" renderAs="PDF">
+<apex:image id="OppLogo" value="{!$Resource.OppLogo}" width="100" height="80" style="position:absolute;right:0"/>
+<br/><br/><br/><br/><br/>
+<table style="fornt-family: sans-serif; padding-bottom : 0px;">
+<tr>
+    <td style="font: 15px">
+    <b>Opportunity Name</b>:
+    </td>
+    <td style="font: 15px; padding-left:1px ">
+    <apex:outputField value="{!opp.name}"> </apex:outputField>
+    </td>
+</tr>
+<tr>
+    <td style="font: 15px">
+    <b>Expected Revenue</b>:
+    </td>
+    <td style="font: 15px; padding-left:1px ">
+    <apex:outputField value="{!opp.Expected_Revenue__c}"> </apex:outputField>
+    </td>
+</tr>
+</table>
+<br/><br/><br/>
+<table>
+<tr> <td> <b>Opportunity Line Items </b>: </td> </tr>
+</table>
+<br/><br/>
+<table border="1">
+<tr style="color: #000000; background-color: #87CEEB; font: 15px">
+    <td style="Padding-left: 40px; Padding-right: 40px;  text-align: center; vertical-align: middle;"> Opportunity Item Name </td>
+    <td style="Padding-left: 40px; Padding-right: 40px"> Sales Price</td>
+    <td style="Padding-left: 30px; Padding-right: 30px"> Quantity  </td>
+    <td style="Padding-left: 40px; Padding-right: 40px"> Total Price (INR) </td>
+</tr>
+<apex:repeat value="{!OPLCList}" var="OPL">
+<tr>
+<td style="Padding-left: 60px; Padding-right: 60px;">{!OPL.name}</td>
+<td style="Padding-left: 40px; Padding-right: 40px;">{!OPL.Sales_Price__c}</td>
+<td style="Padding-left: 30px; Padding-right: 30px">{!OPL.Quantity__c}</td>
+<td style="Padding-left: 40px; Padding-right: 40px">{!OPL.Total_price__c}</td>
+</tr>
+</apex:repeat>
+</table>
+<table style="font-size: 15px" >
+<tr>
+    <td style="padding-left:190px; padding-right:210px"> <!--Blank Space--> </td>
+    <td style="padding-left:0px; padding-right:20px"><b><u>Grand Total</u>: </b> </td>
+    <td style="padding-left:15px; padding-right:0px"><apex:outputField value="{!opp.Expected_Revenue__c}"> </apex:outputField></td>
+</tr>
+</table>
+<br/><br/><br/><br/><br/><br/><br/><br/>
+<table>
+   <tr><td style="Padding-left: 200px; Padding-right: 200px;  text-align: center; vertical-align: middle;"> <i><b> "Perfection And Quality Is Our Priority"</b></i> </td></tr>
+</table>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<apex:image id="OppLogos" value="{!$Resource.OppLogo}" width="100" height="80" style="position:absolute;left:0"/>
+</apex:page>

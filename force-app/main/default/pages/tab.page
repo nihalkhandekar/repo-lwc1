@@ -1,0 +1,37 @@
+<apex:page standardController="Account" renderAs="pdf">
+
+<!-- HTML Table. These are used for Raw pages like PDF-->
+
+<table border="1">
+<apex:repeat value="{!Account.contacts}" var="KhaliBox">
+<tr>
+<td>
+{!KhaliBox.name}
+</td>
+<td>
+{!KhaliBox.phone}
+</td>
+<td>
+{!KhaliBox.email}
+</td>
+</tr>
+</apex:repeat>
+</table>
+
+<!-- Page Block Table... Their property is they are dynamic. These are used for internal VF pages -->
+<apex:pageBlock >
+<apex:pageBlockTable value="{!Account.contacts}" var="KhaliBox" border="1">
+<apex:column value="{!KhaliBox.name}"/>
+<apex:column value="{!KhaliBox.phone}"/>
+<apex:column value="{!KhaliBox.email}"/>
+</apex:pageBlockTable>
+</apex:pageBlock>
+
+<!-- Data Table... Their property is they are dynamic.These are used for Raw pages like PDF-->
+<apex:dataTable value="{!Account.contacts}" var="KhaliBox"  border="1">
+<apex:column value="{!KhaliBox.name}"/>
+<apex:column value="{!KhaliBox.phone}"/>
+<apex:column value="{!KhaliBox.email}"/>
+</apex:dataTable>
+
+</apex:page>

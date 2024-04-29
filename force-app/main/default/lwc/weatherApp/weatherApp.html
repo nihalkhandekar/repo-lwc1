@@ -1,0 +1,56 @@
+<template>
+    <!--<h1> Weather App </h1>   -->
+    <div class="app flex-center">
+        <div class="app-card">
+            <header class="flex-center">
+                <template if:true={response}>
+                    <img src={arrowBackIcon} alt="back arrow" onclick={backHandler} class="slds-m-right_medium cursor">
+                </template>
+                <h1>Weather App</h1>
+            </header>
+            <template if:true={loadingText}>
+                <div class={loadingClasses}>{loadingText}</div>
+            </template>
+            <template if:false={response}>
+            <section class="slds-var-m-around_large">
+                <form onsubmit={submitHandler}>
+                    <input class= "width-100" type="text" placeholder="Enter the city name" required spellcheck="false"
+                    onkeyup={searchHandler}>
+                    <button type="submit" class="slds-m-top_large">Search</button>
+                </form>
+            </section> 
+            </template> 
+            <template if:true={response}>
+            <section class="slds-m-around_large text-center">
+                <img src={weatherIcon} alt="Weather Icon" class="weatherImg">
+                <div class="temperature">
+                    <span>{response.temperature}</span>
+                    <span>°</span>C
+                </div>
+                <div class="description">{response.description}</div>
+                <div class="location">
+                    <img src={mapIcon} alt="Location Icon">
+                    <span>{response.location}</span>
+                </div>
+            </section>
+
+            <footer>
+                <div class="feels-like">
+                    <div class="thermometer">
+                        <img src={thermometerIcon} alt="Thermometer Icon">
+                        <div>{response.feels_like}°C</div>
+                    </div>
+                    <p>Feels Like</p>
+                </div>
+                <div class="humidity">
+                    <div class="droplet">   
+                        <img src={dropletIcon} alt="Droplet Icon">
+                        <div>{response.humidity}</div>
+                    </div>   
+                    <p>humidity</p>                 
+                </div>
+            </footer>
+            </template> 
+        </div>     
+    </div>  
+</template>

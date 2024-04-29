@@ -1,0 +1,14 @@
+<template>
+ <lightning-card title="Second Component">
+    <lightning-input type="text" value="Welcome" label="Note 1" onchange={HandleInputChange} ></lightning-input>
+    <lightning-input type="text" label="Note 2" onchange={HandleInputChange}></lightning-input>
+    <lightning-input type="text" value={BrandNewValue} label="Note 3" ></lightning-input>
+    <lightning-input type="text" label="Note 4" onchange={HandleInputChange}></lightning-input>
+
+    <div style="background-color: coral; color:white" >This is Greeting Note: {GreetingNote} </div>
+
+    <template for:each={Friends} for:item="friend">
+        <p key={friend}> {GreetingNote} - {friend}</p>
+    </template>
+</lightning-card>   
+</template>

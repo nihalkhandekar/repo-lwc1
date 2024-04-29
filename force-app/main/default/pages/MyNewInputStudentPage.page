@@ -1,0 +1,44 @@
+<apex:page showHeader="true" sidebar="true" wizard="false" standardController="Student__c" lightningStylesheets="true">
+<h1> Static Resources(!$):</h1><br/>
+<b>{!$User.FirstName} {!$User.LastName}<br/>{!$User.Email}</b>
+<!-- tabStyle only attens tab properties -->
+<apex:sectionHeader title="Student Edit" subtitle="New Student"/> <!-- When we open new account, the top of the page contains section header.-->
+  <apex:form > <!-- When we want input type fields then apex:form attribute is used-->
+      <apex:pageBlock title="Student Edit" > <!-- When we write different sections it should be added inside pageBlock-->
+         <apex:pageBlockButtons >
+             <apex:commandButton value="Save Record" action="{!Save}"/>
+             <apex:commandButton value="Cancel Record" action="{!Cancel}"/>
+         </apex:pageBlockButtons> 
+          <apex:pageBlockSection title="Account Information" collapsible="False"> <!-- When you want to add Particular fields it should be added inside pageBlockSection with diff particular title -->
+              <apex:inputField value="{!Student__c.Name}"/>
+              <apex:inputField value="{!Student__c.Hobbies__c}"/>
+              <apex:inputField value="{!Student__c.Parent__c}"/>
+              <apex:inputField value="{!Student__c.Country__c}"/>
+              <apex:inputField value="{!Student__c.Fees1__c}"/>
+              <apex:inputField value="{!Student__c.State__c}"/>
+              <apex:inputField value="{!Student__c.City__c}"/>  
+              <apex:inputField value="{!Student__c.RollNumber__c}"/>  
+              <apex:inputField value="{!Student__c.Password__c}"/>  
+              <apex:inputField value="{!Student__c.DateOfBirth__c}"/>  
+              <apex:inputField value="{!Student__c.MoreThan60_Attendance__c}"/> 
+          </apex:pageBlockSection>
+
+          
+          <apex:pageBlockSection title="Contact Information">
+              <apex:inputField value="{!Student__c.ContactNumber__c}"/>
+              <apex:inputField value="{!Student__c.Email__c}"/>              
+          </apex:pageBlockSection> 
+          
+          <apex:pageBlockSection title="Fees Information">
+              <apex:inputField value="{!Student__c.Unit_Price__c}"/>
+              <apex:inputField value="{!Student__c.Quantity__c}"/>
+              <apex:inputField value="{!Student__c.Type_of_Discount__c}"/>
+              <apex:inputField value="{!Student__c.Discount_Value__c}"/>
+              <apex:inputField value="{!Student__c.Total_Discounted_Amount__c}"/>
+              <apex:inputField value="{!Student__c.Tax_Percent__c}"/>
+              <apex:inputField value="{!Student__c.Total_Amount__c}"/>
+
+          </apex:pageBlockSection>
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

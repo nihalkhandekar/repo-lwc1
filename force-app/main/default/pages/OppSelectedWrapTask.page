@@ -1,0 +1,44 @@
+<apex:page standardController="Opportunity" recordSetVar="records" extensions="OppSelectedWrapTask">
+<apex:form >
+<apex:commandButton value="Add Records" action="{!selectRecord}"/>
+<apex:pageBlock title="Opportunity Table 1">
+<apex:pageBlockTable value="{!WrapList}" var="w" id="InitialValue">
+<apex:variable value="{!0}" var="RowNumber1"/>
+<apex:column >
+<apex:inputCheckbox value="{!w.b}"/> 
+</apex:column>
+<apex:column value="{!w.oppo.name}"/>
+<apex:column value="{!w.oppo.Type}"/>
+<apex:column value="{!w.oppo.StageName}"/>
+<apex:column value="{!w.oppo.LeadSource}"/>
+<apex:column value="{!w.oppo.ExpectedRevenue}"/>
+<apex:column >
+{!RowNumber1}
+<apex:commandButton value="Remove" action="{!Remove1}" immediate="true" reRender="InitialValue">
+<apex:param name="RowIndex1" value="{!RowNumber1}" assignTo="{!RowIndex1}"/>
+</apex:commandButton>
+<apex:variable value="{!RowNumber1+1}" var="RowNumber1"/> 
+</apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+
+<apex:pageBlock title="Opportunity Table 2">
+<apex:pageBlockTable value="{!OppList}" var="opl" id="FinalValue">
+<apex:variable value="{!0}" var="RowNumber2"/>
+<apex:column value="{!opl.name}"/>
+<apex:column value="{!opl.Type}"/>
+<apex:column value="{!opl.StageName}"/>
+<apex:column value="{!opl.LeadSource}"/>
+<apex:column value="{!opl.ExpectedRevenue}"/>
+<apex:column >
+{!RowNumber2}
+<apex:commandButton value="Remove" action="{!Remove2}" immediate="true" reRender="FinalValue">
+<apex:param name="RowIndex2" value="{!RowNumber2}" assignTo="{!RowIndex2}"/>
+</apex:commandButton>
+<apex:variable value="{!RowNumber2+1}" var="RowNumber2"/> 
+</apex:column>
+</apex:pageBlockTable>
+</apex:pageBlock>
+<apex:commandButton value="Create Task" action="{!taskInsert}"/>
+</apex:form>
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page controller="Email" >
+ <apex:form >
+<p style="text-align: center; font-size:20px; background-color: #87CEEB;"> Send Opportunity And LineItem as Email</p><br/><br/>
+<b>Email Status</b> :<b> {!message}  </b>
+<apex:pageBlock >
+<!--<apex:pageBlockSection title="Attachement">
+<apex:inputFile value="b"/>
+</apex:pageBlockSection> -->
+<apex:pageBlockSection > 
+<apex:inputText style="width: 350px" label="To Address:-" value="{!toAddress}" /><br/>
+<apex:inputText style="width: 350px" label="CC Address:-" value="{!ccAddress}"/><br/>
+<apex:OutputText style="width: 350px" label="Subject:-" value="{!Subject}"/><br/>
+<apex:inputTextarea style="width: 800px" value="{!EmailBody}" richText="true"/><br/>
+ </apex:pageBlockSection>
+  <center><apex:commandButton value="SendEmail" action="{!sendingEmail}"/></center> <br/>
+  </apex:pageBlock>
+ <br/>
+ <apex:pageBlock title="Attachment for line Items" >
+ <apex:iframe src="/apex/OppLineItemPDF?id={!OppId}"/>      
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

@@ -1,0 +1,22 @@
+<apex:page controller="Demo" >
+    <apex:form >
+    <apex:SectionHeader title="New Record" subtitle="Record Edit"/>
+    <apex:pageBlock title="New Record" >
+        <apex:pageblockButtons location="Top">
+            <apex:commandButton value="Add" action="{!AddRecord}" />
+            <apex:commandButton value="Remove" action="{!RemoveRecord}" />
+        </apex:pageblockButtons>
+        <table style = "font-size : 15px">
+        <tr>
+        <td><b> Country Name</b></td>
+        <td>
+        <apex:inputText value="{!name}"/>
+        </td>
+        </tr>
+        </table>
+        <apex:pageBlockTable value="{!AddList}" var="s" >
+            <apex:column value="{!s}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

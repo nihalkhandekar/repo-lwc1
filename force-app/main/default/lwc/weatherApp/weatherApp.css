@@ -1,0 +1,103 @@
+.app{
+    background: #091f43;
+    min-height: 100vh;
+    padding: 12px;
+}
+.app-card{
+    background: #ffffff;
+    max-width: 400px;
+    min-width: 350px;
+    border-radius: 8px;
+}
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header{
+    border-bottom: 1px solid #ccc;
+    font-size: 20px;
+    color: #091f43;
+    padding: 16px;
+    font-size: 28px;
+    font-weight: 500;
+}
+input{
+    padding: 16px;
+    text-align: center;
+    height: 55px;
+    outline: none;
+    font-size: 24px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+/* This will update the color of the input field placeholder values from default- black to light grey*/
+input::placeholder{
+    color: #bfbfbf;
+}
+.width-100{
+    width: 100%;
+}
+button{
+    background: #ed2144;
+    width: 100%;
+    color: #ffffff;
+    outline: none;
+    border: none;
+    font-size: 24px;
+    height: 55px;
+    border-radius: 8px;
+}
+.loadingTextSuccess{
+    color: #155724;
+    background: #d4edda;
+    padding: 12px;
+    margin: 12px;
+    border-radius: 5px;
+}
+.loadingTextError{
+    color: #721c24;
+    background: #f8d7da;
+    padding: 12px;
+    margin: 12px;
+    border-radius: 5px;
+}
+.text-center{
+    text-align: center;
+}
+.temperature{
+    font-size: 60px;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 24px;
+}
+.description, .location{
+    font-size: 24px;
+    line-height: 32px;
+    padding-top: 20px;
+}
+footer{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+.feels-like{
+    width: 100%;
+    padding: 16px; 
+}
+.humidity{
+    border-left: 1px solid #ccc;
+    width: 100%;
+    padding: 16px
+}
+.weatherImg{
+    max-width: 125px;
+}
+.thermometer, .droplet{
+    display: flex;
+    justify-content: center;
+}
+.cursor{
+    cursor: pointer;
+}

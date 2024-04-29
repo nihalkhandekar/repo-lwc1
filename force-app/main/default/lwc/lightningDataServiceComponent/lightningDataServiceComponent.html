@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="Account Details">
+        <lightning-layout>
+            <lightning-layout-item size="6">
+                <lightning-card title="Show Account Details">
+                    <lightning-formatted-text value={retrieveAccountName}></lightning-formatted-text> <br/>
+                    <lightning-formatted-text value={retrieveAccountPhone}></lightning-formatted-text>
+                </lightning-card>
+            </lightning-layout-item>
+            <lightning-layout-item size="6">
+                <lightning-card title="Create Account Details">
+                    <lightning-input label="Name" onchange={updateName}></lightning-input> <br/>
+                    <lightning-input label="Phone" onchange={updatePhone}></lightning-input> <br/>
+                    <lightning-button label="Save" variant="brand" onclick={SaveNewRecord}> </lightning-button>
+                </lightning-card>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

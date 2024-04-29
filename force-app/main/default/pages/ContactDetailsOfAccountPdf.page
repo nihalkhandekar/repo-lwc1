@@ -1,0 +1,55 @@
+<apex:page standardController="Account" renderAs="pdf">
+<table style= "font-family=sans-serif; padding-bottom =1px;">
+<tr>
+<td><b><h3>AccountName:</h3></b></td>
+<td>
+<apex:repeat value="{!Account}" var="EmptyBox">
+{!EmptyBox.name}
+</apex:repeat>
+</td>
+<td>
+<apex:image id="InvoiceLogo" value="{!$Resource.InvoiceLogo}" width="200" height="50" style="position:absolute;right:0"/> 
+</td>
+</tr>
+</table>
+<table>
+<tr>
+<td>
+<apex:repeat value="{!Account}" var="EmptyBox">
+Billing Street: {!EmptyBox.BillingStreet}<br/>
+Billing City: {!EmptyBox.BillingCity}<br/>
+Billing State: {!EmptyBox.BillingState}<br/>
+Billing PostalCode: {!EmptyBox.BillingPostalCode}<br/>
+Billing Country: {!EmptyBox.BillingCountry}
+</apex:repeat>
+</td>
+<!--<td>
+<b><h4>Shipping Address:</h4></b>
+<apex:repeat value="{!Account}" var="EmptyBox">
+<b>Shipping Street</b>: {!EmptyBox.ShippingStreet}<br/>
+<b>Shipping City</b>: {!EmptyBox.ShippingCity}<br/>
+<b>Shipping State</b>: {!EmptyBox.ShippingState}<br/>
+<b>Shipping PostalCode</b>: {!EmptyBox.ShippingPostalCode}<br/>
+<b>Shipping Country</b>: {!EmptyBox.ShippingCountry}
+</apex:repeat>
+</td>-->
+</tr>
+</table>
+<table>
+<tr>
+<td>
+<b><h4>Invoice Name #:</h4></b>
+</td>
+<td>
+<apex:repeat value="{!Account}" var="EmptyBox">
+{!EmptyBox.name}
+</apex:repeat>
+</td>
+<td style="text-align:right; padding-right: 20px">
+<b>Date</b>:
+</td>
+<td>
+</td>
+</tr>
+</table>
+</apex:page>

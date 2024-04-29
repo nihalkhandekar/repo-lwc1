@@ -1,0 +1,21 @@
+<!-- createNoteForm.html -->
+<template>
+    <lightning-card>
+        <div class="slds-var-p-around_medium">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input label="Title" value={title} onchange={handleTitleChange} required="true"></lightning-input>
+                    <lightning-textarea label="Description" value={description} onchange={handleDescriptionChange} required="true"></lightning-textarea>
+
+                   <lightning-input label="Work Order" value={workOrder} disabled="true"></lightning-input>   
+                    <lightning-button
+                        variant="brand"
+                        type="submit"
+                        label="Save"
+                        onclick={handleSubmit}>
+                    </lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

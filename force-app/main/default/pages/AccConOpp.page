@@ -1,0 +1,44 @@
+<apex:page controller="AccConOpp" tabStyle="AccConOpp__tab">
+    <apex:form >
+        <apex:pageBlock title="Account Contact Opportunity Create Page">
+        <!-- Save And Cancel Button-->
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save Record" action="{!SaveAllRecords}"/>
+            <apex:commandButton value="Cancel Record" action="{!CancelAllRecords}"/>
+        </apex:pageBlockButtons>
+        <!-- Account section -->
+            <apex:pageBlockSection title="Account Information">
+              <apex:inputField value="{!acc.Name}" required="true"/>
+              <apex:inputField value="{!acc.CurrencyIsoCode}"/>
+              <apex:inputField value="{!acc.Industry}"/>
+              <apex:inputField value="{!acc.AccountNumber}"/>
+              <apex:inputField value="{!acc.Phone}" required="false"/>
+              <apex:inputField value="{!acc.Rating}"/>
+              <apex:inputField value="{!acc.AccountSource}"/>
+            </apex:pageBlockSection>
+        <!-- Contact section -->   
+            <apex:pageBlockSection title="Contact Information">
+              <apex:inputField value="{!con.FirstName}" required="false"/>
+              <apex:inputField value="{!con.Phone}"/>
+              <apex:inputField value="{!con.LastName}"/>
+              <apex:inputField value="{!con.Email}"/>
+              <apex:inputField value="{!con.BirthDate}" required="false"/>
+              <apex:inputField value="{!con.LeadSource}"/>
+              <apex:inputField value="{!con.Salary__c}"/>
+            </apex:pageBlockSection>
+        <!-- Opportunity section -->   
+            <apex:pageBlockSection title="Opportunity Information">
+              <apex:inputField value="{!opp.Name}" required="true"/>
+              <apex:inputField value="{!opp.Type}"/>
+              <apex:inputField value="{!opp.IsPrivate}"/>
+              <apex:inputField value="{!opp.CloseDate}"/>
+              <apex:inputField value="{!opp.StageName}"/>
+              <apex:inputField value="{!opp.Type}"/>
+              <apex:inputField value="{!opp.LeadSource}"/>
+              <apex:inputField value="{!opp.Probability}" required="false"/>
+              <apex:inputField value="{!opp.Approval_Status__c}"/>
+            </apex:pageBlockSection>
+                     
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

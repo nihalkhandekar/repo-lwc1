@@ -1,0 +1,21 @@
+<apex:page controller="Demo1" >
+ <apex:form >
+     <!--Input from User-->
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+        <apex:inputText label="Name" value="{!name}"/>
+        </apex:pageBlockSection>
+     <apex:pageblockButtons >
+        <apex:commandButton value="Add" action="{!AddRecord}" />
+        <apex:commandButton value="Remove" action="{!RemoveRecord}"/>
+     </apex:pageblockButtons>
+      
+     <!--Output for User-->
+    <apex:pageBlockTable value="{!IntList}" var="s" >
+        <apex:column value="{!StrList[s]}"/>
+    </apex:pageBlockTable>
+        
+        </apex:pageBlock>  
+
+     </apex:form> 
+</apex:page>

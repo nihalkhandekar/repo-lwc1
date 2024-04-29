@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Account Record Edit Form">
+        <lightning-record-edit-form  object-api-name={objectApiName}  record-id={recordId} onsuccess={handleSuccess} onsubmit={handleSubmit}>
+        <lightning-input-field field-name={nameField}> </lightning-input-field>
+        <div class="slds-var-m-top_medium">
+            <lightning-button variant="brand" type="submit" label="Save"> </lightning-button>
+        </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+    <lightning-card title="Account Record View Form">
+        <lightning-record-view-form object-api-name={objectApiName} record-id={recordId}>
+        <lightning-output-field field-name="Name"> </lightning-output-field>
+        <lightning-output-field field-name="Phone"> </lightning-output-field>
+
+        </lightning-record-view-form>
+    </lightning-card>
+</template>

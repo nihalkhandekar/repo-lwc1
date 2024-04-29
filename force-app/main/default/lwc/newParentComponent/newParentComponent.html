@@ -1,0 +1,31 @@
+<template>
+ <lightning-card title="Welcome to Parent Component">
+    <div class="slds-p-around_medium lgc-bg">
+        <lightning-input type="text" value={inputValue} label="Enter some text" 
+        placeholder="type here.." onchange={handleInputBoxChange}></lightning-input>
+    </div>
+ </lightning-card>  
+
+ <lightning-input type="text" variant="standard"
+ name="name" label="Enter Count Value" placeholder="Type here.."
+ onchange={HandleCountInput}>
+
+ </lightning-input>
+ <p> Start Counter is: {StartCounter}</p>
+ 
+ <lightning-button variant="success" label="Add 1000 to counterValue"
+ title="Add 1000" onclick={handleClick}></lightning-button>
+
+<lightning-card title="New Count Value in Parent">
+ <div  class="slds-p-around-large" style="background-color: burlywood;">
+    New Count is : {newCount}
+ </div>
+</lightning-card> 
+
+ <c-new-child-component is-pass={isPassed} get-message={message} 
+ counter-value={StartCounter} onupdateinput={updateInputbox} 
+ onadd={handleNewCountValueAdd} onsub={handleNewCountValueSub}
+ onmul={handleNewCountValueMul}></c-new-child-component> <!--updateInputbox is a event here, jisko js me use krege-->
+
+
+</template>

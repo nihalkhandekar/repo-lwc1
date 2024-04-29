@@ -1,0 +1,41 @@
+<apex:page controller="EditAllContacts">
+    <apex:form > 
+        <apex:pageBlock Title="Edit Contact Records">
+        <apex:pageBlockButtons location="top">
+          <apex:commandButton value="Update" action="{!UpdateRecord}"/>  
+          <apex:commandButton value="Cancel" action="{!CancelRecord}"/>
+        </apex:pageBlockButtons>     
+        </apex:pageBlock>
+       
+      <!--<apex:repeat value="{!AccList}" var="a"> -->
+        <apex:pageBlock >   
+         
+          <apex:pageBlockTable value="{!ConList}" var="c" id="InitialValue">
+         <apex:variable value="{!0}" var="RowNumber"/>
+          <apex:column HeaderValue="First Name">
+              <apex:inputField value="{!c.FirstName}"/>
+          </apex:column>
+          <apex:column HeaderValue="Last Name">
+              <apex:inputField value="{!c.LastName}"/>
+          </apex:column>
+          <apex:column HeaderValue="Phone">
+              <apex:inputField value="{!c.phone}"/>
+          </apex:column>
+          <apex:column HeaderValue="Email">
+              <apex:inputField value="{!c.Email}"/>
+          </apex:column>
+          <apex:column HeaderValue="Salary">
+              <apex:inputField value="{!c.Salary__c}"/>
+          </apex:column>
+          <apex:column headerValue="Remove">
+          {!RowNumber}
+              <apex:commandButton value="Remove" action="{!RemoveRow}" immediate="true" reRender="InitialValue">
+                  <apex:param name="RowIndex" value="{!RowNumber}" assignTo="{!RowIndex}" />
+              </apex:commandButton>
+             <apex:variable value="{!RowNumber+1}" var="RowNumber"/>
+          </apex:column>
+          </apex:pageBlockTable>
+       </apex:pageBlock>
+     <!-- </apex:repeat> -->
+    </apex:form>
+</apex:page>

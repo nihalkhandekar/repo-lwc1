@@ -1,0 +1,55 @@
+<apex:page controller="CustomQuote">
+<apex:form >
+<apex:sectionHeader title="Quote Edit" subtitle="New Quote"/>
+<apex:pageBlock title="Custom Quote Create Page">
+        <!-- Save And Cancel Button-->
+        <apex:pageBlockButtons location="Top" >
+            <apex:commandButton value="Save" action="{!SaveRecord}"/>
+            <apex:commandButton value="Cancel" action="{!CancelRecord}"/>
+        </apex:pageBlockButtons>
+        <!-- Quote & Opportunity mapped fields section -->
+            <apex:pageBlockSection title="Quote Details">
+              <apex:inputField value="{!qtt.Quote_Number__c}"/>
+              <apex:inputField value="{!qtt.Expiration_Date__c}"/>
+              <apex:inputField value="{!qtt.name}"/>
+              <apex:inputField value="{!qtt.Opportunity_Custom__c}"/>
+              <apex:inputField value="{!qtt.Status__c}"/>
+              <apex:inputField value="{!qtt.Account__c}"/>
+              <apex:inputField value="{!qtt.Description__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Total">
+              <apex:inputField value="{!qtt.Total_Amount__c}"/>
+              <apex:inputField value="{!qtt.Tax__c}"/>
+              <apex:inputField value="{!qtt.Discount__c}"/>
+              <apex:inputField value="{!qtt.Shipping_Handling__c}"/>
+              <apex:inputField value="{!qtt.Grand_Total__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Prepared for">
+              <apex:inputField value="{!qtt.Contact__c}"/>
+              <apex:inputField value="{!qtt.Phone__c}"/>
+              <apex:inputField value="{!qtt.Email__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Address">
+              <apex:inputField value="{!qtt.Bill_To_Name__c}"/>
+              <apex:inputField value="{!qtt.Ship_To_Name__c}"/>
+            </apex:pageBlockSection>
+</apex:pageBlock>
+<apex:pageBlock title="Opportunity line item">
+<apex:pageBlockTable value="{!OPLCList}" var="op">
+          <apex:column HeaderValue="Name">
+              <apex:inputField value="{!op.name}"/>
+          </apex:column>
+          <apex:column HeaderValue="Sales Price">
+              <apex:inputField value="{!op.Sales_Price__c}"/>
+          </apex:column>
+          <apex:column HeaderValue="Quantity">
+              <apex:inputField value="{!op.Quantity__c}"/>
+          </apex:column>
+          <apex:column HeaderValue="Product">
+              <apex:inputField value="{!op.Product_Custom__c}"/>
+          </apex:column>
+          </apex:pageBlockTable>
+</apex:pageBlock>
+
+</apex:form>
+</apex:page>
