@@ -9,6 +9,7 @@ public class NotesController {
         insert newNote;
         
     }
+    /* Test*/
     @AuraEnabled (cacheable=true)
     public static WorkOrder getWorkNumber(string recordId){
         try {
