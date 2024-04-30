@@ -1,13 +1,15 @@
 public class NotesController {
     @AuraEnabled
+    list<AEC_Notes__c> newNotes = new list<AEC_Notes__c>();
     public static void createNote(String title, String description, Id workOrderId) {
         AEC_Notes__c newNote = new AEC_Notes__c(
             Name = title,
             Description__c = description,
             Work_Order__c = workOrderId
         );
-        insert newNote;
-        system.debug('newNote'+ newNote);
+        newNotes.add(newNote);
+        insert newNotes;
+        system.debug('newNotes'+ newNotes);
         
     }
     /* Testing notes changes from new branch*/
