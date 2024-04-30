@@ -7,6 +7,7 @@ public class NotesController {
             Work_Order__c = workOrderId
         );
         insert newNote;
+        system.debug('newNote'+ newNote);
         
     }
     /* Testing notes changes from new branch*/
