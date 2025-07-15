@@ -1,0 +1,53 @@
+<template>
+    <lightning-card title="Topic Image" icon-name={iconname}>
+        <div class="slds-m-around_medium">
+            <template if:false={selectedRecord}>
+                <div class="slds-p-around_x-small">
+                    <c-topic-search-bar onsearchchange={handleSearch}>
+                    </c-topic-search-bar>
+                </div>
+            </template>
+
+            <div>
+                <template if:false={selectedRecord}>
+                    <template if:true={records}>
+                        <template for:each={records} for:item="record">
+                            <c-topic-related-list key={record.Id} record={record} fieldname={searchfield} iconname={iconname}
+                                onselect={handleSelect}>
+                            </c-topic-related-list>
+                        </template>
+                    </template>
+                </template>
+                <template if:true={selectedRecord}>
+                </template>
+            </div>
+
+            <div class="slds-p-around_x-small">
+                <template if:true={selectedRecord}>
+                    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+                        <span class="slds-icon_container slds-icon-standard-account slds-combobox__input-entity-icon" title="Account">
+                            <lightning-icon icon-name={iconname}></lightning-icon>
+                        </span>
+                        <input class="slds-input slds-combobox__input
+                            slds-combobox__input-value" 
+                            id="combobox-id-5" aria-controls="listbox-id-5" 
+                            autocomplete="off" role="textbox" type="text" 
+                            placeholder="Select an Option" readonly=""
+                            value={selectedRecord.Name}
+                            disabled/>
+                        <button class="sicon_container slds-button slds-button_icon slds-input__icon slds-input__icon_right" 
+                            title="Remove selected option" onclick={handleRemove}>
+                            <lightning-icon icon-name="utility:close" size="small">
+                            </lightning-icon>
+                            
+                            <span class="slds-assistive-text">{label.rc_Remove_Selected_Option}</span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+
+            <lightning-button label="Cancel" variant="neutral" onclick={handleCancel} style="margin-right:5px;"></lightning-button>
+            <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+        </div>
+     </lightning-card>
+</template>

@@ -1,0 +1,26 @@
+<template>
+    <div class="realId-wrapper">
+        <!--div class="realId-image-wrapper slds-show_medium">
+          <img src={helperImg} alt="need help?">
+        </div>
+        <div class="realId-text-wrapper">
+          <p class="realId-title slds-show_medium">
+            {label.headerText}
+          </p>
+          <p class="description slds-show_medium" data-id="desc">
+            {label.description}
+          </p>
+          <div class="realId-link-wrapper slds-show_medium" data-id="link">
+            <a href="" target="_blank" class="realId-link">{label.helpLink}</a>
+          </div>
+        </div-->
+        <p>
+          <template for:each={rightResources} for:item="resource" for:index="ind">
+            <lightning-formatted-rich-text
+              value={resource.Right_pane_content__c}
+              key={resource.Id}>
+            </lightning-formatted-rich-text>
+          </template>
+        </p>
+      </div>
+</template>

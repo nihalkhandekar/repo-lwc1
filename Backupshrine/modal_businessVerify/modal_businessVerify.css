@@ -1,0 +1,36 @@
+.hPadding {
+    padding: 32px 32px 0;
+  }
+  
+  .s-modal__close {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-bottom: auto;
+    margin-top: 8px;
+    float: right;
+  }
+  
+  .slds-modal {
+    box-shadow: 0 12px 24px 0 #DADBDE;
+  }
+  
+  .slds-button:focus {
+    outline: 2px solid #2d2c2c;
+  }
+  
+  @media only screen and (max-width: 1023px) {
+    .hPadding {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  
+    .mobile-close {
+      padding-top: 8px;
+      align-items: baseline;
+    }
+  
+    .s-modal__close {
+      margin-top: 0;
+    }
+  }

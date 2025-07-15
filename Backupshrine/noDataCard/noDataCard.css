@@ -1,0 +1,33 @@
+.noBizHead {
+    margin-top: 40px;
+}
+.subHeading{
+    font-family: 'Karla-Regular';
+    font-size: 18px;
+    line-height: 27px;
+    margin: 16px 0px 32px 0px;
+}
+.noBizFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px dashed #d0cfcf;
+}
+.noBizFoundText {
+    width: 80%;
+    margin-top: 16px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1023px) {
+    .subHeading{
+        font-size: 17px;
+        line-height: 25px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .secondaryBtn{
+        height:auto;
+    }
+}

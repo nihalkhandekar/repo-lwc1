@@ -1,0 +1,22 @@
+<template>
+    <template if:true={count}>
+        <h4 class="noBizHead">{count}+ {mainText}</h4>
+        <div class="subHeading">{subHeadText}</div>
+    </template>
+    <template if:false={count}>
+        <h4 class="noBizHead">{mainText}</h4>
+        <div class="subHeading">{subHeadText}</div>
+    </template>
+    <div class="slds-p-around_xx-large noBizFound">
+        <img src={noBizImg}>
+        <div class="noBizFoundText">
+            <p class="largeBold">{subTextBold}</p>
+            <p class="large">{subText}</p>
+        </div>
+        <template if:true={findyourcred}>
+            <button class="slds-m-top_x-large  slds-button slds-button_brand secondaryBtn" onclick={openManualSearch}>
+                {label.linkCred_searchCredManually}
+            </button>
+        </template>
+    </div>
+</template>

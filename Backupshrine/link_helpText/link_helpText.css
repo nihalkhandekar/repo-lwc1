@@ -1,0 +1,38 @@
+.realId-title {
+  font-size: 18px;
+  line-height: 22px;
+  color: #757575;
+  letter-spacing: 0.13px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-family: 'Karla Bold', sans-serif !important;
+}
+
+.realId-link-wrapper {
+  margin-top: 16px;
+}
+
+.realId-link {
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+  color: #09538B;
+}
+
+.realId-image-wrapper img {
+  width: 90px;
+  height: 77px;
+}
+
+.description {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+}
+
+.realId-wrapper {
+  font-family: 'Karla', sans-serif;
+  font-size: 12px;
+}

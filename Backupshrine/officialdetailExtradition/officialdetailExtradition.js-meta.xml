@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+     <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="position" type="String" label="Position" description="position of the official" />
+            <property name="location" type="String" label="Location" description="location of the official" />
+            <property name="judicialDistrict" type="String" label="Judicial District" description="judicial district of the official" />
+            <property name="GA" type="String" label="GA" description="GA of the official" />
+            <property name="termstartDate" type="Date" label="Term Start Date" description="term start date of the officail" />
+            <property name="termendDate" type="Date" label="Term End Date" description="term end date of the official" />
+            <property name="isIndefiniteTerm" type="Boolean" label="Indefinite Term" description="check for the indefinite term of the user" />
+            <property name="isReadOnly" type="Boolean" label="Read Only" description="Read-only flag for the fields" />
+        </targetConfig>
+    </targetConfigs> 
+</LightningComponentBundle>

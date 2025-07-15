@@ -1,0 +1,91 @@
+.headText {
+    color: #2D2C2C;
+    letter-spacing: 0.31px;
+}
+
+.subText {
+    color: #999999;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+
+.editContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.editCls {
+    color: #09538B;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-align: right;
+    margin-left: auto;
+    text-decoration: underline !important;
+}
+
+.noCardSection {
+    border-radius: 4px;
+    border: 1px solid #D0CFCF;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    display: flex;
+    padding: 48px 24px;
+    width: 100%;
+}
+
+.leftSection,
+.rightSection {
+    padding-right: 28px;
+
+}
+
+.each-princ {
+    margin-bottom: 24px;
+}
+
+.topSpacing {
+    margin-top: 80px;
+}
+
+.each-princ:last-child {
+    margin-bottom: 0;
+}
+
+.topSpacingBus {
+    margin-top: 68px;
+}
+
+@media only screen and (max-width: 1023px) {
+
+    .editCls {
+        font-size: 17px;
+        line-height: 25px;
+    }
+
+    .editContainer {
+        flex-direction: column;
+    }
+
+    .leftSection {
+        padding-right: 0px;
+        text-align: center;
+    }
+
+    .rightSection {
+        padding-right: 0px;
+    }
+
+    .noCardSection {
+        padding: 32px 20px;
+    }
+
+    .topSpacing {
+        margin-top: 70px;
+    }
+
+    .topSpacingBus {
+        margin-top: 40px;
+    }
+}

@@ -1,0 +1,44 @@
+<template>
+    <div class="pagination-container">
+        <!-- Records per page selector -->
+        <label for="recordsPerPage">Records/page:</label>
+        <select id="recordsPerPage" value={pageSize} onchange={handlePageSizeChange}>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+        </select>
+
+        <!-- Left arrow button -->
+        <lightning-button-icon 
+            size="small" 
+            class="slds-p-around_small" 
+            variant="bare" 
+            disabled={disableleftarrow} 
+            onclick={handlePrevious} 
+            icon-name="utility:chevronleft">
+        </lightning-button-icon>
+
+        <!-- Input box for the page number -->
+        <input 
+            type="number" 
+            class="page-input" 
+            value={clickedPage} 
+            min="1" 
+            max={totalpages} 
+            onchange={handlePageInput} />
+
+        <span class="page-total">/ {totalpages}</span>
+
+        <!-- Right arrow button -->
+        <lightning-button-icon 
+            size="small" 
+            class="slds-p-around_small" 
+            variant="bare" 
+            onclick={handleNext} 
+            disabled={disablerightarrow} 
+            icon-name="utility:chevronright">
+        </lightning-button-icon>
+    </div>
+</template>

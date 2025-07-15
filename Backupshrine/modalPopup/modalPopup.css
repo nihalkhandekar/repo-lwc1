@@ -1,0 +1,35 @@
+@media only screen and (min-device-width:450px) {
+    .container {
+        width: 400px !important;
+    }
+}
+
+.modalBackground {
+    --slds-c-modal-content-color-background: #053756 !important;
+}
+
+.button-color {
+    --slds-c-button-brand-color-background: orange;
+    font-family: 'Karla', sans-serif !important;
+}
+
+.textFormat {
+    
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    font-family: 'Karla', sans-serif !important;
+}
+
+.componentDimensions {
+    height: 3.7rem;
+    width: 100%;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Karla', sans-serif;
+}
+
+input:focus {
+    background-color: ivory;
+}

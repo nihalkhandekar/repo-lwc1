@@ -1,0 +1,143 @@
+<template>
+    <div>
+        <h3 class="headText">{label.linkFindBiz_Summary}</h3>
+        <h6 class="slds-p-top_medium subText">{label.subText}</h6>
+    </div>
+    <template if:false={hideBizSection}>
+        <div class="topSpacingBus">
+            <div class="editContainer">
+                <div>
+                    <h4 class="slds-p-top_x-small">{label.businesses}</h4>
+                </div>
+                <div class="slds-p-top_medium slds-p-bottom_small slds-float_right">
+                    <a href="javascript:void(0);" class="editCls" onclick={pageRedirect} tabindex="0" name="bizconfirm">
+                        {label.linkFindBiz_EditSection}
+                    </a>
+                    <img class="slds-m-left_small" src={editIcon} alt="Edit Icon" aria-hidden="true" />
+                </div>
+            </div>
+            <template for:each={bizList} for:item="curobj" for:index="index">
+                <div class="slds-p-top_medium" key={curobj}>
+                    <c-bos_generic-Card currentobj={curobj}></c-bos_generic-Card>
+                </div>
+            </template>
+
+            <!-- <div class="slds-p-top_large">
+                <c-bos_generic-Card currentobj={currentobj}></c-bos_generic-Card>
+            </div> -->
+        </div>
+    </template>
+    <template if:false={hideCredSection}>
+        <div class="topSpacing">
+            <div class="editContainer">
+                <div>
+                    <h4 class="slds-p-top_x-small">{label.your_business_role}</h4>
+                </div>
+                <!-- <div class="slds-p-top_medium slds-float_right">
+                    <a href="javascript:void(0);" class="editCls" onclick={pageRedirect} tabindex="0" name="bizconfirm">
+                        {label.linkFindBiz_EditSection}
+                    </a>
+                    <img class="slds-m-left_small" src={editIcon} alt="Edit Icon" aria-hidden="true" />
+                </div> -->
+            </div>
+            <div class="">
+                <template for:each={bizList} for:item="curobj" for:index="index">
+                    <div class="slds-m-top_x-large editContainer" key={curobj}>
+                        <div>
+                            <h6 class="slds-p-top_x-small">{curobj.businessName}</h6>
+                        </div>
+                        <div class="slds-p-top_medium slds-p-bottom_small slds-float_right">
+                            <a href="javascript:void(0);" class="editCls" onclick={pageRedirect} tabindex="0"
+                                name="bizrole" data-id={curobj.id}>
+                                {label.linkFindBiz_EditSection}
+                            </a>
+                            <img class="slds-m-left_small" src={editIcon} alt="Edit Icon" aria-hidden="true" />
+                        </div>
+                    </div>
+                    <div class="slds-m-top_medium" key={curobj}>
+                        <template if:true={curobj.principalDetails}>
+                            <template for:each={curobj.principalDetails} for:item="princ" for:index="index">
+                                <div key={princ} class="each-princ">
+                                    <c-bos_generic-Card currentobj={princ} statusval={principalStatus}>
+                                    </c-bos_generic-Card>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={curobj.principalDetails.length}>
+                            <c-bos_generic-Card currentobj={noPrincipalData}></c-bos_generic-Card>
+                        </template>
+                    </div>
+                    <div class="slds-m-top_medium" key={curobj}>
+                        <template if:true={curobj.listedAgent}>
+                            <c-bos_generic-Card currentobj={curobj.listedAgent} statusval={label.linkBiz_listedAgent}>
+                            </c-bos_generic-Card>
+                        </template>
+                        <template if:false={curobj.listedAgent}>
+                            <c-bos_generic-Card currentobj={noAgentData}></c-bos_generic-Card>
+                        </template>
+
+
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+    <div class="topSpacing">
+        <div class="editContainer">
+            <div>
+                <h4 class="slds-p-top_x-small">{label.summary_Creds}</h4>
+            </div>
+            <div class="slds-p-top_medium slds-p-bottom_small slds-float_right">
+                <a href="javascript:void(0);" class="editCls" onclick={pageRedirect} tabindex="0" name="matchcred">
+                    {label.linkFindBiz_EditSection}
+                </a>
+                <img class="slds-m-left_small" src={editIcon} alt="Edit Icon" aria-hidden="true" />
+            </div>
+        </div>
+        <!-- <template if:true={credsList.length}>
+            <template for:each={credsList} for:item="curobj" for:index="index">
+                <div class="slds-p-top_large" key={curobj}>
+                    <c-bos_generic-Card currentobj={curobj}></c-bos_generic-Card>
+                </div>
+            </template>
+        </template> -->
+        <template if:true={updatedCredsList.length}>
+            <template for:each={updatedCredsList} for:item="item" for:index="index">
+                <h6 class="slds-m-top_x-large slds-p-top_x-small" key={item}>{item.key}</h6>
+                <template for:each={item.value} for:item="obj" for:index="i">
+                    <div class="slds-p-top_medium" key={item}>
+                        <c-bos_generic-Card key={obj} currentobj={obj}></c-bos_generic-Card>
+                    </div>
+                </template>
+            </template>
+        </template>
+        <template if:false={credsList.length}>
+            <div class="noCardSection slds-m-top_large slds-grid slds-wrap">
+                <div class="leftSection slds-col slds-size_1-of-1 slds-large-size_2-of-12"><img src={buildingGroup}></div>
+                <div class="rightSection slds-col slds-size_1-of-1 slds-large-size_10-of-12">
+                    <div class="">
+                        <h6>{label.linkFindBiz_NoCredSelected}</h6>
+                    </div>
+                    <div class="">
+                        <p class="large">{label.summary_noCredLinkMsg}</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+       <!-- <div>
+            <h4 class="topSpacing">{label.statement_of_truth}</h4>
+        </div>-->
+        <div class="checkbox">
+            <!-- <c-generic-multi-select list-data={sotOptions} oncheckboxinputselection={handleSot} required>
+            </c-generic-multi-select> -->
+         <!--   <c-bos_generic-multi-select list-data={sotOptions} oncheckboxinputselection={handleSot} required>
+            </c-bos_generic-multi-select>
+
+            <lightning-checkbox-group name="Checkbox Group"
+                              label="Checkbox Group"
+                              options={options}
+                              value={value}
+                              onchange={handleChange}></lightning-checkbox-group>-->
+        </div>
+    </div>
+</template>

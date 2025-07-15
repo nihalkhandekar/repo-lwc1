@@ -1,0 +1,90 @@
+<template>
+    <c-event-passer></c-event-passer>
+    <lightning-modal-header>
+        <h2 class="dfs-modal__title">Set Default Staff Data</h2>
+            <div class="custom-default-icon">
+                <lightning-button-icon
+                    icon-name="utility:close"
+                    alternative-text="Close"
+                    onclick={handleCancel}
+                    class="custom-modal__close">
+                </lightning-button-icon>
+            </div>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="dfs-modal__body">
+            <div class="dfs-personal-info">
+                <div class="dfs-info-header">
+                    <div class="dfs-info-icon">
+                        <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                    </div>
+                    <div class="dfs-info-text">
+                        <h2 class="dfs-info-title">Personal Information</h2>
+                        <p class="dfs-info-description">Enter personal information to use state arms/seal</p>
+                    </div>
+                </div>
+
+                <div class="dfs-application-selection">
+                    <label class="dfs-form-label">Select Application:</label>
+                    <div class="dfs-radio-group">
+                        <span class="dfs-radio-button">
+                            <input type="radio" name="application" id="apostille" value="Apostille" onchange={handleApplicationChange} />
+                            <label class="dfs-radio-label" for="apostille">
+                                <span class="dfs-radio-text">Apostille</span>
+                            </label>
+                        </span>
+                        <span class="dfs-radio-button">
+                            <input type="radio" name="application" id="publicOfficial" value="Public Official" onchange={handleApplicationChange} />
+                            <label class="dfs-radio-label" for="publicOfficial">
+                                <span class="dfs-radio-text">Public Official</span>
+                            </label>
+                        </span>
+                        <span class="dfs-radio-button">
+                            <input type="radio" name="application" id="stateSeal" value="State Seal" checked onchange={handleApplicationChange} />
+                            <label class="dfs-radio-label" for="stateSeal">
+                                <span class="dfs-radio-text">State Seal</span>
+                            </label>
+                        </span>
+                        <span class="dfs-radio-button">
+                            <input type="radio" name="application" id="stateExtradition" value="State Extradition" onchange={handleApplicationChange} />
+                            <label class="dfs-radio-label" for="stateExtradition">
+                                <span class="dfs-radio-text">State Extradition</span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="dfs-staff-name-selection">
+                    <label class="dfs-staff-form-label" for="staff-name-select">Default Staff Name</label>
+                    <div class="dfs-select-container">
+                        <div class="dfs-search-box">
+                            <input type="search" class="dfs-select dfs-search-input" id="staff-name-search" 
+                                   placeholder="Search Staff Name..." value={searchTerm} 
+                                   oninput={handleStaffNameChange} />
+                        </div>
+                        
+                        <!-- Display search results -->
+                        <div class="dfs-search-results-container">
+                        <template if:true={contacts}>
+                            <ul class="search-results">
+                                <template for:each={contacts} for:item="contact">
+                                    <li key={contact.Id} data-id={contact.Id} data-name={contact.Name} 
+                                        onclick={handleContactSelect} class="search-result-item">
+                                        {contact.Name}
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button variant="base" label="Cancel" onclick={handleCancel} class="dfs-button-cancel"></lightning-button>
+        <lightning-button variant="brand" label="Add" onclick={handleAdd} class="dfs-button-add"></lightning-button>
+    </lightning-modal-footer>
+</template>

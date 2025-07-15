@@ -1,0 +1,66 @@
+<template>
+  <div class="slds-form-element inputForm cust-dropdown cust-unique-class" onclick={handleTriggerClick}>
+    <label id="label" class="slds-form-element__label" for="combobox-id-3">{label}</label>
+    <div class="slds-form-element__control">
+      <div class="slds-combobox_container">
+        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true"
+          aria-haspopup="listbox" role="combobox" aria-controls={listBoxId}>
+          <div class={inputIconContainerClass} title="listbox">
+            <div>
+              <form autocomplete="off" onsubmit={handleFormSubmit}>
+                <input aria-labelledby="label" type="text" class="slds-input slds-combobox__input cust-lookup"
+                  id="input" autocomplete="off" data-source={originfield} placeholder={placeHolder}
+                  readonly={isReadOnly} onfocus={handleFocus} onselect={handleInputSelect} onchange={handleTextChange}
+                  onkeydown={handleInputKeyDown} onkeyup={handleInputKeyup} onblur={handleBlur} onclick={handleClick}
+                  maxlength="75" />
+              </form>
+            </div>
+            <span class={inputIconClass}>
+              <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
+                <use xlink:href={inputIcon}></use>
+              </svg>
+            </span>
+          </div>
+          
+          <div id={listBoxId}  role="listbox" title="listbox">
+            <template if:true={_hasDropdownOpened}>
+              <div id="listbox-id-4" class={computedDropdownClass}>
+                <ul id="listhead-1" aria-label="Select a value"
+                  class="slds-listbox slds-p-horizontal_small slds-listbox_vertical slds-dropdown__list customListBox" role="listbox"
+                  onscroll={handleListboxScroll} onclick={closePopup} title="listbox">
+                  <template if:true={hasActionButton}>
+                    <slot name="action"></slot>
+                    <li class="slds-has-divider_top-space" role="separator"></li>
+                  </template>
+                  <template if:true={openDropdown}>
+                    <template for:each={_items} for:item="item">
+                      <li role="option" class="slds-listbox__item" key={item.value} id={item.id}
+                        data-value={item.value} data-item-id={item.id} onclick={handleOptionClick}>
+                        <div aria-selected="true" id={item.id}
+                          class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                          role="option">
+                          <template if:true={item.iconName}>
+                            <span class="slds-media__figure slds-listbox__option-icon">
+                              <lightning-icon icon-name={item.iconName} size="x-small"></lightning-icon>
+                            </span>
+                          </template>
+                          <span class="slds-media__body upper-case">
+                            <span class="slds-truncate" title={item.value}>
+                              {item.value}
+                            </span>
+                          </span>
+                        </div>
+                      </li>
+                    </template>
+                  </template>
+                </ul>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</template>

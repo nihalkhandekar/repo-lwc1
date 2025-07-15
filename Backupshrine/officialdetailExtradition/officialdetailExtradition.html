@@ -1,0 +1,140 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:drafts" size="medium" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Official Details</h1>
+                <p class="description">Enter the required information to add a new official.</p>
+            </div>
+        </div>
+
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="Position">Position</label>
+                    <lightning-combobox 
+                    label="Position"
+                    name="Position"
+                    id="position"
+                    value={position} 
+                    variant="label-hidden"
+                    placeholder="Select Position"
+                    class="input-field"
+                    read-only={isReadOnly} 
+                    options={positionSelectOptions} 
+                    onchange={handlepositionChange}>
+                </lightning-combobox>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="TermStartDate">Most Recent Term Start</label>
+                    <lightning-input 
+                        label="Term Start Date"
+                        name="Term Start Date" 
+                        variant="label-hidden"
+                        id="termstartDate" 
+                        type="Date"
+                        placeholder="mm/dd/yyyy"
+                        value={termstartDate}
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handletermstartChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="state">Most Recent Term End</label>
+                    <lightning-input 
+                        label="Term End Date"
+                        name="Term End Date" 
+                        variant="label-hidden"
+                        id="termendDate" 
+                        type="Date"
+                        placeholder="mm/dd/yyyy"
+                        value={termendDate}
+                        class="input-field"
+                        read-only={isReadOnly}  
+                        onchange={handletermendChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <lightning-input 
+                        label="Indefinite Term"
+                        name="Indefinite Term" 
+                        id="IndefiniteTerm" 
+                        value={isIndefiniteTerm} 
+                        type="checkbox" 
+                        class="input-field indefiniteterm" 
+                        read-only={isReadOnly} 
+                        onchange={handleIndefiniteTermChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+        <div class="form-group full-width">
+            <lightning-input-address class='address'
+            address-lookup-placeholder = "Search country, city, state, street...."
+            street={location}    
+            street-label="Address Line 1"
+            street-placeholder="e.g., 123 Main St"
+            subpremise={suite}
+            subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+            subpremise-label="Address Line 2"
+            city-label="City"
+            city={city}
+            city-placeholder="Select City"
+            province-label="State"
+            province={state}
+            province-placeholder="Select  State"
+            postal-code={zipCode}
+            postal-code-label="Zip Code"
+            postal-code-placeholder="e.g., 10001"
+            country-label="Country"
+            country={country}
+            country-placeholder="Select Country"
+            onchange={handleAddressChange}
+            show-address-lookup
+            show-compact-address	
+            required>
+        </lightning-input-address>
+        </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="JudicialDistrict">Judicial District</label>
+                    <lightning-combobox 
+                        label="Judicial District"
+                        name="Judicial District" 
+                        variant="label-hidden"
+                        id="JudicialDistrict" 
+                        placeholder="Select judicial district"
+                        value={judicialDistrict} 
+                        class="input-field"
+                        read-only={isReadOnly}  
+                        options={judicialSelectOptions} 
+                        onchange={handlejudicialChange}>
+                    </lightning-combobox>
+                </div>
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="GA">GA</label>
+                    <lightning-input 
+                        label="GA"
+                        name="GA" 
+                        variant="label-hidden"
+                        id="GA" 
+                        placeholder="Select GA"
+                        value={GA}
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handlegaChange}>
+                    </lightning-input>
+                </div>  
+                <div class="form-group quarter-width"></div>     
+                <div class="form-group quarter-width"></div>                   
+            </div>
+    </div>
+    </div>
+</template>

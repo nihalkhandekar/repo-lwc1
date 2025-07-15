@@ -1,0 +1,51 @@
+<template>
+    <template if:true={open}>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" 
+	aria-describedby="modal-content-id-1" class={modalStyle}>
+        <div class="slds-modal__container">
+            <div class="slds-modal__content hPadding" id="modal-content-id-1">
+                <button class="slds-button slds-button_icon sld s-modal__close slds-button_icon-inverse mobile-close slds-col slds-size_1-of-12 tabfocus" 
+				title="Close" onclick={handleClose}>
+                    <lightning-icon size="x-small" icon-name="utility:close" alternative-text="Close">
+					</lightning-icon>
+                    <span class="slds-assistive-text">{label.labelClose}</span>
+                </button>
+                <template if:true={showmulticred}>
+                    <c-verify_b-multi-cred-verify onmulticrednext={multiCredNext} total-length={totalLength}>
+					</c-verify_b-multi-cred-verify>
+                </template>
+                <template if:true={showcustid}>
+                    <c-verify_b-cust-verify onupdatebizpro={updatebizevt} credpreverfied={credpreverfied} 
+					pre-verified-cred={preVerifiedCred} selected-business-obj={selectedBusiness} 
+					user-details={userDetails} onshowemail={showEmailScreen} multi-cred={multiCred}
+                    cred-verification={credVerification} onnextclick={handleNextClick} cred-list={credDetails} 
+					index={index} total-length={totalLength} onmovetonextid={moveToNextID}>
+					</c-verify_b-cust-verify>
+                </template>
+                <template if:true={showemail}>
+                    <c-verify_b-email-verify selected-business-obj={selectedBusiness} onshowotp={showOTPScreen} 
+					creds-list={credDetails} multi-cred={multiCred} onmovetonextid={moveToNextID}
+                    masked-email={maskedEmail} custid={custid} not-found={showNotRegisteredModal} 
+					cred-verification={credVerification} index={index} total-length={totalLength}>
+					</c-verify_b-email-verify>
+                </template>
+                <template if:true={showotp}>
+                    <c-verify_b-O-T-P-verify oncredsuccess={credAddSuccess} email-pre-verified={emailPreVerified} 
+					selected-business-obj={selectedBusiness} enc-code={encCode} email={email} custid={custid} 
+					creds-list={credDetails} multi-cred={multiCred} onmovetonext={moveToNext} 
+					onmovetonextid={moveToNextID} cred-verification={credVerification} index={index} 
+					total-length={totalLength}></c-verify_b-O-T-P-verify>
+                </template>
+                <template if:true={showSkipNow}>
+                    <p class="large slds-m-bottom_xx-large slds-align_absolute-center" onclick={verifyLater}>
+                        <a>Verify Later</a> 
+                    </p>
+                </template>
+            </div>
+        </div>
+    </section>
+    <template if:true={open}>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  </template> 
+  </template>

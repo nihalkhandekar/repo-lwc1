@@ -1,0 +1,13 @@
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+/* .back-button .slds-button {
+    border: none !important; 
+    box-shadow: none !important; 
+} */
+
+.abbrLayout{
+    max-width:200px;
+}

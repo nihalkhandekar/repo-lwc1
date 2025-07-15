@@ -1,0 +1,48 @@
+.notification{
+    border: 1px solid #F6A053;
+    background-color: #FFF8F2;
+    padding: 24px 0 24px 0;
+}
+
+.notification .icon{
+    height: 18px;
+    width: 18px;
+    margin-right: 8px;
+    position: relative;
+    top: 2px;
+}
+
+.notification a{
+    color: #09538B;
+    text-decoration: underline;
+    display: block;
+    margin-top: 4px;
+}
+
+.text-and-icon{
+    display: flex;
+}
+
+.text-and-icon span{
+    width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+    .notification .icon{
+        display: inline-block;
+        position: static;
+        top: 0px;
+    }
+    .notification a{
+        display: inline-block;
+        margin-top: 0;
+        margin-left: 16px;
+    }
+    .notification{
+        padding: 24px 0;
+        text-align: center;
+    }
+    .text-and-icon{
+        display: block;
+    }
+}

@@ -1,0 +1,79 @@
+.add-address {
+  color: #09538B;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+}
+
+.add-address svg {
+  height: 18px;
+  padding-left: 10px;
+}
+
+.dropdown-item {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+}
+
+.cust-dropdown .slds-input-has-icon .slds-input__icon {
+  top: 40%;
+}
+
+.cust-dropdown .slds-input {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  padding-left: 35px !important;
+  background-color: #ffffff;
+}
+
+.cust-dropdown .upper-case {
+  text-transform: uppercase;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+}
+
+.cust-lookup.slds-input.error-class {
+  border: 1px solid #db2426 !important;
+  box-shadow: 0 4px 8px 0 #E7E9F2 !important;
+}
+
+.slds-listbox__item.slds-has-focus {
+  background-color: #f3f2f2;
+}
+
+.inputForm .slds-form-element__label {
+  font-size: 18px;
+  line-height: 27px;
+  color: #2d2c2c;
+}
+
+input.cust-lookup[readonly][disabled] {
+  background-color: rgb(233, 234, 236);
+  border-color: rgb(196, 198, 202);
+}
+
+.cust-dropdown .slds-input[readonly] {
+  background-color: #e9eaec;
+  border-color: rgb(196, 198, 202);
+  font-size: inherit;
+  font-weight: 400;
+}
+
+.customListBox {
+  max-height: 300px;
+  overflow: auto;
+}
+
+@media only screen and (max-width:1023px) {
+  .inputForm .slds-form-element__label {
+    font-size: 17px;
+    line-height: 25px;
+  }
+}
