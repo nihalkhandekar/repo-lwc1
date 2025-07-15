@@ -1,0 +1,127 @@
+<template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text={label.loading_brs}></lightning-spinner>
+    </div>
+    <div class="slds-grid slds-wrap biz-input-field">
+        <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm has-search-icon">
+            <lightning-input max-length=255 type="text" value={searchKey} label={label.business_name}
+                onkeyup={onSearchKeyUp} onkeydown={onSearchKeyDown} placeholder={label.business_name_placeholder} autocomplete="off"
+                disabled={isSearchDisabled} class="biz-search-name"></lightning-input>
+        </div>
+        <template if:true={showAddManualButton}>
+            <div class="slds-col slds-large-size_3-of-12 slds-size_12-of-12">
+                <button class="slds-button slds-button_natural add-manual-button" onclick={handleGoToManual}>
+                    {label.ADD_MANUALLY}
+                </button>
+            </div>
+        </template>
+    </div>
+    <div class="slds-grid slds-wrap results-table-grid">
+        <div class="slds-size_12-of-12 results-table">
+            <div class="desktop">
+                <table class="table-bordered slds-table slds-table_bordered slds-border_left slds-border_right">
+                    <thead>
+                        <tr>
+                            <template for:each={businessColumns} for:item="row">
+                                <th key={row.label}>
+                                    {row.label}
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template if:false={noBusinessList}>
+                            <template if:true={businessList}>
+                                <template for:each={updatedData} for:item="business" for:index="index">
+                                    <tr key={business.id}>
+                                        <td class="custom-radio">
+                                            <input checked={business.checked} onchange={onBusinessRadioCheck}
+                                                value={index} name="table-radio" type="radio" id={business.Id}
+                                                aria-label={business.Name} data-id={business.Id} />
+                                            <label for={business.Id}>
+                                                <template if:true={business.AccountNumber}>
+                                                    {business.AccountNumber}
+                                                </template>
+                                                <template if:false={business.AccountNumber}>
+                                                    &nbsp;
+                                                </template>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            {business.Name}
+                                        </td>
+                                        <td>
+                                            {business.Business_Address_1__c}
+                                        </td>
+                                        <td if:true={showMailingAddress}>
+                                            {business.Mailing_Address_1__c}
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                        </template>
+                        <template if:false={noBusinessList}>
+                            <template if:false={businessList}>
+                                <td colspan={colSpan} height="195" class="no-results">
+                                    {label.Search_Result}
+                                </td>
+                            </template>
+                        </template>
+                        <template if:true={noBusinessList}>
+                            <td colspan={colSpan} height="195" class="no-results">
+                                {label.No_Result}
+                            </td>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mobile">
+                <template if:false={noBusinessList}>
+                    <p class="no-results" if:false={businessList}>
+                        {label.Search_Result}
+                    </p>
+                </template>
+                <p class="no-results" if:true={noBusinessList}>
+                    {label.No_Result}
+                </p>
+                <template if:false={noBusinessList}>
+                    <template if:true={businessList}>
+                        <template for:each={updatedData} for:item="business" for:index="index">
+                            <div class="each-result custom-radio" key={business.idForMobile}>
+                                <input checked={business.checked} onchange={onBusinessRadioCheck} value={index}
+                                    name="table-mobile-radio" type="radio" id={business.idForMobile}
+                                    aria-label={business.Name} data-id={business.Id} />
+                                <label for={business.idForMobile}>
+                                    <div class="each-row">
+                                        <p class="each-column">{label.Business_ID}</p>
+                                        <p class="each-column">{business.AccountNumber}</p>
+                                    </div>
+                                    <div class="each-row">
+                                        <p class="each-column">{label.Name}</p>
+                                        <p class="each-column">{business.Name}</p>
+                                    </div>
+                                    <div class="each-row">
+                                        <p class="each-column">{label.brs_Business_Address}</p>
+                                        <p class="each-column">{business.Business_Address_1__c}</p>
+                                    </div>
+                                    <div class="each-row" if:true={showMailingAddress}>
+                                        <p class="each-column">Connecticut Mailing Address</p>
+                                        <p class="each-column">{business.Mailing_Address_1__c}</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </template>
+                    </template>
+                </template>
+            </div>
+        </div>
+        <!--BRS-2670 pagination-->
+        <c-generic-data-table if:true={showResults} generickey="id" genericdata={businessList}
+            class="mydatatable slds-table_striped" generichidecheckbox="false" no-of-records-per-page={recordsPerPage}
+            button-limit="4" onpaginationchange={updatePaginatedData} modal-theme onscrolltotop={handleTableScrollToTop}
+            messageheader={label.messageheader} messagetext={label.messagetext} searchlength={searchResultLength}
+            actuallength={actuallength}>
+        </c-generic-data-table>
+    </div>
+</template>

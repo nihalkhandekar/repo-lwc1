@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+            <h6 class="certUploadHeading">{labels.Legal_Certificate_Head}</h6>
+            <p class="description">{labels.Legal_Certificate_Body}</p>
+            <c-brs_generic-file-upload onuploadfinish={finishedLegalCertUpload} accepted-formats={acceptedFormats}
+                maximum-files="1" record-id={Account_Id} required="true" hide-required-error="true" file-value="LegalExistence"
+                onremovefile={handleLegalCertRemove} onpageload={handleLegalCertLoad} hide-max-file-size="true"
+                onerror={handleLegalCertError}>
+            </c-brs_generic-file-upload>
+        </div>
+        <template if:true={nameMatch}>
+            <div class="slds-large-size_12-of-12 slds-size_12-of-12 stateDiv">
+                <h6 class="certUploadHeading">{labels.Sec_Certificate_Head}</h6>
+                <p class="description">{labels.Sec_Certificate_Body}</p>
+                <c-brs_generic-file-upload onuploadfinish={finishedStateCertUpload} accepted-formats={acceptedFormats}
+                    maximum-files="1" record-id={Account_Id} required="true" hide-required-error="true" file-value="StateCert"
+                    onremovefile={handleStateCertRemove} onpageload={handleStateCertLoad} hide-max-file-size="true"
+                    onerror={handleStateCertError}>
+                </c-brs_generic-file-upload>
+            </div>
+        </template>
+        <p class="error-text" if:true={showError}>{errorMsg}</p>
+    </div>
+</template>

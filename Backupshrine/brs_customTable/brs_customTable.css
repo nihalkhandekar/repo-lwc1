@@ -1,0 +1,110 @@
+.blue-text{
+    color: #075E96;
+    font-size: 16px;
+    letter-spacing: 0.11px;
+    line-height: 27px;
+    margin-left: 4px;
+    cursor: pointer;
+}
+
+.assignee-name.blue-text{
+    margin-left: 0px;
+}
+
+.assignee-name{
+    margin-top: 8px;
+}
+.mobile-table .mobile-table-row .mobile-table-column .assignee-name:first-child,
+.table-bordered tbody tr td .assignee-name:first-child{
+    margin-top:0;
+}
+
+.table-bordered{
+  table-layout: fixed;
+  border-color: #ECEBEB;
+  border-radius: 4px;
+}
+
+.table-bordered tr:hover,
+.table-bordered tr:hover td,
+.table-bordered tr:hover,
+.table-bordered tr:hover td {
+    background: #ffffff;
+    box-shadow: none;
+}
+
+.table-bordered tbody tr td,
+.table-bordered thead tr th {
+    letter-spacing: 0.01px;
+    padding: 8px 16px 8px 16px;
+    white-space: normal;
+    border-color: #ECEBEB;
+    vertical-align: top;
+}
+
+.table-bordered tbody tr td {
+    color: #2D2C2C;
+    word-break: break-word;
+}
+
+
+.table-bordered tbody tr td:last-child,
+.table-bordered thead tr th:last-child {
+    padding-right: 32px;
+}
+
+.table-bordered tbody tr td:first-child,
+.table-bordered thead tr th:first-child{
+  padding-left: 32px;
+}
+
+.table-bordered thead tr th {
+    background: #F7F9FA;
+    color: #757575;
+    font-weight: bold;
+}
+
+.mobile-table {
+    margin-bottom: 12px;
+}
+
+.mobile-table .mobile-table-row {
+    display: flex;
+    border: 1px solid #ECEBEB;
+    border-bottom: none;
+}
+
+.mobile-table .mobile-table-row:first-child {
+    border-radius: 4px 4px 0px 0px;
+}
+
+.mobile-table .mobile-table-row:last-child {
+    border-bottom: 1px solid #ECEBEB;
+    border-radius: 0 0 4px 4px;
+}
+
+.mobile-table .mobile-table-row .mobile-table-column:first-child {
+    width: 50%;
+    background-color: #F7F9FA;
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 14px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding: 8px;
+}
+
+.mobile-table .mobile-table-row .mobile-table-column:last-child {
+    width: 50%;
+    word-break: break-all;
+    background-color: #FFFFFF;
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 12px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding: 8px;
+}
+.table-bordered thead tr th p{
+    color: #757575;
+}

@@ -1,0 +1,48 @@
+.cardWrapper {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px 0 #E7E9F2;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.cardContent {
+    display: flex;
+    margin-top: 12px;
+}
+
+.cardContent .largeBold {
+    padding-left: 8px;
+}
+
+.cardRightLink {
+    display: flex;
+    align-items: center;
+}
+
+.small a {
+    text-decoration: underline;
+}
+
+.blueArrow {
+    transform: rotate(180deg);
+    height: 20px;
+    padding-right: 8px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .blueArrow {
+        height: 24px;
+    }
+
+    .cardWrapper {
+        padding: 16px;
+    }
+
+    .cardContent {
+        margin-top: 8px;
+    }
+}

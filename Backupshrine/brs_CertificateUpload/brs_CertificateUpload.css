@@ -1,0 +1,17 @@
+.certUploadHeading {
+    color: #333232;
+    font-family: Lato;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+}
+.description{
+    color: #3A3939;
+    font-family: Karla;
+    letter-spacing: 0.01px;
+    padding-top: 24px;
+    margin-bottom: 32px;
+}
+
+.stateDiv{
+    padding-top: 54px;
+}

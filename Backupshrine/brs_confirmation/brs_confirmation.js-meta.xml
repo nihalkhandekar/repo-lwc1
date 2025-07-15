@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="filing" type="@salesforce/schema/UCC_Filing__c"/>
+            <property name="filingStatus" type="String"/>
+            <property name="lienType" type="string"/>
+            <property name="lienNumber" type="string"/>
+            <property name="AccountId" type="String" label="AccountId" description=""/>
+            <property name="FilingLength" type="Integer" label="FilingLength" description=""/>
+            <property name="DueYear" type="String" label="DueYear" description=""/>
+            <property name="buttonValue" type="String" label="buttonValue" description=""/>
+            <property name="isAnnualScreen" type="Boolean" label="isAnnualScreen" description=""/>
+            <property name="financialStatementNumber" type="Boolean" label="financialNumber" description=""/>
+            <property name="financialStatementNumberValue" type="String" label="financialStatementNumber" description=""/>
+            <property name="filingId" type="String" description="Filing Id"/>
+            <property name="businessFilingRecord" label="Business filing" type="@salesforce/schema/Business_Filing__c"/>
+            <property name="linkBusinessToAccount" type="Boolean" label="Link Business To Account" description="Link business to account option check"/>
+            <property name="emailId" type="String" label="Email Id" description=""/>
+            <property name="phoneNumber" type="String" label="Phone Number" description=""/>
+            <property name="businessemailId" type="String" label="Business Email Id" description=""/>
+            <property name="isAgentChange" type="Boolean" label="Agent Change" description="Agent change flag"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

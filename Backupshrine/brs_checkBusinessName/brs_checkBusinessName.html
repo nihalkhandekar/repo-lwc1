@@ -1,0 +1,35 @@
+<template>
+	<div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+	
+    <lightning-card title={label.brs_CheckBNameLabel} icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <div class="slds-p-top_small"></div>
+            <label>{label.Recovery_SelfCertify_BusinessNameLabel}</label>
+            <lightning-input class="slds-p-top_xx-small" data-id="input1" type="text" variant="label-hidden" name="input1" max-length="100"
+                value={businessNameEntered} placeholder={label.Barbs_Placeholder}
+                onblur={handleBusinessNameInputBlur} onkeyup={businessNameChange}>
+            </lightning-input>
+            <template if:true={showAvailability} class="slds-m-around_medium">
+                <!--labels to show when the business name is available and when it is not available-->
+                <template if:false={businessNameAvailable}>
+                    <p class="helptext name-not-available">{label.businessNameNotAvailableMessageDomestic}</p>
+                </template>
+                <!--labels to show when the business name is available and when it is available-->
+                <template if:true={businessNameAvailable}>
+                    <p class="helptext name-available">
+                        <span>{label.businessNameAvailableMessageFE}&nbsp;</span>
+                    </p>
+                </template>
+            </template>
+            <div class="slds-p-top_medium"></div>
+            <button onclick={handleClick} class="slds-button slds-button_brand submit-btn">
+                {label.brs_CheckBNameAvailability}
+            </button>
+        </div>        
+    </lightning-card>
+</template>

@@ -1,0 +1,11 @@
+.total-fees-wrapper {
+    padding: 16px 24px;
+    border: solid 1px #053756;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    border-radius: 4px;
+    margin-top: 16px;
+}
+
+.total-fees-label {
+    margin-right: 24px;
+}

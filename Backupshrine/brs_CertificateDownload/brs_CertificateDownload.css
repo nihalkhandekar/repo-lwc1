@@ -1,0 +1,70 @@
+.white-background{
+    background: #ffffff;
+}
+
+.certificate-download {
+    padding-top: 48px;
+    padding-bottom: 60px;
+}
+
+.iconClass{
+    height: 16px;
+}
+
+.certificate-downlload__sub-title,
+.certificate-downlload__footer-sub-title {
+    font-family: Karla;
+    font-size: 18px;
+    line-height: 27px;
+    color: #2D2C2C;
+    padding: 16px 0 24px;
+}
+
+.border-line{
+    margin:60px 0;
+    border-top: 1px solid #D0CFCF;
+}
+
+.divider {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.buttons-section{
+    align-items: center;
+}
+
+.preview-button-wrapper {
+    margin-bottom: 24px;
+}
+
+.certificate-download__title {
+    font-size: 34px !important;
+    font-weight: bold !important;
+    line-height: 42px !important;
+    letter-spacing: 0.31px;
+    padding-top:48px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .certificate-download {
+        padding-bottom: 60px;
+    }
+
+    .or-block{
+        width: 60px;
+    }
+
+    .certificate-download__title {
+        font-size: 43px !important;
+        font-weight: bold !important;
+        line-height: 49px !important;
+    }
+    .divider {
+        padding:0;
+    }
+}
+a.slds-button.secondaryBtn.higher {
+    padding: 0px;
+}

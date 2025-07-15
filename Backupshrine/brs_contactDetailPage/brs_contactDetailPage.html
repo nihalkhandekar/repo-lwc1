@@ -1,0 +1,92 @@
+<template>
+    <div class="slds-grid slds-grid_vertical">
+        <div class="slds-col slds-m-bottom_x-large">
+            <h5 class="slds-m-bottom_large add-incorporator">
+                {label.brs_Add_Incorporator}
+            </h5>
+            <p class="an-incorporator-content">{label.Incorporator_Content} </p>
+            <button class="slds-button slds-button_natural button-copy-add" onclick={handleAddIncorporator}>
+                <span>
+                    <img src={addIcon} class="addIcon" alt="addIcon" title="addIcon" />
+                </span>&nbsp;&nbsp;&nbsp;{label.Add_caps}
+            </button>
+        </div>
+        <div class="slds-col slds-m-bottom_x-large">
+            <h5 class="slds-m-bottom_large add-agent">
+                {label.Add_Agent}
+            </h5>
+            <p class="an-agent-content">{label.Add_Agent_Content}</p>
+            <div class="selection-container-desktop-ed" if:true={displayAgentDetails}>
+                <label>
+                    {agentname.Name}
+                    <span class="actionButtons">
+                        <lightning-button class="slds-button slds-button_natural" label="Edit" icon-name="utility:edit"
+                            icon-position="left">
+                        </lightning-button>
+                        <lightning-button class="slds-button slds-button_natural" label="Delete"
+                            icon-name="utility:delete" icon-position="left">
+                        </lightning-button>
+                    </span>
+                </label>
+            </div>
+            <button class="slds-button slds-button_natural button-copy-add" onclick={handleAddAgent}
+                if:true={addAgentButton}>
+                <span>
+                    <img src={addIcon} class="addIcon" alt="addIcon" title="addIcon" />
+                </span>&nbsp;&nbsp;&nbsp;{label.Add_L}
+            </button>
+        </div>
+    </div>
+
+    <template if:true={addAgentPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-modal__header_empty">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                            <label class="search-agent">{label.Secretary_Header}</label>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                            <label class="closePopup" onclick={handleClosePopup}>&times;</label>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p class="you-can-search-for-agent">{label.Search_Agent_Content} </p>
+                    <div class="slds-grid slds-wrap popupContentData">
+                        <div class="slds-col slds-large-size_6-of-12 slds-size_6-of-12">
+                            <label class="type">{label.Type_Label}<sup>*</sup></label>
+                            <lightning-combobox class="rectangle-1" name="progress" value={value}
+                                placeholder="E.g. Business" options={agentTypeValues.data.values}
+                                onchange={handleChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="slds-col slds-large-size_6-of-12 slds-size_6-of-12">
+                            <label class="name">{label.name}<sup>*</sup></label>
+                            <lightning-input type="text" name="input1" onchange={handleSearchAgent}
+                                placeholder="E.g. Abc  Corp"></lightning-input>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12" style="margin-top: 30px">
+                            <template if:true={agentList}>
+                                <lightning-datatable data={agentList} columns={columns} key-field="Id"
+                                    onrowselection={selectedRowData}>
+                                </lightning-datatable>
+                            </template>
+                            <template if:true={error}>
+                                {error}
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer slds-modal__footer_directional">
+                    <button class="slds-button slds-button_brand confirm-button"
+                        onclick={confirmSelectedRow}>{label.Confirm}</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

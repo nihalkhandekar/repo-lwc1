@@ -1,0 +1,29 @@
+<template>
+    <div class="business-date-block slds-grid">
+        <div class="slds-col slds-size_12-of-12">
+            <c-generic-radio_brs radio-options={options} onctbosdatachange={handleOption} name="radioOptions"
+                answer={selectedOption} >
+            </c-generic-radio_brs>
+            <template if:true={fieldVisible}>
+                <hr />
+            </template>
+            <div class="display" if:true={fieldVisible}>
+                <div class="input-wrapper business-start-date slds-size_7-of-12 slds-large-size_4-of-12">
+                    <label>{label.Start_Date_Label}</label>
+                    <lightning-input type="date" class = "brs-date-picker" value={defaultDate} variant="label-hidden" placeholder="MM/DD/YYYY"
+                        onchange={handleStartDate} date-style="short" 
+                        format="MM/DD/YYYY" disabled
+                        ></lightning-input>
+                </div>
+                <div class="input-wrapper slds-size_7-of-12 slds-large-size_4-of-12">
+                    <label>{label.Select_End_Date_Label}</label>
+                    <lightning-input type="date" class = "brs-date-picker" value={progressValue} variant="label-hidden" placeholder="MM/DD/YYYY"
+                        onchange={handlePeriodofDuration} date-style="short" ></lightning-input>
+                </div>
+            </div>
+        <template if:true={showErrorMessage}>
+            <p class="error-text">{errorMessage}</p>
+        </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,81 @@
+<template>
+    <div class="desktop-show">
+        <table class="table-bordered slds-table slds-table_bordered slds-border_left slds-border_right">
+            <thead>
+                <tr>
+                    <template for:each={tableColumns} for:item="row">
+                        <th key={row.label}>
+                            <p class="smallBold">{row.label}</p>
+                        </th>
+                    </template>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={tableData} for:item="row" for:index="parentindex">
+                    <tr key={row.id}>
+                        <template for:each={row.values} for:item="column" for:index="childindex">
+                            <td key={column.value}>
+                                <template if:true={column.showmore}>
+                                    <template if:true={column.showall}>
+                                        <template for:each={column.value} for:item="name">
+                                            <p key={name} class="small assignee-name">{name}</p>
+                                        </template>
+                                        <p class="assignee-name blue-text" data-id={parentindex} data-name={childindex}
+                                            onclick={onShowLess}>({labels.businessProfile_show_less})</p>
+                                    </template>
+                                    <template if:false={column.showall}>
+                                        <p class="small">{column.initialValue}
+                                            <span onclick={onShowMore} data-id={parentindex} data-name={childindex}
+                                                class="blue-text" if:true={column.length}>
+                                                (+{column.length})
+                                            </span>
+                                        </p>
+                                    </template>
+                                </template>
+                                <template if:false={column.showmore}>
+                                    <p if:false={column.showFormattedNumber} class="small">{column.value}</p>
+                                    <p if:true={column.showFormattedNumber}  class="small"><lightning-formatted-number value={column.value} format-style="currency" currency-code="USD"></lightning-formatted-number></p>
+                                </template>
+                            </td>
+                        </template>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mobile-show">
+        <template for:each={tableData} for:item="row" for:index="parentindex">
+            <div class="mobile-table" key={row.Id}>
+                <template for:each={row.values} for:item="column" for:index="childindex">
+                    <div class="mobile-table-row" key={column.value}>
+                        <p class="mobile-table-column">{column.label}</p>
+                        <p class="mobile-table-column">
+                            <template if:true={column.showmore}>
+                                <template if:true={column.showall}>
+                                    <template for:each={column.value} for:item="name">
+                                        <p key={name} class="small assignee-name">{name}</p>
+                                    </template>
+                                    <p class="assignee-name blue-text" data-id={parentindex} data-name={childindex}
+                                        onclick={onShowLess}>({labels.businessProfile_show_less})</p>
+                                </template>
+                                <template if:false={column.showall}>
+                                    <p class="small">{column.initialValue}
+                                        <span onclick={onShowMore} data-id={parentindex} data-name={childindex}
+                                            class="blue-text" if:true={column.length}>
+                                            (+{column.length})
+                                        </span>
+                                    </p>
+                                </template>
+                            </template>
+                            <template if:false={column.showmore}>
+                                <p if:false={column.showFormattedNumber} class="small">{column.value}</p>
+                                <p if:true={column.showFormattedNumber}  class="small"><lightning-formatted-number value={column.value} format-style="currency" currency-code="USD"></lightning-formatted-number></p>
+                            </template>
+                        </p>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

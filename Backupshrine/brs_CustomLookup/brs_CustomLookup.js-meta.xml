@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="objectName" type="String" required="false" label="Object Name" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="searchfield" type="String" required="false" label="Search field" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="iconname" type="String" required="false" label="Icon Name" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="selectedRecordId" type="String" required="false" label="Selected Record Id" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="isNameReservation" type="Boolean" required="false" label="Is Name Reservation" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="isMergerFlow" type="String" required="false" label="Merger Flow" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="businessFilingRecord" type="String" required="false" label="Merger Flow BusinessFiling Record" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="businessFilingRecordNew" type="@salesforce/schema/Business_Filing__c" required="false" label="Merger Flow BusinessFiling Record New" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="isValid" type="Boolean" required="false" label="Is Name Reservation" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="isValidData" type="Boolean" required="false" label="Is Valid" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

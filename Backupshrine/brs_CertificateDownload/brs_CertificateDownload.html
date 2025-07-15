@@ -1,0 +1,52 @@
+<template>
+    <div class="white-background">
+        <div class="certificate-download slds-grid slds-wrap brs-container">
+            <c-brs_bread-crumb items={breadcrumbList} onbreadcrumbclick={onBreadCrumbClick} theme="theme2">
+            </c-brs_bread-crumb>
+            <div class="slds-size_1-of-1 slds-large-size_12-of-12 ">
+                <h1 class="certificate-download__title">{label.Certificate_Title}</h1>
+                <p class="certificate-downlload__sub-title large">
+                    <lightning-formatted-rich-text value={label.cert_Unable_view}>
+                    </lightning-formatted-rich-text>
+                </p>
+                <div class="slds-grid slds-wrap slds-size_12-of-12">
+                    <p class="preview-button-wrapper large">
+                        {label.Preview_Certificate_Label}&nbsp;<a target="_blank"
+                            href={previewLink}>{label.Preview_Certificate_Label1}</a>&nbsp;{label.Preview_Certificate_Label2}
+                    </p>
+                </div>
+                <div class="slds-grid slds-size_12-of-12">
+                    <div class="slds-large-size_4-of-12 slds-grid slds-size_12-of-12 button-wrapper">
+                        <a class="slds-button slds-button_stretch secondaryBtn higher" href={downloadLink} download>
+                            <span>
+                                <img src={downloadIcon} class="iconClass" alt=" "
+                                    /></span>&nbsp;&nbsp;{label.Download_Certificate_Text}
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-size_1-of-1 slds-large-size_12-of-12 footer-container">
+
+                <hr class="border-line" />
+                <h5>{label.Certificate_Footer_Title}</h5>
+                <p class="certificate-downlload__footer-sub-title">{label.Certificate_Footer_SubTitle}</p>
+                <div class="slds-grid slds-wrap buttons-section">
+                    <div class="slds-size_12-of-12 slds-large-size_4-of-12">
+                        <button role="link" class="slds-button slds-button_stretch primaryBtn higher"
+                            onclick={onBusinessMaintenenceHandler}>
+                            {label.Certificate_Footer_Button1}
+                        </button>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-large-size_1-of-12 or-block">
+                        <div class="divider">{label.Certificate_Or_Text}</div>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-large-size_5-of-12">
+                        <button role="link" class="slds-button slds-button_stretch secondaryBtn higher" onclick={onHomeHandler}>
+                            {label.Certificate_Footer_Button2}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

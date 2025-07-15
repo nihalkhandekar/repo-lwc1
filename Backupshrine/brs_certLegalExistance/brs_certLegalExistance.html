@@ -1,0 +1,24 @@
+<template>
+    <div class="grey-background">
+        <div class="cert-legal-existance slds-grid slds-wrap brs-container">
+            <div class="slds-size_1-of-1 slds-large-size_8-of-12">
+                <h2 class="cert-legal-existance__title">{label.certLegalExistanceHeading}</h2>
+                <p class="cert-legal-existance__section large">{label.certLegalExistanceSection1}</p>
+                <p class="cert-legal-existance__section large">{label.certLegalExistanceSection2}</p>
+                <p class="cert-legal-existance__section large">{label.certLegalExistanceSection4}</p>
+                <p class="cert-legal-existance__section large">
+                    <lightning-formatted-rich-text value={label.certLegalExistanceSection3}>
+                    </lightning-formatted-rich-text>
+                </p>
+            </div>
+            <div class="slds-grid slds-wrap content-card-comp building-bg">
+                <template for:each={dataForContentCard} for:item="contentcard">
+                    <div key={contentcard} class="slds-size_1-of-1 slds-large-size_6-of-12 content-card-comp__item">
+                        <c-brs_content-card contentdata={contentcard} hide-chevron={hideChevron}
+                            is-link-present={isLinkPresent} navigationdata={contentcard.navPath}></c-brs_content-card>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

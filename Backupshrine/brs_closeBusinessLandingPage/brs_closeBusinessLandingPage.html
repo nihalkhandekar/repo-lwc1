@@ -1,0 +1,86 @@
+<template>
+    <div class="landing-page">
+        <div class="landing-page-banner"></div>
+        <div class="brs-container  brs-wrapper">
+            <div class="landing-page-card">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12">
+                        <h2 if:false={isRevocationDissolution}>{labels.Header_Question}</h2>
+                        <h2 if:true={isRevocationDissolution}>{labels.RevocationDissolution_Header_Question}</h2>
+                        <p class="smallerBold completion-time mobile-show">
+                            <img src={timerIcon} alt="" class="time-icon" role="presentation" />
+                            {displayTimeText}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 slds-align-bottom">
+                        <button class="slds-button slds-button_brand primaryBtn getStartedBtn slds-float--right"
+                            onclick={handleGetStartedClick}>
+                            {labels.LandingPage_Button}
+                            <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" role="presentation" />
+                        </button>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1">
+                        <div class="mobile-show mobile-scholarcontent">
+                            <c-brs_header scholar-content={scholarContent} show-scholar-only></c-brs_header>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap desktop-show">
+                    <div class="slds-col slds-size_12-of-12">
+                        <p class="smallerBold completion-time">
+                            <img src={timerIcon} alt="" class="time-icon" role="presentation" />
+                            {displayTimeText}
+                        </p>
+                    </div>
+                </div>
+                <div class="hr-line"></div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12 slds-order_3 slds-large-order_1">
+                        <p class="small para-text" if:false={isRevocationDissolution}>
+                            {labels.Description}
+                        </p>
+                        <p class="small para-text" if:false={isRevocationDissolution}>
+                            {labels.Description1}
+                        </p>
+						<p class="small para-text" if:false={isRevocationDissolution}>
+                            {labels.Description3}
+                        </p>
+                        <p class="small para-text" if:false={isRevocationDissolution}>
+                            {labels.Description2}
+                        </p>
+                        <p class="small para-text" if:false={isRevocationDissolution}>
+                            <lightning-formatted-rich-text value={labels.Description4}></lightning-formatted-rich-text>
+                        </p>
+                        <h5 class="para-text revoke-text" if:true={isRevocationDissolution}>
+                            {labels.need_to_revoke}
+                        </h5>
+                        <template if:false={isRevocationDissolution}>
+                            <c-qn-a_-question-help-text helptextnotes={topPleaseNoteSection}
+                                questionid={topPleaseNoteSection}>
+                            </c-qn-a_-question-help-text>
+                        </template>
+                        <template if:true={isRevocationDissolution}>
+                            <c-qn-a_-question-help-text helptextnotes={revocationPleaseNoteSection}
+                                questionid={revocationPleaseNoteSection}  class="revote-please-note">
+                            </c-qn-a_-question-help-text>
+                            <div>
+                            	<p class="small para-text desc-text-1" if:true={isRevocationDissolution}>
+                                 	<lightning-formatted-rich-text value={labels.revoke_description1}></lightning-formatted-rich-text>
+                                </p>
+                                <p class="small para-text" if:true={isRevocationDissolution}>
+                                    {labels.revoke_description2}
+                                </p>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-order_2 slds-large-order_2">
+                    </div>
+                    <div
+                        class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-order_2 slds-large-order_2 desktop-show">
+                        <c-brs_link_help-text scholar-content={scholarContent}></c-brs_link_help-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

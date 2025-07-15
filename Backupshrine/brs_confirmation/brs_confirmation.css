@@ -1,0 +1,380 @@
+.success-container {
+    background: #f7f9fa;
+}
+
+.background {
+    height: 440px;
+    background: var(--c-confirmationPageBg) no-repeat;
+    width: 100%;
+    background-size: cover;
+    border-radius: 4px;
+}
+.background-annual {
+    background: var(--c-annualReportPageBg) no-repeat;
+    height: 440px;
+    width: 100%;
+    background-size: cover;
+    border-radius: 4px;
+}
+.success-container-card {
+    padding-top: 36px;
+    border-radius: 4px 4px 0 0;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    margin: auto;
+    margin: -288px 16px 170px 16px;
+    color:#2D2C2C;
+}
+
+.success-icon {
+    width: 160px;
+    height: auto;
+    margin: auto;
+    display: block;
+    margin-bottom: 32px;
+}
+
+.success-container-card h4 {
+    margin-bottom: 16px;
+}
+
+.success-container-card h4.success-msg{
+    margin-bottom:0;
+}
+
+.success-container-card h4.success-heading{
+    margin-bottom: 16px;
+}
+
+.success-container-card .cust-anchor {
+    color: #09538b;
+    font-family: Karla;
+    font-size: 20px;
+    letter-spacing: 0.27px;
+    line-height: 28px;
+    text-decoration: underline;
+}
+
+.success-container-card .desc-bold {
+    font-weight: bold !important;
+    margin-bottom: 24px;
+}
+
+.success-container-card .desc {
+    margin-bottom: 32px;
+}
+
+.desc-bold .download {
+    font-family: Karla;
+    text-decoration: underline;
+    color: #00528d;
+    font-weight: normal;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.success-container-card .download img {
+    width: 24px;
+    margin-left: 8px;
+    margin-right: 12px;
+    margin-top: -3px;
+}
+
+.success-container-card-body,
+.success-container-card-content {
+    padding-left: 32px;
+    padding-right: 32px;
+}
+.success-container-card-content {
+    border-top: 1px solid #ecebeb;
+}
+
+.success-container-card-footer {
+    border-top: 1px solid #ecebeb;
+    padding: 30px 32px 32px 32px;
+    text-align: center;
+}
+
+.success-container-card-footer .primaryBtnSmall {
+    width: 100%;
+    margin-bottom: 16px;
+    line-height: 21px !important;
+}
+
+.success-container-card-footer .secondary-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    line-height: 21px !important;
+}
+.please-note {
+    box-sizing: border-box;
+    border: 1px solid #F6A053;
+    border-radius: 4px;
+    background-color: #FFF8F2;
+    padding: 12px 0 12px 24px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+.please-note-copy-1 {
+    color: #8A5321;
+    font-family: KarlaBold !important;
+    font-size: 16px !important;
+    letter-spacing: 0.01px;
+    line-height: 24px !important;
+}
+.please-note-copy-2 {
+    color: #333232;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+.filings_due_table {    
+    margin-top: 32px;
+    margin-bottom: 41px;
+}
+.filings_due_table tbody tr td{
+    border: solid 1px #D0CFCF;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    
+}
+.filings_due_table tbody tr td .due-details-container{
+    padding-left: 32px;
+    border-radius: 0 4px 4px 0;
+}
+.filings_due_table tbody tr:last-child td.show-more-section{
+    border: solid 1px #D0CFCF;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color:#09538B;
+    text-decoration: underline;
+}
+.filings_due_table thead th{
+    border: solid 1px #D0CFCF;
+    background: #F7F9FA;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 42px;
+}
+
+.filings_icon {
+    vertical-align: top;
+    margin-right: 20px;
+    margin-top: 5px;
+}
+.filing-due {
+    font-family: Lato;
+    font-weight: bold;
+    margin-bottom: 16px;
+    font-size: 22px;
+}
+.filings_due_table tr th::before {
+    content: '.';
+    position: relative;
+    top: -4px;
+    left: -10px;
+    font-size: 40px;
+}
+.filings_due_table tr th:first-child::before {
+    color: #DB2426;
+}
+.filings_due_table tr th:last-child::before {
+    color: #97ABB8;
+}
+.filings_due_table tr th:nth-child(2)::before {
+    color: #F6A053;
+}
+.success-container-card .download img.annual-download-img {
+    margin-left: -5px;
+}
+.past-due {
+    color: #DB2426;
+}
+.amount {
+    font-size: 16px;
+    color:#757575;
+}
+.amount-value {
+    color:#333232;
+}
+.filings_due_table tr {
+    display: flex;
+    flex-direction: column;
+}
+.filings_due_table td:nth-child(2n) {
+    order: 2;
+}
+
+table.filings_due_table tbody tr td.no-leftOrTopBorder,
+table.filings_due_table thead tr th.no-leftOrTopBorder {
+    border-left:solid 1px #d0cfcf;
+    border-top: none;
+}
+table.filings_due_table tbody tr td.no-rightOrBottomBorder,
+table.filings_due_table thead tr th.no-rightOrBottomBorder {
+    border-right: solid 1px #d0cfcf;
+    border-bottom: none ;
+}
+.filings_due_table tbody tr td .due-details-container{
+    border-left: solid 5px #DB2426;
+    padding-top: 15px;
+}
+ .filings_due_table tbody tr td .due-details-container{
+        padding-bottom: 0
+    }
+.due-amount-container {
+    border-left: solid 5px #DB2426;
+    padding-left: 32px;
+}
+    table.filings_due_table tr td:nth-child(2) {
+        padding-top: 0;
+    }
+    table.filings_due_table tr td:nth-child(1){
+        padding-bottom: 0;
+    }
+    .filing-due-container{
+        margin-bottom: 46px;
+    }
+    .success-filing{
+        margin-bottom: 24px;
+    }
+    .financial-number { 
+        font-family: KarlaBold;
+    }
+    .success-container-card .filing-number {
+        margin-bottom: 12px;
+    }
+    .next-step-container {
+        padding-top: 48px;
+        margin-top: 32px;
+        border-top: solid 1px #ecebeb;
+      }
+      
+      .next-steps-heading {
+        margin-bottom: 60px;
+      }
+      
+      .step-label {
+        color: #09538b;
+        margin-bottom: 16px;
+      }
+      
+      .next-steps .step-side-section {
+        padding-bottom: 60px;
+        padding-left: 18px;
+        display: inline-block;
+        width: 92%;
+      }
+      
+      .next-steps .next-steps:last-child .step-side-section {
+        padding-bottom: 40px;
+      }
+      
+      .next-step-container .next-steps:nth-of-type(1) .step-side-section::before,
+      .next-step-container .next-steps:nth-of-type(2) .step-side-section::before {
+        content: "";
+        position: absolute;
+        top: 26px;
+        bottom: 0;
+        left: 10px;
+        border-left: dashed 1px #d0cfcf;
+        height: 101%;
+      }
+      
+      .next-step-container .next-steps:last-child .step-side-section::before {
+        border-left: none;
+      }
+      
+      .next-steps {
+        position: relative;
+      }
+      
+      .next-steps .step-icon {
+        vertical-align: top;
+        margin-top: 5px;
+      }
+      
+      button.access-button {
+        margin-top: 15px;
+        display: inline-block;
+      }
+      
+      .next-step-container .next-steps:last-child {
+        padding-bottom: 0;
+        margin-bottom: 40px;
+      }
+      .msg-container{
+        background: #FFFFFF;
+        box-shadow: 0px 4px 8px #e7e9f2;
+        border-radius: 4px 4px 0px 0px;
+        padding: 16px;
+        margin-bottom: 56px;
+        display: flex;
+        flex-direction: row;
+      }
+      
+      .icon_holder{
+        display: none;
+      }
+      
+      .content_box{
+        width: 80%;
+        height: 100%;
+        margin-left: 24px;
+      }
+      
+      .content_box_desc{
+        margin-top: 8px;
+      }
+      
+@media only screen and (min-width: 1024px) {
+    .success-container-card {
+        max-width: 743px;
+        margin: -234px auto 170px;
+    }
+    table.filings_due_table tbody tr td.no-leftOrTopBorder,
+    table.filings_due_table thead tr th.no-leftOrTopBorder {
+        border-left: none;
+        border-top: solid 1px #d0cfcf;
+    }
+    table.filings_due_table tbody tr td.no-rightOrBottomBorder,
+    table.filings_due_table thead tr th.no-rightOrBottomBorder {
+        border-right: none ;
+        border-bottom: solid 1px #d0cfcf;
+    }
+    .table-row-container {
+        display: inline-block;
+    }
+    .filings_due_table tr {
+        display: table-row;
+    }
+    .filings_due_table tbody tr td .due-details-container{
+        padding-bottom: 16px;
+    }
+    table.filings_due_table tr td:nth-child(2){
+        padding-left: 32px;
+    }
+    .due-amount-container {
+        border-left: none;
+    }
+    table.filings_due_table tr td:nth-child(1){
+        padding-bottom: 16px;
+    }
+    
+  .icon_holder{
+    display: block;
+    width: 64px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .msg-container{
+    padding: 24px;
+  }
+}

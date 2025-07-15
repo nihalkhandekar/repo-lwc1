@@ -1,0 +1,42 @@
+.certificate-heading {
+    padding-bottom: 30px;
+}
+.certificate-sub-heading {
+    padding-bottom: 30px;
+}
+.search-buisness-btn {
+    padding-top: 16px;
+    padding-bottom: 40px;
+}
+.searchContent {
+    border-bottom: 1px solid #ecebeb;
+}
+.error-sub-heading {
+    margin-top: 40px;
+}
+.noCertificateFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed #D0CFCF;
+    padding-top: 48px;
+    border-radius: 4px;
+    margin-top: 40px;
+}
+.noCertificateFoundText {
+    margin-top: 16px;
+    width: 100%;
+    margin-left: 10px;
+}
+.certificate-detail-heading {
+    padding: 0 0 20px;
+}
+
+@media only screen and (min-width: 1023px) {
+    .noCertificateFound {
+        flex-direction: row;
+    }
+    .noCertificateFoundText {
+        margin-left: 32px;
+    }
+}

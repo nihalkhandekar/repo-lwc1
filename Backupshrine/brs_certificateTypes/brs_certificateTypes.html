@@ -1,0 +1,26 @@
+<template>
+    <div class="cert-type-wrapper" if:true={dataLoaded}>
+        <div class="cards-wrapper">
+            <c-generic-multi-select_brs is-cert-types={isCertTypes} listdata={certificateCards}
+                oncheckboxinputselection={handleCertSelection} onuncheckboxinputselection={handleCertUnselect}>
+            </c-generic-multi-select_brs>
+        </div>
+        <div class="total-fees-wrapper slds-grid">
+            <p class="largeBold slds-size_8-of-12 total-fees-label">
+                {label.BRS_Total_Fee}
+            </p>
+            <p class="large slds-size_3-of-12">
+                ${feesTotal}
+            </p>
+        </div>
+        <p class="error-text" if:true={showCertError}>
+            {label.BRS_Cert_Type_Error}
+        </p>
+        <c-brs_next-back-buttons nextlabel={label.BRS_Proceed_Payment} prevlabel={label.Back}
+            onhandlenext={handleProceed} onhandleback={handleBack}></c-brs_next-back-buttons>
+    </div>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+</template>

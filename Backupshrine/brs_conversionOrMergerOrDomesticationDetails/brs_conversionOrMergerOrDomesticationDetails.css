@@ -1,0 +1,70 @@
+.pageheading {
+    margin-bottom: 32px;
+}
+
+.hr-line {
+    height: 0px;
+    border: 0.5px solid #ECEBEB;
+}
+
+.heading-hr {
+    height: 1px;
+    background: #DDDBDB;
+}
+
+.card-heading {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.card-heading img {
+    width: 36px;
+    margin-right: 4px;
+}
+
+.margin-b-40 {
+    margin-bottom: 40px;
+}
+
+.card-separator {
+    margin-bottom: 12px;
+}
+
+.each-card {
+    margin-bottom: 24px;
+}
+
+.each-card:last-child {
+    margin-bottom: 0;
+}
+
+.each-row {
+    margin-bottom: 16px;
+}
+
+.each-card .each-row:last-child {
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1023px) {
+    .each-row,
+    .each-card .each-row .slds-col {
+        margin-bottom: 12px;
+    }
+
+    .each-card .each-row .slds-col:last-child {
+        margin-bottom: 0;
+    }
+
+    .heading-hr {
+        margin-top:32px;
+    }
+
+    .card-heading {
+        margin-bottom: 24px;
+    }
+
+    .card-separator {
+        margin-bottom: 24px;
+    }
+}

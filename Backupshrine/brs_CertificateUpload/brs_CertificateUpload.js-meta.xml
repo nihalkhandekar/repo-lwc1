@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="Business_Name_in_state_of_formation" type="String" label="Business name in state of formation" description=""/>
+            <property name="Business_Name" type="String" label="Account name" description=""/>
+            <property name="Account_Id" type="String" label="Account Id" description=""/>
+            <property name="Legal_config" type="String" label="Legal config" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

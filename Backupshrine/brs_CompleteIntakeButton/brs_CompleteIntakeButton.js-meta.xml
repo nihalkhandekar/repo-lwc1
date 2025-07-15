@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="workorderID" type="String" description="Business Name selected by User" label="workorderID"/>
+            <property name="businessfilingID" type="String" description="Selected business type eg : LLP, LLC, Stock etc" label="businessfilingID"/>
+            <property name="isBusinessFormation" type="Boolean" description="Selected business type eg : LLP, LLC, Stock etc" label="isBusinessFormation"/>
+            <property name="businessNameEntered" type="String" label="Business Name" description=""/>
+            <property name="businessNameAvailable" type="Boolean" label="Business Name Available" description=""/>
+            <property name="filingtype" type="String" label="filingtype" description=""/>
+            <property name="subtype" type="String" label="subtype" description=""/>
+
+            <property name="amendmenttype" type="String" label="Amendmenttype" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,74 @@
+.grey-background {
+    overflow: hidden;
+}
+
+.cert-legal-existance {
+    color: #2d2c2c;
+    padding-top: 60px;
+    margin-bottom: 120px;
+}
+
+.content-card-comp {
+    margin: 0 -7px;
+    display: flex;
+    align-items: stretch;
+    position: relative;
+}
+
+.content-card-comp__item {
+    margin: 0 0 14px;
+}
+
+.cert-legal-existance .cert-legal-existance__section:first-of-type {
+    padding-top: 16px;
+}
+
+.cert-legal-existance .cert-legal-existance__section:nth-of-type(2) {
+    padding: 32px 0 32px;
+}
+
+.cert-legal-existance .cert-legal-existance__section:last-of-type {
+    padding-bottom: 80px;
+}
+
+.cert-legal-existance__title {
+    max-width: 648px;
+}
+
+.building-bg:after {
+    position: absolute;
+    content: "";
+    height: 268px;
+    width: 165px;
+    top: -134px;
+    right: -96px;
+    background: url("/business/resource/CT_Assets/icons/building-inactive.svg");
+}
+
+.building-bg:before {
+    position: absolute;
+    content: "";
+    bottom: 10px;
+    left: -96px;
+    height: 230px;
+    width: 230px;
+    background: url("/business/resource/CT_Assets/icons/card-inactive.svg");
+}
+
+@media only screen and (min-width: 1024px) {
+    .cert-legal-existance__section3 {
+        padding-bottom: 42px;
+    }
+
+    .building-bg:after {
+        height: 268px;
+        width: 254px;
+        top: -222px;
+        right: -186px;
+    }
+
+    .building-bg:before {
+        bottom: 10px;
+        left: -200px;
+    }
+}

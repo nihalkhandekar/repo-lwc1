@@ -1,0 +1,62 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <!--div class="fin-input-div inputForm">
+        <div class="slds-form-element__label">{label.ALEI_Label}*</div>
+        <div class="slds-grid slds-wrap slds-gutters form-row">
+            <div class="slds-col slds-col slds-large-size_4-of-12 slds-size_12-of-12">
+                <lightning-input variant="label-hidden" type="text" value={label.Connecticut_ALEI_Prefix} disabled>
+                </lightning-input>
+            </div>
+            <div class="slds-col slds-large-size_8-of-12 slds-size_12-of-12">
+                <lightning-input variant="label-hidden" type="text" onchange={onBusinessIdChange} required>
+                </lightning-input>
+            </div>
+        </div>
+    </div-->
+    <div class="inputForm fin-input-div">
+        <lightning-input type="text" label={label.certificate_number} placeholder={label.Certificate_Number_Placeholder} onchange={onCerticateNumberChange} onkeypress={handleEnter} required>
+        </lightning-input>
+    </div>
+    <div class="search-buisness-btn">
+        <button class="slds-button slds-button_stretch secondaryBtn higher" onclick={onSearchBusiness}>
+            <img src={searchIcon} class="icon" alt="searchIcon" title="searchIcon" aria-hidden="true" />
+            {label.verify_Certificate_Search}
+        </button>
+    </div>
+    <template if:true={showCertDetails}>
+        <template if:true={showDataCertDetails}>
+            <div class="searchContent">
+                <h5 class="certificate-detail-heading">{certificateDetails.length}
+                    {label.verify_certificate_search_result}</h5>
+                <p>{label.verify_Certificate_question}</p>
+                <div class="sortSection slds-m-top_x-large slds-m-bottom_large slds-grid slds-wrap">
+                    <p class="small"><b>{label.verify_certificate_search_result_1} </b>({certificateDetails.length}
+                        {label.Certificate_Of_Text} {certificateDetails.length})
+                        {label.verify_certificate_search_result_2}</p>
+                </div>
+                <div class="theme3 theme5 slds-m-top_large">
+                    <c-brs_link_generic-radio-input radio-options={certificateDetails} name="theme3"
+                        onctbosdatachange={handleCertificateSelection} answer={selectedCertificate}
+                        has-error={showError} iscertificateinfo>
+                    </c-brs_link_generic-radio-input>
+                </div>
+            </div>
+        </template>
+        <template if:true={showEmptyCertDetails}>
+            <h5 class="error-sub-heading">{label.no_Certificate_Title}</h5>
+            <div class="slds-p-around_xx-large noCertificateFound">
+                <img src={noCertImage} alt="searchIcon">
+                <div class="noCertificateFoundText">
+                    <p class="largeBold">{label.no_Certificate_subTitle}</p>
+                    <p class="large">{label.no_Certificate_description}</p>
+                </div>
+            </div>
+        </template>
+    </template>
+    <c-brs_next-back-buttons nextlabel={nextButton} prevlabel={prevButton} disablenextbutton={isDisableNextButton}
+        onhandlenext={onVerfiyCertificate} onhandleback={gotoCertificateLandingPage}>
+    </c-brs_next-back-buttons>
+</template>

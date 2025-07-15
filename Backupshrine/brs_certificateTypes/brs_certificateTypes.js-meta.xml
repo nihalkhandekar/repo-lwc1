@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="certTypes" type="String" label="certTypes" description=""/>
+            <property name="feeTotal" type="String" label="feeTotal" description=""/>
+            <property name="tempRecord" type="@salesforce/schema/Temp_History__c"/>
+            <property name="showError" type="String" label="showError" description=""/>
+            <property name="businessType" type="String" label="businessType" description=""/>
+            <property name="accBusinessType" type="String" label="Account Business Type" description=""/>
+            <property name="accountId" type="String" label="Account Id" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

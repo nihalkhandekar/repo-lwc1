@@ -1,0 +1,22 @@
+.helptext {
+    color: #2D2C2C;
+    font-family: Karla, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+.name-not-available {
+    color: #DB2426;
+    font-family: KarlaBold;
+}
+.name-available {
+    color:#2D8D60;
+    font-family: KarlaBold;
+}
+.available {
+    color: #2D8D60 !important;
+}
+
+.unAvailable {
+    color: #DB2426 !important;
+}

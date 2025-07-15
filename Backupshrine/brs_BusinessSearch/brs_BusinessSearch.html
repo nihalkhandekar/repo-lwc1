@@ -1,0 +1,89 @@
+<template>
+    <c-brs_search-fields-banner is-loading={isLoading} urlstring={urlstring} is-business-search
+        onsearchbusiness={onSearchBusiness} export-data={allData} page-heading={pageHeading} has-results={hasResults}
+        selected-filters={selectedFilters}>
+    </c-brs_search-fields-banner>
+    <div class="brs-container search-results-container">
+        <c-brs_bread-crumb items={breadcrumbList} if:true={isUserSearched} onbreadcrumbclick={onBreadCrumbClick}>
+        </c-brs_bread-crumb>
+        <div class="slds-gutters slds-grid slds-wrap  search-content" if:true={isUserSearched}>
+            <template if:false={showBusinessDetails}>
+                <h6 class="results-text mobile-show slds-col slds-size_12-of-12">
+                    {actuallength}
+                    <template if:true={hasOnlyOneResult}> {label.result_found} </template>
+                    <template if:false={hasOnlyOneResult}> {label.results_found} </template>
+                </h6>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 no-col-lpadding">
+                    <c-brs_advance-search-filters onfilterselection={handleFilterSelection} filters={filtersArray}
+                        onclearfilter={resetFilters} onshowall={showAllFilters}>
+                    </c-brs_advance-search-filters>
+                </div>
+            </template>
+
+            <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12" if:false={showBusinessDetails}>
+                <h6 class="results-text desktop-show">
+                    {actuallength}
+                    <template if:true={hasOnlyOneResult}> {label.result_found} </template>
+                    <template if:false={hasOnlyOneResult}> {label.results_found} </template>
+                </h6>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_12-of-12 slds-large-size_6-of-12">
+                        <h5 class="results-title">{label.BusinessesName}</h5>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-large-size_6-of-12 sort-dropdown">
+                        <c-brs_sort-drop-down options={sortOptions} onsortselected={handleSort}
+                            selected-sort={selectedSort}></c-brs_sort-drop-down>
+                    </div>
+                </div>
+                <template if:false={allBusinessResults.resultCount}>
+                    <c-brs_no-data-card if:false={allBusinessResults.resultCount} no-data-msg={label.noDataText}>
+                    </c-brs_no-data-card>
+                </template>
+
+                <template if:true={allBusinessResults.resultCount}>
+                    <template if:true={showResults}>
+                        <c-brs_business-detail-card all-business={updatedData}
+                            onshowbusinessdetails={onShowBusinessDetails}
+                            onshowprincipals={onShowPrincipals}>
+                        </c-brs_business-detail-card>
+                        <c-generic-data-table generickey="id" genericdata={allData}
+                            class="mydatatable slds-table_striped" generichidecheckbox="false"
+                            no-of-records-per-page='8' button-limit='4' onpaginationchange={updatePaginatedData}
+                            messageheader={label.messageheader} messagetext={label.messagetext}
+                            searchlength={searchResultLength} actuallength={actuallength}
+                            show-attention-card={showAttentionCard}>
+                        </c-generic-data-table>
+                    </template>
+                </template>
+            </div>
+            <template if:true={showBusinessDetails}>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+                    <c-brs_business-details if:false={showBusinessInnerDetails} business-details={selectedBusinessDetails}
+                        scholer-content={scholerContent} onviewdetails={onViewDetails}>
+                    </c-brs_business-details>
+                    <c-brs_conversion-or-merger-or-domestication-details if:true={showBusinessInnerDetails}
+                        scholer-content={scholerContent} details={businessInnerDetails}>
+                    </c-brs_conversion-or-merger-or-domestication-details>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 desktop-show">
+                    <c-brs_helper-text>
+                        <div slot="header">
+                            <h6>{label.help_head}</h6>
+                        </div>
+                        <div slot="body">
+                            <p class="small">{label.BusinessAccountLoginText}</p>
+                        </div>
+                        <div slot="links">
+                            <p class="small slds"><a href={label.AccountDashBoardPage} target="_blank">{label.login_account}</a></p>
+                        </div>
+                    </c-brs_helper-text>
+                </div>
+            </template>
+        </div>
+        <div if:false={isUserSearched} class="spacing">
+        </div>
+    </div>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>

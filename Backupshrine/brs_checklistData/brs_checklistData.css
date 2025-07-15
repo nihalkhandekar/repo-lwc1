@@ -1,0 +1,19 @@
+.each-checkbox {
+  display: flex;
+}
+
+.each-checkbox {
+  margin-bottom: 14px;
+}
+
+.checkbox-label {
+  width: 250px;
+}
+
+.checklist-card{
+  padding: 10px;
+}
+
+.submit-btn{
+  margin-top: 16px;
+}

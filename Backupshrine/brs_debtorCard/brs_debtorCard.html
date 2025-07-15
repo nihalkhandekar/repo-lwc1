@@ -1,0 +1,19 @@
+<template>
+    <div class="cardWrapper">
+        <div class="cardLeftContent">
+            <h6>{carddata.debtorName}</h6>
+            <div class="cardContent">
+                <p class="large">{label.DebtorUCCLiens_Label}</p>
+                <p class="largeBold">{carddata.lienCountForDebtor}</p>
+            </div>
+        </div>
+        <div class="cardRightLink">
+            <p class="small">
+                <a onclick={handleLink} data-id={carddata.debtorId}>
+                    <span class="slds-show_large">{label.view_liens}</span>
+                    <img src={arrowBack} class="blueArrow" alt="arrow" />
+                </a>
+            </p>
+        </div>
+    </div>
+</template>

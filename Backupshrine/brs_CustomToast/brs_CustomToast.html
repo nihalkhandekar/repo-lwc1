@@ -1,0 +1,40 @@
+<template>
+
+    <!-- Comment this code if you want to hide this
+    <lightning-card title="Custom Toast Notification" icon-name="custom:custom19">
+        <div class="slds-m-around_medium">
+            <lightning-input label="Title" value={title} onchange={titleChange}></lightning-input>
+            <lightning-input label="Message" value={message} onchange={messageChange}></lightning-input>
+            <lightning-combobox
+                label="Variant"
+                value={variant}
+                onchange={variantChange}
+                options={variantOptions}>
+            </lightning-combobox>
+            <p class="slds-m-vertical_small"><lightning-button label="Show Standard Notification" onclick={showNotification}></lightning-button></p>
+            <p class="slds-m-vertical_small"><lightning-button label="Show Custom Notification" onclick={showCustomNotice}></lightning-button></p>
+        </div>
+    </lightning-card>
+   Comment this code if you want to hide this-->
+
+    
+    <div data-id="toastModel" style="height: 4rem;" class="slds-hide">
+        <div class="slds-notify_container slds-is-relative">
+            <div class={mainDivClass} role="status">
+                <span class="slds-assistive-text">{variant}</span>
+              	<span class={messageDivClass} title={message}>
+                  <lightning-icon icon-name={iconName} size="small" variant="inverse"></lightning-icon>
+                </span>
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small ">{message}</h2>
+                </div>
+                <div class="slds-notify__close">
+                    <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close" onclick={closeModel}>
+                        <lightning-icon icon-name="utility:close" size="small" variant="inverse"> </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div> 
+            </div>
+        </div>
+    </div>
+</template>

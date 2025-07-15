@@ -1,0 +1,22 @@
+<template>
+    <div if:true={spinner}>
+        <lightning-spinner
+          alternative-text="Page is loading..."
+        ></lightning-spinner>
+      </div>
+    <div class="page-footer slds-grid slds-size_12-of-12 customNextBtnDiv">
+        <div class="slds-col button-wrapper slds-order_2">
+            <p class="error-text" if:true={showError}>Please enter a business to proceed.</p>
+            <div class="search-buisness-btn" if:true={showbutton}>
+                <button class="slds-button slds-button_brand secondaryBtn higher" onclick={completeIntake}>
+                    <!-- <span>
+                        <img src={searchIcon} class="searchIcon" alt="searchIcon" title="searchIcon"
+                            aria-hidden="true" />
+                    </span>&nbsp;&nbsp; -->
+                    Complete Intake
+                </button>
+            </div>
+        </div>
+      
+    </div>
+</template>

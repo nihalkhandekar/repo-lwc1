@@ -1,0 +1,36 @@
+.THIS{
+  background-color: white;
+}
+.input-wrapper {
+  display: inline-block;
+  margin-bottom: .75rem;
+}
+.business-date-block hr{
+border: none;
+border-top: 1px solid #a4a4a4;
+}
+.business-date-block {
+  margin-top: 36px;
+}
+.THIS .slds-input{
+min-height: 50px !important;
+}
+.business-start-date{
+margin-right: 20px;
+}
+.display {
+  display: flex;
+}
+.error-msg {
+color: #DB2426;
+font-family: KarlaBold;
+font-size: 14px;
+letter-spacing: 0.13px;
+line-height: 27px;
+margin-bottom: 16px;
+}
+@media only screen and (max-width: 1024px) {
+  .display {
+    display: block;
+  }
+}

@@ -1,0 +1,20 @@
+<template>
+    <div class="content-card" onclick={handleNavigation}>
+        <div class="content-main">
+            <h6 class="content-card__title">
+                {contentdata.headerTitle}
+                <img src={arrowIcon} class="arrowIcon" alt="arrowIcon" if:false={hideChevron} />
+            </h6>
+            <p class="content-card__sub-title small" if:true={showsubtitle}>{contentdata.subTitle}</p>
+            <p class="content-card__description small">
+                <lightning-formatted-rich-text value={contentdata.description}></lightning-formatted-rich-text>
+            </p>
+        </div>
+        <div class="content-footer" if:true={isLinkPresent}>
+            <button class="slds-button slds-button_natural button-link"
+                onclick={handleButtonNavigation}>{label.BRS_Get_Started}
+                <img src={arrowLinkIcon} alt="arrow" class="arrow-icon" />
+            </button>
+        </div>
+    </div>
+</template>

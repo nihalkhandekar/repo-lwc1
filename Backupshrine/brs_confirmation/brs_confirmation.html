@@ -1,0 +1,184 @@
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner alternative-text={labels.loading_brs} variant="brand" size="large">
+    </lightning-spinner>
+  </template>
+<div class="success-container">
+  <!--Shreya | Merged PDF
+  <c-ucc-file-merge filing-status={filingStatus} ondocumentcompleted={handleDocumentLink}></c-ucc-file-merge>
+  -->
+
+  <div class="background" if:false={isAnnualScreen}></div>
+  <div class="background-annual" if:true={isAnnualScreen}></div>
+
+  <div class="slds-grid slds-wrap slds-grid_align-center">
+    <div class="slds-size_12-of-12 slds-large-size_8-of-12">
+      <div class="success-container-card">
+        <div class="success-container-card-body">
+          <img src={successIcon} alt="" class="success-icon" />
+          <h4 if:false={isAnnualScreen}>{successMsg}</h4>
+          <template if:true={isAnnualScreen}>
+            <h4 class="success-msg" >{successMsg}</h4>
+            <h4 class="success-heading">{successMsgForAnnual}</h4>
+          </template>
+          <template if:false={isAnnualScreen}>
+            <div if:false={isOFS}>
+              <p class="large desc-bold">{labels.UCC_MemberWorking}</p>
+              <p class="large desc">{labels.check_inbox}</p>
+            </div>
+            <div if:true={isOFS}>
+              <p class="large desc-bold filing-number" if:true={isUCC3Or5}>
+                {labels.Filing_Number}
+                <a href={downloadUrl} class="download" download>
+                  <img src={downloadIcon} alt="Download" role="presentation" />
+                  {lienNumber}
+                </a>
+              </p>
+
+              <p class="large desc-bold" if:false={isUCC3Or5}>
+                {labels.UCC_FinancialStatementNumber}
+                <a href={downloadUrl} class="download" download>
+                  <img src={downloadIcon} alt="Download" role="presentation" />
+                  {financialStatementNumberValue}
+                </a>
+              </p>
+              
+              <p class="large success-filing" if:true={isUCC3Or5}>
+                {labels.Successfully_Filed_Message}
+                <span class="financial-number"> {financialStatementNumberValue}</span>
+              </p>
+              <p if:true={isUCC5} class="large desc">{labels.name_confirm_subheading} {emailId}.</p>
+              <p if:false={isUCC5} class="large desc">{labels.UCC_AlreadyEmailed}</p>
+            </div>
+          </template>
+          <div if:true={isAnnualScreen}>
+            <p class="large desc">{emailLinkText}</p>
+            <p class="large desc-bold" if:true={isFilingApproved}>
+              <a href={downloadUrl} class="download" download>
+                <img src={downloadIcon} alt="Download" class="annual-download-img" />
+                {labels.Annual_Report_DownloadText}
+              </a>
+            </p>
+          </div>
+        </div>
+        <div if:true={isAnnualScreen} class="success-container-card-content">
+          <div if:true={isContinueFilingButton}>
+            <div class="please-note">
+              <h6 class="please-note-copy-1">{labels.Please_Note}</h6>
+              <p class="please-note-copy-2">{labels.Business_Filings_Due}</p>
+            </div>
+            <h6 class="filing-due">{labels.Filings_Due}</h6>
+            <p>{labels.Continue_Filing_Due}</p>
+            <div class="filing-due-container">
+              <c-brs_fillings-due hide-headers="true" account-id={AccountId} report-type={labels.Annual_Report_Label}
+                hide-description="true"></c-brs_fillings-due>
+            </div>
+          </div>
+        </div>
+        <template if:true={isAnnualScreen}>
+          <div class='msg-container' if:true={isFilingApproved}>
+            <div class='icon_holder'>
+              <img src={documentIcon} alt="document">
+            </div>
+            <div class='content_box'>
+              <h6>{labels.request_certified_copy_heading}</h6>
+              <p class='large content_box_desc'>{labels.request_certified_copy_sub_heading}</p>
+              <p class='large'>{labels.request_certified_copy_paratext}</p>
+              <button class="slds-button secondary-btn higher access-button" onclick={goToCopyRequestFlow}>
+                {labels.get_certified_copy}
+              </button>
+            </div>
+          </div>
+          <div if:true={isAgentChange} class="next-step-container success-container-card-body">
+            <h4 class="next-steps-heading">{labels.Next_Steps}</h4>
+            <div class="next-steps">
+              <img src={nextStepIcon} alt="" class="step-icon" />
+              <div class="step-side-section">
+                <h6 class="step-label"><span>{labels.brs_step1} </span>{firstStep}</h6>
+                <p class="large step-content">{firstStepText}</p>
+                <button if:true={showlinkBusinessStep} class="slds-button secondary-btn higher access-button"
+                 onclick={linkBusiness}>
+                  {labels.Link_business_to_account}
+                </button>
+              </div>
+            </div>
+            <div class="next-steps">
+              <img src={nextStepIcon} alt="" class="step-icon" />
+              <div class="step-side-section">
+                <h6 class="step-label"><span>{labels.brs_step2} </span>{labels.First_Report_Step2}</h6>
+                <p class="large step-content">{labels.First_Report_Step2_Text}</p>
+                <button class="slds-button secondary-btn higher access-button"
+                onclick={goToAccountPreferences}>
+                  {labels.Notification_Text}
+                </button>
+              </div>
+            </div>
+            <div class="next-steps">
+              <img src={nextStepIcon} alt="" class="step-icon" />
+              <div class="step-side-section">
+                <h6 class="step-label"><span>{labels.brs_step3} </span>{labels.First_Report_Step3}</h6>
+                <p class="large step-content">{labels.First_Report_Step3_Text}</p>
+                <button class="slds-button secondary-btn higher access-button"
+                onclick={goToAccountDashboard}>
+                  {labels.Access_Account_Dashboard}
+                </button>
+              </div>
+            </div>
+        </div>
+        <div if:false={isAgentChange} class="next-step-container success-container-card-body">
+          <h4 class="next-steps-heading">{labels.Next_Steps}</h4>
+          <div class="next-steps">
+            <img src={nextStepIcon} alt="" class="step-icon" />
+            <div class="step-side-section">
+              <h6 class="step-label"><span>{labels.brs_step1} </span>{labels.First_Report_Step2}</h6>
+              <p class="large step-content">{labels.First_Report_Step2_Text}</p>
+              <button class="slds-button secondary-btn higher access-button"
+              onclick={goToAccountPreferences}>
+                {labels.Notification_Text}
+              </button>
+            </div>
+          </div>
+          <div class="next-steps">
+            <img src={nextStepIcon} alt="" class="step-icon" />
+            <div class="step-side-section">
+              <h6 class="step-label"><span>{labels.brs_step2} </span>{labels.First_Report_Step3}</h6>
+              <p class="large step-content">{labels.First_Report_Step3_Text}</p>
+              <button class="slds-button secondary-btn higher access-button"
+              onclick={goToAccountDashboard}>
+                {labels.Access_Account_Dashboard}
+              </button>
+            </div>
+          </div>
+      </div>
+        </template>
+        <div class="success-container-card-footer" if:false={isAnnualScreen}>
+          <button onclick={goToAccountDashboard} class="slds-button primaryBtnSmall">
+            <template if:false={isUCC5}>{labels.UCC_Judgment_AccessBusinessDashboard}</template>
+            <template if:true={isUCC5}>{labels.Access_Account_Dashboard}</template>
+          </button>
+          <div if:false={hideAnotherFiling}>
+            <button class="slds-button secondary-btn higher" onclick={handleGoNext}>
+              {labels.UCC_FileAnotherLien}
+            </button>
+          </div>
+        </div>
+        <div class="success-container-card-footer" if:true={isAnnualScreen}>
+          <button class="slds-button primaryBtnSmall" onclick={handleNextButtons} data-value="continueFiling"
+            if:true={isContinueFilingButton}>
+            {labels.Continue_Filing}
+          </button>
+          <div if:true={hideAnotherFiling}>
+            <button class="slds-button secondary-btn higher" data-value="fileAnotherBusiness"
+              onclick={handleNextButtons}>
+              {labels.File_Another_Business}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<template if:true={showConfirmationPopUp}>
+  <c-brs_link-business-confirmation show-confirmation-pop-up={showConfirmationPopUp} message={message} header={confirmationHeaderMsg} onmodalclose={closeModal}></c-brs_link-business-confirmation>
+</template>
+</template>

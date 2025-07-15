@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Verify the below information is present" icon-name="custom:custom51">
+        <div class="checklist-card">
+        <template for:each={checklistInfo.data} for:item="checkinfo">
+            <div key={checkinfo} class="each-checkbox">
+                <p class="checkbox-label">{checkinfo}</p>
+                <lightning-input label="Yes" value="Yes" type="radio" name={checkinfo} onchange={onRadioSelect}>
+                </lightning-input>
+                <lightning-input checked label="No" value="No" type="radio" name={checkinfo} onchange={onRadioSelect}>
+                </lightning-input>
+            </div>
+        </template>
+        <button onclick={handleClick} class="slds-button slds-button_brand submit-btn">
+            {label.label_subBttn}
+        </button >
+    </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,190 @@
+<template>
+    <lightning-card title="">
+        <c-brs_-Custom-Toast title = "Message" message = {message}
+        variant={variant} autoclose="true" ></c-brs_-Custom-Toast>
+<template if:true={showSpinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </template>
+<template if:true={singleRecoredType}>
+    <div if:true={options}> 
+    <lightning-card title="Record Type Selector in Lightning Web Component">
+        <lightning-layout multiple-rows="true" vertical-align="end">
+            <lightning-layout-item size="6" small-device-size="2" medium-device-size="4" large-device-size="4" padding="around-small">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <lightning-combobox name="recordTypes"
+                                                label="Select Record Types"
+                                                value={selectedValue}
+                                                placeholder="-Select-"
+                                                options={options}
+                                                onchange={handleChange}></lightning-combobox>
+                        </div>
+                    </div>
+            </lightning-layout-item>
+        </lightning-layout><br/>
+    <div style="margin-left:3%;">
+        <div if:true={selectedValue}>
+            Selected Record Type Id: <b>{selectedValue}</b>
+        </div>
+    </div>
+</lightning-card></div>
+</template>
+<!-- 
+<template if:true={recordtypeid}>
+   
+    <div if:true={isBusinessFilingObject}>
+       
+    <c-brs_-backoffice-types recordtypeid ={recordTypeId} onftypechange={handlefTypeChange}
+    ontypechange={handleTypeChange}></c-brs_-backoffice-types>
+</div>
+</template> -->
+    <template if:true={saved}>
+        <div class="record-layout-container">
+            <lightning-record-edit-form object-api-name={objectname} record-type-id={recordtypeid} 
+            onsuccess={handleSuccess} onsubmit={handleSubmit} data-id="myForm" record-id={recordId} onerror ={handlerror} onload={handleLoad}>
+            <div>
+            <lightning-messages class ={className}></lightning-messages>
+          
+            </div>
+        
+           
+                <template for:each={layoutSections} for:item="section">
+
+                   <c-dmv_collapsemodal key={section.label} title={section.label} show-section={section.displaySection}>
+                  <div class="slds-section__content test-id__section-content slds-section__content section__content slds-p-top--none slds-p-horizontal_small">
+                        <lightning-layout class="slds-form__row slds-grid slds-size_1-of-1">
+                           
+                            <template for:each={section.lstFields} for:item="field">
+
+                                <lightning-layout-item size={section.columnsize} key={field.fieldName} padding="around-small"  flexibility="auto">
+                                    <template if:true={field.fieldName}>
+                                        <div if:false={field.isReadOnly} >
+                                           
+                                            <div if:true={field.isValueAvailable} >
+
+                                                <div if:true={field.isDateavailable} >
+                                                    <div if:true={inputModeBool}>
+
+<div if:false={isRecievedDateShow}>
+
+                                                        <lightning-input-field  required={field.isRequired} value={field.datevalue} field-name={field.fieldName} class="slds-form-element__control" disabled={field.isDisable}> </lightning-input-field>
+                                                    </div>
+
+                                           
+<div if:true={isRecievedDateShow}>
+
+    <lightning-input-field  required={field.isRequired}  field-name={field.fieldName} class="slds-form-element__control" disabled={field.isDisable}> </lightning-input-field>
+</div>         
+
+
+
+
+
+
+                                                    </div >
+                                                    <div if:false={inputModeBool} class="slds-grid slds-grid">
+                                                        <lightning-output-field field-name={field.fieldName}   value={field.datevalue} class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                                        <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                                              alternative-text="edit" 
+                                                                              onclick={handleEdit} class="colorbutton test-id__inline-edit-trigger slds-shrink-none inline-edit-trigger slds-button slds-button_icon-bare"></lightning-button-icon>
+                                                    </div>
+
+                                                   </div>
+                                    <div if:false={field.isDateavailable} >
+                                                <div if:true={inputModeBool}>
+                                                    <lightning-input-field  required={field.isRequired} value={field.fieldvalue} field-name={field.fieldName} class="slds-form-element__control" disabled={field.isDisable}> </lightning-input-field>
+                                                </div >
+                                                <div if:false={inputModeBool} class="slds-grid slds-grid">
+                                                    <lightning-output-field field-name={field.fieldName}   value={field.fieldvalue} class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                                    <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                                          alternative-text="edit" 
+                                                                          onclick={handleEdit} class="colorbutton test-id__inline-edit-trigger slds-shrink-none inline-edit-trigger slds-button slds-button_icon-bare"></lightning-button-icon>
+                                                </div>
+
+
+</div>
+
+                                            </div>
+
+                                            <div if:false={field.isValueAvailable} >
+                                              
+                                            <div if:true={inputModeBool}>
+                                                <lightning-input-field  required={field.isRequired}  field-name={field.fieldName} class="slds-form-element__control"  disabled={field.isDisable}> </lightning-input-field>
+                                            </div >
+                                            <div if:false={inputModeBool} class="slds-grid slds-grid">
+                                                <lightning-output-field field-name={field.fieldName}    class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                                <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                                      alternative-text="edit" 
+                                                                      onclick={handleEdit} class="colorbutton test-id__inline-edit-trigger slds-shrink-none inline-edit-trigger slds-button slds-button_icon-bare"></lightning-button-icon>
+                                            </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div if:true={field.isReadOnly} >
+                                           
+                                            <div if:true={field.isValueAvailable}>
+                                                <lightning-output-field field-name={field.fieldName}   value={field.fieldvalue} class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                       </div>
+                                           <div if:false={field.isValueAvailable} >
+                                           
+                                            <lightning-output-field   field-name={field.fieldName} class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                        </div></div>
+                                    </template>
+                                </lightning-layout-item>
+                            </template>
+                            
+                        </lightning-layout>
+                    </div>
+               
+                   </c-dmv_collapsemodal>
+                </template>
+            
+        
+                    
+                    <div class="slds-docked-form-footer" if:false={reaonlypage}>
+
+                    <lightning-button label="Cancel" title="Cancel" onclick={handleToggle} class="slds-m-left_x-small"></lightning-button>
+                    <lightning-button type="submit" variant="brand" label="Save" title="save" class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                        
+                    <div class="slds-text-title slds-align_absolute-center" if:true={filingSaveMessageDisplayed}>
+                        <lightning-formatted-text value={filingSaveMessage} ></lightning-formatted-text>
+                    </div>
+
+                </lightning-record-edit-form>
+        </div>
+
+        <template if:true={showAccountr}>
+            <template for:each={finalChildObjectDetails} for:item="section">
+               
+        <div key={section.childObjectAPIName}>
+            <c-related-list 
+            record-id={recordId}
+            sobject-api-name={section.childObjectAPIName}
+            related-field-api-name ={section.relatedParentFieldAPIName}
+            sorted-by=""
+            parentrecordtoupdate={parentApiName}
+            ondelete={handledelete}
+            fields={section.fields}
+            recordtypename={section.recordTypeName}
+            columns={section.columns}
+            onrelatedrecordadded={handleRelatedRecord}
+            flow-name={flowName}
+            filingtype={filingType}
+            filingfiletypegp={filingfiletypegp}
+            filingfiletype={filingfiletype}></c-related-list>
+          
+            
+
+
+            <!--<c-relateditmes2  record-id={recordId} fields-list={fieldslit} object-name="Contact" 
+            parent-object-name="Account" parent-field-a-p-i-name="AccountId">
+
+            </c-relateditmes2>!-->
+        </div>
+            </template>
+        </template>
+      </template>
+    
+    </lightning-card>
+</template>

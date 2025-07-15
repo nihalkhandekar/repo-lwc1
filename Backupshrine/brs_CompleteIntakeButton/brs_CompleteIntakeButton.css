@@ -1,0 +1,391 @@
+.left-border {
+    border-left: 4px solid #09538B;
+}
+
+.slds-modal__header {
+    text-align: left;
+}
+
+.header-text {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+
+.question-title-transform {
+    text-transform: capitalize;
+}
+
+.no-border {
+    border: none;
+    box-shadow: none;
+}
+
+.member-popup header {
+    padding: 32px 32px 0 32px;
+    text-align: left;
+}
+
+.member-popup .title {
+    color: #2D2C2C;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    margin-bottom: 8px;
+}
+
+.member-popup .desc {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.member-popup .closeIcon {
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.member-popup .popup-body {
+    padding: 40px 32px 16px 32px;
+}
+
+.member-popup .popup-body.radio-options {
+    padding-top: 0;
+    padding-bottom: 24px;
+}
+
+.member-popup footer {
+    border: none;
+    padding: 32px;
+    padding-top: 16px;
+    background: #ffffff;
+}
+
+.member-popup footer button {
+    border-radius: 4px;
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.member-popup footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.member-popup footer button img {
+    height: 16px;
+}
+
+.member-list .username p {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding: 24px;
+}
+
+/* Customized css */
+
+.add-a-debtor {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+    line-height: 43px;
+}
+
+.a-debtor-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 28px;
+}
+
+.agent-mailing-address {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 20px;
+}
+
+.orgAddress {
+    padding-top: 30px;
+}
+
+.orgName {
+    padding-top: 24px;
+}
+
+.individualDetails {
+    padding-top: 24px;
+}
+
+.errorBtnDiv {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.primaryBtnSmall {
+    float: right;
+}
+
+.orgLocation {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 24px;
+}
+
+.addDebtorBtn {
+    padding-top: 42px;
+}
+
+.addIcon {
+    height: 25px;
+}
+
+.addLabel {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.debtor-card-details {
+    box-sizing: border-box;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    margin-top: 20px;
+}
+
+.name {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.name-member {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.addressdiv {
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.addressClass {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.iconCls {
+    height: 17px;
+}
+
+.statusText {
+    float: right;
+    margin-right: 24px;
+}
+
+.footerButtons {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.edit-footer {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-left: 24px;
+    text-decoration: underline;
+}
+
+.duplicate-footer {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-left: 24px;
+    padding-left: 24px;
+    text-decoration: underline;
+}
+
+.remove-footer {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-left: 24px;
+    padding-left: 24px;
+    text-decoration: underline;
+}
+
+.footerBtns {
+    padding-left: 12px;
+}
+.cust-anchor {
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.13;
+    font-family: Karla;
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.full-screen .page-footer {
+    padding: 32px;
+}
+
+.page-footer {
+    display: flex;
+    align-items: center;
+    padding: 32px 0;
+    border-top: solid 1px #ECEBEB;
+    margin-top: 80px;
+    background: none;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.alignButton {
+    display: flex;
+    justify-content: center;
+}
+footer {
+    width: 100%;
+}
+.section-title {
+    color: #757575;
+    font-size: 16px;
+    font-family: KarlaBold;
+    padding-bottom: 11px;
+}
+.section-subtitle {
+    font-size: 35px;
+    color:#2D2C2C;
+    font-family: Lato;
+    font-weight: bold;
+    padding-bottom: 48px;
+}
+.modelHeader .title {
+    width: 80%;
+}
+.entered-date{
+    color: #3A95D3;
+    font-size: 22px;
+    font-family: Lato;
+    font-weight: bold;
+}
+.helptext {
+    color: #2D2C2C;
+    font-family: Karla, sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+.business-label {
+    margin-bottom: 4px;
+}
+.business-input {
+    width: 100%;
+}
+.business-name-modal {
+    color: #2D2C2C;
+}
+.modal-label-text {
+    font-family: Lato;
+    font-weight: bold;
+    font-size: 22px;
+}
+.name-available {
+    color:#2D8D60;
+    font-family: KarlaBold;
+}
+.slds-modal__footer .slds-button+.slds-button{
+    margin-left: 0;
+}
+.secondary-btn {
+    margin-right: 24px;
+}
+.name-not-available {
+    color: #DB2426;
+    font-family: KarlaBold;
+}
+.add-designation {
+    color: #2D2C2C;
+    font-family: Karla;
+}
+.input1{
+    display: none;
+}
+@media only screen and (max-width: 1023.9px) {
+    .page-footer {
+        flex-direction: column-reverse;
+        margin-top: 36px;
+        padding-top: 0;
+    }
+    .slds-button.primaryBtnSmall {
+        width: 100%;
+    }
+    .button-wrapper {
+        margin-bottom: 32px;
+        width: 100%;
+    }
+    footer  .slds-col,footer.page-bottom-footer {
+        padding: 0;
+    }
+    .confirm-button {
+        margin-bottom: 15px;
+    }
+    .secondary-btn {
+        margin-right: 0px;
+    }
+    
+}

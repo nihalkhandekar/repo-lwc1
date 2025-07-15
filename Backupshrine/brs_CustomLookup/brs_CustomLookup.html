@@ -1,0 +1,59 @@
+<template>
+    <template if:false={selectedRecord}>
+    <div class="slds-p-around_x-small"> 
+    <c-brs_-back-office-search-component onchange={handleOnchange}>
+    </c-brs_-back-office-search-component> </div> 
+    </template>
+
+   <div >
+    <template if:true={error}> 
+    <template if:true={error.details}>
+    <template if:true={error.details.bcdy}>(error.details.body.message)
+</template></template></template>
+    
+   </div> 
+   
+    <div>
+    <template if:false={selectedRecord}>
+    <template if:true={records}>
+    <template for:each={records} for:item="record">
+        
+    <c-brs_-backoffice-record-list key={record.id} record={record} onselectrecord={handleselect} iconname={iconname} fieldname={searchfield}> </c-brs_-backoffice-record-list>
+    </template>
+    </template>
+    </template> 
+    <template if:false={selectedRecord}> </template>
+    </div>
+   
+    <div class="slds-p-around_x-small">
+    <template if:true={selectedRecord}>
+    <div class="slds-combobox_form-element slds-input-has-icon slds-input-has-icon_left-right" role="none">
+    <span class="slds-icon_container slds-icon-standard-account slds-combobox_input-entity-icon" title="Account">
+    <lightning-icon icon-name={iconname) ></lightning-icon></span> 
+
+        <span class="slds-media_body" style="padding-top: 9px;font-weight: 600;"> 
+    
+            <span class="slds-listbox_option-text slds-listbox_option-text_entity"> 
+       
+                &nbsp;&nbsp;   Name:-&nbsp;{selectedRecord.Name}  &nbsp;&nbsp;&nbsp; BusinessID:-&nbsp;{selectedRecord.bId} &nbsp; &nbsp;&nbsp;  Business type:-&nbsp;{selectedRecord.btype}</span> </span> &nbsp;&nbsp;&nbsp;  Business Status:-&nbsp;{selectedRecord.status} &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+<!-- <input class="slds-input slds-combobox_input slds-combobox__input-value" id="combobox-id-5" aria-controls="listbox-id-5" autocomplete="off" role="textbox" type="text" placeholder="5elect an Option" readonly="" value={selectedRecord.Name} disabled > -->
+<button class="sicon_container sids-button slds-button_icon slds-input_icon slds-input_icon_right" title="Remove selected option" onclick={handleRemove}>
+    <lightning-icon icon-name="utility:close" size="small"> 
+    </lightning-icon> <span class="slds-assistive-text">Remove selected cption</span> </button> 
+    </div>
+    <!--<lightning-layout> <lightning-layout-item> <lightning-pill label={selectedRecord.Name} onremove={handleRemove}> <lightning-icon icon-name={iconname)></lightning-icon </lightning-pill> </lightning-layout-item> </lightning-layout> --> 
+    </template>
+    </div>
+    <div>
+        <template if:true={showMergerError}>
+           <p style="color:red;"> Select either Active Business or General Partnership with status as Recorded</p>
+        </template>
+
+    </div>
+    <div>
+        <template if:true={showBusinessAndCitiVal}>
+           <p style="color:red;"> Business Type and Citizen Type of the Surviving Business should be same as mentioned in the Filing</p>
+        </template>
+
+    </div>
+</template>

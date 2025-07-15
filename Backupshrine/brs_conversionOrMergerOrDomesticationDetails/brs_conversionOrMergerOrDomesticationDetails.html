@@ -1,0 +1,130 @@
+<template>
+    <h5 class="pageheading">{pageHeading}</h5>
+    <div class="mobile-show mobile-scholarcontent">
+        <c-brs_header scholar-content={scholerContent} show-scholar-only></c-brs_header>
+    </div>
+    <div class="margin-b-40 heading-hr"></div>
+    <div class="each-card">
+        <c-brs_simple-card theme="theme2">
+            <div slot="header">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col">
+                        <h6 class="card-heading">{label.general_information}</h6>
+                        <div class="hr-line card-separator"></div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap slds-gutters each-row">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                        <p class="grey-text small">{label.filing_numberNew}</p>
+                        <p class="small">{details.filingId}</p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12">
+                        <p class="grey-text small">{label.Filing_date_and_time}</p>
+                        <p class="small">{details.filingDateTime}</p>
+                    </div>
+                </div>
+                <template if:true={isMerger}>
+                    <div class="slds-grid slds-wrap slds-gutters each-row">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                            <p class="grey-text small">{label.Business_AELI}</p>
+                            <p class="small">{details.businessId}</p>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12">
+                            <p class="grey-text small">{label.business_name}</p>
+                            <p class="small">{details.businessName}</p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </c-brs_simple-card>
+    </div>
+    <template if:false={isMerger}>
+        <div class="each-card">
+            <c-brs_simple-card theme="theme2">
+                <div slot="header">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col">
+                            <h6 class="card-heading">
+                                <img src={arrowUpIcon} alt="" />
+                                {secondCardHeading} {label.Business_Details}
+                            </h6>
+                            <div class="hr-line card-separator"></div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters each-row">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                            <p class="grey-text small">{label.Business_AELI}</p>
+                            <p class="small">{details.changedbusinessId}</p>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12">
+                            <p class="grey-text small">{label.business_name}</p>
+                            <p class="small">{details.changedbusinessName}</p>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters each-row">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                            <p class="grey-text small">{label.State_Country_to}</p>
+                            <p class="small">{details.changedBusinessStateOrCountry}</p>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12">
+                            <p class="grey-text small">{label.Date}</p>
+                            <p class="small">{details.changedbusinessDate}</p>
+                        </div>
+                    </div>
+                </div>
+            </c-brs_simple-card>
+        </div>
+        <div class="each-card">
+            <c-brs_simple-card theme="theme2">
+                <div slot="header">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col">
+                            <h6 class="card-heading">
+                                <img src={arrowDownIcon} alt="" />
+                                {thirdCardHeading} {label.Business_Details}
+                            </h6>
+                            <div class="hr-line card-separator"></div>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters each-row">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                            <p class="grey-text small">{label.Business_AELI}</p>
+                            <p class="small">{details.changingbusinessId}</p>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12">
+                            <p class="grey-text small">{label.business_name}</p>
+                            <p class="small">{details.changingbusinessName}</p>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap slds-gutters each-row">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12">
+                            <p class="grey-text small">{label.Business_type}</p>
+                            <p class="small">{details.changingbusinesstype}</p>
+                        </div>
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12">
+                            <p class="grey-text small">{label.Date}</p>
+                            <p class="small">{details.changingbusinessDate}</p>
+                        </div>
+                    </div>
+                </div>
+            </c-brs_simple-card>
+        </div>
+    </template>
+    <div class="each-card" if:true={isMerger}>
+        <c-brs_simple-card theme="theme2">
+            <div slot="header">
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col">
+                        <h6 class="card-heading">{label.Terminating} {label.Business_Details}</h6>
+                        <div class="hr-line card-separator"></div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <div class="slds-col">
+                        <c-brs_custom-table table-data={tabledata} table-columns={tablecolumns}></c-brs_custom-table>
+                    </div>
+                </div>
+            </div>
+        </c-brs_simple-card>
+    </div>
+</template>
