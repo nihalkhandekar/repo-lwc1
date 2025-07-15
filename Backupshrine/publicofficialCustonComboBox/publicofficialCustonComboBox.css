@@ -1,0 +1,25 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-list {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    list-style: none;
+    margin: 0;
+    width: 150px;
+}
+
+.dropdown-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.selected-option {
+    display: block;
+    margin-bottom: 10px;
+}

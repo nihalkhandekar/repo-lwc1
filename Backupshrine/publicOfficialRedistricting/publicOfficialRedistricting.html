@@ -1,0 +1,238 @@
+<template>
+    <div class="publicofficials-container">
+        <h1 class="page-heading">Redistricting</h1>
+        <div class="search-info-container">
+            <!-- Header Section -->
+            <div class="custom-card-header">
+                <lightning-icon icon-name="standard:search" size="small" class="header-icon"></lightning-icon>
+                <div class="header-text">
+                    <h1 class="title">Search</h1>
+                </div>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <!-- Custom Label for Last Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="townsOffice">Towns</label>
+                        <lightning-combobox 
+                            variant="label-hidden"
+                            name="townsOffice" 
+                            class="input-field"
+                            value={townsOffice} 
+                            placeholder="Select Towns Office" 
+                            options={sbtOptions} 
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+
+                    <!-- Custom Label for Congressional Dist -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="congressionalDist">Congressional Dist</label>
+                        <lightning-input 
+                            name="congressionalDist" 
+                            variant="label-hidden"
+                            value={congressionalDist} 
+                            class="input-field" 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Custom Label for House Assembly Dist -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="houseAssemblyDist">House Assembly Dist</label>
+                        <lightning-input 
+                            name="houseAssemblyDist" 
+                            variant="label-hidden"
+                            value={houseAssemblyDist} 
+                            class="input-field" 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Custom Label for Senatorial Dist -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="senatorialDist">Senatorial Dist</label>
+                        <lightning-input 
+                            name="senatorialDist" 
+                            variant="label-hidden"
+                            value={senatorialDist} 
+                            class="input-field" 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <lightning-button 
+                    label="Clear All" 
+                    onclick={handleClear} 
+                    variant="neutral" 
+                    icon-name="utility:close" 
+                    icon-position="left"
+                    class="slds-m-right_x-small slds-button_neutral clear-font">
+                </lightning-button>
+                <lightning-button 
+                    label="Search" 
+                    onclick={handleSearch} 
+                    variant="brand" 
+                    icon-name="utility:search" 
+                    icon-position="left"
+                    class="slds-button_brand searchbutton">
+                </lightning-button>
+            </div>
+        </div>
+
+        <div class="dashboard-cards">
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                    <span class="slds-text-title_bold slds-m-right_x-small search-css">Search Results</span>
+                    <lightning-badge label={transactionsFoundLabel} class="slds-badge_inverse result-no-css"></lightning-badge>
+                </div>
+                <div class="right-buttons">
+                    <template if:true={isEditing}>
+                        <lightning-button variant="neutral" label="Cancel" onclick={handleCancelClick}
+                            class="slds-m-right_x-small slds-button_neutral clear-font">
+                        </lightning-button>
+                        <lightning-button variant="neutral" label="Undo" onclick={handleUndoClick}
+                            class="slds-m-right_x-small slds-button_neutral clear-font">
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Save Changes" onclick={handleSaveChanges}
+                            class="slds-m-left_x-small slds-button_brand addnewbutton">
+                        </lightning-button>
+                    </template>
+                    <template if:false={isEditing}>
+                        <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonClick}>
+                            <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                            <span>Export to Excel</span>
+                        </div>
+                        <lightning-button icon-name="utility:edit" size="xx-small" label="Edit" onclick={handleEditClick} variant="brand"
+                            class="slds-m-left_x-small slds-button_neutral">
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Add New District" icon-name="utility:add" onclick={openSealAddModal}
+                            class="slds-m-left_x-small slds-button_brand addnewbutton">
+                        </lightning-button>
+                    </template>
+                </div>
+            </div>
+
+            <template if:true={showResults}>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                        <thead>
+                            <tr class="custom-header">
+                                <th scope="col" data-field="Name__c" onclick={handleSort}>
+                                    <div class="slds-truncate">Towns/ Elections Office</div>
+                                </th>
+                                <th scope="col" data-field="congressionalDist">
+                                    <div class="slds-truncate">Congressional District</div>
+                                </th>
+                                <th scope="col" data-field="houseAssemblyDist">
+                                    <div class="slds-truncate">House Assembly District</div>
+                                </th>
+                                <th scope="col" data-field="senatorialDist">
+                                    <div class="slds-truncate">Senatorial District</div>
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <template for:each={paginatedResult} for:item="row">
+                                <tr key={row.Id} data-id={row.Id}>
+                                    <!-- Towns Office Column -->
+                                    <td>{row.Name__c}</td>
+                            
+                                    <!-- Congressional District Column (Single-select) -->
+                                    <td>
+                                        <div class="dropdown">
+                                            <span>{row.congressionalDist}</span>
+                                            <lightning-button-menu alternative-text="Select Congressional District"
+                                                onselect={handleMenuSelect}
+                                                data-row-id={row.Id}
+                                                disabled={isEditingValue}
+                                                menu-alignment="auto"
+                                                data-type="congressional">
+                                                <template for:each={congressionalOptions} for:item="option">
+                                                    <lightning-menu-item key={option.value}
+                                                        label={option.label}
+                                                        value={option.value}>
+                                                    </lightning-menu-item>
+                                                </template>
+                                            </lightning-button-menu>
+                                        </div>
+                                    </td>
+                            
+                                    <!-- House Assembly District Column (Multi-select) -->
+                                    <td>
+                                        <div class="dropdown">
+                                            <span>{row.houseAssemblyDist}</span>
+                                            <lightning-button-menu alternative-text="Select House Assembly District"
+                                                onselect={handleMenuSelect}
+                                                onclose={handleMenuClose}
+                                                data-row-id={row.Id}
+                                                data-type="houseAssembly"
+                                                disabled={isEditingValue}
+                                                menu-alignment="auto"
+                                                is-multi-select="true">
+                                                <template for:each={row.houseAssemblyOptions} for:item="option">
+                                                    <lightning-menu-item key={option.value}
+                                                        label={option.label}
+                                                        value={option.value}
+                                                        class={option.class}>
+                                                    </lightning-menu-item>
+                                                </template>
+                                            </lightning-button-menu>
+                                        </div>
+                                    </td>
+                            
+                                    <!-- Senatorial District Column (Multi-select) -->
+                                    <td>
+                                        <div class="dropdown">
+                                            <span>{row.senatorialDist}</span>
+                                            <lightning-button-menu alternative-text="Select Senatorial District"
+                                                onselect={handleMenuSelect}
+                                                disabled={isEditingValue}
+                                                data-row-id={row.Id}
+                                                menu-alignment="auto"
+                                                data-type="senatorial"
+    
+                                                is-multi-select="true">
+                                                <template for:each={row.senatorialOptions} for:item="option">
+                                                    <lightning-menu-item key={option.value}
+                                                        label={option.label}
+                                                        value={option.value}
+                                                        class={option.class}>
+                                                    </lightning-menu-item>
+                                                </template>
+                                            </lightning-button-menu>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </template>
+                            
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </template>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                    disabled={isPreviousDisabled} variant="neutral">
+                </lightning-button>
+
+                <div class="page-info">
+                    <span class="page-range">{startRange}-{endRange} of {transactionsFoundLabel}</span>
+                    <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                </div>
+
+                <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                    disabled={isNextDisabled} variant="neutral">
+                </lightning-button>
+            </div>
+        </div>
+        <c-public-official-export-to-excel></c-public-official-export-to-excel>
+    </div>
+</template>

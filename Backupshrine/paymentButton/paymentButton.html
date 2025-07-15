@@ -1,0 +1,8 @@
+<template>
+    <lightning-card title="PayPal Payment">
+        <div id="paypal-button-container"></div>
+        <template if:true={isProcessing}>
+            <lightning-spinner alternative-text="Processing Payment..."></lightning-spinner>
+        </template>
+    </lightning-card>
+</template>

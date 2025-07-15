@@ -1,0 +1,199 @@
+<template>
+    <div class="dashboard-container">
+        <template if:true={isLoading}>
+            <div class="spinner-container">
+                <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <div class="breadcrumb-container">
+                <div class="breadcrumb">
+                    <a href="#" onclick={navigateToDashboard}>{labels.MyDashboard}</a> 
+                    <lightning-icon class="chevron-icon custom-color slds-icon_x-small" icon-name="utility:chevronright" size="x-small" alternative-text="Chevron Right"></lightning-icon> 
+                    <div class="subtextbox">
+                        <span>{labels.PaymentHistory}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-content">
+                        <div class="dashboard-card-icon">
+                            <lightning-icon icon-name="standard:asset_action_source" size="large" class="dashboard-icon"></lightning-icon>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">{labels.PaymentHistory}</h2>
+                            <p class="card-description">{labels.TrackPayments}</p>
+                        </div>
+                    </div>
+                </div>
+                <template if:true={visibleData}>
+                    <div class="slds-scrollable_x custom-table-container">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered custom-table">
+                            <thead>
+                                <tr class="custom-header">
+                                    <th scope="col" onclick={sortByField} data-field="TransactionDate">
+                                        <div class="slds-truncate" title="Transaction Date">{labels.TransactionDate}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick={sortByField} data-field="WorkorderNumber">
+                                        <div class="slds-truncate" title="Workorder Number">{labels.WorkorderNumber}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick={sortByField} data-field="Name">
+                                        <div class="slds-truncate" title="Requester Name">{labels.RequestorName}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick={sortByField} data-field="PaymentType">
+                                        <div class="slds-truncate" title="Payment Type">{labels.PaymentType}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <!-- <th scope="col" onclick={sortByField} data-field="CreditCardName">
+                                        <div class="slds-truncate" title="Credit Card Name">Credit Card Name
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th> -->
+                                    <th scope="col" onclick={sortByField} data-field="PaymentAmount">
+                                        <div class="slds-truncate" title="Amount">{labels.Amount}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick={sortByField} data-field="AuthCode">
+                                        <div class="slds-truncate" title="Auth Code">{labels.AuthCode}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" onclick={sortByField} data-field="TransactionStatus">
+                                        <div class="slds-truncate" title="Status">{labels.Status}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Action">{labels.Action}</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template if:true={isRecordsLoading}>
+                                    <tr class="no-border-row">
+                                        <td colspan="9" class="slds-text-align_center loader-row">
+                                            <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template if:false={isRecordsLoading}>
+                                    <template for:each={visibleData} for:item="row">
+                                        <tr key={row.Id} class="custom-column">
+                                            <td>
+                                                <div class="slds-truncate" title={row.TransactionDate}>{row.TransactionDate}</div>
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" 
+                                                onclick={navigateToTrack2} 
+                                                data-application-id={row.WorkorderNumber} 
+                                                class="tableText">
+                                                 {row.WorkorderNumber}
+                                             </a>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={row.Name}>{row.Name}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={row.PaymentType}>{row.PaymentType}</div>
+                                            </td>
+                                            <!-- <td>
+                                                <div class="slds-truncate" title={row.CreditCardName}>{row.CreditCardName}</div>
+                                            </td> -->
+                                            <td>
+                                                <div class="slds-truncate" title={row.PaymentAmount}>${row.PaymentAmount}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={row.AuthCode}>{row.AuthCode}</div>
+                                            </td>
+                                            <td>
+                                                <div class={row.statusClass} title={row.TransactionStatus}>
+                                                    {row.TransactionStatus}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <lightning-icon icon-name="utility:download" size="small" class="download" data-id={row.Id} onclick={handleClickDownload}></lightning-icon>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <template if:true={showPages}>
+                        <div class="pagination-controls">
+                            <lightning-button label="Prev" icon-name="utility:jump_to_left" icon-position="left" onclick={handlePreviousPage} variant="neutral" disabled={isPreviousDisabled}></lightning-button>
+                            <span class="paginationText">{startRecord} - {endRecord} of {totalRecords} | Page {currentPage} of {totalPages}</span>
+                            <lightning-button label="Next" icon-name="utility:jump_to_right" icon-position="right" onclick={handleNextPage} variant="neutral" disabled={isNextDisabled}></lightning-button>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={visibleData}>
+                    <p class="no-data-message">{labels.Youdonothaveanypaymenthistoryyet}</p>
+                </template>
+            </div>
+        </template>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <lightning-modal-header label="Receipt">
+                    <lightning-icon class="close-icon" icon-name="utility:close" size="small" onclick={handleCancel}></lightning-icon>
+                </lightning-modal-header>
+                
+                <lightning-modal-body>
+                    <div class="slds-p-around_small">
+
+                        <template if:true={checkpaymenttypeCheck}>
+                            <p class="modal-text work-order">Work Order#: {WorkorderNumber}</p>
+                            <p class="modal-text total-amount">Total Amount Paid: ${PaymentAmount}</p>
+                            <p class="modal-text">Payment Method: {PaymentType}</p>
+                            <p class="modal-text">Date of Payment: {TransactionDate}</p>
+                        </template>
+                        <template if:true={checkpaymenttypeCard}>
+                            <p class="modal-text work-order">Work Order#: {WorkorderNumber}</p>
+                            <p class="modal-text total-amount">Total Amount Paid: ${PaymentAmount}</p>
+                            <p class="modal-text">Payment Method: {PaymentType}</p>
+                            <p class="modal-text">Credit Card Type: {CardName}</p>
+                            <p class="modal-text">Credit last digits : {CardLastDigit}</p>
+                            <p class="modal-text">Auth Code: {AuthCode}</p>
+                            <p class="modal-text">Date of Payment: {TransactionDate}</p>
+                        </template>
+
+                    </div>
+                </lightning-modal-body>
+
+                <lightning-modal-footer>
+                    <lightning-button variant="brand" class="cancelbutton" label="Cancel" onclick={handleCancel}></lightning-button>
+                    <lightning-button variant="brand" class="downloadbutton" label="Download Payment Receipt" icon-name="utility:download" onclick={handleDownloadReceipt}></lightning-button>
+                </lightning-modal-footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+
+
+        <c-pdf-genrator data-id="pdfGenerator" 
+        work-order-numb={WorkorderNumber} 
+        auth-code={AuthCode} 
+        price='{PaymentAmount}' 
+        payment-method={PaymentType} 
+        payment-date={TransactionDate} 
+        requestor-name={requestorName}
+        paid-for={paidFor}
+        card-name={CardName}
+        card-last-digit={CardLastDigit}
+        total-fee={totalFee} expedite-fee={expediteFee} documents-requested={documentsRequested}
+        ></c-pdf-genrator>
+
+    </template>
+</template>

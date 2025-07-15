@@ -1,0 +1,327 @@
+/* Root styles for modal size */
+:host {
+    --slds-c-modal-sizing-medium: 80vw;
+    --lwc-modal-max-width: 80vw; /* Set width to 80% of the viewport */
+    --lwc-modal-max-height: 85vh; /* Set max height to 85% of the viewport */
+}
+.SE-ModalHeader{
+    padding: 48px 12px 12px 12px !important;
+    border-radius: 0px !important;
+    height: fit-content;
+    max-height: calc(100vh - 170px);
+    overflow-y: auto;
+    position: fixed;
+    width: 100%;
+}
+
+.button-font{
+    font-size: 13px;
+}
+
+
+
+
+/* Modal container styling */
+.slds-modal__container {
+    width: 80vw !important;  /* Force width to 80% */
+    max-width: 1000px !important;  /* Max width */
+    max-height: 85vh !important;  /* Max height */
+    overflow: hidden; /* Prevent container from adding scrollbars */
+}
+
+.custom-modal__back {
+    position: absolute;
+    /* top: 0.5rem; */
+    /* right: 0.5rem; */
+    --lwc-borderWidthThin: 0px;
+    display: flex;
+    align-items: start;
+    background: white;
+    border-radius: 8px;
+}
+
+
+/* Content body to allow scrolling */
+.custom-modal-body {
+    max-height: calc(85vh - 120px); /* Adjust based on header and footer height */
+    padding-right: 0.5rem; /* Add padding to avoid overlapping with scrollbar */
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.extension-design{
+    width: 80;
+}
+
+.business-design{
+    width: 140px;
+}
+/* Header and Footer styles */
+.slds-modal__header {
+    background-color: #EEF4FF;
+    border-radius: 16px 16px 0px 0px;
+}
+
+.slds-modal__footer {
+    margin-top: 1.5rem;
+    border-top: 1px solid #dddbda;
+    border-radius: 0px 0px 16px 16px;
+}
+
+/* Close button styling */
+.slds-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.esq-align {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    height: 100%; 
+    padding-top: 32px;
+}
+.reason-inline{
+    display: flex;
+}
+
+.wetsign-inline{
+    display: flex;
+    padding-top: 1.5rem;
+}
+
+.boldFont {
+    font-weight: 590;
+    font-size: 12px;
+    padding-right: 0.5rem;
+}
+
+.info-sections{
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    padding: 12px;
+    font-family: "SF Pro", sans-serif;
+    border-bottom: 1px solid #f3f3f3;
+    background-color: #f6f9ff;
+}
+
+.personal-info-section,
+.address-info-section,
+.term-info-section,
+.sealStamp-info-section,
+.upload-signature-section{
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border: 1px solid #dddbda;
+    border-radius: 12px;
+}
+
+.custom-space{
+    padding: 12px 16px 12px 16px;
+    background-color: #FFFFFF;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+
+.slds-button-group {
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f3f2f2; /* Adjust the background color to match your design */
+}
+.button-left-group{
+    display: flex;
+
+    gap: 0.6rem;
+}
+
+.button-right-group {
+    display: flex;
+
+}
+
+/* Header container styling */
+.header-container {
+    display: flex;
+    align-items: center;
+    font-weight: 590;
+}
+
+/* Style for the Edit button */
+.edit-button {
+    background-color: #EEF4FF; /* White background */
+    border: 0px solid #d8dde6; /* Light border */
+    padding-left: 1rem;
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 590;
+}
+
+.full-width{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+
+.address {
+    --sds-c-textarea-color-background:#FFFFFF;
+    --textarea-color-background:#FFFFFF;
+    --sds-c-input-color-background:#FFFFFF;
+    --input-color-background:#FFFFFF;
+    --dxp-c-textarea-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --dxp-s-form-element-text-line-height: 20px;
+    --dxp-s-form-element-text-font-size: 14px;
+    --dxp-s-form-element-color-border:#C9C9C9;
+    --sds-c-textarea-text-color:#181818;
+    --dxp-s-form-element-text-color:#181818;
+    --lwc-borderWidthThin:1px;
+    --lwc-formLabelFontSize: 12px;
+    --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+    --slds-c-input-color-background:#FFFFFF;
+    --slds-c-input-color-border:#C9C9C9;
+    --slds-c-input-radius-border:8px 8px 8px 8px;
+    --sds-c-textarea-radius-border:8px 8px 8px 8px;
+    --slds-c-textarea-color-background:#FFFFFF;
+    --slds-c-textarea-color-border:#C9C9C9;
+    --sds-c-input-text-color:#181818;
+    --sds-c-textarea-color-border:#C9C9C9;
+    --dxp-c-textarea-width-border:1px;
+    --sds-c-input-color-border:#C9C9C9;
+    --slds-c-textarea-radius-border:8px 8px 8px 8px;
+    --dxp-c-input-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --sds-c-input-radius-border:8px 8px 8px 8px;
+    --dxp-s-form-element-label-font-size: 12px;
+    --dxp-s-form-element-label-font-weight: 590;
+    --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+    --dxp-c-input-width-border: 1px;
+}
+.address .slds-form-element__control input[name="state"],
+.address .slds-form-element__control input[name="country"],
+.address .slds-form-element__control input[name="city"],
+.address .slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+
+.slds-form-element__control input[name="state"],
+.slds-form-element__control input[name="country"],
+.slds-form-element__control input[name="city"],
+.slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+.clear-font{
+    color: #747474;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.extinsion-class{
+    width: 80px;
+}
+
+.business-phone{
+    width: 180px;
+}
+
+.business-extension{
+    display: flex;
+    gap: 1rem;
+}
+
+
+lightning-input{
+    --slds-c-input-radius-border: 8px;
+    }
+
+lightning-combobox{
+    --slds-c-input-radius-border: 8px;
+}
+
+lightning-textarea{
+    --slds-c-textarea-radius-border: 8px;
+}
+
+.cancel-button:hover{
+    border-color: #0070d2;
+    color: #0176d3;
+
+
+}
+.cancel-button{
+    color: #0176d3;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.button-group{
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+
+
+
+.save-button{
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+    --sds-c-button-brand-color-border-hover:  rgb(169, 224, 240);
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.custom-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    --lwc-borderWidthThin: 0px;
+}
+
+.clear-font{
+    color: #747474;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.upload-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light grey background for the upload area */
+    border: 1px dashed #c8c8c8; /* Dashed border for the upload section */
+    text-align: center;
+}
+
+.upload-section h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #0070d2; /* Blue color for the heading */
+    margin-bottom: 10px;
+}
+
+.upload-section .upload-button {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+
+
+
+
+/* Media query for responsive adjustments */
+@media (min-width: 48em) {
+    :host {
+        --slds-c-modal-sizing-medium: 80vw;
+    }
+}

@@ -1,0 +1,8 @@
+<template>
+    <lightning-card title="Apostille Submission Document">
+        <lightning-button label="Generate PDF" onclick={handleGeneratePdf}></lightning-button>
+        <template if:true={error}>
+            <p>Error fetching data: {error}</p>
+        </template>
+    </lightning-card>
+</template>

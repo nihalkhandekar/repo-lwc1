@@ -1,0 +1,4 @@
+.poc-modal .slds-modal__content {
+    min-height: 320px;
+    padding-bottom: 0;
+  }

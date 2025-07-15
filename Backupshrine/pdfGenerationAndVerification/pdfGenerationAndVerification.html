@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="PDF Generation and Verification">
+        <div class="slds-p-horizontal_medium">
+            <!-- Button to trigger PDF generation -->
+            <lightning-button label="Generate PDF and Verify Hash" onclick={generatePdf}></lightning-button>
+
+            <!-- File upload for file hash generation -->
+            <lightning-input type="file" label="Upload File" onchange={handleFileUpload}></lightning-input>
+
+            <!-- Display the generated file hash -->
+             <p>{generatefilehash}</p>
+             <p>{downloadedfilehash}</p>
+            <template if:true={fileHash}>
+                <p>Generated File Hash (SHA-256): {fileHash}</p>
+            </template>
+        </div>
+    </lightning-card>
+</template>

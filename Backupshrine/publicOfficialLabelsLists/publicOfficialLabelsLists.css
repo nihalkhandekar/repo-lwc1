@@ -1,0 +1,365 @@
+.publicofficials-container{
+    background-color: #F9FAFB; /* Light grey color */
+    min-height: 80vh; /* Ensure it covers the full height */
+    padding: 16px;
+    font-family: 'SF Pro', sans-serif;
+}
+
+.page-heading{
+    width: 130px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 590;
+    line-height: 20px;
+    text-align: left;
+    color: #09629F;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-left: 0.25rem;
+}
+
+.label-container{
+    padding: 16px;
+    border-radius: 12px;
+    background-color: #ffffff;
+
+}
+
+.label-heading{
+    font-weight: 590;;
+    color: #181818;
+    font-size: 16px;
+
+}
+
+.list-block{
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    gap: 50px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.left-list{
+    width: 50%;
+    height: 600px;
+}
+
+.right-list{
+    width: 50%;
+    height: 600px;
+    overflow-y: auto;
+
+}
+
+/* Scrollbar appearance customization */
+.right-list::-webkit-scrollbar {
+    width: 6px; /* Set width of the scrollbar */
+}
+
+.right-list::-webkit-scrollbar-thumb {
+    background-color: #c9c9c9; /* Blue scrollbar */
+    border-radius: 4px; /* Rounded scrollbar for better UX */
+}
+
+.right-list::-webkit-scrollbar-track {
+    background-color: #F0F0F0; /* Light background for the track */
+}
+
+
+
+.label-options {
+    display: flex;            /* Use flexbox layout */
+    flex-wrap: wrap;          /* Allow wrapping if needed */
+    gap: 15px;     
+    margin-top: 12px;           /* Add space between the radio buttons */
+    font-size: 14px;
+}
+
+.label-options label {
+    display: flex;
+    align-items: center;
+}
+
+.label-options input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.1); /* Make radio buttons slightly larger */
+}
+
+.town-container{
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.04);
+    margin-top: 12px;
+}
+
+.type-container{
+    background-color: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.04);
+}
+
+.town-title{
+    color: #003a62;
+    font-size: 16px;
+    font-weight: 590;
+    margin-bottom: 12px;
+}
+
+.town-hedear{
+    color: #003a62;
+    font-size: 16px;
+    font-weight: 590;
+    margin-bottom: 12px;
+}
+
+.election-container{
+    background-color: #EEF4FF;
+    margin-bottom: 12px;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.04);
+
+}
+.title-text{
+    padding-top: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.election-title{
+    color: #003a62;
+    font-size: 16px;
+    font-weight: 590;
+    margin-bottom: 12px;
+}
+
+.election-options {
+    display: flex;            /* Use flexbox layout */
+    flex-wrap: wrap;          /* Allow wrapping if needed */
+    gap: 15px;     
+    margin-top: 12px;           /* Add space between the radio buttons */
+    font-size: 14px;
+    padding-left: 24px;
+}
+
+.election-options label {
+    display: flex;
+    align-items: center;
+}
+
+
+.election-options input[type="checkbox"], 
+.election-options input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.1); /* Make radio buttons slightly larger */
+}
+
+.clerk-container{
+    margin-top: 12px;
+
+}
+
+/* Specific for Registrars Section */
+.registrars-options label {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+}
+
+/* Specific for Mayor/1st Selectmen Section */
+.mayor-options label {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.legislator-options{
+    display: flex;            /* Use flexbox layout */
+    flex-wrap: wrap;          /* Allow wrapping if needed */
+    gap: 15px;     
+    font-size: 14px;
+
+}
+
+/* Legislator Type Options */
+.legislator-type-options {
+    display: flex;
+    gap: 15px;  /* Add spacing between each option */
+    flex-wrap: wrap;  /* Wrap the options if there's not enough space */
+    margin-top: 12px;
+    padding-left: 24px;
+}
+
+/* Optional: Adjust the radio buttons and checkboxes for the addresses to display properly */
+.legislator-address-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 12px;
+    padding-left: 24px;
+}
+
+.legislator-type-options label,
+.legislator-address-options label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.legislator-type-options input[type="checkbox"],
+.legislator-address-options input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.1); /* Make checkboxes and radio buttons slightly larger */
+}
+/* Style for the state container */
+.state-container {
+    max-height: 240px; /* Set a fixed height */
+    overflow-y: hidden; /* Hide scroll until content overflows */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow with light blur */
+
+}
+
+.state-options {
+    max-height: 200px; /* Adjust height of the state-options */
+    overflow-y: auto; /* Enable scrolling */
+}
+
+/* Apply the same style as city options to the state options */
+.city-options,
+.state-options {
+    display: block;
+    font-size: 14px;
+}
+
+.city-options label,
+.state-options label {
+    display: block;
+    margin-bottom: 12px;
+    margin-top: 12px;
+}
+
+.state-options label{
+    padding-left: 24px;
+}
+
+
+/* Scrollbar appearance customization */
+.state-options::-webkit-scrollbar {
+    width: 6px; /* Set width of the scrollbar */
+}
+
+.state-options::-webkit-scrollbar-thumb {
+    background-color: #c9c9c9; /* Blue scrollbar */
+    border-radius: 4px; /* Rounded scrollbar for better UX */
+}
+
+.state-options::-webkit-scrollbar-track {
+    background-color: #F0F0F0; /* Light background for the track */
+}
+
+
+/* Remove thick border and style checkboxes/radio buttons */
+input[type="checkbox"], input[type="radio"] {
+    appearance: none; /* Remove default appearance */
+    -webkit-appearance: none; /* Webkit-specific appearance removal */
+    -moz-appearance: none; /* Mozilla-specific appearance removal */
+    background-color: #fff; /* White background */
+    border: 1px solid #d1d1d1; /* Light gray border */
+    border-radius: 4px; /* Rounded corners */
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer; /* Add pointer cursor for better UX */
+    margin-right: 8px; /* Space between checkbox/radio and label */
+}
+
+/* For radio buttons */
+input[type="radio"] {
+    border-radius: 50%; /* Make radio buttons circular */
+}
+
+/* Style checked checkboxes */
+input[type="checkbox"]:checked::before {
+    content: "✔"; /* Use check mark for checked state */
+    position: absolute;
+    font-size: 12px;
+    color: #003A62; /* Blue color for checkmark */
+    left: 1px;
+    top: -2px;
+}
+
+/* Style checked radio buttons */
+input[type="radio"]:checked::before {
+    content: "";
+    position: absolute;
+    background-color: #003A62; /* Blue fill for radio */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+}
+
+/* Hover effect for better UX */
+input[type="checkbox"]:hover, input[type="radio"]:hover {
+    border-color: #003A62; /* Blue border on hover */
+}
+
+/* Checked state with blue border */
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+    border-color: #003A62; /* Change border to blue when checked */
+}
+
+
+
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    padding: 0.5rem;
+}
+
+
+/* Clear Button Styling */
+.slds-button_neutral {
+    background-color: #FFFFFF; /* Light background color */
+    border: 1px solid #dcdfe6; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    color: #747474; /* Blue text color */
+    font-size: 14px;
+}
+
+.slds-button_neutral:hover {
+    background-color: #e0e5eb; /* Slightly darker on hover */
+    font-size: 14px;
+}
+
+.slds-button .slds-button_brand{
+    border: 1px solid #dcdfe6; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 14px;
+    background-color: #003A62; /* Blue background color */
+    color: #ffffff; /* White text color */
+
+}
+
+
+.searchbutton{
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+    --sds-c-button-brand-color-border-hover:  rgb(169, 224, 240);
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.clear-font{
+    color: #747474;
+    --slds-c-button-text-color: #747474;
+    --lwc-buttonBorderRadius: 8px;
+}

@@ -1,0 +1,124 @@
+<template>
+    <lightning-button label="Upload Shipping Label" onclick={openModal}></lightning-button>
+    
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+
+                <!-- Modal/Popup Header -->
+                <header class="slds-modal__header">
+                    <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button> -->
+                    <div>
+                        <h2 class="slds-text-heading_medium" style="text-align: left;">Upload Additional Shipping Label</h2>
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Modal/Popup Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div>
+                        <div class="internalheading">
+                            <p>Upload Multiple Prepaid Shipping Label</p>
+                            <span style="color: red;">*</span>
+                        </div>
+                        <div class="internalBorder ">
+                            <lightning-file-upload 
+                            class="fileUploadContainer"
+                            accept=".pdf, .png" 
+                            label="" 
+                            record-id={recordId}
+                            multiple
+                            required
+                            onuploadfinished={handleUploadFinished}>
+                            </lightning-file-upload>
+
+                            
+                            <!-- <lightning-file-upload 
+                                 label="" 
+                                 accept=".pdf"
+                                 record-id={recordId}
+                                 icon-name= 
+                                 multiple
+                                 onuploadfinished={handleUploadFinished}>
+                          </lightning-file-upload> -->
+                        </div>
+                       
+                    </div>
+
+                    <!-- <lightning-file-upload 
+                        label="Upload multiple Pre-Paid Shipping Label" 
+                        accept=".pdf"
+                        record-id={recordId}
+                        multiple
+                        onuploadfinished={handleUploadFinished}>
+                    </lightning-file-upload> -->
+                    <!-- <div class="uploaded-file"> -->
+                        <template if:true={uploadedFiles.length}>
+                            <div class="uploaded-files">
+                                <template for:each={uploadedFiles} for:item="file">
+                                    <div key={file.documentId} class="uploaded-file">
+                                        <div style="width: 100%;">
+                                            <span class="fileContainer">
+                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)" alternative-text="File" size="small"></lightning-icon>
+                                                <span>{file.name}</span>
+                                            </span>
+                                        </div>
+                                        <span style="border-left: 2px solid #9b9ea4;">
+                                            <lightning-button-icon class="slds-border_left deleteButtonContainer" icon-name="utility:delete"  alternative-text="Delete" title="Delete" data-id={file.documentId} onclick={handleDelete} ></lightning-button-icon>
+                                        </span>
+                                        <!-- <button 
+                                            class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-small delete-button" 
+                                            title="Delete" 
+                                            data-id={file.documentId}
+                                            onclick={handleDelete}>
+                                            <lightning-icon icon-name="utility:delete" alternative-text="Delete" size="x-small"></lightning-icon>
+                                            <span class="slds-assistive-text">Delete</span>
+                                        </button> -->
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                        
+                       
+                    <!-- </div> -->
+                </div>
+ <!-- <lightning-icon icon-name="doctype:pdf" alternative-text="PDF File" size="small"></lightning-icon>
+                        <span>Board Resolution.PDF</span>
+                        <button class="slds-button slds-button_icon slds-button_icon-border-filled slds-button_icon-small delete-button" title="Delete">
+                            <lightning-icon icon-name="utility:delete" alternative-text="Delete" size="x-small"></lightning-icon>
+                        </button> -->
+                <!-- Modal/Popup Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                    <lightning-button  class="slds-m-left_medium" variant="brand" label="Upload" onclick={handleUpload}></lightning-button>
+                </footer>
+
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
+
+
+<!-- <template> -->
+
+    
+    <!-- <lightning-card  title="Upload Additional Shipping Label">
+        <lightning-file-upload
+        label="Attach receipt"
+        name="fileUploader"
+        accept={acceptedFormats}
+        record-id={myRecordId}
+        onuploadfinished={handleUploadFinished}
+        multiple
+    >
+    </lightning-file-upload>
+    </lightning-card> -->
+   
+<!-- </template> -->

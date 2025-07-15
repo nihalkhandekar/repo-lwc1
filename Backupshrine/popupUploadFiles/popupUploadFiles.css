@@ -1,0 +1,69 @@
+.slds-modal__container {
+    width: 50rem;
+    max-width: 100%;
+}
+
+
+.internalheading{
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+}
+.internalBorder{
+    border: 2px dotted #d8dde6; /* Added dotted border */
+    border-radius: 0.25rem; /* Optional: rounded corners */
+    padding: 10px;
+    border-block-start-color: #f0f2f6;
+}
+.slds-file-selector__dropzone {
+    padding: 0.125rem;
+    border: none !important; /* Ensures no border is applied */
+    border-radius: 0.25rem;
+}
+
+.uploaded-files {
+    margin-top: 1rem;
+    /* border: 1px solid #cbcbcb; */
+    width: 100%;
+    /* border-radius: 8px; */
+}
+
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    /* border: 1px solid #d8dde6; */
+    padding: 0.5rem;
+    /* border-radius: 0.25rem; */
+    border-radius: 8px;
+    border: 1px solid #cbcbcb;
+}
+
+.uploaded-file lightning-icon {
+    margin-right: 0.5rem;
+}
+
+.uploaded-file span {
+    flex-grow: 1;
+}
+
+.delete-button {
+    margin-left: auto;
+}
+.fileContainer{
+    border: 2px solid rgb(27, 150, 255);
+    padding: 6px;
+    justify-content: center;
+    display: inline-flex;
+    border-radius: 8px;
+    color: rgb(1, 118, 211);
+}
+.deleteButtonContainer{
+    --slds-c-button-radius-border: 8px;
+    --slds-c-icon-color-foreground: red;
+      margin-left: 10px;
+    --slds-c-button-text-color-hover:red;
+    --slds-c-button-text-color-active:red;
+    --slds-c-button-color-border-active:red;
+    --slds-c-button-shadow-focus:red;
+}

@@ -1,0 +1,30 @@
+<template>
+  <div class="pbWrapper">
+    <template if:true={isbos}>
+      <p class="slds-m-bottom_x-small introName">{labels.Email_Verification_Hello_Content}, {currentuser}</p>
+      <p class="introSubHeading">{labels.linkBiz_ConnectBusiness}</p>
+    </template>
+    <template if:false={isbos}>
+      <div class="exitbtn-container">
+        <p class="slds-m-bottom_x-small introName greetingText">{labels.Email_Verification_Hello_Content}, {firstName}
+        </p>
+        <button class="natural-button-with-icon slds-button slds-button_natural slds-m-bottom_x-small" onclick={handleExit} data-id={index}>
+          <img src={exitIcon} alt="" class="exit-icon" />
+          <span class="small">{labels.exitLabel}</span>
+        </button>
+      </div>
+      <p class="introSubHeading">{labelVal}</p>
+    </template>
+    <!-- <p class="progressBarlabel">{labelVal}</p> -->
+    <div class="container">
+      <div class="slds-progress-bar dmvprogressBar slds-progress-bar_circular" aria-valuemin="0" aria-valuemax="100"
+        aria-valuenow={_value} role="progressbar">
+        <span aria-hidden="true" class={classes} style={Width}>
+          <span class="slds-assistive-text">{labels.label_progressIndicator} {Widthtext}</span>
+        </span>
+      </div>
+      <div aria-hidden="true" class="percentage">{_value}%</div>
+    </div>
+  </div>
+  <div class="separator"></div>
+</template>

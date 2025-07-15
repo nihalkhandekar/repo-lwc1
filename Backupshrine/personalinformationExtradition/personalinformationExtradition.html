@@ -1,0 +1,130 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:user" size="medium" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Personal Information</h1>
+                <p class="description">Fill in the official's personal information below.</p>
+            </div>
+        </div>
+
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="prefix">Prefix</label>
+                    <lightning-combobox 
+                            variant="label-hidden"
+                            name="prefix" 
+                            class="input-field"
+                            value={prefix} 
+                            placeholder="Select prefix" 
+                            options={prefixSelectOptions} 
+                            onchange={handleprefixChange}
+                            disabled={isReadOnly}
+                        ></lightning-combobox>
+                </div>
+
+                <!-- Custom Label for Last Name -->
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="lastName"><span class="required-indicator">*</span>Last Name</label>
+                    <div class={lastNameErrorClass}>
+                        <lightning-input 
+                                label="Last Name"
+                                name="lastName" 
+                                variant="label-hidden"
+                                id="lastName" 
+                                placeholder="e.g Doe"
+                                value={lastName} 
+                                required                           
+                                class="input-field" 
+                                read-only={isReadOnly} 
+                                aria-describedby="lastNameError"
+                                aria-invalid={isLastNameInvalid}
+                                onchange={handlelastnameChange}>
+                        </lightning-input>
+                    </div>
+                    <template if:true={isLastNameInvalid}>
+                        <div>
+                           Last Name is required.
+                        </div>
+                    </template>
+                    {prelastname}
+                </div>
+                            <!-- Custom Label for Middle Name -->
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="middleInitial">Middle Initial</label>
+                    <lightning-input 
+                        label="Middle Initial"
+                        name="middleInitial" 
+                        variant="label-hidden"
+                        id="middleInitial" 
+                        placeholder="e.g R"
+                        value={middleInitial} 
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handlemiddleChange}>
+                    </lightning-input>
+                </div>
+                                        <!-- Custom Label for First Name -->
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="firstName"><span class="required-indicator">*</span>First Name</label>
+                    <div class={firstNameErrorClass}>
+                        <lightning-input 
+                            label="First Name"
+                            name="firstName" 
+                            variant="label-hidden"
+                            id="firstName" 
+                            placeholder="e.g John"
+                            value={firstName} 
+                            required 
+                            class="input-field" 
+                            aria-describedby="firstNameError"
+                            read-only={isReadOnly} 
+                            aria-invalid={isFirstNameInvalid}
+                            onchange={handlefirstChange}>
+                        </lightning-input>
+                    </div>
+                    <template if:true={isFirstNameInvalid}>
+                        <div>
+                           First Name is required.
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="suffix">Suffix</label>
+                    <lightning-combobox 
+                            variant="label-hidden"
+                            label="Suffix"
+                            name="suffix" 
+                            class="input-field"
+                            value={suffix} 
+                            placeholder="Select suffix" 
+                            options={suffixSelectOptions} 
+                            onchange={handlesuffixChange}
+                            disabled={isReadOnly}
+                        ></lightning-combobox>
+                </div>
+                <div class="form-group quarter-width">
+                    <!-- <label class="custom-label" for="esq">Esq.</label> -->
+                    <lightning-input 
+                        type="checkbox"
+                        label="Esq."
+                        name="esq" 
+                        id="esq"
+                        checked={esq}
+                        class="input-field esqclass"
+                        onchange={handleesqChange}>  
+                    </lightning-input> 
+                </div>
+                <div class="form-group quarter-width"></div>
+                <div class="form-group quarter-width"></div>
+            </div>
+    </div>
+    </div>
+
+</template>

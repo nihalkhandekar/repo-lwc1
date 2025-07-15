@@ -1,0 +1,528 @@
+.publicofficials-container{
+    background-color: #F9FAFB; /* Light grey color */
+    min-height: 100vh; /* Ensure it covers the full height */
+    padding: 16px;
+    padding-bottom: 5ren;
+}
+
+.page-heading{
+    width: 130px;
+    height: 20px;
+    font-size: 14px;
+    font-weight: 510;
+    line-height: 20px;
+    text-align: left;
+    color: #09629F;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-left: 0.25rem;
+}
+
+.custom-badge {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease;
+    background-color: #f3f3f3;
+    color: #181818;
+
+}
+
+.custom-badge:hover {
+    background-color: #4d4d4d; /* Darker shade of blue for hover effect */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    color: #fff; /* Text color when active */
+}
+
+.custom-badge.active {
+    background-color: #4d4d4d; /* Color when active */
+    color: #fff; /* Text color when active */
+}
+
+.no-result-found-label{
+    font-size: 16px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.search-info-container {
+    background-color: #ffffff;
+    font-family: 'SF Pro', sans-serif;
+    margin: 0 auto;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+}
+
+/* Header Section */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    padding: 12px;
+    border-radius: 12px 12px 0 0;
+    box-sizing: border-box;
+}
+
+/* Header Title */
+.header-text .title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: #025999;
+    padding-left: 0.5rem;
+}
+
+/* Header Title */
+.header-text .title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    color: #025999;
+    padding-left: 0.5rem;
+}
+
+.input-section{
+    padding: 12px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+    border: 0px;
+
+
+}
+
+.input-group {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
+/* Quarter width for 4 inputs per row */
+.quarter-width {
+    flex-basis: 19%; /* Slightly less than 25% to allow for spacing */
+}
+
+/* Custom label styles */
+.custom-label {
+    font-size: 12px;
+    font-weight: 590;
+    font-family: "SF Pro", sans-serif;
+    color: #5c5c5c;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+/* Input fields to take full width within their quarter-width container */
+.input-field {
+    width: 100%;
+}
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Align buttons to the right */
+    border-top: 1px solid #F3F3F3 ;
+    gap: 12px;
+
+    padding: 0.5rem;
+}
+
+
+/* Clear Button Styling */
+.slds-button_neutral {
+    background-color: #FFFFFF; /* Light background color */
+    border: 1px solid #dcdfe6; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    color: #747474; /* Blue text color */
+    font-size: 14px;
+}
+
+.slds-button_neutral:hover {
+    background-color: #e0e5eb; /* Slightly darker on hover */
+    font-size: 14px;
+}
+
+.slds-button .slds-button_brand{
+    border: 1px solid #dcdfe6; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 14px;
+    background-color: #003A62; /* Blue background color */
+    color: #ffffff; /* White text color */
+
+}
+
+.clear-all {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .clear-text {
+    color: #747474;
+    font-size: 14px;
+    background: none;
+    border: none;
+    padding-right: 10px;
+    padding-left: 2px;
+    align-items: center;
+  }
+  .clear-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #706e6b;
+    border-radius: 50%;
+    margin-right: 4px;
+    background-color: #706e6b;
+    position: relative;
+  }
+  
+  .clear-icon {
+    /* color: white; */
+    position: absolute; 
+  }
+
+
+.searchbutton{
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+    --sds-c-button-brand-color-border-hover:  rgb(169, 224, 240);
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.export-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 1rem;
+    background-color: #ffffff;
+    color: #2e844a;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #2e844a;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.export-button:hover {
+    background-color: #ffffff;
+}
+
+.export-button lightning-icon {
+    margin-right: 0.5rem;
+}
+
+
+.clear-font{
+    color: #747474;
+    --slds-c-button-text-color: #747474;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.dashboard-cards {
+    display: flex;
+    margin-top: 1.5rem;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 12px;
+    overflow: visible;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    height: auto;
+}
+
+.slds-grid{
+    padding: 0px;
+}
+
+.buttoncontainerfilter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.left-button {
+    margin-right: auto;
+}
+
+.slds-p-left_small{
+    padding: 8px ;
+ }
+
+ .search-css{
+    color: #033D68;
+    font-size: 16px;
+    font-weight: 590;
+}
+
+.result-no-css{
+    color: #025999;
+    background-color: #EEF4FF;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+}
+
+
+.custom-table {
+    border: 1px solid #d8dde6; /* Adds a border to the table */
+    border-radius: 12px;
+    table-layout: fixed;
+    /* overflow: visible; */
+    position: relative; 
+    min-width: 100%;
+    /* width: auto; */
+}
+
+/* Apply borders to the table cells (th and td) */
+.custom-table th, .custom-table td {
+    border: 1px solid #E5E5E5;
+    padding: 10px;
+    position: relative; /* Ensure menu options can appear without clipping */
+    /* z-index: 1;         Keep elements on top */
+}
+
+/* Round the corners of the table */
+.custom-table th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.custom-table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.custom-table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.custom-table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}
+
+/* Ensure menus and dropdowns show above table content */
+.custom-table .menu-options {
+    position: absolute;
+    z-index: 9999; /* Higher z-index to ensure visibility */
+}
+
+.custom-table-wrapper {
+    overflow: visible; 
+    border-radius: 12px; 
+    font-family: "SF Pro", sans-serif;
+    font-size: 14px;
+}
+
+.custom-table thead tr.custom-header th {
+    /* background-color: #f6f9ff;  */
+    font-weight: 700;
+    font-size: 13px;
+    color: #181818;
+    height: 32px; /* Fixed height for table header */
+    vertical-align: middle;
+    line-height: 20px;
+    text-align: left;    
+}
+
+.custom-table th:nth-child(1),
+.custom-table td:nth-child(1) {
+    width: 30%; 
+}
+
+.custom-table th:nth-child(2),
+.custom-table td:nth-child(2) {
+    width: 10%; 
+}
+
+.custom-table th:nth-child(3),
+.custom-table td:nth-child(3) {
+    width: 10%; 
+}
+.custom-table th:nth-child(4),
+.custom-table td:nth-child(4) {
+    width: 10%; 
+}
+
+/* Adjust the width of the Actions column */
+.custom-table th:last-child,
+.custom-table td:last-child {
+    width: 10%; 
+}
+
+/* Table Rows */
+.slds-table_cell-buffer tr>th {
+    padding-left: 0rem !important;
+    padding: 6px 12px 6px 12px !important;
+    gap: 10px;
+    border: 0px 1px 1px 0px;
+    opacity: 0px;
+    background: #F3F3F3;
+
+font-size: 13px !important;
+font-weight: 700;
+line-height: 20px;
+text-align: left !important;;
+
+}
+.slds-table_cell-buffer tr>td {
+    padding-left: 0rem !important;
+    padding: 5px 12px 5px 12px !important;
+    gap: 10px;
+    border: 0px 1px 1px 0px;
+    opacity: 0px;
+    
+}
+
+td{
+    justify-content: space-between;
+}
+
+
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center; /* Center-align the pagination numbers */
+    align-items: left; /* Vertically center-align */
+    max-width: 100%; /* Prevent overflow */
+    padding: 0.1rem; /* Add padding */
+    box-sizing: border-box;
+}
+
+
+
+
+/* .pagination-container c-pagination {
+    flex: 1;
+    max-width: 100%;
+} */
+
+.pagination-container {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem; /* Adjust as needed */
+    margin-top: 1rem;
+}
+
+.pagination-button {
+    color: blue; /* Blue text color */
+    padding: 5px 10px; /* Padding for better appearance */
+    font-size: 14px; /* Font size for the button text */
+    --slds-c-button-radius-border: 8px;
+    --slds-c-button-text-color: #003A62;
+    outline: none; /* Remove default outline */
+}
+
+.extra-space{
+    margin-bottom: 5rem;
+    padding-bottom: 5rem;
+}
+
+/* Dropdown Container */
+.dropdown {
+    position: relative; /* Set the dropdown container to relative */
+    justify-content: left;
+}
+
+
+.button-cell{
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    color: #747474;
+}
+
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+    background-color: #f4f6f9;
+    border: 1px solid #d8dde6;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.disabled-dropdown{
+    opacity: 0.5;
+
+}
+
+/* Dropdown Icon */
+.dropdown-icon {
+    font-size: 12px;
+    color: #333;
+}
+
+/* Dropdown List */
+.dropdown-list {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #d8dde6;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000; /* Ensure dropdown appears above everything */
+    display: none; /* Default hidden */
+}
+
+/* Scrollbar appearance customization */
+.dropdown-list::-webkit-scrollbar {
+    width: 4px; /* Set width of the scrollbar */
+}
+
+.dropdown-list::-webkit-scrollbar-thumb {
+    background-color: #c9c9c9; /* Blue scrollbar */
+    border-radius: 4px; /* Rounded scrollbar for better UX */
+}
+
+.dropdown-list::-webkit-scrollbar-track {
+    background-color: #F0F0F0; /* Light background for the track */
+}
+
+/* Show dropdown when it's toggled */
+.dropdown-list.show {
+    display: block;
+    width: 60px;
+}
+
+.list-label{
+    padding-left: 2px;
+}
+
+/* Dropdown List Items */
+.dropdown-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-list li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dropdown positioning classes */
+.dropdown-below {
+    top: 100%;
+}
+
+.dropdown-above {
+    bottom: 100%;
+}
+
+.current-page-input{
+    width: 3%;
+    margin-top: -0.3rem;
+    text-align: center;
+  }
+  .page-info, .page-text{
+    display: contents;
+  }

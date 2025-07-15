@@ -1,0 +1,241 @@
+<template>
+    <div class="SE-ModalHeaderMain full-mode">
+        <div class="header-container specificHeader">
+            <lightning-button-icon icon-name="utility:back" size="large" alternative-text="Close"
+                    onclick={goBackModal} class="custom-modal__back">
+            </lightning-button-icon>
+            <h2 class="slds-text-heading_medium">{headerText}</h2>
+            <!-- Conditionally render the Edit button when in view mode -->
+            <template if:true={isReadOnly}>
+                <lightning-button  icon-name="utility:edit"
+                alternative-text="Edit"
+                class="edit-button editButtonCss"
+                onclick={handleEditClick}
+                title="Edit"
+                variant="base"
+                aria-label="Edit" label="Edit" ></lightning-button>
+
+            </template>
+        </div>
+    </div>
+    <div class="SE-ModalHeader">
+        <div class="custom-modal-body modalBodyCssChange">
+            <div class="personal-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:user" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Basic Info</h2>
+                        <p class="slds-text-body_small">Enter customer's contact and organization details to proceed. Fields marked with an asterisk (*) are mandatory.</p>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                            label="Prefix"
+                            name="prefix"
+                            placeholder="Select prefix"
+                            options={prefixSelectOptions}
+                            value={formData.prefix}
+                            disabled={isReadOnly}
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Last Name" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="Last name can only contain letters" class="SE-searchCardInputLabel"
+                         name="lastName" disabled={isReadOnly} required  value={formData.lastName} onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="First Name" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="First name can only contain letters" class="SE-searchCardInputLabel"
+                         name="firstName" disabled={isReadOnly} required  value={formData.firstName} onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Middle Initial" name="middleInitial" pattern="^[A-Za-z]+(\.[A-Za-z]+)*\.?$" message-when-pattern-mismatch="Middle initial can only contain letters" class="SE-searchCardInputLabel"
+                        disabled={isReadOnly}  value={formData.middleInitial} onchange={handleInputChange}></lightning-input>
+                    </div>                   
+                    
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-4 ">
+                        <lightning-combobox
+                            label="Suffix"
+                            name="suffix"
+
+                            placeholder="Select suffix"
+                            options={suffixSelectOptions} value={formData.suffix} disabled={isReadOnly} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Personal Name" name="personalName" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="Personal Name can only contain letters" class="SE-searchCardInputLabel"
+                         disabled={isReadOnly}  value={formData.personalName} onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                            label="Title"
+                            name="title"
+                            placeholder="Select title"
+                            class="SE-searchCardInputLabel"
+                            disabled={noEditField}
+                            required
+                            options={titleOptions} value={formData.title} read-only={isReadOnly} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                            label="State/Borough/Town"
+                            name="sbt"
+                            required
+                            disabled={noEditFieldSBT}
+                            class="SE-searchCardInputLabel"
+                            placeholder="Select State/Borough/Town"
+                            options={sbtOptions} value={formData.sbt} read-only={isReadOnly} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                            label="Party"
+                            name="party"
+                            placeholder="Select Party"
+                            options={partyOptions} value={formData.party} disabled={isReadOnly} onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4 slds-align-bottom esq-align">
+                        <lightning-input type="checkbox" label="Authorized Public Official" name="apo" disabled={isReadOnly} checked={formData.apo}
+                        onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="slds-box slds-theme_shade slds-m-top_medium"> -->
+            <div class="address-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:service_territory_member" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Mailling Address</h2>
+                        <p class="slds-text-body_small">Enter address details to proceed further.</p>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium">
+                    <div class="slds-col slds-size_1-of-5">
+                        <lightning-input label="Email Address" class="SE-searchCardInputLabel" name="email" type="email" disabled={isReadOnly} required value={formData.email} onchange={handleInputChange} ></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-5">
+                        <lightning-input label="Fax" name="fax" placeholder="e.g 1234567890"
+                          disabled={isReadOnly} type="tel"  value={formData.fax} 
+                          maxlength="14" minlength = "14" 
+                          onkeydown={handleKeyPress}
+                          message-when-too-short="Please enter 10 digits Phone Number"
+                          onchange={handleInputChange}></lightning-input>
+                    </div>
+                     <div class="slds-col slds-size_1-of-5">
+                        <lightning-input label="Home Phone" name="homePhone" maxlength="14" minlength = "14" 
+                         message-when-too-short="Please enter 10 digits Phone Number"
+                         onkeydown={handleKeyPress}
+                          class="SE-searchCardInputLabel"
+                         placeholder="e.g (555) 555-5555"  disabled={isReadOnly} type="tel"  value={formData.homePhone} onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-5 ">
+                        <lightning-input label=" Business Phone" name="businessPhone" maxlength="14" minlength = "14"
+                         message-when-too-short="Please enter 10 digits Phone Number"
+                         onkeydown={handleKeyPress}
+                        placeholder="e.g (555) 555-5555"  disabled={isReadOnly} type="tel" class="SE-searchCardInputLabel"  value={formData.businessPhone} onchange={handleInputChange}></lightning-input>
+                        <!-- <lightning-input label="Extension" name="extension" placeholder="e.g 1234"  disabled={isReadOnly} type="tel" class="extinsion-class"  value={formData.extension} onchange={handleInputChange}></lightning-input> -->
+                    </div>
+                    <div class="slds-col slds-size_1-of-5">
+                    <lightning-input label="Extension" name="extension" placeholder="e.g 1234"  disabled={isReadOnly} type="tel" class="SE-searchCardInputLabel"
+                    pattern="[0-9]*" message-when-pattern-mismatch="Please enter only number" onkeydown={handleKeyPress}
+                       value={formData.extension} onchange={handleInputChange}></lightning-input>
+                </div>
+                </div>
+            
+                <div class="form-group full-width slds-form-element_compound slds-form-element">
+                    <lightning-input-address 
+                        class='address SE-searchCardInputLabel'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={formData.address1}    
+                        street-label="Address Line 1"
+
+                        subpremise={formData.address2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={formData.city}
+
+                        province-label="State"
+                        province={formData.state}
+
+                        postal-code={formData.zipCode}
+                        postal-code-label="Zip Code"
+
+                        country-label="Country"
+                        country={formData.country}
+
+                        onchange={handleAddressChange}
+                        show-address-lookup
+                        show-compact-address	
+                        disabled={isReadOnly}
+                        required>
+                    </lightning-input-address>
+                </div>
+            </div>
+
+            <div class="term-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:shift_type" size="small" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Term Details</h2>
+                        <p class="slds-text-body_small">Enter Term details.</p>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                            label="Elected"
+                            name="elected" class="SE-searchCardInputLabel"
+                            placeholder="Select elected" disabled={isReadOnly}
+                            options={electedOptions} value={formData.elected} required onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Start of Recent Term" class="SE-searchCardInputLabel" date-style="short" name="startTerm" disabled={endTermDisable} type="date" required={isTermDateRequired} placeholder="mm/dd/yyyy" value={formData.startTerm} onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="End of Recent Term" date-style="short" class="SE-searchCardInputLabel" name="endTerm" required={isTermDateRequired} disabled={endTermDisable} type="date" placeholder="mm/dd/yyyy" value={formData.endTerm} onchange={handleInputChange}></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4  esq-align">
+                        <lightning-input type="checkbox" label="Indefinite Term" disabled={isReadOnly} name="indefiniteTerm" checked={formData.indefiniteTerm}
+                        onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="button-group">
+            <button class="slds-button SE-borderLessButton cancel-button" onclick={goBackModal}>Cancel</button>
+            <template if:false={isReadOnly}>
+                <lightning-button variant="brand" label={buttonLabel} class="button-font" disabled={isReadOnly} onclick={handleAdd}></lightning-button>
+    
+            </template>
+        </div>
+        <!-- <lightning-button label="Cancel" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button>
+        <lightning-button variant="brand" label="Add Official" disabled={isReadOnly} onclick={handleAdd}></lightning-button> -->
+    </div>
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+    
+</template>

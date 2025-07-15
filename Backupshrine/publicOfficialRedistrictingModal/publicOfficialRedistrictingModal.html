@@ -1,0 +1,57 @@
+<template>
+    <lightning-modal-header >
+        <div class="header-container specificHeader">
+            <h2 class="slds-text-heading_medium">Add District</h2>
+
+        </div>
+        <lightning-button-icon
+                icon-name="utility:close"
+                size="large"
+                alternative-text="Close"
+                onclick={closeModal}
+                class="custom-modal__close cancelButtonCss">
+            </lightning-button-icon> 
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="custom-modal-body modalBodyCssChange">
+            <div class="personal-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:service_territory_member" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">District Information</h2>
+                        <p class="slds-text-body_small">Enter district information to complete adding a new district.</p>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                            label="District Type"
+                            name="district"
+                            placeholder="Select district type"
+                            options={districtOptions}
+                            value={formData.district}
+                            class="SE-searchCardInputLabel"
+                            required
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="District Number" name="districtNumber" class="SE-searchCardInputLabel"
+                        onkeydown={restrictCongressionalKeyInput}
+                         required  value={formData.lastName} onchange={handleInputChange} pattern="^(?:\+1\s?)?\(?([2-9][0-9]{2})\)?[\s.-]?([0-9]{3})[\s.-]?([0-9]{4})$"></lightning-input>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button>
+        <lightning-button variant="brand" label="Add District" disabled={isReadOnly} onclick={handleAdd}></lightning-button>
+    </lightning-modal-footer>
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+    
+</template>

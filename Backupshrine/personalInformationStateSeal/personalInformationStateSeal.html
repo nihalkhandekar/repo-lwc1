@@ -1,0 +1,230 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:user" size="medium" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Personal Information</h1>
+                <p class="description">Enter personal information to use state arms/seal.</p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="prefix">Prefix</label>
+                    <lightning-combobox 
+                        variant="label-hidden"
+                        name="prefix" 
+                        class="input-field"
+                        value={prefix} 
+                        placeholder="Select prefix" 
+                        options={prefixOptions} 
+                        onchange={handleInputChange}
+                        disabled={isReadOnly}
+                    ></lightning-combobox>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="lastName"><span class="required-indicator">*</span>Last Name</label>
+                    <div class={lastNameErrorClass}>
+                        <lightning-input 
+                            label="Last Name"
+                            name="lastName" 
+                            variant="label-hidden"
+                            id="lastName" 
+                            placeholder="e.g Doe"
+                            value={lastName}                      
+                            class="input-field" 
+                            read-only={isReadOnly} 
+                            aria-describedby="lastNameError"
+                            aria-invalid={isLastNameInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="lastNameError" if:true={isLastNameInvalid}>
+                            Last Name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="middleInitial">Middle Initial</label>
+                    <lightning-input 
+                        label="Middle Initial"
+                        name="middleInitial" 
+                        variant="label-hidden"
+                        id="middleInitial" 
+                        placeholder="e.g R"
+                        value={middleInitial} 
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="firstName"><span class="required-indicator">*</span>First Name</label>
+                    <div class={firstNameErrorClass}>
+                        <lightning-input 
+                            label="First Name"
+                            name="firstName" 
+                            variant="label-hidden"
+                            id="firstName" 
+                            placeholder="e.g John"
+                            value={firstName} 
+                            class="input-field" 
+                            read-only={isReadOnly} 
+                            aria-describedby="firstNameError"
+                            aria-invalid={isFirstNameInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="firstNameError" if:true={isFirstNameInvalid}>
+                            First Name is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="suffix">Suffix</label>
+                    <lightning-combobox 
+                        variant="label-hidden"
+                        label="Suffix"
+                        name="suffix" 
+                        class="input-field"
+                        value={suffix} 
+                        placeholder="Select suffix" 
+                        options={suffixOptions} 
+                        onchange={handleInputChange}
+                        disabled={isReadOnly}
+                    ></lightning-combobox>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="dob"><span class="required-indicator">*</span>Date of Birth</label>
+                    <div class={dobErrorClass}>
+                        <lightning-input
+                            type="date"
+                            label="dob"
+                            name="dob" 
+                            variant="label-hidden"
+                            id="dob"
+                            placeholder="mm/dd/yyyy"
+                            value={dob} 
+                            class="input-field date-format-hide" 
+                            read-only={isReadOnly} 
+                            aria-describedby="dobError"
+                            aria-invalid={isDobInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="dobError" if:true={isDobInvalid}>
+                            Date of Birth is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="title">Title</label>
+                    <lightning-input 
+                        label="title"
+                        name="title" 
+                        variant="label-hidden"
+                        id="title" 
+                        placeholder="e.g title"
+                        value={title}                                       
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="entity">Entity</label>
+                    <lightning-input 
+                        label="entity"
+                        name="entity" 
+                        variant="label-hidden"
+                        id="entity" 
+                        placeholder="e.g entity"
+                        value={entity}                                       
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="email"><span class="required-indicator">*</span>Email</label>
+                    <div class={emailErrorClass}>
+                        <lightning-input 
+                            label="Email"
+                            type="email"
+                            name="email" 
+                            variant="label-hidden"
+                            id="email" 
+                            placeholder="e.g johndoe@gmail.com"
+                            value={email} 
+                            class="input-field" 
+                            message-when-bad-input="Please enter a valid email address."
+                            message-when-value-missing="Email is required."
+                            read-only={isReadOnly} 
+                            aria-describedby="emailError"
+                            aria-invalid={isEmailInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="emailError" if:true={isEmailInvalid}>
+                            Email is required and must be valid.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="phoneNumber"><span class="required-indicator">*</span>Phone Number</label>
+                    <div class={phoneNumberErrorClass}>
+                        <lightning-input 
+                            label="Phone Number"
+                            name="phoneNumber" 
+                            type="tel"
+                            pattern="[0-9]{10}" 
+                            title="(xxx) xxx-xxxx"
+                            variant="label-hidden"
+                            id="phoneNumber" 
+                            placeholder="e.g 0987654321"
+                            message-when-pattern-mismatch="Phone number must be exactly 10 digits."
+                            message-when-value-missing="Phone number is required."
+                            value={phoneNumber} 
+                            class="input-field" 
+                            read-only={isReadOnly} 
+                            aria-describedby="phoneNumberError"
+                            aria-invalid={isPhoneNumberInvalid}
+                            onkeypress={handleKeyPress}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="phoneNumberError" if:true={isPhoneNumberInvalid}>
+                            Phone Number is required and must be 10 digits.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width esq-align">
+                    <lightning-input 
+                        type="checkbox"
+                        label="Esq"
+                        name="esq" 
+                        id="esq"
+                        checked={esq}
+                        class="input-field" 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <!-- Empty for alignment -->
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

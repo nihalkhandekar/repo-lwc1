@@ -1,0 +1,339 @@
+/* submittedRequests.css */
+.dashboard-container {
+    padding: 1rem;
+}
+
+.breadcrumb-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.breadcrumb-container .breadcrumb {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-container .breadcrumb a {
+    margin-right: 4px;
+    color: #09629F;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 510;
+    line-height: 24px;
+}
+
+.breadcrumb-container .subtextbox {
+    opacity: 1; /* make the subtextbox visible */
+    background: rgba(238, 244, 255, 1);
+    border: 0.4px solid rgba(7, 132, 218, 1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    display: inline-block; /* make it an inline-block element */
+    vertical-align: middle; /* align it vertically with the icon */
+    margin-left: 4px;
+}
+
+.downloadbutton{
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-text-color: #ffffff;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-font-weight: 400;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-start:6px;
+    --slds-c-button-spacing-inline-end:16px;
+    --slds-c-button-spacing-block-end:6px;
+    --slds-c-button-spacing-inline-start:16px;
+}
+
+.cancelbutton{
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --sds-c-button-brand-color-background: #ffffff;
+    --sds-c-button-brand-text-color: #003A62;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-font-weight: 400;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-start:6px;
+    --slds-c-button-spacing-inline-end:16px;
+    --slds-c-button-spacing-block-end:6px;
+    --slds-c-button-spacing-inline-start:16px;
+    margin-right: 16px;
+}
+
+.breadcrumb-container .subtextbox span {
+    color: rgba(0, 22, 36, 1);
+    font-size: 16px;
+    font-weight: 510;
+    line-height: 24px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end; /* Align the search box to the right */
+    margin-bottom: 1rem;
+}
+
+.search-box-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.search-box {
+    padding: 0.5rem;
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
+    width: 350px; /* Adjust width as needed */
+    height: 40px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 40%;
+    right: 24px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Disable clicking on the icon */
+    height: 15px;
+    width: 15px;
+}
+
+.dashboard-cards {
+    display: flex;
+    flex-direction: column;
+    padding: 0rem;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 2px 12px 0px #0000000A;
+    border: 1px solid #E5E5E5;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    height: 100%;
+}
+
+/* .dashboard-card:hover {
+    transform: translateY(-5px);
+} */
+
+.dashboard-card {
+    background-color: #f6f9ff;
+    width: 1864px;
+    height: 78px;
+}
+
+.dashboard-card-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+}
+
+.dashboard-card-icon {
+    margin-right: 1rem;
+    align-self: flex-start;
+    --sds-c-icon-color-background: #dd7a01;
+}
+
+.dashboard-icon {
+    margin: 0;
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #181818;
+    margin: 0;
+}
+
+.card-description {
+    font-size: 12px;
+    color: #5C5C5C;
+    margin-top: 0.1rem;
+    font-weight: 400;
+}
+
+.custom-table-container {
+    padding: 24px; /* Adds padding around the table */
+}
+
+.custom-table {
+    border: 1px solid #d8dde6; /* Adds a border to the table */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-table thead tr.custom-header th {
+    background-color: #f6f9ff; /* Custom background color for the header */
+    font-weight: 700;
+    font-size: 14px;
+    color: #181818;
+    height: 32px; /* Fixed height for table header */
+    vertical-align: middle;
+}
+
+.custom-header {
+    width: 144px; /* Set the width */
+    height: 32px;
+    background-color: #f6f9ff; /* Customize the background color of the header */
+    font-weight: 700;
+    font-size: 14px;
+vertical-align: middle;
+}
+
+.custom-column {
+    font-size: 14px;
+    height: 40px; /* Fixed height for table rows */
+    vertical-align: middle;
+    font-weight: 400;
+}
+
+.status-paid,
+.status-cancel,
+.status-progress {
+    width: 93px; /* Set the width */
+    height: 22px; /* Set the height */
+    line-height: 22px; /* Align text vertically in the center */
+    border-radius: 23px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 590;
+    padding: 0; /* Remove padding to ensure exact dimensions */
+}
+
+.status-paid {
+    background-color: #effceb;
+    color: #2e844a;
+}
+
+.status-cancel {
+    background-color: #fef1ee;
+    color: #ba0517;
+}
+
+.status-progress {
+    background-color: #fbf3e0;
+    color: #181818;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 8px;
+    justify-content: center;
+    margin-bottom: 24px;
+    --sds-c-button-radius-border: 8px;
+}
+
+.pagination-controls lightning-button {
+    background-color: white;
+    color: white;
+    border-radius: 8px;
+    border: 1px;
+    width: 86px;
+    height: 32px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-controls lightning-button:hover {
+    background-color: #005bb5;
+}
+
+.pagination-controls lightning-button[disabled] {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.slds-button__icon {
+    width: 11.38px;
+    height: 9.23px;
+    position: relative;
+    top: 3.37px;
+    left: 2.3px;
+    gap: 0px;
+    opacity: 1; /* Make sure the icon is visible */
+}
+
+.paginationText {
+    color: #747474;
+    font-size: 14px;
+}
+
+.pagination-info {
+    color: #333; /* Text color */
+    font-size: 10px; /* Font size for pagination info */
+    margin-right: 1rem; /* Space between info and buttons */
+}
+
+.pagination-info span {
+    font-weight: bold; /* Make the current page number bold */
+}
+
+.no-data-message {
+    font-size: 1rem;
+    color: #6b7078;
+    text-align: center;
+    padding: 1rem;
+}
+
+.download {
+    --sds-c-icon-color-foreground-default: #0070d2;
+    cursor: pointer; /* Ensures the cursor changes to a hand on hover */
+}
+
+/* MODAL CSS PART */
+
+:host {
+    --slds-c-modal-content-color-background: rgba(255, 255, 255, 1);
+}
+
+.modal-text {
+    font-size: 14px;
+    color: rgba(24, 24, 24, 1);
+    margin-bottom: 0.75rem;
+    margin-left: 0.5rem;
+    display: block;
+    font-weight: 590;
+    line-height: 20px;
+}
+.work-order {
+    margin-bottom: 1.5rem;
+}
+
+.total-amount {
+    margin-bottom: 0.75rem;
+}
+.close-icon {
+    cursor: pointer;
+}
+.no-border {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.no-border-row td {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+.loader-row {
+    height: 400px; /* Adjust height as needed for proper loader centering */
+}
+
+
+.receipt {
+    font-size: 1rem;
+    font-weight: 590;
+    color: rgba(3, 61, 104, 1);
+    /* margin-left: 16rem; */
+}

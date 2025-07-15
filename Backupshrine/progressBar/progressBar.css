@@ -1,0 +1,96 @@
+.pbWrapper {
+  margin: 0 24px;
+}
+
+.progress-bar__value_inprogess {
+  display: block;
+  height: 100%;
+  background: #f6a053;
+  box-shadow: 0 2px 4px 0 #e7e9f2;
+}
+
+.progress-bar__value_complete {
+  display: block;
+  height: 100%;
+  background-color: #3a95d3;
+  box-shadow: 0 2px 4px 0 #e7e9f2;
+}
+
+p.introName {
+  color: #757575;
+  margin-top: 48px;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: .01px;
+  line-height: 24px;
+  text-transform: capitalize;
+}
+
+p.introSubHeading {
+  color: #2D2C2C;
+  margin-bottom: 16px;
+  font-family: KarlaBold;
+  font-size: 18px;
+  letter-spacing: .13px;
+  line-height: 27px;
+}
+
+.dmvprogressBar {
+  border: 1px solid #D0CFCF !important;
+  background-color: #ECEBEB !important;
+}
+
+.percentage {
+  color: #757575;
+  font-family: KarlaBold;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  line-height: 17px;
+  margin-left: 8px;
+  /* margin-right: 8px; */
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.separator {
+  box-sizing: border-box;
+  height: 2px;
+  border: 1px solid #ECEBEB;
+  margin-bottom: 20px;
+}
+
+.ml-10{
+  margin-left: 10px;
+}
+
+.exit-icon{
+  cursor: pointer;
+  width: 16px;
+  height: 14px;
+  margin-right: 8px;
+}
+
+.exitbtn-container{
+  display: flex;
+  margin-top: 48px;
+}
+
+p.greetingText{
+  margin-top: 0px;
+  flex: 1;
+}
+
+@media only screen and (max-width: 1023.9px) {
+  .progressBarlabel {
+    margin-top: 0;
+  }
+
+  .pbWrapper {
+    margin: 0;
+  }
+}

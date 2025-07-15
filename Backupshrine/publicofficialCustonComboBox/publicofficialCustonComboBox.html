@@ -1,0 +1,26 @@
+<template>
+    <div class="dropdown">
+        <!-- Display the selected options as a string -->
+        <span class="selected-option">{selectedOptionsString}</span>
+
+        <!-- Button to open/close the dropdown -->
+        <button onclick={toggleDropdown}>Select Options</button>
+
+        <!-- Dropdown list, shown conditionally -->
+        <ul class="dropdown-list" if:true={isDropdownOpen}>
+            <!-- Loop through the options array -->
+            <template for:each={options} for:item="option">
+                <li key={option.value}>
+                    <!-- Checkbox for each option -->
+                    <input 
+                        type="checkbox" 
+                        value={option.value} 
+                        checked={option.selected} 
+                        onchange={handleCheckboxChange} 
+                    />
+                    <span>{option.label}</span>
+                </li>
+            </template>
+        </ul>
+    </div>
+</template>

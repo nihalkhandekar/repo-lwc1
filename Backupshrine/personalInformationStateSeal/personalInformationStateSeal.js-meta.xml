@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="prefix" type="String" label="Prefix" description="Prefix of the user (Mr., Mrs., etc.)" />
+            <property name="firstName" type="String" label="First Name" description="First Name of the user" />
+            <property name="middleInitial" type="String" label="Middle Initial" description="Middle Initial of the user" />
+            <property name="lastName" type="String" label="Last Name" description="Last Name of the user" />
+            <property name="suffix" type="String" label="Suffix" description="Suffix (Jr., Sr., etc.)" />
+            <property name="dob" type="Date" label="dob" description="User's dob" />
+            <property name="title" type="String" label="title" description="title" />
+            <property name="entity" type="String" label="entity" description="entity" />
+            <property name="isReadOnly" type="Boolean" label="Read Only" description="Read-only flag for fields" />
+            <property name="email" type="String" label="Email" description="email" />
+            <property name="esq" type="Boolean" label="Esq" description="Indicates if Esq. checkbox is selected" /> <!-- Added for Esq -->
+            <property name="phoneNumber" type="String" label="Phone Number" description="phoneNumber" />
+            <property name="showError" type="Boolean" label="showError" description="showError" /> <!-- Added for Esq -->
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

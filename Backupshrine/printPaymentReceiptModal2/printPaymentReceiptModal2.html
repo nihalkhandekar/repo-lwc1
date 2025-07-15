@@ -1,0 +1,56 @@
+<template>
+    <lightning-modal-header class="SE-ModalHeader">
+        <div class="SE-ModalHeaderTitle">
+            <h2>Print Payment Receipt</h2>
+        </div>
+        <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={closeModels} class="custom-modal__close">
+        </lightning-button-icon>
+    </lightning-modal-header>
+
+    <!-- Show loader while data is loading -->
+    <template if:true={isLoading}>
+        <lightning-modal-body>
+            <lightning-spinner alternative-text="Loading..." size="large" variant="base"></lightning-spinner>
+        </lightning-modal-body>
+    </template>
+
+    <!-- Show modal content once data is loaded -->
+    <template if:false={isLoading}>
+        <lightning-modal-body>
+            <!-- Modal content goes here -->
+             <div class="vertical-text">
+                <p class="modal-text work-order">Work Order#: </p> {workOrder}
+             </div>
+             <div class="vertical-text">
+                <p class="modal-text total-amount">Amount Paid: </p> ${totalAmountPaid}
+             </div>
+             <div class="vertical-text">
+                <p class="modal-text">Payment Method: </p> {paymentMethod}
+             </div>
+             <div class="vertical-text">
+                <p class="modal-text">Auth Code: </p> {authCode}
+             </div>
+             <div class="vertical-text">
+                <p class="modal-text">Date of Payment: </p> {dateOfPayment}
+             </div>
+        </lightning-modal-body>
+    </template>
+
+    <lightning-modal-footer class="SE-modalFooter">
+        <div class="slds-button-group">
+            <div class="button-left-group">
+                <lightning-button label="Send Payment Receipt via email" variant="neutral" class="button-spacing print-buttons" onclick={handleSendEmail}></lightning-button>
+            </div>
+            
+            <div class="button-right-group SE-modalFooterButtonGroup">
+                <button class="slds-button SE-borderLessButton" onclick={closeModels}>Cancel</button>
+                <lightning-button variant="brand" label="Print Payment Receipt" class="save-button" onclick={handlePrint}></lightning-button>
+            </div>
+        </div>
+    </lightning-modal-footer>
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+
+    <!-- Your PDF Generator child component -->
+    <c-pdf-genrator data-id="pdfGenerator" records={records} documents-requested={documentsRequested}
+    total-fee={totalFee} expedite-fee={expediteFee}></c-pdf-genrator>
+</template>
