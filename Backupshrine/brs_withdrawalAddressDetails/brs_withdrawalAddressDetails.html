@@ -1,0 +1,9 @@
+<template>
+    <p class="mailing-address">{label.Mailing_Address}</p>
+    <c-brs_address can-be-outside-us={isNotCloseBusiness} source={source} class="mailingAddress" unitlabel={label.AddressUnit_Apt}
+        autocomplete set-retained-address={mailingAddressFields}>
+    </c-brs_address>
+    <c-brs_next-back-buttons show-summary={showGotoSummary} nextlabel={label.Next}
+        gotosummarylabel={label.go_to_summary} prevlabel={label.Back} onhandlenext={validate} onhandleback={handleBack}
+        ongotosummary={goToSummaryPageWithOutConfirmation}></c-brs_next-back-buttons>
+</template>

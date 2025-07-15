@@ -1,0 +1,16 @@
+.headerModal {
+    text-align: left;
+}
+
+.footerContent {
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+
+}
+
+.primaryBtnSmall {
+    height: auto;
+    padding: 20px 56px;
+}

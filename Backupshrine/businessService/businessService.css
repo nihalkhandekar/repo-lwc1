@@ -1,0 +1,32 @@
+.resultContainer {
+  margin-bottom: 60px;
+}
+
+.error-msg-wrapper {
+  text-align: center;
+}
+
+.slds-button:focus {
+  outline: 2px solid #2d2c2c;
+}
+
+.keywords {
+  color: #757575;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+}
+
+.keywords:focus {
+  font-weight: normal;
+}
+
+.results {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  line-height: 50px;
+  margin-left: 24px;
+}

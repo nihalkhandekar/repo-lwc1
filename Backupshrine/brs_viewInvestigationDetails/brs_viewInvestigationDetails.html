@@ -1,0 +1,60 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1" if:true={investigationDetails}> 
+            <div class="slds-grid slds-wrap generic-details-card">
+                <div class="slds-col top-section slds-size_1-of-1">
+                    <div class="left-section">
+                        <img src={calendarIcon} role="presentation" alt="calendar icon" />
+                        <div class="name-container">
+                            <p class="detail-name largeBold">
+                                {investigationDetails.fIName}
+                            </p>
+                            <p class="due-date large">
+                                <span>{label.FI_Due_Date}:</span>
+                                <span class="date-value">{investigationDetails.dueDate}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        <c-brs_badges class-name={badgeClassName} text={investigationDetails.fIStatus}></c-brs_badges>
+                    </div>
+                </div>
+                <div class="slds-col bottom-content slds-size_1-of-1">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col details-container slds-size_1-of-2">
+                            <p class="details-header small">
+                                {label.TotalAmount}
+                            </p>
+                            <p class="details-value small">
+                                <lightning-formatted-number value={investigationDetails.totalAmount} format-style="currency" currency-code="USD" currency-display-as="symbol"></lightning-formatted-number>
+                            </p>
+                        </div>
+                        <div if:true={showNegotiatedAmt}
+                            class="slds-col details-container slds-size_1-of-2">
+                            <p class="details-header small">
+                                {label.Negotiated_Amount}
+                            </p>
+                            <p class="details-value small">
+                                <lightning-formatted-number value={investigationDetails.negotiatedAmount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col bordered-card slds-size_1-of-1" if:true={investigationDetails}>
+            <c-brs_generic-bordered-card card-label={label.Outstanding_Amount}
+                card-value={investigationDetails.outstandingAmount}></c-brs_generic-bordered-card>
+        </div>
+        <div class="slds-col slds-size_1-of-1">
+            <c-brs_next-back-buttons nextlabel={label.Next} prevlabel={label.Back} onhandlenext={handleNext}
+                onhandleback={handleBack}></c-brs_next-back-buttons>
+        </div>
+    </div>
+    <c-brs_payment-confirmation-modal onmodalconfirm={handleModalConfirm} show-popup={showPopup} onmodalclose={handleCloseModal}
+    tablecolumns={tablecolumns} tabledata={tabledata}></c-brs_payment-confirmation-modal>
+</template>

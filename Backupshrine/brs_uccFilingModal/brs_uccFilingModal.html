@@ -1,0 +1,29 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={labels.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <c-modal open={isModalOpen} onmodalclose={closeModal} size>
+        <div slot="header" class="headerModal">
+            <h6>{labels.UCC_CopyReq_AddFile}</h6>
+        </div>
+        <div slot="body" class="slds-m-bottom_large slds-large-size_12-of-12 slds-size_1-of-1">
+            <p class="large slds-m-bottom_large">{labels.UCC_CopyReq_AddFile_modalDesc}</p>
+            <p class="large slds-m-bottom_xx-small">{labels.UCC_CopyReq_FileNo}</p>
+            <lightning-input type="text" required onchange={handleFilingNumber} placeholder={labels.Brs_ALEI_Placeholder}
+                class="slds-size_1-of-1 inputBox" variant="label-hidden" max-length="10" onblur={handleBlur} onkeydown={handleValidateKey} >
+            </lightning-input>
+            <div>
+                <c-generic-multi-select
+                    list-data={expediteCopyCheckboxOptions}
+                    value={isExpediteCopy}
+                    oncheckboxinputselection={onExpediteCopyCheck}>
+                </c-generic-multi-select>
+            </div>
+        </div>
+        <div slot="actions" class="slds-m-vertical_small footerContent">
+            <button class="slds-button slds-button_brand primaryBtnSmall" onclick={validateFilingNumber}>{labels.Next} 
+                <img src={chevronRightWhite} class="rightIcon slds-m-left_x-small" alt=""></button>
+        </div>
+    </c-modal>
+</template>

@@ -1,0 +1,66 @@
+.bordered-card{
+    margin-top: 20px;
+}
+.generic-details-card{
+    padding: 16px 14px 18px 24px; 
+    border: 1px solid #D0CFCF;
+    box-shadow: 0px 8px 16px #E7E9F2;
+    border-radius: 4px;
+    background: #FFFFFF;
+}
+.top-section{
+    padding-bottom: 32px;
+    margin-bottom : 32px;
+    border-bottom :solid 1px #ECEBEB;  
+}
+.right-section{
+    padding-bottom: 20px;
+}
+.details-header {
+    color: #757575;
+}
+.details-container {
+    padding-bottom: 12px;
+}
+.due-date {
+    color: #757575;
+}
+.name-container {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 24px;
+}
+.date-value{
+    padding-left: 4px;
+}
+.generic-details-card .top-section{
+    display: flex;
+    flex-direction: column-reverse;
+}
+@media only screen and (min-width: 1024px) {
+    .bordered-card{
+        margin-top: 32px;
+    }
+    .generic-details-card{
+        padding-right: 24px;
+    }
+    .right-section{
+        padding-bottom: 0;
+        float: right;
+    }
+    .due-date {
+        color: #757575;
+    }
+    .left-section,.right-section{
+        display: inline-block
+    }
+    .bottom-content .details-container:nth-child(odd){
+        width: 60%;
+    } 
+    .bottom-content .details-container:nth-child(even){
+        width: 40%;
+    }   
+    .generic-details-card .top-section{
+        display: block;
+    }
+}

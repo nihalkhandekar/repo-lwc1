@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountRecord" label="Account" type="@salesforce/schema/Account"/>
+            <property name="dateEntered" type="Date" description="Date selected by User" label="Date entered by user"/>
+            <property name="minDate" type="Date" description="Input a minimum date" label="Minimum date"/>
+            <property name="minDateValidationMessage" type="String" description="Minimum date validation error message" label="Minimum date error message"/>
+            <property name="maxDate" type="Date" description="Input a Maximum date" label="max date"/>
+            <property name="maxDateValidationMessage" type="String" description="Maximum date validation error message" label="Maximum date error message"/>
+            <property name="isRequired" type="Boolean" description="Check if input is required" label="Is Input Required"/>
+            <property name="isRequiredValidationMessage" type="String" description="Required validation error message" label="Required error message"/>
+            <property name="validationErrorBlockTitle" type="String" description="Validation error block title" label="Error block title"/>
+            <property name="dateLabel" type="String" description="Date label" label="Date Label"/>
+            <property name="showConfirmationBlock" type="Boolean" description="Enable this feature if before going to next screen there is a need to show confirmation on input" label="Enable confirmation block"/>
+            <property name="confirmationBlockTitle" type="String" description="Confirmation block title" label="Confirmation block title"/>
+            <property name="confirmationBlockSubTitle" type="String" description="Confirmation block sub title" label="Confirmation block sub title"/>
+            <property name="confirmationBlockMessage" type="String" description="Confirmation block message" label="Confirmation block message"/>
+            <property name="showUserInput" type="Boolean" description="To enable show user input" label="Show user input on confirmation block"/>
+            <property name="placeholder" type="String" description="Placeholder for date input" label="Date input placeholder. "/>
+            <property name="badInputMessage" type="String" description="Bad input validation message" label="Bad input error message"/>
+            <property name="maintennaceType" type="String" label="maintennaceType" description=""/>
+            <property name="authorizedDateEntered" type="Date" description="Authorized date selected by User" label="Authorized date entered by user"/>
+            <property name="effectiveDateEntered" type="Date" description="Effective date selected by User" label="Effective date entered by user"/>
+            <property name="effectiveTimeSelected" type="Date" description="Effective time selected by User" label="Effective time entered by user"/>
+            <property name="withdrawalEffectiveTimeSelected" type="String" description="Effective time selected by User" label="Effective time entered by user"/>
+            <property name="businessFiling" type="String" label="businessFiling" description=""/>
+            <property name="effectiveDate" type="String" description="Effective date header" label="Effective date header"/>
+            <property name="effectiveTime" type="String" description="Effective time header" label="Effective time header"/>
+            <property name="showTimePicker" type="Boolean" description="Hide/Show the time Picker" label="Show Time Picker"/>
+            <property name="isGotoSummary" type="Boolean" description="Go to summary" label="Go to summary"/>
+            <property name="showGotoSummary" type="Boolean" description="Display go to summary" label="Display go to summary"/>
+            <property name="goToDashBoardPage" type="Boolean" label="Go to Dashboard Page" description=""/>
+            <property name="twentyFourHourTime" label="Effective Time in 24hr Format" type="string"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

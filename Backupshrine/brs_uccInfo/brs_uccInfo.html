@@ -1,0 +1,68 @@
+<template>
+    <template if:false={isFromEdit}>
+        <c-generic-radio-input class="slds-size_6-of-12" qid="request-options" radio-options={chooseIndividual}
+            value={radioOption} onctbosdatachange={handleRadio}></c-generic-radio-input>
+        <div if:false={showOrganization} class="gap slds-size_1-of-1 inputForm">
+            <div class="slds-grid slds-wrap slds-gutters form-row">
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                    <lightning-input type="text" class="requestInputReq" label={label.Surname}
+                        value={requestSurname} placeholder={label.surname_placeholder} required
+                        onchange={handleSurname} onblur={handleSurnameBlur}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                    <lightning-input type="text" class="requestInput" label={label.First_Name}
+                        value={requestFirstName} placeholder={label.surname_placeholder} onchange={handleFirstName} onblur={handleFirstNameBlur}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap slds-gutters form-row">
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                    <lightning-input type="text" class="requestInput" label={label.Middle_Name}
+                        value={requestMiddleName} placeholder={label.suffix_placeholder} onchange={handleMiddleName} onblur={handleMiddleNameBlur}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                    <lightning-input type="text" class="requestInput" label={label.Suffix}
+                        value={requestSuffix} placeholder={label.suffix_placeholder} onchange={handleSuffix} onblur={handleSuffixBlur}>
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+        <c-generic-radio-input class="slds-size_6-of-12" qid="request-options" radio-options={chooseOrganization}
+            value={radioOption} onctbosdatachange={handleRadio}></c-generic-radio-input>
+        <div if:true={showOrganization} class=" inputForm gap slds-size_1-of-1">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                    <lightning-input type="text" class="requestInputReq"
+                        label={label.Name_Required} value={requestOrgName} placeholder={label.org_placeholder} required
+                        onchange={handleOrgName} onblur={handleOrgNameBlur}>
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={isFromEdit}>
+        <c-brs_simple-card has-footer>
+            <div slot="header">
+                <div class="slds-wrap slds-gutters gapCard">
+                    <p class="member-label nameGap smallBold grey-text">{label.Name}</p>
+                    <h6 class="member-name" if:true={showOrganization}>{requestOrgName}</h6>
+                    <h6 class="member-name" if:false={showOrganization}>{fullName}</h6>
+                </div>
+            </div>
+            <div slot="footer">
+                <button onclick={editInfo} data-name="0"
+                    class="natural-button-with-icon slds-button slds-button_natural">
+                    <img src={editIcon} alt="" class="icon" />
+                    {label.Edit}
+                </button>
+                <button onclick={deleteInfo} class="natural-button-with-icon slds-button slds-button_natural"
+                    data-name="0">
+                    <img src={deleteIcon} alt="" class="icon" />
+                    {label.Remove}
+                </button>
+            </div>
+        </c-brs_simple-card>
+    </template>
+</template>

@@ -1,0 +1,52 @@
+.trade-and-search {
+    background-color: #f7f9fa;
+}
+
+.search-content {
+    padding-top: 40px;
+    padding-bottom: 80px;
+}
+
+.results-title {
+    margin-bottom: 16px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid #DDDBDB;
+}
+
+.spacing {
+    height: 178px;
+}
+
+.results-text.mobile-show {
+    margin-bottom: 32px;
+}
+
+.search-results-container {
+    margin-top: 32px;
+}
+
+@media print {
+    .search-content{
+        padding: 0px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .search-content {
+        padding-top: 56px;
+    }
+
+    .results-text {
+        padding-bottom: 32px;
+        border-bottom: 1px solid #dddbdb;
+        margin-bottom: 32px;
+    }
+
+    .results-title {
+        margin-bottom: 20px;
+        margin-top: 0;
+        padding-top: 0;
+        border: none;
+    }
+}

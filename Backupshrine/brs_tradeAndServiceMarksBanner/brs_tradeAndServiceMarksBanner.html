@@ -1,0 +1,79 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class={bannerClassName}>
+        <div class="slds-grid slds-wrap brs-container slds-grid_align-center">
+            <div class="slds-size_1-of-1 slds-large-size_12-of-12">
+                <h1 class="banner-heading">{pageHeading}</h1>
+            </div>
+            <!--Trade Search Code Start-->
+            <div class="slds-size_1-of-1 slds-large-size_10-of-12 white-theme form-column">
+                <label class="slds-form-element__label">{label.trade_search_placeholder}</label>
+                <div class="searchbox-with-icon hide-label">
+                    <lightning-input autocomplete="off" message-when-value-missing={label.trade_empty_search_message}
+                        max-length="255" placeholder={label.Trade_Placeholder} type="text" required
+                        onchange={onInputChange} onblur={onInputBlur} onkeyup={checkEnter} value={searchString}
+                        class="search-input no-right-radius">
+                    </lightning-input>
+                    <span class="search-icon" onclick={onSearch} onkeyup={checkEnter} aria-label={label.Search} role="button"
+                        tabindex="0">
+                        <img src={searchIconWhite} alt="" />
+                    </span>
+                </div>
+            </div>
+
+            <!--Trade Search Code End-->
+        </div>
+    </div>
+    <div class="email-csv-section">
+        <div class="slds-grid slds-wrap brs-container email-csv-container">
+            <div class="slds-size_1-of-1 slds-large-size_1-of-12">
+                <img src={sotsIcon} alt="" class="icon" />
+            </div>
+            <template if:false={hasResults}>
+                <div class="slds-size_1-of-1 slds-large-size_9-of-12" if:false={showDetails}>
+                    <p class="large">
+                        <lightning-formatted-rich-text value={label.Trade_Banner_Below_Text}>
+                        </lightning-formatted-rich-text>
+                    </p>
+                </div>
+                <template if:true={showDetails}>
+                    <div class="slds-size_1-of-1 slds-large-size_7-of-12">
+                        <p class="large">
+                            {label.print_help_text}
+                        </p>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_4-of-12 buttons-section">
+                        <div class="slds-float_right full-width">
+                            <button onclick={handlePrintToPdf} class="slds-button secondary-btn higher">
+                                {label.PRINT_AS_PDF}
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </template>
+            <template if:true={hasResults}>
+                <div class="slds-size_1-of-1 slds-large-size_6-of-12">
+                    <p class="large">
+                        {label.export_to_csv_help_text}
+                    </p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_5-of-12 buttons-section">
+                    <div class="slds-float_right full-width">
+                        <button onclick={handleShareLink} class="slds-button secondary-btn higher share-link">
+                            {label.share_link}
+                        </button>
+                        <button onclick={handleExportCsv} class="slds-button secondary-btn higher">
+                            {label.export_to_csv}
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    <template if:true={showEmailModal}>
+        <c-email-modal onsubmitemail={submitEmail} onclosemodal={handleShareLink}></c-email-modal>
+    </template>
+</template>

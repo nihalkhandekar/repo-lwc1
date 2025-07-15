@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="entityType" type="String" label="entityType" description="Use this attribute to indicate the entity being modified/created. Eg : Debtor, Secured Party, Assignor, etc."/>
+            <property name="selectedWayToAmend" type="String" label="selectedWayToAmend" description=""/>
+            <property name="uccFilingId" type="String" label="uccFilingId" description=""/>
+            <property name="isDataModified" type="Boolean" label="isDataModified" description=""/>
+            <property name="typedescription" type="String" label="Description" description="Use this description to display related information about the member type being created/ modified."/>
+            <property name="lienType" type="String" label="lienType" description="specifies the Lien type selected for filling"/>
+			<property name="showGoToSummaryButton" type="Boolean" label="Show Go To Summary" description=""/>
+            <property name="goToSummary" type="Boolean" label="Go to Summary Button Selected" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

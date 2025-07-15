@@ -1,0 +1,125 @@
+.profile-container {
+    background-color: #FFF;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.profile-card__item {
+    display: flex;
+    border-bottom: 1px solid #ECEBEB;
+    margin: 0 18px;
+}
+
+.profile-card__item:last-child {
+    border-bottom: none;
+    padding-right: 0;
+}
+
+.profile-card>div {
+    padding-left: 0;
+    border-left: none;
+}
+
+.profile-card>div:first-child {
+    border-left: none;
+    padding-left: 0;
+}
+
+.profile-card__item>p {
+    flex-basis: 50%;
+    color: #2D2C2C;
+    margin: 8px 0px;
+}
+
+.profile-card__item>p:first-child {
+    color: #757575;
+    font-weight: bold;
+    padding-bottom: 0;
+}
+
+.profile-card__item .profile-card__item_status {
+    background-color: #E0F2FF;
+    padding: 4px 16px;
+    text-transform: uppercase;
+    color: #09538B;
+    font-weight: 700;
+    border-radius: 11px;
+    flex-basis: auto;
+    font-family: KarlaBold;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 0.6px;
+}
+
+.status-description {
+    font-family: Karla;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .profile-container {
+        padding: 52px 5% 42px;
+    }
+
+    .profile-card {
+        flex-direction: row;
+        justify-content: unset;
+    }
+
+    .profile-card__item {
+        display: block;
+        border-bottom: none;
+        margin: 0;
+    }
+
+    .profile-card__item .profile-label {
+        white-space: nowrap;
+        font-family: KarlaBold !important;
+        font-weight: 400 !important;
+        letter-spacing: 0.01px;
+    }
+
+    .profile-card__item>p {
+        flex-basis: auto;
+        margin: 0;
+    }
+
+    .profile-card__item>p:first-child {
+        padding-bottom: 12px;
+    }
+
+    .profile-card>div {
+        border-left: 1px solid #ECEBEB;
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+    div.profile-card__item:last-child {
+        padding-right: 0;
+    }
+
+    .status-description {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media only screen and (max-width: 1023.9px) {
+    .profile-card__item>p {
+        margin: 12px 0px;
+    }
+
+    .profile-card__item {
+        margin: 0;
+    }
+
+    .profile-container {
+        padding: 0 18px;
+    }
+}

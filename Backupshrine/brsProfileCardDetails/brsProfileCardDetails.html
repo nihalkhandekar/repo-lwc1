@@ -1,0 +1,35 @@
+<template>
+    <div class="slds grid slds-wrap profile-container">
+        <div class="slds-col slds-large-size_9-of-12 slds-size_12-of-12">
+            <div if:true={itemdata} class="profile-card">
+                <div class="profile-card__item">
+                    <p class="small profile-label">{label.Business_ID}</p>
+                    <p class="small">{itemdata.businessId}</p>
+                </div>
+                <div class="profile-card__item">
+                    <p class="small profile-label">{label.Name}</p>
+                    <p class="small">{itemdata.name}</p>
+                </div>
+                <div class="profile-card__item" if:true={isFirst}>
+                    <p class="small profile-label">{label.Due_Date}</p>
+                    <p if:true={itemdata.dueDate} class="small">{itemdata.dueDate}</p>
+                    <p if:false={itemdata.dueDate} class="small">{label.profileCard_Empty_Status}</p>
+                </div>
+                <div class="profile-card__item" if:true={isAnnual}>
+                    <p class="small profile-label">{label.profileCard_Filing_Year}</p>
+                    <p if:true={itemdata.filingYear} class="small">{itemdata.filingYear}</p>
+                    <p if:false={itemdata.filingYear} class="small">{label.profileCard_Empty_Status}</p>
+                </div>
+                <div class="profile-card__item" if:false={isObtainCert}>
+                    <p class="small profile-label">{label.profileCard_Filing_Fee}</p>
+                    <p if:true={itemdata.filingFee} class="small">${itemdata.filingFee}</p>
+                    <p if:false={itemdata.filingFee} class="small">{label.profileCard_Empty_Status}</p>
+                </div>
+                <div class="profile-card__item" if:true={itemdata.status}>
+                    <p class="small profile-label">{label.profileCard_Status}</p>
+                    <p class="status-description profile-card__item_status">{itemdata.status}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

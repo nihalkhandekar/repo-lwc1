@@ -1,0 +1,156 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    
+    <lightning-card title={titleWithCount} icon-name="standard:record">        
+        <div slot="footer">
+            <div>
+                <lightning-button variant="base" label="View All" onclick={navigateToRelatedList}></lightning-button>
+            </div>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <div if:true={debtorRecordsLst} class="slds-box">
+                <lightning-card title={debtorRecordsTitle}>
+                    <lightning-button label="New" slot="actions" onclick={createNewDebtor}></lightning-button>
+                    <template for:each={debtorRecordsLst} for:item="rec">
+                        <div key={rec.Id} class="slds-p-left_small slds-p-bottom_xx-small">
+                            <lightning-button variant="base" label="View Record" value={rec.Id} onclick={viewRecord}>
+                            </lightning-button>
+                            <lightning-record-view-form record-id={rec.Id} object-api-name="UCC_Related_Info__c">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="Name__c"></lightning-output-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="RecordType_Name__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <template if:true={rec.Address__c}>
+                                        <lightning-output-field field-name="Address__c"></lightning-output-field>
+                                    </template>
+                                    <template if:false={rec.Address__c}>
+                                        <lightning-output-field field-name="International_Address__c"></lightning-output-field>
+                                    </template>
+                                </div>
+                            </lightning-record-view-form>
+                        </div>
+                    </template>
+                </lightning-card>
+            </div>
+        </div>
+
+        <div class="slds-m-around_medium">
+            <div if:true={securedPartyRecordsLst} class="slds-box">
+                <lightning-card title={sPRecordsTitle}>
+                    <lightning-button label="New" slot="actions" onclick={createNewSP}></lightning-button>
+                    <template for:each={securedPartyRecordsLst} for:item="rec">
+                        <div key={rec.Id} class="slds-p-left_small slds-p-bottom_xx-small">
+                            <lightning-button variant="base" label={labels.View_Record} value={rec.Id} onclick={viewRecord}>
+                            </lightning-button>
+                            <lightning-record-view-form record-id={rec.Id} object-api-name="UCC_Related_Info__c">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="Name__c"></lightning-output-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="RecordType_Name__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <template if:true={rec.Address__c}>
+                                        <lightning-output-field field-name="Address__c"></lightning-output-field>
+                                    </template>
+                                    <template if:false={rec.Address__c}>
+                                        <lightning-output-field field-name="International_Address__c"></lightning-output-field>
+                                    </template>
+                                </div>
+                            </lightning-record-view-form>
+                        </div>
+                    </template>
+                </lightning-card>
+            </div>
+        </div>
+
+        <div if:true={isInformationstatement} class="slds-m-around_medium">
+            <div if:true={submitterRecordsList} class="slds-box">
+                <lightning-card title={labels.SubmitterContacts}>
+                    <lightning-button label="New" slot="actions" onclick={createNewSubmitter}></lightning-button>
+                    <template for:each={submitterRecordsList} for:item="rec">
+                        <div key={rec.Id} class="slds-p-left_small slds-p-bottom_xx-small">
+                            <lightning-button variant="base" label={labels.View_Record} value={rec.Id} onclick={viewRecord}>
+                            </lightning-button>
+                            <lightning-record-view-form record-id={rec.Id} object-api-name="UCC_Related_Info__c">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="Name__c"></lightning-output-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="RecordType_Name__c"></lightning-output-field>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <template if:true={rec.Address__c}>
+                                        <lightning-output-field field-name="Address__c"></lightning-output-field>
+                                    </template>
+                                    <template if:false={rec.Address__c}>
+                                        <lightning-output-field field-name="International_Address__c"></lightning-output-field>
+                                    </template>
+                                </div>
+                            </lightning-record-view-form>
+                        </div>
+                    </template>
+                </lightning-card>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <div if:true={annualReportRecords} class="slds-box">
+                <lightning-card title={labels.Annual_Report}>
+                    <lightning-button label="New" slot="actions" onclick={createNewAnnual}></lightning-button>
+                    <template for:each={annualReportRecords} for:item="rec">
+                        <div key={rec.Id} class="slds-p-left_small slds-p-bottom_xx-small">
+                            <lightning-button variant="base" label="View Record" value={rec.Id} onclick={viewRecord}>
+                            </lightning-button>
+                            <lightning-record-view-form record-id={rec.Id} object-api-name={labels.Business_Filing_API_Name}>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="Name"></lightning-output-field>
+                                        <lightning-output-field field-name="Status__c"></lightning-output-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2"></div>
+                                </div>                               
+                            </lightning-record-view-form>
+                        </div>
+                    </template>
+                </lightning-card>
+            </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <div if:true={firstReportRecords} class="slds-box">
+                <lightning-card title={labels.First_Report_Flow}>
+                    <lightning-button label="New" slot="actions" onclick={createNewFirst}></lightning-button>
+                    <template for:each={firstReportRecords} for:item="rec">
+                        <div key={rec.Id} class="slds-p-left_small slds-p-bottom_xx-small">
+                            <lightning-button variant="base" label="View Record" value={rec.Id} onclick={viewRecord}>
+                            </lightning-button>
+                            <lightning-record-view-form record-id={rec.Id} object-api-name={labels.Business_Filing_API_Name}>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-output-field field-name="Name"></lightning-output-field>
+                                        <lightning-output-field field-name="Status__c"></lightning-output-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2"></div>
+                                </div>                               
+                            </lightning-record-view-form>
+                        </div>
+                    </template>
+                </lightning-card>
+            </div>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,263 @@
+.left-border {
+    border-left: 4px solid #09538B;
+}
+
+.slds-modal__header {
+    text-align: left;
+}
+
+.header-text {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+
+.no-border {
+    border: none;
+}
+
+.member-popup header {
+    padding: 32px 32px 0 32px;
+    text-align: left;
+}
+
+.member-popup .title {
+    color: #2D2C2C;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    margin-bottom: 8px;
+}
+
+.member-popup .desc {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.member-popup .closeIcon {
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.member-popup .popup-body {
+    padding: 40px 32px 16px 32px;
+}
+
+.member-popup .popup-body.radio-options {
+    padding-top: 0;
+    padding-bottom: 24px;
+}
+
+.member-popup footer {
+    border: none;
+    padding: 32px;
+    padding-top: 16px;
+    background: #ffffff;
+}
+
+.member-popup footer button {
+    border-radius: 4px;
+    font-family: 'KarlaBold', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.member-popup footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.member-popup footer button img {
+    height: 16px;
+}
+
+.member-list .username p {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding: 24px;
+}
+
+/* Customized css */
+
+.add-a-debtor {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+    line-height: 43px;
+}
+
+.a-debtor-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 28px;
+}
+
+.agent-mailing-address {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 20px;
+}
+
+.orgAddress {
+    padding-top: 30px;
+}
+
+.orgName {
+    padding-top: 24px;
+}
+
+.individualDetails {
+    padding-top: 24px;
+}
+
+.errorBtnDiv {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.primaryBtnSmall {
+    float: right;
+}
+
+.orgLocation {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 24px;
+}
+
+.addDebtorBtn {
+    padding-top: 42px;
+}
+
+.addIcon {
+    height: 25px;
+}
+
+.addLabel {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.debtor-card-details {
+    box-sizing: border-box;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    margin-top: 20px;
+}
+
+.name {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.name-member {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.addressdiv {
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.addressClass {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.iconCls {
+    height: 17px;
+}
+
+.statusText {
+    float: right;
+    margin-right: 24px;
+}
+
+.footerButtons {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.edit-footer {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-left: 24px;
+    text-decoration: underline;
+}
+
+.duplicate-footer {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-left: 24px;
+    padding-left: 24px;
+    text-decoration: underline;
+}
+
+.remove-footer {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-left: 24px;
+    padding-left: 24px;
+    text-decoration: underline;
+}
+
+.footerBtns {
+    padding-left: 12px;
+}

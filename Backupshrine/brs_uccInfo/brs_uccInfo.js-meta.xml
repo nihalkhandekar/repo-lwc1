@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="radioOption" label="radioOption" type="string"/>
+            <property name="debtor" label="debtor" type="string"/>
+            <property name="orgName" label="orgName" type="string"/>
+            <property name="requestSurname" label="Surname" type="string"/>
+            <property name="requestFirstName" label="First name" type="string"/>
+            <property name="requestMiddleName" label="Middle name" type="string"/>
+            <property name="requestSuffix" label="Suffix" type="string"/>
+            <property name="requestOrgName" label="Org name" type="string"/>
+            <property name="isFromEdit" label="Edit or not" type="Boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

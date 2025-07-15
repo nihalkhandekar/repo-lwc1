@@ -1,0 +1,79 @@
+<template>
+    <div class="trade-and-search brs-wrapper">
+        <c-brs_trade-and-service-marks-banner onprintpdf={onPrintPdfFile} show-details={showTSDetails}
+            is-loading={isLoading} onsearch={onSearch} has-results={hasResults} selected-filters={selectedFilters}>
+        </c-brs_trade-and-service-marks-banner>
+        <div class="brs-container search-results-container">
+            <c-brs_bread-crumb items={breadcrumbList} if:true={isUserSearched} onbreadcrumbclick={onBreadCrumbClick}>
+            </c-brs_bread-crumb>
+            <div class="slds-gutters slds-grid slds-wrap search-content" if:true={isUserSearched}>
+                <template if:false={showTSDetails}>
+                    <h6 class="results-text mobile-show slds-col slds-size_12-of-12">
+                        {actuallength}
+                        <template if:true={hasOnlyOneResult}> {label.result_found} </template>
+                        <template if:false={hasOnlyOneResult}> {label.results_found} </template>
+                    </h6>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 no-col-lpadding">
+                        <c-brs_advance-search-filters onfilterselection={handleFilterSelection} filters={filtersArray}
+                            onclearfilter={resetFilters}>
+                        </c-brs_advance-search-filters>
+                    </div>
+                </template>
+
+                <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12" if:false={showTSDetails}>
+                    <h6 class="results-text desktop-show">
+                        {actuallength}
+                        <template if:true={hasOnlyOneResult}> {label.result_found} </template>
+                        <template if:false={hasOnlyOneResult}> {label.results_found} </template>
+                    </h6>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_12-of-12 slds-large-size_12-of-12">
+                            <h5 class="results-title">{label.Trade_and_service_marks}</h5>
+                        </div>
+                    </div>
+                    <template if:false={allResults.resultCount}>
+                        <c-brs_no-data-card if:false={allResults.resultCount} no-data-msg={label.noDataText}>
+                        </c-brs_no-data-card>
+                    </template>
+
+                    <template if:true={allResults.resultCount}>
+                        <template if:true={showResults}>
+                            <c-brs_trade-and-service-mark-card all-trade-and-service={updatedData}
+                                onshowdetails={onShowDetails}>
+                            </c-brs_trade-and-service-mark-card>
+                            <c-generic-data-table generickey="id" genericdata={allData}
+                                class="mydatatable slds-table_striped" generichidecheckbox="false"
+                                no-of-records-per-page='8' button-limit='4' onpaginationchange={updatePaginatedData}
+                                messageheader={label.messageheader} messagetext={label.messagetext}
+                                searchlength={searchResultLength} actuallength={actuallength}>
+                            </c-generic-data-table>
+                        </template>
+                    </template>
+                </div>
+                <template if:true={showTSDetails}>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+                        <c-brs_trade-and-service-mark-details details={selectedTSDetails}
+                            scholer-content={scholerContent}>
+                        </c-brs_trade-and-service-mark-details>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 desktop-show">
+                        <c-brs_helper-text>
+                            <div slot="header">
+                                <h6>{label.help_head}</h6>
+                            </div>
+                            <div slot="body">
+                                <p class="small">{label.Trade_Help_Text_Desc}</p>
+                            </div>
+                            <div slot="links">
+                                <p class="small slds"><a href={label.Trade_help_text_url}
+                                        target="_blank">{label.Trade_help_text_url}</a></p>
+                            </div>
+                        </c-brs_helper-text>
+                    </div>
+                </template>
+            </div>
+            <div if:false={isUserSearched} class="spacing">
+            </div>
+        </div>
+    </div>
+</template>

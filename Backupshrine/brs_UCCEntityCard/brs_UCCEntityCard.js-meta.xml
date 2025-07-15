@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="membertype" type="String" label="Member Type" description="Use this attribute to indicate the entity being modified/created. Eg : Debtor, Secured Party, Assignor, etc."/>
+            <property name="newUCCId" type="String" label="newUCCId" description="Use this attribute to pass UCC Filing record ID.This will be used to associate all entities created. Eg : Debtor, Secured Party, Assignor, etc."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

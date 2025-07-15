@@ -1,0 +1,229 @@
+.left-border {
+    border-left: 4px solid #09538B;
+}
+
+.slds-modal__header {
+    text-align: left;
+}
+
+.header-text {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+
+.radio-heading{
+    margin-bottom: 24px;
+}
+
+.no-border {
+    border: none;
+}
+
+.member-popup header {
+    padding: 32px 32px 0 32px;
+    text-align: left;
+}
+
+.member-popup .title {
+    color: #2D2C2C;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    margin-bottom: 8px;
+}
+
+.member-popup .desc {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.member-popup .closeIcon {
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.member-popup .popup-body {
+    padding: 40px 32px 16px 32px;
+}
+
+.member-popup .popup-body.radio-options {
+    padding-top: 0;
+    padding-bottom: 24px;
+}
+
+.member-popup footer {
+    padding: 32px;
+    background: #ffffff;
+}
+
+.member-popup footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.member-popup footer button img {
+    height: 16px;
+}
+
+.member-list .username p {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding: 24px;
+}
+
+/* Customized css */
+
+.add-a-debtor {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+    line-height: 43px;
+}
+
+.a-debtor-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 16px;
+}
+
+.separator {
+    background-color: #ecebeb;
+    padding-top: 1px;
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+
+.agent-mailing-address {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 20px;
+}
+
+.orgAddress {
+    padding-top: 30px;
+}
+
+.orgName {
+    padding-top: 24px;
+}
+
+.individualDetails {
+    padding-top: 24px;
+}
+
+.errorBtnDiv {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.primaryBtnSmall {
+    float: right;
+}
+
+.orgLocation {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 24px;
+}
+
+.addIcon {
+    height: 25px;
+}
+
+.addLabel {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+
+.debtor-card-details {
+    box-sizing: border-box;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    margin-top: 20px;
+}
+
+.name {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.name-member {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.addressClass {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.iconCls {
+    height: 17px;
+}
+
+.remove-modal .slds-modal__content {
+    padding-top: 4px;
+}
+@media only screen and (max-width: 1024px) {
+    .confirm-button {
+        margin-bottom: 15px;
+    }
+    .slds-modal__footer .slds-button+.slds-button{
+        margin-left: 0;
+    }
+
+    .fullwidth {
+        width: 100%;
+    }
+    .page-scroll-popup .title,.debtor-card-details .name-member {
+        font-size: 20px;
+    }
+
+}

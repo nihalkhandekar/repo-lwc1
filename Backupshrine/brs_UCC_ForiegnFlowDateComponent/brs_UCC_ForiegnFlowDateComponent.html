@@ -1,0 +1,159 @@
+<!-- 
+* @AUTHOR:   Avinash Shukla
+* @DATE:   2020-12-14
+* @description ::: This LWC component is used for BRS 37,39. The design of the component is generic so this can be used in places where the requirement are similar.
+* MODIFICATION LOG:
+* DEVELOPER                         DATE                               DESCRIPTION
+* ***************************************************************************************
+* Avinash Shukla                   2020-12-14                   Created the first version
+* 
+*********************************************************************************************/ 
+-->
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner class="spinner-inner" alternative-text={label.loading_brs} variant="brand" size="medium">
+    </lightning-spinner>
+  </template>
+  <!--Autoblur issue fix-->
+  <lightning-input variant="label-hidden" type="number" class="input1"></lightning-input>
+  <!--End-->
+  <template if:false={isCloseBusiness}>
+    <div class="slds-size_12-of-12 slds-large-size_9-of-12 slds-wrap">
+      <!-- Show Error Message on Validation failed-->
+      <template if:true={showMessageContainer}>
+        <section role="dialog" tabindex="-1" aria-label="Meaningful description of the modal content" aria-modal="true"
+          aria-describedby="modal-content-id-3"
+          class="slds-modal slds-fade-in-open date-popup slds-modal_small page-scroll-popup">
+          <label class="closePopup slds-float_right" onclick={closePopUp}>
+            <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+          </label>
+          <template if:true={showErrorBlock}>
+            <div class="slds-modal__container">
+              <header class="slds-modal__header slds-modal__header_empty">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                    <p class="title" id="modal-heading-01">
+                      {validationErrorBlockTitle}
+                    </p>
+                  </div>
+                  <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                    <label class="closePopup slds-float_right" onclick={closePopUp}>
+                      <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+                    </label>
+                  </div>
+                </div>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-err">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-size_12-of-12 desc">
+                    <p>{errorMessage}</p>
+                  </div>
+                </div>
+              </div>
+              <footer class="slds-modal__footer">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col">
+                    <button title={Ok} onclick={confirmAccept} class="slds-button primaryBtnSmall slds-button_stretch">
+                      {Ok}
+                    </button>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </template>
+          <template if:true={showConfirmationBlockFE}>
+            <div class="slds-modal__container">
+              <header class="slds-modal__header slds-modal__header_empty">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                    <h6>
+                      {confirmationBlockTitle}
+                      </h6>
+                  </div>
+                  <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                    <label class="closePopup slds-float_right" onclick={closePopUp}>
+                      <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+                    </label>
+                  </div>
+                </div>
+              </header>
+              <div class="slds-modal__content noRad slds-p-around_medium" id="modal-content-id-1">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col slds-size_12-of-12 desc">
+                    <p>{confirmationBlockMessage}</p>
+                    <p class="large gap"> {confirmationBlockSubTitle}</p>
+                    <template if:true={showUserInput}>
+                      <p class="entered-date">
+                        <!--Added as Part of BRS-2241-->
+                        <lightning-formatted-date-time value={dateEntered} year="numeric" month="numeric" day="numeric"
+                          time-zone="UTC">
+                        </lightning-formatted-date-time>
+                      </p>
+                    </template>
+                  </div>
+                </div>
+              </div>
+              <footer class="slds-modal__footer">
+                <div class="slds-grid slds-wrap">
+                  <div class="slds-col">
+                    <button title={confirmLabelFE} onclick={confirmAcceptAndNavigateNext}
+                      class="slds-button primaryBtnSmall slds-button_stretch">
+                      {confirmLabelFE}
+                    </button>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </template>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+      <label class="business-label">{dateLabel}</label>
+      <lightning-input type="date" variant="label-hidden" value={dateEntered} placeholder={placeholder}
+        date-style="short" required={isRequired} onchange={handleDate} data-id="inputfields" class="brs-date-picker"
+        message-when-value-missing={isRequiredValidationMessage} message-when-bad-input={badInputMessage}
+        format="MM/DD/YYYY">
+      </lightning-input>
+    </div>
+  </template>
+  <template if:true={isCloseBusiness}>
+    <div class="slds-grid slds-wrap slds-gutters">
+      <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12" if:true={showNoteSection}>
+        <div class="slds-m-bottom_x-large">
+          <c-qn-a_-question-help-text helptextnotes={topPleaseNoteContent}
+            questionid={topPleaseNoteContent}>
+          </c-qn-a_-question-help-text>
+        </div>
+      </div>
+      <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 slds-p-right_xx-small inputForm full-width"
+        if:true={showAuthorizedDate}>
+        <lightning-input type="date" label={authorizedDateLabel} value={authorizedDateEntered} placeholder={placeholder}
+          date-style="short" required onchange={handleAuthorizedDate} data-id="inputfields" class="brs-date-picker"
+          message-when-value-missing={isRequiredValidationMessage} message-when-bad-input={badInputMessage}
+          format="MM/DD/YYYY" onkeyup={handleKeyUp} data-type="authorizedDate">
+        </lightning-input>
+      </div>
+      <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 slds-p-right_xx-small inputForm full-width date-block">
+        <lightning-input type="date" label={effectiveDate} value={effectiveDateEntered} placeholder={placeholder}
+          date-style="short" onchange={handleEffectiveDate} data-id="inputfields" class="brs-date-picker"
+          message-when-value-missing={isRequiredValidationMessage} message-when-bad-input={badInputMessage}
+          format="MM/DD/YYYY" onkeyup={handleKeyUp} disabled={disableEffectiveDateField} data-type="effectiveDate">
+        </lightning-input>
+      </div>
+    </div>
+    <div class="slds-grid slds-wrap slds-gutters">
+      <template if:true={showTimePicker}>
+        <div class="slds-col slds-large-size_8-of-12 slds-size_12-of-12 slds-p-right_xx-small inputForm time-block">
+          <c-brs_time-picker label={effectiveTime} value={withdrawalEffectiveTimeSelected}
+            ontimeselection={handleChangeEffectiveTime} ontimeselectionerror={handleTimeSelectionError}>
+          </c-brs_time-picker>
+          <p class="error-text" if:true={showTimeError}>{label.effective_time_past_error}</p>
+        </div>
+      </template>
+    </div>
+  </template>
+  <c-brs_next-back-buttons show-summary={showGotoSummary} gotosummarylabel={label.go_to_summary} nextlabel={nextLabel}
+    prevlabel={backLabel} onhandlenext={handleClickNext} onhandleback={back}
+    ongotosummary={goToSummaryPageWithOutConfirmation}>
+  </c-brs_next-back-buttons>
+</template>

@@ -1,0 +1,37 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <!--Use this for the display of entity records-->
+    <div class="slds-grid slds-wrap">
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+            <template for:each={allMembersInfoFromApex} for:item="memberInfo" for:index="index">
+                <div class="slds-large-size_12-of-12 slds-size_12-of-12 debtor-card-details" key={memberInfo.Id}>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                        <p class="name">{label.Name}</p>
+                    </div>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                        <template if:true={memberInfo.isIndividual}>
+                            <p class="name-member">
+                                <!-- Adding Bug Fixes for BRS-1040 -->
+                                {memberInfo.fullName}
+                            </p>
+                        </template>
+                        <template if:true={memberInfo.isOrganisation}>
+                            <p class="name-member">{memberInfo.Org_Name__c}</p>
+                        </template>
+                    </div>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12 addressdiv">
+                        <p class="addressClass small">
+                            <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                                aria-hidden="true" />
+                            <!-- Adding Bug Fixes for BRS-1040 -->
+                            <span>{memberInfo.fullAddress}</span>
+                        </p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>
