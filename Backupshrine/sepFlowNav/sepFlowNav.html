@@ -1,0 +1,63 @@
+<template>
+    <div class="sep-flow-nav-container">
+        <template if:true={canExit}>
+            <div class="slds-col slds-order_1">
+                <button class="slds-button natural-button-large slds-button_natural"
+                    onclick={handleExit}>{label.CancelButton}</button>
+            </div>
+        </template>
+        <template if:false={canExit}>
+            <div class="slds-col slds-order_1">
+                <button class="slds-button natural-button-large slds-button_natural" onclick={handleBack}>
+                    {label.SEP_Go_Back}
+                </button>
+            </div>
+        </template>
+        <template if:false={isConsentPage}>
+            <div class="slds-col slds-order_2 sep-flow-nav-next-button-container">
+                <button onclick={handleNext} class="slds-button primaryBtnSmall alignButton">
+                    {label.NextButton} &nbsp;
+                    <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse"
+                        size="x-small">
+                    </lightning-icon>
+                </button>
+            </div>
+       </template>
+       <template if:true={isConsentPage}>
+            <div class="slds-col slds-order_2 sep-flow-nav-next-button-container">
+                    <button  onclick={handleNext} class="slds-button primaryBtnSmall alignButton">
+                        {label.submitButton} &nbsp;
+                        <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse" size="x-small">
+                        </lightning-icon>
+
+                    </button>
+            </div>
+       </template>
+    </div>
+
+    <template if:true={modalopen}>
+        <c-modal open={modalopen} onmodalclose={closeModal} size="">
+            <div slot="header" style="text-align:left" class="headerModal slds-size_1-of-1">
+                <h6>{label.SEP_Reg_PopErrorHeader}</h6>
+            </div>
+            <div slot="body"
+                class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="listItem">
+                    <p class="large">
+                        {label.SEP_Confirm_Modal_Desc}
+                    </p>
+                </div>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+                <div class="buttons-wrapper">
+                    <button onclick={closeModal} class="slds-button natural-button slds-button_natural">
+                        {label.CancelButton}
+                    </button>
+                    <button onclick={handleConfirm} class="slds-button primaryBtn higher">
+                        {label.Confirm}
+                    </button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+</template>

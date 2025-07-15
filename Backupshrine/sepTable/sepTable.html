@@ -1,0 +1,32 @@
+<template>
+    <template if:false={variationTwo}>
+        <div class="table-container">
+            <template for:each={tableData} for:item="eachRow" for:index="index">
+            <div class="table-row" key={eachRow.label}>           
+                <div class="table-col icon-and-text">
+                    <img src={eachRow.icon} alt=""/>
+                <p class="largeBold">{eachRow.firstLabel}</p> 
+                </div>
+                <div class="table-col">
+                    <p class="large second-label">{eachRow.secondLabel}</p></div>
+            </div>
+            </template>
+        </div>
+    </template>
+    <template if:true={variationTwo}>
+        <div class="table-container table-container-variation-two">
+            <template for:each={tableData} for:item="eachRow" for:index="index">
+            <div class="table-row" key={eachRow.label}>           
+                <div class="table-col icon-and-text">
+                    <img src={eachRow.icon} alt=""/>
+                <p class="largeBold">{eachRow.firstLabel}</p> 
+                </div>
+                <div class="table-col">
+                    <p class="large second-label">{eachRow.secondLabel}</p></div>
+            </div>
+            </template>
+        </div>
+    </template>
+
+
+</template>

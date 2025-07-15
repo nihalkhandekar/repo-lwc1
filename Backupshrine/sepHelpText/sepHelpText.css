@@ -1,0 +1,19 @@
+.help-text {
+    background: #F7F9FA;
+    border: 1px solid #ECEBEB;
+    border-radius: 4px;
+    padding:32px;
+}
+
+.help-text h6 {
+    margin-bottom: 12px;
+    line-height: 25px !important;
+    letter-spacing: 0.142857px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .help-text {
+        margin-bottom: 32px;
+        padding:16px;
+    }
+}

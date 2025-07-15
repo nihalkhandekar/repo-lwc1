@@ -1,0 +1,45 @@
+<template>
+    <div>
+        <div>
+            <h6 class="pClass">{label.SEP_EmailVerificationModalVerify}</h6>
+        </div>
+        <div class="sub-container">
+            <div class="mob_img">
+                <img src={mailImg} class="mailImg_mob" alt="VerifyEmail" title="VerifyEmail" />
+            </div>
+            <div class="displayCls">
+                <div class="large">
+                    <img src={mailImg} class="mailImg" alt="VerifyEmail" title="VerifyEmail" />
+                </div>
+                <div>
+                    <p class="large pClass">
+                        {label.verify_enterCode} {email}
+                    </p>
+                    </br>
+                    <p class="large">
+                        <a href="javascript:void(0);" tabindex="0" class="cust-anchor large" onclick={handleResendCode}>
+                            {label.verify_resendCode}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="slds-p-top_x-large">
+            <p class="slds-p-bottom_xxx-small large pClass sep-email-verification-code-label">
+                {label.verify_code}
+            </p>
+            <div class="slds-form-element__control search-input-box inputTextElement">
+                <lightning-input type="text" placeholder="######" class="searchBox" role="textbox" maxlength=6
+                    onchange={checkInputLength} onkeypress={checkNumeric} variant="label-hidden"
+                    aria-label={label.verify_code} title={label.verify_code}></lightning-input>
+                <span class="helpText" id="err-text" aria-label={errorMessage} role="alert"></span>
+            </div>
+        </div>
+        <hr>
+        <div class="bttnPadding">
+            <button class="slds-button slds-float_right bttnClass primaryBtn" onclick={handleVerifyCode}>
+                {label.verify_verify}&nbsp;
+            </button>
+        </div>
+    </div>
+</template>

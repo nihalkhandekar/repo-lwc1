@@ -1,0 +1,21 @@
+<template>
+    <div class="nav-block">
+        <div class="nav-container">
+            <div class="main-container">
+                <h3>{pageTitle}</h3>
+                <ul class="nav-list">
+                    <template for:each={tabList} for:item="eachTab" for:index="index">
+                        <li key={eachTab.label} class={eachTab.className} data-name={index}>
+                            <img src={eachTab.activeIcon} alt="" class="icon active-icon" />
+                            <img src={eachTab.icon} alt="" class="icon passive-icon" />
+                            <span>{eachTab.label}</span>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+        <p class="current-page-name smallBold">
+            {activePageName}
+        </p>
+    </div>
+</template>

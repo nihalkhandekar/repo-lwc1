@@ -1,0 +1,57 @@
+.alignButton {
+    display: flex;
+    justify-content: center;
+    height: 56px;
+}
+
+.sep-flow-nav-container {
+    display: flex;
+    align-items: center;
+    padding: 32px 0;
+    border-top: 1px solid #d8d8d8;
+    margin-top: 80px;
+    max-width: 1136px;
+    margin: 0 auto;
+}
+
+.sep-flow-nav-next-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sep-flow-nav-next-button {
+    background-color: #09538b;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: Karla;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    padding: 0 40px;
+    text-align: center;
+    text-transform: uppercase;
+    border: none;
+    min-height: 56px;
+    height: auto;
+    justify-content: center;
+    display: flex;
+    justify-content: center;
+    height: 56px;
+}
+
+@media only screen and (max-width: 1023.9px) {
+    .sep-flow-nav-next-button-container {
+        margin-bottom: 24px;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .sep-flow-nav-container {
+        flex-direction: column-reverse;
+    }
+    
+    .alignButton {
+        font-size: 12px;
+    }
+}

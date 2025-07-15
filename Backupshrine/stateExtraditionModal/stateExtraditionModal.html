@@ -1,0 +1,400 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+        <div class="SE-ModalHeaderMain">
+            <div>
+                <lightning-button-icon icon-name="utility:back" size="large" alternative-text="go Back"
+                    onclick={cloeModels} class="custom-modal__back">
+                </lightning-button-icon>
+                <div class="SE-ModalHeaderTitle" style="margin-left: 40px;">
+                    <h2>{headerText}</h2>
+                </div>
+            </div>
+            <div>
+                <template if:true={isReadOnly}>
+                    <lightning-button icon-name="utility:edit" alternative-text="Edit" class="edit-button"
+                        onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+                        label="Edit"></lightning-button>
+                </template>
+            </div>
+        </div>
+
+        <div class="SE-ModalHeader">
+            <div class="SE-modalMainBody modalBodyCssChange">
+                <div class="SE-modalFormStack modifyheight">
+                    <div class="SE-modalFormStackSection">
+
+                        <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Personal Information</h2>
+                                <p class="slds-text-body_small">Fill in the official's personal information below.</p>
+                            </div>
+                        </div>
+
+                        <div class="SE-modalFormStackSectionContent ">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet comboboxItemBackgroundColorChange">
+                                    <label class="SE-inputLabel" for="Prefix">Prefix</label>
+                                    <lightning-combobox label="Prefix" name="prefix" variant="label-hidden"
+                                        placeholder="Select prefix" options={prefixSelectOptions} value={prefix}
+                                        read-only={isReadOnly} onchange={handleInputChange}
+                                        class="SE-notvalidate"></lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="lastName"><span
+                                            class="required-indicator">*</span>Last
+                                        Name</label>
+                                    <div class={lastNameErrorClass}>
+                                        <lightning-input label="Last Name" name="lastName" variant="label-hidden"
+                                            id="lastName" placeholder="e.g Doe" pattern="[A-Za-z]+"
+                                            message-when-pattern-mismatch="Last name should only contains letters."
+                                            class="SE-searchCardInputLabel" value={lastName} required
+                                            disabled={isReadOnly} onkeydown={handleNameKeyDown} onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="middleInitial">Middle Initial</label>
+                                    <lightning-input label="Middle Initial" name="middleInitial" variant="label-hidden"
+                                        id="middleInitial" disabled={isReadOnly} placeholder="e.g R"
+                                        class="SE-searchCardInputLabel" pattern="[A-Za-z]+"
+                                        onkeydown={handleNameKeyDown}
+                                        message-when-pattern-mismatch="Middle name should only contains letters."
+                                        value={middleInitial} onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="firstName"><span
+                                            class="required-indicator">*</span>First
+                                        Name</label>
+                                    <div class={firstNameErrorClass}>
+                                        <lightning-input label="First Name" name="firstName" variant="label-hidden"
+                                            id="firstName" placeholder="e.g John" class="SE-searchCardInputLabel"
+                                            value={firstName} required disabled={isReadOnly}
+                                            onchange={handleInputChange} pattern="[A-Za-z]+"
+                                            onkeydown={handleNameKeyDown}
+                                            message-when-pattern-mismatch="First name should only contain letters.">
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-grid SE-modalFormStackSectionInputRow50 customGroupOFInputFieldMarginSet">
+                                <div class="slds-col SE-customCol50 comboboxItemBackgroundColorChange">
+                                    <label class="SE-inputLabel" for="suffix">Suffix</label>
+                                    <lightning-combobox variant="label-hidden" label="Suffix" name="suffix"
+                                        value={suffix} placeholder="Select suffix" options={suffixSelectOptions}
+                                        onchange={handleInputChange} read-only={isReadOnly}></lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-customCol50">
+                                    <lightning-input type="checkbox" label="Esq." name="esq" id="esq" checked={esq}
+                                        disabled={isReadOnly} class="esqclassalignment SE-notvalidate"
+                                        onchange={handleInputChange}></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="SE-modalFormStackSection">
+
+                        <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:drafts" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Official Details</h2>
+                                <p class="slds-text-body_small">Enter the required information to add a new official.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="Position"><span
+                                            class="required-indicator">*</span>Position</label>
+                                    <div class={positionErrorClass}>
+                                        <lightning-combobox label="Position" name="position" variant="label-hidden"
+                                            id="Position" value={position} required options={positionOptions}
+                                            class="SE-notvalidate" read-only={isReadOnly} placeholder="Select Position"
+                                            onchange={handleInputChange} onblur={handleShowErrorMessage}>
+                                        </lightning-combobox>
+                                    </div>
+                                    <template if:true={positionErrorMessage}>
+                                        <div class="errorText">
+                                            {positionErrorMessage}
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="TermStartDate"><span
+                                            class="required-indicator">*</span>Most Recent Term Start</label>
+                                    <div class={termstartErrorClass}>
+                                        <lightning-input label="Term Start Date" name="termstartDate"
+                                            variant="label-hidden" id="termstartDate" type="Date"
+                                            placeholder="mm/dd/yyyy" value={termstartDate} required
+                                            disabled={disabledTerms} class="SE-notvalidate" onchange={handleInputChange} onblur={handleShowErrorMessage}
+                                            date-style="short">
+                                        </lightning-input>
+                                    </div>
+                                    <template if:true={startDateErrorMessage}>
+                                        <div class="errorText">
+                                            {startDateErrorMessage}
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="termendDate"><span
+                                            class="required-indicator">*</span>Most Recent Term End</label>
+                                    <div class={termendErrorClass}>
+                                        <lightning-input label="Term End Date" name="termendDate" variant="label-hidden"
+                                            id="termendDate" type="date" placeholder="mm/dd/yyyy" value={termendDate}
+                                            required aria-describedby="termendDateError" disabled={disabledTerms}
+                                            class="SE-notvalidate" aria-invalid={istermendInvalid}
+                                            onchange={handleInputChange} date-style="short" onblur={handleShowErrorMessage}>
+                                        </lightning-input>
+                                    </div>
+                                    <template if:true={endDateErrorMessage}>
+                                        <div class="errorText">
+                                            {endDateErrorMessage}
+                                        </div>
+                                    </template>
+                                    <template if:true={istermendInvalid}>
+                                        <div class="errorText">Term End Date cannot be earlier than Term Start Date.
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <lightning-input label="Indefinite Term" name="isIndefiniteTerm" id="IndefiniteTerm"
+                                        checked={isIndefiniteTerm} value={isIndefiniteTerm} type="checkbox"
+                                        class="indefinitetermalignment SE-notvalidate" disabled={isReadOnly}
+                                        onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+
+                            <div class="slds-grid SE-modalFormStackSectionInputRow50">
+                                <div class="slds-col SE-customCol50">
+                                    <label class="SE-inputLabel comboboxItemBackgroundColorChange"
+                                        for="JudicialDistrict">Judicial District</label>
+                                    <lightning-combobox label="Judicial District" name="judicialDistrict"
+                                        variant="label-hidden" id="JudicialDistrict"
+                                        placeholder="Select judicial district" value={judicialDistrict}
+                                        read-only={isReadOnly} options={judicialSelectOptions}
+                                        onchange={handleInputChange} class="SE-notvalidate">
+                                    </lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-customCol50">
+                                    <label class="SE-inputLabel" for="GA">GA</label>
+                                    <lightning-input label="GA" name="GA" variant="label-hidden" id="GA"
+                                        class="SE-notvalidate" disabled={isReadOnly} placeholder="Select GA" value={GA}
+                                        onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+
+                            <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="Seal/Stampof">Seal/Stamp of</label>
+                                    <lightning-textarea name="sealstamp" label="Seal/Stamp of" variant="label-hidden"
+                                        id="SealStampof" placeholder="Enter seal/stamp of..." value={SealStampof}
+                                        disabled={isReadOnly} onchange={handleInputChange} class="SE-notvalidate">
+                                    </lightning-textarea>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="Notes">Notes</label>
+                                    <lightning-textarea name="notes" label="Notes" variant="label-hidden" id="Notes"
+                                        placeholder="Enter notes..." disabled={isReadOnly} value={Notes}
+                                        onchange={handleInputChange} class="SE-notvalidate">
+                                    </lightning-textarea>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="SE-modalFormStackSection">
+
+                        <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:visualization" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Generate Letter</h2>
+                                <p class="slds-text-body_small">Enter the details for the letter.</p>
+                            </div>
+                        </div>
+
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet comboboxItemBackgroundColorChange">
+                                    <label class="SE-inputLabel" for="Signed By">Signed By</label>
+                                    <lightning-combobox label="Signed By" name="signedBy" variant="label-hidden"
+                                        placeholder="Select Signed By" options={signedByOptions} value={signedBy}
+                                        onchange={handleInputChange} read-only={isReadOnly} class="SE-notvalidate">
+                                    </lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet comboboxItemBackgroundColorChange">
+                                    <label class="SE-inputLabel" for="Letter Type">Letter Type</label>
+                                    <lightning-combobox label="Letter Type" name="letterType" variant="label-hidden"
+                                        placeholder="Select Letter Type" options={letterTypeOptions} value={letterType}
+                                        onchange={handleInputChange} read-only={isReadOnly} class="SE-notvalidate">
+                                    </lightning-combobox>
+                                </div>
+                                <!-- <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="boldFont">Wet Signature</label>
+                                    <lightning-radio-group name="wetSign" label="Wet Signature" options={wetSignOptions}
+                                      disabled={isReadOnly} variant="label-hidden" value={wetSign} class="SE-notvalidate"
+                                        onchange={handleInputChange}>
+                                    </lightning-radio-group>
+                                </div> -->
+                                <div class="slds-col slds-size_1-of-3 wetsign-inline">
+                                    <label class="boldFont">Wet Signature</label>
+                                    <lightning-radio-group name="wetSign" label="Wet Signature" options={wetSignOptions}
+                                        disabled={isReadOnly} variant="label-hidden" value={wetSign}
+                                        onchange={handleInputChange}
+                                        class="SE-notvalidate comboboxItemBackgroundColorChange" required>
+                                    </lightning-radio-group>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flex-container">
+                        <div class="flex-item">
+                            <div class="SE-modalFormStackSection">
+
+                                <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                                    <div class="SE-modalFormStackSectionHeaderIcon">
+                                        <lightning-icon icon-name="standard:app_form_product_participant"
+                                            size="medium"></lightning-icon>
+                                    </div>
+                                    <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                        <h2 class="slds-text-heading_small">Term History</h2>
+                                        <p class="slds-text-body_small">Below is the term history of the official.</p>
+                                    </div>
+                                </div>
+
+                                <div class="SE-modalFormStackSectionContent TrHoverBackGroundColorChange">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                        <thead>
+                                            <tr class="custom-header">
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Start Term</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate">End Term</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={displayTermHistoryRecords} for:item="record">
+                                                <tr key={record.changeDate} class="custom-column">
+                                                    <td>
+                                                        <div class="slds-truncate spacing">{record.startTerm}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate spacing">{record.endTerm}</div>
+                                                    </td>
+
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="flex-item">
+                            <div class="SE-modalFormStackSection">
+
+                                <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                                    <div class="SE-modalFormStackSectionHeaderIcon">
+                                        <lightning-icon icon-name="standard:person_name" size="medium"></lightning-icon>
+                                    </div>
+                                    <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                        <h2 class="slds-text-heading_small">Name History</h2>
+                                        <p class="slds-text-body_small">Below is the name history of the official.</p>
+                                    </div>
+                                </div>
+
+                                <div class="SE-modalFormStackSectionContent TrHoverBackGroundColorChange">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                        <thead>
+                                            <tr class="custom-header">
+                                                <th scope="col">
+                                                    <div class="slds-truncate">First Name</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Middle Name</div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Last Name</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={displayHistoryRecords} for:item="record">
+                                                <tr key={record.changeDate} class="custom-column">
+                                                    <td>
+                                                        <div class="slds-truncate spacing">{record.firstName}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate spacing">{record.middleName}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate spacing">{record.lastName}</div>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="SE-modalFooter">
+                <div class='slds-button-group'>
+
+                    <div class="button-left-group">
+                        <template if:true={isReadOnly}>
+                            <lightning-button label="Generate Certificate" variant="neutral"
+                                class="button-spacing print-buttons" onclick={handledownloadLetter}
+                                disabled={isGenerateButtonDisabled}>
+                            </lightning-button>
+                        </template>
+                    </div>
+
+                    <div class="button-right-group SE-modalFooterButtonGroup">
+                        <button class="slds-button SE-borderLessButton" onclick={cloeModels}>Cancel</button>
+                        <lightning-button variant="brand" label="Save" disabled={isReadOnly} class="save-button"
+                            onclick={handleAdd}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <c-toast-message-state-modal></c-toast-message-state-modal>
+        <c-pdf-generator data-id="pdfgenerator" signed-by={signedBy} full-name={fullName}
+            judicial-district={judicialDistrict} letter-type={letterType} wet-sign={wetSign} position={position}
+            country={country}>
+        </c-pdf-generator>
+
+
+    </template>
+</template>

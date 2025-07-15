@@ -1,0 +1,204 @@
+<template>
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+    <c-event-passer></c-event-passer>
+
+    <lightning-modal-header >
+        <!-- Container for title and edit button -->
+        <div class="custom-header specificHeader">
+            <div class="slds-grid slds-grid_vertical-align-center slds-p-horizontal_small custom-grid">
+                <!-- Title 'Add Staff Data' -->
+                <h2 class="slds-text-heading_medium slds-m-right_x-small">{dynamicHeading}</h2>
+                
+                <template if:true={isEditVisible}>
+                    <span class="separator">|</span>
+
+                    <div class="edit-button-wrapper" onclick={handleEdit}>
+                        <lightning-button-icon
+                            icon-name="utility:edit"
+                            variant="base"
+                            alternative-text="Edit"
+                            class="edit-button-icon editButtonCss"
+                        ></lightning-button-icon>
+                        <span class="edit-text">Edit</span>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <div class="custom-icon">
+            <lightning-button-icon
+                icon-name="utility:close"
+                alternative-text="Close"
+                onclick={handleCancel}
+                class="custom-modal__close cancelButtonCss">
+            </lightning-button-icon> 
+        </div>           
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="custom-modal-body modalBodyCssChange">
+            <div class="personal-info-section">
+            <div class="personal-info-header">
+                <div class="slds-media slds-media_center slds-m-bottom_medium">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:user" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Personal Information</h2>
+                        <p class="slds-text-body_small">Enter personal information to use state arms/seal.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-border">
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet">
+                        <lightning-input label="Last Name" name="lastName" required value={lastName} onchange={handleInputChange} disabled={readOnly} maxlength="25" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+"
+                        message-when-pattern-mismatch="Last name can only contain letters" class="SE-searchCardInputLabel"></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet">
+                        <lightning-input label="Middle Initial" name="middleInitial" value={middleInitial} onchange={handleInputChange} disabled={readOnly} maxlength="25" pattern="^[A-Za-z]+(\.[A-Za-z]+)*\.?$"
+                        message-when-pattern-mismatch="Middle initial can only contain letters" class="SE-searchCardInputLabel"></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet">
+                        <lightning-input label="First Name" name="firstName" required value={firstName} onchange={handleInputChange} disabled={readOnly} maxlength="25" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+"
+                        message-when-pattern-mismatch="First name can only contain letters" class="SE-searchCardInputLabel"></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet comboboxItemBackgroundColorChange">
+                        <lightning-combobox
+                            class="custom-combobox SE-notvalidate"
+                            label="Suffix"
+                            name="suffix"
+                            placeholder="Select suffix"
+                            options={suffixOptions}
+                            value={suffix}
+                            onchange={handleInputChange}
+                            disabled={readOnly}>
+                        </lightning-combobox>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet">
+                        <lightning-combobox
+                            label="Status"
+                            name="status"
+                            placeholder="Select status"
+                            options={statusOptions}
+                            value={status}
+                            class="SE-notvalidate"
+                            onchange={handleInputChange}
+                            disabled={readOnly}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet">
+                        <lightning-input label="Phone Number" name="phone" class="SE-searchCardInputLabel" type="tel" value={phone} onchange={handleInputChange} disabled={readOnly} maxlength="14" required onkeydown={handlePhoneKeyDown}
+                        ></lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4 customInputFieldHeightSet slds-align-middle">
+                        <lightning-input type="checkbox" label="Esq." class="SE-notvalidate" name="esq" checked={esq} onchange={handleEsqChange} disabled={readOnly}></lightning-input>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange">
+                    <div class="slds-col slds-size_1-of-2">
+                        <lightning-combobox
+                            label="Title"
+                            name="title"
+                            placeholder="Select title"
+                            options={staffTitleOptions}
+                            value={title}
+                            class="SE-searchCardInputLabel"
+                            onchange={handleInputChange}
+                            disabled={readOnly}
+                            required>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-2 comboboxItemBackgroundColorChange">
+                        <lightning-combobox
+                            label="Division"
+                            name="division"
+                            placeholder="Select division"
+                            options={staffDivisionOptions}
+                            value={division}
+                            class="SE-searchCardInputLabel"
+                            onchange={handleInputChange}
+                            disabled={readOnly}
+                            required>
+                        </lightning-combobox>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <div class="upload-signature-section"> 
+                <div class="upload-info-section">
+                    <div class="slds-media slds-media_center slds-m-bottom_medium">
+                        <div class="slds-media__figure">
+                            <lightning-icon icon-name="standard:logging" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body">
+                            <h3 class="slds-text-heading_small">Upload Signature</h3>
+                            <p class="slds-text-body_small">Upload official signature to complete the process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-border">
+                    <div class="file-upload-container">
+                        <div class="upload-border">
+                            <lightning-file-upload
+                                name="fileUploader"
+                                class="SE-notvalidate content-justify"
+                                accept=".jpeg,.gif,.jpg,.png,.bmp"
+                                record-id={recordId}
+                                onuploadfinished={handleUploadFinished}
+                                disabled={readOnly}>
+                            </lightning-file-upload>
+                        </div>
+                        <!-- <div class="description">
+                            or Drop Files
+                        </div> -->
+                        
+                        <div class="file-types">
+                            (Upload jpeg, gif, jpg, png, bmp extension files)
+                        </div>
+
+                    </div>  
+                </div> 
+            </div>
+                <!-- Display uploaded file names here -->
+                <template if:true={uploadedFiles.length}>
+                    <div class="uploaded-files">
+                        <template for:each={uploadedFiles} for:item="file" for:index="index">
+                            <div key={file.documentId} class="uploaded-file">
+                                <div class="file-info" onclick={handleFileDownload} data-id={file.documentId} data-name={file.name}>
+                                    <lightning-icon icon-name="doctype:image" size="x-small"></lightning-icon>
+                                    <span class="file-name" title={file.name}>{file.name}</span>
+                                </div>
+                                <div class="delete-button-wrapper">
+                                    <lightning-button-icon 
+                                        icon-name="utility:delete" 
+                                        variant="border-filled"
+                                        size="small"
+                                        alternative-text="Delete"
+                                        title="Delete"
+                                        class="delete-button"
+                                        onclick={handleDeleteFile} 
+                                        data-index={index}
+                                        disabled={readOnly}>
+                                    </lightning-button-icon>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            <!-- </div> -->
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" variant="base" onclick={handleCancel} class="slds-m-right_x-small customcancel-button"></lightning-button>
+        <template if:false={readOnly}>
+            <lightning-button variant="brand" label={customButtonLabel} onclick={handleAdd}></lightning-button>
+        </template>
+    </lightning-modal-footer>
+    
+</template>

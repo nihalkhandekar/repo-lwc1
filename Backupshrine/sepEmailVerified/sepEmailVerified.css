@@ -1,0 +1,102 @@
+.sep-email-verified-container {
+    max-width: 1136px;
+    margin: 0 auto;
+    margin-top: 64px;
+    margin-bottom: 64px;
+}
+
+.sep-email-verified-content {
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    padding: 52px 40px;
+    margin-bottom: 160px;
+}
+
+.sep-email-verified-header {
+    margin-bottom: 48px;
+}
+
+.sep-email-verified-email-icon {
+    position: relative;
+    width: 75px;
+    display: inline-block;
+}
+
+.sep-email-verified-email-icon-phone {
+    width: 32px;
+}
+
+.sub-icon {
+    position: absolute;
+    bottom: -12px;
+    right: 2px;
+}
+
+.sub-icon-phone {
+    position: absolute;
+    bottom: -12px;
+    right: -12px;
+}
+
+.main-icon-phone {
+    position: relative;
+    width: 32px;
+    display: inline-block;
+}
+
+.sep-email-verified-text {
+    display: inline-block;
+    margin-left: 18px;
+}
+
+.sep-email-verified-text-phone {
+    display: inline-block;
+    margin-left: 40px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .sep-email-verified-container {
+        margin: 40px 20px;
+    }
+
+    .sep-email-verified-content {
+        text-align: center;
+        padding: 32px 16px;
+        display: flex;
+    }
+
+    .sep-email-verified-email-icon {
+        margin-bottom: 10px;
+        margin-top: 8px;
+    }
+
+    .sep-email-verified-email-icon .mail-icon {
+        width: 45px;
+    }
+
+    .sep-email-verified-email-icon .sub-icon {
+        position: absolute;
+        bottom: -2px;
+        right: -4px;
+    }
+
+    .sep-email-verified-text-phone {
+        margin-left: 0;
+    }
+
+    .sep-email-verified-text {
+        margin-left: 8px;
+        text-align: left;
+    }
+
+    .sep-email-verified-text {
+        margin-left: 16px;
+        text-align: left;
+    }
+
+    .sep-email-verified-text-phone {
+        padding-top: 10px;
+        margin-left: 16px;
+        text-align: left;
+    }
+}

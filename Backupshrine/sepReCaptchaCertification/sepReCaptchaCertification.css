@@ -1,0 +1,6 @@
+iframe {
+    overflow:visible;
+}
+iframe::-webkit-scrollbar {  
+    display: none;
+}

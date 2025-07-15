@@ -1,0 +1,147 @@
+<template>
+    <div class="personalPref_wrapper">
+        <c-sep-header heading-text={label.PersonalInfo_Subheader} sub-heading-text={label.Subheader_helpttext}>
+        </c-sep-header>
+        <p class="small">{label.SEP_RequiredFieldErrorMsg}</p>
+        <div class="slds-grid slds-wrap personal-form">
+            <div class="slds-col slds-size_1-of-1 form-row slds-col">
+                <div class="slds-grid slds-gutters inputForm slds-wrap">
+                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                        <label>
+                            <div class='large qlebal'>{label.First_Name_Required}*</div>
+                            <!-- <span class="slds-assistive-text">{label.First_Name_Required}</span> -->
+                            <lightning-input class="agent-inputs formInput" type="text" value={FirstName}
+                                max-length="40" data-id="fname" placeholder={label.First_Name_Required}
+                                onchange={handleAgentFirstName} message-when-value-missing={label.mandatoryFieldMsg}
+                                variant='label-hidden' onblur={handleAgentFirstNameBlur} disabled={readonlyAgentDetails}
+                                required>
+                            </lightning-input>
+                        </label>
+                    </div>
+                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12">
+                        <label>
+                            <div class='large qlebal'>{label.middleNameLabel}</div>
+                            <lightning-input class="agent-inputs formInput" type="text" value={MiddleName}
+                                max-length="40" disabled={readonlyAgentDetails}
+                                placeholder={label.middleNameLabel} onchange={handleAgentMiddleName}
+                                variant='label-hidden' onblur={handleAgentMiddleNameBlur}>
+                            </lightning-input>
+                        </label>
+                    </div>
+                </div>
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm padRight">
+                    <label>
+                        <div class='large qlebal'>{label.Last_Name_Required}*</div>
+                        <lightning-input class="agent-inputs formInput" type="text" value={LastName} autocomplete="off"
+                            max-length="40" disabled={readonlyAgentDetails} placeholder={label.Last_Name_Required}
+                            onchange={handleAgentLastName} message-when-value-missing={label.mandatoryFieldMsg}
+                            variant='label-hidden' onblur={handleAgentLastNameBlur} required>
+                        </lightning-input>
+                    </label>
+                </div>
+                <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm sep-date-container">
+                    <!-- <c-ctds_generic-data-types data-id="Dob" required=true typeof-data="Date" label={label.DOBlabel}
+                        ondateselection={handleDate} placeholder={label.DOBplaceholderLabel} date-value-output={dob}>
+                    </c-ctds_generic-data-types> -->
+                    <div class='large qlebal dobfield'>{label.DOBlabel}*&nbsp;
+                        <lightning-helptext class='helpTextCustom' icon-name="utility:info_alt"
+                            content={label.badInputDateMessage}></lightning-helptext>
+                    </div>
+                    <lightning-input label={label.DOBlabel} type="date"
+                        class="brs-date-picker agent-inputs formInput mobDateField" value={dob}
+                        placeholder={label.DOBplaceholderLabel} date-style="short" required onchange={handleDate}
+                        data-id="dobField" variant='label-hidden' onblur={checkInputValidity} format="MM/DD/YYYY"
+                        onkeydown={checkDateVal} message-when-bad-input={label.badInputDateMessage}
+                        message-when-value-missing={label.mandatoryFieldMsg}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 inputForm ssn-field">
+                    <label>
+                        <p class='large qlebal'>{label.SSNLabel}*&nbsp;
+                            <template if:true={ssnToolContent}>
+                                <lightning-helptext class='helpTextCustom' icon-name="utility:info_alt"
+                                    content={ssnToolContent}></lightning-helptext>
+                            </template>
+                        </p>
+                        <lightning-input data-id="SSN__c" type="ipnput" value={socialSecurityNumber} maxlength="11"
+                            onchange={ssnChangedValue} onblur={checkAnswerValidity}
+                            class="text slds-icon_container formInput" pattern="[0-9]{3}-[0-9]{2}-[0-9]{4}"
+                            placeholder="xxx-xx-xxxx" variant='label-hidden'
+                            message-when-pattern-mismatch={label.mismatchPatternMsg}
+                            message-when-value-missing={label.mandatoryFieldMsg} required=true>
+                        </lightning-input>
+                    </label>
+                    <div class='legal ssn_subInfo'>{label.SEP_PersonalInfoSSNSubText}</div>
+                </div>
+            </div>
+            <template if:false={isRemovalFlow}>
+                <div class="slds-size_1-of-1">
+                    <c-brs_address address-type={label.Addresslabel} source={source} class="residentialAddress"
+                        unitlabel={label.UnitLabel} autocomplete set-retained-address={residentialAddressFields}
+                        disabled={disableAddress} onaddresschange={onAddressChange}>
+                    </c-brs_address>
+                </div>
+
+
+                <div class="slds-col slds-size_1-of-1 no-address-checkbox">
+                    <c-generic-multi-select list-data={addressOptions} value={NoAddressCheckboxValue}
+                        oncheckboxinputselection={disableAddressEntry}>
+                    </c-generic-multi-select>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12 form-row inputForm">
+                    <label>
+                        <p class='large qlebal'>{label.ExclusionPeriodLabel}*</p>
+                        <lightning-combobox value={selectedExclusionPeriod} placeholder={label.SEP_SelectOne}
+                            options={periodOptions} required=true class="formInput" onchange={onExclusionPeriodChange}
+                            autocomplete="off" variant='label-hidden'
+                            message-when-value-missing={label.mandatoryFieldMsg}>
+                        </lightning-combobox>
+                    </label>
+                </div>
+            </template>
+        </div>
+
+        <template if:true={modalopen}>
+            <c-modal open={modalopen} onmodalclose={closeModal} size="">
+                <div slot="header" class="headerModal slds-size_1-of-1 slds-text-align_left">
+                    <h6>{label.lifetimePopupHeader}</h6>
+                </div>
+                <div slot="body"
+                    class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                    <div class="listItem">
+                        <p class="large">
+                            {label.lifetimeErrorMsg}
+                        </p>
+                    </div>
+                </div>
+                <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+                    <div class="buttons-wrapper">
+                        <button title=Cancel onclick={closeModal}
+                            class="slds-button natural-button slds-button_natural">
+                            {label.Cancellabel}
+                        </button>
+                        <button title="Confirm" onclick={handleConfirm} class="slds-button primaryBtn higher">
+                            {label.Confirmlabel}
+                        </button>
+                    </div>
+                </div>
+            </c-modal>
+        </template>
+
+        <div class='removal_element'>
+            <c-sep-header heading-text={label.communicationPref}>
+            </c-sep-header>
+            <div class="slds-grid slds-wrap personal-form">
+                <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12 form-row inputForm">
+                    <p class='large qlebal'>{label.SEP_PersonalInfoLangPreferenceQuestionLabel}*</p>
+                    <lightning-combobox value={preferredLanguage}
+                        placeholder={label.SEP_SelectOne} options={langOptions} required=true class="formInput lang_dropdown"
+                        onchange={onlangPreferenceChange} autocomplete="off" variant='label-hidden'
+                        message-when-value-missing={label.mandatoryFieldMsg}>
+                    </lightning-combobox>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</template>

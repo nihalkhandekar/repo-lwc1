@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="isRemovalFlow" type="Boolean" label="Is Removal Flow"/>
+            <property name="FirstName" type="String" label="FirstName" description=""/>
+            <property name="MiddleName" type="String" label="MiddleName" description=""/>
+            <property name="LastName" type="String" label="LastName" description=""/>
+            <property name="dob" type="String" label="Date of Birth"/>
+            <property name="Address" type="String" label="Address"/>
+            <property name="Apartment" type="String" label="Apartment"/>
+            <property name="AddressCity" type="String" label="AddressCity"/>
+            <property name="AddressState" type="String" label="AddressState"/>
+            <property name="AddressZipCode" type="String" label="AddressZipCode"/>
+            <property name="NoAddress" type="Boolean" label="AddressNotProvided"/>
+            <property name="ssn" type="String" label="Social Security Number"/>
+            <property name="AddressUnit" type="String" label="Unit"/>
+            <property name="selectedExclusionPeriod" type="String" label="Selected Exclusion Period"/>
+            <property name="preferredLanguage" type="String" label="Preferred Language"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

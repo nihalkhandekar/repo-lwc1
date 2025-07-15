@@ -1,0 +1,15 @@
+<template>
+    <iframe if:false={variationTwo}
+      src={navigateTo}
+      name="reCaptchaFrame"
+      width="350"
+      height="500"
+      style="border-width: 0px; " scrolling="no">
+    </iframe>
+    <template if:true={variationTwo}>
+      <iframe if:false={isMobile} data-callback="imNotARobot" title="recaptcha-eligibilty" style="border:0;margin-left: -8px;margin-bottom: -18px;" src={navigateTo} name="reCaptchaFrame" height="500" width="315" scrolling="no">
+      </iframe>
+      <iframe if:true={isMobile} data-callback="imNotARobot" title="recaptcha-eligibilty" style="border:0;margin-left: -8px;margin-bottom: -28px;" src={navigateTo} name="reCaptchaFrame" height="500" width="315" scrolling="no">
+      </iframe>
+    </template>
+  </template>

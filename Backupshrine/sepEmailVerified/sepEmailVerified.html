@@ -1,0 +1,32 @@
+<template>
+    <div class="sep-email-verified-container notranslate">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+        <template if:false={isLoading}>
+            <h3 class="sep-email-verified-header">Self-exclusion registration</h3>
+            <div class="sep-email-verified-content">
+                <div class="sep-email-verified-email-icon" if:false={phoneVerified}>
+                    <template if:true={emailVerified}>
+                        <img src={mailOutline} alt="Mail Icon" class="mail-icon" role="presentation" />
+                        <img src={rightIconGreen} alt="Right Icon" class="sub-icon" role="presentation" />
+                    </template>
+                    <template if:true={emailLinkExpired}>
+                        <img src={mailOutline} alt="Mail Icon" class="mail-icon" role="presentation" />
+                        <img src={errorStopIcon} alt="Error Icon" class="sub-icon" role="presentation" />
+                    </template>            
+                </div>
+                <div class="sep-email-verified-email-icon sep-email-verified-email-icon-phone" if:true={phoneVerified}>
+                    <template if:true={phoneVerified}>
+                        <img src={mobileIcon} alt="Mobile Icon" class="main-icon-phone" role="presentation" />
+                        <img src={rightIconGreen} if:false={phoneLinkExpired} alt="Right Icon" class="sub-icon-phone" role="presentation" />
+                        <img src={errorStopIcon} if:true={phoneLinkExpired} alt="Error Icon" class="sub-icon-phone" role="presentation" />
+                    </template>                
+                </div>
+                <h6 class="sep-email-verified-text" if:false={phoneVerified}>{content}</h6>
+                <h6 class="sep-email-verified-text-phone" if:true={phoneVerified}>{content}</h6>
+            </div>
+        </template>
+    </div>
+</template>

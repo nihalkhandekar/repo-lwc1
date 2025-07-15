@@ -1,0 +1,151 @@
+.landing-page .flowContainer {
+    margin: auto;
+    background: none;
+  }
+  
+  .landing-page-banner {
+    background: var(--c-sepLandingPageBg) no-repeat;
+    height: 145px;
+    background-size: cover;
+  }
+  
+  .landing-page-card {
+    background-color: #ffffff;
+    padding: 32px 20px;
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+  
+  .completion-time {
+    /* margin-top: 24px; */
+    font-family: KarlaBold;
+    color: #757575;
+    margin-bottom: 24px;
+  }
+  
+  .completion-time .time-icon {
+    width: 18px;
+    margin-right: 8px;
+  }
+  
+  .hr-line {
+    height: 3px;
+    opacity: 0.18;
+    background-color: #d8d8d8;
+    margin-bottom: 64px;
+    display: block;
+  }
+  
+  .small-heading {
+    color: #2d2c2c;
+  }
+  
+  .heading-margin{
+    margin-bottom: 32px;
+    margin-top: 16px;
+  }
+  
+  .para-text {
+    margin-bottom: 26px;
+    color: #2d2c2c;
+  }
+  
+  .bullet-points {
+    margin-bottom: 16px;
+    padding: 0;
+  }
+  
+  .bullet-points li {
+    margin-bottom: 16px;
+    padding: 0;
+    display: flex;
+    color: #2d2c2c;
+    align-items: start;
+  }
+  
+  .bullet-points li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .bullet-points li .bullet-icon {
+    margin-right: 22px;
+    width: 20px;
+    margin-top: 4px;
+  }
+  
+  .margin-0 {
+    margin: 0;
+  }
+  
+  .showInMobile {
+    display: block;
+  }
+  
+  .hideInMobile {
+    display: none;
+  }
+
+  .mobile-scholarcontent{
+    margin-top: 48px;
+    margin-bottom:32px;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .landing-page .flowContainer {
+      max-width: 1136px;
+    }
+  
+    .landing-page-banner {
+      height: 316px;
+    }
+  
+    .landing-page-card {
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 4px 8px 0 #e7e9f2;
+      padding: 68px 94px 48px 74px;
+      margin-top: -190px;
+      margin-bottom: 190px;
+    }
+  
+    .completion-time {
+      /* margin-top: 18px; */
+      margin-bottom: 60px;
+    }
+  
+    .showInMobile {
+      display: none;
+    }
+  
+    .hideInMobile,
+    .hr-line {
+      display: block;
+    }
+
+   .getStartedBtn{
+     margin-top: 40px;
+   }
+  }
+  @media only screen and (max-width: 1023px){
+    .hr-line {
+      margin-top: 64px;
+    }
+    .showInMobile{
+      margin-bottom: 40px;
+    }
+    .margin_mob{
+      margin-top: 40px;
+    }
+    .bullet-points li {
+      margin-bottom: 24px;
+    }
+    .heading-margin{
+      margin-bottom: 40px;
+    }
+    .completion-time {
+      margin-top: 16px;
+    }
+    .landing-page-banner {
+      background: var(--c-sepLandingPageBgMobile) no-repeat;
+      background-size: 100% 100%;
+    }
+  }

@@ -1,0 +1,277 @@
+.contact-info .flowContainer {
+    margin: auto;
+    background: none;
+  }
+  
+  .contact-info-banner {
+    background: var(--c-landingPageBg) no-repeat;
+    height: 145px;
+    background-size: cover;
+  }
+  
+  .contact-info-card {
+    background-color: #ffffff;
+    padding: 32px 20px;
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+
+  .contact-info-header {
+    margin-bottom: 32px;
+  }
+
+  .contact-info-sub-header {
+    margin-bottom: 16px;
+  }
+
+  .contact-info-content {
+    margin-bottom: 34px;
+  }
+
+  .contact-info-check-box {
+    float: left;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .hr-line {
+    height: 3px;
+    opacity: .18;
+    background-color: #d8d8d8;
+    margin-bottom: 60px;
+    width: 100%;
+    margin: 16px 0 40px;
+  }
+
+  .steps-list {
+    list-style: disc;
+    padding-left: 20px;
+    font-family: 'Karla';
+    font-size: 18px;
+    margin-bottom: 40px;
+    line-height: 25px;
+  }
+
+  label.slds-form-element__label {
+    display: none !important;
+  }
+
+  .sep-contact-info-prim-email {
+    display: flex;
+    justify-content: center;
+  }
+
+ .secondary-btn-container {
+    margin-top: 36px;
+    padding-left: 24px;
+  }
+
+  .captcha-container {
+    margin: 0;
+  }
+
+  .check-mark-icon {
+    margin-right: 8px;
+  }
+
+  .secondary-btn-container button{
+    height: 56px;
+    padding: 0 64px;
+    line-height: 17px;
+  }
+
+  .primary-email-label {
+    margin-bottom: -22px;
+  }
+
+  .sep-add-icon {
+    width: 32px;
+    margin-right: 10px;
+    margin-bottom: 4px;
+  }
+
+  .remove-icon {
+    width: 24px;
+  }
+
+  .add-alt-email-btn {
+    font-family: Karla;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 27px;
+    letter-spacing: 0.1px;
+    color: #09538B;
+  }
+
+  .removeCls {
+    margin-left: 8px;
+  }
+
+  .altInp {
+      align-items: flex-end;
+  }
+
+  .hPadding {
+    padding: 32px 32px 0;
+  }
+  
+  .s-modal__close {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-bottom: auto;
+    margin-top: 8px;
+    float: right;
+  }
+  
+  .slds-modal {
+    box-shadow: 0 12px 24px 0 #DADBDE;
+  }
+  
+  .slds-button:focus {
+    outline: 2px solid #2d2c2c;
+  }
+
+  .info-icon {
+    margin-left: 14px;
+    margin-bottom: 2px;
+  }
+
+  .verified-email {
+    color: #2D2C2C;
+  }
+
+  .remove-icon-link {
+    text-decoration: underline;
+  }
+
+  .alt-email-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .slds-form-element__help {
+    position: absolute;
+  }
+
+  .removeCls {
+      margin-top: 22px;
+  }
+
+  .validation-errors .removeCls {
+      margin-top: 0;
+  }
+
+
+  .slds-button__icon {
+    color: #2D2C2C;
+    height: 16px;
+    width: 16px;
+  }
+
+  .captcha-error {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  @media only screen and (max-width: 1023px) {
+    .hPadding {
+      padding: 24px 16px 0;
+    }
+  
+    .mobile-close {
+      padding-top: 8px;
+      align-items: baseline;
+    }
+  
+    .s-modal__close {
+      margin-top: 0;
+    }
+
+    .verify-button-container {
+      padding: 0;
+      margin-top: 36px;
+    }
+
+    .verify-button-container button{
+      justify-content: center;
+    }
+
+    .steps-list {
+      margin-bottom: 24px;
+      font-size: 17px;
+    }
+
+    .hr-line {
+      margin: 8px 0 32px;
+    }
+
+    .small {
+      font-size: 16px !important;
+    }
+
+    .sep-contact-primary-email-label {
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+
+    .verify-button-container {
+      margin-top: 16px;
+    }
+    
+    .sep-contact-primary-email-container {
+      margin-bottom: 32px;
+    }
+
+    .sep-contact-primary-phone-label {
+      margin-bottom: 24px;
+    }
+
+    .sep-contact-alt-phone-label {
+      margin-bottom: 20px;
+    }
+
+    .steps-list {
+      margin-bottom: 20px;
+    }
+
+    .alt-phone-container {
+      margin-bottom: 48px !important;
+    }
+
+    .validation-errors .removeCls {
+      margin-top: -20px;
+    }
+
+    .alt-emails {
+      width: 220px;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .contact-info .flowContainer {
+      max-width: 1136px;
+    }
+  
+    .contact-info-banner {
+      height: 316px;
+    }
+  
+    .contact-info-card {
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 4px 8px 0 #e7e9f2;
+      padding: 68px 94px 48px 74px;
+      margin-top: -190px;
+      margin-bottom: 190px;
+    }
+
+    .sep-contact-primary-email-container {
+      margin-bottom: 56px;
+    }
+
+    .alt-phone-container {
+      margin-bottom: 56px !important;
+    }
+  }

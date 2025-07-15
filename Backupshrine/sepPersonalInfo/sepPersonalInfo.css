@@ -1,0 +1,77 @@
+.landing-page .flowContainer {
+  margin: auto;
+  background: none;
+}
+
+.landing-page-banner {
+  background: var(--c-landingPageBg) no-repeat;
+  height: 145px;
+  background-size: cover;
+}
+
+.landing-page-card {
+  background-color: #ffffff;
+  padding: 32px 20px;
+  margin-top: 0;
+  margin-bottom: 80px;
+}
+
+.no-address-checkbox {
+  margin-bottom: 24px;
+}
+
+.personal-form {
+  margin-bottom: 56px;
+  margin-top: 24px;
+}
+
+.ssn-field{
+  margin-bottom: 8px;
+}
+.qlebal{
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+.padRight{
+  padding-right: 12px;
+}
+.dobfield{
+  display: inline-block;
+}
+
+.removal_element{
+  margin-top: -24px;
+}
+
+@media only screen and (max-width: 1023px) {
+  .padRight{
+    padding-right: 0px;
+  }
+  .lang_dropdown{
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .lang_dropdown{
+    width: 50%;
+  }
+  .personal-form {
+    margin-bottom: 80px;
+  }
+
+  .landing-page .flowContainer {
+    max-width: 1136px;
+  }
+
+  .landing-page-banner {
+    height: 316px;
+  }
+
+  .landing-page-card {
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    padding: 68px 94px 48px 74px;
+    margin-top: -190px;
+    margin-bottom: 190px;
+  }
+}

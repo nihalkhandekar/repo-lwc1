@@ -1,0 +1,14 @@
+.custom-header{
+    background-color: #EEF4FF;
+    color: #0c7cce;
+    font-family: 'SF Pro';
+    font-size: 18px;
+    font-weight: 590;
+    padding: 0.7rem;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}

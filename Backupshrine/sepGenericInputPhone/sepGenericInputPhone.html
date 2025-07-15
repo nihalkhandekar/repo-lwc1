@@ -1,0 +1,9 @@
+<template>
+    <lightning-input type="tel" name="tel" class="phone input-field formInput"
+        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="###-###-####"
+        message-when-pattern-mismatch={mismatchPatternMsg}
+        message-when-value-missing={missingValueMsg}  label={labelValue}
+        value={mobile} onchange={mobileHandler} max-length="12" required={isRequired}
+        onblur={handlePhoneBlur} onpaste={handleMobilePaste} aria-placeholder="">
+    </lightning-input>
+</template>

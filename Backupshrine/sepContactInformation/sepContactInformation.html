@@ -1,0 +1,158 @@
+<template>
+    <div class="wrapper">
+        <c-sep-header if:false={isRemovalFlow} heading-text={labels.SEP_ContactInfoPageHeading} data-id="sep-contact-info-wrapper"
+            sub-heading-text={labels.SEP_ContactInfoPageProvideInfo}>
+        </c-sep-header>
+        <c-sep-header if:true={isRemovalFlow} heading-text={labels.SEP_ContactInfoPageHeading} data-id="sep-contact-info-wrapper"
+            sub-heading-text={labels.SEP_ContactInfoPageProvideInfoRemoval}>
+        </c-sep-header>
+        <div class="slds-grid slds-wrap slds-m-bottom_x-large">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12 form-row">
+                <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 inputForm sepForm sep-contact-primary-email-container">
+                    <div>
+                        <p class="largeBold slds-m-bottom--large sep-contact-primary-email-label">
+                            {labels.SEP_ContactInfoPagePrimEmailAddress}
+                            <lightning-helptext if:false={isRemovalFlow} class='helpTextCustom info-icon sep-tooltip' icon-name="utility:info_alt" 
+                            content={labels.SEP_ContactInfoPagePrimEmailHelpText}></lightning-helptext>
+                            <lightning-helptext if:true={isRemovalFlow} class='helpTextCustom info-icon sep-tooltip' icon-name="utility:info_alt" 
+                            content={labels.SEP_ContactInfoPagePrimEmailHelpTextRemoval}></lightning-helptext>                            
+                        </p>
+                    </div>
+                    <template if:false={emailVerified}>
+                        <div class="slds-grid slds-wrap sep-contact-info-prim-email">
+                            <div class="slds-size_12-of-12 slds-large-size_9-of-12">
+                                <lightning-input type="text" 
+                                    label={labels.SEP_ContactInfoPagePrimEmailAddressMandatory} 
+                                    placeholder={labels.SEP_ContactInfoPagePrimEmailPlaceholderText}
+                                    onchange={handleChangeEmail} value={primaryemail} onblur={handleEmailOnBlur}
+                                    data-id="EmailField" akey="EmailField" required class="formInput sep-contact-primary-email"
+                                    message-when-value-missing={labels.field_is_mandatory}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-size_12-of-12 slds-large-size_3-of-12 slds-p-left_medium secondary-btn-container verify-button-container">
+                                <button class="secondaryBtn slds-button" onclick={verifyEmail}>
+                                    {labels.SEP_ContactInfoPageVerify}
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={emailVerified}>
+                        <div>
+                            <div>
+                                <p class="large slds-m-bottom--medium">{labels.SEP_ContactInfoPagePrimEmailAddressMandatory}
+                            </p></div>
+                            <p class="large slds-m-bottom--medium verified-email">
+                                <img src={checkmark} class="check-mark-icon" alt="checkmarkicon" role="presentation"/>    
+                                {primaryemail}
+                            </p>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <template if:false={isRemovalFlow}>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12 form-row">
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 inputForm sepForm">
+                        <div class="slds-grid">
+                            <div class="slds-large-size_12-of-12">
+                                <label>
+                                    <p class="largeBold slds-m-bottom_medium">{labels.SEP_ContactInfoPageAltEmailLabel}</p>
+                                    <template if:true={showEmailInp}>
+                                        <template for:each={altEmailsCounter} for:item="num" for:index="index">
+                                            <div class="slds-grid altInp alt-email-container" key={item}>
+                                                <lightning-input class="slds-large-size_9-of-12 formInput alt-emails" type="text" placeholder={labels.SEP_ContactInfoPagePrimEmailPlaceholderText}
+                                                onchange={handleAltChangeEmail} label={num.label} onblur={handleAltEmailBlur} value={num.value}
+                                                data-id={num.id} message-when-pattern-mismatch={labels.SEP_ContactInfoPageInvalidEmail} data-my-id={index}>
+                                                </lightning-input>
+                                                <div class="slds-large-size_4-of-12 removeCls" data-id={num.id} onclick={removeAltEmail}>
+                                                    <a class="large remove-icon-link" tabindex="0" role="button"><img src={trashIcon} class="remove-icon" alt="addIcon" role="presentation"/>{labels.SEP_ContactInfoPageRemove}</a>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <template if:true={showAddAlt}>
+                                        <a class="add-alt-email-btn" onclick={addAltEmail} tabindex="0" role="button">
+                                            <img src={addIcon} class="sep-add-icon" alt="addIcon" role="presentation" />
+                                            {labels.SEP_ContactInfoPageAddAltEmail}
+                                        </a>
+                                    </template>
+                                </label>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr-line"></div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12 form-row largeBold">
+                    <p class="largeBold slds-m-bottom--medium sep-contact-primary-phone-label">
+                        {labels.SEP_ContactInfoPagePrimPhoneNo}
+                    </p>
+                </div>
+                <p class="large">{labels.SEP_ContactInfoPageNextSteps}</p>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12 form-row">
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 inputForm sepForm">
+                        <div class="slds-grid">
+                            <div class=" slds-size_12-of-12 slds-large-size_9-of-12">
+                                <label>
+                                    <ul class="steps-list">
+                                        <li>{labels.SEP_ContactInfoPageStandardRates}</li>
+                                        <li>{labels.SEP_ContactInfoPageUSMobNo}</li>
+                                    </ul>
+                                    <div>
+                                        <label>
+                                            <c-sep-generic-input-phone label-value={labels.SEP_ContactInfoPagePrimPhoneNo} data-my-id="phoneNumer" onphonevaluechange={phoneNumberChanged}
+                                            value={phoneNumber} data-id="primaryPhoneNumber" onphonefieldblur={altPhoneNumberBlur}>
+                                            </c-sep-generic-input-phone>
+                                        </label>
+                                    </div>
+                                </label>                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12 form-row">
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 inputForm sepForm alt-phone-container">
+                        <div class="slds-grid">
+                            <div class="slds-size_12-of-12 slds-large-size_9-of-12">
+                                <p class="largeBold slds-m-bottom--large sep-contact-alt-phone-label">{labels.SEP_ContactInfoPageAltPhoneNo}</p>
+                                <label>
+                                    <c-sep-generic-input-phone label-value={labels.SEP_ContactInfoPageAltPhoneNo} data-my-id="altPhoneNumer" onphonevaluechange={altPhoneNumberChanged}
+                                    value={altPhoneNumber} data-id="altPhoneNumber" onphonefieldblur={altPhoneNumberBlur}>
+                                    </c-sep-generic-input-phone>
+                                </label>                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12 form-row">
+                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm sepForm captcha-container">
+                    <div class="captcha-wrapper">
+                        <p class="formCaptchaLabel large">{labels.SEP_ContactInfoPageClickCheckBox}</p>
+                    </div>
+                    <c-sep-re-Captcha-Certification oncaptchasuccess={handleCaptchSuccess} variation-two="true" oncaptchafailed={handleCaptchFailed}
+                    oncaptchaexpired={handleResetCaptcha}></c-sep-re-Captcha-Certification>
+                    <template if:true={hasCaptchError}>
+                        <div data-help-message="" role="alert" class="slds-form-element__help captcha-error">{labels.field_is_mandatory}</div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <template if:true={open}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class={modalStyle} aria-label={labels.SEP_ContactInfoPageVerifyModalAriaLabel}>
+            <div class="slds-modal__container">
+                <div class="slds-modal__content hPadding" id="modal-content-id-1">
+                    <button class="slds-button slds-button_icon sld s-modal__close slds-button_icon-inverse mobile-close slds-col slds-size_1-of-12 tabfocus" 
+                    title="Close" onclick={handleClose}>
+                        <lightning-icon size="x-small" icon-name="utility:close" alternative-text="Close">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <c-sep-email-verify-modal onverificationsuccessful={handleVerificationSuccessful} email={primaryemail} firstname={firstname} lastname={lastname} language={languagePreference}></c-sep-email-verify-modal>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+</template>

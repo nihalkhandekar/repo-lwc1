@@ -1,0 +1,176 @@
+.h6.colorCls {
+    line-height: 27px !important;
+}
+
+.p.large,
+p.largeBold {
+    letter-spacing: 0.13px !important;
+}
+
+.displayCls {
+    display: flex;
+    padding-top: 32px;
+    /* justify-content: space-between; */
+    /* padding-right: 7.5rem; */
+}
+
+.displayCls .large {
+    padding-right: 2rem;
+}
+
+.bttnClass {
+    width: 100%;
+    justify-content: center;
+}
+
+.pClass {
+    color: #2D2C2C;
+}
+
+.slds-button:hover {
+    color: #ffffff;
+}
+
+.primaryBtn.slds-button {
+    height: 56px;
+}
+
+/* .slds-form-element__label{
+    color: #2d2c2c !important;
+    font-family: Karla !important;
+    font-size: 18px !important;
+    line-height: 27px !important
+} */
+
+.mailImg {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.mailImg_mob,
+.mob_img {
+    display: none;
+}
+
+.listItemCls {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 24px;
+}
+
+.bttnPadding {
+    padding-bottom: 6rem;
+}
+
+.search-box {
+    border-radius: 4px;
+    border: 1px solid #d0cfcf;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    display: flex;
+
+}
+
+.searchBox {
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.search-box input[type="text"] {
+    /* font-size: 16px;
+    line-height: 19px; */
+    outline: none;
+}
+
+.search-box input {
+    border-color: transparent;
+    padding: 16px 24px;
+    width: 100%;
+}
+
+.errorValidation {
+    color: #db2426;
+    font-family: 'Karla Bold', sans-serif;
+    font-size: 14px;
+    letter-spacing: .1px;
+    line-height: 21px;
+}
+
+.cust-anchor {
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.13;
+    font-family: 'Karla', sans-serif;
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.resultImg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 160px;
+}
+
+.sep-email-verification-code-label {
+    padding-bottom: 4px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .listItemCls {
+        font-size: 17px;
+        line-height: 25px;
+        padding-top: 0;
+    }
+
+    .mailImg_mob {
+        display: block;
+        height: 50px;
+        width: auto;
+        margin: 0 auto;
+    }
+
+    .mob_img {
+        margin-top: 6px;
+        margin-bottom: 16px;
+        display: block;
+    }
+
+    .mailImg {
+        display: none;
+    }
+
+    .displayCls {
+        padding-right: 0;
+        padding-top: 0;
+    }
+
+    .displayCls .large {
+        padding-right: 0;
+    }
+
+    .sub-container {
+        display: flex;
+        margin-top: 34px;
+    }
+
+    .sub-container .mob_img {
+        flex: 1;
+    }
+
+    .sub-container .displayCls {
+        flex: 2.5;
+    }
+
+    hr {
+        margin: 38px 0 24px 0;
+    }
+
+    .bttnPadding {
+        padding-bottom: 5rem;
+    }
+}

@@ -1,0 +1,28 @@
+<template >
+    <template if:true={firstQueSet}>
+        <c-sep-header heading-text={label.Indentity_Subheader} sub-heading-text={SEP_IdenityProofPageHeaderOneEdited}>
+        </c-sep-header>
+    </template>
+    <template if:false={firstQueSet}>
+        <c-sep-header heading-text={label.Indentity_Subheader} sub-heading-text={SEP_IdenityProofPageHeaderTwoEdited}>
+        </c-sep-header>
+    </template>
+    <div class="slds-grid slds-wrap slds-m-bottom_xx-large">
+        <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12">
+            <template if:true={questions.length} for:each={questions} for:item="item" for:index="index">
+                <h6 key={item.Text.Statement}>{item.Text.Statement}</h6>
+                <template if:true={item.HelpText}>
+                    <p class='small' key={item.HelpText.Statement}>{item.HelpText.Statement}</p>
+                </template>
+                <div class="mt-24 mb-48" key={item.Text.Statement}>
+                    <c-generic-radio_brs data-id={item.QuestionId} radio-options={item.options} name={item.Text.Statement} answer={item.value}
+                    onctbosdatachange={handleRadioSelect} has-error={hasError} required={required}></c-generic-radio_brs>
+                    <div if:true={item.hasError} class="erorr_msg">{label.field_is_mandatory}</div>
+                </div>
+            </template>
+        </div>
+    </div>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>

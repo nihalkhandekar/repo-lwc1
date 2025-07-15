@@ -1,0 +1,334 @@
+<template>
+    <div class="stateseal-container">
+        <h1 class="page-heading">Requests</h1>
+        <div class="search-info-container firstDivForSearching">
+            <!-- Header Section -->
+            <div class="custom-card-header searchTitleHeader">
+                <lightning-icon icon-name="standard:search" size="medium" class="header-icon"></lightning-icon>
+                <div class="header-text">
+                    <h1 class="title">Search</h1>
+                </div>
+            </div>
+
+            <div class="input-section searchInputFieldsAndComboboxContainer">
+                <div class="input-group">
+                    <!-- Custom Label for Last Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="lastName">Last Name</label>
+                        <lightning-input label="Last Name" name="lastName" variant="label-hidden" id="lastName"
+                        pattern="[A-Za-z]+" message-when-pattern-mismatch="Last name should only contain letters."
+                            value={lastName} class="input-field SE-searchCardInputLabel" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                    <!-- Custom Label for First Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="firstName">First Name</label>
+                        <lightning-input label="First Name" name="firstName" variant="label-hidden" id="firstName"
+                        pattern="[A-Za-z]+" message-when-pattern-mismatch="First name should only contain letters."
+                            value={firstName} class="input-field SE-searchCardInputLabel" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="city">City</label>
+                        <lightning-combobox variant="label-hidden" name="city" class="input-field SE-notvalidate comboboxItemBackgroundColorChange" value={city}
+                            placeholder="Select city" options={cityOptions}
+                            onchange={handleInputChange}></lightning-combobox>
+                    </div>
+                    <!-- Custom Label for Middle Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="email">Email Address</label>
+                        <lightning-input label="Email Address" name="email" variant="label-hidden" id="email"
+                            value={email} class="input-field SE-notvalidate" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="proposedUse">Proposed Use</label>
+                        <lightning-input label="Proposed Use" name="proposedUse" variant="label-hidden" id="proposedUse"
+                            value={proposedUse} class="input-field SE-notvalidate" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="letterText">Letter Text</label>
+                        <lightning-input label="Letter Text" name="letterText" variant="label-hidden" id="letterText"
+                            value={letterText} class="input-field SE-notvalidate" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                    <!-- Custom Label for Middle Name -->
+                    <!-- Custom Label for Last Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="disposition">Disposition</label>
+                        <lightning-combobox name="disposition" label="Disposition" placeholder="Select Disposition"
+                            variant="label-hidden" value={disposition} options={dispositionOptions} class="input-field SE-notvalidate comboboxItemBackgroundColorChange"
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    <!-- Custom Label for Middle Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="approvedFor">Approved For</label>
+                        <lightning-combobox name="approvedFor" label="Approved For" placeholder="Select approved for"
+                            variant="label-hidden" value={approvedFor} options={approvedForOptions} class="input-field SE-notvalidate comboboxItemBackgroundColorChange"
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+
+
+                    <!-- Custom Label for Last Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="entity">Entity</label>
+                        <lightning-input label="entity" name="entity" variant="label-hidden" id="entity" value={entity}
+                            class="input-field SE-notvalidate" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+
+                    <!-- Custom Label for Last Name -->
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="transactionDate">Response Date</label>
+                        <lightning-input type="date" label="mm/dd/yyyy" name="transactionDate" variant="label-hidden"
+                            id="transactionDate" date-style="short" placeholder="mm/dd/yyyy" value={transactionDate}
+                            class="input-field date-format-hide SE-notvalidate" onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+            <div class="button-group">
+                <!-- <lightning-button label="Clear All" onclick={handleClear} variant="base" icon-name="utility:close"
+                    icon-position="left" class="slds-m-right_x-small clear-font">
+                </lightning-button> -->
+                <div class="clear-all" onclick={handleClear}>
+                    <span class="clear-icon-wrapper">
+                        <lightning-icon icon-name="utility:close" size="xx-small" class="clear-icon"></lightning-icon>
+                    </span>
+                    <span class="clear-text">Clear All</span>
+                </div>
+                <lightning-button variant="brand" label="Search" icon-name="utility:search" icon-position="left"
+                    title="Search action" onclick={handleSearch} class="slds-m-left_x-small customButton">
+                </lightning-button>
+            </div>
+        </div>
+        <template if:true={isLoading}>
+            <div class="spinner-container">
+                <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+            </div>
+        </template>
+
+        <template if:false={isLoading}>
+        <div class="dashboard-cards secondDivForDataTable">
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                <!-- Buttons Section-->
+                <div class="buttoncontainerfilter">
+                    <div class="left-button slds-p-left_small">
+                        <span class="slds-text-title_bold slds-m-right_x-small search-css">Search Results</span>
+                        <lightning-badge label={transactionsFoundLabel}
+                            class="slds-badge_inverse result-no-css"></lightning-badge>
+                    </div>
+                    <div class="right-buttons">
+                        <lightning-badge data-id="current-day" label="Today" class={badgeClassCurrentDay}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-quarter" label="This Quarter" class={badgeClassThisQuarter}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+
+                        <lightning-button-menu icon-position="left" variant="bare" data-id="filterMenu"
+                            alternative-text="Filter By Disposition" title="Filter"
+                            icon-name="utility:filterList" label="Filter by Disposition"
+                            onselect={handleDispositionFilter}
+                            class="slds-button_icon slds-button_icon-inverse custom-button-menu">
+                            <lightning-menu-item label="Approved" value="Approved"></lightning-menu-item>
+                            <lightning-menu-item label="Pending" value="Pending"></lightning-menu-item>
+                            <lightning-menu-item label="Denied" value="Denied"></lightning-menu-item>
+                            <lightning-menu-item label="Notice" value="Notice"></lightning-menu-item>
+                            <lightning-menu-item label="All Dispositions" value="All"></lightning-menu-item>
+                        </lightning-button-menu>
+
+                        <lightning-button variant="brand" label="Add New Request" icon-name="utility:add"
+                            title="Primary action" onclick={openSealAddModal}
+                            class="slds-m-left_x-small slds-button_brand addnewbutton customButton">
+                        </lightning-button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Section-->
+            <template if:true={showResults}>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                        <thead>
+                            <tr class="custom-header">
+                                <th scope="col" data-field="Last_Name__c" class={sortedClassLastName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Last Name
+                                        <lightning-icon icon-name={sortIcons.Last_Name__c}   class="sort-icon"
+                                            size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="First_Name__c" class={sortedClassFirstName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        First Name
+                                        <lightning-icon icon-name={sortIcons.First_Name__c}  class="sort-icon"
+                                            size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="Address_Line_1__c" class={sortedClassAddress1Name} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Address
+                                        <lightning-icon icon-name={sortIcons.Address_Line_1__c}  class="sort-icon"
+                                            size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="City__c" class={sortedClassCityName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        City
+                                        <lightning-icon icon-name={sortIcons.City__c}  class="sort-icon"
+                                            size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="Date_of_SOTS_Response__c" class={sortedClassDateName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Date of SOTS Response
+                                        <lightning-icon icon-name={sortIcons.Date_of_SOTS_Response__c}  class="sort-icon"
+                                            size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="Disposition__c" class={sortedClassDispositionName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Disposition
+                                        <lightning-icon icon-name={sortIcons.Disposition__c}  class="sort-icon"
+                                            size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate actionMenu">
+                                        Actions
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={isRecordsLoading}>
+                                <!-- Show loader centered in the table without top and bottom borders -->
+                                <tr class="no-border-row">
+                                    <td colspan="7" class="slds-text-align_center loader-row">
+                                        <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:false={isRecordsLoading}>
+                            <template for:each={paginatedResult} for:item="row">
+                                <tr key={row.Id}>
+                                    <td>
+                                        <div class="slds-truncate" title={row.Last_Name__c}>{row.Last_Name__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.First_Name__c}>{row.First_Name__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.Address_Line_1__c}>{row.Address_Line_1__c}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.City__c}>{row.City__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.formattedDate}>{row.formattedDate}</div>
+                                    </td>
+                                    <td>
+                                        <div class={row.dispositionClass} title={row.Disposition__c}>
+                                            {row.Disposition__c}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- Custom dropdown menu without icon and border -->
+                                        <lightning-button-menu alternative-text="Actions"
+                                            class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                            variant="bare" icon-name="utility:threedots_vertical"
+                                            onselect={handleMenuSelect} menu-alignment="auto" data-id={row.Id}
+                                            data-status={row.Disposition__c}>
+                                            <template if:true={row.isPending}>
+                                                <lightning-menu-item label="View Request"
+                                                    value="view_request" class="comboboxItemBackgroundColorChange"></lightning-menu-item>
+                                                <lightning-menu-item label="Edit Request" value="edit_request"
+                                                    variant="bare" class="comboboxItemBackgroundColorChange"></lightning-menu-item>
+                                            </template>
+                                            <template if:false={row.isPending}>
+                                                <lightning-menu-item label="View Request" variant="base"
+                                                    value="view_request" class="comboboxItemBackgroundColorChange"></lightning-menu-item>
+                                                <lightning-menu-item label="Edit Request" variant="base"
+                                                    value="edit_request" class="comboboxItemBackgroundColorChange"></lightning-menu-item>
+                                                <lightning-menu-item label="Print Envelope" variant="base"
+                                                    value="print_envelope" class="comboboxItemBackgroundColorChange"></lightning-menu-item>
+                                                <lightning-menu-item label="Print Letter" variant="base"
+                                                    value="print_letter" class="comboboxItemBackgroundColorChange"></lightning-menu-item>
+                                            </template>
+                                        </lightning-button-menu>
+                                    </td>
+                                </tr>
+                            </template>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </template>
+
+
+
+            <template if:false={showResults}>
+                <div class="no-result-found">
+                    <h1 class="no-result-found-label">No Results Found</h1>
+                </div>
+            </template>
+
+            <!-- Include the pdfGenerator child component -->
+            <c-pdf-generator></c-pdf-generator> <!-- Assuming pdfGenerator is the child LWC -->
+
+            <template if:true={showResults}>
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                        disabled={isPreviousDisabled} variant="neutral">
+                    </lightning-button>
+
+                    <div class="page-info">
+                        <span class="page-range">{startRange}-{endRange} of {transactionsFoundLabel} &nbsp;</span>
+                        <span class="page-text"> | Page &nbsp;
+                            <lightning-input 
+                                type="number" 
+                                value={currentPage} 
+                                label="Current Page" 
+                                variant="label-hidden"
+                                class="current-page-input"
+                                onchange={handlePageChange}>
+                            </lightning-input> &nbsp;
+                            of {totalPages}
+                        </span>
+                    </div>                    
+
+                    <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                        disabled={isNextDisabled} variant="neutral">
+                    </lightning-button>
+                </div>
+            </template>
+        </div>
+        </template>
+
+
+
+
+        
+        
+    </div>
+</template>

@@ -1,0 +1,146 @@
+.success-page .flowContainer {
+    margin: auto;
+    background: none;
+  }
+  
+  .success-page-banner {
+    background: var(--c-sepAgentAcceptanceBg) no-repeat;
+    height: 317px;
+    background-size: cover;
+    background-position-y: -20px;
+  }
+  
+  .success-page-card {
+    background-color: #ffffff;
+    padding: 32px 20px;
+    margin-top: 0;
+    margin-bottom: 80px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: -120px;
+  }
+  
+  .success-page-header {
+    margin-bottom: 28px;
+    letter-spacing: 0.2px;
+  }
+
+  .success-page-icon-container {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .success-page-content {
+    margin-bottom: 28px;
+  }
+
+  .backToWebsiteBtn {
+    width: 100%;
+  }
+
+  .success-page-check-box {
+    float: left;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+  }
+
+  .already-registered-content {
+    margin-bottom: 60px;
+  }
+
+  .already-registered-header {
+    margin-bottom: 16px;
+  }
+  
+  .error-subheader {
+    margin-bottom: 0;
+  }
+
+  .hr-line {
+    height: 3px;
+    opacity: 0.18;
+    background-color: #d8d8d8;
+    margin-bottom: 32px;
+    margin-top: 56px;
+  }
+
+  .anchor-link{
+    color:#09538B;
+    text-decoration: underline;
+    display: inline-block;
+  }
+
+  .right-icon-white {
+    margin-left: 12px;
+  }
+
+  .margin-bot{
+    margin-bottom: 32px;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .success-page .flowContainer {
+        max-width: 800px;
+    }
+  
+    .success-page-banner {
+      height: 431px;
+    }
+  
+    .success-page-card {
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 4px 8px 0 #e7e9f2;
+      padding: 68px 32px 32px 32px;
+      margin-top: -190px;
+      margin-bottom: 190px;
+      width: 100%;
+    }
+
+    .success-page-page-header {
+      position: absolute;
+      width: 100%;
+      max-width: 800px;
+      color: #FFFFFF;
+      text-align: left;
+      top: 142px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    .success-page-page-header {
+      position: absolute;
+      max-width: 800px;
+      color: #FFFFFF;
+      text-align: left;
+      top: 43px;
+      left: 24px;
+    }
+
+    .success-page-page-header-error {
+      top: 20px;
+    }
+
+    .success-page-header {
+      margin-bottom: 16px;
+    }
+
+    .success-page-sub-header {
+      line-height: 22px;
+      letter-spacing: 0.12px;
+      margin-bottom: 24px;
+    }
+
+    .hr-line {
+      margin-top: 48px;
+    }
+
+    .right-icon-white {
+      margin-left: 6px;
+    }
+  }

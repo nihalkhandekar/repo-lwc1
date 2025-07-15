@@ -1,0 +1,172 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="action:update_status" size="small" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">For SOTS Use (ONLY)</h1>
+                <p class="description">Enter account status to continue further.</p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group third-width">
+                    <label class="custom-label" for="letterText"><span class="required-indicator">*</span>Letter Text</label>
+                    <div class={letterTextErrorClass}>
+                        <lightning-textarea
+                            name="letterText"
+                            label="Letter Text"
+                            variant="label-hidden"
+                            id="letterText"
+                            read-only={isReadOnly}
+                            placeholder="Enter letter text..."
+                            value={letterText}
+                            class="input-field"
+                            onchange={handleInputChange}>
+                        </lightning-textarea>
+                        <template if:true={isLetterTextInvalid}>
+                            <div class="slds-form-element__help" id="letterTextError">
+                                Letter Text is required.
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="form-group third-width">
+                    <label class="custom-label" for="enclosure">Enclosure</label>
+                    <lightning-textarea
+                        name="enclosure"
+                        label="Enclosure"
+                        id="enclosure"
+                        read-only={isReadOnly}
+                        variant="label-hidden"
+                        placeholder="Enter enclosure..."
+                        value={enclosure}
+                        class="input-field"
+                        onchange={handleInputChange}>
+                    </lightning-textarea>
+                </div>
+
+                <div class="form-group third-width">
+                    <label class="custom-label" for="proposedUse">Proposed Use</label>
+                    <lightning-textarea
+                        name="proposedUse"
+                        label="Proposed Use"
+                        id="proposedUse"
+                        read-only={isReadOnly}
+                        variant="label-hidden"
+                        placeholder="Enter proposed use..."
+                        value={proposedUse}
+                        class="input-field"
+                        onchange={handleInputChange}>
+                    </lightning-textarea>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="requestFor"><span class="required-indicator">*</span>Request For</label>
+                    <div class={requestedForClass}>
+                        <lightning-combobox
+                            name="requestFor"
+                            label="Request For"
+                            read-only={isReadOnly}
+                            placeholder="Select request for"
+                            variant="label-hidden"
+                            value={requestFor}
+                            required
+                            options={requestForOptions}
+                            class="input-field"
+                            aria-invalid={isRequestedForInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                        <template if:true={isRequestedForInvalid}>
+                            <div class="slds-form-element__help" id="requestedForError">
+                                Requested For is required.
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="disposition"><span class="required-indicator">*</span>Disposition</label>
+                    <div class={dispositionClass}>
+                        <lightning-combobox
+                            name="disposition"
+                            label="Disposition"
+                            read-only={isReadOnly}
+                            placeholder="Select Disposition"
+                            variant="label-hidden"
+                            value={disposition}
+                            options={dispositionOptions}
+                            class="input-field {dispositionClass}" 
+                            aria-describedby="dispostion Error"
+                            aria-invalid={isDispositionInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                        <template if:true={isDispositionInvalid}>
+                            <div class="slds-form-element__help" id="dispositionError">
+                                Disposition is required.
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="approvedFor">Approved For</label>
+                    <lightning-combobox
+                        name="approvedFor"
+                        label="Approved For"
+                        placeholder="Select approved for"
+                        variant="label-hidden"
+                        value={approvedFor}
+                        read-only={isReadOnly}
+                        options={approvedForOptions}
+                        class="input-field"
+                        onchange={handleInputChange}>
+                    </lightning-combobox>
+                </div>
+
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="sotsDate"><span class="required-indicator">*</span>Date of SOTS Response</label>
+                    <div class={dateOfResponseClass}>
+                        <lightning-input
+                            type="date"
+                            label="date"
+                            name="sotsDate"
+                            id="sotsDate"
+                            placeholder="Select date of SOTS response"
+                            value={responseDate}
+                            read-only={isReadOnly}
+                            class="input-field horizontal-radio-group date-format-hide"
+                            variant="label-hidden"
+                            aria-describedby="Date of response error"
+                            aria-invalid={isDateOfResponseInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <template if:true={isDateOfResponseInvalid}>
+                            <div class="slds-form-element__help" id="dateOfResponseError">
+                                Date of SOTS Response is required.
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="input-radio-group">
+                    <label class="boldFont">Reason</label>
+                    <lightning-input type="radio" name="reason" label="Educational" required="true" checked={isEducationalChecked} variant="label-hidden" class="slds-radio_faux" read-only={isReadOnly} value="Educational" onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                    <label class=custom-label-radio>Educational</label>
+                    <lightning-input type="radio" name="reason" label="Memorial" required="true" checked={isMemorialChecked} variant="label-hidden" class="slds-radio_faux" value="Memorial" read-only={isReadOnly} onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                    <label class=custom-label-radio>Memorial</label>
+                    <lightning-input type="radio" name="reason" label="Official Business" required="true"  checked={isOfficialBusinessChecked} variant="label-hidden" class="slds-radio_faux" read-only={isReadOnly} value="Official Business" onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                    <label class=custom-label-radio>Official Business</label>
+                    <lightning-input type="radio" name="reason" label="Constitution & Laws" required="true" checked={isConstitutionChecked} variant="label-hidden" class="slds-radio_faux" read-only={isReadOnly} value="Constitution & Laws" onchange={handleInputChange}  disabled={isReadOnly}></lightning-input>
+                    <label class=custom-label-radio>Constitution & Laws</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

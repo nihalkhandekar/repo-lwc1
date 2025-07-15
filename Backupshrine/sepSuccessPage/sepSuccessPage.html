@@ -1,0 +1,168 @@
+<template>
+    <div class="success-page notranslate">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+        <h3 class="success-page-page-header" if:true={variationOne}>{labels.SEP_SuccessPageMainHeading}</h3>
+        <h3 class="success-page-page-header success-page-page-header-error" if:true={variationFive}> 
+            {labels.SEP_SuccessPageMainHeadingError}</h3>
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={variationThree}>{labels.SEP_Error_Header}</h3><!-- Invalid request -->
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={variationTwo}>{labels.SEP_Error_Header_ID_Proofing}</h3><!-- ID proofing failure -->
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={variationSix}>{labels.SEP_Error_Header_ID_Proofing}</h3><!-- ID proofing failure -->
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={variationSeven}>{labels.SEP_Error_Header_ID_Proofing}</h3><!-- ID proofing failure -->
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={removalVariationTwo}>{labels.SEP_Error_Header}</h3><!-- Invalid request -->
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={removalVariationThree}>{labels.SEP_Error_Header}</h3><!-- Removal Invalid request -->
+            <h3 class="success-page-page-header success-page-page-header-error" if:true={removalVariationOne}>{labels.SEP_RemovalSuccessPageMainHeading}</h3><!-- Removal Success -->
+        <div class="success-page-banner"></div>
+        <div class="flowContainer brs-wrapper">
+            <div class="success-page-card">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_12-of-12">
+                        <template if:true={variationOne}>
+                            <div class="success-page-icon-container">
+                                <img src={successVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header">{labels.SEP_SuccessPageHeading}</h4>
+                            <div>
+                                <p class="large success-page-sub-header slds-m-bottom_xx-large">
+                                    {labels.SEP_SuccessPageContentOne}&nbsp;<a class="anchor-link" href={labels.SEP_EmailAddressMailTo}>{labels.SEP_EmailAddress}</a></p>
+                            </div>
+                            <c-sep-table table-data={tableData} variation-two='true'></c-sep-table>
+                        </template>
+                        <template if:true={variationTwo}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header">{labels.SEP_ErrorPageContentOne}</h4>
+                            <div>
+                                <p class="success-page-sub-header slds-m-bottom--medium large">
+                                    {labels.SEP_ErrorPageContentTwo}&nbsp;
+                                    <a href={labels.SEP_CtPortalExclusionLink}>{labels.SEP_ErrorPageContentTwolink}</a>
+                                </p>
+                                <!-- <p class="success-page-sub-header slds-m-bottom--medium large">
+                                    {labels.SEP_IDproofingGenericErrorPara2}</p> -->
+                                <lightning-formatted-rich-text  value={labels.SEP_IDproofingGenericErrorPara2}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </template>
+                        <template if:true={variationThree}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header already-registered-header">
+                                {labels.SEP_AlreadyRegisteredHeading}</h4>
+                            <div>
+                                <p class="success-page-sub-header slds-m-bottom_xx-large large">
+                                    {labels.SEP_AlreadyRegisteredContent}&nbsp;<a class="anchor-link" href={labels.SEP_EmailAddressMailTo}>{labels.SEP_EmailAddress}</a></p>
+                            </div>
+                            <c-sep-table table-data={tableData} variation-two='true'></c-sep-table>
+                        </template>
+                        <template if:true={variationFour}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header already-registered-header">{labels.SEP_ErrorPageHeading}</h4>
+                            <!-- <div>
+                                <p class="success-page-sub-header slds-m-bottom_xx-large">{labels.SEP_AlreadyRegisteredContent}</p>
+                            </div> -->
+                        </template>
+                        <template if:true={variationFive}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header">{labels.SEP_FlowErrorMsg}</h4>
+                            <div>
+                                <p class="success-page-sub-header slds-m-bottom--medium large">{labels.SEP_ErrorScreenHelpTxt}</p>
+                                <!-- <p class="success-page-content largeBold">{labels.SEP_ErrorPageContentTwo} <a class="success-page-content">{labels.SEP_ErrorPageContentLinkText}</a></p> -->
+                            </div>
+                        </template>
+                        <template if:true={variationSix}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header">{labels.SEP_ErrorPageContentOne}</h4>
+                            <div>
+                                <p class="success-page-sub-header slds-m-bottom--medium large">{labels.SEP_IDproofingTimeOutMsg}</p>
+                                <p class="success-page-sub-header slds-m-bottom--medium large">
+                                    {labels.SEP_ErrorPageContentTwo}&nbsp;
+                                    <a href={labels.SEP_CtPortalExclusionLink}>{labels.SEP_ErrorPageContentTwolink}</a>
+                                </p>  
+                                <!-- <p class="success-page-sub-header slds-m-bottom--medium large">{labels.SEP_IDproofingGenericErrorPara2}</p> -->
+                                <lightning-formatted-rich-text  value={labels.SEP_IDproofingGenericErrorPara2}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </template>
+                        <template if:true={variationSeven}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header">{labels.SEP_ErrorPageContentOne}</h4>
+                            <div>
+                                <p class="success-page-sub-header slds-m-bottom--medium large">{labels.SEP_IDproofingUserBlockedMsg}</p>
+                                <!-- <p class="success-page-sub-header slds-m-bottom--medium large">
+                                    {labels.SEP_IDproofingGenericErrorPara2}</p> -->
+                                <lightning-formatted-rich-text  value={labels.SEP_IDproofingGenericErrorPara2}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </template>
+                        <!-- Removal Success Scenario -->
+                        <template  if:true={removalVariationOne}>
+                            <div class="success-page-icon-container">
+                                <img src={successVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header">{labels.SEP_RemovalSuccessPageHeadingSuccess}</h4>
+                            <div class='success-page-sub-header margin-bot'>
+                                <lightning-formatted-rich-text  value={labels.SEP_RemovalSuccessPageContentOne}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                            <c-sep-table table-data={tableData} variation-two='true'></c-sep-table>
+                        </template>
+                         <!-- Removal Duplicate Scenario -->
+                        <template if:true={removalVariationTwo}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header already-registered-header">
+                                {labels.SEP_AlreadyRegisteredHeading}</h4>
+                            <div class='success-page-sub-header margin-bot'>
+                                <lightning-formatted-rich-text  value={labels.SEP_RemovalSuccessPageContentThree}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                            <c-sep-table table-data={tableData} variation-two='true'></c-sep-table>
+                        </template>
+                         <!-- Removal Failure Scenario -->
+                        <template if:true={removalVariationThree}>
+                            <div class="success-page-icon-container">
+                                <img src={failedVerificationIcon} alt="Success Icon" class="success-icon"
+                                    role="presentation" />
+                            </div>
+                            <h4 class="success-page-header already-registered-header">
+                                {labels.SEP_AlreadyRegisteredHeading}</h4>
+                            <div>
+                                <lightning-formatted-rich-text  value={labels.SEP_RemovalSuccessPageContentTwo}>
+                                </lightning-formatted-rich-text>
+                            </div>
+                        </template>
+                        <div class="hr-line"></div>
+                        <button onclick={handleBackToWebsite}
+                            class="higher slds-button slds-button_brand primaryBtn backToWebsiteBtn already-registered-back-btn">
+                            {labels.SEP_SuccessPageBackButton}
+                            <img src={arrowRightWhite} alt="Right Icon" class="right-icon-white"
+                            role="presentation" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

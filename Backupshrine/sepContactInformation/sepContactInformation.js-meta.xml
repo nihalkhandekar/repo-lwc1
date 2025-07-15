@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">   
+            <property name="isRemovalFlow" type="Boolean" label="Is Removal Flow"/>    
+            <property name="sobjectList" type="@salesforce/schema/SEP_Contact_Detail__c[]" label="SEPContactList" description="" />  
+            <property name="firstname" type="String" label="firstname"/>
+            <property name="lastname" type="String" label="lastname"/>
+            <property name="languagePreference" type="String" label="languagePreference"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
