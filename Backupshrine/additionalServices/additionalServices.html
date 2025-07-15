@@ -1,0 +1,30 @@
+<template>
+    <template if:true={isLoading}>
+        <!-- Loader -->
+        <div class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header classForSpecificlargeIcon">
+            <lightning-icon icon-name="standard:app" size="large" class="header-icon"></lightning-icon>
+            <div class="classForTitle">
+                <h1 class="header-title">{labels.AdditionalServicesRequired}</h1>
+                <p class="header-subtitle">{labels.Pleaseenteranyspecialinstructionsrelatedtoyourdocuments}</p>
+            </div>
+        </div>
+
+        <!-- Delivery Instructions Section -->
+        <div class="input-section">
+            <p class="input-header">{labels.SpecialInstructions}</p>
+            <div class="input-group">
+                <label class="input-title" for="instruction">{labels.Instructions}</label>
+                <lightning-textarea label="Instructions"  variant="label-hidden" name="instruction" placeholder={instructionPlaceholder} read-only={readOnly}  value={instruction} class="textarea-instructions" onchange={handleInputChange}></lightning-textarea>
+            </div>
+        </div>
+    </div>
+</template>
+</template>

@@ -1,0 +1,22 @@
+<template>
+    <div class="container">
+        <lightning-button class="button-container" label="Add Payment" variant="brand" icon-name="utility:add"
+            onclick={handleAddPaymentClick}></lightning-button>
+
+        <template if:true={showFields}>
+            <div class="input-row">
+                <lightning-combobox class="input-field" name="paymentType" label="Payment Type" value={paymentType}
+                    options={paymentTypeOptions} onchange={handlePaymentTypeChange}>
+                </lightning-combobox>
+
+                <lightning-combobox class="input-field" name="cardType" label="Card Type" value={cardType}
+                    options={cardTypeOptions} onchange={handleCardTypeChange}>
+                </lightning-combobox>
+
+                <lightning-input class="input-field" name="paymentAmount" label="Payment Amount" type="currency"
+                    value={paymentAmount} onchange={handlePaymentAmountChange}>
+                </lightning-input>
+            </div>
+        </template>
+    </div>
+</template>

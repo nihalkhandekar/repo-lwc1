@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="address1" type="String" label="Address Line 1" description="First line of the address" />
+            <property name="address2" type="String" label="Address Line 2" description="Second line of the address" />
+            <property name="city" type="String" label="City" description="City of the user" />
+            <property name="state" type="String" label="State" description="State of the user" />
+            <property name="country" type="String" label="Country" description="Country of the user" />
+            <property name="zipCode" type="String" label="Postal Code" description="Postal code of the user" />
+            <property name="isReadOnly" type="Boolean" label="Read Only" description="Read-only flag for the fields" />
+            <property name="showError" type="Boolean" label="showError" description="showError" /> <!-- Added for Esq -->
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

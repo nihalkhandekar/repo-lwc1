@@ -1,0 +1,120 @@
+<template>
+    <div class="containermain">
+        <div class="containerleft">
+            <div class="header1container">
+                <div class="header1icon">
+                    <lightning-icon icon-name="standard:contract_line_outcome" size="large"></lightning-icon>
+                </div>
+                <div class="header1body">
+                    <div class="header1bodyuppersection">
+                        {labels.Submit}
+                    </div>
+                    <div class="header1bodylowersection">{labels.Pleasereviewallinformationenteredbeforeproceeding}
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="bodymain">
+                <div class="bodysection1">{labels.Byclickingyouareallowingyourapostilleorauthenticationrequesttobe}
+                   
+                </div>
+                <div class="bodysection2">
+                    <div class="bodysection2upperpart">
+                        <p class="bodysection2upperpartleft">{labels.PreferredMethod}:
+                        </p>
+                        <p class="bodysection2upperpartright">
+                            {labels.MailingAddress}:
+                        </p>
+                    </div>
+                    <div class="bodysection2lowerpart">
+                        <p class="bodysection2lowerpartleft">
+                            {labels.HanddeliveryoforiginaldocumentorsendviaFedEUPSorDHL}:
+                        </p>
+                        <p class="bodysection2lowerpartright">
+                            "Secretary of the State, Authentications and Apostille Unit, 165 Capitol Avenue Suite 1000, Hartford, CT 06106"
+                        </p>
+                    </div>
+                </div>
+                <div class="bodysection2">
+                    <div class="bodysection2upperpart">
+                        <p class="bodysection2upperpartleft">
+                           {labels.FirstClassOrPriorityMail}
+                        </p>
+                        <p class="bodysection2upperpartright">
+                            {labels.MailingAddress}:
+                        </p>
+                    </div>
+                    <div class="bodysection2lowerpart">
+                        <p class="bodysection2lowerpartleft">
+                            {labels.FirstClassorPrioritMailthroughtheUSPostalService}
+                            
+                        </p>
+                        <p class="bodysection2lowerpartright">
+                            "Secretary of the Sta te, Authentications and Apostille Unit, P.O. Box 150470, Hartford, CT 06115-0470"
+                        </p>
+                    </div>
+                </div>
+                <div class="bodysection4">
+                    <strong>{labels.Donforget}:</strong> {labels.Uploadorincludeaprepaidreturnshippinglabel}<br/>
+                    {labels.Ifaprepaidreturnenvelopeorlabelisnotprovidedthe}
+                </div>
+                <div class="bodysection5">
+                    {labels.WeAreNotResponsibleFor}
+                </div>
+                <div class="bodysection6">
+{labels.YourOrderWillBeProcessedOnlyAfterWeReceiveAndApprove} 
+               </div>
+            </div>
+            <div class="bodysection7">
+                <p class="bodysection7internal">
+                    <input type="checkbox" checked={isChecked} onchange={handleCheckboxChange}/>
+                    {labels.Ihavereadandagreetothetermsfthisonlinesubmission}<strong style="color: red;">*</strong>
+                </p>
+                <p class="bodysection7internal">
+                    <input type="checkbox" checked={isDocumentsChecked} onchange={handleDocumentsCheckboxChange}/>
+                    {labels.IConfirm}<strong style="color: red;">*</strong>
+                </p>
+            </div>
+        </div>
+
+        <div class="containerright">
+            <div class="header2container">
+                <div class="header2icon">
+                    <lightning-icon icon-name="standard:answer_best" size="large"></lightning-icon>
+                </div>
+                <div class="header2body">
+                    <div class="header2bodyuppersection">
+                        {labels.Questions}? {labels.ContactUs}?
+                    </div>
+                    <div class="header2bodylowersection">
+                       {labels.ContactusifyouhaveanyquersperGivenMentionedDetailsBelow}
+                    </div>
+                </div>
+            </div>
+            <div class="body2main">
+                <div class="body2section1">
+                    <strong>{labels.Timing}: </strong> 08:30 am to 04:00 pm
+                </div>
+                <div class="body2section1">
+                    <strong>Email: </strong><a class="clicklink" href="#" onclick={handleClickMail}>bsd@ct.gov</a>
+                    <template if:true={notify}>
+                        <div class="slds-notify slds-notify_alert slds-alert_offline" role="alert">
+                            <span class="slds-assistive-text">offline</span>
+                            <span class="slds-icon_container slds-icon-utility-offline slds-m-right_x-small">
+                            </span>
+                            <h2>"mailto:bsd@ct.gov?subject=bsd%40ct.gov" {labels.copiedtoyourclipboard}</h2>
+                        </div>
+                    </template>
+                </div>
+                <div class="lineseprate">
+                </div>
+                <div class="body2section1">
+                    {labels.Clickto} <a class="clicklink" href="#" onclick={handleClickSupport}>{labels.CreateaSupportTicket}:</a>
+                </div>
+                <div class="body2section2">
+                    {labels.Supportticketsgodirectlytoourofficeandanagentwillreospondtoyoubyemail}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

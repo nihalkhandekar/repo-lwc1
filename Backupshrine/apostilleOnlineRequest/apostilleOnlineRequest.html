@@ -1,0 +1,527 @@
+<template>
+    <lightning-card>
+        <div class="SE-mainBody">
+            <div class="SE-content">
+                <div class="SE-top">
+                    <div class="SE-linkLable apostilleLabel">
+                        Apostille Request
+                    </div>
+                </div>
+                <div class="SE-Card firstDivForSearching">
+                    <div class="SE-searchCardHeader searchheader searchTitleHeader">
+                        <div class="SE-searchCardHeaderIcon searchtitle">
+                            <lightning-icon icon-name="standard:search" size="medium"></lightning-icon>
+                            <div class="SE-searchCardHeaderTitleText textalign">
+                                Search
+                            </div>
+                        </div>
+                        <div class="SE-searchCardHeaderTitle searchInputFieldsAndComboboxContainer">
+                            <!-- <div class="SE-searchCardHeaderTitleText">
+                                Search
+                            </div> -->
+                            <div class="SE-searchToggle">
+                                <span class="slds-p-right_x-small">Advanced Search</span>
+                                <lightning-input type="toggle" label="Advanced Search" name="advancedSearch"
+                                    checked={showAdvancedSearch} onchange={handleToggleChange}
+                                    variant="label-hidden"></lightning-input>
+                                <!-- <span class="slds-p-left_x-small">Basic Search</span> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="SE-searchCardContent searchInputFieldsAndComboboxContainer">
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" label="Work Order#"
+                                        name="workOrder" id="WorkOrder" type="text" value={workOrder}
+                                        onchange={handleInputChange} placeholder="e.g 20240821-001">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" name="lastName" label="Last Name"
+                                        id="LastName" type="text" value={lastName} onchange={handleInputChange}
+                                        placeholder="e.g Doe">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" name="firstName" label="First Name"
+                                        id="FirstName" type="text" value={firstName} onchange={handleInputChange}
+                                        placeholder="e.g John">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" name="organizationName"
+                                        label="Organization Name" id="OrganizationName" type="text"
+                                        value={organizationName} onchange={handleInputChange}
+                                        placeholder="e.g Administration">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2">
+                                    <lightning-input class="SE-searchCardInputLabel" name="emailAddress"
+                                        label="Email Address" id="EmailAddress" type="text" value={emailAddress}
+                                        onchange={handleInputChange} placeholder="e.g johndoe@gmail.com">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox
+                                        class="SE-searchCardInputLabel comboboxItemBackgroundColorChange" name="status"
+                                        label="Status" id="Status" value={status} options={statusOptions}
+                                        onchange={handleInputChange} placeholder="Select Status">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <!-- <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" name="expeditedFee"
+                                        label="Expedited Fee" id="ExpeditedFee" type="text" value={expeditedFee}
+                                        onchange={handleInputChange} placeholder="Enter expedite fee">
+                                    </lightning-input>
+                                </lightning-layout-item> -->
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" name="receivedDate"
+                                        label="Received Date" id="ReceivedDate" type="date" value={receivedDate}
+                                        onchange={handleInputChange} date-style="short">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-searchCardInputLabel" name="expedited"
+                                        label="Expedited" id="expedited"  options={expeditedOption} value={expedited}
+                                        onchange={handleInputChange}>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <template if:true={showAdvancedSearch}>
+                                    <lightning-layout-item style="flex-basis: 20%;" size="2"
+                                        class="slds-p-right_medium">
+                                        <lightning-input class="SE-searchCardInputLabel" name="apostilleDate"
+                                            label="Apostille Date" id="ApostilleDate" type="date" value={apostilleDate}
+                                            onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item style="flex-basis: 20%;" size="2">
+                                        <lightning-input class="SE-searchCardInputLabel" name="apostilleNumber"
+                                            label="Apostille #" id="ApostilleNumber" type="text" value={apostilleNumber}
+                                            onchange={handleInputChange} placeholder="e.g 123456-1">
+                                        </lightning-input>
+                                    </lightning-layout-item>
+                                </template>
+                            </lightning-layout>
+                        </div>
+                        <template if:true={showAdvancedSearch}>
+                            <div>
+                                <lightning-layout>
+                                    <lightning-layout-item style="flex-basis: 20%;" size="2"
+                                        class="slds-p-right_medium">
+                                        <lightning-combobox
+                                            class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                                            name="documentType" label="Type of Document" id="DocumentType"
+                                            value={documentType} options={documentTypeOptions}
+                                            onchange={handleInputChange} placeholder="Select type of document">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item style="flex-basis: 20%;" size="2"
+                                        class="slds-p-right_medium">
+                                        <lightning-combobox
+                                            class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                                            name="signedBy" label="Signed by" id="SignedBy" value={signedBy}
+                                            options={signedByOptions} onchange={handleInputChange}
+                                            placeholder="Select signed by">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item style="flex-basis: 20%;" size="2"
+                                        class="slds-p-right_medium">
+                                        <lightning-combobox
+                                            class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                                            name="officialCapacity" label="Official Capacity" id="OfficialCapacity"
+                                            value={officialCapacity} options={officialCapacityOptions}
+                                            onchange={handleInputChange} placeholder="Select official capacity">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                    <lightning-layout-item style="flex-basis: 20%;" size="2">
+                                        <lightning-combobox
+                                            class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                                            name="country" label="Country" id="Country" value={country}
+                                            options={countryOptions} onchange={handleInputChange}
+                                            placeholder="Select Country">
+                                        </lightning-combobox>
+                                    </lightning-layout-item>
+                                </lightning-layout>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="SE-footer">
+                        <div class="button-group">
+                            <div class="clear-all" onclick={handleClear}>
+                                <span class="clear-icon-wrapper">
+                                    <lightning-icon icon-name="utility:close" size="xx-small"
+                                        class="clear-icon"></lightning-icon>
+                                </span>
+                                <span class="clear-text">Clear All</span>
+                            </div>
+                            <!-- <lightning-button icon-name="utility:clear" alternative-text="Clear All" label="Clear All"
+                                onclick={handleClear} title="Clear All" class="clearbutton">
+                            </lightning-button> -->
+                            <lightning-button icon-name="utility:search" variant="brand" alternative-text="Search"
+                                label="Search" onclick={handleSearch} title="Search" class="customButton">
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="SE-Card SE-searchCardContent secondDivForDataTable TrHoverBackGroundColorChange">
+                    <div class="slds-grid slds-grid_align-end">
+                        <div class="buttoncontainerfilter">
+                            <div class="left-button ">
+                                <span class="slds-text-title_bold slds-m-right_x-small">Search Result:</span>
+                                <lightning-badge label={recordCountValue} class="totoalcountbadge">
+                                </lightning-badge>
+                            </div>
+                            <div class="right-buttons">
+                                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-quarter" label="This Quarter"
+                                    class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-button-menu icon-position="right" data-id="filterMenu"
+                                    alternative-text="Filter By SStatus" label="Filter By Status" title="Filter"
+                                    tooltip="Filter by status" icon-name="utility:filterList"
+                                    onselect={handleFilterSelect}>
+                                    <lightning-menu-item label="Submitted" value="Submitted"></lightning-menu-item>
+                                    <lightning-menu-item label="Documents Received" value="Documents Received"></lightning-menu-item>
+                                    <lightning-menu-item label="Cancelled By Staff" value="Cancelled By Staff" ></lightning-menu-item>
+                                    <lightning-menu-item label="Cancelled By Customer" value="Cancelled By Customer"></lightning-menu-item>
+                                    <lightning-menu-item label="Order Completed - Mail" value="Order Completed - Mail"></lightning-menu-item>
+                                    <lightning-menu-item label="Order Completed – Pick Up" value="Order Completed – Pick Up"></lightning-menu-item>
+                                </lightning-button-menu>
+                            </div>
+                        </div>
+                    </div>
+                    <template if:true={isLoading}>
+                        <div class="spinner-container">
+                            <lightning-spinner alternative-text="Loading..." variant="brand"
+                                size="large"></lightning-spinner>
+                        </div>
+                    </template>
+                    <template if:false={isLoading}>
+                        <template if:true={showResults}>
+                            <template if:true={recordCount}>
+                                <div class="custom-table-spacing slds-scrollable_x">
+                                    <table
+                                        class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered onlineReq-table custom-table">
+                                        <thead>
+                                            <tr class="custom-header">
+                                                <th scope="col" onclick={sortByField} data-field="ApplicationID">
+                                                    <div class="slds-truncate" title="Work Order #">Work Order #
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="Last_Name__c">
+                                                    <div class="slds-truncate" title="Last Name">Last Name
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="First_Name__c">
+                                                    <div class="slds-truncate" title="First Name">First Name
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="Organization_Name__c">
+                                                    <div class="slds-truncate" title="Organization Name">Organization
+                                                        Name
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="Email_Address__c">
+                                                    <div class="slds-truncate" title="Email Address">Email Address
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="Document_Type__c">
+                                                    <div class="slds-truncate" title="Document Type">Document Type
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <!-- <th scope="col" onclick={sortByField} data-field="Expedite_Request_Boolean__c">
+                                                    <div class="slds-truncate" title="Expedited">Expedited
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th> -->
+                                                <th scope="col" onclick={sortByField} data-field="AppliedDate">
+                                                    <div class="slds-truncate" title="Received Date">Received Date
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="Status">
+                                                    <div class="slds-truncate" title="WO Status">WO Status
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" title="Actions">Actions</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template if:true={isRecordsLoading}>
+                                                <tr class="no-border-row TrHoverBackGroundColorChange">
+                                                    <td colspan="5" class="slds-text-align_center loader-row">
+                                                        <lightning-spinner alternative-text="Loading records..."
+                                                            variant="brand" size="large"></lightning-spinner>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                            <template if:false={isRecordsLoading}>
+                                                <template for:each={paginatedResult} for:item="row">
+                                                    <tr key={row.Id}
+                                                        class="custom-column classFortableBodyUpdationSpecificCss">
+                                                        <td class={row.clickable} data-id={row.Id}
+                                                            onclick={toggleDocument}>
+                                                            <div class="slds-truncate tableText" title={row.workOrder}>
+                                                                <template if:true={row.hasDocuments}
+                                                                    class="slds-button slds-button_icon slds-m-right_x-small"
+                                                                    aria-expanded={row.isExpanded}
+                                                                    aria-controls="documents-{row.Id}">
+                                                                    <span
+                                                                        class="slds-icon_container slds-icon-border-filled icon-border">
+                                                                        <lightning-icon class="upDownIcon"
+                                                                            icon-name={row.iconName} size="xx-small"
+                                                                            alternative-text="Toggle"></lightning-icon>
+                                                                    </span>
+                                                                </template>
+                                                                <template if:true={row.hasDocuments}>
+                                                                    <span class="tableText">{row.WorkOrder}</span>
+                                                                    <template if:false={row.isExpanded}>
+                                                                        <span class="doc-count">+{row.docCount}</span>
+                                                                    </template>
+                                                                </template>
+                                                                <template if:false={row.hasDocuments}>
+                                                                    <span class="tableTextChild">{row.WorkOrder}</span>
+                                                                </template>
+                                                            </div>
+                                                        </td>
+                                                        <td class="column2">
+                                                            <div class="slds-truncate" title={row.LastName}>
+                                                                {row.LastName}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column3">
+                                                            <div class="slds-truncate" title={row.FirstName}>
+                                                                {row.FirstName}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column4">
+                                                            <div class="slds-truncate" title={row.OrganizationName}>
+                                                                {row.OrganizationName}</div>
+                                                        </td>
+                                                        <td class="column5">
+                                                            <div class="slds-truncate" title={row.EmailAddress}>
+                                                                {row.EmailAddress}</div>
+                                                        </td>
+                                                        <td class="column6">
+                                                            <div class="slds-truncate" title={row.DocumentType}>
+                                                                {row.documentType}</div>
+                                                        </td>
+                                                        <!-- <td class="column7">
+                                                            <div class="slds-truncate" title={row.Expedited}>
+                                                                {row.expeditedLabel}
+                                                            </div>
+                                                        </td>                                                         -->
+                                                        <td class="column7">
+                                                            <div class="slds-truncate" title={row.ReceivedDate}>
+                                                                {row.AppliedDate}</div>
+                                                        </td>
+                                                        <td class="column8">
+                                                            <template if:false={row.isExpanded}>
+                                                                <div class={row.unexpandedStatusClass}
+                                                                    title={row.unexpandedStatus}>
+                                                                    {row.unexpandedStatus}
+                                                                </div>
+                                                            </template>
+                                                            <template if:true={row.isExpanded}>
+                                                                <div class={row.expandedStatusClass}
+                                                                    title={row.expandedStatus}>
+                                                                    {row.expandedStatus}
+                                                                </div>
+                                                            </template>
+                                                        </td>
+                                                        <!-- <td class="column8">
+                                                        <div class="slds-truncate" title={row.WOStatus}>{row.Status}
+                                                        </div>
+                                                    </td> -->
+                                                        <td class="column9">
+
+                                                            <lightning-button-menu alternative-text="Actions"
+                                                                class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                variant="bare" icon-name="utility:threedots_vertical"
+                                                                onselect={handleAction} menu-alignment="auto"
+                                                                data-id={row.Id} data-doc={row.documentType}
+                                                                data-docid={row.docId}
+                                                                data-certificate={row.certificateNumber}
+                                                                data-status={row.Status}>
+                                                                <lightning-menu-item label="View Request" variant="base"
+                                                                    value="view_request"></lightning-menu-item>
+                                                                <lightning-menu-item label="Process Apostille Request" variant="base"
+                                                                    value="edit_request"></lightning-menu-item>
+                                                                <!-- <lightning-menu-item label="Edit Request 2" variant="base" value="edit_request2"></lightning-menu-item> -->
+                                                                <lightning-menu-item label="Add Payment" variant="base"
+                                                                    value="add_paymnet"></lightning-menu-item>
+                                                                <lightning-menu-item label="View Apostille Certificate"
+                                                                    variant="base"
+                                                                    value="view_apostille_certificate"></lightning-menu-item>
+                                                                <lightning-menu-item label="View Order Details Report"
+                                                                    variant="base"
+                                                                    value="view_order_details_report"></lightning-menu-item>
+
+                                                            </lightning-button-menu>
+                                                        </td>
+                                                    </tr>
+                                                    <template if:true={row.isExpanded}>
+                                                        <template for:each={row.documents} for:item="document">
+                                                            <tr key={document.Id} class="custom-column-child">
+                                                                <td class="childcolumn1">
+                                                                    <div class="slds-truncate tableTextChild"
+                                                                        title={document.ApplicationID}>
+                                                                        {document.ApplicationID}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="childcolumn2">
+                                                                    <div class="slds-truncate" title={row.LastName}>
+                                                                        {row.LastName}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="childcolumn3">
+                                                                    <div class="slds-truncate" title={row.FirstName}>
+                                                                        {row.FirstName}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="childcolumn4">
+                                                                    <div class="slds-truncate"
+                                                                        title={row.OrganizationName}>
+                                                                        {row.OrganizationName}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="childcolumn5">
+                                                                    <div class="slds-truncate" title={row.EmailAddress}>
+                                                                        {row.EmailAddress}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="childcolumn6">
+                                                                    <div class="slds-truncate" title={document.DocType}>
+                                                                        {document.DocType}</div>
+                                                                </td>
+                                                                <!-- <td class="column7">
+                                                                    <div class="slds-truncate" title={row.Expedited}>
+                                                                        {row.expeditedLabel}
+                                                                    </div>
+                                                                </td>                                                                 -->
+                                                                <td class="childcolumn7">
+                                                                    <div class="slds-truncate" title={row.AppliedDate}>
+                                                                        {row.AppliedDate}</div>
+                                                                </td>
+                                                                <td class="childcolumn8">
+                                                                    <div class={document.statusClass}
+                                                                        title={document.Status}>
+                                                                        {document.Status}
+                                                                    </div>
+                                                                </td>
+                                                                <td class="childcolumn9">
+                                                                    <lightning-button-menu alternative-text="Actions"
+                                                                        class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                        variant="bare"
+                                                                        icon-name="utility:threedots_vertical"
+                                                                        onselect={handleAction} menu-alignment="auto"
+                                                                        data-id={row.Id} data-doc={document.DocType}
+                                                                        data-status={document.Status}
+                                                                        data-certificate={document.certificateNumber}
+                                                                        data-docid={document.Id}>
+                                                                        <lightning-menu-item label="View Request"
+                                                                            variant="base"
+                                                                            value="view_request"></lightning-menu-item>
+                                                                        <lightning-menu-item label="Process Apostille Request"
+                                                                            variant="base"
+                                                                            value="edit_request"></lightning-menu-item>
+                                                                        <!-- <lightning-menu-item label="Edit Request 2" variant="base" value="edit_request2"></lightning-menu-item> -->
+                                                                        <lightning-menu-item label="Add Payment"
+                                                                            variant="base"
+                                                                            value="add_paymnet"></lightning-menu-item>
+                                                                        <lightning-menu-item
+                                                                            label="View Apostille Certificate"
+                                                                            variant="base"
+                                                                            value="view_apostille_certificate"></lightning-menu-item>
+                                                                        <lightning-menu-item
+                                                                            label="View Order Details Report"
+                                                                            variant="base"
+                                                                            value="view_order_details_report"></lightning-menu-item>
+
+                                                                    </lightning-button-menu>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- <div class="SE-pagination"> -->
+                                <template if:true={showPages}>
+                                    <div class="pagination-container">
+                                        
+                                                <lightning-button class="pagination-button" label="<< Prev"
+                                                    onclick={handlePreviousPage} disabled={isPreviousDisabled}
+                                                    variant="neutral">
+                                                </lightning-button>
+        
+                                                <div class="page-info">
+                                                    <span class="page-range">{startRecord}-{endRecord} of {totalRecords} &nbsp;</span>
+                                                    <span class="page-text"> | Page &nbsp; 
+                                                        <lightning-input 
+                                                        type="number" 
+                                                        value={currentPage} 
+                                                        label="Current Page" 
+                                                        variant="label-hidden"
+                                                        class="current-page-input"
+                                                        onchange={handlePageChange}>
+                                                    </lightning-input> &nbsp;
+                                                    of {totalPages}
+                                                </span>
+                                                </div>
+        
+                                                <lightning-button class="pagination-button" label="Next >>"
+                                                    onclick={handleNextPage} disabled={isNextDisabled} variant="neutral">
+                                                </lightning-button>
+                                        
+                                    </div>
+                                </template>
+                                <!-- </div> -->
+                            </template>
+                            <template if:false={recordCount}>
+                                <p class="no-data-message">You have not submitted any apostille requests.</p>
+                            </template>
+                        </template>
+
+                    </template>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>

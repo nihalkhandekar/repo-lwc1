@@ -1,0 +1,104 @@
+<template>
+    <!-- Container with Padding -->
+    <div class="container">
+        <!-- Add Document Button -->
+        <div class="button-container">
+            <lightning-button 
+                label="Add Document" 
+                variant="brand" 
+                icon-name="utility:add" 
+                onclick={handleAddRow}>
+            </lightning-button>
+        </div>
+
+        <!-- Heading with Background -->
+        <template if:true={documentRows}>
+            <div class="heading-container">
+                <div class="heading-grid slds-grid slds-gutters">
+                    <div class="slds-col heading-cell">Type of Document</div>
+                    <div class="slds-col heading-cell">Name of the Person Listed on Document</div>
+                    <div class="slds-col heading-cell">Title of Officially Signing the Document</div>
+                    <div class="slds-col heading-cell">Name of the Notary Public/Public Official</div>
+                    <div class="slds-col heading-cell">Fee</div>
+                    <div class="slds-col heading-cell">Actions</div>
+                </div>
+            </div>
+
+            <!-- Display Rows Dynamically -->
+            <template for:each={documentRows} for:item="row" for:index="index">
+                <div key={row.id} class="slds-grid slds-gutters slds-p-around_small row">
+                    <!-- Type of Document -->
+                    <div class="slds-col column"> 
+                        <lightning-combobox 
+                            value={row.documentType}
+                            options={documentTypeOptions} 
+                            data-id={row.id} 
+                            data-name="documentType"
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    
+                    <!-- Name of the Person -->
+                    <div class="slds-col column"> 
+                        <lightning-input 
+                            value={row.personName} 
+                            data-id={row.id} 
+                            data-name="personName"
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Title of Signing -->
+                    <div class="slds-col column"> 
+                        <lightning-combobox 
+                            value={row.signingTitle}
+                            options={signingTitleOptions} 
+                            data-id={row.id} 
+                            data-name="signingTitle"
+                            onchange={handleInputChange}>
+                        </lightning-combobox>
+                    </div>
+                    
+                    <!-- Name of the Notary Public/Public Official -->
+                    <div class="slds-col column"> 
+                        <lightning-input 
+                            value={row.notaryName} 
+                            data-id={row.id} 
+                            data-name="notaryName"
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Fee -->
+                    <div class="slds-col column"> 
+                        <lightning-input 
+                            type="currency" 
+                            value={row.fee} 
+                            data-id={row.id} 
+                            data-name="fee"
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="slds-col column"> 
+                        <a href="javascript:void(0);" 
+                           class="action-link" 
+                           data-id={row.id} 
+                           onclick={handleEditRow}>
+                           Edit
+                        </a>
+                        <lightning-button-icon 
+                            icon-name="utility:delete" 
+                            alternative-text="Delete Row"
+                            variant="bare"
+                            class="slds-m-left_x-small"
+                            onclick={handleDeleteRow}
+                            data-id={row.id}>
+                        </lightning-button-icon>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,34 @@
+<template>
+    <c-apostille-request-formchild
+        first-name={firstName}
+        last-name={lastName}
+        organization-name={organizationName}
+        email={email}
+        phone={phone}
+        address-line1={addressLine1}
+        suite={suite}
+        city={city}
+        state={state}
+        zip-code={zipCode}
+        country={country}
+        onformchange={handleFormChange}
+        ></c-apostille-request-formchild>
+    <c-apostille-shipping-address-child
+        first-name={shippingFirstName}
+        last-name={shippingLastName}
+        business-name={shippingBusinessName}
+        address-line1={shippingAddressLine1}
+        suite={shippingSuite}
+        city={shippingCity}
+        state={shippingState}
+        zip-code={shippingZipCode}
+        country={shippingCountry}
+        same-as-contact-address={sameAsContactAddress}
+        same-as-contact-address-string={sameAsContactAddressString}
+        onformchange={handleFormChange}
+    ></c-apostille-shipping-address-child>
+    <c-documentinfo></c-documentinfo>
+    <c-additional-services></c-additional-services>
+    <c-apostille-return-delivery></c-apostille-return-delivery>
+    <c-navigation-buttons></c-navigation-buttons>
+</template>

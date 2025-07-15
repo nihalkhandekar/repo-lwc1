@@ -1,0 +1,62 @@
+.notification-container {
+    width: 392px; 
+    height: auto; 
+    gap: 20px;
+    opacity: 1; 
+}
+
+.header-stack {
+    width: 100%; 
+    height: auto; 
+    gap: 8px;
+    opacity: 1; 
+}
+
+.notification-stack {
+    width: 100%; 
+    height: auto; 
+    padding: 0px 0px 8px 0px;
+    gap: 10px;
+    border-bottom: 1px solid #E5E5E5;
+    opacity: 1; 
+}
+
+.notification-title {
+    width: 123px;
+    height: 30px;
+    font-family: 'SF Pro', sans-serif;
+    font-size: 20px;
+    font-weight: 590;
+    line-height: 30px;
+    text-align: left;
+    color: rgba(2, 89, 153, 1);
+    opacity: 1; 
+}
+
+.sub-title {
+    width: 100%; 
+    height: auto; 
+    font-family: 'SF Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 510;
+    line-height: 18px;
+    text-align: left;
+    color: rgba(116, 116, 116, 1);
+    opacity: 1; 
+    margin-top: 8px;
+    letter-spacing: 0.3px;
+}
+
+.new-notification {
+    width: 392px;
+    height: 24px;
+    font-family: 'SF Pro', sans-serif;
+    font-size: 14px;
+    font-weight: 510;
+    line-height: 20px;
+    text-align: center;
+    color: rgba(116, 116, 116, 1);
+    opacity: 1; 
+    gap: 0; 
+    margin-top: 16px;
+}

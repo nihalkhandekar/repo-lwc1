@@ -1,0 +1,219 @@
+.activity-container {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    font-family: "SF Pro", sans-serif;
+}
+
+.activity-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 590;
+    margin: 0;
+    flex-grow: 1;
+    color: #025999;
+}
+
+.today-button {
+    font-size: 14px;
+    padding: 0.25rem 0.75rem;
+    font-weight: 590;
+    /* background-color: #f4f6f9;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px; */
+    color: #003A62;
+}
+
+:host{
+    --dxp-s-button-font-weight:590;
+    --dxp-s-button-font-size:14px;
+}
+
+.activity-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.activity-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    width: 30%;
+    /* padding: 1rem; */
+    height: 6rem;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top: 4px solid transparent;
+}
+
+.submitted {
+    border-top-color: #eef4ff;
+    /* background-color: #EEF4FF; */
+}
+
+.approved {
+    border-top-color: #cdefc4;
+}
+
+.rejected {
+    border-top-color: #fef1ee;
+}
+
+/* .card-header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: inherit;
+} */
+
+.submitted .card-header {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding: 0.5rem; */
+    background-color: #eef4ff;
+}
+
+.approved .card-header {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #cdefc4;
+}
+
+.rejected .card-header {
+    width: 100%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #fef1ee;
+}
+
+.card-title {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: inherit;
+    text-align: center;
+    padding-bottom: 0.4rem;
+}
+
+.card-count-container {
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.card-count {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1d1e1f;
+    height: 100%;
+    /* padding: 1rem; */
+}
+
+.submitted .card-title {
+    color: #033d68;
+}
+
+.approved .card-title {
+    color: #194e31;
+}
+
+.rejected .card-title {
+    color: #ba0517;
+}
+
+.notifications {
+    margin-top: 1rem;
+}
+
+.notifications-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #025999;
+}
+
+.no-notifications {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    text-align: center;
+    color: #6b7078;
+}
+
+.placeholder-icon {
+    margin-top: 1rem;
+}
+
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    font-size: 12px;
+    font-weight: 510;
+    color: #747474;
+}
+
+.emptyNotificationImage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.classForMyActivityTodayIconCss .slds-button__icon {
+    fill: var(--slds-c-icon-color-foreground, currentColor);
+    width: 16px;
+    height: 16px;
+    color: #025999;
+}
+
+.activity-header .slds-button__icon {
+    fill: var(--slds-c-icon-color-foreground, currentColor);
+    width: 16px;
+    height:16px;
+    color: #025999;
+}
+
+.submitted .anchor{
+    height: 100%;
+    width:100%;
+}
+
+.approved .anchor{
+    height: 100%;
+    width:100%;
+}
+
+.rejected .anchor{
+    height: 100%;
+    width:100%;
+}

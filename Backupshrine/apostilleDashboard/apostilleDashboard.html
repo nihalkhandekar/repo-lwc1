@@ -1,0 +1,30 @@
+<template>
+    <div class="dashboard-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div><span class="dashboard-title">{labels.MyDashboard}</span></div>
+            <div>
+                <lightning-button label={labels.StartNewApostilleRequest} variant="brand-outline" icon-name="standard:document"  onclick={navigateToForm} class="start-request-button "></lightning-button></div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-cards">
+            <template for:each={dashboardItems} for:item="item">
+                <a href={item.link} key={item.id} class="dashboard-card" target={item.target}>
+                    <div class="dashboard-card-content">
+                        <div class="dashboard-card-icon">
+                            <lightning-icon icon-name={item.icon} size="large" class="dashboard-icon"></lightning-icon>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">{item.title}</h2>
+                            <p class="card-description">{item.description}</p>
+                        </div>
+                    </div>
+                    <div class="spacer"></div>
+                    <hr class="divider">
+                    <span class="view-link">{labels.View}</span> 
+                </a>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,50 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="action:update_status" size="small" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Account Status</h1>
+                <p class="description">Enter account status to continue further.</p>
+            </div>
+        </div>
+
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="custom-label" for="Seal/Stampof">Seal/Stamp of</label>
+                        <lightning-textarea
+                            name="Seal/Stamp of"
+                            label="Seal/Stamp of"
+                            variant="label-hidden"
+                            id="SealStampof"
+                            placeholder="Enter seal/stamp of..."
+                            value={SealStampof}
+                            class="input-field"  
+                            read-only={isReadOnly} 
+                            onchange={handlesealstateChange}>
+                        </lightning-textarea>
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="custom-label" for="Notes">Notes</label>
+                        <lightning-textarea
+                            name="Notes"
+                            label="Notes"
+                            variant="label-hidden"
+                            id="Notes"
+                            placeholder="Enter notes..."
+                            value={Notes}
+                            class="input-field" 
+                            read-only={isReadOnly}  
+                            onchange={handlenoteChange}>
+                        </lightning-textarea>
+                </div>
+                        
+            </div>
+        </div>
+
+
+    </div>
+</template>

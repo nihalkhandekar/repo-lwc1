@@ -1,0 +1,208 @@
+<template>
+    <lightning-card title="Search By">
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Work Order Number"
+                id="ApplicationId"
+                type="text" 
+                value={ApplicationId} 
+                onchange={handleApplicationIdChange}
+                placeholder="Enter Work Order Number">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Name"
+                id="Name"
+                type="text" 
+                value={Name} 
+                onchange={handleNameChange}
+                placeholder="Enter Name">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Organisation Name"
+                id="OrganisationName"
+                type="text" 
+                value={OrganisationName} 
+                onchange={handleOrganisationNameChange}
+                placeholder="Enter Organisation Name">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Recieved Date"
+                id="AppliedeDate"
+                type="date" 
+                value={AppliedeDate} 
+                onchange={handleAppliedeDateChange}
+                placeholder="Enter Recieved Date">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Email Address"
+                id="EmailAddress"
+                type="text" 
+                value={EmailAddress} 
+                onchange={handleEmailAddressChange}
+                placeholder="Enter Email Address">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-combobox 
+                label="Status"
+                id="StatusSelect"
+                value={StatusSelect} 
+                options={StatusSelectOptions} 
+                onchange={handleStatusSelectChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Expedite Date"
+                id="ExpediteDate"
+                type="checkbox" 
+                checked={ExpediteDate} 
+                onchange={handleExpediteDateChange}>
+            </lightning-input>
+        </div>
+
+
+        
+    </div>
+    <!-- BUTTON FOR SEARCH AND CANCEL -->
+    <lightning-layout-item size="12" padding="around-small">
+        <div style="margin-right:10px;display: flex; justify-content: flex-end; gap: 10px;">
+            <lightning-button icon-name="utility:clear" variant="base" alternative-text="Clear All" label="Clear All"
+                onclick={handleClear} title="Clear All">
+            </lightning-button>
+    
+            <lightning-button icon-name="utility:search" variant="brand" alternative-text="Search" label="Search"
+                onclick={handleSearch} class="custom-button" title="Search">
+            </lightning-button>
+        </div>
+    </lightning-layout-item>
+
+</lightning-card>
+
+
+<lightning-card>
+    <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+        <div class="button-container">
+        
+            <div class="left-button slds-p-left_small">
+                <span class="slds-text-title_bold slds-m-right_x-small">Searched Result:</span>
+                <lightning-badge
+                    label={recordCountValue}
+                    class="slds-badge_inverse">
+                </lightning-badge>
+            </div>
+
+            <div class="right-buttons">
+                <lightning-badge
+                    data-id="current-day"
+                    label="Current day"
+                    class={badgeClassCurrentDay}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-week" 
+                    label="This week"
+                    class={badgeClassThisWeek}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-month"
+                    label="This month"
+                    class={badgeClassThisMonth}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-quarter"
+                    label="This quarter"
+                    class={badgeClassThisQuarter}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-year"
+                    label="This year"
+                    class={badgeClassThisYear}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>                   
+            
+                <lightning-button-menu
+                    icon-position="right"
+                    data-id="filterMenu"
+                    alternative-text="Filter By Status"
+                    title="Filter"
+                    tooltip="Filter by status"
+                    icon-name="utility:filterList"
+                    onselect={handleFilterSelect}
+                    class="slds-button_icon slds-button_icon-inverse custom-button-menu">
+                    <lightning-menu-item label="New" value="New"></lightning-menu-item>
+                    <lightning-menu-item label="Pending" value="Pending"></lightning-menu-item>
+                    <lightning-menu-item label="Accepted" value="Accepted"></lightning-menu-item>
+                    <lightning-menu-item label="Rejected" value="Rejected"></lightning-menu-item>
+                </lightning-button-menu>
+
+                <span class="slds-text-body_regular slds-m-right_small custom-label" onclick={handleFilterClick}>Filter by status</span>
+
+            </div>
+        </div>
+    </div>
+
+    <lightning-datatable
+        key-field="Id"
+        data={currentRecords} 
+        columns={columns}
+        hide-checkbox-column>
+    </lightning-datatable>
+
+    <!-- Pagination component -->
+    <div class="pagination-container">
+        <!-- Records per page selector -->
+        <label for="recordsPerPage">Records/page:</label>
+            <select id="recordsPerPage" onchange={handlePageSizeChange}>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>
+            <!-- Left arrow button -->
+            <lightning-button-icon 
+                size="small" 
+                class="slds-p-around_small" 
+                variant="bare" 
+                disabled={disableLeftArrow} 
+                onclick={handlePrevious} 
+                icon-name="utility:chevronleft">
+            </lightning-button-icon>
+                
+            <!-- Input box for the page number -->
+                <input 
+                type="number" 
+                class="page-input" 
+                value={currentPage} 
+                min="1" 
+                max={totalPages} 
+                onchange={handlePageInput} />
+                
+            <span class="page-total">/ {totalPages}</span>
+                
+            <!-- Right arrow button -->
+            <lightning-button-icon 
+                size="small" 
+                class="slds-p-around_small" 
+                variant="bare" 
+                onclick={handleNext} 
+                disabled={disableRightArrow} 
+                icon-name="utility:chevronright">
+            </lightning-button-icon>
+    </div>
+</lightning-card>
+
+</template>

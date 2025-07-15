@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: flex-end; /* Aligns the button to the end of the page */
+    padding: .5rem; /* Optional: Adds some padding around the container */
+}
+
+.custom-modal-container {
+    width: 90%;
+    height: 85%;
+    max-width: 95%;
+    max-height: 95%;
+    margin-top: 62px;
+    overflow: hidden; /* Ensure no scrollbars appear */
+}
+
+.custom-close-icon  {
+    --slds-c-icon-color-foreground-default: white;
+ }

@@ -1,0 +1,263 @@
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; 
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.popupheader{
+    --slds-c-modal-radius-border: 16px;
+}
+.popupfooter{
+    --slds-c-modal-radius-border: 16px;
+}
+
+.rejectionReasonCss{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.header-label {
+    font-size: 18px;
+    font-weight: 590;
+    color: rgba(12, 124, 206, 1);
+    align-items: center;
+}
+
+.close-icon{
+    cursor: pointer;
+}
+
+.certiImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; /* Ensures the image is responsive */
+    height: 135px;
+    width: 2000px;
+}
+
+.header-body{
+font-size: 20px;
+font-weight: 700;
+text-align: center;
+color: #181818;
+font-family: 'Salesforce Sans';
+margin-top: 8px;
+}
+
+.page-title{
+    font-family: 'SF Pro', sans-serif; 
+}
+
+.contentMain{
+font-size: 16px;
+font-weight: 700;
+line-height: 24px;
+}
+
+.spantext{
+font-size: 16px;
+font-weight: 400;
+line-height: 24px;
+}
+
+.custom-table-container{
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.custom-header{
+    background-color: #F3F3F3;
+    border: 1px solid #E5E5E5;
+    overflow: hidden;
+}
+.linkText{
+    color:rgba(12, 124, 206, 1);
+}
+
+.track-link {
+    color: #0070d2;
+    /* text-decoration: none; */
+    font-weight: 400;
+    margin-bottom: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.custom-modal {
+    border-radius: 16px 16px 16px 16px;
+    background-color: #ffffff;
+    --slds-c-modal-content-color-background: #ffffff;
+}
+
+.printbutton1{
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-text-color: #ffffff;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-font-weight: 400;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-start:6px;
+    --slds-c-button-spacing-inline-end:16px;
+    --slds-c-button-spacing-block-end:6px;
+    --slds-c-button-spacing-inline-start:16px;
+}
+
+.downloadbutton{
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-text-color: #ffffff;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-font-weight: 400;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-start:6px;
+    --slds-c-button-spacing-inline-end:16px;
+    --slds-c-button-spacing-block-end:6px;
+    --slds-c-button-spacing-inline-start:16px;
+}
+
+
+.sort-icon {
+    width: 12px; /* Set a standard width for the icon */
+    height: 12px; /* Set a standard height for the icon */
+    fill: #747474; /* Color the icon */
+    position: relative; /* Make position relative to avoid moving it */
+    top: 0px; /* Adjust this only if the icon is not vertically aligned */
+    left: 2px; /* Slight adjustment to horizontally align icon */
+}
+
+.sort-icon svg.slds-icon {
+    width: 100%; /* Allow the SVG to take up the full container size */
+    height: 100%; /* Same for height */
+    fill: inherit; /* Ensure the SVG uses the inherited color */
+    position: relative; /* Remove absolute positioning */
+    top: 0; /* Reset position */
+    left: 0; /* Reset position */
+}
+
+
+.custom-container {
+    padding-left: 2px; /* Adjust the padding for left */
+    padding-right: 7px; /* Adjust the padding for right */
+}
+
+.custom-table {    
+    border-radius: 8px; 
+    border: 1px solid #e0e0e0; 
+} 
+
+.custom-table thead {
+    border-radius: 8px 8px 0 0; /* Round the top corners of the table */
+    border: 1px solid #e0e0e0;  /* Light grey outer border for the header */
+    border-bottom: none; /* Remove bottom border of the thead */
+}
+
+.custom-table thead th {
+    border-right: none; /* No border between header columns */
+}
+
+.custom-table tbody tr td {
+    border-right: 1px solid #f0f0f0; /* Lighter grey border between td elements */
+    border-bottom: 1px solid #f0f0f0; /* Lighter grey border between tr elements */
+}
+
+.custom-table tbody tr:last-child td {
+    border-bottom: none; /* Remove bottom border for the last row */
+}
+
+.custom-table th:first-child {
+    border-left: none; /* No left border for the first th */
+}
+
+.custom-table th:last-child {
+    border-right: none; /* No right border for the last th */
+}
+
+.payment-container{
+    padding-left: 2px;
+    padding-right: 330px;
+}
+.payment-table{
+    border-radius: 8px; 
+    border: 1px solid #e0e0e0; 
+}
+
+.payment-table thead {
+    border-radius: 8px 8px 0 0; /* Round the top corners of the table */
+    border: 1px solid #e0e0e0;  /* Light grey outer border for the header */
+    border-bottom: none; /* Remove bottom border of the thead */
+}
+
+.payment-table thead th {
+    border-right: none; /* No border between header columns */
+}
+
+.payment-table tbody tr td {
+    border-right: 1px solid #f0f0f0; /* Lighter grey border between td elements */
+    border-bottom: 1px solid #f0f0f0; /* Lighter grey border between tr elements */
+}
+.column-1 {
+    width: 30%; /* adjust the width as needed */
+}
+
+.column-2 {
+    width: 0%; /* adjust the width as needed */
+}
+
+.column-3 {
+    width: 30%; /* adjust the width as needed */
+}
+.custom-hover-button {
+    /* Default button style, no changes */
+}
+
+.custom-hover-button:hover {
+    background-color: white;
+    border: 1px solid #1b5297; 
+    color: #1b5297; 
+    box-shadow: none;
+    text-align: center;
+    display: block; 
+}
+Updated CSS for Payment Details
+
+/* Add these classes to your existing CSS file */
+
+.payment-details-container {
+    margin-top: 1.5rem;
+}
+
+.payment-grid-row {
+    display: grid;
+    grid-template-columns: 150px 100px 150px;
+    gap: 16px;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+
+.payment-label {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.payment-value {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.payment-method {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+}

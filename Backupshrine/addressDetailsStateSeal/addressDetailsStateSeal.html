@@ -1,0 +1,117 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:service_territory_member" size="medium" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Address Details</h1>
+                <p class="description">Enter address details to proceed further.</p>
+            </div>
+        </div>
+
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="custom-label" for="address1">Address 1</label>
+                    <lightning-input 
+                        label="address1"
+                        name="address1" 
+                        variant="label-hidden"
+                        id="address1" 
+                         
+                        placeholder="e.g 17 Wells Road"
+                        value={address1}                           
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="custom-label" for="address2">Address 2</label>
+                    <lightning-input 
+                        label="address2"
+                        name="address2" 
+                        variant="label-hidden"
+                         
+                        id="address2" 
+                        placeholder="Enter address 1"
+                        value={address2} 
+                           
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="city">City</label>
+                    <lightning-input 
+                        label="city"
+                        name="city" 
+                        variant="label-hidden"
+                        id="city" 
+                        placeholder="Enter city"
+                        value={city} 
+                         
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+
+                <!-- Custom Label for Last Name -->
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="state">State</label>
+                    <lightning-input 
+                        label="state"
+                        name="state" 
+                        variant="label-hidden"
+                        id="state" 
+                        placeholder="Enter state"
+                        value={state} 
+                         
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                            <!-- Custom Label for Middle Name -->
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="country">Country</label>
+                    <lightning-input 
+                        label="country"
+                        name="country" 
+                        variant="label-hidden"
+                        id="country" 
+                        placeholder="Enter country"
+                        value={country} 
+                          
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+                                        <!-- Custom Label for First Name -->
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="zipCode">Zip Code</label>
+                    <lightning-input 
+                        label="zipCode"
+                        name="zipCode" 
+                        variant="label-hidden"
+                        id="zipCode" 
+                        placeholder="Enter zip code"
+                        value={zipCode} 
+                         
+                        class="input-field" 
+                        read-only={isReadOnly} 
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </div>
+            </div>
+    </div>
+    </div>
+</template>

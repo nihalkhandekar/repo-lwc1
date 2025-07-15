@@ -1,0 +1,185 @@
+<template>
+    <!-- Spinner when loading -->
+    <template if:true={isLoading}>
+        <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <!-- Modal content when not loading -->
+    <template if:false={isLoading}>
+        <div class="custom-modal">
+            <lightning-modal-header class="popupheader">
+                <div class="header-content">
+                    <span class="header-label">Apostille Certificate</span>
+                    <lightning-icon class="close-icon" icon-name="utility:close" size="small" onclick={handleCancel}></lightning-icon>
+                </div>
+            </lightning-modal-header>
+
+            <lightning-modal-body>
+                <!-- <img src={certificateImageUrl} alt="Certificate Image" class="certiImg" /> -->
+                <div class="slds-grid slds-wrap container">
+                    <div class="slds-col slds-size_1-of-1 sub-header">
+                        <div class="bold">APOSTILLE</div>
+                        <div class="normalwithoutmargin">(Convention de La Haye du 5 octobre 1961)</div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col-upper">
+                            <div class="bold">1. Country:</div>
+                            <div class="normal">País:</div> 
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 ">
+                            <div class="data-section">{checklistData.destination}</div> 
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col-upper public-doc">
+                            <div class="bold">This public document</div>
+                            <div class="normalwithoutmargin">El presente documento público</div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="data-section">{documentType}</div> 
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col-upper">
+                            <div class="bold">2. has been signed by</div>
+                            <div class="normal">ha sido firmado por</div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="data-section">{checklistData.signedBy}</div> 
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col-upper">
+                            <div class="bold">3. acting in the capacity of</div>
+                            <div class="normal">quien actúa en calidad de</div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="data-section">{checklistData.position}</div> 
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col-upper">
+                            <div class="bold">4. bears the seal / stamp of</div>
+                            <div class="normal">y está revestido del sello / timbre de</div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <div class="data-section">{checklistData.signedStamp}</div> 
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 certified">
+                        <div class="bold">Certified</div>
+                        <div class="normalwithoutmargin">Certificado</div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col">
+                            <div class="bold">5. at Hartford, Connecticut</div>
+                            <div class="normal">en</div>
+                        </div>
+                        <div class="vertical-line"></div> <!-- Vertical line between sections 5 and 6 -->
+                        <div class="col">
+                            <div class="bold">6. the</div>
+                            <div class="normal">el día</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col">
+                            <div class="bold">7. by</div>
+                            <div class="normal">por</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="bold">Stephanie Thomas, Secretary of the State of Connecticut</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 row">
+                        <div class="col">
+                            <div class="bold">8. Nº</div>
+                            <div class="normal">bajo el número</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="bold">{checklistData.certificateNumber}</div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 signature">
+                        <div class="col">
+                            <div class="bold">9. Seal / stamp:</div>
+                            <div class="normal">Sello / timbre:</div>
+                        </div>
+                        <div class="col-2">
+                            <div class="bold">Gold Embossed Seal</div>
+                        </div>
+                        <div class="vertical-line"></div>
+                        <div class="col">
+                            <div class="bold">10. Signature:</div>
+                            <div class="normalwithoutmargin">Firma:____________________</div>
+                        </div>
+
+                    </div>
+                    <br/><br/>
+                    <div class="enterLinkHere slds-size_1-of-1" style="text-align: right;"> 
+                        <div>
+                            <br/>
+                            To verify the issuance of this Apostille/ Esta Apostilla se puede verificar en la dirección siguiente:</div>
+                        <div style="text-align: right;">
+                            https://ctds--sapdev001.sandbox.my.site.com/eApostille/apostilleverification?certificateNo={certificateNo}
+                            </div>
+                            <br/><br/>
+                    </div>
+                    <div class="mainQRCode">
+                        <template if:true={qrCode}>
+                            <div class="qr-code-container">
+                                <img src={qrCode} alt="QR Code" />
+                            </div>
+                        </template>
+                    </div>
+                    <br/><br/>
+                    <div class="para slds-size_1-of-1" style="text-align: center;">
+                        This Certificate is not valid anywhere within the United States of America, its territories or possessions.
+                    </div>
+                    <br/><br/>
+                    <div class="para slds-size_1-of-1">This Apostille only certifies the authenticity of the signature and the capacity of the person who has signed the public document, and, where appropriate, the identity
+                        of the seal or stamp which the public document bears. This Apostille does not certify the content of the document for which it was issued.
+                    </div>
+                    <br/><br/>
+                    <div class="para slds-size_1-of-1" style="font-weight: bold;">This certificate does not constitute an Apostille under the Hague Convention of 5 October 1961, for those countries that have not acceded to that Convention.
+                        If this document is to be used in a country which is not party to the Hague Convention of 5 October 1961, the certificate should be presented to the consular
+                        section of the mission representing that country.
+                    </div>
+                    <br/><br/>
+                    <div>
+                        <hr/>
+                    </div>
+                    <br/><br/>
+                    <div class="para slds-size_1-of-1" style="text-align: center;">
+                        <hr/>
+                        Este Certificado no es valido en ningun lugar dentro de los Estados Unidos, sus territorios o posesiones
+                    </div>
+                    <br/><br/>
+                    <div class="para slds-size_1-of-1">
+                        Esta Apostilla certifica únicamente la autenticidad de la firma, la calidad en que el signatario del documento haya actuado y, en su caso, la identidad del sello o timbre
+del que el documento público esté revestido
+                    </div>
+                    <br/><br/>
+                    <div class="para slds-size_1-of-1" style="font-weight: bold;">
+                        Este certificado no constituye una Apostilla en virtud del Convenio de la Haya de 5 de octubre de 1961, para los países que no se han adherido a la
+Convención. Si este documento para ser utilizado en un país que no es parte en el Convenio de La Haya de 5 de octubre de 1961, el certificado debe ser
+presentado a la sección consular de la misión que representa a ese país.
+                    </div>
+                </div>
+            </lightning-modal-body>
+            <lightning-modal-footer class="popupfooter">
+                <div class="slds-grid slds-grid_align-end">
+                    <button class="slds-button slds-m-right_small custom-hover-button" onclick={handleCancel}>Cancel</button>
+                    <lightning-button variant="brand" label="Print Certificate" class="printbutton1 slds-m-right_small" onclick={handlePrint}></lightning-button>
+                    <!-- <lightning-button variant="brand" label="Print" class="printbutton1 slds-m-right_small" onclick={generatePdfDocument}></lightning-button> -->
+                    <lightning-button variant="brand" label="Download Certificate" class="downloadbutton" onclick={handleDownload}></lightning-button>
+                </div>
+            </lightning-modal-footer>
+            <c-pdf-genrator data-id="pdfGenrator">
+            </c-pdf-genrator>     
+            <c-apostille-pdf-generator></c-apostille-pdf-generator>
+        </div>
+        <c-toast-message-state-modal></c-toast-message-state-modal>
+    </template>
+</template>

@@ -1,0 +1,241 @@
+/* Apostille Container */
+.apostille-container {
+    width: Fill (1,200px)px;
+    height: Hug (272px)px;
+    gap: 0px;
+    border-radius: 12px 12px 12px 12px;
+    border: 0.5px 0px 0px 0px;
+    opacity: 0px;
+    background: rgba(255, 255, 255, 1);
+    border: 0.5px solid rgba(201, 201, 201, 1);
+    box-shadow: 2px 2px 2px 2px rgba(30, 30, 30, 0.05);
+    font-family: 'SF Pro', sans-serif; /* Font family: SF Pro */
+}
+
+.custom-card-tile{
+    align-items: center;
+    text-align: center;
+    background-color: #E5E5E5;
+    font-family: 'SF Pro', sans-serif; /* Font family: SF Pro */
+    font-size: 16px;
+    font-weight: 590;
+    color: #033d68;
+    padding: 0.75rem;
+    border-radius: 12px 12px 0 0;
+
+}
+
+.page-title{
+    font-family: 'SF Pro', sans-serif; /* Font family: SF Pro */;
+}
+
+
+.header{
+    padding: 1rem;
+}
+
+
+.heading {
+    font-size: 14px;
+    color: #181818;
+    font-weight: 590;
+    margin-bottom: 1.5rem;
+}
+
+.description {
+    font-size: 14px;
+    margin: 5px 0;
+    margin-bottom: 1rem;
+}
+
+.work-order {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+}
+
+.track-description{
+    font-size: 14px;
+    color: #181818;
+    margin-bottom: 1rem;
+}
+
+.track-link {
+    color: #0070d2;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.track-link:hover {
+    text-decoration: underline;
+}
+
+
+
+
+/* Header Section */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    margin: 1rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+.documents-section {
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-header {
+    background-color: #f4f4f4;
+    color: #131212;
+}
+
+.table-header-cell {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.table-cell {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400
+}
+
+.table-row {
+    background-color: #fff;
+}
+
+.total-fee {
+    background-color: #EEF4FF;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    text-align: right;
+    font-weight: 510;
+    font-size: 16px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.total-fee-int{
+    padding-right: 0.5rem;
+    font-weight: 700;
+}
+
+.mailing-section {    
+    margin: 1rem;
+    margin-top: 1.5rem;
+    border: 0.5px solid rgba(201, 201, 201, 1);
+    border-radius: 12px;
+}
+
+
+/* .mailing-table-header-cell{
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+} */
+
+.mailing-table-header-cell-left{
+    width: 50%;
+    padding: 8px;
+    background-color: #f4f4f4;
+    color: #141414;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    border-top-left-radius: 12px;
+}
+
+.mailing-table-header-cell-right{
+    padding: 8px;
+    background-color: #f4f4f4;
+    color: #333;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    border-top-right-radius: 12px;
+
+}
+
+
+
+/* .mailing-table-cell{
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400
+} */
+
+.mailing-table-cell-left{
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom-left-radius: 12px;
+
+
+
+}
+
+.mailing-table-cell-right{
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom-right-radius: 12px;
+}
+
+
+
+/* Header Title */
+.header-text .title {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    padding-left: 1rem;
+}
+
+/* Header Description */
+.header-text .description {
+    font-size: 12px;
+    color: #6b7078;
+    padding-left: 1rem;
+}
+
+
+
+.button-container {
+    display: flex;             
+    justify-content: flex-end;  
+    gap: 1rem;                 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-right: 1rem;            
+}
+
+.button-container lightning-button {
+    margin-left: 0.5rem; 
+}

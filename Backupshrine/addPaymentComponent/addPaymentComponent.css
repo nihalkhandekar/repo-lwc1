@@ -1,0 +1,23 @@
+.container {
+    padding: .5rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Align the button to the right end */
+    margin-bottom: 1rem; /* Space below the button */
+}
+
+.add-payment-button {
+    margin-left: auto;
+}
+
+.input-row {
+    display: flex;
+    gap: 1rem; /* Space between input fields */
+    flex-direction: row; /* Arrange fields in a row */
+}
+
+.input-field {
+    flex: 1; /* Make input fields take up available space */
+}

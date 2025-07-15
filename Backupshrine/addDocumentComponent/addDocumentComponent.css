@@ -1,0 +1,91 @@
+/* Container with padding */
+.container {
+    padding: .5rem;
+}
+
+/* Align Add Document button to the right */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+
+/* Heading container with background */
+.heading-container {
+    background-color: #f4f6f9;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+/* Grid for headings */
+.heading-grid {
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+.heading-cell {
+    padding: 0.5rem;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.row {
+    border-bottom: 1px solid #ddd;
+}
+
+.column {
+    padding: 0.5rem;
+    white-space: nowrap;
+}
+
+.heading-cell:nth-child(1),
+.column:nth-child(1) {
+    width: 15%;
+}
+
+.heading-cell:nth-child(2),
+.column:nth-child(2) {
+    width: 25%;
+}
+
+.heading-cell:nth-child(3),
+.column:nth-child(3) {
+    width: 20%;
+}
+
+.heading-cell:nth-child(4),
+.column:nth-child(4) {
+    width: 20%;
+}
+
+.heading-cell:nth-child(5),
+.column:nth-child(5) {
+    width: 10%;
+}
+
+.heading-cell:nth-child(6),
+.column:nth-child(6) {
+    width: 10%;
+}
+
+.lightning-combobox,
+.lightning-input {
+    width: 100%;
+}
+
+/* Style for Edit action text */
+.action-link {
+    color: #0070d2;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 0.5rem;
+}
+
+.action-link:hover {
+    text-decoration: underline;
+}
