@@ -1,0 +1,41 @@
+.custom-table tr:last-child td:first-child{
+    border-bottom-left-radius: 0px !important;
+}
+
+.custom-table tr:last-child td:last-child{
+    border-bottom-right-radius: 0px !important;
+}
+
+.text-size{
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.data-section{
+    margin-top: 12px;
+}
+
+.alert-container {
+    margin: 1rem 0;
+    position: relative;
+    background-color: #fbf3e0;
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 12px;
+    font-family: "SF Pro", sans-serif;
+    font-weight: 590;
+    color: #8c4b02;
+    border: 1px #e5e5e5;
+}
+
+.dismiss-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+}

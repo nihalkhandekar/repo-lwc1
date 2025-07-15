@@ -1,0 +1,110 @@
+<template>
+    <lightning-modal-header>
+        <div class="header-container">
+            <h2 class="slds-text-heading_medium">Send Email</h2>
+        </div>
+        <lightning-button-icon
+        icon-name="utility:close"
+        size="large"
+        alternative-text="Close"
+        onclick={closeModal}
+        class="custom-modal__close">
+    </lightning-button-icon> 
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="custom-modal-body">
+            <div class="email-info-section">
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-input label="To" name="toEmail" type="email" placeholder="e.g johndoe@gmail.com" required value={formData.toEmail} onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-input label="CC" name="CCEmail" type="email" placeholder="e.g johndoe@gmail.com" value={formData.CCEmail} onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-input label="Subject" name="subject" required placeholder="e.g Doe" value={formData.subject} onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Include Seal" type="checkbox" name="includeSeal"  value={includeSeal} onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Include Arm" type="checkbox" name="includeArm"  value={includeSeal} onchange={handleInputChange}></lightning-input>
+                    </div>
+                </div>
+
+                <!-- Upload Seal/Arm Field -->
+                <!-- <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                        <lightning-input type="file" name="sealArmUpload" class="fileUploadContainer" accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" multiple label="Upload Seal/Arm" onchange={handleUpload}></lightning-input>
+                    </div>
+                </div> -->
+
+               <!-- Seal/Arm Documents Display Section -->
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                        <template if:true={sealArmList.length}>
+                            <ul class="slds-list_vertical slds-m-top_small">
+                                <template for:each={sealArmList} for:item="attachment">
+                                    <li key={attachment.id} class="slds-item slds-m-vertical_x-small">
+                                        <lightning-icon icon-name="doctype:attachment" alternative-text="Attachment" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                        <span>{attachment.name}</span>
+                                        <lightning-button-icon 
+                                            icon-name="utility:delete" 
+                                            alternative-text="Delete Attachment" 
+                                            variant="bare" 
+                                            class="slds-m-left_x-small" 
+                                            data-id={attachment.id} 
+                                            data-list="sealArmList" 
+                                            onclick={handleDeleteAttachment}>
+                                        </lightning-button-icon>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Attachments Display Section -->
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                        <template if:true={attachmentsList.length}>
+                            <h3>Attachments</h3>
+                            <ul class="slds-list_vertical slds-m-top_small">
+                                <template for:each={attachmentsList} for:item="attachment">
+                                    <li key={attachment.id} class="slds-item slds-m-vertical_x-small">
+                                        <lightning-icon icon-name="doctype:attachment" alternative-text="Attachment" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                        <a href={attachment.url} target="_blank">{attachment.name}</a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Description Field -->
+                <div class="slds-grid slds-gutters slds-wrap">
+                    <label class="discription-label"><span class="required-indicator">*</span>Description</label>
+                    <div class="slds-col slds-size_1-of-1">
+                        <lightning-input-rich-text label="Description" name="description" required value={formData.description} onchange={handleInputChange}></lightning-input-rich-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <div class="button-right-group">
+            <lightning-button label="Cancel" variant="base" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button>
+            <lightning-button variant="brand" label="Send Email" class="save-button" onclick={handleSendEmail}></lightning-button>
+        </div>
+    </lightning-modal-footer>
+
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+</template>

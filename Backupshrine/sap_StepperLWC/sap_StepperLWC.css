@@ -1,0 +1,218 @@
+.progress-indicator-wrapper {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    margin-top: 10px;
+    margin-left: 110px;
+    width: 250px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    display: flex;
+    align-items: flex-start;
+}
+
+.slds-progress__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.slds-progress__marker_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 16px;
+    position: relative;
+}
+
+.slds-progress__marker {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d8dde6;
+    border-radius: 50%;
+    background-color: white;
+    margin: 30px 10px 30px 0px;
+    position: relative;
+}
+
+.inner-circle {
+    width: 10px;
+    height: 10px;
+    background-color: #d8dde6;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slds-is-completed .slds-progress__marker {
+    border-color: #0070d2;
+}
+
+.slds-is-completed .inner-circle {
+    background-color: #0070d2;
+}
+
+.slds-is-active .slds-progress__marker {
+    box-shadow: 0px 0px 8px 2px rgba(0, 112, 210, 0.5);
+    border-color: #0070d2;
+}
+
+.slds-is-active .inner-circle {
+    background-color: #0070d2 !important;
+}
+
+.slds-is-active .slds-progress__item_content {
+    font-weight: bold;
+    color: #09629f;
+    font-size: 16px;
+    font-weight: 590;
+}
+
+.slds-progress__item_content {
+    flex-grow: 1;
+    font-weight: 400;
+    color: #747474;
+    font-size: 16px;
+}
+
+.step-icon {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.slds-progress__list > li:not(:last-child) .slds-progress__marker_container:after {
+    content: "";
+    width: 2px;
+    height: 100%;
+    background-color: #d8dde6;
+    top: 20%;
+    z-index: -1;
+}
+
+.slds-is-completed + .slds-progress__list > li .slds-progress__marker_container:after {
+    background-color: #0070d2;
+}
+
+.form-container {
+    position: fixed;
+    padding-top: 2%;
+    height: 10%;
+}
+
+.SelectedStepper {
+    background-color: #eef4ff;
+    width: 100%;
+    border-radius: 8px;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 16px;
+    font-weight: 590;
+    color: #09629f;
+}
+
+.NotSelectedStepper {
+    font-weight: 400;
+    font-size: 16px;
+    color: #747474;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .progress-indicator-wrapper {
+        width: fit-content;
+        max-width: 250px;
+        margin-top: 29px;
+        margin-left: -120px;
+    }
+
+    .slds-progress__marker {
+        width: 18px;
+        height: 18px;
+        margin: 25px 8px 25px 0px;
+    }
+
+    .inner-circle {
+        width: 9px;
+        height: 9px;
+    }
+
+    .slds-progress__item_content {
+        font-size: 13px;
+    }
+
+    .SelectedStepper, .NotSelectedStepper {
+        font-size: 13px;
+        height: 34px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .progress-indicator-wrapper {
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        margin-left: -170px;
+    }
+
+    .slds-progress__marker {
+        width: 16px;
+        height: 16px;
+        margin: 20px 6px 20px 0px;
+    }
+
+    .inner-circle {
+        width: 8px;
+        height: 8px;
+    }
+
+    .slds-progress__item_content {
+        font-size: 12px;
+    }
+
+    .SelectedStepper, .NotSelectedStepper {
+        font-size: 12px;
+        height: 32px;
+    }
+
+    .step-icon {
+        margin-right: 5px;
+    }
+}
+
+.firstIconEnabled{
+    fill:white;
+    background-color: #3ba755;
+}
+.secondIconEnabled{
+    fill:white;
+    background-color: #107cad;
+}
+.thirdIconEnabled{
+    fill:white;
+    background-color: #acd360;
+}
+.fourthIconEnabled{
+    fill:white;
+    background-color: #056764;
+}
+.firstIconDisabled{
+    fill:white;
+    background-color: #aeaeae;
+}
+.secondIconDisabled{
+    fill:white;
+    background-color: #aeaeae;
+}
+.thirdIconDisabled{
+    fill:white;
+    background-color: #aeaeae;
+}
+.fourthIconDisabled{
+    fill:white;
+    background-color: #aeaeae;
+}

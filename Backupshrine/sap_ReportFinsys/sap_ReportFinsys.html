@@ -1,0 +1,236 @@
+<template>
+    <lightning-card>
+        <div class="SE-mainBody">
+            <div class="SE-content">
+                <div class="SE-top">
+                    <div class="SE-linkLable">Reports</div>
+                </div>
+                <div class="SE-Card firstDivForSearching">
+                    <div class="SE-searchCardHeader searchTitleHeader">
+                        <div class="SE-searchCardHeaderIcon">
+                            <lightning-icon icon-name="standard:search" size="medium"></lightning-icon>
+                        </div>
+                        <div class="SE-searchCardHeaderTitle">
+                            <div class="SE-searchCardHeaderTitleText">Search</div>
+                        </div>
+                    </div>
+                    <div class="SE-searchCardContent">
+                        <div class="searchInputFieldsAndComboboxContainer">
+                            <lightning-layout class="field-layout slds-wrap">
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate comboboxItemBackgroundColorChange"
+                                        name="selectReport" label="Select Report" id="selectReport"
+                                        options={selectReportOptions} placeholder="Select Report Type"
+                                        value={selectReport} onchange={handleInputChange}>
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <template if:true={formFields}>
+                                    <template for:each={formFields} for:item="field">
+                                        <lightning-layout-item key={field.label} style="flex-basis: 20%; padding-bottom: 2rem;" size="2"
+                                            class="slds-p-right_medium">
+                                            <template if:true={field.isCombobox}>
+                                                <lightning-combobox class="SE-notvalidate comboboxItemBackgroundColorChange"
+                                                    label={field.label} name={field.label} options={field.options}
+                                                    placeholder={field.placeholder} value={field.value} onchange={handleDynamicFieldChange}>
+                                                </lightning-combobox>
+                                            </template>
+                                            <template if:true={field.isInput}>
+                                                <lightning-input class="SE-notvalidate" label={field.label}
+                                                    name={field.label} type={field.inputType} placeholder={field.placeholder}
+                                                    value={field.value} onchange={handleDynamicFieldChange}>
+                                                </lightning-input>
+                                            </template>
+                                            <template if:true={field.isDateInput}>
+                                                <lightning-input class="SE-notvalidate" label={field.label}
+                                                    name={field.label} type={field.inputType} placeholder={field.placeholder}
+                                                    value={field.value} onchange={handleDynamicFieldChange} date-style="short">
+                                                </lightning-input>
+                                            </template>
+                                        </lightning-layout-item>
+                                    </template>
+                                </template>
+                            </lightning-layout>
+                        </div>
+                        <div class="searchInputFieldsAndComboboxContainer">
+                            <template if:true={showActivityAndUser}>
+                                <div class="slds-grid slds-wrap">
+                                    <template if:true={showTransaction}>
+                                        <div class="slds-col slds-size_5-of-12">
+                                            <div class="activity-container">
+                                                <div class="select-box">
+                                                    <div class="header">
+                                                        <span class="header-title">Transaction Type</span>
+                                                        <button class="reset-button" onclick={handleTransactionReset}>Reset</button>
+                                                    </div>
+                                                    <div class="header-divider"></div>
+                                                    <div class="checkbox-list scrollbar style-3">
+                                                        <template for:each={activityOptions} for:item="option">
+                                                            <div key={option.value} class={option.class}>
+                                                                <lightning-input type="checkbox" 
+                                                                    label={option.label}
+                                                                    name={option.value} 
+                                                                    onchange={handleActivityCheckboxChange}
+                                                                    checked={option.checked}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                                <div class="selected-box">
+                                                    <div class="header">
+                                                        <span class="header-title">Selected Transaction Type</span>
+                                                        <button class="reset-button" onclick={handleActivityReset}>Reset</button>
+                                                    </div>
+                                                    <div class="header-divider"></div>
+                                                    <div class="selected-items-list scrollbar style-3">
+                                                        <template for:each={selectedActivities} for:item="item">
+                                                            <div key={item} class="selected-item">{item}</div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                        
+                                    <template if:false={showTransaction}>
+                                        <div class="slds-col slds-size_5-of-12">
+                                            <div class="activity-container">
+                                                <div class="select-box">
+                                                    <div class="header">
+                                                        <span class="header-title">Select Activity</span>
+                                                        <button class="reset-button" onclick={handleActivityReset}>Reset</button>
+                                                    </div>
+                                                    <div class="header-divider"></div>
+                                                    <div class="checkbox-list scrollbar style-3">
+                                                        <template for:each={activityOptions} for:item="option">
+                                                            <div key={option.value} class={option.class}>
+                                                                <lightning-input class="checkbox-item" type="checkbox" label={option.label}
+                                                                    name={option.value} onchange={handleActivityCheckboxChange}
+                                                                    checked={option.checked}>
+                                                                </lightning-input>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                                <div class="selected-box">
+                                                    <div class="header">
+                                                        <span class="header-title">Selected Activities</span>
+                                                        <button class="reset-button" onclick={handleActivityReset}>Reset</button>
+                                                    </div>
+                                                    <div class="header-divider"></div>
+                                                    <div class="selected-items-list scrollbar style-3">
+                                                        <template for:each={selectedActivities} for:item="item">
+                                                            <div key={item} class="selected-item">{item}</div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                        
+                                    <div class="slds-col slds-size_2-of-12"></div>
+                        
+                                    <div class="slds-col slds-size_5-of-12">
+                                        <div class="user-container userClass">
+                                            <div class="select-box">
+                                                <div class="header">
+                                                    <span class="header-title">Select User</span>
+                                                    <button class="reset-button" onclick={handleUserReset}>Reset</button>
+                                                </div>
+                                                <div class="header-divider"></div>
+                                                <div class="checkbox-list scrollbar style-3">
+                                                    <template for:each={userOptions} for:item="option">
+                                                        <div key={option.value} class={option.class}>
+                                                            <lightning-input type="checkbox" label={option.label}
+                                                                name={option.value} onchange={handleUserCheckboxChange}
+                                                                checked={option.checked}>
+                                                            </lightning-input>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                            <div class="selected-box">
+                                                <div class="header">
+                                                    <span class="header-title">Selected Users</span>
+                                                    <button class="reset-button" onclick={handleUserReset}>Reset</button>
+                                                </div>
+                                                <div class="header-divider"></div>
+                                                <div class="selected-items-list scrollbar style-3">
+                                                    <template for:each={selectedUsers} for:item="item">
+                                                        <div key={item} class="selected-item">{item}</div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                        
+                    </div>
+                    <div class="SE-footer">
+                      
+                        <div class="button-group">
+                            <div class="clear-all" onclick={handleClear}>
+                                <span class="clear-icon-wrapper">
+                                    <lightning-icon icon-name="utility:close" size="xx-small"
+                                        class="clear-icon"></lightning-icon>
+                                </span>
+                                <span class="clear-text">Clear All</span>
+                            </div>
+                            <lightning-button icon-name="utility:search" variant="brand" label="Search"
+                                onclick={handleSearch} class="customButton">
+                            </lightning-button>
+
+                        </div>
+                    </div>
+                </div>
+
+                    <template if:true={checkReportType.isSettlementReport}>
+                        <c-sap_-finsys-settlement-report></c-sap_-finsys-settlement-report>
+                    </template>
+                    <template if:true={checkReportType.isDailySettlementReport}>
+                        <c-sap_-finsys-daily-settlement-report></c-sap_-finsys-daily-settlement-report>
+                    </template>
+
+                    <template if:true={checkReportType.isCreditBalanceReport}>
+                        <c-sap_-finsys-credit-balance-report></c-sap_-finsys-credit-balance-report>
+                    </template>
+                    <template if:true={checkReportType.isCreditCardReport}>
+                        <c-sap_-finsys-credit-card-report></c-sap_-finsys-credit-card-report>
+                    </template>
+                    <template if:true={checkReportType.isAgingReport}>
+                        <c-sap_-finsys-aging-report></c-sap_-finsys-aging-report>
+                    </template>
+                    <template if:true={checkReportType.isCumulativeDepositSummary}>
+                        <c-sap_-cumulative-deposit-summary-report></c-sap_-cumulative-deposit-summary-report>
+                    </template>
+                    <template if:true={checkReportType.isDailyTransactionListing}>
+                        <c-sap_-daily-transaction-listing-report></c-sap_-daily-transaction-listing-report>
+                    </template>
+                    <template if:true={checkReportType.isDepositSummary}>
+                        <c-sap_-deposit-summary-report></c-sap_-deposit-summary-report>
+                    </template>
+                    <template if:true={checkReportType.isReturnedChecksSummary}>
+                        <c-sap_-returned-checks-summary-report></c-sap_-returned-checks-summary-report>
+                    </template>
+                    <template if:true={checkReportType.isRefundedRequestHistory}>
+                        <c-sap_-refund-request-report></c-sap_-refund-request-report>
+                    </template>
+                    <template if:true={checkReportType.isUserCloseoutReport}>
+                        <c-sap_-user-closeout-report></c-sap_-user-closeout-report>
+                    </template>
+                    <template if:true={checkReportType.isNotaryPublicReconciliationReport}>
+                        <c-sap_-notary-public-report></c-sap_-notary-public-report>
+                    </template>       
+                    <template if:true={checkReportType.isCoreCtDepositSummary}>
+                        <c-sap_-core-c-t-report></c-sap_-core-c-t-report>
+                    </template>   
+                      
+                
+            </div>
+        </div>
+    </lightning-card>
+    <c-sap_-finsys-export-to-excel></c-sap_-finsys-export-to-excel>
+    <c-sap_-pdf-generator-finsys-report></c-sap_-pdf-generator-finsys-report>
+</template>

@@ -1,0 +1,170 @@
+<template>
+  <div class="publicofficials-container firstDivForSearching">
+    <div class="search-info-container">
+      <!-- Header Section -->
+      <div class="custom-card-header">
+        <lightning-icon icon-name="standard:labels" size="medium" class="header-icon"></lightning-icon>
+        <div class="header-text">
+          <h1 class="title">Update Mailing Label</h1>
+        </div>
+      </div>
+
+      <div class="input-section searchInputFieldsAndComboboxContainer modalBodyCssChange">
+        <div class="input-group">
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="lastName">Last Name</label>
+            <lightning-input label="Last Name" name="lastName" variant="label-hidden" value={lastName} placeholder="e.g Doe" class="input-field" onchange={handleFieldChange}>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="firstName">First Name</label>
+            <lightning-input label="First Name" name="firstName" variant="label-hidden" value={firstName} placeholder="e.g John" class="input-field" onchange={handleFieldChange}>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="middleName">Middle Initial</label>
+            <lightning-input label="Middle Name" name="middleName" variant="label-hidden" value={middleName} placeholder="e.g R" class="input-field" onchange={handleFieldChange}>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="title">Title</label>
+            <lightning-input label="Title" name="title" variant="label-hidden" value={title} placeholder="e.g Extradition Unit" class="input-field" onchange={handleFieldChange}>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="entity">Entity</label>
+            <lightning-input
+              label="Entity"
+              name="entity"
+              variant="label-hidden"
+              value={entity}
+              placeholder="e.g Department of Public Safety"
+              class="input-field"
+              onchange={handleFieldChange}>
+            </lightning-input>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="Number Of Label">Number Of Label</label>
+            <lightning-input
+              label="Number Of Label"
+              name="Number Of Label"
+              variant="label-hidden"
+              value={numberOfLabel}
+              placeholder="e.g 20"
+              class="input-field"
+              onkeypress={validateNumericInput}
+              onchange={handleLabelChange}>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="Cell Phone"><span style="color: red">*</span>Cell Phone</label>
+            <lightning-input
+              label="Cell Phone"
+              name="Cell Phone"
+              variant="label-hidden"
+              value={formattedCellPhone}
+              placeholder="e.g (123) 456-7890"
+              class="input-field"
+              maxlength="14"
+              onchange={handleCellChange}
+              onkeydown={handlePhoneKeyDown}
+              required>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="Other Phone"><span style="color: red">*</span>Other Phone</label>
+            <lightning-input
+              label="Other Phone"
+              name="Other Phone"
+              variant="label-hidden"
+              value={formattedOtherPhone}
+              placeholder="e.g (123) 456-7890"
+              class="input-field"
+              maxlength="14"
+              onchange={handleOtherphoneChange}
+              onkeydown={handlePhoneKeyDown}
+              required>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="Fax"><span style="color: red">*</span>Fax</label>
+            <lightning-input
+              label="Fax"
+              name="Fax"
+              variant="label-hidden"
+              value={formattedFax}
+              placeholder="e.g (123) 456-7890"
+              class="input-field"
+              maxlength="14"
+              onchange={handleFaxChange}
+              onkeydown={handlePhoneKeyDown}
+              required>
+            </lightning-input>
+          </div>
+          <div class="form-group quarter-width">
+            <label class="custom-label" for="Pager"><span style="color: red">*</span>Pager</label>
+            <lightning-input
+              label="Pager"
+              name="Pager"
+              variant="label-hidden"
+              value={formattedPager}
+              placeholder="e.g (123) 456-7890"
+              class="input-field"
+              maxlength="14"
+              onchange={handlePagerChange}
+              onkeydown={handlePhoneKeyDown}
+              required>
+            </lightning-input>
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label class="custom-label" for="entity">Other Info</label>
+          <lightning-textarea
+            label="Other Info"
+            name="Other Info"
+            variant="label-hidden"
+            value={otherinfo}
+            placeholder="Enter other info..."
+            class="input-field textarea"
+            onchange={handleFieldChange}>
+          </lightning-textarea>
+        </div>
+
+        <div class="full-width-line"></div>
+
+        <div class="form-group full-width slds-form-element_compound slds-form-element">
+          <lightning-input-address
+            class="address"
+            address-lookup-placeholder="Search country, city, state, street...."
+            street={address1}
+            street-label="Address Line 1"
+            subpremise={address2}
+            subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+            subpremise-label="Suite/Apartment/Floor"
+            city-label="City"
+            city={city}
+            province-label="State"
+            province={state}
+            postal-code={zipCode}
+            postal-code-label="Zip Code"
+            country-label="Country"
+            country={country}
+            onchange={handleAddressChange}
+            read-only={isReadOnly}
+            show-address-lookup
+            show-compact-address
+            required>
+          </lightning-input-address>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <lightning-button label="Save" onclick={handleSearch} variant="brand" class="slds-button_brand searchbutton"> </lightning-button>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,201 @@
+<template>
+  <lightning-modal-header class="header-container">
+    <h2 class="customHeading">{header}</h2>
+    <div class="slds-grid slds-grid_align-end">
+      <lightning-button-icon
+        icon-name="utility:close"
+        variant="bare"
+        size="large"
+        onclick={handleCancel}
+        class="slds-m-left_xx-small close-button"
+      ></lightning-button-icon>
+    </div>
+  </lightning-modal-header>
+
+  <lightning-modal-body>
+    <div class="custom-batch-section">
+      <!-- Filter Section -->
+      <div class="slds-grid slds-gutters slds-wrap slds-m-bottom_medium">
+        <div class="slds-col slds-size_1-of-3">
+          <div class="slds-form-element">
+            <div class="slds-form-element__control">
+              <lightning-input
+                label={dateFieldLabel}
+                type="date"
+                value={selectedDate}
+                data-field="selectedDate"
+                onchange={handleDateChange}
+                disabled={isCoreCtBatch}
+                date-style="short"
+              ></lightning-input>
+            </div>
+          </div>
+        </div>
+
+        <!-- End Date Field (Hidden when isCoreCtBatch is true) -->
+        <template if:false={isCoreCtBatch}>
+          <div class="slds-col slds-size_1-of-3">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control">
+                <lightning-input
+                  label="Select End Date"
+                  type="date"
+                  value={selectedEndDate}
+                  data-field="selectedEndDate"
+                  onchange={handleDateChange}
+                  date-style="short"
+                ></lightning-input>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <!-- Batch Selection (Disabled when isCoreCtBatch is true) -->
+        <div class="slds-col slds-size_1-of-3">
+          <div class="slds-form-element">
+            <div class="slds-form-element__control">
+              <lightning-combobox
+                label="Batch"
+                value={selectedBatch}
+                options={batchOptions}
+                placeholder="Select Batch"
+                onchange={handleBatchChange}
+                disabled={isCoreCtBatch}
+              ></lightning-combobox>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Table -->
+      <!-- Core CT Batch Table -->
+      <template if:true={isCoreCtBatch}>
+        <div class="slds-m-top_medium">
+          <table class="slds-table slds-table_cell-buffer">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th>Work Order Number</th>
+                <th>Transaction Id</th>
+                <th>Activity</th>
+                <th>Activity Code</th>
+                <th>Payment Type</th>
+                <th>Transaction Type</th>
+                <th>Transaction Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={batchData.coreCTDetails} for:item="detail">
+                <tr key={detail.transactionId}>
+                  <td>{detail.workOrderNumber}</td>
+                  <td>{detail.transactionId}</td>
+                  <td>{detail.activity}</td>
+                  <td>{detail.activityCode}</td>
+                  <td>{detail.paymentType}</td>
+                  <td>{detail.transactionType}</td>
+                  <td>{detail.transactionAmount}</td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </template>
+
+      <template if:true={showFirstDataTable}>
+        <div class="slds-m-top_medium">
+          <table class="slds-table slds-table_cell-buffer cols-6">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th>Payment Type</th>
+                <th>Total Count</th>
+                <th>Cash</th>
+                <th>Check</th>
+                <th>Credit Card</th>
+                <th>Other</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Regular</td>
+                <td>{regularTransactionCount}</td>
+                <td>{formattedCashAmount}</td>
+                <td>{formattedCheckAmount}</td>
+                <td>-</td>
+                <td>{formattedOtherAmount}</td>
+                <td>{formattedRegularTotal}</td>
+              </tr>
+              <tr>
+                <td>Credit Card</td>
+                <td>{creditCardTransactionCount}</td>
+                <td>-</td>
+                <td>-</td>
+                <td>{formattedCreditCardAmount}</td>
+                <td>-</td>
+                <td>{formattedCreditCardTotal}</td>
+              </tr>
+              <tr class="slds-text-title_bold">
+                <td>Total</td>
+                <td>{totalTransactionCount}</td>
+                <td>{formattedCashAmount}</td>
+                <td>{formattedCheckAmount}</td>
+                <td>{formattedCreditCardAmount}</td>
+                <td>{formattedOtherAmount}</td>
+                <td>{formattedGrandTotal}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </template>
+
+      <template if:true={isViewActivity}>
+        <div class="slds-m-top_medium">
+          <table class="slds-table slds-table_cell-buffer cols-4">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th>Open</th>
+                <th>Closed</th>
+                <th>Sealed</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{depositSummary.openCount}</td>
+                <td>{depositSummary.closedCount}</td>
+                <td>{depositSummary.sealedCount}</td>
+                <td>{formattedDepositTotalAmount}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </template>
+    </div>
+  </lightning-modal-body>
+
+  <div class="footer-container">
+    <lightning-modal-footer>
+      <div class="slds-grid slds-grid_align-end">
+        <lightning-button
+          label="Cancel"
+          onclick={handleClose}
+          class="btn-cancel"
+        ></lightning-button>
+        <lightning-button
+          label="Download PDF"
+          variant="brand"
+          onclick={handleDownloadPdf}
+          class="custom-btn"
+        ></lightning-button>
+        <lightning-button
+          label="Download Excel"
+          variant="brand"
+          onclick={handleDownloadExcel}
+          class="custom-btn"
+        ></lightning-button>
+      </div>
+    </lightning-modal-footer>
+  </div>
+
+  <c-sap_-finsys-dashboar-export-to-excel></c-sap_-finsys-dashboar-export-to-excel>
+  <c-sap_-finsys-dashboard-pdf-generator></c-sap_-finsys-dashboard-pdf-generator>
+</template>

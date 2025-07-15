@@ -1,0 +1,46 @@
+<template>
+  <lightning-modal-header class="FS-ModalHeader">
+    <div class="header-container">
+      <template if:true={isSucess}>
+        <lightning-icon icon-name="utility:success" size="small" class="slds-input__icon slds-input__icon_left icon-padding"></lightning-icon>
+        <h2 class="slds-text-heading_medium sucess-font">Sucess Work Order Created</h2>
+      </template>
+      <template if:false={isSucess}>
+        <h2 class="slds-text-heading_medium">Create Work Order</h2>
+      </template>
+    </div>
+    <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={closeModal} class="custom-modal__close"> </lightning-button-icon>
+  </lightning-modal-header>
+  <lightning-modal-body class="FS-modalBody">
+    <template if:true={isSucess}>
+      <div class="custom-modal-body">
+        <p class="delete-confirmation-text bold-font">Work Oder #: {sqNumber}</p>
+        <p class="delete-confirmation-text">If you would like to send the payment receipt via email then choose option “Send via Email”.</p>
+      </div>
+    </template>
+    <template if:false={isSucess}>
+      <div class="custom-modal-body">
+        <p class="delete-confirmation-text">Are you sure you want to create this work order?</p>
+      </div>
+    </template>
+  </lightning-modal-body>
+  <lightning-modal-footer class="FS-modalFooter">
+    <template if:true={isSucess}>
+      <lightning-button label="No" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button>
+      <lightning-button label="Print Payment Receipt" variant="brand" class="save-button print-button" onclick={handlePrintPaymentReceipt}></lightning-button>
+      <lightning-button variant="brand" label="Send via Email" class="save-button" onclick={handleSendEmail}></lightning-button>
+    </template>
+    <template if:false={isSucess}>
+      <lightning-button label="No" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button>
+      <lightning-button variant="brand" label="Yes" class="save-button" onclick={handleSave}></lightning-button>
+    </template>
+  </lightning-modal-footer>
+
+  <template if:true={saveTheData}>
+    <div class="spinner-container">
+      <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+    </div>
+  </template>
+  <c-sap_-toast-message-state-modal></c-sap_-toast-message-state-modal>
+  <c-sap_-finsys-pdf-generator></c-sap_-finsys-pdf-generator>
+</template>

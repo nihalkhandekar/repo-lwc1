@@ -1,0 +1,285 @@
+<template>
+    <div class="SE-ModalHeaderMain">
+        <div>
+            <lightning-button-icon icon-name="utility:back" size="large" alternative-text="Close"
+                onclick={goBackModalToComponent} class="custom-modal__back"> </lightning-button-icon>
+            <div class="SE-ModalHeaderTitle" style="margin-left: 40px">
+                <h2>{headerText}</h2>
+            </div>
+        </div>
+        <div>
+            <template if:true={isReadOnly}>
+                <lightning-button icon-name="utility:edit" alternative-text="Edit" class="edit-button"
+                    onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+                    label="Edit"></lightning-button>
+            </template>
+        </div>
+    </div>
+    <template if:true={creatingOrUpdating}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+    <div class="SE-ModalHeader">
+        <div class="SE-modalMainBody">
+            <div class="SE-modalFormStack">
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Basic Information</h2>
+                            <p class="slds-text-body_small">Review the batch details and make anynecessary edits.</p>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow customFieldView">
+                            <div class="BatchCodeAndCreatedDate">
+                                <div class="slds-col SE-customCol">
+                                    <lightning-combobox
+                                        class="SE-notvalidate slds-col SE-customCol SE-searchCardInputLabel input BatchCombobox"
+                                        label="BatchCode" id="BatchCode" name="BatchCode" value={batchName}
+                                        options={batchCodeOptions} onchange={handleInputChange}
+                                        placeholder="eg. Authentication/Apostille " disabled>
+                                    </lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-customCol InputColumnAlign">
+                                    <label class="SE-inputLabel" for="middleInitial">Batch Created Date</label>
+                                    <lightning-input label="Batch Created Date" name="BatchCreatedDate"
+                                        variant="label-hidden" id="BatchCreatedDate" disabled placeholder="12/31/2024"
+                                        class="SE-searchCardInputLabel"
+                                        message-when-pattern-mismatch="Batch Created Date" value={batchCreatedDate}
+                                        onchange={handleInputChange} type="date" date-style="short">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="createdBy">
+                                <div class="slds-col SE-customCol InputColumnAlign">
+                                    <label class="SE-inputLabel" for="CreatedBy"><span
+                                            class="required-indicator"></span>Created By</label>
+                                    <div class={firstNameErrorClass}>
+                                        <lightning-input label="Created By" name="CreatedBy" variant="label-hidden"
+                                            id="CreatedBy" placeholder="e.g John"
+                                            class="SE-searchCardInputLabel createdByInputBox" value={batchCreatedByName}
+                                            onchange={handleInputChange} message-when-pattern-mismatch="Created By"
+                                            disabled>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <lightning-combobox class="SE-notvalidate SE-searchCardInputLabel input BatchCombobox"
+                                    label="BatchStatus" id="BatchStatus" name="BatchStatus" value={batchStatus}
+                                    options={batchStatusOptions} onchange={handleInputChange} placeholder="Open"
+                                    disabled={isReadOnly}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col SE-customCol InputColumnAlign">
+                                <label class="SE-inputLabel" for="emailAddress"> Transaction Count</label>
+                                <div class="slds-form-element__control slds-input-has-icon">
+                                    <div class="emailfielclass">
+                                        <lightning-input label="Transaction Count" name="TransactionCount"
+                                            variant="label-hidden" class="SE-searchCardInputLabel" placeholder="1"
+                                            disabled value={totalTransactionCount} onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol InputColumnAlign">
+                                <label class="SE-inputLabel" for="phoneNumber"> Transaction Amount</label>
+                                <div class="slds-form-element__control slds-input-has-icon">
+                                    <div class="emailfielclass">
+                                        <lightning-input label="Transaction Amount" name="TransactionAmount"
+                                            maxlength="14" minlength="14" message-when-too-short="Transaction Amount"
+                                            onkeydown={handleKeyPress} variant="label-hidden"
+                                            class="slds-text-align_right SE-searchCardInputLabel" placeholder="$100.00"
+                                            disabled type="tel" value={totalTransactionAmount}
+                                            onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol InputColumnAlign">
+                                <label class="SE-inputLabel" for="LastModifiedDate "><span
+                                        class="required-indicator">*</span> Last Modified Date</label>
+                                <lightning-input label="Customer Account Balance" name="LastModifiedDate"
+                                    variant="label-hidden" id="LastModifiedDate" placeholder="12/31/2024"
+                                    class="SE-searchCardInputLabel" value={batchLastModifiedDate} disabled
+                                    onchange={handleInputChange} type="date" date-style="short" required>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:address" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Transcation Details</h2>
+                            <p class="slds-text-body_small">Have a look at all the transaction of the batch included.
+                            </p>
+                        </div>
+                    </div>
+                    <template if:true={isLoading}>
+                        <div class="spinner-container">
+                            <lightning-spinner alternative-text="Loading..." variant="brand"
+                                size="large"></lightning-spinner>
+                        </div>
+                    </template>
+                    <template if:false={isLoading}>
+                        <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                            <template if:true={hasResults}>
+                                <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                        <thead>
+                                            <tr class="custom-header">
+                                                <th scope="col" onclick={sortByField} data-field="lastName">
+                                                    <div class="slds-truncate" title="LastName">
+                                                        Last Name
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="firstName">
+                                                    <div class="slds-truncate" title="FirstName">
+                                                        First Name
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="activityCode">
+                                                    <div class="slds-truncate" title="activityCode">
+                                                        Payment Type
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="paymentType">
+                                                    <div class="slds-truncate" title="paymentType">
+                                                        Transaction Amount
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="activityCode">
+                                                    <div class="slds-truncate" title="activityCode">
+                                                        Transaction Type
+                                                    </div>
+                                                </th>
+                                                <th scope="col" onclick={sortByField} data-field="transactionAmount">
+                                                    <div class="slds-truncate" title="transactionAmount">
+                                                        Date
+                                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                            size="x-small" class="sort-icon"></lightning-icon>
+                                                    </div>
+                                                </th>
+                                                <template if:false={isReadOnly}>
+                                                    <th scope="col" onclick={sortByField} data-field="date">
+                                                        <div class="slds-truncate" title="blanck"></div>
+                                                    </th>
+                                                </template>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template if:true={isRecordsLoading}>
+                                                <tr class="no-border-row">
+                                                    <td colspan="11" class="slds-text-align_center loader-row">
+                                                        <lightning-spinner alternative-text="Loading records..."
+                                                            variant="brand" size="large"></lightning-spinner>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                            <template if:false={isRecordsLoading}>
+                                                <template for:each={allFeeData} for:item="row">
+                                                    <tr key={row.Id} class="custom-column">
+                                                        <td>
+                                                            <div class="slds-truncate">{row.lastName}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate">{row.firstName}</div>
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="slds-truncate">{row.PaymentType}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate slds-text-align_right">
+                                                                {row.TotalFeeAmount}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate">{row.transactionType}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate">{row.CreatedDate}</div>
+                                                        </td>
+                                                        <template if:false={isReadOnly}>
+                                                            <td>
+                                                                <lightning-button-menu alternative-text="Actions"
+                                                                    class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                    variant="bare"
+                                                                    icon-name="utility:threedots_vertical"
+                                                                    onselect={handleAction} menu-alignment="auto"
+                                                                    data-id={row.Id}
+                                                                    data-value={row.individualApplicationId}>
+                                                                    <lightning-menu-item label="Edit"
+                                                                        value="edit_request"></lightning-menu-item>
+                                                                </lightning-button-menu>
+                                                            </td>
+                                                        </template>
+                                                    </tr>
+                                                </template>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="SE-pagination">
+                                    <template if:true={showPages}>
+                                        <lightning-button class="clearCustomButton" label="<< Prev"
+                                            onclick={handlePreviousPage} disabled={isPreviousDisabled}
+                                            variant="neutral"> </lightning-button>
+
+                                        <div class="page-info">
+                                            <span class="page-range">{startRecord}-{endRecord} of {totalRecords}</span>
+                                            <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                                        </div>
+
+                                        <lightning-button class="clearCustomButton" label="Next >>"
+                                            onclick={handleNextPage} disabled={isNextDisabled} variant="neutral">
+                                        </lightning-button>
+                                    </template>
+                                </div>
+                            </template>
+                            <template if:false={hasResults}>
+                                <p class="no-data-message">No work order transaction found for the given criteria.</p>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="SE-modalFooter">
+            <div class="slds-button-group">
+                <div class="button-left-group">
+                    <lightning-button variant="neutral" label="Print Batch" onclick={handlePrintBatch}
+                        class="print-buttons"></lightning-button>
+                </div>
+                <div class="button-right-group SE-modalFooterButtonGroup">
+                    <button class="slds-button SE-borderLessButton" onclick={goBackModal}>Cancel</button>
+                    <lightning-button variant="brand" label="Save" disabled={buttonStatus} class="save-button"
+                        onclick={handleUpdateBatch}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <c-sap_-pdf-genrator batch-id={batchRecordId}> </c-sap_-pdf-genrator>
+    <c-sap_-toast-message-state-modal></c-sap_-toast-message-state-modal>
+</template>

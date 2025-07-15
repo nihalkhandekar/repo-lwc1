@@ -1,0 +1,126 @@
+.consent-heading {
+  margin-bottom: 16px;
+  letter-spacing: 0.2px;
+}
+
+.consent-desc {
+  margin-bottom: 16px;
+  letter-spacing: 0.012px;
+}
+
+.consent-bullets {
+  margin-left: 14px;
+}
+
+.consent-bullets li {
+  font-family: Karla;
+  margin-bottom: 16px;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.01px;
+  color: #2D2C2C;
+  list-style: disc;
+}
+
+.consent-bullets li:last-child {
+  margin-bottom: 40px;
+}
+
+.consent-acknowledge-link {
+  padding: 24px 32px;
+  color: #09538B;
+  text-decoration: underline;
+  cursor: pointer;
+  background: #FFFFFF;
+  border: 1px solid #D0CFCF;
+  box-shadow: 0px 6px 12px #E7E9F2;
+  border-radius: 4px;
+  margin-bottom: 32px;
+  cursor: pointer;
+}
+
+.acknowledge-checkbox {
+  margin-bottom: 72px;
+}
+
+.exclude-section {
+  margin-bottom: 76px;
+}
+
+.exclude-desc {
+  margin-bottom: 24px;
+}
+
+.type-input {
+  margin-top: 32px;
+  margin-bottom: 24px;
+}
+
+.shadow-table {
+  margin-bottom: 48px;
+}
+
+.please-note-section {
+  margin-bottom: 24px;
+}
+
+.error-msg {
+  margin-bottom: 16px;
+}
+
+.please-read-text {
+  margin-bottom: 32px;
+}
+
+.certify-text {
+  margin-bottom: 16px;
+}
+
+.modal-list {
+  list-style-type: decimal;
+  margin-left: 16px;
+}
+
+.modal-list li {
+  font-size: 18px;
+  line-height: 27px;
+  color: #2D2C2C;
+  letter-spacing: 0.12px;
+  font-family: Karla;
+}
+
+.sub-text {
+  margin-bottom: 20px;
+  margin-top: 12px;
+}
+
+.list-item-spacing{
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .consent-heading {
+      letter-spacing: 0.2px;
+    }
+
+    .consent-bullets {
+      margin-bottom: 8px;
+    }
+
+    .acknowledge-checkbox {
+      margin-bottom: 56px;
+    }
+
+    .type-input {
+      margin-top: 24px;
+      margin-bottom: 32px;
+    }    
+
+    .consent-desc {
+      font-size: 16px !important;
+    }
+
+    .certify-text {
+      font-size: 16px !important;
+    }
+}

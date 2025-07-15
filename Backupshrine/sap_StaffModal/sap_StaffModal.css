@@ -1,0 +1,168 @@
+.modal-header {
+  border-radius: 16px 16px 0px 0px;
+  background-color: #eef4ff;
+}
+
+.modal-header .slds-text-heading_medium {
+  width: 200px;
+  height: 28px;
+  color: #0c7cce;
+}
+
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.custom-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.custom-card-header .header-icon {
+  margin-right: 10px;
+  color: #0070d2;
+}
+
+.custom-card-header .title {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.custom-card-header .description {
+  font-size: 12px;
+  color: #666666;
+}
+
+.input-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.form-group {
+  flex: 1;
+}
+
+.form-group .custom-label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.quarter-width {
+  flex: 0 0 24%;
+}
+
+.esq-align {
+  display: flex;
+  align-items: center;
+}
+
+.upload-section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px dashed #c8c8c8;
+  text-align: center;
+}
+
+.upload-section h2 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0070d2;
+  margin-bottom: 10px;
+}
+
+.upload-section .upload-button {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  border-top: 1px solid #d8dde6;
+}
+
+.modal-footer lightning-button:nth-child(1) {
+  color: #666666;
+}
+
+.modal-footer lightning-button:nth-child(2) {
+  background-color: #0070d2;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
+:host {
+  --slds-c-modal-sizing-medium: 85vw;
+  --lwc-modal-max-width: 80vw;
+  --lwc-modal-max-height: 85vh;
+}
+
+/* Optional: Adjust max-width if needed */
+@media (min-width: 48em) {
+  :host {
+    --slds-c-modal-sizing-medium: 85vw;
+  }
+}
+
+.slds-modal__container {
+  width: 80vw !important;
+  max-width: 1000px !important;
+  max-height: 85vh !important;
+}
+
+.custom-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+lightning-modal-header {
+  background-color: #f3f2f2;
+  border-bottom: 1px solid #dddbda;
+}
+
+lightning-modal-footer {
+  border-top: 1px solid #dddbda;
+}
+
+.slds-box.slds-theme_shade {
+  background-color: #f3f2f2;
+  border: 1px dashed #dddbda;
+}
+
+.section-border {
+  padding: 0px 10px 20px 10px;
+}
+
+.customInputFieldHeightSet {
+  height: 80px;
+}
+
+.customGroupOFInputFieldMarginSet {
+  margin-bottom: 6px;
+}

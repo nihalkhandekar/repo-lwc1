@@ -1,0 +1,97 @@
+<template>
+    <template if:true={isVisible}>
+        <div class="form-container slds-grid slds-wrap slds-gutters">
+            <!-- Left Column: Progress Indicator -->
+            <div class="progress-indicator slds-col slds-size_1-of-3">
+                <div class="progress-indicator-wrapper">
+                    <div class="slds-progress slds-progress_vertical">
+                        <ol class="slds-progress__list">
+                            <!-- Step 1: Request Info -->
+                            <li class={step1Class}>
+                                <div class="slds-progress__marker_container">
+                                    <div class="slds-progress__marker">
+                                        <div class="inner-circle"></div>
+                                    </div>
+                                </div>
+                                <div class={step1LabelClass} onclick={handleStepClick} data-step="1" onmouseenter={handleHoverStep} onmouseleave={handleHoverOutStep} style="padding-left: 5%;">
+                                    <lightning-icon icon-name="standard:contract_line_item" alternative-text="Request Info" size="small" class="step-icon firstIcon"></lightning-icon>
+                                    <span class="slds-truncate">{labels.RequestInfo}</span>
+
+                                    <template if:true={showTooltipForStep1}>
+                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_left" 
+                                             style="position: absolute; left: 105%; top: 50%; transform: translateY(-50%);">
+                                            <div class="slds-popover__body">You cannot go back after completing Card payment.</div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </li>
+
+                            <!-- Step 2: Review -->
+                            <li class={step2Class}>
+                                <div class="slds-progress__marker_container">
+                                    <div class="slds-progress__marker">
+                                        <div class="inner-circle"></div>
+                                    </div>
+                                </div>
+                                <div class={step2LabelClass} onclick={handleStepClick} onmouseenter={handleHoverStep} onmouseleave={handleHoverOutStep} data-step="2" style="padding-left: 5%;">
+                                    <lightning-icon icon-name="standard:survey" alternative-text="Review" size="small" class="step-icon secondIcon"></lightning-icon>
+                                    <span class="slds-truncate">{labels.Review}</span>
+                                    <template if:true={showTooltipForStep2}>
+                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_left" 
+                                             style="position: absolute; left: 105%; top: 50%; transform: translateY(-50%);">
+                                            <div class="slds-popover__body">You cannot go back after completing Card payment.</div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </li>
+
+                            <!-- Step 3: Payment -->
+                            <li class={step3Class}>
+                                <div class="slds-progress__marker_container">
+                                    <div class="slds-progress__marker">
+                                        <div class="inner-circle"></div>
+                                    </div>
+                                </div>
+                                <div class={step3LabelClass} onclick={handleStepClick} onmouseenter={handleHoverStep} onmouseleave={handleHoverOutStep} data-step="3" style="padding-left: 5%;">
+                                    <lightning-icon icon-name="custom:custom17" alternative-text="Payment" size="small" class="step-icon thirdIcon"></lightning-icon>
+                                    <span class="slds-truncate">{labels.Payment}</span>
+
+                                    <template if:true={showTooltipForStep3}>
+                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_left" 
+                                             style="position: absolute; left: 105%; top: 50%; transform: translateY(-50%);">
+                                            <div class="slds-popover__body">You cannot go back after completing Card payment.</div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </li>
+
+                            <!-- Step 4: Submit -->
+                            <li class={step4Class}>
+                                <div class="slds-progress__marker_container">
+                                    <div class="slds-progress__marker">
+                                        <div class="inner-circle"></div>
+                                    </div>
+                                </div>
+                                <div class={step4LabelClass} 
+                                     onmouseenter={handleHoverSubmit} 
+                                     onmouseleave={handleHoverOutSubmit} 
+                                     onclick={handleSubmitClick} 
+                                     data-step="4" 
+                                     style="padding-left: 5%;">
+                                    <lightning-icon icon-name="standard:title_party" alternative-text="Submit" size="small" class="step-icon ForthIcon"></lightning-icon>
+                                    <span class="slds-truncate">{labels.Submit}</span>
+                                    <template if:true={showSubmitError}>
+                                        <div class="slds-popover slds-popover_tooltip slds-nubbin_left" style="position: absolute; left: 105%; top: 50%; transform: translateY(-50%);" >
+                                            <div class="slds-popover__body">Submit is not available yet. Please complete the previous steps.</div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </template>
+</template>

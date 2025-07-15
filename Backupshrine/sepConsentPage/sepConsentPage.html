@@ -1,0 +1,156 @@
+<template>
+    <div class="consent-container">
+        <h4 class="consent-heading">{label.SEP_Waiver_and_release}</h4>
+        <p class="small consent-desc">
+            {label.SEP_Consent_desc}
+        </p>
+        <ul class="consent-bullets">
+            <template for:each={bulletPoints} for:item="point">
+                <li key={point}>{point}</li>
+            </template>
+        </ul>
+
+        <template if:true={isLifeTime}>
+            <p class="largeBold please-read-text">{label.SEP_Please_Read_Text}</p>
+            <label>
+                <p class="large">
+                    <lightning-formatted-rich-text value={label.SEP_Consent_lifetime_desc}>
+                    </lightning-formatted-rich-text>
+                </p>
+                <div class="type-input">
+                    <lightning-textarea autocomplete="off" variant="label-hidden" type="text" value={lifeTimeInputText}
+                        placeholder={label.SEP_Please_type_here} class="sep-life-time-input"
+                        message-when-value-missing={label.SEP_Life_Time_Error_Message} max-length="255"
+                        onchange={onLifeTimeInputChange} onblur={onLifeTimeInputBlur} required>
+                    </lightning-textarea>
+                </div>
+            </label>
+        </template>
+        <template if:false={isLifeTime}>
+            <template if:false={isRemovalFlow}>
+                <div class="shadow-table">
+                    <c-sep-table table-data={tableData} variation-two='true'></c-sep-table>
+                </div>
+                <p class="largeBold please-read-text">{label.SEP_Please_Read_Text}</p>
+            </template>
+        </template>
+        <p class="consent-acknowledge-link largeBold" role="button" tabindex="0" onclick={onShowOrHideAcknowledgeModal}>
+            {label.SEP_Consent_Click_Here_Text}
+        </p>
+        <p class={termsClassName} if:false={isRemovalFlow}>
+            <lightning-formatted-rich-text value={label.SEP_Consent_Agree_Terms1}>
+            </lightning-formatted-rich-text>
+            <lightning-formatted-rich-text value={label.SEP_Consent_Agree_Terms2}>
+            </lightning-formatted-rich-text>
+            <lightning-formatted-rich-text value={label.SEP_Consent_Agree_Terms3}>
+            </lightning-formatted-rich-text>
+        </p>
+        <div class="acknowledge-checkbox slds-has-error">
+            <c-generic-multi-select list-data={acknowledgeCheckBoxOptions}
+                oncheckboxinputselection={onAcceptAcknowledgeCheck}>
+            </c-generic-multi-select>
+            <p class="slds-form-element__help error-msg" if:true={showAcknowledgeError}>
+                {label.field_is_mandatory}
+            </p>
+        </div>
+
+        <template if:true={showAcknowledgeModal}>
+            <c-modal no-scroll open={showAcknowledgeModal} onmodalclose={onShowOrHideAcknowledgeModal}
+                size="medium">
+                <div slot="header" class="headerModal slds-size_1-of-1 slds-text-align_left">
+                    <h5 if:false={isRemovalFlow}>{label.SEP_Life_Time_Modal_Heading}</h5>
+                    <h5 if:true={isRemovalFlow}>{label.SEP_Removal_Modal_Heading}</h5>
+                </div>
+                <div slot="body" class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                    <div class="listItem">
+                        <template if:true={isRemovalFlow}>
+                            <p class="large sub-text">
+                                <lightning-formatted-rich-text value={label.SEP_Removal_Consent_PI_Desc1}>
+                                </lightning-formatted-rich-text>
+                                <lightning-formatted-rich-text value={label.SEP_Removal_Consent_PI_Desc2}>
+                                </lightning-formatted-rich-text>
+                                <lightning-formatted-rich-text value={label.SEP_Removal_Consent_PI_Desc3}>
+                                </lightning-formatted-rich-text>
+                                <lightning-formatted-rich-text value={label.SEP_Removal_Consent_PI_Desc4}>
+                                </lightning-formatted-rich-text>
+                            </p> 
+                        </template>
+                        <template if:false={isRemovalFlow}>
+                            <ol class="modal-list">
+                                <li>
+                                    {label.Personal_information_label}
+                                    <p class="large sub-text">
+                                        <lightning-formatted-rich-text value={label.SEP_Consent_PI_Desc1}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_Consent_PI_Desc2}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_Consent_PI_Desc3}>
+                                        </lightning-formatted-rich-text>
+                                    </p>
+                                </li>
+                                <li>
+                                    {label.SEP_Extent_of_self_exclusion}
+                                    <p class="large sub-text">
+                                        <lightning-formatted-rich-text value={label.SEP_Extent_Desc1}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_Extent_Desc2}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_Extent_Desc3}>
+                                        </lightning-formatted-rich-text>
+                                    </p>
+                                </li>
+                                <li>
+                                    {label.SEP_Voluntary_Disclosure_of_Social_Security_Number}
+                                    <p class="large sub-text">
+                                        <lightning-formatted-rich-text value={label.SEP_Voluntary_Desc1}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_Voluntary_Desc2}>
+                                        </lightning-formatted-rich-text>
+                                    </p>
+                                </li>
+                                <li>
+                                    {label.SEP_Self_Exclusion_Time_Periods}
+                                    <p class="large sub-text">
+                                        <lightning-formatted-rich-text value={label.SEP_Self_Exclusion_Desc1}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_Self_Exclusion_Desc2}>
+                                        </lightning-formatted-rich-text>
+                                    </p>
+                                </li>
+                                <li>
+                                    {label.SEP_gamble_label}
+                                    <p class="large sub-text">
+                                        <lightning-formatted-rich-text value={label.SEP_gamble_desc1}>
+                                        </lightning-formatted-rich-text>
+                                        <lightning-formatted-rich-text value={label.SEP_gamble_desc2}>
+                                        </lightning-formatted-rich-text>
+                                    </p>
+                                </li>
+                                <li class="list-item-spacing">
+                                    <lightning-formatted-rich-text value={label.SEP_Consent_For_more_information}>
+                                    </lightning-formatted-rich-text>
+                                </li>
+                                <li class="list-item-spacing">
+                                    <lightning-formatted-rich-text value={label.SEP_Consent_Only_one_request}>
+                                    </lightning-formatted-rich-text>
+                                </li>
+                            </ol>
+                        </template>
+
+                    </div>
+                </div>
+                <div slot="actions" class="slds-size_1-of-1">
+                    <div class="buttons-wrapper">
+                        <button title=Cancel onclick={onShowOrHideAcknowledgeModal}
+                            class="slds-button natural-button slds-button_natural">
+                            {label.SEP_Close_Label}
+                        </button>
+                        <button title={label.SEP_I_ACKNOWLEDGE_ALL} onclick={onAcceptAcknowledge} class="slds-button primaryBtn higher">
+                            {label.SEP_I_ACKNOWLEDGE_ALL}
+                        </button>
+                    </div>
+                </div>
+            </c-modal>
+        </template>
+    </div>
+</template>

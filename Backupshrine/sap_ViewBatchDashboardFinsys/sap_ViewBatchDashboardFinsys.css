@@ -1,0 +1,153 @@
+/* Modal Header Styles */
+.header-container {
+  background-color: #eef4ff;
+  border-bottom: 1px solid #dddbda;
+  border-radius: 16px 16px 0px 0px;
+}
+
+.customHeading {
+  font-weight: 590;
+  color: #0c7cce;
+  font-family: "SF Pro", sans-serif;
+  font-size: 18px;
+  text-align: left;
+}
+
+.close-button {
+  color: #706e6b;
+}
+
+/* Filter Section Styles */
+.custom-batch-section {
+  /* padding: 1rem; */
+}
+
+.slds-form-element__label {
+  font-size: 0.75rem;
+  color: #3e3e3c;
+  font-weight: 500;
+}
+
+/* Date inputs and dropdowns */
+lightning-input,
+lightning-combobox {
+  --slds-c-input-radius-border: 8px;
+  --slds-c-input-color-border: #dddbda;
+}
+
+/* Table Styles */
+.slds-table {
+  border-collapse: separate; /* Changed from collapse */
+  border-spacing: 0;
+  font-size: 0.8125rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dddbda; /* Outer border */
+  width: 100%; /* Ensure full width */
+  table-layout: fixed;
+}
+
+.slds-table thead {
+  background-color: #f3f3f3;
+}
+
+.slds-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.slds-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.slds-table th,
+.slds-table td {
+  overflow: hidden; /* Prevent content overflow */
+  text-overflow: ellipsis; /* Show ellipsis for long content */
+  white-space: nowrap; /* Prevent text wrapping */
+  padding: 0.5rem;
+  border: 1px solid #dddbda;
+}
+
+.slds-table.cols-6 th,
+.slds-table.cols-6 td {
+  width: calc(100% / 6); /* Equal width for 6-column table */
+}
+
+.slds-table.cols-4 th,
+.slds-table.cols-4 td {
+  width: calc(100% / 4); /* Equal width for 4-column table */
+}
+
+.slds-table td {
+  max-width: 0;
+  min-width: 0;
+}
+
+/* .slds-table tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.slds-table tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+.slds-table th {
+    color: #514f4d;
+    font-weight: 600;
+    padding: 0.5rem;
+    text-align: left;
+    background-color: #f3f3f3;
+}
+
+.slds-table td {
+    padding: 0.5rem;
+    color: #3e3e3c;
+} */
+
+.slds-text-title_bold {
+  font-weight: 700;
+  background-color: #f8f8f8;
+}
+
+/* Footer Styles */
+.footer-container {
+  background-color: #f3f3f3;
+  border-top: 1px solid #dddbda;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  overflow: hidden;
+}
+
+.slds-grid.slds-grid_align-end {
+  gap: 0.5rem; /* Adds space between buttons */
+}
+
+/* Modal Body Layout */
+lightning-modal-body {
+  padding: 0;
+}
+
+/* Add some spacing between sections */
+.slds-m-bottom_medium {
+  margin-bottom: 1rem;
+}
+
+.slds-m-top_medium {
+  margin-top: 1rem;
+}
+
+/* Ensure responsive layout */
+@media (max-width: 768px) {
+  .slds-col.slds-size_1-of-3 {
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+  .slds-table {
+    font-size: 0.75rem; /* Slightly smaller font for mobile */
+  }
+
+  .slds-table th,
+  .slds-table td {
+    padding: 0.375rem; /* Reduced padding for smaller screens */
+  }
+}

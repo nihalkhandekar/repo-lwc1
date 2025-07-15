@@ -1,0 +1,230 @@
+.publicofficials-container {
+  /* Light grey color */
+  background-color: #f9fafb;
+  /* Ensure it covers the full height */
+  min-height: 100vh;
+  padding: 16px;
+}
+
+.page-heading {
+  width: 250px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: 510;
+  line-height: 20px;
+  text-align: left;
+  color: #09629f;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.search-info-container {
+  background-color: #ffffff;
+  font-family: 'SF Pro', sans-serif;
+  margin: 0 auto;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.custom-card-header {
+  display: flex;
+  align-items: center;
+  background-color: #f6f9ff;
+  border: 1px solid #f3f3f3;
+  padding: 12px;
+  border-radius: 1rem 1rem 0 0;
+  box-sizing: border-box;
+}
+
+.header-text .title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #025999;
+  padding-left: 0.5rem;
+}
+
+/* Header Title */
+.header-text .title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #025999;
+  padding-left: 0.5rem;
+}
+
+.header-text .title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  color: #025999;
+  padding-left: 0.5rem;
+}
+
+.input-section {
+  padding: 12px;
+  padding-bottom: 0px;
+  border-radius: 0px;
+  border: 0px;
+}
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.form-group:last-child {
+  margin-right: 0;
+}
+
+.quarter-width {
+  /* Slightly less than 25% to allow for spacing */
+  flex-basis: 19%;
+}
+
+.input-field {
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  /* Align buttons to the right */
+  justify-content: flex-end;
+  border-top: 1px solid #f3f3f3;
+  margin-top: 5px;
+  padding: 0.5rem;
+}
+
+.custom-label {
+  font-size: 12px;
+  font-weight: 590;
+  font-family: 'SF Pro', sans-serif;
+  color: #5c5c5c;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.searchbutton {
+  --sds-c-button-brand-color-background: #003a62;
+  --sds-c-button-brand-color-border: #003a62;
+  --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+  --sds-c-button-brand-color-border-hover: rgb(169, 224, 240);
+  --lwc-buttonBorderRadius: 8px;
+}
+
+.clear-all {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  cursor: pointer;
+  width: Hug (112px) px;
+  height: Hug (32px) px;
+  padding: 6px 16px 6px 16px;
+  gap: 8px;
+  border-radius: 8px 0px 0px 0px;
+  opacity: 0px;
+}
+
+.clear-all .slds-icon-text-default {
+  --slds-c-icon-color-foreground: white;
+}
+
+.clear-icon-wrapper {
+  width: 16px;
+  height: 16px;
+  padding: 0.62px;
+  gap: 0px;
+  opacity: 0px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #706e6b;
+  border-radius: 50%;
+  margin-right: 4px;
+  background-color: #706e6b;
+  position: relative;
+}
+
+.clear-icon {
+  /* color: white; */
+  position: absolute;
+}
+
+.clear-text {
+  width: 56px;
+  height: 20px;
+  gap: 0px;
+  opacity: 0px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  color: rgba(116, 116, 116, 1);
+  align-items: center;
+}
+
+.input-field .textarea {
+  border-radius: 8px;
+}
+
+.address {
+  --sds-c-textarea-color-background: #ffffff;
+  --textarea-color-background: #ffffff;
+  --sds-c-input-color-background: #ffffff;
+  --input-color-background: #ffffff;
+  --dxp-c-textarea-text-font-size: 14px;
+  --dxp-s-form-element-text-font-weight: 400;
+  --dxp-s-form-element-text-line-height: 20px;
+  --dxp-s-form-element-text-font-size: 14px;
+  --dxp-s-form-element-color-border: #c9c9c9;
+  --sds-c-textarea-text-color: #181818;
+  --dxp-s-form-element-text-color: #181818;
+  --lwc-borderWidthThin: 1px;
+  --lwc-formLabelFontSize: 12px;
+  --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+  --slds-c-input-color-background: #ffffff;
+  --slds-c-input-color-border: #c9c9c9;
+  --slds-c-input-radius-border: 8px 8px 8px 8px;
+  --sds-c-textarea-radius-border: 8px 8px 8px 8px;
+  --slds-c-textarea-color-background: #ffffff;
+  --slds-c-textarea-color-border: #c9c9c9;
+  --sds-c-input-text-color: #181818;
+  --sds-c-textarea-color-border: #c9c9c9;
+  --dxp-c-textarea-width-border: 1px;
+  --sds-c-input-color-border: #c9c9c9;
+  --slds-c-textarea-radius-border: 8px 8px 8px 8px;
+  --dxp-c-input-text-font-size: 14px;
+  --dxp-s-form-element-text-font-weight: 400;
+  --sds-c-input-radius-border: 8px 8px 8px 8px;
+  --dxp-s-form-element-label-font-size: 12px;
+  --dxp-s-form-element-label-font-weight: 590;
+  --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+  --dxp-c-input-width-border: 1px;
+}
+.address .slds-form-element__control input[name='state'],
+.address .slds-form-element__control input[name='country'],
+.address .slds-form-element__control input[name='city'],
+.address .slds-form-element__control input[name='postalCode'] {
+  width: 50%;
+}
+
+.full-width-line {
+  /* Remove default border */
+  border: none;
+  /* Set a dotted border on top */
+  border-top: 2px dotted #aeaeae;
+  /* Set height to 0 since we're using border */
+  height: 0;
+  /* Make it full width */
+  width: 100%;
+  /* Add margin on top and bottom */
+  margin: 20px 0;
+}
+
+.input-group .input-field {
+  --slds-c-input-radius-border: 8px;
+  --slds-c-textarea-radius-border: 8px;
+}

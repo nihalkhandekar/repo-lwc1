@@ -1,0 +1,133 @@
+<template>
+    <lightning-card>
+            <div class="SE-content">
+                <div class="SE-Card secondDivForSearching">
+                    <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                        <div class="buttoncontainerfilter">
+                            <div class="left-button slds-p-left_small">
+                                <span class="slds-text-title_bold slds-m-right_x-small search-css">Search Results</span>
+                                <lightning-badge label={formattedRecordsFound} 
+                                    class="slds-badge_inverse result-no-css"></lightning-badge>
+                            </div>
+                            <div class="right-buttons">
+                                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-quarter" label="This Quarter"
+                                        class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonClick}>
+                                    <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                                    <span>Export to Excel</span>
+                                </div>
+                                <lightning-button icon-name="utility:download" variant="brand" label="Download PDF"
+                                onclick={handleDownloadPdf} class="customButton slds-m-left_small">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={settlementReport.length}>
+                        <div class="slds-scrollable_x custom-table-wrapper">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                <thead>
+                                    <tr class="custom-header">
+                                        <th scope="col">Work Order #</th>
+                                        <th scope="col">Payer</th>
+                                        <th scope="col">Refund Reason</th>
+                                        <th scope="col">Refund Status</th>
+                                        <th scope="col">Requested By</th>
+                                        <th scope="col">Payment Number/ Voucher ID</th>
+                                        <th scope="col">Payment Amount</th>
+                                        <th scope="col">Refund Amount</th>
+                                        <th scope="col">Refund Date</th>                                   
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={settlementReport} for:item="row">
+                                        <tr key={row.Id}>
+                                            <td><div class="slds-truncate">{row.SAP_Work_Order_Number__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Payer}</div></td>
+                                            <td><div class="slds-truncate">{row.Refund_Reason__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Refund_Status__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Requested_By__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Payment_Number__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Payment_Amount__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Refund_Amount__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Refund_Date__c}</div></td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="total-row">
+                                        <td><strong>Total</strong></td>
+                                        <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+                                        <td>
+                                            <lightning-formatted-number value={totalPaymentAmount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                                        </td>
+                                        <td>
+                                            <lightning-formatted-number value={totalRefundAmount} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>  
+                            </table>
+                        </div>
+                    </template>
+
+                    <template if:true={isRecordsLoading}>
+                        <div class="slds-text-align_center loader-row">
+                            <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                        </div>
+                    </template>
+
+                    <template if:false={settlementReport.length}>
+                        <div class="no-result-found">
+                            <h1 class="no-result-found-label">No Results Found</h1>
+                        </div>
+                    </template>
+
+                    <template if:true={showPagination}>
+                        <div class="pagination-container">
+                            <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                                disabled={isPreviousDisabled} variant="neutral">
+                            </lightning-button>
+                    
+                            <div class="page-info">
+                                <span class="page-range">{startRange}-{endRange} of {recordsFound} &nbsp;</span>
+                                <span class="page-text"> | Page &nbsp;
+                                    <lightning-input 
+                                    type="number" 
+                                    value={currentPage} 
+                                    label="Current Page" 
+                                    variant="label-hidden"
+                                    class="current-page-input"
+                                    onchange={handlePageChange}>
+                                    </lightning-input> &nbsp;
+                                    of {totalPages}
+                                </span>
+                            </div>
+                    
+                            <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                                disabled={isNextDisabled} variant="neutral">
+                            </lightning-button>
+                        </div>
+                    </template>
+                    
+                </div>
+            </div>
+    </lightning-card>
+
+    <c-sap_-finsys-export-to-excel></c-sap_-finsys-export-to-excel>
+    <c-sap_-finsys-reports-pdf-generator></c-sap_-finsys-reports-pdf-generator>
+    
+</template>

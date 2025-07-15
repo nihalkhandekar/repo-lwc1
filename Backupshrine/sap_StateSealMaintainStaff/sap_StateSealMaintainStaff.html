@@ -1,0 +1,273 @@
+<template>
+        <div class="stateseal-container">
+            <h1 class="page-heading">Maintain Staff Data</h1>
+            <div class="search-info-container firstDivForSearching">
+                <!-- Header Section -->
+                <div class="custom-card-header searchTitleHeader">
+                    <lightning-icon icon-name="standard:search" size="medium" class="header-icon"></lightning-icon>
+                    <div class="header-text">
+                        <h1 class="title">Search</h1>
+                    </div>
+                </div>
+
+                <div class="staff-input-section searchInputFieldsAndComboboxContainer">
+                    <div class="input-group">
+                        <!-- Custom Label for Last Name -->
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="lastName">Last Name</label>
+                            <lightning-input 
+                                label="Last Name"
+                                name="lastName" 
+                                variant="label-hidden"
+                                id="lastName" 
+                                value={lastName}                          
+                                class="input-field SE-searchCardInputLabel comboboxItemBackgroundColorChange" 
+                                maxlength="25"
+                                pattern="[A-Za-z]+"
+                                message-when-pattern-mismatch="Last name should only contain letters."
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <!-- Custom Label for First Name -->
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="firstName">First Name</label>
+                            <lightning-input 
+                                label="First Name"
+                                name="firstName" 
+                                variant="label-hidden"
+                                id="firstName" 
+                                value={firstName} 
+                                class="input-field SE-searchCardInputLabel" 
+                                maxlength="25"
+                                pattern="[A-Za-z]+"
+                                message-when-pattern-mismatch="First name should only contain letters."
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="phone">Phone Number</label>
+                            <lightning-input 
+                                label="Phone Number"
+                                name="phone" 
+                                type="tel"
+                                variant="label-hidden"
+                                id="phone" 
+                                value={phone}
+                                class="input-field SE-searchCardInputLabel" 
+                                maxlength="14"
+                                pattern="\(\d{3}\) \d{3}-\d{4}" 
+                                message-when-pattern-mismatch="Phone number format (860) 569-1111"
+                                onchange={handleInputChange}
+                                onkeydown={handlePhoneKeyDown}>
+                            </lightning-input>
+                        </div>
+                        <!-- Custom Label for Middle Name -->
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="title">Title</label>
+                            <lightning-combobox 
+                                    label="Title"
+                                    name="title" 
+                                    variant="label-hidden"
+                                    id="title" 
+                                    class="input-field SE-notvalidate comboboxItemBackgroundColorChange"
+                                    placeholder="Select Title" 
+                                    options={staffTitleOptions} 
+                                    value={title} 
+                                    onchange={handleInputChange}>
+                            </lightning-combobox>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="division">Division</label>
+                            <lightning-combobox 
+                                label="Division"
+                                name="division" 
+                                variant="label-hidden"
+                                id="division" 
+                                class="input-field SE-notvalidate comboboxItemBackgroundColorChange"
+                                placeholder="Select Division" 
+                                options={staffDivisionOptions} 
+                                value={division} 
+                                onchange={handleInputChange}>
+                        </lightning-combobox>        
+                        </div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <lightning-button 
+                    label="Clear All" 
+                    onclick={handleClear} 
+                    variant="bare" 
+                    icon-name="utility:close" 
+                    icon-position="left"
+                    class="slds-m-right_x-small slds-button_neutral clear-font">
+                </lightning-button>
+                    <lightning-button 
+                        label="Search" 
+                        onclick={handleSearch} 
+                        variant="brand" 
+                        class="customButton searchbutton"
+                        icon-name="utility:search" 
+                        icon-position="left">
+                    </lightning-button>
+                </div>
+            </div>
+
+            <div class="result-info-container secondDivForDataTable">
+                <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+
+                <!-- Buttons Section-->
+                <div class="button-container">
+                    <div class="left-button slds-p-left_small">
+                        <span class="slds-text-title_bold slds-m-right_x-small search-css">Maintain Staff Data</span>
+                        <lightning-badge label={transactionsFoundLabel} class="slds-badge_inverse result-no-css"></lightning-badge>
+                    </div>
+                    <div class="right-buttons">
+                        <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-quarter" label="This Quarter" class={badgeClassThisQuarter}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+
+                        <div class="custom-brand-style">
+                            <lightning-button variant="brand" label=" Set Default Staff" title="Primary action" icon-name="utility:user" 
+                            icon-position="left" onclick={openDefaultStaffModal} class="slds-m-left_x-small slds-button_brand customButton">
+                            </lightning-button>
+                            <lightning-button variant="brand" label="Add New Staff" title="Primary action" icon-name="utility:add" 
+                            icon-position="left" onclick={handleAddNewStaffClick} class="slds-m-left_x-small slds-button_brand addnewbutton customButton">
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>  
+                </div>                      
+
+                <!-- Result Section-->
+                <template if:true={isSearching}>
+                    <div class="loader">
+                        <lightning-spinner alternative-text="Loading" size="medium" variant="brand"></lightning-spinner>
+                    </div>
+                </template>        
+                <template if:true={showResults}>
+                        <div class="slds-scrollable_x custom-table-wrapper TrHoverBackGroundColorChange">                       
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead>
+                                        <tr class="custom-header TrHoverBackGroundColorChange">
+                                            <th scope="col" data-field="LastName" onclick={handleSort} class={sortedClassLastName}>
+                                                <div class="slds-truncate">
+                                                    Last Name
+                                                    <lightning-icon icon-name={sortIcons.LastName} class="sort-icon" size="x-small"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="FirstName" onclick={handleSort} class={sortedClassFirstName}>
+                                                <div class="slds-truncate">
+                                                    First Name
+                                                    <lightning-icon icon-name={sortIcons.FirstName} class="sort-icon" size="x-small"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="SAP_Staff_Title__c" onclick={handleSort} class={sortedClassStaffTitle}>
+                                                <div class="slds-truncate">
+                                                    Title
+                                                    <lightning-icon icon-name={sortIcons.SAP_Staff_Title__c} class="sort-icon" size="x-small"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="SAP_Division__c" onclick={handleSort} class={sortedClassDivision}>
+                                                <div class="slds-truncate">
+                                                    Division
+                                                    <lightning-icon icon-name={sortIcons.SAP_Division__c} class="sort-icon" size="x-small"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="Phone" onclick={handleSort} class={sortedClassPhone}>
+                                                <div class="slds-truncate">
+                                                    Phone
+                                                    <lightning-icon icon-name={sortIcons.Phone} class="sort-icon" size="x-small"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate">
+                                                    Actions
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={paginatedResult} for:item="row">
+                                            <tr key={row.Id}  class="custom-body">
+                                                <td>
+                                                    <div class="slds-truncate" title={row.LastName}>{row.LastName}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.FirstName}>{row.FirstName}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.SAP_Staff_Title__c}>{row.SAP_Staff_Title__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.SAP_Division__c}>{row.SAP_Division__c}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.Phone}>{row.Phone}</div>
+                                                </td>
+                                                <td>
+
+                                                <!-- Custom dropdown menu without icon and border -->
+                                                <lightning-button-menu alternative-text="Actions"
+                                                    class="slds-button_icon slds-button_icon-inverse custom-button-menu" 
+                                                    variant="bare"
+                                                    icon-name="utility:threedots_vertical" 
+                                                    onselect={handleMenuSelect} 
+                                                    menu-alignment="auto"
+                                                    data-id={row.Id}
+                                                    >
+                                                    <template if:false={row.isMenuOpen}>
+                                                        <lightning-menu-item label="View Staff Data" variant="base" value="view_request"></lightning-menu-item>
+                                                        <lightning-menu-item label="Edit Staff Data" variant="base"  value="edit_request"></lightning-menu-item>
+                                                        <lightning-menu-item label="Delete" variant="base" value="print_envelope"></lightning-menu-item>
+                                                    </template>
+                                                </lightning-button-menu>
+                                                </td> 
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                        </div>  
+                </template>
+
+                
+                
+                <template if:false={showResults}>
+                    <div class="no-result-found">
+                        <h1 class="no-result-found-label">No Results Found</h1>
+                    </div>
+                </template>
+
+                <!-- Pagination -->
+                <div class="pagination-container">
+                    <template if:true={showPages}>
+                        <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                            disabled={isPreviousDisabled} variant="neutral">
+                        </lightning-button>
+
+                        <div class="page-info">
+                            <span class="page-range">{paginationInfo}</span>
+                            <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                        </div>
+
+                        <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                            disabled={isNextDisabled} variant="neutral">
+                        </lightning-button>
+                    </template>
+                </div>
+
+
+            </div>
+        </div>
+</template>

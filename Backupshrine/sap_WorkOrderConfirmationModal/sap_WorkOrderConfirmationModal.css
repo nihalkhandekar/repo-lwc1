@@ -1,0 +1,277 @@
+/* Root styles for modal size */
+:host {
+  --slds-c-modal-sizing-medium: 60vw;
+  --lwc-modal-max-width: 60vw; /* Set width to 80% of the viewport */
+  --lwc-modal-max-height: 65vh; /* Set max height to 85% of the viewport */
+}
+
+/* Modal container styling */
+.slds-modal__container {
+  width: 60vw !important; /* Force width to 80% */
+  max-width: 600px !important; /* Max width */
+  max-height: 65vh !important; /* Max height */
+  overflow: hidden; /* Prevent container from adding scrollbars */
+}
+
+.print-button {
+  margin-right: 8px;
+}
+
+.sucess-font {
+  padding-left: 12px;
+  color: #2e844a;
+}
+.bold-font {
+  font-weight: 590;
+}
+
+.save-button {
+  --sds-c-button-brand-color-background: #003a62;
+  --sds-c-button-brand-color-border: #003a62;
+  --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+  --sds-c-button-brand-color-border-hover: rgb(169, 224, 240);
+  --lwc-buttonBorderRadius: 8px;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*  height: 100px;  Adjust as needed */
+  z-index: 20px;
+}
+
+/* Content body to allow scrolling */
+.custom-modal-body {
+  max-height: calc(85vh - 120px); /* Adjust based on header and footer height */
+  align-items: center;
+}
+
+.delete-confirmation-text {
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'SF Pro', sans-serif;
+}
+
+.info-sections {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  padding: 12px;
+  font-family: 'SF Pro', sans-serif;
+  border-bottom: 1px solid #f3f3f3;
+  background-color: #f6f9ff;
+}
+
+/* Header and Footer styles */
+.slds-modal__header {
+  background-color: #eef4ff;
+  border-radius: 16px 16px 0px 0px;
+}
+
+.slds-modal__footer {
+  margin-top: 1.5rem;
+  border-top: 1px solid #dddbda;
+  border-radius: 0px 0px 16px 16px;
+}
+
+/* Close button styling */
+.slds-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.esq-align {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+.reason-inline {
+  display: flex;
+}
+
+.wetsign-inline {
+  display: flex;
+  padding-top: 1.5rem;
+}
+
+.boldFont {
+  font-weight: 590;
+  font-size: 12px;
+  padding-right: 0.5rem;
+}
+
+.info-sections {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.personal-info-section,
+.address-info-section,
+.term-info-section,
+.sealStamp-info-section,
+.upload-signature-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border: 1px solid #dddbda;
+  border-radius: 12px;
+}
+
+.custom-space {
+  padding: 12px 16px 12px 16px;
+  background-color: #ffffff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.slds-button-group {
+  justify-content: space-between;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f3f2f2; /* Adjust the background color to match your design */
+}
+.button-left-group {
+  display: flex;
+
+  gap: 0.6rem;
+}
+
+.button-right-group {
+  display: flex;
+}
+
+/* Header container styling */
+.header-container {
+  display: flex;
+  align-items: center;
+  font-weight: 590;
+}
+
+/* Style for the Edit button */
+.edit-button {
+  background-color: #eef4ff; /* White background */
+  border: 0px solid #d8dde6; /* Light border */
+  padding-left: 1rem;
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease; /* Smooth transition */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 590;
+}
+
+.full-width {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.address {
+  --sds-c-textarea-color-background: #ffffff;
+  --textarea-color-background: #ffffff;
+  --sds-c-input-color-background: #ffffff;
+  --input-color-background: #ffffff;
+  --dxp-c-textarea-text-font-size: 14px;
+  --dxp-s-form-element-text-font-weight: 400;
+  --dxp-s-form-element-text-line-height: 20px;
+  --dxp-s-form-element-text-font-size: 14px;
+  --dxp-s-form-element-color-border: #c9c9c9;
+  --sds-c-textarea-text-color: #181818;
+  --dxp-s-form-element-text-color: #181818;
+  --lwc-borderWidthThin: 1px;
+  --lwc-formLabelFontSize: 12px;
+  --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+  --slds-c-input-color-background: #ffffff;
+  --slds-c-input-color-border: #c9c9c9;
+  --slds-c-input-radius-border: 8px 8px 8px 8px;
+  --sds-c-textarea-radius-border: 8px 8px 8px 8px;
+  --slds-c-textarea-color-background: #ffffff;
+  --slds-c-textarea-color-border: #c9c9c9;
+  --sds-c-input-text-color: #181818;
+  --sds-c-textarea-color-border: #c9c9c9;
+  --dxp-c-textarea-width-border: 1px;
+  --sds-c-input-color-border: #c9c9c9;
+  --slds-c-textarea-radius-border: 8px 8px 8px 8px;
+  --dxp-c-input-text-font-size: 14px;
+  --dxp-s-form-element-text-font-weight: 400;
+  --sds-c-input-radius-border: 8px 8px 8px 8px;
+  --dxp-s-form-element-label-font-size: 12px;
+  --dxp-s-form-element-label-font-weight: 590;
+  --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+  --dxp-c-input-width-border: 1px;
+}
+.address .slds-form-element__control input[name='state'],
+.address .slds-form-element__control input[name='country'],
+.address .slds-form-element__control input[name='city'],
+.address .slds-form-element__control input[name='postalCode'] {
+  width: 50%;
+}
+
+.slds-form-element__control input[name='state'],
+.slds-form-element__control input[name='country'],
+.slds-form-element__control input[name='city'],
+.slds-form-element__control input[name='postalCode'] {
+  width: 50%;
+}
+
+.clear-font {
+  color: #747474;
+  --slds-c-button-text-color: #003a62;
+  --lwc-buttonBorderRadius: 8px;
+}
+
+.extinsion-class {
+  width: 80px;
+}
+
+.business-phone {
+  width: 180px;
+}
+
+.business-extension {
+  display: flex;
+  gap: 1rem;
+}
+
+lightning-input {
+  --slds-c-input-radius-border: 8px;
+}
+
+lightning-combobox {
+  --slds-c-input-radius-border: 8px;
+}
+
+lightning-textarea {
+  --slds-c-textarea-radius-border: 8px;
+}
+
+.save-button {
+  --sds-c-button-brand-color-background: #003a62;
+  --sds-c-button-brand-color-border: #003a62;
+  --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+  --sds-c-button-brand-color-border-hover: rgb(169, 224, 240);
+  --lwc-buttonBorderRadius: 8px;
+}
+
+.custom-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  --lwc-borderWidthThin: 0px;
+}
+
+.clear-font {
+  color: #747474;
+  --slds-c-button-text-color: #003a62;
+  --lwc-buttonBorderRadius: 8px;
+}
+
+/* Media query for responsive adjustments */
+@media (min-width: 48em) {
+  :host {
+    --slds-c-modal-sizing-medium: 80vw;
+  }
+}
