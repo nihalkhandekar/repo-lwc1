@@ -1,0 +1,101 @@
+.h6.colorCls {
+    line-height: 27px !important;
+}
+
+.p.large,
+p.largeBold {
+    letter-spacing: 0.13px !important;
+}
+
+.bttnClass {
+    width: 100%;
+    justify-content: center;
+}
+
+.pClass {
+    color: #2D2C2C;
+}
+
+.slds-button:hover {
+    color: #ffffff;
+}
+
+.primaryBtn.slds-button {
+    height: 56px;
+}
+
+.hyperlinkCls {
+    text-decoration: underline;
+}
+
+/* .slds-form-element__label{
+    color: #2d2c2c !important;
+    font-family: Karla !important;
+    font-size: 18px !important;
+    line-height: 27px !important
+} */
+
+.listItemCls {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.bttnPadding {
+    padding-bottom: 5.5rem;
+}
+
+/* .slds-form-element__label{
+    color: #2d2c2c !important;
+    font-family: Karla !important;
+    font-size: 18px !important;
+    line-height: 27px !important
+} */
+
+.search-input-box input {
+    border-radius: 4px;
+    border: 1px solid #d0cfcf;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    box-sizing: border-box !important;
+    display: flex;
+    height: 60px;
+}
+
+.search-input-box input[type="text"] {
+    color: #757575 !important;
+    font-family: 'Karla', sans-serif;
+    font-size: 16px !important;
+    letter-spacing: 0.13px !important;
+    line-height: 19px !important;
+    outline: none;
+
+}
+
+.search-input-box input {
+    border-color: transparent;
+    padding: 16px 24px;
+    width: 100%;
+}
+
+.searchBox {
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.errorValidation {
+    color: #db2426;
+    font-family: 'Karla Bold', sans-serif;
+    font-size: 14px;
+    letter-spacing: .1px;
+    line-height: 21px;
+}
+
+@media only screen and (max-width: 64rem) {
+    .listItemCls {
+        font-size: 17px;
+        line-height: 25px;
+    }
+}

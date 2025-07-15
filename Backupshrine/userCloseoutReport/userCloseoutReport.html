@@ -1,0 +1,991 @@
+<template>
+  <lightning-card>
+    <div class="SE-content">
+      <!-- Apostille Section -->
+      <template if:true={Apostille}>
+        <div class="slds-grid slds-grid_align-spread">
+          <div class="slds-col" style="display: flex">
+            <lightning-button-icon
+              icon-name={headerIcon}
+              variant="border-filled"
+              alternative-text="Toggle Sections"
+              onclick={toggleApostilleSections}
+              class="header-toggle-icon"
+            >
+            </lightning-button-icon>
+            <h1 class="headingClass">&nbsp; &nbsp;Apostille Transactions</h1>
+          </div>
+          <template if:true={isApostilleSectionVisible}>
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+              <div class="buttoncontainerfilter">
+                <!-- Filter and Export Buttons -->
+                <div class="right-buttons">
+                  <lightning-badge
+                    data-id="today"
+                    label="Today"
+                    class={badgeClassCurrentDay}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-week"
+                    label="This Week"
+                    class={badgeClassThisWeek}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-month"
+                    label="This Month"
+                    class={badgeClassThisMonth}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-quarter"
+                    label="This Quarter"
+                    class={badgeClassThisQuarter}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-year"
+                    label="This Year"
+                    class={badgeClassThisYear}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <div
+                    class="export-button"
+                    title="Export to Excel"
+                    onclick={handleExportApostille}
+                  >
+                    <lightning-icon
+                      icon-name="doctype:excel"
+                      size="xx-small"
+                      alternative-text="Excel Icon"
+                    ></lightning-icon>
+                    <span>Export to Excel</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <template if:true={isApostilleSectionVisible}>
+          <div class="SE-Card secondDivForSearching">
+            <!-- Check Payment Section -->
+            <template if:true={checkPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Check
+                  </h2>
+                  <lightning-badge
+                    label={checkPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th
+                          scope="col"
+                          data-field="WorkOrderNumber"
+                          class={sortedClassCustomer}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            WO/Invoice #
+                            <lightning-icon
+                              icon-name={sortIcons.WorkOrderNumber}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th
+                          scope="col"
+                          data-field="CustomerName"
+                          class={sortedClassName}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            Name
+                            <lightning-icon
+                              icon-name={sortIcons.CustomerName}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={checkPayments} for:item="row">
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Check for Closeout {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+
+            <!-- Credit Card Payment Section -->
+            <template if:true={creditCardPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Credit Cards
+                  </h2>
+                  <lightning-badge
+                    label={creditCardPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th
+                          scope="col"
+                          data-field="WorkOrderNumber"
+                          class={sortedClassCustomer}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            WO/Invoice #
+                            <lightning-icon
+                              icon-name={sortIcons.WorkOrderNumber}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th
+                          scope="col"
+                          data-field="CustomerName"
+                          class={sortedClassName}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            Name
+                            <lightning-icon
+                              icon-name={sortIcons.CustomerName}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={creditCardPayments} for:item="row">
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Credit Card for Closeout
+                              {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+
+            <!-- Cash Payment Section -->
+            <template if:true={cashPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Cash
+                  </h2>
+                  <lightning-badge
+                    label={cashPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th
+                          scope="col"
+                          data-field="WorkOrderNumber"
+                          class={sortedClassCustomer}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            WO/Invoice #
+                            <lightning-icon
+                              icon-name={sortIcons.WorkOrderNumber}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th
+                          scope="col"
+                          data-field="CustomerName"
+                          class={sortedClassName}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            Name
+                            <lightning-icon
+                              icon-name={sortIcons.CustomerName}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={cashPayments} for:item="row">
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Cash for Closeout {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+
+            <!-- Money Order Payment Section -->
+            <template if:true={moneyOrderPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Money Orders
+                  </h2>
+                  <lightning-badge
+                    label={moneyOrderPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th
+                          scope="col"
+                          data-field="WorkOrderNumber"
+                          class={sortedClassCustomer}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            WO/Invoice #
+                            <lightning-icon
+                              icon-name={sortIcons.WorkOrderNumber}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th
+                          scope="col"
+                          data-field="CustomerName"
+                          class={sortedClassName}
+                          onclick={handleSort}
+                        >
+                          <div class="slds-truncate">
+                            Name
+                            <lightning-icon
+                              icon-name={sortIcons.CustomerName}
+                              class="sort-icon"
+                              size="x-small"
+                            ></lightning-icon>
+                          </div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={moneyOrderPayments} for:item="row">
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Money Order for Closeout
+                              {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </template>
+
+      <!-- Finsys Section -->
+      <template if:true={Finsys}>
+        <div class="slds-grid slds-grid_align-spread">
+          <div class="slds-col" style="display: flex">
+            <lightning-button-icon
+              icon-name={headerIcon}
+              variant="border-filled"
+              alternative-text="Toggle Sections"
+              onclick={toggleFinsysSections}
+              class="header-toggle-icon"
+            >
+            </lightning-button-icon>
+            <h1 class="headingClass">&nbsp; &nbsp;Finsys Transactions</h1>
+          </div>
+          <template if:true={isSectionFinsysVisible}>
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+              <div class="buttoncontainerfilter">
+                <div class="right-buttons">
+                  <lightning-badge
+                    data-id="today"
+                    label="Today"
+                    class={badgeClassCurrentDay}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-week"
+                    label="This Week"
+                    class={badgeClassThisWeek}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-month"
+                    label="This Month"
+                    class={badgeClassThisMonth}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-quarter"
+                    label="This Quarter"
+                    class={badgeClassThisQuarter}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-year"
+                    label="This Year"
+                    class={badgeClassThisYear}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <div
+                    class="export-button"
+                    title="Export to Excel"
+                    onclick={handleExportFinsys}
+                  >
+                    <lightning-icon
+                      icon-name="doctype:excel"
+                      size="xx-small"
+                      alternative-text="Excel Icon"
+                    ></lightning-icon>
+                    <span>Export to Excel</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <template if:true={isSectionFinsysVisible}>
+          <div class="SE-Card secondDivForSearching">
+            <!-- Check Section -->
+            <template if:true={checkFinsysPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Check
+                  </h2>
+                  <lightning-badge
+                    label={checkFinsysPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th scope="col">
+                          <div class="slds-truncate">WO/Invoice #</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Name</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={checkFinsysPayments} for:item="row">
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Check for Closeout {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+
+            <!-- Card Payment Section -->
+            <template if:true={creditFinsysCardPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Card
+                  </h2>
+                  <lightning-badge
+                    label={creditFinsysCardPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th scope="col">
+                          <div class="slds-truncate">WO/Invoice #</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Name</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template
+                        for:each={creditFinsysCardPayments}
+                        for:item="payment"
+                      >
+                        <tr key={payment.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {payment.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              {payment.CustomerName}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Credit Card for Closeout
+                              {payment.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={payment.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              {payment.CreatedDate}
+                            </div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+
+            <!-- Cash Section -->
+            <template if:true={cashFinsysPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Cash
+                  </h2>
+                  <lightning-badge
+                    label={cashFinsysPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th scope="col">
+                          <div class="slds-truncate">WO/Invoice #</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Name</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template for:each={cashFinsysPayments} for:item="row">
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Cash for Closeout {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+
+            <!-- Money Order Section -->
+            <template if:true={moneyOrderFinsysPayments.length}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Money Order
+                  </h2>
+                  <lightning-badge
+                    label={moneyOrderFinsysPayments.length}
+                    class="slds-badge_inverse result-no-css"
+                  ></lightning-badge>
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th scope="col">
+                          <div class="slds-truncate">WO/Invoice #</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Name</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template
+                        for:each={moneyOrderFinsysPayments}
+                        for:item="row"
+                      >
+                        <tr key={row.Id}>
+                          <td>
+                            <div class="slds-truncate">
+                              {row.WorkOrderNumber}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CustomerName}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Money Order for Closeout
+                              {row.Payment_Number__c}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={row.TotalFeeAmount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{row.CreatedDate}</div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </template>
+
+      <!-- Work Order Transactions Section -->
+      <template if:true={BRS}>
+        <div class="slds-grid slds-grid_align-spread">
+          <div class="slds-col" style="display: flex">
+            <lightning-button-icon
+              icon-name={headerIcon}
+              variant="border-filled"
+              alternative-text="Toggle Sections"
+              onclick={toggleBRSSections}
+              class="header-toggle-icon"
+            >
+            </lightning-button-icon>
+            <h1 class="headingClass">&nbsp; &nbsp;Work Order Transactions</h1>
+          </div>
+          <template if:true={isBRSSectionVisible}>
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+              <div class="buttoncontainerfilter">
+                <div class="right-buttons">
+                  <lightning-badge
+                    data-id="today"
+                    label="Today"
+                    class={badgeClassCurrentDay}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-week"
+                    label="This Week"
+                    class={badgeClassThisWeek}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-month"
+                    label="This Month"
+                    class={badgeClassThisMonth}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-quarter"
+                    label="This Quarter"
+                    class={badgeClassThisQuarter}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <lightning-badge
+                    data-id="this-year"
+                    label="This Year"
+                    class={badgeClassThisYear}
+                    onclick={handleBadgeClick}
+                  ></lightning-badge>
+                  <div
+                    class="export-button"
+                    title="Export to Excel"
+                    onclick={handleExportBRS}
+                  >
+                    <lightning-icon
+                      icon-name="doctype:excel"
+                      size="xx-small"
+                      alternative-text="Excel Icon"
+                    ></lightning-icon>
+                    <span>Export to Excel</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+
+        <template if:true={isBRSSectionVisible}>
+          <div class="SE-Card secondDivForSearching">
+            <!-- Credit Card Transactions -->
+            <template if:true={hasCreditBRSPayments}>
+              <div class="payment-type-section slds-m-bottom_medium">
+                <div class="left-button slds-p-left_small">
+                  <h2
+                    class="slds-text-title_bold slds-m-right_x-small search-css"
+                  >
+                    Credit Card
+                  </h2>
+                  <lightning-badge class="slds-badge_inverse result-no-css"
+                    >{creditBRSCardPayments.length}</lightning-badge
+                  >
+                </div>
+                <div class="slds-scrollable_x custom-table-wrapper">
+                  <table
+                    class="slds-table slds-table_cell-buffer slds-table_bordered custom-table"
+                  >
+                    <thead>
+                      <tr class="custom-header">
+                        <th scope="col">
+                          <div class="slds-truncate">WO/Invoice #</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Name</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Payment Details</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Amount</div>
+                        </th>
+                        <th scope="col">
+                          <div class="slds-truncate">Date</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <template
+                        for:each={creditBRSCardPayments}
+                        for:item="payment"
+                      >
+                        <tr key={payment.id}>
+                          <td>
+                            <div class="slds-truncate">{payment.workOrder}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">{payment.name}</div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              In Credit Card for Closeout {payment.cardLast4}
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              <lightning-formatted-number
+                                value={payment.amount}
+                                format-style="currency"
+                                currency-code="USD"
+                              ></lightning-formatted-number>
+                            </div>
+                          </td>
+                          <td>
+                            <div class="slds-truncate">
+                              {payment.createdDate}
+                            </div>
+                          </td>
+                        </tr>
+                      </template>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+      </template>
+    </div>
+  </lightning-card>
+
+  <c-excel-export-finsys></c-excel-export-finsys>
+    
+</template>

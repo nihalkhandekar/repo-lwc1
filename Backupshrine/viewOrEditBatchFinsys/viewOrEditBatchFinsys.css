@@ -1,0 +1,165 @@
+.SE-ModalHeaderMain{
+    background-color: #EEF4FF;
+    height: 48px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    padding: 8px 12px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+  }
+
+
+  .print-buttons{
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background: #ffffff;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.custom-modal__back {
+    position: absolute;
+    /* top: 0.5rem; */
+    /* right: 0.5rem; */
+    --lwc-borderWidthThin: 0px;
+    display: flex;
+    align-items: start;
+    background: white;
+    border-radius: 8px;
+}
+
+.SE-ModalHeader{
+    padding: 48px 12px 12px 12px !important;
+    border-radius: 0px !important;
+    overflow-y: auto;
+    height: fit-content;
+    position: fixed;
+    overflow-y: auto;
+    max-height: calc(100vh - 170px);
+    width: 100%;
+}
+
+.edit-button {
+    background-color: #EEF4FF; /* White background */
+    border: 0px solid #d8dde6; /* Light border */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 8px 16px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 590;
+}
+
+/* .footerButtons {
+    width: 100%;
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 40px;
+    justify-content: space-between;
+} */
+
+
+.footer{
+    background-color: #F3F3F3;
+    /* height: 56px; */
+    border-radius: 0 0 8px 8px;
+    padding: 8px 12px;
+    /* margin-top: -24px; */
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    bottom: 0;
+    font-size: 13px !important;
+
+}
+.slds-button-group {
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f3f2f2; /* Adjust the background color to match your design */
+    font-size: 14px;
+}
+
+.button-left-group{
+    display: flex;
+    gap: 0.6rem;
+}
+
+.button-right-group {
+    display: flex;
+
+}
+
+
+.SE-modalFormStack >div {
+    margin-bottom: 15px;
+}
+
+.customFieldView {
+    width: 100%;
+    display: flex
+;
+}
+
+.BatchCodeAndCreatedDate {
+    width: 50%;
+    display: flex
+;
+    gap: 32px;
+}
+
+.createdBy {
+    width: 50%;
+}
+
+.BatchCombobox .slds-input_faux {
+    color: var(--slds-g-color-neutral-base-50, var(--lwc-colorTextPlaceholder, rgb(116, 116, 116)));
+    border-radius: 8px;
+}
+
+.BatchCombobox .slds-input_faux:not {
+    color: var(--slds-g-color-neutral-base-50, var(--lwc-colorTextPlaceholder, rgb(116, 116, 116)));
+    border-radius: 8px;
+}
+
+.InputColumnAlign {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 6px;
+}
+
+.custom-table{
+    width: 100%;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-table tbody tr.custom-column td {
+    font-weight: 400;
+    font-size: 14px;
+    color: #181818;
+    height: 40px;
+    vertical-align: middle;
+    border-width: 1px 1px 0px 0px;
+    border-style: solid;
+    border-color: #E5E5E5;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 5px 12px 5px 12px !important;
+    text-align: left;
+}

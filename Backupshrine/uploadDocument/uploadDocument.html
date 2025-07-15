@@ -1,0 +1,40 @@
+<template>
+    <div class="right-stack slds-p-around_medium">
+        <div class="slds-text-heading_small slds-m-bottom_small header-title">
+            {labels.uploadDocumentsLabel}
+        </div>
+        
+        <lightning-layout multiple-rows>
+            <!-- Upload Document and Driver's License or State ID Card -->
+            <lightning-layout-item class="slds-p-around_small slds-box upload-document slds-m-right_large">
+                <lightning-input label={labels.documentUploadLabel} name="documentUpload" type="file" onchange={handleFileUpload} class="slds-align_absolute-center" required></lightning-input>
+                <img src={documentUploadPreview} alt="Document Upload Preview" class="file-preview" if:true={documentUploadPreview}>
+            </lightning-layout-item>
+
+            <lightning-layout-item class="slds-p-around_small slds-box upload-document">
+                <lightning-input label={labels.idCardUploadLabel} name="idCardUpload" type="file" onchange={handleFileUpload} class="slds-align_absolute-center" required></lightning-input>
+                <img src={idCardUploadPreview} alt="ID Card Upload Preview" class="file-preview" if:true={idCardUploadPreview}>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout multiple-rows>
+            <!-- Steps to Upload Your Signature -->
+            <lightning-layout-item class="slds-m-around_small steps-list">
+                <p><strong>{labels.stepsToUploadSignatureTitle}</strong></p>
+                <ul>
+                    <li>{labels.step1}</li>
+                    <li>{labels.step2}</li>
+                    <li>{labels.step3}</li>
+                </ul>
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <lightning-layout multiple-rows>
+            <!-- Provide Signature -->
+            <lightning-layout-item class="slds-p-around_small slds-box upload-signature">
+                <lightning-input label={labels.signatureUploadLabel} name="signatureUpload" type="file" onchange={handleFileUpload} class="slds-align_absolute-center" required></lightning-input>
+                <img src={signatureUploadPreview} alt="Signature Upload Preview" class="file-preview" if:true={signatureUploadPreview}>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

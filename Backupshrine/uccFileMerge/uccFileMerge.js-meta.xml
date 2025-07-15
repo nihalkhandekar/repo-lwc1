@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="filingStatus" type="String" label="Filing Status" description=""/>
+            <property name="boFiling" label="Business filing" type="@salesforce/schema/Business_Filing__c"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

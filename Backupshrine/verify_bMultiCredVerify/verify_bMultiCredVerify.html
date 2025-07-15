@@ -1,0 +1,27 @@
+<template>
+    <div class="slds-p-bottom_x-large">
+        <h6 class="colorCls">{label.verify_AddCred}</h6>  
+        <p class="slds-p-top_medium colorCls large">
+            {label.verify_multiCred_Msg1}&nbsp;<b>{totalLength}&nbsp;{label.verify_multiCred_Msg2}</b>&nbsp;{label.verify_multiCred_Msg3}
+            </br></br>
+        </p>
+        <ul class="slds-list_dotted listItemCls">
+            <li>{label.verify_multiCred_item1}</li>
+            <li>{label.verify_multiCred_item2}</li>
+        </ul>
+    </div>   
+    <hr>
+    <div class="bttnPadding">
+        <button class="slds-button slds-float_right bttnClass primaryBtn" onclick={multiCredNext}>
+            {label.Next_Button} &nbsp;
+            <lightning-icon
+                    icon-name="utility:chevronright"
+                    size="xx-small"
+                    alternative-text="chevronright"
+                    title="chevronright"
+                    variant="inverse"
+					aria-hidden="true"
+            ></lightning-icon>
+        </button>
+    </div>
+</template>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="select_Contact_Id" type="String" label="Contact Id" description="Selected Contact ID" role="inputOnly" />
+            <property name="selectedCustomerId" type="String" label="Customer ID" description="Selected Customer ID" role="outputOnly" />
+            <property name="accountId" type="String" label="Account ID" description="Selected Customer Account ID" role="outputOnly" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

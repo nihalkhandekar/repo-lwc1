@@ -1,0 +1,146 @@
+<template>
+    <div if:false={multiCred}>
+        <h6 if:false={credVerification} class="pClass">{label.verify_AddBiz}</h6>
+        <h6 if:true={credVerification} class="pClass">{label.verify_AddCred}</h6>
+    </div>
+    <div if:true={multiCred}>
+        <h6 class="pClass">{label.verify_AddCred}&nbsp;({index} of {totalLength} {label.verify_AddCredID})</h6>
+    </div>
+    <div if:false={notFound}>
+        <div>
+            <p if:false={credVerification} class="slds-p-top_medium large pClass">
+                {label.verify_bizEmailIdMsg} <b>{selectedBusinessObj.businessName}</b> {label.verify_sendCodeMsg}
+            </p>
+            <p if:true={credVerification} class="slds-p-top_medium large pClass">
+                {label.verify_emailIdMsg} <b>{credsList.Credential_Type}</b> {label.verify_sendCodeMsg}
+            </p>
+            </br></br>
+            <ul class="slds-list_dotted listItemCls">
+                <li if:false={credVerification}>{label.verify_forgotBizEmailMsg}&nbsp;
+                    <a href={label.verify_concordURL} target="_blank"
+                        class="hyperlinkCls">{label.verify_SectretaryState}</a>.
+                </li>
+                <li if:true={credVerification}>{label.verify_forgotEmailMsg}&nbsp;
+                    <a href="https://www.elicense.ct.gov/" target="_blank" class="hyperlinkCls">{label.verify_eLicense}</a>.
+                </li>
+            </ul>
+            </br></br>
+            <p if:false={credVerification} class="largeBold pClass">
+                {maskedEmail}
+            </p>
+            <p if:true={credVerification} class="largeBold pClass">
+                {maskedEmail}
+            </p>
+            </br></br>
+        </div>
+        <div class="slds-p-bottom_x-large" if:true={doesNotMatch}>
+            <c-bos_help-Text if:false={credVerification} headtext={label.helptexheader}
+                bodytext={label.verify_emailChangeMsg}></c-bos_help-Text>
+            <c-bos_help-Text if:true={credVerification} headtext={label.helptexheader}
+                bodytext={label.verify_changedEmailMsg}></c-bos_help-Text>
+        </div>
+        <div class="slds-p-bottom_x-large">
+            <p class="slds-p-bottom_xxx-small largeBold pClass">
+                {label.verify_Step} 2
+            </p>
+            <p if:false={credVerification} class="slds-p-bottom_xxx-small large pClass">
+                {label.verify_regBizEmail}
+            </p>
+            <p if:true={credVerification} class="slds-p-bottom_xxx-small large pClass">
+                {label.verify_eLicenseAccEmail}
+            </p>
+            <div class="slds-form-element__control search-input-box inputTextElement">
+                <!-- <input type="text" class="searchBox" role="textbox" /> -->
+                <lightning-input type="text" class="searchBox" role="textbox" variant="label-hidden"
+                    aria-label={errorMessage} onkeypress={handleEnterKey}></lightning-input>
+                <span class="helpText" id="err-text" aria-label={errorMessage} role="alert"></span>
+            </div>
+            <template if:true={emailIDMismatch} class="error-container">
+                <div class="errorValidation">
+                    <p if:false={credVerification} class="small">
+                        {label.verify_emailMisMatch}
+                    </p>
+                    <p if:true={credVerification} class="small">
+                        Credential mismatch error goes here
+                    </p>
+                </div>
+            </template>
+        </div>
+        <hr>
+        <div class="bttnPadding">
+            <button class="slds-button slds-float_right bttnClass primaryBtn" onclick={handleVerify}>
+                {label.verify_sendCode}&nbsp;
+                <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                    title="chevronright" variant="inverse" aria-hidden="true"></lightning-icon>
+            </button>
+        </div>
+    </div>
+
+    <div if:true={notFound}>
+        <template if:false={credVerification}>
+            <p class="slds-p-top_medium large pClass">
+                {label.verify_notFoundMsg}
+                <b> #{custid}.</b>
+            </p>
+        </template>
+        <template if:true={credVerification}>
+            <p class="slds-p-top_medium large pClass">
+                We're sorry, we could not find an eLicense account email connected to eLicense User ID
+                <b> #{custid}.</b>
+            </p>
+        </template>
+        </br>
+        <p class="slds-p-vertical_medium large pClass">
+            {label.verify_confirmEmail}
+        </p>
+        </br>
+        <ul class="slds-list_dotted listItemCls">
+            <template if:false={credVerification}>
+                <li>{label.verify_checkEmail}&nbsp;
+                    <a href={label.verify_concordURL} target="_blank"
+                        class="hyperlinkCls">{label.verify_SectretaryState}</a>.
+                </li>
+                <li>
+                    {label.verify_findBizEmailMsg}&nbsp;
+                </li>
+            </template>
+            <template if:true={credVerification}>
+                <li>You can check your email at your &nbsp;
+                    <a href='https://www.elicense.ct.gov/' target="_blank"
+                        class="hyperlinkCls">eLicense account</a>.
+                </li>
+                <li>
+                    Please note that any additions or changes to your eLicense account email may take 24 hours before it shows up in our system.&nbsp;
+                </li>
+            </template>
+            
+        </ul>
+        </br>
+        <hr>
+        <div if:false={credVerification} class="bttnPadding">
+            <button class="slds-button slds-float_right bttnClass primaryBtn" onclick={navigateToBizDash}>
+                {label.verify_backDashboard}
+                <!-- <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                    title="chevronright" variant="inverse" aria-hidden="true"></lightning-icon> -->
+            </button>
+        </div>
+        <div if:true={credVerification} class="bttnPadding">
+            <div if:false={isOnlyCred}>
+            <button if:false={isLastCred} class="slds-button slds-float_right bttnClass primaryBtn"
+                onclick={moveToNext}>
+                Verify next User ID &nbsp;
+                <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                    title="chevronright" variant="inverse" aria-hidden="true"></lightning-icon>
+            </button>
+                <button if:true={isLastCred} class="slds-button slds-float_right bttnClass primaryBtn"
+                    onclick={moveToNext}>
+                Continue
+            </button>
+        </div>
+            <button if:true={isOnlyCred} class="slds-button slds-float_right bttnClass primaryBtn"
+                onclick={navigateToBizDash}>
+                {label.verify_backDashboard}
+            </button>
+        </div>
+    </div>
+</template>

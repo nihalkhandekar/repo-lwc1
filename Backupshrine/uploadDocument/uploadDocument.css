@@ -1,0 +1,60 @@
+.slds-m-around_small {
+    margin: 0.5rem;
+}
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.lightning-layout {
+    display: flex;  
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.lightning-layout-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+}
+
+lightning-input[type="file"] {
+    width: 100%;
+}
+
+button.slds-m-around_small {
+    margin: 1rem;
+}
+.slds-box {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+}
+.upload-document {
+    flex: 0 1 48%;
+    max-width: 48%;
+}
+.upload-signature {
+    flex: 0 1 99%;
+    max-width: 98%;
+    
+}
+.steps-list ul {
+    list-style: none;
+    padding-left: 0;
+}
+.steps-list ul li {
+    position: relative;
+    padding-left: 15px; /* Add space for the dot */
+}
+.steps-list ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #020202;
+}
+.button-section {
+    margin-top: 40px; /* Adjust as needed */
+   
+}

@@ -1,0 +1,8 @@
+<template>
+    <div class="theme1">
+        <c-generic-radio_brs radio-options={options} name="AssignType" onctbosdatachange={onAssignTypeRadioCheck}
+            has-error={showErrorMessage} answer={type} value={type}>
+        </c-generic-radio_brs>
+    </div>
+    <p class="error-text" if:true={showErrorMessage}>{labels.Selection_Required}</p>
+</template>

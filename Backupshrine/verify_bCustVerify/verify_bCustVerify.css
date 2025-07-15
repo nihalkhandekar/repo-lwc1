@@ -1,0 +1,82 @@
+.h6.colorCls {
+    line-height: 27px !important;
+}
+
+.p.large,
+p.largeBold {
+    letter-spacing: 0.13px !important;
+}
+
+.bttnClass {
+    width: 100%;
+    justify-content: center;
+}
+
+.bttnPadding {
+    padding-bottom: 6rem;
+}
+
+.slds-button:hover {
+    color: #ffffff;
+}
+
+.primaryBtn.slds-button {
+    height: 56px;
+}
+
+.linkCls {
+    color: #00528D;
+}
+
+.custImg {
+    width: 256px;
+    height: auto;
+}
+
+/* .slds-form-element__label{
+    color: #2d2c2c !important;
+    font-family: Karla !important;
+    font-size: 18px !important;
+    line-height: 27px !important
+} */
+
+.search-input-box input {
+    border-radius: 4px;
+    border: 1px solid #d0cfcf;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    box-sizing: border-box !important;
+    display: flex;
+    height: 60px;
+}
+
+.searchBox {
+    font-size: 18px;
+    line-height: 27px;
+}
+
+.search-input-box input[type="text"] {
+    color: #757575 !important;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px !important;
+    letter-spacing: 0.13px !important;
+    line-height: 27px !important;
+}
+
+.search-input-box input {
+    border-color: transparent;
+    padding: 16px 24px;
+    width: 100%;
+}
+
+.errorValidation {
+    color: #db2426;
+    font-family: 'Karla Bold', sans-serif;
+    font-size: 14px;
+    letter-spacing: .1px;
+    line-height: 21px;
+}
+
+.colorCls {
+    color: #2D2C2C;
+}

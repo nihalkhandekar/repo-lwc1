@@ -1,0 +1,139 @@
+<template>
+  <div class="slds-size--1-of-1 sideNavWrapper">
+    <div class="progressbar slds-show_large">
+      <c-progress-bar progress={progress} firstname={firstName} label={title} onshowexitpopup={openConfirmModal}></c-progress-bar>
+    </div>
+    <div class="progressbar-mob slds-hide_large">
+
+      <div class="page-title" onclick={handleMenuToggle}>
+        <div class="progressbar">
+          <p class="slds-text-color_weak slds-text-title_bold">{getProgressLevel}</p>
+        </div>
+        <div class="title-wrapper">
+          <p class="largeBold">
+            {title}
+          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" class={svgClass}>
+            <use xlink:href={getCaretIcon}></use>
+          </svg>
+        </div>
+      </div>
+      <div class="page-title" onclick={handleMenuToggle}>
+        <button class="natural-button-with-icon slds-button slds-button_natural slds-m-bottom_x-small" onclick={openConfirmModal} data-id={index}>
+          <img src={exitIcon} alt="" class="exit-icon" />
+          <span class="small">{labels.exitLabel}</span>
+        </button>
+      </div>
+    </div>
+    <nav class="slds-nav-vertical mob-nav" aria-label="Sub page">
+      <div class="slds-nav-vertical__section">
+
+        <ul aria-describedby="entity-header">
+          <li>
+            <template for:each={sidenavobj} for:item="sectionItem">
+              <template if:true={sectionItem.show}>
+              <template if:true={sectionItem.subsections.length}>
+                <div key={sectionItem.label}>
+                  <div data-id={sectionItem.pageNameRef} class="sectionWrapper" data-type={sectionItem.label}
+                    key={sectionItem.label}>
+                    <span id={sectionItem.pageNameRef} class="icon">
+                      <img key={sectionItem.label} alt="active" class="active" src={playBlueIcon}>
+                      <img key={sectionItem.label} alt="locked" class="locked" src={parentLockClosedIcon}>
+                      <img key={sectionItem.label} alt="completed" class="completed" src={checkBlueIcon}>
+                    </span>
+                    <ul class="horizontal-style">
+                      <li key={sectionItem.label} class="slds-nav-vertical__item itemWrapper">
+                        <a class="slds-nav-vertical__action" aria-current="true">{sectionItem.label}</a>
+                        <template if:false={sectionItem.IsActive}>
+                          <lightning-button-icon icon-name="utility:chevrondown" alternative-text="Connected"
+                            variant="bare" onclick={expandCollapseSideNav} access-key={sectionItem.pageNameRef}>
+                          </lightning-button-icon>
+                        </template>
+                        <template if:true={sectionItem.IsActive}>
+                          <lightning-button-icon icon-name="utility:chevronup" alternative-text="Connected"
+                            variant="bare" onclick={expandCollapseSideNav} access-key={sectionItem.pageNameRef}>
+                          </lightning-button-icon>
+                        </template>
+                      </li>
+                    </ul>
+                  </div>
+                  <div if:true={sectionItem.IsActive}>
+                    <ul aria-describedby="folder-header">
+                      <li>
+                        <template for:each={sectionItem.subsections} for:item="subSectionItem">
+                          <div data-id={subSectionItem.pageNameRef} class="sub-sectionWrapper"
+                            key={subSectionItem.label} if:true={subSectionItem.show}>
+                            <span id={subSectionItem.pageNameRef} class="icon">
+                              <img key={subSectionItem.subSectionName} alt="active" class="active" src={playGreyIcon}>
+                              <img key={subSectionItem.subSectionName} alt="locked" class="locked"
+                                src={childLockClosedIcon}>
+                              <img key={subSectionItem.subSectionName} alt="completed" class="completed"
+                                src={checkGreyIcon}>
+                            </span>
+                            <template if:true={subSectionItem.show}>
+                              <ul>
+                                <li key={subSectionItem.label} class="slds-nav-vertical__item itemWrapper">
+                                  <a name={subSectionItem.pageNameRef} onclick={handleChange}
+                                    class="slds-nav-vertical__action">{subSectionItem.label}</a>
+                                </li>
+                              </ul>
+                            </template>
+                          </div>
+                        </template>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </template>
+              <template if:false={sectionItem.subsections.length}>
+                <div data-id={sectionItem.pageNameRef} key={sectionItem.label} class="sectionWrapper">
+                  <span class="icon">
+                    <img key={sectionItem.label} alt="active" class="active" src={playBlueIcon}>
+                    <img key={sectionItem.label} alt="locked" class="locked" src={parentLockClosedIcon}>
+                    <img key={sectionItem.label} alt="completed" class="completed" src={checkBlueIcon}>
+                  </span>
+                  <ul>
+                    <li key={sectionItem.label} class="slds-nav-vertical__item">
+                      <a onclick={handleChange} name={sectionItem.pageNameRef} aria-current="true"
+                        class="slds-nav-vertical__action">{sectionItem.label}</a>
+                    </li>
+                  </ul>
+                </div>
+                </template>
+              </template>
+            </template>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <c-modal open={showConfirmModal} onmodalclose={closeConfirmModal} size={modalSize} theme="theme2">
+    <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+        <h6>{labels.exit_filing}</h6>
+    </div>
+    <div slot="body"
+        class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+        <p class="large pb-80">{exitFilingModalDesc}</p>
+    </div>
+    <div slot="actions" class="modal-footer slds-grid slds-m-vertical_small slds-size_1-of-1 sldsActionButtons">
+      <template  if:false={hideSaveButton}>
+        <div class="slds-col button-wrapper slds-order_2">
+          <button class="slds-button primaryBtnSmall slds-float_right" onclick={handleNext}>
+            {labels.save}
+          </button>
+        </div>
+        <div class="slds-col button-wrapper slds-order_1">
+          <button class="slds-button secondary-btn higher slds-float_left" onclick={handleExit}>{exitButtonText}</button>
+        </div>
+      </template>
+      <template if:true={hideSaveButton}>
+        <div class="slds-col button-wrapper slds-order_2">
+          <button class="slds-button secondary-btn higher slds-float_right" onclick={handleExit}>
+            {exitButtonText}
+          </button>
+        </div>
+      </template>
+    </div>
+</c-modal>
+</template>

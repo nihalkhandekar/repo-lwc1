@@ -1,0 +1,106 @@
+<template>
+    <div class="slds-p-bottom_x-large">
+        <div if:false={multiCred}>
+            <h6 if:false={credVerification} class="colorCls">{label.verify_AddBiz}</h6>
+            <h6 if:true={credVerification} class="colorCls">{label.verify_AddCred}</h6>
+        </div>
+        <div if:true={multiCred}>
+            <h6 class="colorCls">{label.verify_AddCred}&nbsp;({index} {label.verifyCredsOf} {totalLength} {label.verify_AddCredID})</h6>
+        </div>
+        <p if:false={credVerification} class="slds-p-top_medium colorCls large">
+            {label.verify_VerifyBizMsg}
+            </br></br>
+        </p>
+        <p if:true={credVerification} class="slds-p-top_medium colorCls large">
+            {label.verify_VerifyCredMsg}
+            </br></br>
+        </p>
+        <p class="colorCls largeBold">
+            {label.verify_Step} 1
+        </p>
+        <p if:false={credVerification} class="colorCls large">
+            <lightning-formatted-rich-text value={label.verify_CustIdMsg}></lightning-formatted-rich-text>
+            </br></br>
+        </p>
+        <p if:true={credVerification} class="colorCls large">
+            <lightning-formatted-rich-text value={label.verify_UserIdMsg}></lightning-formatted-rich-text>
+            </br></br>
+        </p>
+        <p class="colorCls largeBold">
+            {label.verify_Step} 2
+        </p>
+        <p if:false={credVerification} class="colorCls large">
+            <lightning-formatted-rich-text value={label.verify_bizEmailMsg}></lightning-formatted-rich-text>
+        </p>
+        <p if:true={credVerification} class="colorCls large">
+            <lightning-formatted-rich-text value={label.verify_emailMsg}></lightning-formatted-rich-text>
+        </p>
+    </div>    
+    <div if:false={credVerification} class="slds-p-bottom_x-large">
+        <img
+            src={custImg}
+            class="custImg"
+            alt="customerID"
+            title="customerID"
+        />
+    </div>
+    <div if:true={credVerification} class="slds-p-bottom_x-large">
+        <img
+            src={credImg}
+            class="custImg"
+            alt="customerID"
+            title="customerID"
+        />
+    </div>
+    <p if:true={credVerification} class="slds-p-bottom_x-large colorCls large">
+        {label.verify_hasUserIdMsg}&nbsp;
+        <a href="https://www.elicense.ct.gov/" target="_blank" class="linkCls">{label.verify_logineLicense}</a>&nbsp;{label.verify_findUserId}&nbsp;
+    </p>
+    <p if:true={multiCred} class="slds-p-bottom_x-large colorCls large">
+        {label.verify_linkId} <br><b>{credsList.Full_Credential_Code} - {credsList.Credential_Type}</b>
+    </p>
+    <div class="slds-p-bottom_x-large" if:true={fewMoreChancesLeft}>
+        <c-bos_help-Text headtext={label.helptexheader} bodytext={numberOfChances}></c-bos_help-Text>
+       <!-- <c-bos_help-Text if:true={credVerification} headtext={label.helptexheader} bodytext={label.numberOfChances}></c-bos_help-Text>-->
+    </div>
+    <div if:true={maxLimitReached}>
+        <c-bos_help-Text if:false={credVerification} headtext={label.helptexheader} bodytext={label.maxLimitTextcontent}></c-bos_help-Text>
+        <c-bos_help-Text if:true={credVerification} headtext={label.helptexheader} bodytext={label.verify_maxAttempts}></c-bos_help-Text>
+    </div>
+    <div if:false={maxLimitReached}>
+        <p class="colorCls largeBold">
+            {label.verify_Step} 1
+        </p>
+        <p if:false={credVerification} class="colorCls large">
+            {label.verify_custId}
+        </p>
+        <p if:true={credVerification} class="colorCls large">
+            {label.verify_userId}
+        </p>
+        <div class="slds-p-bottom_small slds-form-element__control search-input-box inputTextElement">
+            <lightning-input if:false={credVerification} type="text" placeholder="#########" class="searchBox"
+                role="textbox" maxlength=9 onchange={checkInputLength} onkeypress={checkNumeric} variant="label-hidden"
+                aria-label={errorMessage}>
+            </lightning-input>
+            <span class="helpText" id="err-text" aria-label={errorMessage} role="alert"></span>
+            <lightning-input if:true={credVerification} type="text" placeholder="#########" class="searchBox"
+                role="textbox" variant="label-hidden" aria-label={errorMessage} onkeypress={handleSelectEnter}>
+            </lightning-input>
+        </div>
+    </div>
+    <hr>
+    <div class="bttnPadding" if:false={showCloseButton}>
+        <button class="slds-button slds-float_right bttnClass primaryBtn" onclick={handleSelect}>
+            {label.Next_Button} &nbsp;
+            <!-- <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                title="chevronright" variant="inverse" aria-hidden="true"></lightning-icon> -->
+        </button>
+    </div>
+    <div class="bttnPadding" if:true={showCloseButton}>
+        <button class="slds-button slds-float_right bttnClass primaryBtn closeBtn" onclick={handleClose}>
+            {label.modal_close} &nbsp;
+            <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                title="chevronright" variant="inverse" aria-hidden="true"></lightning-icon>
+        </button>
+    </div>
+</template>
