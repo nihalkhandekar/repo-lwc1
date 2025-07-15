@@ -1,0 +1,352 @@
+<template>
+  <h4 class="parentSection">{label.BusinessCenter}</h4>
+  <!--CTBOS-4897 | Toast Message-->
+  <template if:true={showToast}>
+    <div class="demo-only">
+        <div class="slds-notify_container toastContainer">
+            <div class="slds-notify slds-notify_toast slds-theme--info" role="status">
+                <span class="slds-assistive-text">info</span>
+
+                <div class="slds-notify__content toastContent">
+                    <p class="slds-text-heading_small large toastMessage">
+                        {label.business_linkSuccessHeading}
+                        <br /><br />
+
+                        {label.Now}&nbsp;
+                        <a href={label.business_ManageSettings} target="_self">{label.business_ManageAccount}</a>&nbsp;{label.Business_toast}
+                        
+                    </p>
+                </div>
+                <div class="slds-notify__close toastClose">
+                  <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close">
+                      <lightning-icon icon-name="utility:close" size="x-small" alternative-text="close"
+                        title="close" onclick={handleClose}>
+                      </lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </template>
+  <!--CTBOS-4897 | Toast Message-->
+
+  <div data-id="actionItemsSection" class="slds-p-top_x-large paddingCls section">
+    <div class="slds-grid slds-wrap aiHeader">
+      <div class="slds-size_1-of-1 slds-large-size_8-of-12">
+        <div class="slds-grid slds-size_12-of-12">
+          <h5>{label.businessProfile_ActionItemsTitle}</h5>
+        </div> 
+      </div>
+      <p class="small slds-p-top_large title_desc_mob">{label.bizDashboard_Msg}</p>
+      <div class="slds-size_1-of-1 slds-large-size_4-of-12">
+        <div class="sort" onclick={handleExpandSort}>
+          <p class="smallBold">{label.sort_by}:&nbsp;</p>
+          <p class="small">{selectedSort}</p>
+          <div class="chevron-wrapper">
+            <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+              title="chevrondown" class="chevron-container-down"></lightning-icon>
+          </div>
+          <template if:true={expandSort}>
+            <div class="sortOptions">
+              <div class="sortoptionWrapper">
+                <div class="oneSort" data-id={label.name} onclick={handleSort}>
+                  <p class="large">{label.name}</p>
+                </div>
+                <div class="oneSort" data-id={label.due_date} onclick={handleSort}>
+                  <p class="large">{label.due_date}</p>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+      <p class="small slds-p-top_large title_desc">{label.bizDashboard_Msg}</p>
+    </div>
+    <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 headerTable">
+        <div class="slds-col slds-size_12-of-12 headerRow">
+          <div class="header_count">
+            <div class="pastDueDot"></div>
+            <b> {pastDueCount} {label.businessProfile_PastDue}</b>
+          </div>
+          <div class="header_count">
+            <div class="dueSoonDot"></div>
+            {dueSoonCount} {label.businessProfile_DueSoon}
+          </div>
+          <div class="header_count">
+            <div class="upcomingDot"></div>
+            {upcomingCount} {label.businessProfile_upcoming}
+          </div>
+        </div>
+        <template if:true={firstSixCard.length}>
+          <div class="aicard">
+            <c-bos-action-item-card actiondata={firstSixCard} onaicardclick={handleAIClick}>
+            </c-bos-action-item-card>
+          </div>
+        </template>
+      </div>
+      <template if:false={firstSixCard.length}>
+        <div class="actionEmptyState slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+          <div class="noAction_wrapper slds-large-size_12-of-12">
+            <div class="leftContent slds-large-size_2-of-12">
+              <img src={buildingGroup} class="noCardIcon" />
+            </div>
+            <div class="slds-large-size_10-of-12 contentPadding">
+              <div>
+                <h6>{label.business_action_item_no_link_items}</h6>
+              </div>
+              <div>
+                <p class="large">
+                  {label.AddYour} <a href={label.LinkCredentialLink}>{label.Dashboard_credentials}</a> {label.or} <a onclick={scrollToBizService}>{label.dashboard_onlineBizService}</a> {label.dashboard_nobiz_endText}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+    <div class="service_card section" data-id="onlineBusinessServices">
+    <div class="bizHeader slds-grid slds-wrap">
+      <div class="">
+        <h5>{label.dashboardHeader_onlineBizService}</h5>
+      </div>
+      <div class="slds-show_large connectBizBtn">
+       <a href={label.seeAllBizLink}><p class="large">{label.dashboard_seeAllBizServices}</p></a>
+       <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevrondown"
+       title="chevrondown" class="chevron-container-down slds-m-top_xx-small slds-m-left_small"></lightning-icon>
+      </div>
+      <p class="slds-size_12-of-12 slds-m-top_small small">{label.dashboardSubHeader_onlineBizService}</p>
+    </div>
+   
+      <div class="slds-grid slds-wrap ">
+        <!-- <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12"> -->
+          <div class="slds-size_12-of-12 slds-large-size_6-of-12">
+            <div class="businessCard_wrapper ">
+              <div class="bizservice_card">
+              <img src={registerBiz} class="buildingGroup" />
+              <h6>{label.dashboard_bizService_registerBiz}</h6>
+              </div>
+              <div class="bizservice_card_footer">
+                <a href={label.RegisterBizLink}><p class="large">{label.dashboard_bizService_registerBiz}</p></a>
+              </div>
+            </div>
+          </div>
+          <div class=" slds-size_12-of-12 slds-large-size_6-of-12">
+            <div class="businessCard_wrapper ">
+              <div class="bizservice_card">
+                <img src={fileAnnualReport} class="buildingGroup" />
+              <h6>{label.dashboard_bizService_fileAR}</h6>
+              </div>
+              <div class="bizservice_card_footer">
+                <a href={label.FileAnnualReportLink}><p class="large">{label.dashboard_bizService_fileAR}</p></a>
+              </div>
+            </div>
+          </div>
+        <!-- </div> -->
+      </div>
+      <div class="slds-hide_large connectBizBtn">
+        <a href={label.seeAllBizLink}><p class="large">{label.dashboard_seeAllBizServices}</p></a>
+        <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevrondown"
+        title="chevrondown" class="chevron-container-down slds-m-top_xx-small slds-m-left_small"></lightning-icon>
+       </div>
+  </div>
+  <template if:true={businessData.length}>
+  <div class="section" data-id="businessSection">
+    <div class="bizHeader slds-grid">
+      <div class="">
+        <h5>{label.businessProfile_MyBusinesses}&nbsp;
+          <template if:true={businessData.length}>({bizLength})</template>
+        </h5>
+      </div>
+    </div>
+
+    
+      <div class="slds-grid slds-wrap">
+        <template for:each={businessData} for:item="item">
+          <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12" key={item.IdNumber}
+            onclick={businessCardClick} data-id={item.accId}>
+            <div class="bizCard">
+              <div class="bizCardItem">
+                <div class="id">
+                  <template if:true={item.capsuleCancelText}>
+                    <img src={businessImgPassive} class="addImg bizImg" alt="Business Image" title="Business Image"
+                      tabindex="0" />
+                  </template>
+                  <template if:false={item.capsuleCancelText}>
+                    <img src={businessImg} class="addImg bizImg" alt="Business Image" title="Business Image"
+                      tabindex="0" />
+                  </template>
+                  <p class="small idnum">{label.bizDashboard_Id} {item.IdNumber}</p>
+                </div>
+                <template if:true={item.capsuleText}>
+                <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                  <div class="capsule desktop">
+                      <!-- <img src={alertImg} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" /> -->
+                    <p class="description">{item.capsuleText}</p>
+                  </div>
+                </div>
+                </template>
+                <template if:true={item.redcapsuleText}>
+                  <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                    <div class="redCapsule desktop">
+                      <img src={alertImg} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" />
+                      <p class="description">{item.redcapsuleText}</p>
+                    </div>
+                  </div>
+                </template>
+                <template if:true={item.yellowcapsuleText}>
+                  <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                    <div class="yellowCapsule desktop">
+                      <img src={warningImg} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" />
+                      <p class="description">{item.yellowcapsuleText}</p>
+                    </div>
+                  </div>
+                </template>
+                <template if:true={item.capsuleCancelText}>
+                  <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                    <div class="capsule desktop">
+                      <!-- <img src={businessImgPassive} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" /> -->
+                      <p class="description">{item.capsuleCancelText}</p>
+                    </div>
+                  </div>
+                </template>
+              </div>
+              <div class="bizCardDesc">
+                <div>
+                  <h6 class="bizCardDescName" title={item.name}>{item.name}</h6>
+                </div>
+              </div>
+              <!-- <template if:false={item.hideCapsule}>
+                <div class="capsule mobile"><img src={alertImg} class="addImg" alt="Alert Image" title="Alert Image"
+                    tabindex="0" />
+                  <p class="description">{item.noOfAlerts} {label.businessProfile_PastDue}</p>
+                </div>
+              </template> -->
+              <template if:true={item.capsuleText}>
+                <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                  <div class="capsule mobile">
+                    <!-- <img src={alertImg} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" /> -->
+                    <p class="description">{item.capsuleText}</p>
+                  </div>
+                </div>
+              </template>
+              <template if:true={item.redcapsuleText}>
+                <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                  <div class="redCapsule mobile">
+                    <img src={alertImg} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" />
+                    <p class="description">{item.redcapsuleText}</p>
+                  </div>
+                </div>
+              </template>
+              <template if:true={item.yellowcapsuleText}>
+                <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                  <div class="yellowCapsule mobile">
+                    <img src={warningImg} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" />
+                    <p class="description">{item.yellowcapsuleText}</p>
+                  </div>
+                </div>
+              </template>
+              <template if:true={item.capsuleCancelText}>
+                <div class="capsuleWrapper" if:false={item.hideCapsule}>
+                  <div class="capsule  mobile">
+                    <!-- <img src={businessImgPassive} class="addImg" alt="Alert Image" title="Alert Image" tabindex="0" /> -->
+                    <p class="description">{item.capsuleCancelText}</p>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+        <template if:true={loadMoreBusiness}>
+          <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" onclick={handleLoadMoreBiz}>
+            <p class="small">{label.biz_load_more}</p>
+          </div>
+        </template>
+        <template if:true={showLessBiz}>
+          <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+            onclick={handleShowLessBiz}>
+            <p class="small">{label.bizDashboard_lessBusiness}</p>
+          </div>
+        </template>
+      </div>
+  </div>
+</template>
+  <div class="credentialSection" data-id="credentialSection">
+    <div class="bizHeader slds-grid">
+      <div class="">
+        <h5>{label.bizDashboard_ProfCreds}</h5>
+      </div>
+      <div class="connectBizBtn">
+        <button class="slds-button slds-button_brand primaryBtn higher credBtn" onclick={handleLinkCreds}>
+          <img src={addImg} class="addImg" alt="Link Business Image" tabindex="0" />
+          {label.bizDashboard_AddCreds}
+        </button>
+      </div>
+    </div>
+    <template if:false={credentialsList.length}>
+      <div class="businessCard_wrapper slds-grid slds-wrap">
+      <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+        <div class="noAction_wrapper slds-large-size_12-of-12">
+          <div class="leftContent slds-large-size_2-of-12">
+            <img src={noCredDataImg} class="noCardIcon" />
+          </div>
+          <div class="slds-large-size_10-of-12 contentPadding">
+            <div>
+              <h6>{label.bizDashboard_AddCredMsg}</h6>
+            </div>
+            <div>
+              <p class="large">
+                <lightning-formatted-rich-text value={label.bizDashboard_AddCredDescription}>
+                </lightning-formatted-rich-text>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </template>
+    <template if:true={credentialsList.length}>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 headerTable">
+          <div class="slds-col slds-size_12-of-12 headerRow">
+            <div class="header_count">
+              <div class="dueSoonDot"></div>
+              {pendingCount} {label.businessProfile_credentialsPending}
+            </div>
+            <div class="header_count">
+              <div class="activeDot"></div>
+              {activeCount} {label.businessProfile_credentialsActive}
+            </div>
+            <div class="header_count">
+              <div class="upcomingDot"></div>
+              {inactiveCount} {label.businessProfile_credentialsInactive}
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="aicard">
+          <c-bos-overview-credentials-card credcard={firstfiveCredCard} section="dashboard"
+            oncredunlink={handlecredunlink}>
+          </c-bos-overview-credentials-card>
+        </div>
+        <template if:true={loadMoreBlock}>
+          <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+            onclick={handleCredLoadMore}>
+            <p class="small">{label.bizDashboard_MoreCred}</p>
+          </div>
+        </template>
+        <template if:true={showLess}>
+          <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+            onclick={handleCredShowLess}>
+            <p class="small">{label.bizDashboard_LessCred}</p>
+          </div>
+        </template>
+    </template>
+        
+  </div>
+  <div if:true={spinner}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+  </div>
+</template>

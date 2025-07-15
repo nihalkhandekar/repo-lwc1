@@ -1,0 +1,130 @@
+.card-section {
+    border-radius: 4px;
+    border: 1px solid #D0CFCF;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    width: 100%;
+}
+
+.marginClass {
+    margin: 24px 32px 32px 32px;
+}
+
+.splitSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.labelClass {
+    color: #757575;
+    letter-spacing: 0.01px;
+    font-family: 'Karla', sans-serif;
+}
+
+.pills {
+    border-radius: 11.5px;
+    background-color: #E0F2FF;
+    padding: 4px 12px;
+    color: #09538B;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: 'Karla', sans-serif;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.headerClass {
+    color: #2D2C2C;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.16px;
+}
+
+.subheaderClass {
+    color: #2D2C2C;
+    letter-spacing: 0.01px;
+}
+
+.sublabel {
+    color: #757575;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.addressClass {
+    color: #757575;
+    letter-spacing: 0.01px;
+    display: flex;
+    margin-left: -3px;
+}
+
+.iconCls {
+    height: 17px;
+    margin-right: 8px;
+    margin-top: 4px;
+}
+
+.dropDownSection {
+    border-top: 1px solid #D0CFCF;
+    padding: 16px 0 8px 0;
+    margin-top: 16px;
+}
+
+.footer {
+    padding: 16px 34px;
+    border-top: 1px solid #ECEBEB;
+    display: flex;
+}
+
+.footer .removeLink {
+    cursor: pointer;
+}
+
+.footer .large {
+    color: #00528D;
+    text-decoration: underline
+}
+
+.footer .iconCls {
+    margin: auto 8px auto 0;
+}
+
+@media only screen and (max-width: 1023px) {
+    .marginClass {
+        margin: 16px 16px 24px 16px;
+    }
+
+    .pills {
+        font-family: 'Karla', sans-serif;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        line-height: 14px;
+        margin-bottom: auto;
+    }
+
+    .iconCls {
+        margin-right: 12px;
+        margin-top: 2px
+    }
+
+    .currentobjAddress {
+        font-family: 'Karla', sans-serif;
+        line-height: 20px;
+    }
+
+    /* .pills {
+        font-family: karla;
+        font-size: 12px;
+        letter-spacing: 0.5px;
+        line-height: 14px;
+    } */
+
+    .labelClass {
+        width: 54%;
+    }
+
+    .footer {
+        padding: 16px 15px;
+    }
+}

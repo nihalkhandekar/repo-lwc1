@@ -1,0 +1,404 @@
+<template>
+    <div class="desktop">
+        <div class="sideNavItem">
+            <img src={myDashboardIcon} onclick={openMyDashboard} data-id='1' onmouseover={addhover}
+                onmouseleave={removehover} class="sidenavIcon business" alt="Business Image" tabindex="0" />
+            <template if:true={showActionItems}>
+                <img src={actionItemsIcon} onclick={openActionItems} data-id='2' onmouseover={addhover}
+                    onmouseleave={removehover} class="sidenavIcon aitems" alt="Action Items Image" tabindex="0" />
+            </template>
+            <img src={businessCenterIcon} onclick={showAccordion} data-id='3' onmouseover={addhover}
+                onmouseleave={removehover} class="sidenavIcon bcenter" alt="Business Center Image" tabindex="0" />
+            <template if:false={isbos}>
+                <template if:true={showSubItems}>
+                    <template if:false={showStartBiz}>
+                        <img src={chevronDown} onclick={expandStartBiz} onmouseover={addhover} data-id='31'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronDown bcenter"
+                            alt="Business Image" tabindex="0" />
+                    </template>
+                    <template if:true={showStartBiz}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                        <img src={chevronDown} onclick={expandStartBiz} onmouseover={addhover} data-id='31'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronUp bcenter"
+                            alt="Business Image" tabindex="0" />
+                        <span class="sidenavIcon subitem bcenter" data-id='311'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='312'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='314'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='315'></span>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                    </template>
+                    <template if:false={showManageBiz}>
+                        <img src={chevronDown} onclick={expandManageBiz} onmouseover={addhover} data-id='32'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronDown bcenter"
+                            alt="Business Image" tabindex="0" />
+                    </template>
+                    <template if:true={showManageBiz}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                        <img src={chevronDown} onclick={expandManageBiz} onmouseover={addhover} data-id='32'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronUp bcenter"
+                            alt="Business Image" tabindex="0" />
+                        <span class="sidenavIcon subitem bcenter" data-id='321'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='322'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='323'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='324'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='325'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='326'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='327'></span>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                    </template>
+                    <span class="sidenavIcon subitem bcenter" data-id='34'></span>
+                    <template if:false={showUcc}>
+                        <img src={chevronDown} onclick={expandUCC} onmouseover={addhover} data-id='33'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronDown bcenter"
+                            alt="Business Image" tabindex="0" />
+                    </template>
+                    <template if:true={showUcc}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                        <img src={chevronDown} onclick={expandUCC} onmouseover={addhover} data-id='33'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronUp bcenter"
+                            alt="Business Image" tabindex="0" />
+                        <span class="sidenavIcon subitem bcenter" data-id='331'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='332'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='333'></span>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                    </template>
+                    <span class="sidenavIcon subitem bcenter" data-id='36'></span>
+                    <template if:false={showHistory}>
+                        <img src={chevronDown} onclick={expandHistory} onmouseover={addhover} data-id='35'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronDown bcenter"
+                            alt="Business Image" tabindex="0" />
+                    </template>
+                    <template if:true={showHistory}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-left_large">
+                        </div>
+                        <img src={chevronDown} onclick={expandHistory} onmouseover={addhover} data-id='35'
+                            onmouseleave={removehover} class="sidenavIcon subitem chevronUp bcenter"
+                            alt="Business Image" tabindex="0" />
+                        <span class="sidenavIcon subitem bcenter" data-id='351'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='352'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='353'></span>
+                        <span class="sidenavIcon subitem bcenter" data-id='354'></span>
+                    </template>
+                </template>
+            </template>
+            <template if:true={isbos}>
+                <img src={checklistsIcon} onclick={openchecklistPage} data-id='4' onmouseover={addhover}
+                    onmouseleave={removehover} class="sidenavIcon checklist" alt="Checklists Image" tabindex="0" />
+            </template>
+            <!--   <img src={covidUpdatesIcon} onclick={openCovidUpdates} data-id='5' onmouseover={addhover}
+                onmouseleave={removehover} class="sidenavIcon covidupdates" alt="Covid Updates Image" tabindex="0" />-->
+            <hr class="noMargin">
+            <img src={accountSettingsIcon} class="sidenavIcon" data-id='6' onmouseover={addhover}
+                onmouseleave={removehover} alt="Settings Image" tabindex="0" onclick={handleProfile} />
+        </div>
+        <div class="sideNavItem toggle">
+            <!---SCBCG-164-Date-11/21/22 change myDashboard customlabel to Home-->
+            <p class="small firstItem business" data-id='1' onmouseover={addhover} onmouseleave={removehover}
+                onclick={openMyDashboard}>{labels.accountDashboard_MyDashboard}</p>
+            <template if:true={showActionItems}>
+                <p class="small secondItem aitems" data-id='2' onmouseover={addhover} onmouseleave={removehover}
+                    onclick={openActionItems}>{labels.ActionItems}</p>
+            </template>
+            <template if:true={isbos}>
+                <p class="small secondItem bcenter" data-id='3' onmouseover={addhover} onmouseleave={removehover}
+                    onclick={openDashboardPage}>{labels.BusinessCenter}</p>
+            </template>
+            <template if:false={isbos}>
+                <p class="small secondItem bcenter img" data-id='3' onmouseover={addhover} onmouseleave={removehover}
+                    onclick={showAccordion}>{labels.BusinessCenter}
+                    <template if:false={showSubItems}><img src={chevronDown} class="chevronDown" /></template>
+                    <template if:true={showSubItems}><img src={chevronDown} class="chevronUp" /></template>
+                </p>
+            </template>
+            <template if:false={isbos}>
+                <template if:true={showSubItems}>
+                    <template if:true={showStartBiz}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large ">
+                        </div>
+                    </template>
+                    <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                        data-id='31' onclick={expandStartBiz}>{labels.bizDash_Startbusiness}</p>
+                    <template if:true={showStartBiz}>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='311' data-name="start-new-business-checklist" onclick={RedirectToPage}>
+                            {labels.bizDash_Createchecklist}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='312' data-name="brslandingpage" onclick={RedirectToPage}>
+                            {labels.bizDash_Registerbusiness}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='314' onclick={gotoLinkCred}>{labels.bizDash_Linkcredential}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='315' data-name="nameres" onclick={RedirectToPage}>
+                            {labels.bizDash_Reservename}</p>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large">
+                        </div>
+                    </template>
+                    <template if:true={showManageBiz}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large">
+                        </div>
+                    </template>
+                    <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                        data-id='32' onclick={expandManageBiz}>{labels.bizDash_Managebusiness}</p>
+                    <template if:true={showManageBiz}>
+                        <!-- 
+                        Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-4225
+                        Change(s)/Modification(s) Made on : 2021-05-10
+                        -->
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='321' data-name={labels.URL_for_AR_from_dashboard} onclick={RedirectToPage}>
+                            {labels.bizDash_FileReport}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='322' data-name={labels.URL_for_FR_from_dashboard} onclick={RedirectToPage}>{labels.bizDash_FileOrg}
+                        </p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='323' data-name="certificatemaintainence" onclick={RedirectToPage}>
+                            {labels.bizDash_Certificate}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='324' data-name="businessinformation" onclick={RedirectToPage}>
+                            {labels.bizDash_Updateinformation} </p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='325' data-name="foreign-investigation" onclick={RedirectToPage}>
+                            {labels.bizDash_Foreignpenalty}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='326' data-name={labels.closebusinesslandingpage} onclick={RedirectToPage}>
+                            {labels.bizDash_Dissolvebusiness}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='327' data-name="revocation-landing-page" onclick={RedirectToPage}>
+                            {labels.bizDash_Revokedissolution}</p>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large">
+                        </div>
+                    </template>
+                    <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover} data-id='34'
+                        data-name="intakelanding" onclick={RedirectToPage}>{labels.bizDash_IntakeFiling}
+                    </p>
+                    <template if:true={showUcc}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large">
+                        </div>
+                    </template>
+                    <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                        data-id='33'  onclick={expandUCC}>{labels.bizDash_UCCliens}</p>
+                    <template if:true={showUcc}>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='331' data-name="onlineenquiry" onclick={RedirectToPage}>{labels.bizDash_Searchlien}
+                        </p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='332' data-name="ucclandingpage" onclick={RedirectToPage}>{labels.bizDash_Filelien}
+                        </p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='333' data-name={labels.infoRequest} onclick={RedirectToPage}>
+                            {labels.bizDash_Informationrequest}</p>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large">
+                        </div>
+                    </template>
+                    <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover} data-id='36'
+                        data-name="requestforcopylandingpage" onclick={RedirectToPage}>{labels.bizDash_Copyrequests}
+                    </p>
+                    <template if:true={showHistory}>
+                        <div class="bcenter">
+                            <hr class="slds-m-vertical_medium slds-m-right_large">
+                        </div>
+                    </template>
+                    <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                        data-id='35'  onclick={expandHistory}>{labels.my_activities}</p>
+                    <template if:true={showHistory}>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='351' onclick={openchecklistPage}>{labels.businessProfile_MyChecklists}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='352' data-name="dashboard" onclick={goToMyFilings}>{labels.my_filings}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='353' onclick={openPaymentHistory}>{labels.ph_mypayments}</p>
+                        <p class="small firstItem subitemtext bcenter" onmouseover={addhover} onmouseleave={removehover}
+                            data-id='354' onclick={openFilerInfo}>{labels.my_filer_info}</p>
+                    </template>
+                </template>
+            </template>
+            <template if:true={isbos}>
+                <p class="small secondItem checklist" data-id='4' onmouseover={addhover} onmouseleave={removehover}
+                    onclick={openchecklistPage}>{labels.Checklists}</p>
+            </template>
+            <!---SCBCG-165-Date-11/21/22 Remove COVID-19 Tab-->
+            <!-- <p class="small secondItem covidupdates" data-id='5' onmouseover={addhover} onmouseleave={removehover}
+                onclick={openCovidUpdates}>{labels.COVID_19_updates}</p>-->
+            <hr class="noMargin">
+            <p class="small" data-id='6' onmouseover={addhover} onmouseleave={removehover} onclick={handleProfile}>
+                {labels.Account_settings}</p>
+        </div>
+    </div>
+    <div class="mobile" if:true={showSideNavMob}>
+        <div class="sideNavItem mobheader" onclick={showItems}>
+            <p class="largeBold">{sideNavHeader}</p>
+            <img src={arrowCircleDown} if:false={showMenuItems} class="sidenavIcon" alt="ArrowCircleDown Image"
+                tabindex="0" />
+            <img src={arrowCircleDown} if:true={showMenuItems} class="sidenavIcon upsideDown"
+                alt="ArrowCircleDown Image" tabindex="0" />
+        </div>
+        <template if:true={showMenuItems}>
+            <div class="padLeft">
+                <div class="sideNavItem" onclick={openMyDashboard}>
+                    <p class="smallBold" onclick={openMyDashboard}>{labels.accountDashboard_MyDashboard}</p>
+                </div>
+                <template if:true={showActionItems}>
+                    <div class="sideNavItem" onclick={openActionItems}>
+                        <p class="smallBold" onclick={openActionItems}>{labels.ActionItems}</p>
+                    </div>
+                </template>
+                <div class="sideNavItem" onclick={showAccordion}>
+                    <p class="smallBold" onclick={showAccordion}>{labels.BusinessCenter}</p>
+                    <template if:false={isbos}>
+                        <img src={arrowCircleDown} if:false={showSubItems} class="sidenavIcon"
+                            alt="ArrowCircleDown Image" tabindex="0" />
+                        <img src={arrowCircleDown} if:true={showSubItems} class="sidenavIcon upsideDown"
+                            alt="ArrowCircleDown Image" tabindex="0" />
+                    </template>
+                </div>
+                <template if:false={isbos}>
+                    <template if:true={showSubItems}>
+                        <div class="subMenuWrapper">
+                            <div class="sideNavItem subMenuItem" onclick={expandStartBiz}>
+                                <p class="small" onclick={expandStartBiz}>{labels.bizDash_Startbusiness}</p>
+                                <template if:false={showStartBiz}><img src={blueChevron}
+                                        class="chevronDown" /></template>
+                                <template if:true={showStartBiz}><img src={blueChevron} class="chevronUp" /></template>
+                            </div>
+                            <template if:true={showStartBiz}>
+                                <p class="small sideNavItem subMenuItem" data-name="start-new-business-checklist"
+                                    onclick={RedirectToPage}> {labels.bizDash_Createchecklist}</p>
+                                <p class="small sideNavItem subMenuItem" data-name="brslandingpage"
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Registerbusiness}</p>
+                                <p class="small sideNavItem subMenuItem" onclick={gotoLinkCred}>
+                                    {labels.bizDash_Linkcredential}</p>
+                                <p class="small sideNavItem subMenuItem" data-name="namereservation"
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Reservename}</p>
+                            </template>
+                        </div>
+                        <div class="subMenuWrapper">
+                            <div class="sideNavItem subMenuItem" onclick={expandManageBiz}>
+                                <p class="small" onclick={expandManageBiz}>{labels.bizDash_Managebusiness}</p>
+                                <template if:false={showManageBiz}><img src={blueChevron}
+                                        class="chevronDown" /></template>
+                                <template if:true={showManageBiz}><img src={blueChevron} class="chevronUp" /></template>
+                            </div>
+                            <!-- 
+                                Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-4225
+                                Change(s)/Modification(s) Made on : 2021-05-10
+                                Change(s)/Modification(s) Made by : Avinash Shukla
+                            -->
+                            <template if:true={showManageBiz}>
+                                <p class="small sideNavItem subMenuItem" data-name={labels.URL_for_AR_from_dashboard}
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_FileReport}</p>
+                                <!-- 
+                                    Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-4225, Replacing the data-name="onlineenquiry" with data-name="businessfiling?rt=fr" 
+                                    Change(s)/Modification(s) Made on : 2021-05-10
+                                    Change(s)/Modification(s) Made by : Avinash Shukla
+                                -->
+                                <p class="small sideNavItem subMenuItem" data-name={labels.URL_for_FR_from_dashboard}
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_FileOrg}
+                                </p>
+                                <p class="small sideNavItem subMenuItem" data-name="certificatemaintainence"
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Certificate}</p>
+                                <p class="small sideNavItem subMenuItem" data-name="businessinformation"
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Updateinformation} </p>
+                                <p class="small sideNavItem subMenuItem" data-name="foreign-investigation"
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Foreignpenalty} </p>
+                                <p class="small sideNavItem subMenuItem" data-name={labels.closebusinesslandingpage}
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Dissolvebusiness}</p>
+                                <p class="small sideNavItem subMenuItem" data-name="revocation-landing-page"
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Revokedissolution}</p>
+                            </template>
+                        </div>
+                        <div class="subMenuWrapper">
+                            <div class="sideNavItem subMenuItem" data-name="intakelanding" onclick={RedirectToPage}>
+                                <p class="small" data-name="intakelanding" onclick={RedirectToPage}>
+                                    {labels.bizDash_IntakeFiling}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="subMenuWrapper">
+                            <div class="sideNavItem subMenuItem" onclick={expandUCC}>
+                                <p class="small" onclick={expandUCC}>{labels.bizDash_UCCliens}</p>
+                                <template if:false={showUcc}><img src={blueChevron} class="chevronDown" /></template>
+                                <template if:true={showUcc}><img src={blueChevron} class="chevronUp" /></template>
+                            </div>
+                            <template if:true={showUcc}>
+                                <p class="small sideNavItem subMenuItem" data-name="onlineenquiry"
+                                    onclick={RedirectToPage}>{labels.bizDash_Searchlien}
+                                </p>
+                                <p class="small sideNavItem subMenuItem" data-name="ucclandingpage"
+                                    onclick={RedirectToPage}>{labels.bizDash_Filelien}
+                                </p>
+                                <p class="small sideNavItem subMenuItem" data-name={labels.infoRequest}
+                                    onclick={RedirectToPage}>
+                                    {labels.bizDash_Informationrequest}</p>
+                            </template>
+                        </div>
+                        <div class="subMenuWrapper">
+                            <div class="sideNavItem subMenuItem" data-name="requestforcopylandingpage" onclick={RedirectToPage}>
+                                <p class="small" data-name="requestforcopylandingpage" onclick={RedirectToPage}>
+                                    {labels.bizDash_Copyrequests}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="subMenuWrapper">
+                            <div class="sideNavItem subMenuItem" onclick={expandHistory}>
+                                <p class="small" onclick={expandHistory}>{labels.my_activities}</p>
+                                <template if:false={showHistory}><img src={blueChevron}
+                                        class="chevronDown" /></template>
+                                <template if:true={showHistory}><img src={blueChevron} class="chevronUp" /></template>
+                            </div>
+                            <template if:true={showHistory}>
+                                <p class="small sideNavItem subMenuItem" onclick={openchecklistPage}>
+                                    {labels.businessProfile_MyChecklists}</p>
+                                <p class="small sideNavItem subMenuItem" data-name="dashboard" onclick={goToMyFilings}>
+                                    {labels.my_filings}</p>
+                                <p class="small sideNavItem subMenuItem" onclick={openPaymentHistory}>
+                                    {labels.ph_mypayments}</p>
+                                <p class="small sideNavItem subMenuItem" onclick={openFilerInfo}>
+                                    {labels.my_filer_info}</p>
+                            </template>
+                        </div>
+                    </template>
+                </template>
+                <template if:true={isbos}>
+                    <div class="sideNavItem" onclick={openchecklistPage}>
+                        <p class="smallBold" onclick={openchecklistPage}>{labels.Checklists}</p>
+                    </div>
+                </template>
+                <!---SCBCG-165-Date-11/21/22 Remove COVID-19 Tab-->
+                <!--   <div class="sideNavItem" onclick={openCovidUpdates}>
+                    <p class="smallBold" onclick={openCovidUpdates}>{labels.COVID_19_updates}</p>
+                </div>-->
+                <div class="sideNavItem" onclick={handleProfile}>
+                    <p class="smallBold" onclick={handleProfile}>{labels.Account_settings}</p>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

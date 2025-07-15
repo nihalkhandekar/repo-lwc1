@@ -1,0 +1,494 @@
+.parentSection {
+    padding: 16px 0;
+}
+
+.section {
+    margin-bottom: 120px;
+}
+
+.bizHeader {
+    display: flex;
+    justify-content: space-between;
+    margin: 36px 16px 32px 0;
+    align-items: center;
+}
+
+.bizCard {
+    padding: 24px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.bizCardDescName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bizCardItem {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bizCardItem .id {
+    display: flex;
+}
+
+.capsuleWrapper,
+.bizCardItem .id {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 50%;
+}
+
+.capsule,
+.yellowCapsule,
+.redCapsule {
+    font-size: 14px;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.capsule {
+    background-color: #ECEBEB;
+    font-weight: bold;
+}
+
+.yellowCapsule {
+    border: 1px solid #F6A053;
+    background-color: #FFF8F2;
+}
+
+.redCapsule {
+    border: 1px solid #DB2426;
+    background-color: #FFF9F9;
+}
+
+.bizCardDesc {
+    margin-top: 24px;
+    margin-bottom: 8px;
+}
+
+.linkBiz {
+    background: lightblue url("/business/resource/CT_Assets/icons/BusinessDashboard/add-white-small.svg") no-repeat fixed center;
+}
+
+.addImg {
+    margin-right: 8px;
+}
+
+.bizImg {
+    width: 24px;
+}
+
+.actionItemSection {
+    margin-top: 120px;
+    margin-right: 16px;
+}
+
+.description,
+.idnum {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #757575;
+    font-weight: bold;
+
+}
+
+.headerTable {
+    border-radius: 4px;
+    max-width: 900px;
+    margin-top: 32px;
+}
+
+.headerRow {
+    padding: 20px 33px;
+    display: flex;
+    background-color: #f7f9fa;
+    margin: 1px 0;
+    border: 1px solid #d0cfcf;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+
+.header_count {
+    font-size: 18px;
+    font-family: 'Karla', sans-serif;
+    margin-right: 40px;
+}
+
+.pastDueDot,
+.dueSoonDot,
+.upcomingDot,
+.activeDot {
+    width: 8px;
+    height: 8px;
+    display: inline-flex;
+    border-radius: 50%;
+    margin: 0 11px 2px 0;
+}
+
+.pastDueDot {
+    background-color: #db2426;
+}
+
+.dueSoonDot {
+    background-color: #f6a053;
+}
+
+.upcomingDot {
+    background-color: #97abb8;
+}
+
+.activeDot {
+    background-color: #2D8D60
+}
+
+.closeCard_wrapper {
+    display: flex;
+    background-color: white;
+    border: 1px solid #d0cfcf;
+}
+
+.actionEmptyState{
+    box-shadow: 0 8px 16px 0 #e7e9f2;
+    border-top: 1px solid #d0cfcf;
+	border-radius: 4px;
+}
+.noAction_wrapper {
+    display: flex;
+    padding: 32px 25px;
+}
+
+.businessCard_wrapper {
+    display: flex;
+    background-color: white;
+    border: 2px dashed #D0CFCF;
+    margin-right: 16px;
+    border-radius: 8px;
+}
+
+.noCardIcon,.buildingGroup {
+    width: 100px;
+}
+
+
+/* .rightContent {
+    margin-left: 40px;
+} */
+
+.loadmore_Block {
+    margin-top: 32px;
+    padding: 16px 0;
+    text-align: center;
+    border-top: 1px solid #ecebeb;
+    border-bottom: 1px solid #ecebeb;
+    cursor: pointer;
+}
+
+.loadmore_Block .small {
+    color: #09538b;
+    text-decoration: underline;
+}
+
+.aicard {
+    cursor: pointer;
+}
+
+.aiHeader {
+    display: flex;
+    align-items: center;
+}
+
+.sort .small,
+.sort .chevron-wrapper,
+.sortOptions {
+    cursor: pointer;
+}
+
+.chevron-wrapper {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.sort {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sortOptions {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    margin-top: 40px;
+}
+
+.sortoptionWrapper {
+    border: 1px solid #d0cfcf;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 #e7e9f2;
+}
+
+.oneSort {
+    padding: 10px 25px;
+}
+
+.oneSort:hover {
+    background-color: #f7f9fa;
+}
+
+.desktop {
+    display: flex;
+}
+
+.mobile {
+    display: none;
+}
+
+.addThisClass {
+    color: blue;
+}
+
+.loadmore_Block {
+    margin-top: 32px;
+    padding: 16px 0;
+    text-align: center;
+    border-top: 1px solid #ecebeb;
+    border-bottom: 1px solid #ecebeb;
+    cursor: pointer;
+}
+
+.loadmore_Block .small {
+    color: #09538b;
+    text-decoration: underline;
+}
+
+.title_desc_mob {
+    display: none;
+}
+
+.title_desc {
+    display: block;
+}
+
+/* CTBOS-4897 */
+.toastContainer {
+    top: 108px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+}
+
+.slds-theme--info a {
+    color: #09538B;
+    text-decoration : underline;
+}
+
+.slds-notify_toast, .slds-notify--toast {
+    margin: 0.5rem 0;
+    max-width: calc(100% - 136px);
+}
+
+.credBtn.primaryBtn.slds-button{
+    padding: 0 46px;
+}
+
+.service_card .businessCard_wrapper {
+    flex-direction: column;
+}
+
+.bizservice_card {
+    padding: 24px 24px 48px 24px;
+    display: flex;
+    align-items: center;
+}
+
+.bizservice_card .buildingGroup {
+    width: 56px;
+    margin-right: 8px;
+}
+
+.bizservice_card_footer {
+    padding: 16px 32px;
+    border-top: 1px solid #ECEBEB;
+}
+
+.service_card a .large {
+    color: #09538B;
+    text-decoration: underline;
+}
+
+.service_card .connectBizBtn {
+    display: flex;
+    align-items: center;
+}
+
+@media only screen and (max-width: 1024px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: flex;
+    }
+
+    .paddingCls {
+        padding-top: 24px;
+    }
+
+    .contentPadding {
+        padding-top: 24px;
+    }
+
+    .capsule.mobile,
+    .yellowCapsule.mobile,
+    .redCapsule.mobile {
+        /* width: fit-content; */
+        margin-top: 16px;
+        display: inline-flex;
+    }
+
+    .bizCardDesc {
+        margin-top: 16px;
+    }
+
+    .headerRow {
+        padding: 18px 17px;
+        flex-direction: column;
+    }
+
+    .header_count {
+        margin-bottom: 16px;
+    }
+
+    .header_count:last-child {
+        margin-bottom: 0;
+    }
+
+    .connectBizBtn {
+        margin-top: 24px;
+    }
+
+    /*CTBOS-4897*/
+    .slds-notify_toast,
+    .slds-notify--toast,
+    .toastContainer .slds-theme--info,
+    .toastContainer .slds-notify--toast {
+        max-width: unset;
+    }
+
+    .toastClose .slds-button_icon {
+        width: auto;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .bizHeader {
+        flex-direction: column;
+        margin-bottom: 32px;
+        margin-right: 0;
+        align-items: inherit;
+    }
+
+    .bizHeader h4 {
+        margin-bottom: 24px;
+    }
+
+    .bizCard,
+    .actionItemSection {
+        margin-right: 0;
+    }
+
+    .higher {
+        width: 100%;
+    }
+
+    .loadmore_Block {
+        margin-bottom: 120px;
+    }
+
+    .noAction_wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .rightContent {
+        margin-left: 0;
+    }
+
+    .businessCard_wrapper {
+        margin-right: 0
+    }
+
+    .header_count {
+        font-size: 17px;
+    }
+
+    .sort {
+        justify-content: flex-start;
+        margin-top: 24px;
+    }
+
+    .title_desc_mob {
+        display: block;
+    }
+
+    .title_desc {
+        display: none;
+    }
+
+    /*CTBOS-4897*/
+    .toastContainer {
+        width: 100%;
+    }
+	.paddingCls{
+        padding-top: 0px;
+    }
+    .section {
+        margin-bottom: 60px;
+    }
+
+    .bizservice_card {
+        padding-left: 8px;
+    }
+
+    .bizservice_card_footer {
+        padding-left: 16px;
+    }
+
+    .bizservice_card .buildingGroup {
+        width: 40px;
+    }
+
+    .service_card .businessCard_wrapper {
+        margin-bottom: 16px;
+    }
+
+    .service_card .connectBizBtn {
+        margin-top: 16px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .toastContainer {
+        transform: unset;
+        left: unset;
+        top: 0;
+        margin-right: 20px;
+        width: auto;
+    }
+}

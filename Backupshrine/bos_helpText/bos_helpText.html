@@ -1,0 +1,14 @@
+<template>
+    <div class="helpText_container">
+        <slot name="header">
+            <p class="smallBold header">
+                <lightning-formatted-rich-text value={headtext}></lightning-formatted-rich-text>
+            </p>
+        </slot>
+        <slot name="body">
+            <p class="small body">
+                <lightning-formatted-rich-text value={bodytext}></lightning-formatted-rich-text>
+            </p>
+        </slot>
+    </div>
+</template>

@@ -1,0 +1,132 @@
+<template>
+  <div class="account" if:true={isScreenLoaded}>
+    <div class="slds-grid">
+      <div class="slds-col slds-size_full">
+        <!-- <c-bos-account-dashboard-header></c-bos-account-dashboard-header> -->
+      </div>
+    </div>
+    <div if:true={spinner}>
+      <lightning-spinner
+        alternative-text="Loading"
+        size="small"
+      ></lightning-spinner>
+    </div>
+    <div class="">
+      <div class="dashboard__header">
+        <!-- <div class="title__small containerDiv">
+          {label.accountDashboard_newbussinesschecklist}
+        </div> -->
+        <h4 class="title__large accContainerDiv">
+          {label.accountDashboard_newbussinesschecklist}
+          <!-- {label.accountDashboard} -->
+        </h4>
+        <p class="small helpText">{label.checklistCheckboxes}</p>
+        <template if:false={hasSectionData}>
+          <div class="background-container">
+            <div class="accContainerDiv">
+              <div class="empty-container slds-grid slds-wrap">
+                <div
+                  class="slds-col slds-size_1-of-1 slds-medium-size_3-of-12 slds-large-size_2-of-12 icon-container"
+                >
+                  <div class="tower-icon-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="tower-icons">
+                      <use xlink:href={buildingGroupIcon}></use>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  class="slds-col slds-size_1-of-1 slds-medium-size_9-of-12 slds-large-size_10-of-12 empty-text-content"
+                >
+                  <div class="empty-title">
+                    {label.accountDashboard_nochecklistText}
+                  </div>
+                  <div class="empty-sub-title">
+                    {label.accountdashboard_createnewchecklist}
+                  </div>
+                  <div class="new-checklist">
+                    <button
+                      class="slds-button slds-button_brand primaryBtn new-checklist"
+                      onclick={handleNewChecklist}
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                        <use xlink:href={addIcon}></use>
+                      </svg>
+                      &nbsp;&nbsp;{label.accountdashboard_newchecklist}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template if:true={hasSectionData}>
+          <div class="slds-grid slds-wrap slds-grid_align-spread filter-grid accContainerDiv">
+            <div class="slds-col  slds-order_2 slds-large-order_1 slds-size_1-of-1 slds-large-size_5-of-12 sortbar">
+              <div class="sortby-label slds-p-right_medium">
+                {label.accountDashboard_sortby}:
+              </div>
+              <lightning-combobox name="progress" label="" value={sortValue} placeholder="Select Progress"
+                options={sortOptions} variant="label-hidden" class="cust-sort-by" onchange={handleSortChange}>
+              </lightning-combobox>
+            </div>
+            <div
+              class="slds-col  slds-order_1 slds-large-order_2 slds-size_1-of-1 slds-large-size_6-of-12 slds-text-align_right right_content">
+              <div class="setting">
+                <span class="icon">
+                  <!-- <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                    <use xlink:href={chatbubble}></use>
+                  </svg> -->
+                  <img src={chatbubble} class="link-icons">
+                </span>
+                <a href={label.surveyLink} target="_blank">{label.bizDashboard_giveChecklistFeedback}</a>
+              </div>
+              <button class="slds-button slds-button_brand primaryBtn new-checklist" onclick={handleNewChecklist}>
+                <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                  <use xlink:href={addIcon}></use>
+                </svg>
+                &nbsp;&nbsp;{label.accountdashboard_newchecklist}
+              </button>
+            </div>
+          </div>
+        </template>
+      </div>
+      <template if:true={sectionData}>
+        <div class="card-section">
+          <h6 if:true={completedChecklists.length} class="accContainerDiv slds-p-bottom_medium">{label.completedChecklists}</h6>
+          <template for:each={completedChecklists} for:item="section">
+            <div class="slds-grid accContainerDiv" key={section.id}>
+              <div class="slds-col slds-size_full slds-p-bottom_large">
+                <c-bos-account-progress-card
+                  section={section}
+                  ondeletechecklist={handleRemoveChecklist}
+                  onchecklistclick={handleChecklistClick}
+                >
+                </c-bos-account-progress-card>
+              </div>
+            </div>
+          </template>
+          <h6 if:true={inprogressChecklists.length} class="accContainerDiv slds-p-vertical_medium">{label.inprogressChecklists}</h6>
+          <template for:each={inprogressChecklists} for:item="section">
+            <div class="slds-grid accContainerDiv" key={section.id}>
+              <div class="slds-col slds-size_full slds-p-bottom_large">
+                <c-bos-account-progress-card
+                  section={section}
+                  ondeletechecklist={handleRemoveChecklist}
+                  onchecklistclick={handleChecklistClick}
+                >
+                </c-bos-account-progress-card>
+              </div>
+            </div>
+          </template>
+        </div>
+      </template>
+
+      <c-checklist-delete-modal
+        openmodel={openRemoveChecklistModal}
+        checklist={deleteModalInContext}
+        onchecklistdeleteconfirm={handleChecklistRemoveConfirm}
+        onclosechecklistmodel={closeChecklistConfirmModal}
+      ></c-checklist-delete-modal>
+    </div>
+  </div>
+</template>

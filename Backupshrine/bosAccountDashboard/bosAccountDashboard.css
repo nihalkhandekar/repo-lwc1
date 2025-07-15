@@ -1,0 +1,281 @@
+.accContainerDiv {
+  max-width: 1136px;
+  width: auto;
+  margin: 0 5%;
+}
+
+.account {
+  background-color: #f7f9fa;
+  min-height: calc(100vh - 80px);
+}
+
+.dashboard__header {
+  padding-top: 60px;
+}
+
+.title__small {
+  color: #757575;
+  font-family: 'Karla',sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+}
+
+.sortby-label {
+  color: #2d2c2c;
+  font-family: 'Karla',sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+}
+
+.link-icons {
+  height: 18px;
+  width: 18px;
+}
+
+.sortbar {
+  display: flex;
+  align-items: center;
+  /* flex-direction: row; */
+}
+
+.new-checklist {
+  color: #ffffff;
+  font-family: 'Karla',sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+  line-height: 17px;
+  padding: 16px 40px;
+}
+
+.empty-container {
+  box-sizing: border-box;
+  border: 2px dashed #97abb8;
+  border-radius: 8px;
+  background-color: #ffffff;
+  margin-bottom: 60px;
+}
+
+.background-container {
+  min-height: 588px;
+  background-image: var(--c-accountDashboardBg);
+  background-color: rgba(255, 255, 255, 0.2);
+  background-blend-mode: lighten;
+  background-repeat: no-repeat;
+  background-attachment: local;
+  background-position: center right -42px;
+  background-size: 480px 100%;
+}
+
+.tower-icon-container {
+  position: relative;  
+}
+
+.tower-icons {
+  height: 128px;
+  width: 172px;
+}
+
+.add-icon-container {
+  position: absolute;
+  bottom: -10px;
+  right: 8px;
+}
+
+.add-icons {
+  height: 54px;
+  width: 54px;
+}
+
+.add-icons .add-icon-white {
+  background: #fff;
+  border-radius: 50%;
+}
+
+.empty-title {
+  color: #2d2c2c;
+  font-family: 'Lato',sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  line-height: 35px;
+}
+
+.empty-sub-title {
+  color: #2d2c2c;
+  font-family: 'Karla',sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  padding: 8px 0 20px;
+}
+
+.empty-text-content {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.icon-container {
+  justify-content: center;
+  display: flex;
+}
+
+.cust-sort-by {
+  cursor: pointer;
+}
+
+.card-section{
+  padding-bottom: 92px;
+}
+
+.right_content {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.setting {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+  text-align:left;
+}
+
+.setting a {
+  text-decoration: underline;
+}
+
+.setting .icon {
+  padding-right: 8px;
+}
+
+.setting .link-icons {
+  height: 20px;
+  width: 20px;
+}
+
+.helpText {
+  padding-bottom: 24px;
+  margin: 0 5%;
+}
+
+@media only screen and (max-width: 1024px) {
+  .accContainerDiv {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .helpText {
+    padding-bottom: 16px;
+    margin: 0;
+  }
+
+  .title__large {
+    margin-bottom: 24px;
+  }
+
+  .sortbar {
+    /* flex-direction: column; */
+  }
+
+  .new-checklist {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .empty-container {
+    border: 2px dashed #97abb8;
+    padding: 32px 18px;
+  }
+
+  .cust-sort-by {
+    width: 100%;
+  }
+  .sortby-label {
+    text-align: left;
+    /* width:100%; */
+  }
+
+  .right_content {
+    flex-direction: column;
+  }
+
+  .setting {
+    margin-bottom: 24px;
+  }
+}
+
+@media only screen and (max-width: 968px) {
+  .sortby-label {
+    text-align: left;
+    width: 100%;
+  }
+
+  .title__large {
+    margin-bottom: 24px;
+  }
+
+  .sortbar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .filter-grid {
+    padding-top: 8px;
+    padding-bottom: 20px;
+  }
+  .dashboard__header {
+    padding-top: 0;
+  }
+
+  .title__large {
+    color: #2D2C2C;
+    font-family: 'Lato',sans-serif;
+    font-size: 34px;
+    font-weight: bold;
+    letter-spacing: 0.24px;
+    line-height: 42px;
+    margin-bottom: 36px;
+    margin-top: 8px;
+  }
+
+  .empty-title{
+    margin-top: 32px;
+  }
+}
+
+/* For Desktop specific styles
+ */
+@media only screen and (min-width: 1024px) {
+  .cust-sort-by {
+    width: 56%;
+  }
+
+  .empty-text-content {
+    padding-left: 100px;
+  }
+
+  .empty-container {
+    padding: 45px 64px;
+  }
+
+  .title__large {
+    color: #2D2C2C;
+    font-family: 'Lato', sans-serif;
+    font-size: 43px;
+    font-weight: bold;
+    letter-spacing: 0.31px;
+    line-height: 49px;
+    padding: 16px 0;
+  }
+
+  .filter-grid {
+    padding-top: 8px;
+    padding-bottom: 36px;
+  }
+}

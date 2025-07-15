@@ -1,0 +1,48 @@
+.mainContainer {
+    max-width: 1600px;
+    width: auto;
+    display: flex;
+    margin: 0 auto;
+    background-color: #f7f9fa;
+    margin-top: 32px;
+}
+
+.mainContent {
+    width: 100%;
+    background-color: #f7f9fa;
+    margin-bottom: 45px;
+    padding: 0 5%;
+}
+.resources {
+    padding-left: 24px;
+    padding-right: 16px;
+}
+.resources p.small, .resources h6 {
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+hr {
+    margin: 0;
+    margin-right: 32px;
+}
+
+@media only screen and (max-width: 1023px) {
+  .mainContainer, .mainContent {
+    flex-direction: column;
+  }
+  .mainContainer {
+    padding: 0 20px;
+    margin-top: 0px;
+  }
+  .mainContent {
+    padding: 0;
+  }
+  .resources {
+      padding: 0;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .sideNav {
+    min-width: 240px;
+  }
+}

@@ -1,0 +1,88 @@
+.banner {
+    height: auto;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-bottom: 56px;
+}
+
+.banner:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(270deg, rgba(12,105,143,0) 0%, rgba(5,55,86,0.88) 100%);
+    z-index: 2;
+}
+
+.businessinformation {
+    background-image: url("/business/resource/CTDS_Images/images/BusinessBanner.jpg");
+}
+
+.banner-wrapper {
+    padding-top: 56px;
+    position: relative;
+    z-index: 3;
+    max-width: 794px;
+}
+
+.banner-heading {
+    font-size: 45px !important;
+    letter-spacing: 0.28px;
+    line-height: 54px !important;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+.icon-and-desc {
+    display: flex;
+    max-width: 794px;
+    align-items: center;
+}
+
+.shop-icon {
+    width: 52px;
+    margin-right: 16px;
+}
+
+.blue-text {
+    color: #87BEE3;
+    letter-spacing: 0.25px;
+}
+
+.desc {
+    color: #ffffff;
+    font-size: 20px !important;
+    font-weight: bold;
+    letter-spacing: 0.14px;
+    line-height: 26px !important;
+}
+
+@media only screen and (min-width: 1024px) {
+    .banner {
+        height: 492px;
+        padding-bottom: 0;
+    }
+
+    .banner-wrapper {
+        padding-top: 80px;       
+    }
+
+    .banner-heading {
+        font-size: 74px !important;
+        letter-spacing: 0.25px;
+        line-height: 90px !important;
+    }
+
+    .shop-icon {
+        width: 80px;
+        margin-right: 20px;
+    }
+
+    .desc {
+        letter-spacing: 0.2px;
+        line-height: 35px !important;
+        font-size: 28px !important;
+    }
+}

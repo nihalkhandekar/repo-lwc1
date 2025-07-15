@@ -1,0 +1,27 @@
+<template>
+  <div class="ct-bos-multi-container-all">
+    <template for:each={listData} for:item="item" for:index="index">
+      <div class="slds-p-vertical_small tabfocus" key={item.value} id={index} onkeypress={handleOnChangeTab}>
+        <div class="ct-bos-multi-checkbox-container ct-bos-multi-container-individual">
+          <div class="slds-grid">
+            <div class="slds-col">
+              <label for={item.value} class="ct-bos-multi-checkbox-label" aria-label={item.value}
+                onmousedown={handleMouseClick} onkeydown={handleKeyDown} tabindex="0">
+                <input id={item.value} class="ct-bos-multi-checkbox-input" type="checkbox" onchange={handleOnChange}
+                  value={item.value} aria-hidden="true" tabindex="-1" />
+                <div if:true={answer}>
+                  {answer}
+                  <span class="answergiven"></span>
+                </div>
+                <span class="ct-bos-multi-checkbox-custom"></span>
+              </label>
+              <p class="large input-title">
+                <lightning-formatted-rich-text value={item.value}></lightning-formatted-rich-text>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>

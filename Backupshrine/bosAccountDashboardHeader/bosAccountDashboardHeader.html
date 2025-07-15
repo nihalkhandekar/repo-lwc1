@@ -1,0 +1,66 @@
+<template>
+    <div class="slds-list_horizontal slds-color__background_gray-1 dashboard__header">
+        <div class="mainSection">
+            <div class="desktop slds-grid_align-spread slds-list_horizontal dashboard__header__links slds-p-around_medium">
+                <div class="align-left">
+                    <div class="setting slds-p-right_medium">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                                <use xlink:href={settingIcon}></use>
+                            </svg>
+                        </span>
+                        <a href="javascript:void(0)"   onclick={handleAccountSetting}>{label.accountDashboard_manageSettings}</a>
+                    </div>
+                    <div class="setting">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                                <use xlink:href={megaphoneIcon}></use>
+                            </svg>
+                        </span>
+                        <a href={label.surveyLink} target="_blank">{label.bizDashboard_giveChecklistFeedback}</a>
+                    </div>
+                </div>
+                <div class="align-right">
+                    <div class="setting">
+                        <a href="javascript:void(0)"  onclick={handleLogout}>{label.accountDashboard_logout}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="navBarDivMob">
+                <div class={getMobileNav} onclick={toggleNav}>
+                    <h3 class="slds-section__title">
+                        <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button cust-nav">
+                            <svg class="mobile-link-icons" aria-hidden="true">
+                                <use xlink:href={optionsIcon}></use>
+                            </svg>
+                            <span class="slds-truncate mobile-heading" title="Options and settings">Options and settings</span>
+                        </button>
+                    </h3>
+                    <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+                        <ul>
+                            <li class="mobile-link" onclick={handleAccountSetting}>
+                                <a href="javascript:void(0)">{label.accountDashboard_manageSettings}</a>
+                                <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                                        <use xlink:href={settingIcon}></use>
+                                    </svg>
+                                </span>
+                            </li>
+                            <li class="mobile-link">
+                              <a href={label.surveyLink} target="_blank">{label.accountDashboard_giveFeedback}</a>
+                                <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+                                        <use xlink:href={megaphoneIcon}></use>
+                                    </svg>
+                                </span>
+                            </li>
+                            <li class="mobile-logout mobile-link" onclick={handleLogout}>
+                                <a href="javascript:void(0)">{label.accountDashboard_logout}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,204 @@
+.header {
+    width: Fill (1,888px)px;
+    height: Hug (32px)px;
+    gap: 0px;
+    opacity: 0px;
+    color: #1589EE;
+    padding-left: 0.5rem; 
+    padding-right: 0.5rem;
+}
+.batch-header{
+    width: Fill (1,856px)px;
+    height: Hug (24px)px;
+    gap: 0px;
+    opacity: 0px;
+    padding-left: 0.5rem; 
+    padding-right: 0.5rem;
+    font-family: "SF Pro", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: left;
+}
+.batch-section {
+    border-color: white;
+    margin-right: 20px; 
+    margin-left: 20px;
+    background-color: #FFF;
+    border: 0.5px solid #E5E5E5;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    gap: 12px;
+    padding: 16px 0px 0px 0px;
+}
+.filter-section {
+    margin-right: 20px; 
+    margin-left: 20px;
+    background-color: #FFF;
+    border: 0.5px solid #E5E5E5;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    gap: 12px;
+    padding: 16px 0px 0px 0px;
+}
+.transactionHeader{
+    margin-left: 10px;
+}
+lightning-card {
+    border: none !important;
+}
+
+
+.slds-form-element__control {
+    padding-left: 0.5rem; /* Adjust as needed */
+    padding-right: 0.5rem; /* Adjust as needed */
+}
+
+.slds-form-element {
+    margin-bottom: 1rem; /* Optional: Adjust spacing between rows */
+}
+
+.custom-blue-button {
+    background-color: #0070d2; /* Custom blue color */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    padding: 0.75rem 1.5rem; /* Adjust padding if needed */
+    border-radius: 0.25rem; /* Optional: rounded corners */
+    text-transform: uppercase; /* Optional: uppercase text */
+}
+
+.custom-blue-button:hover {
+    background-color: #005bb5; /* Slightly darker blue for hover */
+}
+
+.custom-blue-button:focus {
+    outline: none; /* Remove default focus outline */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.left-button {
+    margin-right: auto;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer; /* Make the entire section clickable */
+    border-radius: 20px; /* Rounded corners */
+    background-color: #f0f0f0; /* Light grey background */
+    padding: 10px 20px; /* Padding for the container */
+}
+
+.filter-title {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.custom-button .slds-button {
+    border-radius: 20px;
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333; /* Dark text color */
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Light border */
+}
+
+.custom-button .slds-button:hover {
+    background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+.custom-button-menu .slds-button {
+    border-radius: 20px;
+    background-color: #f0f0f0; /* Light grey background */
+    color: #333; /* Dark text color */
+    padding: 10px 20px;
+    font-size: 14px;
+    border: 1px solid #ccc; /* Light border */
+}
+
+.custom-button-menu .slds-button:hover {
+    background-color: #e0e0e0; /* Slightly darker grey on hover */
+}
+
+.custom-badge {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease;
+}
+
+.custom-badge:hover {
+    background-color: #4d4d4d; /* Darker shade of blue for hover effect */
+}
+
+.custom-badge.active {
+    background-color: #4d4d4d; /* Color when active */
+    color: #fff; /* Text color when active */
+}
+
+.custom-label {
+    color: #007bff; 
+    cursor: pointer; 
+}
+.custom-modal-full {
+    width: 90%;
+    height: 85%;
+    max-width: 95%;
+    max-height: 95%;
+    margin-top: 62px;
+    overflow: hidden; /* Ensure no scrollbars appear */
+}
+
+.slds-modal__content {
+    height: calc(100vh - 100px); /* Adjust height as needed to fit content */
+    overflow-y: auto; /* Enable scrolling for modal content */
+}
+
+
+
+.pagination-controls {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between elements */
+}
+
+.pagination-info {
+    margin-right: 10px; /* Space between info and combobox */
+}
+
+.pagination-combobox {
+    margin-right: 10px; /* Space between combobox and input */
+}
+
+.page-jump-input {
+    margin-right: 10px; /* Space between input and button */
+}
+
+.go-to-button {
+    margin-top: 0.25rem;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center; /* Center-align the pagination numbers */
+    align-items: center; /* Vertically center-align */
+    max-width: 100%; /* Prevent overflow */
+    padding: 0.5rem; /* Add padding */
+    box-sizing: border-box;
+}
+
+.pagination-container c-pagination {
+    flex: 1;
+    max-width: 100%;
+}

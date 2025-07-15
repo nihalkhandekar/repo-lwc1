@@ -1,0 +1,61 @@
+<template>
+  <!-- <div if:true={isGuestUser}>
+    <template if:true={showLanguageDropdown}>
+      <c-Qn-A_-Language-Selection></c-Qn-A_-Language-Selection>
+    </template>
+  </div> -->
+  <div class="mainContainer">
+    <div class={tabClass}>
+      <c-biz_side-nav show-action-items={showActionItems} class={activeClass} onmydashboard={openMyDashboard}
+        onaccountdashboard={openAcccDashboard} onbizdashboard={openBizDashboard} onactionitems={openActionItems}
+        oncovidupdates={openCovidUpdates} onpaymenthistory={openPaymentHistory} onfilerinfo={openFilerInfo}
+        onlinkcred={goToCredential} onlinkbiz={goToBusiness}></c-biz_side-nav>
+    </div>
+    <template if:true={isBusinessCenter}>
+      <template if:true={showProfile}>
+        <div class="slds grid slds-col slds-size_12-of-12">
+          <c-bos-business-profile accountid={accountid} onbusinessunlink={handleBusinessUnlink} unlinkid={businessUnlinked}></c-bos-business-profile>
+        </div>
+      </template>
+      <template if:false={showProfile}>
+        <div class="mainContent slds-grid">
+          <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+            <c-biz_dashboard onbizcardclick={handleBizClick} unlinkedbusiness={businessUnlinked} onafterunlink={handleAfterUnlink} onactioncardclick={handleActionClick}></c-biz_dashboard>
+          </div>
+          <c-ct_resources componentname={componentName}></c-ct_resources>
+        </div>
+      </template>
+    </template>
+    <template if:true={isAccountDashboard}>
+      <div class="slds grid slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+        <c-bos-account-dashboard></c-bos-account-dashboard>
+      </div>
+    </template>
+    <template if:true={isMyDashboard}>
+      <div class="mainContent">
+        <c-bos-my-dashboard ontoggleaitab={toggleAITabs} onactioncardclick={handleActionClick}
+          ongotoactionitems={gotoActionItems} ongotobusiness={goToBusiness} ongotocredential={goToCredential}
+          ongotochecklist={openAcccDashboard} ongotocovidupdates={openCovidUpdates} ongotobizservices={goToBizServices}
+          ongotopayments={openPaymentHistory}></c-bos-my-dashboard>
+      </div>
+    </template>
+    <template if:true={isCovidUpdates}>
+      <div class="mainContent">
+          <c-bos-covid-updates></c-bos-covid-updates>
+      </div>
+    </template>
+    <template if:true={isPayment}>
+      <div class="mainContent">
+         <c-brs_-payment-details show-history-table={isPayment}></c-brs_-payment-details>
+      </div>
+    </template>
+    <template if:true={isFilerInfo}>
+      <div class="mainContent">
+         <c-brs_my-filer-info></c-brs_my-filer-info>
+      </div>
+    </template>
+  </div>
+  <div if:true={spinner}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+  </div>
+</template>

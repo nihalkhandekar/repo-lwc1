@@ -1,0 +1,124 @@
+<template>
+    <!-- loader -->
+    <div if:true={showSpinner}>
+        <lightning-spinner
+            alternative-text="Loading..." variant="brand" class="slds-is-fixed">
+        </lightning-spinner>
+    </div>
+    <!-----/loader-------->
+    <!--- Header -->
+    <div class="slds-tabs_card">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-standard-opportunity">
+                                 <lightning-icon icon-name="standard:recipe" alternative-text="recipe" title="recipe"></lightning-icon>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span>Authorize.net Payment Gateway Integration in Salesforce</span>
+                                        <span class="slds-page-header__title slds-truncate" title="Recently Viewed">POC Steps</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <br/>
+    <!--- /Header -->
+    <!--- payment gatway inputs form -->
+    <lightning-card  variant="Narrow"  title="Credit Card Forms" icon-name="standard:payment_gateway">
+        <div class="slds-var-p-around_small">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-input name="firstName" data-input="firstName" class="fieldvalidate" type="text"
+                                     label="First Name" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-input name="lastName" data-input="lastName" class="fieldvalidate" type="text"
+                                     label="Last Name" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-input name="email" data-input="email" class="fieldvalidate" type="email"
+                                     label="Email" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+ 
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="9" large-device-size="9">
+                    <lightning-input name="cardNumber" data-input="cardNumber" class="fieldvalidate" type="tel"
+                                     label="Card Number" required onchange={handleChange} maxlength="16" minlength="12" onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="3" large-device-size="3">
+                    <lightning-input type="number" label="Amount"
+                                     value="150" formatter="currency" name="amount" data-input="amount"
+                                     required onchange={handleChange} onblur={handleValidation}
+                    >
+                    </lightning-input>
+                </lightning-layout-item>
+ 
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="3" large-device-size="3">
+                    <lightning-combobox name="cardMonth" data-input="cardMonth" options={monthOptions} placeholder="Choose a month"
+                                        label="Month" value={cardmMonth} required onchange={handleChange} onblur={handleValidationForCombobox}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="3" large-device-size="3">
+                    <lightning-combobox name="cardYear" data-input="cardYear" options={yearOptions} placeholder="Choose a year"
+                                        label="Year" value={cardYear} required onchange={handleChange} onblur={handleValidationForCombobox}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-input name="cvv" data-input="cvv" class="fieldvalidate" type="password" maxlength="4"
+                                     label="CVV/CVC" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+ 
+                <!-- address inputs -->
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-combobox name="country" data-input="country" options={countries} placeholder="Choose a country"
+                                        label="Country" value={country} required onchange={handleChange} onblur={handleValidationForCombobox}>
+                    </lightning-combobox>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="6" large-device-size="6">
+                    <lightning-input name="state" data-input="state" class="fieldvalidate" type="text"
+                                     label="State/Province" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+ 
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-input name="street" data-input="street" class="fieldvalidate" type="text"
+                                     label="Street" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-input name="city" data-input="city" class="fieldvalidate" type="text"
+                                     label="City" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small" size="12" medium-device-size="4" large-device-size="4">
+                    <lightning-input label="Postal Code" value={zipcode} type="tel"
+                                     name="zip" data-input="zip" required onchange={handleChange} onblur={handleValidation}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <!--/address inputs-->
+ 
+                <lightning-layout-item size="12" class="slds-var-p-top_small">
+                    <lightning-button class="slds-align_absolute-center" variant="brand" label="Pay Amount"
+                        onclick={handlePayment}>
+                    </lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+    <!--- /payment gatway inputs form -->
+</template>

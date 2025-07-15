@@ -1,0 +1,123 @@
+<!-- <template>
+  
+
+      <div class="page-title" onclick={handleMenuToggle}>
+        <div class="progressbar">
+          <p class="slds-text-color_weak slds-text-title_bold"></p>
+         
+        </div>
+        <div class="title-wrapper">
+          <p class="largeBold">
+            
+          </p>
+         
+          <svg xmlns="http://www.w3.org/2000/svg" class={svgClass}>
+            <use xlink:href={getCaretIcon}></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <nav class="slds-nav-vertical mob-nav" aria-label="Sub page">
+      <div class="slds-nav-vertical__section">
+
+        <ul aria-describedby="entity-header">
+
+          
+        </ul>
+      </div>
+    </nav>
+  </div>
+</template> -->
+
+<template>
+  <div class="slds-size--1-of-1 sideNavWrapper">
+    <div class="progressbar slds-show_large">
+      <c-progress-bar progress={progressLevel} firstname={firstName} label={title} isbos={checkifbos}></c-progress-bar>
+    </div>
+    <div class="progressbar-mob slds-hide_large">
+
+      <div class="page-title" onclick={handleMenuToggle}>
+        <!-- <div class="progressbar">
+          <p class="slds-text-color_weak slds-text-title_bold">{getProgressLevel}</p>
+        </div> -->
+        <div class="title-wrapper">
+          <p class="largeBold">
+            {labels.accountDashboard_ConnectMyBusiness}
+          </p>
+          <svg xmlns="http://www.w3.org/2000/svg" class={svgClass}>
+            <use xlink:href={getCaretIcon}></use>
+          </svg>
+        </div>
+      </div>
+    </div>
+    <nav class="slds-nav-vertical mob-nav" aria-label="Sub page">
+      <div class="slds-nav-vertical__section">
+
+        <ul aria-describedby="entity-header">
+          <li>
+            <template for:each={sidenavobj.sections} for:item="sectionItem">
+              <template if:true={sectionItem.subSection.length}>
+                <div key={sectionItem.sectionName}>
+                  <div data-id={sectionItem.pageNameRef} class="sectionWrapper" data-type={sectionItem.sectionName}
+                    key={sectionItem.sectionName}>
+                    <span id={sectionItem.pageNameRef} class="icon">
+                      <img key={sectionItem.sectionName} alt="active" class="active" src={pCurrentIcon}>
+                      <img key={sectionItem.sectionName} alt="locked" class="locked" src={pLockedIcon}>
+                      <img key={sectionItem.sectionName} alt="completed" class="completed" src={pCompletedIcon}>
+                    </span>
+                    <ul>
+                      <li key={sectionItem.sectionName} class="slds-nav-vertical__item slds-is-active itemWrapper">
+                        <a class="slds-nav-vertical__action dmvitem expandableLink"
+                          aria-current="true">{sectionItem.sectionName}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="slds-show resultsContainer">
+                    <ul aria-describedby="folder-header">
+                      <li>
+                        <template for:each={sectionItem.subSection} for:item="subSectionItem">
+                          <div data-id={subSectionItem.pageNameRef} class="subItemWrapper"
+                            key={subSectionItem.subSectionName}>
+                            <template if:true={subSectionItem.show}>
+                              <span id={sectionItem.pageNameRef} class="icon">
+                                <img key={sectionItem.sectionName} alt="active" class="active" src={cCurrentIcon}>
+                                <img key={sectionItem.sectionName} alt="locked" class="locked" src={cLockedIcon}>
+                                <img key={sectionItem.sectionName} alt="completed" class="completed"
+                                  src={cCompletedIcon}>
+                              </span>
+                              <ul>
+                                <li key={subSectionItem.subSectionName} class="slds-nav-vertical__item">
+                                  <a name={subSectionItem.pageNameRef}
+                                    class="slds-nav-vertical__action">{subSectionItem.subSectionName}</a>
+                                </li>
+                              </ul>
+                            </template>
+                          </div>
+                        </template>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </template>
+              <template if:false={sectionItem.subSection.length}>
+                <div data-id={sectionItem.pageNameRef} key={sectionItem.sectionName} class="sectionWrapper">
+                  <span class="icon">
+                    <img key={sectionItem.sectionName} alt="active" class="active" src={pCurrentIcon}>
+                    <img key={sectionItem.sectionName} alt="locked" class="locked" src={pLockedIcon}>
+                    <img key={sectionItem.sectionName} alt="completed" class="completed" src={pCompletedIcon}>
+                  </span>
+                  <ul>
+                    <li key={sectionItem.sectionName} class="slds-nav-vertical__item slds-is-active">
+                      <a name={sectionItem.pageNameRef} aria-current="true"
+                        class="slds-nav-vertical__action">{sectionItem.sectionName}</a>
+                    </li>
+                  </ul>
+                </div>
+              </template>
+            </template>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</template>

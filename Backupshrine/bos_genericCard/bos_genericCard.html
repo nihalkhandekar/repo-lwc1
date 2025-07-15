@@ -1,0 +1,107 @@
+<template>
+    <div class="card-section">
+        <div class="marginClass">
+            <template if:false={currentobj.eLicense_Credential_ID}>
+                <div class="splitSection">
+                    <p class="slds-float_left labelClass smallBold">
+                        <lightning-formatted-rich-text value={currentobj.businessId}></lightning-formatted-rich-text>
+                    </p>
+                    <template if:true={statusval}>
+                        <p class="slds-float_right pills">{statusval}</p>
+                    </template>
+                    <template if:false={statusval}>
+                        <template if:true={currentobj.status}>
+                            <p class="slds-float_right pills">{currentobj.status}</p>
+                        </template>
+                    </template>
+                </div>
+                <div class="slds-p-top_x-small">
+                    <h6 class="headerClass">
+                        <template if:true={currentobj.label}>
+                            <lightning-formatted-rich-text value={currentobj.label}></lightning-formatted-rich-text>
+                        </template>
+                        <template if:false={currentobj.label}>
+                            <lightning-formatted-rich-text value={currentobj.boldLabel}></lightning-formatted-rich-text>
+                        </template>
+                    </h6>
+                </div>
+                <div class="slds-p-top_x-small sublabel">
+                    <template if:true={currentobj.sublabel}>
+                        <lightning-formatted-rich-text value={currentobj.sublabel}></lightning-formatted-rich-text>
+                    </template>
+                </div>
+                <div class="slds-p-top_xx-small splitSection">
+                    <template if:true={currentobj.address}>
+                        <p class="addressClass small">
+                            <img class="iconCls" src={locationIcon} alt="address"
+                                aria-hidden="true" />{currentobj.address}
+                            </p>
+                    </template>
+                    <!-- <p class="addressClass small">
+                        <img class="slds-m-bottom_xxx-small iconCls" src={personIcon} alt="contact"
+                            aria-hidden="true" />
+                    </p> -->
+                </div>
+            </template>
+            <template if:true={currentobj.eLicense_Credential_ID}>
+                <div class="splitSection">
+                    <p class="slds-float_left labelClass smallBold">
+                        <lightning-formatted-rich-text value={currentobj.Full_Credential_Code}>
+                        </lightning-formatted-rich-text>
+                    </p>
+                    <template if:true={statusval}>
+                        <p class="slds-float_right pills">{statusval}</p>
+                    </template>
+                    <template if:false={statusval}>
+                    <template if:true={currentobj.Credential_Public_Status}>
+                        <p class="slds-float_right pills">{currentobj.Credential_Public_Status}</p>
+                    </template>
+                    </template>
+                </div>
+                <div class="slds-p-top_x-small">
+                    <h6 class="headerClass">
+                        <lightning-formatted-rich-text value={currentobj.Credential_Type}>
+                        </lightning-formatted-rich-text>
+                    </h6>
+                </div>
+                <div class="slds-p-top_xxx-small">
+                    <p class="small">{currentobj.Business_Individual_Name}</p>
+                </div>
+                <div class="slds-p-top_small splitSection">
+                    <p class="addressClass small">
+                        <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                            aria-hidden="true" />
+                        <lightning-formatted-rich-text value={currentobj.MainAddress}></lightning-formatted-rich-text>
+                    </p>
+                    <!-- <template if:true={showbizowner}>
+                        <p class="addressClass small">
+                            <img class="slds-m-bottom_xxx-small iconCls" src={personIcon} alt="contact"
+                                aria-hidden="true" />
+                            <lightning-formatted-rich-text value={currentobj.Doing_Business_As}>
+                            </lightning-formatted-rich-text>
+                        </p>
+                    </template> -->
+                </div>
+            </template>
+
+            <template if:true={hasDropdown}>
+                <div class="dropDownSection inputTextElement">
+                    <lightning-combobox name="progress" label={label.linkBiz_RelatedLabel}
+                        data-id={currentobj.eLicense_Credential_ID} placeholder={label.linkBiz_RelatedPlaceholder}
+                        options={options} onchange={handleOptChange} value={selectedAnswer} class="hideDropdown">
+                    </lightning-combobox>
+                </div>
+            </template>
+        </div>
+
+        <template if:true={removeSection}>
+            <div class="footer" onkeydown={handleRemoveKey}>
+                <span class="slds-grid removeLink" tabindex="0" onclick={handleRemove}>
+                    <img class="slds-m-right_xxx-small iconCls" src={removeIcon} alt="address" aria-hidden="true" />
+                    <p class="large">{removeSection}</p>
+                </span>
+            </div>
+        </template>
+
+    </div>
+</template>

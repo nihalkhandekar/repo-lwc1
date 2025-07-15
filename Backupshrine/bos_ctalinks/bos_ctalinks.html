@@ -1,0 +1,40 @@
+<template>
+    <div class="nav-button">
+        <hr>
+        <template if:true={requiredError} class="error-container">
+      <div aria-label={errorMessage} class="error-msg-wrapper" role="alert">
+        <section class="slds-popover slds-nubbin_bottom-right" role="dialog">
+                <div class="slds-popover__body error-msg">
+                  <p class="small">
+                    {errorMessage}
+                  </p>
+                </div>
+              </section>
+            </div>
+        </template>
+        <div class="page-footer slds-grid slds-size_12-of-12 slds-large-size_12-of-12">
+            <div class="slds-col button-wrapper slds-order_2">
+        <button title={nextButtonLabel} onclick={handleContinue} class="slds-button primaryBtnSmall">
+          {nextButtonLabel} &nbsp;
+          <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse" size="x-small"
+            class="chevronRight">
+                    </lightning-icon>
+                </button>
+            </div>
+            <template if:false={hideBackBtn}>
+                <div class="slds-col slds-order_1">
+                    <a href="javascript:void(0);" tabindex="0" class="slds-button cust-anchor"
+                        onclick={handleBack}>{labels.GO_BACK_BUTTON}</a>
+                </div>
+            </template>
+      <template if:true={hideBackBtn}>
+        <template if:true={addAnotherBizFlag}>
+          <div class="slds-col slds-order_1">
+            <a href="javascript:void(0);" tabindex="0" class="slds-button cust-anchor"
+              onclick={handleCancel}>{labels.linkBiz_Cancel}</a>
+          </div>
+        </template>
+      </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,78 @@
+.cust-anchor {
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.13;
+    font-family: 'Karla', sans-serif;
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.nav-button {
+    margin-top: 80px;
+    margin-bottom: 32px;
+}
+
+.page-footer {
+    display: flex;
+    align-items: center;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-wrapper button.slds-button.primaryBtnSmall {
+    display: flex;
+    justify-content: center;
+}
+
+.primaryBtnSmall.slds-button,
+.primaryBtnSmall .slds-button {
+    background-color: #09538b;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    padding: 0 56px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    border: none;
+    display: block;
+    height: 56px;
+    width: auto;
+}
+
+.slds-nubbin_bottom-right:after {
+    top: unset !important;
+    bottom: -6px;
+}
+
+@media only screen and (max-width: 1023.9px) {
+    .page-footer {
+        flex-direction: column-reverse;
+        margin-top: 36px;
+        padding-top: 0;
+    }
+
+    .slds-button.primaryBtnSmall {
+        width: 100%;
+    }
+
+    .button-wrapper {
+        margin-bottom: 32px;
+        width: 100%;
+    }
+
+    .error-msg-wrapper {
+        text-align: left;
+    }
+
+    .error-msg-wrapper .slds-popover.slds-nubbin_bottom-right {
+        width: 100% !important;
+    }
+
+}

@@ -1,0 +1,22 @@
+.helpText_container {
+  box-sizing: border-box;
+  border: 1px solid #F6A053;
+  border-radius: 4px;
+  background-color: #FFF8F2;
+  padding: 12px 24px;
+}
+
+.header {
+  color: #8A5321;
+  font-family: 'Karla Bold', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+}
+
+.body {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px !important;
+}
