@@ -1,0 +1,81 @@
+:host {
+    padding-top: 50px; /* Adjust this value based on your header's height */
+    display: block;
+}
+
+.header {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    z-index: 999; /* One less than the main header to ensure it's below if they overlap */
+    background-color: #003a62; /* Dark Blue background */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    /* border-bottom: 3px solid #1589EE;  White border bottom */
+    box-shadow: 0px -3px 0px 0px #1589ee inset;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    width: 100%;
+    max-width: 100%;
+    /* gap: 8px; */
+}
+
+.nav-links {
+    display: flex;
+    align-items: left;
+    flex-grow: 1;
+    justify-content: left; /* Center the nav links */
+    gap: 8px;
+}
+
+.nav-button {
+    background-color: inherit;
+    color: white;
+    border: 0px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 15px;
+    text-decoration: none;
+    border-radius: none;
+    font-weight: 400;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: white;
+    color: #1c4879;
+    border-top: 4px solid #0c7cce;
+    border-radius: 4px;
+}
+
+.nav-button.active {
+    background-color: white;
+    color: #1C4879;
+    border-top: 4px solid #0c7cce;
+    border-radius: 4px;
+    font-weight: 590;
+    font-size: 14px;
+}
+.unreadNotifications{
+    postion: relative;
+    height: 20px;
+    width: 20px;
+    background-color: brown;
+    border-radius: 20px;
+    right: 3rem;
+
+}
+
+.nav-notification{
+    display: flex;
+
+}

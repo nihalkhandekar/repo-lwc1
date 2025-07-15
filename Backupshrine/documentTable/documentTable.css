@@ -1,0 +1,58 @@
+.slds-table th {
+    padding: 0.5rem; /* 8px */
+}
+
+.slds-table td {
+    padding: 0.5rem; /* 8px */
+    vertical-align: middle; /* Aligns content vertically in the middle */
+}
+
+.aligned-cell {
+    padding: 0;
+    vertical-align: middle;
+}
+
+.aligned-cell:last-child {
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aligned-input {
+    width: 100%;
+    margin: 0;
+}
+
+.name-column {
+    width: 20rem; /* 320px */
+    white-space: nowrap;
+    overflow: visible;
+}
+
+.add-document-btn {
+    margin-bottom: 2rem; /* 10px */
+}
+
+/* Total section alignment */
+.total-section {
+    text-align: right;
+    padding: 0.625rem; /* 10px */
+    border-top: 0.0625rem solid #ddd; /* 1px */
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.remove-icon {
+    margin: 0 auto;
+    position: relative;
+    top: 1.25rem; /* 20px */
+    right: 2.8125rem; /* 45px */
+}
+
+.align-input {
+    /* margin-top: 0.9rem; */
+}

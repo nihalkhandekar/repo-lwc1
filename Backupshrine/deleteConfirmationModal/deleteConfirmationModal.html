@@ -1,0 +1,27 @@
+<template>
+    <lightning-modal-header>
+        <div class="header-container">
+            <h2 class="slds-text-heading_medium">Delete {officeType}</h2>
+
+        </div>
+        <lightning-button-icon
+                icon-name="utility:close"
+                size="large"
+                alternative-text="Close"
+                onclick={closeModal}
+                class="custom-modal__close">
+            </lightning-button-icon> 
+    </lightning-modal-header>
+    <lightning-modal-body>
+        <div class="custom-modal-body">
+            <p class="delete-confirmation-text">Are you sure you want to delete {officeType}?</p>
+        </div>
+
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="No" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button>
+        <lightning-button variant="brand" label="Yes"  onclick={handleDelete}></lightning-button>
+    </lightning-modal-footer>
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+    
+</template>

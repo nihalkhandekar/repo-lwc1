@@ -1,0 +1,100 @@
+<template>
+    <div class="slds-grid slds-grid_align-end slds-m-bottom_small">
+        <lightning-button label="+ Add Document" onclick={handleAddDocument} variant="brand" class="add-document-btn"></lightning-button>
+    </div>
+    <lightning-card>
+        
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
+            <thead>
+                <tr>
+                    <th scope="col">Type of Document</th>
+                    <th scope="col">Destination Country</th>
+                    <th scope="col" class="name-column">Name of the Person Listed on the Document</th>
+                    <th scope="col">Hague Status</th>
+                    <th scope="col">Fee</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={documents} for:item="document" for:index="index">
+                    <tr key={document.id}>
+                        <td class="aligned-cell">
+                            <lightning-combobox
+                                name="type"
+                                value={document.type}
+                                placeholder="Select Type"
+                                options={documentTypes}
+                                data-index={index}
+                                onchange={handleInputChange}
+                                class="aligned-input">
+                            </lightning-combobox>
+                        </td>
+                        <td class="aligned-cell">
+                            <lightning-combobox
+                                name="country"
+                                value={document.country}
+                                placeholder="Select Country"
+                                options={countries}
+                                data-index={index}
+                                onchange={handleInputChange}
+                                class="aligned-input">
+                            </lightning-combobox>
+                        </td>
+                        <td class="aligned-cell name-column">
+                            <lightning-input
+                                name="name"
+                                value={document.name}
+                                placeholder="Enter Name of Person"
+                                data-index={index}
+                                onchange={handleInputChange}
+                                class="slds-m-bottom_small aligned-input">
+                            </lightning-input>
+                        </td>
+                        <td class="aligned-cell">
+                            <lightning-combobox
+                                name="hagueStatus"
+                                value={document.hagueStatus}
+                                placeholder="Select Status"
+                                options={hagueStatuses}
+                                data-index={index}
+                                onchange={handleInputChange}
+                                class="aligned-input">
+                            </lightning-combobox>
+                        </td>
+                        <td class="aligned-cell">
+                            <lightning-input
+                                name="fee"
+                                type="number"
+                                value={document.fee}
+                                data-index={index}
+                                onchange={handleInputChange}
+                                class="slds-m-bottom_small aligned-input">
+                            </lightning-input>
+                        </td>
+                        <td class="aligned-cell">
+                            <lightning-button-icon
+                                icon-name="utility:delete"
+                                alternative-text="Remove"
+                                title="Remove"
+                                onclick={handleRemoveDocument}
+                                data-index={index}
+                                class="remove-icon aligned-input">
+                            </lightning-button-icon>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <div class="total-section">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer slds-table_fixed-layout">
+                <tfoot>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td style="text-align:right; padding-right: 20px;">Total: ${total}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,7 @@
+.container{
+    display: flex;
+    align-items: center;
+}
+.separator {
+    margin: 6px 6.5px;
+}

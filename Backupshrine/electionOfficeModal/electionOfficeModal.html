@@ -1,0 +1,246 @@
+<template>
+    <lightning-modal-header >
+        <div class="header-container specificHeader">
+            <h2 class="slds-text-heading_medium">{headerText}</h2>
+            <!-- Conditionally render the Edit button when in view mode -->
+            <template if:true={isReadOnly}>
+                <lightning-button  icon-name="utility:edit"
+                alternative-text="Edit"
+                class="edit-button editButtonCss"
+                onclick={handleEditClick}
+                title="Edit"
+                variant="base"
+                aria-label="Edit" label="Edit" ></lightning-button>
+
+            </template>
+        </div>
+        <!-- <lightning-button-icon
+            icon-name="utility:close"
+            alternative-text="Close"
+            onclick={closeModal}
+            class="slds-modal__close">
+        </lightning-button-icon> -->
+        <lightning-button-icon
+                icon-name="utility:close"
+                size="large"
+                alternative-text="Close"
+                onclick={closeModal}
+                class="custom-modal__close cancelButtonCss">
+            </lightning-button-icon> 
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="custom-modal-body modalBodyCssChange">
+            <div class="personal-info-section">
+                <template if:true={isTownAdd}>
+                    <div class="slds-grid slds-gutters slds-wrap ">
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input label="Town Id" name="id" disabled required  value={formData.id} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input label="Towns/ Election Office" name="name" disabled={viewEditDisable} pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="Town Name can only contain letters" required class="SE-searchCardInputLabel"  value={formData.name} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 comboboxItemBackgroundColorChange">
+                            <lightning-combobox 
+                                    label="Election Held In"
+                                    name="electionHeldIn" 
+                                    value={formData.electionHeldIn}
+                                    placeholder="Election Office by" 
+                                    options={electionHeldInOptions} 
+                                    disabled={isReadOnly}
+                                    class="SE-searchCardInputLabel"
+                                    required
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+                            <!-- <lightning-input label="Election Held In" name="electionHeldIn" disabled={isReadOnly} required  value={formData.electionHeldIn} onchange={handleInputChange}></lightning-input> -->
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input 
+                                label="Congressional District"
+                                name="congDist"
+                                type="text"
+                                value={formData.congDist}
+                                placeholder="Enter Congressional District"
+                                disabled={viewEditDisable}
+                                pattern="^[0-9]*$"
+                                class="SE-searchCardInputLabel"
+                                onchange={handleInputChange}
+                                onkeydown={restrictCongressionalKeyInput}
+                                message-when-bad-input="Invalid Congressional District. Please enter a valid value."
+                                required
+                            >
+                            </lightning-input>
+                        </div>               
+                        
+                    </div>
+                    <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium">
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input 
+                                label="House Assembly District"
+                                name="houseDist"
+                                type="text"
+                                value={formData.houseDist}
+                                placeholder="Enter multiple districts, comma-separated"
+                                disabled={viewEditDisable}
+                                onchange={handleInputChange}
+                                 pattern="^[0-9, ]*$"
+                                onkeydown={restrictHouseSenatorialKeyInput}
+                                class="SE-searchCardInputLabel"
+                                message-when-bad-input="Invalid House Assembly District. Please enter valid values."
+                                required
+                            >
+                            </lightning-input>
+                        </div> 
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input 
+                            label="Senatorial District"
+                            name="senatorialDist"
+                            type="text"
+                            value={formData.senatorialDist}
+                            placeholder="Enter multiple districts, comma-separated"
+                            disabled={viewEditDisable}
+                            onchange={handleInputChange}
+                             pattern="^[0-9, ]*$"
+                            onkeydown={restrictHouseSenatorialKeyInput}
+                            class="SE-searchCardInputLabel"
+                            message-when-bad-input="Invalid Senatorial District. Please enter valid values."
+                            required
+                        >
+                        </lightning-input>
+                    </div> 
+                    </div>
+
+                </template>
+
+                <template if:true={isCityAdd}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input label="Borough/City ID" name="id" disabled required  value={formData.id} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input label="Borough/City/ Election Office" name="name" class="SE-searchCardInputLabel" 
+                            disabled={viewEditDisable} required pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="Borough/City Name can only contain letters" value={formData.name} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4 comboboxItemBackgroundColorChange">
+                            <lightning-combobox 
+                                    label="Election Held In"
+                                    name="electionHeldIn" 
+                                    value={formData.electionHeldIn}
+                                    placeholder="Election Office by" 
+                                    options={electionHeldInOptions} 
+                                    class="SE-searchCardInputLabel"
+                                    disabled={isReadOnly}
+                                    required
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+                            <!-- <lightning-input label="Election Held In" name="electionHeldIn" disabled={isReadOnly} required  value={formData.electionHeldIn} onchange={handleInputChange}></lightning-input> -->
+                        </div>               
+                        
+                    </div>
+
+                </template>
+                <template if:true={isStateAdd}>
+                    <div class="slds-grid slds-gutters slds-wrap">
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input label="State ID" name="id" disabled required  value={formData.id} onchange={handleInputChange}></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input label="State/ Election Office" name="name" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="State Name can only contain letters"
+                            disabled={viewEditDisable} required class="SE-searchCardInputLabel" value={formData.name} onchange={handleInputChange}></lightning-input>
+                        </div>
+                    </div>
+
+                </template>
+
+            </div>
+            <div class="address-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:service_territory_member" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Registrar Business Mailing Address</h2>
+                        <p class="slds-text-body_small">Enter address details to proceed further.</p>
+                    </div>
+                </div>
+                <template if:true={isStateAdd}>
+                    <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="Title" name="rovName" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="Title can only contain letters"
+                             disabled={isReadOnly} value={formData.rovName} class="SE-searchCardInputLabel" onchange={handleInputChange} ></lightning-input>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={isTownAdd}>
+                    <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="Email Address" name="email" type="email" disabled={isReadOnly} class="SE-searchCardInputLabel" value={formData.email} onchange={handleInputChange} ></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="ROV Name" name="rovName" pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" message-when-pattern-mismatch="ROV Name can only contain letters" disabled={isReadOnly} required class="SE-searchCardInputLabel" value={formData.rovName} onchange={handleInputChange} ></lightning-input>
+                        </div>
+                    </div>
+                    <!-- <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium">
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="ROV Name" name="rovName" pattern="[A-Za-z, ]+" message-when-pattern-mismatch="ROV Name can only contain letters" disabled={isReadOnly} required class="SE-searchCardInputLabel" value={formData.rovName} onchange={handleInputChange} ></lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2">
+                            <lightning-input label="ROV Office" name="rovOffice" disabled={isReadOnly} value={formData.rovOffice} onchange={handleInputChange} ></lightning-input>
+                        </div>
+                    </div> -->
+                </template>
+
+               
+            
+                <div class="form-group full-width slds-form-element_compound slds-form-element">
+                    <lightning-input-address 
+                        class='address SE-searchCardInputLabel'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={formData.address1}    
+                        street-label="Address Line 1"
+
+                        subpremise={formData.address2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={formData.city}
+
+                        province-label="State"
+                        province={formData.state}
+
+                        postal-code={formData.zipCode}
+                        postal-code-label="Zip Code"
+
+                        country-label="Country"
+                        country={formData.country}
+
+                        onchange={handleAddressChange}
+                        show-address-lookup
+                        show-compact-address
+                        	
+                        required={istownAdd}
+                        disabled={isReadOnly}>
+                    </lightning-input-address>
+                </div>
+            </div>
+
+        </div>
+
+    </lightning-modal-body>
+
+    <lightning-modal-footer>
+        <!-- <lightning-button label="Cancel" onclick={closeModal} class="slds-m-right_x-small clear-font"></lightning-button> -->
+         <div class="button-group">
+        <button class="slds-button SE-borderLessButton cancel-button" onclick={closeModal}>Cancel</button>
+        <template if:false={isReadOnly}>
+
+            <!-- <lightning-button variant="brand" label="Save" onclick={handleAdd}></lightning-button> -->            
+                <lightning-button variant="brand" label={AddStateClicked} onclick={handleAdd}></lightning-button>
+           
+        </template>
+    </div>
+        
+    </lightning-modal-footer>
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+    
+</template>

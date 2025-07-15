@@ -1,0 +1,54 @@
+<!--*********************************************************************************************
+ * NAME:  ctds_genericRadioCheckboxWithTextInput.html
+ * DESCRIPTION: Renders a radio button/ checkbox along with text input when the desired input is selected in radio/checkbox 
+ *
+ * @AUTHOR: Priyanka
+ * @DATE: 11/23/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Priyanka                          11/23/2020                         Created the first version
+*********************************************************************************************-->
+
+<template>
+  <p class={tabClass}>
+    <c-generic-radio_brs data-id="radio" radio-options={options} name={radioName} label={radiolabel}
+      onctbosdatachange={handleselectedinput} answer={value} has-error={showErrorMessage}
+      required={radiorequired} add-border={addBorder} copyrequest={copyrequest}></c-generic-radio_brs>
+  </p>
+
+  <p class="error-text" if:true={showErrorMessage}>{messageWhenValueMissing}</p>
+  <template if:true={showText}>
+    <p class="inputfieldClassSection">
+      <c-ctds_generic-data-types
+        typeof-data={inputType}
+        label={textlabel}
+        onselectedinputtext={handleselectedinputText}
+        text-info={textInfo}
+        max-char-text={maxCharText}
+        required={textrequired}
+        placeholder={textplaceholder}
+        show-max-char-text={showMaxCharText}
+        showtextnote ={showTextNote}
+        textnotevalue ={textNoteValue}
+      ></c-ctds_generic-data-types>
+    </p>
+  </template>
+  <template if:true={showTextArea}>
+    <h5 class="text-area-title">{TextAreaTitle}</h5>
+    <p class="inputfieldClassSection">
+      <c-ctds_generic-data-types
+        typeof-data={inputType}
+        label={textlabel}
+        onselectedinputtext={handleselectedinputText}
+        text-area-output={textInfo}
+        max-char-text-area={maxCharText}
+        required={textrequired}
+        placeholder={textplaceholder}
+        show-max-char-text-area={showMaxCharText}
+      ></c-ctds_generic-data-types>
+    </p>
+  </template>
+</template>

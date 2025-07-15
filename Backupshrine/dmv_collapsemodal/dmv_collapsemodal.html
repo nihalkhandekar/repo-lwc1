@@ -1,0 +1,27 @@
+<template>
+
+    <div class={divClass} data-id="collapsibleSectionContainer">
+    <h3 class="slds-section__title slds-theme_shade">
+        <lightning-button-stateful
+            label-when-off={title}
+            label-when-on={title}
+            icon-name-when-off="utility:chevrondown"
+            icon-name-when-on="utility:chevronright"
+            selected={isSelected}
+            onclick={handleSectionHeaderClick}
+           class ="collaspsebutton"
+            >
+        </lightning-button-stateful>
+
+    </h3>
+
+    
+        <!-- button state defaults to false so state 
+             represents "is collapsed"
+        -->
+       
+        <div class="slds-section__content" >
+        <slot></slot>
+        </div>
+</div>
+</template>

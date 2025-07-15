@@ -1,0 +1,50 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="email-modal" aria-modal="true"
+        aria-describedby="email-content"
+        class="slds-modal slds-fade-in-open email-popup page-scroll-popup">
+        <div class="slds-modal__container" id="email-content">
+            <header class="slds-modal__header slds-modal__header_empty">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                        <p class="title" id="email-modal">{label.share_link_label}</p>
+                        <p class="desc">
+                            <img src={emailIcon} class="email-icon" alt="Email Icon" role="presentation" />
+                            {label.send_link_email_label}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                        <label role="button" tabindex="0" aria-label="Close" class="closePopup slds-float_right"
+                            onclick={onCancel} onkeypress={onCancel}>
+                            <img src={closeIcon} class="closeIcon" alt="closeIcon" role="presentation" />
+                        </label>
+                    </div>
+                </div>
+            </header>
+            <div class="slds-modal__content slds-p-around_medium popup-body">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_12-of-12 inputForm">
+                        <lightning-input max-length=255 class="email" type="text"
+                        label={label.brs_maintenance_FileNowEmail} message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                        pattern={emailPattern} placeholder={label.placeholder_for_email} required 
+                        onchange={onEmailChange} onkeyup={onEnter}
+                        value={email}>
+                    </lightning-input>
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <div class="slds-grid slds-wrap modal-footer-section">
+                    <div class="slds-order_2 button-sec">
+                        <button class="slds-button primaryBtn slds-button_brand higher" onclick={onSend}>{label.Send}
+                        </button>
+                    </div>
+                    <div class="slds-order_1 button-sec">
+                        <button class="slds-button secondary-btn higher"
+                            onclick={onCancel}>{label.Cancel_Label}</button>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+</template>

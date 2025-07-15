@@ -1,0 +1,246 @@
+<template>
+
+    <div class="entirePage">
+        <div  class="titleLeft">
+            <p class="setFontSizeOnly">My Dashboard</p>
+            <lightning-button variant="brand" label="Start a New Apostile Request" icon-name="standard:folder"  style="color:aliceblue"></lightning-button>
+        </div>
+        <div >
+            <div class="containers">
+                <lightning-card  variant="Narrow"  title="Submitted Requests" icon-name="standard:approval" class="container">
+                    <p class="slds-p-horizontal_small">Keep track of all your submitted apostille requests in one place, with real-time updates.</p>
+                    <lightning-tile slot="footer" class="centralized" name="tile">
+                    <lightning-button  variant="base" label="view">Card Footer</lightning-button>
+              </lightning-tile>
+                </lightning-card>
+
+               <lightning-card  variant="Narrow"  title="Drafts" icon-name="standard:account" class="container">
+                <p class="slds-p-horizontal_small">Easily access, review, and edit your saved drafts before final submission.</p>
+                <lightning-tile slot="footer" class="centralized" name="tile">
+                <lightning-button  variant="base" label="view">Card Footer</lightning-button>
+           </lightning-tile>
+            </lightning-card>
+
+            </div>
+            <div class="containers">
+                <lightning-card  variant="Narrow"  title="Letters and Certificates" icon-name="standard:asset_action_source" class="container">
+                    <p class="slds-p-horizontal_small">Download and manage your official letters and certificates quickly and securely.</p>
+                    <lightning-tile slot="footer" class="centralized" name="tile">
+                    <lightning-button  variant="base" label="view">Card Footer</lightning-button>
+                    </lightning-tile>
+               </lightning-card>
+
+               <lightning-card  variant="Narrow"  title="Payment History" icon-name="standard:partner_marketing_budget" class="container">
+                <p class="slds-p-horizontal_small">Track Status history of all your payments.</p>
+                <lightning-tile slot="footer" class="centralized" name="tile">
+               <lightning-button  variant="base" label="view">Card Footer</lightning-button>
+            </lightning-tile>
+           </lightning-card>
+            </div>
+            <div class="containers">
+                <lightning-card  variant="Narrow"  title="Guidlines and Resources" icon-name="standard:article" class="container">
+                    <p class="slds-p-horizontal_small">Access essential guidlines, resources and instructions to navigate the apostile process.</p>
+                   
+                    <lightning-tile slot="footer" class="centralized" name="tile">
+                    <lightning-button  variant="base" label="view">Card Footer</lightning-button>
+                </lightning-tile>
+               </lightning-card>
+
+               <lightning-card  variant="Narrow"  title="User Profile and Settings" icon-name="standard:avatar" class="container">
+                <p class="slds-p-horizontal_small">Manage your account information,update personal details and customise your settings.</p>
+                
+                    
+                <lightning-tile slot="footer" class="centralized" name="tile">
+                    <lightning-button  variant="base" label="view" name="view button " >Card Footer</lightning-button>
+                </lightning-tile>
+
+                
+               
+               
+           </lightning-card>
+            </div>
+
+        </div>
+    </div>
+
+</template>
+
+
+
+
+
+<!-- <template> -->
+    <!-- <header class="header-container">
+        <div class="right-section">
+            <div class="title">Secretary of the State</div>
+        </div>
+        <div class="left-section">
+            <button class="link-button">{i18n.orderForm}</button>
+            <button class="link-button" onclick={showVerificationForm}>{i18n.verification}</button>
+            <div class="slds-form-element">
+                <label class="slds-checkbox_toggle slds-grid">
+                    <span class="slds-form-element__label slds-m-bottom_none">Spanish</span>
+                    <input type="checkbox" name="checkbox-toggle-21" value="checkbox-toggle-21" aria-describedby="checkbox-toggle-21" onchange={handleLanguageToggle} />
+                    <span id="checkbox-toggle-21" class="slds-checkbox_faux_container">
+                        <span class="slds-checkbox_faux"></span>
+                    </span>
+                </label>
+            </div>
+            <div class="user-profile">
+                <button class="slds-button slds-button_icon slds-global-actions__item-action" title="User Profile" aria-haspopup="true">
+                    <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                        <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#user"></use>
+                    </svg>
+                    <span class="slds-assistive-text">User Profile</span>
+                </button>
+            </div>
+        </div>
+    </header> -->
+    
+    <!-- <div class="container" if:true={showStaticContent} onclick={showFormSection}>
+        <header class="header">
+            <div class="logo-section"> -->
+                <!-- <img src={logo} alt="Logo" class="logo"> -->
+                <!-- <div class="header-text">
+                    <h1><b>{i18n.title_header}</b></h1>
+                    <h2>{i18n.subtitle}</h2>
+                    <br>
+                    <p>{i18n.website}: <a href="https://portal.ct.gov/sots" target="_blank">portal.ct.gov/sots</a></p>
+                </div>
+            </div>
+            <div class="contact-info">
+                <br>
+                <br>
+                <br>
+                <p>{i18n.telephone}: (860) 509-6002</p>
+            </div>
+        </header>
+
+        <section class="content">
+            <div class="section">
+                <h3><b>{i18n.mailingAddressTitle}</b></h3>
+                <p>{i18n.mailingAddressLine1}</p>
+                <p>{i18n.mailingAddressLine2}</p>
+            </div>
+            
+            <div class="section">
+                <h3><b>{i18n.deliveryTitle}</b></h3>
+                <p>{i18n.deliveryLine1}</p>
+                <p>{i18n.deliveryLine2}</p>
+            </div>
+
+            <div class="section">
+                <h3><b>{i18n.checksPayableTo}</b></h3>
+            </div>
+
+            <div class="section">
+                <h3><b>{i18n.feesTitle}</b></h3>
+                <p>• {i18n.childAdoption}: $15.00 {i18n.perDocument}</p>
+                <p>• {i18n.regularDocuments}: $40.00 {i18n.perDocument}</p>
+                <p>• {i18n.expeditedService}: $90.00 {i18n.perDocument}</p>
+            </div>
+
+            <div class="section">
+                <h3><b>{i18n.expeditedServiceTitle}</b></h3>
+                <p>• {i18n.ordersProcessed}</p>
+                <p>• {i18n.adoptionDocuments}</p>
+            </div>
+
+            <div class="footer">
+                <p class="bold-label"><b>{i18n.noExpeditedService}</b></p>
+            </div>
+        </section>
+    </div>
+   
+    <div class="form-container slds-grid slds-wrap slds-gutters" if:true={showFormContent}> -->
+        <!-- Left Column: Progress Indicator -->
+        <!-- <template if:false={isFinalStep}>
+            <div class="progress-indicator slds-col slds-size_2-of-5">
+                <div class="progress-indicator-wrapper">
+                    <div class="progress-heading">{i18n.orderForm}</div>
+                    <div class="progress-description">{i18n.progressDescription}</div>
+
+                    <div class="slds-progress slds-progress_vertical">
+                        <ol class="slds-progress__list">
+                            <li class={step1Class}>
+                                <template if:true={isStepOneCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#success"></use>
+                                        </svg>
+                                    </span>
+                                </template>
+                                <template if:false={isStepOneCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <span class={step1LabelClass}>{i18n.personalInformation}</span>
+                                </div>
+                            </li>
+                            <li class={step2Class}>
+                                <template if:true={isStepTwoCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#success"></use>
+                                        </svg>
+                                    </span>
+                                </template>
+                                <template if:false={isStepTwoCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <span class={step2LabelClass}>{i18n.address}</span>
+                                </div>
+                            </li>
+                            <li class={step3Class}>
+                                <template if:true={isStepThreeCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#success"></use>
+                                        </svg>
+                                    </span>
+                                </template>
+                                <template if:false={isStepThreeCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <span class={step3LabelClass}>{i18n.upload_Document}</span>
+                                </div>
+                            </li>
+                            <li class={step4Class}>
+                                <template if:true={isStepFourCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <svg class="slds-icon slds-icon_xx-small" aria-hidden="true">
+                                            <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#success"></use>
+                                        </svg>
+                                    </span>
+                                </template>
+                                <template if:false={isStepFourCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <span class={step4LabelClass}>{i18n.payment}</span>
+                                </div>
+                            </li>
+                        </ol>
+                        <div aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar">
+                            <span class="slds-assistive-text">Progress: 25%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template> -->
+
+        <!-- Right Column: Form Content -->
+        <!-- <div class="form-content slds-col slds-size_3-of-5">
+            <div class="slds-box form-content-wrapper">
+                <lightning-flow flow-api-name='Apostille_Form_Application' flow-input-variables={inputVariables} onstatuschange={handleAccountStatusChange}></lightning-flow>
+            </div>
+        </div> -->
+    <!-- </div> -->
+    
+    <!-- <template if:true={showVerificationContent}>
+        <c-apostille-verification language={language}></c-apostille-verification>
+    </template> -->
+
+<!-- </template> -->

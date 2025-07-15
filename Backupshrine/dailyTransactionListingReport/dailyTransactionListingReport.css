@@ -1,0 +1,344 @@
+/* Styles for both Activity and User Selectors */   
+
+
+.activity-container, .user-container {
+    display: flex;
+    gap: 20px;
+}
+
+.select-box, .selected-box {
+    width: 340px;
+    height: 290px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+.select-box {
+    background-color: white;
+}
+
+.current-page-input{
+  width: 3%;
+  margin-top: -0.3rem;
+  text-align: center;
+}
+.page-info, .page-text{
+  display: contents;
+}
+
+.selected-box {
+    background-color: #EEF4FF;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #09629F;
+    padding: 8px;
+    width: 100%;
+}
+
+.header-divider {
+    height: 1px;
+    background-color: #ccc;
+    width: 100%;
+}
+
+.checkbox-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 8px;
+    flex-grow: 1;
+    overflow-y: auto;
+    height: calc(100% - 70px);
+}
+
+.selected-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px;
+    height: auto;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.checkbox-item {
+    width: 100%;
+    padding: 7px;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.checkbox-item.checked-item {
+    background-color:  #EEF4FF;
+}
+
+.reset-button {
+    border: 1px solid #003A62;
+    background-color: white;
+    border-radius: 8px;
+    color: #003A62;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 5px;
+}
+
+.reset-button:hover {
+    background-color: white;
+    color: #003A62;
+    border: 1px solid #003A62;
+}
+
+.selected-item {
+    background-color: white;
+    color: black;
+    padding: 7px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.scrollbar {
+    overflow-y: scroll;
+}
+
+.style-3::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+.style-3::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+.style-3::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 5px;
+}
+
+.userClass{
+    display: flex;
+    justify-content: end;
+    padding-right: 16px;
+}
+
+.SE-Card {
+    background-color: #ffffff;
+    font-family: "SF Pro", sans-serif;
+    margin: 0 auto;
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+  }
+  
+  .secondDivForSearching {
+    padding: 16px;
+    margin-top: 12px;
+  }
+  
+  .buttoncontainerfilter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .left-button {
+    margin-right: auto;
+  }
+  
+  .slds-p-left_small {
+    padding: 8px;
+  }
+  
+  .search-css {
+    color: #033d68;
+    font-size: 16px;
+    font-weight: 590;
+  }
+  
+  .result-no-css {
+    color: #025999;
+    background-color: #eef4ff;
+  }
+  
+  .slds-scrollable_x {
+    overflow-x: auto;
+    border-radius: 12px;
+  }
+  
+  .custom-table-wrapper {
+    width: 100%;
+    font-family: "SF Pro", sans-serif;
+    font-size: 14px;
+  }
+  
+  .custom-table {
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    border: 1px solid #e5e5e5;
+    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .custom-table th:first-child {
+    border-top-left-radius: 12px;
+  }
+  
+  .custom-table th:last-child {
+    border-top-right-radius: 12px;
+  }
+  
+  .custom-table tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+  }
+  
+  .custom-table tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+  }
+  
+  .custom-table thead tr.custom-header th {
+    font-weight: 700;
+    font-size: 13px;
+    color: #181818;
+    height: 32px;
+    line-height: 20px;
+    text-align: left;
+  }
+  
+  .slds-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .loader-row {
+    height: 436px; /* Adjust as needed */
+  }
+  
+  .slds-text-align_center {
+    text-align: center;
+  }
+  
+
+  .export-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 1rem;
+    background-color: #ffffff;
+    color: #2e844a;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #2e844a;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.export-button:hover {
+    background-color: #ffffff;
+}
+
+.export-button lightning-icon {
+    margin-right: 0.5rem;
+}
+
+
+.pagination-container {
+    display: flex;
+    justify-content: center; /* Center-align the pagination numbers */
+    align-items: left; /* Vertically center-align */
+    max-width: 100%; /* Prevent overflow */
+    padding: 0.1rem; /* Add padding */
+    box-sizing: border-box;
+  }
+  
+  /* .pagination-container c-pagination {
+    flex: 1;
+    max-width: 100%;
+  } */
+  
+  .pagination-container {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem; /* Adjust as needed */
+    margin-top: 1rem;
+  }
+  
+  .pagination-button {
+    color: blue; /* Blue text color */
+    padding: 5px 10px; /* Padding for better appearance */
+    font-size: 14px; /* Font size for the button text */
+    --slds-c-button-radius-border: 8px;
+    --slds-c-button-text-color: #003a62;
+    outline: none; /* Remove default outline */
+  }
+
+  
+.no-result-found-label {
+    font-size: 16px;
+    color: #747474;
+    text-align: center;
+    font-weight: bold;
+    font-family: "SF Pro", sans-serif;
+  
+    padding-bottom: 2rem;
+  }
+
+  .custom-header .sort-icon {
+    visibility: hidden;
+    transition: visibility 0.2s ease;
+  }
+  
+  .custom-header th:hover .sort-icon {
+    visibility: visible;
+  }
+  
+  /* Keep sort icon visible for actively sorted column */
+  .custom-header .sorted .sort-icon {
+    visibility: visible !important;
+  }
+
+  .grand-total-row {
+    font-weight: bold;
+    background-color: #f4f6f9; /* Optional: Light background color */
+}
+
+
+
+.custom-badge {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease;
+}
+
+.custom-badge:hover {
+    background-color: #4d4d4d; /* Darker shade of blue for hover effect */
+    color: #fff;
+}
+
+.custom-badge.active {
+    background-color: #4d4d4d; /* Color when active */ 
+    color: #fff; /* Text color when active */
+}

@@ -1,0 +1,48 @@
+<template>
+    <lightning-card title="Account Contact Table">
+        <div class="slds-p-around_medium">
+            <table class="slds-table slds-table_bordered slds-table_fixed-layout">
+                <thead>
+                    <tr>
+                        <th>Account Name</th>
+                        <th>Account Type</th>
+                        <th>Contact Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={accounts} for:item="account">
+                        <tr key={account.Id}>
+                            <td>
+                                <button class="slds-button slds-button_icon slds-m-right_x-small" 
+                                        onclick={toggleContacts} 
+                                        data-id={account.Id} 
+                                        aria-expanded={account.isExpanded} 
+                                        aria-controls="contact-{account.Id}">
+                                        <span class="icon-border">
+                                            <lightning-icon icon-name={account.iconName} size="xx-small" alternative-text="Toggle"></lightning-icon>
+                                        </span>
+                                </button>
+                                {account.Name}
+
+                                <span class="contact-count">+{account.contactCount}</span>
+
+                            </td>
+                            <td>{account.Type}</td>
+                            <td></td> <!-- Empty for account row -->
+                        </tr>
+
+                        <template if:true={account.isExpanded}>
+                            <template for:each={account.contacts} for:item="contact">
+                                <tr key={contact.Id} class="slds-hint-parent child-row">
+                                    <td></td>
+                                    <td>{contact.Name}</td>
+                                    <td>{contact.Email}</td>
+                                </tr>
+                            </template>
+                        </template>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+</template>

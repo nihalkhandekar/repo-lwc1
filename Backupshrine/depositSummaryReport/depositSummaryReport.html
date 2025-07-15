@@ -1,0 +1,113 @@
+<template>
+    <lightning-card>
+            <div class="SE-content">
+                <div class="SE-Card secondDivForSearching">
+                    <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                        <div class="buttoncontainerfilter">
+                            <div class="left-button slds-p-left_small">
+                                <span class="slds-text-title_bold slds-m-right_x-small search-css">Search Results</span>
+                                <lightning-badge label={recordsFound}
+                                    class="slds-badge_inverse result-no-css"></lightning-badge>
+                            </div>
+                            <div class="right-buttons">
+                                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-quarter" label="This Quarter"
+                                        class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonClick}>
+                                    <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                                    <span>Export to Excel</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={settlementReport}>
+                        <div class="slds-scrollable_x custom-table-wrapper">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                <thead>
+                                    <tr class="custom-header">
+                                        <th scope="col">Speed Type</th>
+                                        <th scope="col">Activity Description</th>
+                                        <th scope="col">Activity Code</th>
+                                        <th scope="col">Regular Deposit</th>
+                                        <th scope="col">Credit Card Deposit</th>
+                                        <th scope="col">Total Amount</th>
+                                        <th scope="col">Transaction Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <template for:each={settlementReport} for:item="row">
+                                        <tr key={row.Id}>
+                                            <td><div class="slds-truncate">{row.Speed_Type__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Select_Activity__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Select_Sub_Activity__c}</div></td>
+                                            <td><div class="slds-truncate">{row.Regular_Deposit}</div></td>
+                                            <td><div class="slds-truncate">{row.Credit_Card_Deposit}</div></td>
+                                            <td><div class="slds-truncate">{row.TotalFeeAmount}</div></td>
+                                            <td><div class="slds-truncate">{row.Transaction_Date__c}</div></td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+
+                    <template if:true={isRecordsLoading}>
+                        <div class="slds-text-align_center loader-row">
+                            <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                        </div>
+                    </template>
+
+                    <template if:false={settlementReport}>
+                        <div class="no-result-found">
+                            <h1 class="no-result-found-label">No Results Found</h1>
+                        </div>
+                    </template>
+
+                    <template if:true={showPagination}>
+                        <div class="pagination-container">
+                            <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                                disabled={isPreviousDisabled} variant="neutral">
+                            </lightning-button>
+                    
+                            <div class="page-info">
+                                <span class="page-range">{startRange}-{endRange} of {recordsFound} &nbsp;</span>
+                                <span class="page-text"> | Page &nbsp;
+                                    <lightning-input 
+                                    type="number" 
+                                    value={currentPage} 
+                                    label="Current Page" 
+                                    variant="label-hidden"
+                                    class="current-page-input"
+                                    style="margin-top: 0.4rem"
+                                    onchange={handlePageChange}>
+                                    </lightning-input> &nbsp;
+                                    of {totalPages}
+                                </span>
+                            </div>
+                    
+                            <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                                disabled={isNextDisabled} variant="neutral">
+                            </lightning-button>
+                        </div>
+                    </template>
+                    
+                </div>
+            </div>
+    </lightning-card>
+
+    <c-excel-export-finsys></c-excel-export-finsys>
+    
+</template>

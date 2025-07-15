@@ -1,0 +1,645 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header classForSpecificlargeIcon">
+            <lightning-icon icon-name="standard:job_profile" size="large" class="header-icon"></lightning-icon>
+            <div class="header-text classForTitle">
+                <h1 class="title">{labels.DocumentInformation}</h1>
+                <p class="description">{labels.PleaseProvideTheFollowingInformation}</p>
+            </div>
+        </div>
+
+        <!-- Input Fields Section -->
+        <div class="input-section">
+            <!-- Warning Section -->
+            <!-- <div class="warning-message">
+                <lightning-icon icon-name="action:info" size="x-small" class="warning-icon"></lightning-icon>
+                <p>{labels.PleaseFileSeparateOrders}</p>
+            </div> -->
+
+            <!-- Destination Country Same Question -->
+            <div class="document-table">
+            <div class="slds-scrollable_x doc_firstTable">
+            <table  class="slds-table_cell-buffer slds-table_bordered doc-table">
+                <thead>
+                    <tr class="doc_row">
+                        <th scope="col" class="slds-document-header">
+                            <div class="slds-truncate table-font-large doc_question" title="Question">{labels.Question}</div>
+                        </th>
+                        
+                        <th scope="col">
+                            <div class="slds-truncate table-font-large doc_responce" title="Response">{labels.Response}</div>
+                        </th>
+                        <template if:true={isDestinationCountrySame}>
+                            <th scope="col">
+                                <div class="slds-truncate table-font-large">{labels.DestinationCountry}</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate table-font-large response_css">{labels.HagueStatus}</div>
+                            </th>
+                        </template>
+                        
+                    </tr>
+                </thead>
+                <tbody class="doc_tbody">
+                    <!-- First question row -->
+                    <tr class="doc_second_tr">
+                        <td>
+                            <template if:true={isDestinationCountrySame}>
+                                <div class="font-large doc_second_tr_first_td first_td_width_set" title="Is the destination country for all the document(s) the same?">{labels.IsTheDestinationCountry}</div>
+                            </template>
+                            <template if:false={isDestinationCountrySame}>
+                                <div class="font-large doc_second_tr_first_td first_td_width_set_2" title="Is the destination country for all the document(s) the same?">{labels.IsTheDestinationCountry}</div>
+                            </template>
+                        </td>
+                       
+                        <td class="doc_second_tr_second_td">
+                            <div class="input-radio-group">
+                                <lightning-input type="radio" name="destinationCountrySameString" label="Yes" variant="label-hidden" value="yes" checked={isDestinationCountrySame} onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                                <label class={radioCssDes}>{labels.Yes}</label>
+                                <lightning-input type="radio" name="destinationCountrySameString" label="No" variant="label-hidden" value="no" checked={isNotDestinationCountrySame} onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                                <label class={radioCssCheckedDes}>{labels.No}</label>
+                            </div>
+                        </td>
+                        <template if:true={isDestinationCountrySame}>
+                            <td>
+                                <div class="input-radio-group">
+                                    
+                                    <lightning-combobox 
+                                        class="font-large"
+                                        variant="label-hidden"
+                                        name="selectedCountry" 
+                                        value={selectedCountry} 
+                                        placeholder={labels.SelectCountry} 
+                                        options={countryOptions} 
+                                        required
+                                        onchange={handleInputChange} 
+                                        disabled={isReadOnly}>
+                                    </lightning-combobox>
+                                </div>
+                            </td>
+                            <td class="doc_second_tr_forth_td">
+                                <div class="input-radio-group">
+                                    <lightning-input data-id="hagueStatusYes" type="radio" name="selectedHagueStatus" label="Yes" variant="label-hidden" value="Yes" onchange={handleInputChange} class="radioButton" checked={isHagueStatusYes} disabled="true"></lightning-input>
+                                    <label class='radioOptions'>{labels.Yes}</label>
+                                    <lightning-input data-id="hagueStatusNo" type="radio" name="selectedHagueStatus" label="No" variant="label-hidden" value="No" onchange={handleInputChange} class="radioButton" checked={isHagueStatusNo} disabled="true"></lightning-input>
+                                    <label class='radioOptions'>{labels.No}</label>
+                                </div>
+                                </td>                             
+                        </template>                       
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+            
+
+          <!--  <div class="input-radio-group">
+                <label class="boldFont">Is the destination country for all the document(s) the same?</label>
+                <lightning-input type="radio" name="destinationCountrySameString" label="Yes" variant="label-hidden" value="yes" checked={isDestinationCountrySame} onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                <label class={radioCssDes}>Yes</label>
+                <lightning-input type="radio" name="destinationCountrySameString" label="No" variant="label-hidden" value="no" checked={isNotDestinationCountrySame} onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                <label class={radioCssCheckedDes}>No</label>
+            </div>-->
+
+             <!-- Conditionally show the country and Hague status dropdowns when "Yes" is selected -->
+          <!--   <template if:true={isDestinationCountrySame}>
+                <div class="DestinationCountyLabel">
+                    <label class="custom-label">Destination County<span class="required-indicator">*</span></label>
+                 </div>
+                <div class="input-radio-group">
+                    <lightning-combobox 
+                        variant="label-hidden"
+                        name="selectedCountry" 
+                        class="destinationCountryCSS"
+                        value={selectedCountry} 
+                        placeholder="Document type" 
+                        options={countryOptions} 
+                        required
+                        onchange={handleInputChange}
+                        disabled={isReadOnly}
+                    ></lightning-combobox>
+                    <div class="hauge-group">
+                        <label class="boldFont">Hague Status:</label>
+                        <lightning-input type="radio" name="selectedHagueStatus" label="Yes" variant="label-hidden" value="Yes" onchange={handleInputChange} class="radioButton" checked={isHagueStatusYes} disabled></lightning-input>
+                        <label class='radioOptions'>Yes</label>
+                        <lightning-input type="radio" name="selectedHagueStatus" label="No" variant="label-hidden" value="No" onchange={handleInputChange} class="radioButton" checked={isHagueStatusNo} disabled></lightning-input>
+                        <label class='radioOptions' >No</label>
+                    </div>
+                </div>
+            </template>-->
+            
+            <!-- Expedited Request -->
+        </br>
+            <div class="input-radio-group">
+                <label class="boldFont">{labels.WouldYouLikeToExpedite}</label>
+                <lightning-input type="radio" name="expediteRequestString" label="Yes" value="yes" variant="label-hidden" checked={isExpediteSelected} onchange={handleInputChange} class="radioButton" disabled={isReadOnly}></lightning-input>
+                <label class={radioCssExp}>{labels.Yes}</label>
+                <lightning-input type="radio" name="expediteRequestString" label="No" value="no" variant="label-hidden" checked={isNotExpediteSelected} onchange={handleInputChange} class="radioButton" disabled={isReadOnly}></lightning-input>
+                <label class={radioCssCheckedExp}>{labels.No}</label>
+                <template if:true={isExpediteSelected}>
+                    <span>(+ ${expediteFee}.00 {labels.oneachdocument})</span>
+                </template>
+            </div>
+
+            <!-- Add Document Button -->
+            <div class="add-document-container" if:false={isReadOnly}>
+                <lightning-button label={labels.AddDocument} variant="brand" onclick={handleAddDocument} icon-name="utility:add" icon-position="left" class="add-document-button"></lightning-button>
+            </div>
+
+            <!-- Document Table -->
+            <div class="document-table"> 
+                <div class="slds-scrollable_x secondtebleSpecificClassDocumntInfo">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered tableSpecificCsssecoundtable">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="slds-document-header firstheader" >
+                                    <div class="slds-truncate table-font-small">{labels.TypeOfDocument}</div>
+                                </th>
+
+                                <!-- Conditionally show Destination Country and Hague Status columns -->
+                                <template if:false={isDestinationCountrySame}>
+                                    <th scope="col " class="secondheader">
+                                        <div class="slds-truncate table-font-small">{labels.DestinationCountry}</div>
+                                    </th>
+
+                                    </template>
+                                    <th scope="col Name_of_the_Person_Listed_on_the_Document_title " class="thirdheader">
+                                        <div class="slds-truncate table-font-small TextWrapForLongText"> {labels.PersonListedontheDocumentCertifiedCopyNumber}</div>
+                                        <!-- <div class="slds-truncate table-font-small ">{labels.ontheDocumentUpload}</div> -->
+                                    </th>
+                                    <template if:false={isDestinationCountrySame}>
+                                    <th scope="col " class="forthheader">
+                                        <div class="slds-truncate table-font-small">{labels.HagueStatus}</div>
+                                    </th>
+                                </template>
+
+                                
+                                <template if:true={uploadColumn}>
+                                    <th scope="col " class="fifthheader">
+                                    <div class="slds-truncate table-font-small TextWrapForLongText">{labels.UploadedDocument}</div>
+                                    </th>
+                                </template>
+
+                                
+                                <th scope="col " class="fifthheader">
+                                    <div class="slds-truncate table-font-small">{labels.Fee}</div>
+                                </th>
+                                <th scope="col " if:false={isReadOnly} class="slds-document-header-action sixthheader">
+                                    <div class="slds-truncate table-font-small"></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={documents.length}>
+                                <template for:each={documents} for:item="doc">
+                                   <!-- <tr key={doc.id} class="classForborderOfdropDownArrow">-->
+                                    <tr key={doc.id} class="tableRowUpdateForDocumentInfoHoverIssue">
+                                        <td class="table-cell classForborderOfdropDownArrow tableColumn1DocumentInfo">
+                                            <template if:true={isReadOnly}>
+                                                {doc.typeOfDocument}
+                                            </template>
+                                            <template if:false={isReadOnly}>
+                                                <lightning-combobox 
+                                                    variant="label-hidden"
+                                                    name="typeOfDocument" 
+                                                    value={doc.typeOfDocument} 
+                                                    placeholder={labels.DocumentType} 
+                                                    options={documentTypes} 
+                                                    data-id={doc.id} 
+                                                    style="max-height: 22.5rem"
+                                                    onchange={handleDocumentChange}
+                                                    class="align-combobox errorshow"
+                                                    required></lightning-combobox>
+                                            </template>
+                                        </td>
+                        
+                                        <template if:false={isDestinationCountrySame}>
+                                            <td class="table-cell classForborderOfdropDownArrow tableColumn2DocumentInfo">
+                                                <template if:true={isReadOnly}>
+                                                    {doc.destinationCountry}
+                                                </template>
+                                                <template if:false={isReadOnly}>
+                                                    <lightning-combobox 
+                                                        variant="label-hidden"
+                                                        name="destinationCountry" 
+                                                        value={doc.destinationCountry} 
+                                                        placeholder={labels.DestinationCountry} 
+                                                        options={countryOptions} 
+                                                        data-id={doc.id} 
+                                                        style="max-height: 22.5rem"
+                                                        onchange={handleDocumentChange}
+                                                        class="align-combobox dropdownforbordericon"
+                                                        required></lightning-combobox>
+                                                </template>
+                                            </td>
+                                            </template>
+
+                                            <td class="table-cell tableColumn4DocumentInfo">
+
+                                                <template if:true={isReadOnly}>
+                                                    <template if:true={doc.documentChange}>
+                                                        {doc.copyNumber}
+                                                    </template>
+                                                    <template if:false={doc.documentChange}>
+                                                        {doc.personName}
+                                                    </template>
+                                                </template>
+
+                                                <template if:false={isReadOnly}>
+                                                    <template if:true={doc.documentChange}>
+                                                        <!-- File input if document type is 'SOTS Certified Copies' -->
+                                                        <lightning-input 
+                                                            label="copyNumber"
+                                                            variant="label-hidden"
+                                                            name="copyNumber" 
+                                                            class="align-input"
+                                                            value={doc.copyNumber} 
+                                                            pattern="[0-9]+" 
+                                                            message-when-pattern-mismatch="Copy number should only contain digits."
+                                                            placeholder={labels.Entercertifiedcopynumber} 
+                                                            data-id={doc.id} 
+                                                            onchange={handleDocumentChange}
+                                                            required></lightning-input>
+                                                    </template>
+                                                    <template if:false={doc.documentChange}>
+                                                        <!-- Normal input if document type is other than 'SOTS Certified Copies' -->
+                                                        <lightning-input 
+                                                            label="personName"
+                                                            variant="label-hidden"
+                                                            name="personName" 
+                                                            class="align-input"
+                                                            value={doc.personName} 
+                                                            placeholder={labels.EnterNameofPerson} 
+                                                            data-id={doc.id} 
+                                                            onchange={handleDocumentChange}
+                                                            required></lightning-input>
+                                                    </template>
+                                                </template>
+                                            </td>
+
+
+                                            <template if:false={isDestinationCountrySame}>
+                                            <td class="table-cell tableColumn3DocumentInfo">
+                                                {doc.hagueStr}
+                                            </td>
+                                        </template>
+
+                                        
+                                        <template if:true={doc.uploadedFiles.length}>
+                                            <td class="table-cell tableColumn5DocumentInfo">
+                                                <div style="width: 38rem" class="uploaded-file">
+                                                    <template for:each={doc.uploadedFiles} for:item="file">
+                                                        <span key={file.documentId} class="fileContainer">
+                                                            <lightning-icon 
+                                                                icon-name="utility:document_preview"
+                                                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211);"
+                                                                alternative-text="File"
+                                                                size="x-small">
+                                                            </lightning-icon>
+                                                            <span class="fileNameContainer" title={file.filename}>
+                                                                {file.filename}
+                                                            </span>
+                                                        
+                                                            <template if:false={isReadOnly}>
+                                                                <lightning-button-menu 
+                                                                    alternative-text="Actions"
+                                                                    class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                    variant="bare"
+                                                                    icon-name="utility:threedots_vertical"
+                                                                    menu-alignment="auto">
+                                                                    <lightning-menu-item 
+                                                                        label="Re-upload" 
+                                                                        variant="base" 
+                                                                        value="reUpload" 
+                                                                        onclick={handleUploadForDocument} 
+                                                                        data-id={doc.id} 
+                                                                        data-row-id={doc.rowId}
+                                                                        data-value="reUpload">
+                                                                    </lightning-menu-item>
+                                                                    <lightning-menu-item 
+                                                                        style="color: rgba(186, 5, 23, 1);" 
+                                                                        label="Delete" 
+                                                                        variant="base" 
+                                                                        value="deleteDoc" 
+                                                                        onclick={deletefile}
+                                                                        data-id={doc.id} 
+                                                                        data-row-id={doc.rowId}>
+                                                                    </lightning-menu-item>
+                                                                </lightning-button-menu>
+                                                            </template>
+                                                        </span>
+                                                    </template>
+                                                </div>
+                                            </td>
+                                        </template>
+
+                                        <template if:true={uploadColumn}>
+                                        <template if:false={doc.uploadedFiles.length}>
+                                            <td class="table-cell tableColumn5DocumentInfo"></td>
+                                        </template>
+                                        </template>
+                        
+                                        
+                                        <td class="table-cell tableColumn5DocumentInfo">
+                                            {doc.feeDisplay}
+                                        </td>
+
+                                        <td if:false={isReadOnly} class="table-cell tableColumn6DocumentInfo">
+                                        
+                                            <template if:false={doc.uploadedFiles.length}>
+                                                <template if:true={doc.showUploadField}>
+                                                <lightning-button-icon
+                                                    class="upload-icon"
+                                                    variant="label-hidden"
+                                                    icon-name="utility:upload"
+                                                    alternative-text="Upload"
+                                                    onclick={handleUploadForDocument}
+                                                    data-row-id={doc.rowId}
+                                                    data-id={doc.id}
+                                                ></lightning-button-icon>
+                                                <lightning-button-icon
+                                                class="delete-button" 
+                                                variant="label-hidden"
+                                                icon-name="utility:delete" 
+                                                alternative-text="Remove" 
+                                                onclick={handleRemoveDocument} 
+                                                data-id={doc.id}
+                                                ></lightning-button-icon>
+                                            </template>
+                                            </template>
+                                            <template if:false={doc.showUploadField}>
+                                                <lightning-button-icon
+                                                class="delete-button" 
+                                                variant="label-hidden"
+                                                icon-name="utility:delete" 
+                                                alternative-text="Remove" 
+                                                onclick={handleRemoveDocument} 
+                                                data-id={doc.id}
+                                            ></lightning-button-icon>
+                                            </template>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>                               
+                        
+                            <template if:false={documents.length}>
+                                <tr>
+                                    <td colspan="6" class="no-documents">{labels.NodocumentsaddedyetClickAddDocumenttostart}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                                      
+                </div>
+            </div>
+            <template if:true={documents.length}>
+                <div class="total-fee">
+                    <template if:true={isExpediteSelected}>
+                        <span>{labels.Total}: {formattedTotalFee} (Expedite: {formattedExpediteFee})</span>
+                    </template>
+                    <template if:false={isExpediteSelected}>
+                        <span>{labels.Total}: {formattedBaseFee}</span>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={showDocumentError}>
+                <div class="slds-text-color_error slds-m-top_small">
+                   {labels.Pleaseuploadatleastonedocument}
+                </div>
+            </template>
+
+            <!-- <div class="dotted-line"></div>
+
+            <div class="input-radio-group">
+                <label class="boldFont">{labels.SameAsContactAddress}</label>
+                <lightning-input type="radio" name="sameAddressString" label="Yes" value="yes" variant="label-hidden" checked={isSameAsContactSelected}  onchange={handleInputChange} class="radioButton" disabled={isReadOnly}></lightning-input>
+                <label class={radioCssCon}>{labels.Yes}</label>
+                <lightning-input type="radio" name="sameAddressString" label="No" value="no" variant="label-hidden" checked={isNotSameAsContactSelected} onchange={handleInputChange}  class="radioButton" disabled={isReadOnly}></lightning-input>
+                <label class={radioCssCheckedCon}>{labels.No}</label>
+            </div>
+
+            <div class="slds-p-horizontal_medium">
+                <p class="required-label">
+                    <span class="required-indicator">*</span> 
+                    {labels.WhoOrWhatAgencyisMailingThe}
+                </p>
+            </div> -->
+            <!-- <div class="form-group"> -->
+                <!-- <div class="form-group">
+                    <label class="input-title" for="businessName">Business Name</label>
+                    <lightning-input label="Business Name" variant="label-hidden" name="businessName" value={businessName}  placeholder={businessNamePlaceholder} class="singleinput-field" disabled={isFieldReadOnly} onchange={handleInputChange}></lightning-input>
+                </div> -->
+                <!-- <div class="inputSectionClassForSpecificCss">
+                    <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                        <label class="input-title" for="businessName"> {labels.BusinessName}</label>
+                        <lightning-input label="Business Name" class="input-field" name="businessName" variant="label-hidden" value={businessName} placeholder={businessNamePlaceholder} disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                    </div> 
+                </div> -->
+                <!-- <div class="form-group half-width" style="display: none;"></div>
+                    <label class="input-title"><span class="required-indicator">*</span> Test</label>
+                <lightning-input label="Last Name Test" class="input-field" name="lastNametest" variant="label-hidden" disabled={readOnly} onchange={handleInputChange}></lightning-input>
+                </div>  -->
+            <!-- </div> -->
+            
+            <!-- <div class="input-group inputSectionClassForSpecificCss">
+                <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                    <label class="custom-label" for="firstName"> <span class="required-indicator">*</span>{labels.FirstName}</label>
+                    <lightning-input 
+                        label="First Name"
+                        name="firstName" 
+                        variant="label-hidden"
+                        id="firstName" 
+                        placeholder={firstnamePlaceholder}
+                        value={firstName} 
+                        required 
+                        class="input-field" 
+                        disabled={isReadOnly} 
+                        pattern="[a-zA-Z][a-zA-Z \-']*[a-zA-Z]"
+                        message-when-pattern-mismatch="Name can contain letters, hyphens (-), apostrophes ('), and spaces"
+                        onchange={handleInputChange}
+                        uppercase>
+                    </lightning-input>
+                </div> -->
+            
+                <!-- <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                    <label class="custom-label" for="lastName"><span class="required-indicator">*</span>{labels.LastName}</label>
+                    <lightning-input 
+                        label="Last Name"
+                        name="lastName" 
+                        variant="label-hidden"
+                        id="lastName" 
+                        placeholder={lastnamePlaceholder}
+                        value={lastName} 
+                        required 
+                        class="input-field" 
+                        disabled={isReadOnly} 
+                        pattern="[a-zA-Z][a-zA-Z \-']*[a-zA-Z]"
+                        message-when-pattern-mismatch="Name can contain letters, hyphens (-), apostrophes ('), and spaces"
+                        onchange={handleInputChange}
+                        uppercase>
+                    </lightning-input>
+                </div> -->
+            <!-- </div> -->
+            
+            <!-- <div class="input-group inputSectionClassForSpecificCss"> -->
+                <!-- <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                    <label class="custom-label" for="email"><span class="required-indicator">*</span>{labels.EmailAddress} </label>
+                    <div class="icon-input-container classForDocumentInfoIconSpecificCss"> 
+                        <lightning-icon icon-name="utility:email" size="x-small" class="left-icon"></lightning-icon>
+                        <lightning-input 
+                            label="Email"
+                            name="email" 
+                            variant="label-hidden"
+                            id="email"
+                            placeholder={emailPlaceholder}
+                            value={email} 
+                            required 
+                            type="email"
+                            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                            message-when-type-mismatch="Please enter a valid email address"
+                            class="input-field email-field" 
+                            disabled={isReadOnly} 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                </div> -->
+            
+                <!-- <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                    <label class="custom-label" for="phone"><span class="required-indicator">*</span>{labels.CellPhoneNumber}</label>
+                    <div class="icon-input-container classForDocumentInfoIconSpecificCss">
+                        <lightning-icon icon-name="utility:call" size="x-small" class="left-icon"></lightning-icon>
+                        <lightning-input 
+                            label="Phone"
+                            name="phone" 
+                            variant="label-hidden"
+                            id="phone"
+                            placeholder={phonePlaceholder}
+                            value={phone} 
+                            required 
+                            type="tel"
+                            pattern="\(\d{3}\) \d{3}-\d{4}" 
+                            message-when-pattern-mismatch="Phone number format (860) 569-1111"
+                            class="input-field phone-field" 
+                            disabled={isReadOnly} 
+                            onchange={handleInputChange} onkeydown={handlePhoneKeyDown}>
+                        </lightning-input>
+                    </div>
+                </div> -->
+            <!-- </div> -->
+            
+            <!-- <div class="input-group inputSectionClassForSpecificCss">
+                <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                    <label class="custom-label" for="emailRequestor"><span class="required-indicator">*</span>{labels.EmailAddressOfThePersonReceivingTheApostille}</label>
+                    <div class="icon-input-container classForDocumentInfoIconSpecificCss"> 
+                        <lightning-icon icon-name="utility:email" size="x-small" class="left-icon"></lightning-icon>
+                        <lightning-input 
+                            label="Email Requestor"
+                            name="emailRequestor" 
+                            variant="label-hidden"
+                            id="emailRequestor"
+                            placeholder={emailPlaceholder}
+                            value={emailRequestor} 
+                            required 
+                            type="email"
+                            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                            message-when-type-mismatch="Please enter a valid email address"
+                            class="input-field email-field" 
+                            disabled={isReadOnly} 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </div> -->
+            
+        </div>
+    </div>
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header headerClass">
+                    <div class="headerContainer"> 
+                        <h2 class="headingClass" title="Upload File">{labels.UploadFile}</h2>
+                        <div class="fileUploadClose">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close" onclick={closeUploadModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <template if:true={isFileLoading}>
+                    <div class="spinner-container">
+                        <lightning-spinner alternative-text="Loading..." variant="brand"
+                            size="large"></lightning-spinner>
+                    </div>
+                </template>
+                <template if:false={isFileLoading}>
+                <div class="slds-modal__content slds-p-around_medium modalContent" data-row-id={currentUploadDocumentId}>
+                    <div class="internalheading">
+                        <span class="textClass">{labels.UploadFile}</span>
+                        <span style="color:red;">*</span>
+                    </div>
+                    
+                        <div class="internalBorder" data-row-id={currentUploadDocumentId}>
+                            <lightning-input type="file" 
+                                class="fileUploadContainer"
+                                accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf"
+                                label="Attachment" 
+                                data-id={currentUploadDocumentId}
+                                data-row-id={currentUploadDocumentId}
+                                onchange={handleUploadFinished}
+                                multiple="false"></lightning-input>
+                        </div>
+                    
+                    <template if:true={hasUploadedFiles.hasUploadedFiles}>
+                        <div class="uploaded-files">
+                            <template for:each={hasUploadedFiles.uploadedFiles} for:item="file">
+                                <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                                    <div class="fileNameClass">
+                                        <span class="fileContainer">
+                                            <lightning-icon 
+                                                icon-name="utility:document_preview"
+                                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211);"
+                                                alternative-text="File"
+                                                size="x-small">
+                                            </lightning-icon>
+                                            <span class="fileNameModal" title={file.filename}>
+                                                {file.filename}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="deleteButtonArea">
+                                            <lightning-button-icon
+                                                class="deleteButtonContainer"
+                                                icon-name="utility:delete"
+                                                size="x-small"
+                                                alternative-text="Delete"
+                                                title="Delete"
+                                                data-id={file.documentId}
+                                                onclick={deletefilemodal}>
+                                            </lightning-button-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                    
+                </div>
+                </template>
+                <footer class="footerContainer">
+                    <div class="footerButtonContainer">
+                        <button class="slds-button slds-button_neutral cancelButtonFooter" onclick={closeUploadModal}>{labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand uploadButtonFooter" onclick={handleUpload}>{labels.Upload}</button>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    
+</template>

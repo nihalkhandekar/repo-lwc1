@@ -1,0 +1,39 @@
+.primaryBtn,
+.secondary-btn {
+    width: 100%;
+    display: block;
+}
+
+.email-icon {
+    margin-right: 18px;
+    width: 50px;
+}
+
+.modelHeader .desc{
+    display: flex;
+    align-items: start;
+}
+
+.email-popup .slds-modal__footer .slds-order_1,
+.email-popup .slds-modal__footer .slds-order_2 {
+    width: 100%;
+}
+
+.title {
+    margin-bottom: 32px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .email-popup .slds-modal__footer .button-sec:first-child {
+        padding-left: 10px;
+    }
+
+    .email-popup .slds-modal__footer .button-sec:last-child {
+        padding-right: 10px;
+    }
+
+    .email-popup .slds-modal__footer .slds-order_1,
+    .email-popup .slds-modal__footer .slds-order_2 {
+        width: 50%;
+    }
+}

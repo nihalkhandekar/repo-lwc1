@@ -1,0 +1,31 @@
+.icon-border {
+    display: inline-block;
+    width: 1rem; /* Set the width of the circle */
+    height: 1rem; /* Set the height of the circle */
+    border: 2px solid #181818; /* Blue border around the icon */
+    border-radius: 50%; /* Make the border circular */
+    display: flex; /* Use flexbox to center the icon */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.icon-border lightning-icon {
+    font-size: 1.25rem; /* Adjust icon size */
+    width: 14px;
+    height: 14px; /* Ensure the icon scales properly */
+}
+
+
+
+.contact-count {
+    background-color: #EEF4FF; /* Salesforce blue color */
+    color: #003A62;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-size: 0.75rem;
+    margin-left: 0.5rem; /* Small margin to the left of the count */
+}

@@ -1,0 +1,14 @@
+:host {
+    display: block;
+    padding: 20px;
+    background-color: #f4f6f9;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+iframe {
+    border: none;
+    border-radius: 5px;
+}

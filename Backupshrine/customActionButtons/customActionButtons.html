@@ -1,0 +1,22 @@
+<template>
+    <div class="slds-text-align_center slds-p-around_xx-small">
+        <!-- PDF Icon -->
+        <lightning-icon
+            class="slds-m-right_x-small"            
+            icon-name="doctype:pdf"
+            alternative-text="Download PDF"
+            size="small"
+            onclick={handlePdfClick}>
+        </lightning-icon>
+        <!-- Separator -->
+        <span class="separator">|</span>
+        <!-- Excel Icon -->
+        <lightning-icon
+            class="slds-m-left_x-small"
+            icon-name="doctype:excel"
+            alternative-text="Download Excel"
+            size="small"
+            onclick={handleExcelClick}>
+        </lightning-icon>
+    </div>
+</template>

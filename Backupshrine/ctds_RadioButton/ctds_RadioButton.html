@@ -1,0 +1,35 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 11-09-2020
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   11-08-2020   ChangeMeIn@UserSettingsUnder.SFDoc   Initial Version
+-->
+<template>
+  <div class={labelClassName}>
+    <label>
+      <lightning-formatted-rich-text value={label}></lightning-formatted-rich-text>
+    </label>
+  </div>
+
+  <fieldset id={name}>
+    <template for:each={radioOptions} for:item="radioOption" for:index="index">
+      <label class="ct-bos-input-label_radio" key={radioOption.label} tabindex="0" aria-label={radioOption.value}
+        id={index}>
+        
+        <input data-id={index} id={index} type="radio" name={name} value={radioOption.value}
+          checked={radioOption.isChecked} onchange={handleChange} disabled={disabled} autocomplete="off"
+          required={required} title={radioOption.value} aria-hidden="true" tabindex="-1" />
+        <span class="checkmark"></span>
+
+        <p class="large radio-label">
+          <lightning-formatted-rich-text value={radioOption.label}></lightning-formatted-rich-text>
+        </p>
+        <div class="ct-bos-multi-container-individual-checked"></div>
+      </label>
+    </template>
+  </fieldset>
+</template>

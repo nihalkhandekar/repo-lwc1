@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="options" type="String" label="options" description=""/>
+            <property name="required" type="boolean" label="required" description=""/>
+            <property name="label" type="string" label="label" description=""/>
+            <property name="messageWhenValueMissing" type="string" label="messageWhenValueMissing" description=""/>
+            <property name="value" type="string" label="value" description=""/>
+            <property name="disabled" type="boolean" label="disabled" description=""/>
+            <property name="name" type="string" label="name" description=""/>
+            <property name="classname" type="string" label="radioclassName" description=""/>
+            <property name="labelClassName" type="string" label="labelClassName" default="heading" description=""/>
+            <property name="clearValueOnCallback" type="boolean" label="clearValueOnCallback" default="false" description="Use this to clear values on conditional visibility re-render"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

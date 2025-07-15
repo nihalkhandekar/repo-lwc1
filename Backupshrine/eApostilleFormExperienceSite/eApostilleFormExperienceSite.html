@@ -1,0 +1,81 @@
+<template>
+    <div class="form-container slds-grid slds-wrap slds-gutters">
+        <!-- Left Column: Progress Indicator -->
+        <template if:false={isFinalStep}>
+            <div class="progress-indicator slds-col slds-size_1-of-3">
+                <div class="progress-indicator-wrapper">
+                    <div class="slds-progress slds-progress_vertical">
+                        <ol class="slds-progress__list">
+                            <li class={step1Class}>
+                                <template if:true={isStepOneCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <lightning-icon icon-name="standard:task" alternative-text="Request Info" size="small"></lightning-icon>
+                                    </span>
+                                </template>
+                                <template if:false={isStepOneCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <lightning-icon icon-name="standard:task" alternative-text="Request Info" size="small"></lightning-icon>
+                                    <span class={step1LabelClass}>Request Info</span>
+                                </div>
+                            </li>
+                            <li class={step2Class}>
+                                <template if:true={isStepTwoCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <lightning-icon icon-name="standard:approval" alternative-text="Review" size="small"></lightning-icon>
+                                    </span>
+                                </template>
+                                <template if:false={isStepTwoCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <lightning-icon icon-name="standard:approval" alternative-text="Review" size="small"></lightning-icon>
+                                    <span class={step2LabelClass}>Review</span>
+                                </div>
+                            </li>
+                            <li class={step3Class}>
+                                <template if:true={isStepThreeCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <lightning-icon icon-name="custom:custom17" alternative-text="Payment" size="small"></lightning-icon>
+                                    </span>
+                                </template>
+                                <template if:false={isStepThreeCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <lightning-icon icon-name="custom:custom17" alternative-text="Payment" size="small"></lightning-icon>
+                                    <span class={step3LabelClass}>Payment</span>
+                                </div>
+                            </li>
+                            <li class={step4Class}>
+                                <template if:true={isStepFourCompleted}>
+                                    <span class="slds-icon_container slds-icon-utility-success slds-progress__marker slds-progress__marker_icon slds-progress__marker_icon-success" title="Complete">
+                                        <lightning-icon icon-name="standard:check" alternative-text="Submit" size="small"></lightning-icon>
+                                    </span>
+                                </template>
+                                <template if:false={isStepFourCompleted}>
+                                    <div class="slds-progress__marker"></div>
+                                </template>
+                                <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                                    <lightning-icon icon-name="standard:check" alternative-text="Submit" size="small"></lightning-icon>
+                                    <span class={step4LabelClass}>Submit</span>
+                                </div>
+                            </li>
+                        </ol>
+                        <div aria-valuemin="0" aria-valuemax="100" aria-valuenow="25" role="progressbar">
+                            <span class="slds-assistive-text">Progress: 25%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Right Column: Form Content -->
+        <div class="form-content slds-col slds-size_3-of-5">
+            <div class="form-content-wrapper">
+                <lightning-flow flow-api-name='Apostille_Form_Application' flow-input-variables={inputVariables} onstatuschange={handleAccountStatusChange}></lightning-flow>
+            </div>
+        </div>
+    </div>
+</template>
