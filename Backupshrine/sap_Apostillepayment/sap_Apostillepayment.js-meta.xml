@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+        <property name="price" type="String" label="price" description="Total price"/>
+        <property name="documentsJson" type="String" label="Documents JSON" description="JSON string containing document information"/>
+        <property name="regulatoryTrxnFeeId" type="String" label="regulatoryTrxnFee Id" description="record Id from flow"/>
+        <property name="selectedPaymentType" type="String" label="selectedPayment Type" description="Payment Type"/>
+        <property name="selectedPaymentGateway" type="String" label="selectedPaymentGateway Type" description="Gateway Type"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

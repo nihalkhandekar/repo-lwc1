@@ -1,0 +1,402 @@
+/* Root styles for modal size */
+:host {
+  --slds-c-modal-sizing-medium: 80vw;
+  --lwc-modal-max-width: 80vw; /* Set width to 80% of the viewport */
+  --lwc-modal-max-height: 85vh; /* Set max height to 85% of the viewport */
+}
+
+/* Modal container styling */
+.slds-modal__container {
+  width: 80vw !important; /* Force width to 80% */
+  max-width: 1000px !important; /* Max width */
+  max-height: 85vh !important; /* Max height */
+  overflow: hidden; /* Prevent container from adding scrollbars */
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* Adjust as needed */
+  z-index: 20px;
+}
+
+/* Content body to allow scrolling */
+.custom-modal-body {
+  max-height: calc(85vh - 120px); /* Adjust based on header and footer height */
+  padding-right: 0.5rem; /* Add padding to avoid overlapping with scrollbar */
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.docHeaderText .slds-truncate {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: left;
+  color: #181818;
+}
+
+.slds-modal__footer {
+  margin-top: 1.5rem;
+  border-top: 1px solid #dddbda;
+  border-radius: 0px 0px 16px 16px;
+}
+
+/* Close button styling */
+.slds-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.esq-align {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+.reason-inline {
+  display: flex;
+}
+
+.wetsign-inline {
+  display: flex;
+  padding-top: 1.5rem;
+}
+
+.boldFont {
+  font-weight: 590;
+  font-size: 12px;
+  padding-right: 0.5rem;
+}
+
+.personal-info-section,
+.official-detail-info-section,
+.account-status-info-section,
+.generate-info-section,
+.table-info-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border: 1px solid #dddbda;
+  border-radius: 12px;
+}
+
+.custom-space {
+  padding: 12px 16px 12px 16px;
+  background-color: #ffffff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.slds-button-group {
+  justify-content: space-between;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f3f2f2; /* Adjust the background color to match your design */
+}
+.button-left-group {
+  display: flex;
+
+  gap: 0.6rem;
+}
+
+.button-right-group {
+  display: flex;
+}
+
+/* Header container styling */
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for the Edit button */
+.edit-button {
+  background-color: #eef4ff; /* White background */
+  border: 0px solid #d8dde6; /* Light border */
+  padding-left: 1rem;
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease; /* Smooth transition */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 590;
+}
+
+.full-width {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.address {
+  --sds-c-textarea-color-background: #ffffff;
+  --textarea-color-background: #ffffff;
+  --sds-c-input-color-background: #ffffff;
+  --input-color-background: #ffffff;
+  --dxp-c-textarea-text-font-size: 14px;
+  --dxp-s-form-element-text-font-weight: 400;
+  --dxp-s-form-element-text-line-height: 20px;
+  --dxp-s-form-element-text-font-size: 14px;
+  --dxp-s-form-element-color-border: #c9c9c9;
+  --sds-c-textarea-text-color: #181818;
+  --dxp-s-form-element-text-color: #181818;
+  --lwc-borderWidthThin: 1px;
+  --lwc-formLabelFontSize: 12px;
+  --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+  --slds-c-input-color-background: #ffffff;
+  --slds-c-input-color-border: #c9c9c9;
+  --slds-c-input-radius-border: 8px 8px 8px 8px;
+  --sds-c-textarea-radius-border: 8px 8px 8px 8px;
+  --slds-c-textarea-color-background: #ffffff;
+  --slds-c-textarea-color-border: #c9c9c9;
+  --sds-c-input-text-color: #181818;
+  --sds-c-textarea-color-border: #c9c9c9;
+  --dxp-c-textarea-width-border: 1px;
+  --sds-c-input-color-border: #c9c9c9;
+  --slds-c-textarea-radius-border: 8px 8px 8px 8px;
+  --dxp-c-input-text-font-size: 14px;
+  --dxp-s-form-element-text-font-weight: 400;
+  --sds-c-input-radius-border: 8px 8px 8px 8px;
+  --dxp-s-form-element-label-font-size: 12px;
+  --dxp-s-form-element-label-font-weight: 590;
+  --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+  --dxp-c-input-width-border: 1px;
+}
+.address .slds-form-element__control input[name='state'],
+.address .slds-form-element__control input[name='country'],
+.address .slds-form-element__control input[name='city'],
+.address .slds-form-element__control input[name='postalCode'] {
+  width: 50%;
+}
+
+.slds-form-element__control input[name='state'],
+.slds-form-element__control input[name='country'],
+.slds-form-element__control input[name='city'],
+.slds-form-element__control input[name='postalCode'] {
+  width: 50%;
+}
+
+lightning-input {
+  --slds-c-input-radius-border: 8px;
+}
+
+lightning-combobox {
+  --slds-c-input-radius-border: 8px;
+}
+
+lightning-textarea {
+  --slds-c-textarea-radius-border: 8px;
+}
+
+.paymentButtonCss {
+  align-items: center;
+  margin-top: 18px;
+}
+
+.save-button {
+  margin-top: 16px;
+  --sds-c-button-brand-color-background: #003a62;
+  --sds-c-button-brand-color-border: #003a62;
+  --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+  --sds-c-button-brand-color-border-hover: rgb(169, 224, 240);
+  --lwc-buttonBorderRadius: 8px;
+}
+
+.custom-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  --lwc-borderWidthThin: 0px;
+}
+
+.clear-font {
+  color: #747474;
+  --slds-c-button-text-color: #003a62;
+  --lwc-buttonBorderRadius: 8px;
+}
+
+.print-buttons {
+  --sds-c-button-brand-color-border: #003a62;
+  --sds-c-button-brand-color-background: #ffffff;
+  --slds-c-button-text-color: #003a62;
+  --lwc-buttonBorderRadius: 8px;
+}
+
+/* Media query for responsive adjustments */
+@media (min-width: 48em) {
+  :host {
+    --slds-c-modal-sizing-medium: 80vw;
+  }
+}
+
+.custom-label {
+  font-size: 12px;
+  font-weight: 590;
+  font-family: 'SF Pro', sans-serif;
+  color: #5c5c5c;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+.required-indicator {
+  color: red;
+  margin-right: 0.2rem;
+}
+
+.esqclassalignment,
+.indefinitetermalignment {
+  margin-top: 22.5px;
+}
+
+.document-info-container {
+  background-color: #ffffff;
+  font-family: 'SF Pro', sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+/* Header Section */
+.custom-card-header {
+  display: flex;
+  align-items: center;
+  background-color: #f6f9ff;
+  border: 1px solid #f3f3f3;
+  padding: 0.7rem;
+  border-radius: 1rem 1rem 0 0;
+  box-sizing: border-box;
+}
+
+/* Header Title */
+.header-text .title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  padding-left: 0.5rem;
+}
+
+/* Header Description */
+.header-text .description {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(92, 92, 92, 1);
+  padding-left: 0.5rem;
+}
+
+.custom-card-header {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.custom-table-container {
+  padding: 24px; /* Adds padding around the table */
+}
+
+.custom-table-container {
+  padding: 24px; /* Adds padding around the table */
+}
+
+.custom-table {
+  border: 1px solid #d8dde6; /* Adds a border to the table */
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.custom-table thead tr.custom-header th {
+  background-color: #f3f3f3; /* Custom background color for the header */
+  font-weight: bold;
+}
+
+.custom-header {
+  width: 144px; /* Set the width */
+  height: 32px;
+  background-color: #f3f3f3; /* Customize the background color of the header */
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.custom-column {
+  font-size: 14px;
+}
+
+.custom-table td {
+  border-right: 1px solid #d8dde6; /* Adjust color and thickness as needed */
+}
+
+.custom-table td:last-child {
+  border-right: none; /* Remove border from the last column */
+}
+
+.spacing {
+  padding: 3px;
+}
+
+.history-info-section {
+  display: flex;
+  justify-content: space-between; /* Space between the two tables */
+  width: 100%; /* Ensure it covers the full width */
+}
+
+.table-info-container {
+  flex: 1; /* Allow both containers to take equal space */
+  margin-right: 20px; /* Add space between the tables */
+}
+
+.table-info-container:last-child {
+  margin-right: 0; /* Remove margin for the last container */
+}
+
+.historytable {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.headerTitle {
+  width: 350px !important;
+}
+
+.input-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+  margin-top: 12px;
+  margin-left: 10px;
+  margin-bottom: -10px;
+}
+
+.radioFont {
+  font-weight: 400;
+  font-size: 14px;
+  padding-right: 0.5rem;
+}
+
+.input-group {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.SE-modalFormStackSectionInputRow40 {
+  width: 49%;
+  height: Fixed (80px) px;
+  gap: 32px;
+  opacity: 0px;
+}
+.radiobuttoncss {
+  margin-top: -7px;
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.certificate_container {
+  width: 50rem !important;
+}
+
+.printCertiFooter {
+  margin-top: 0px !important ;
+  border-radius: 0px !important;
+}

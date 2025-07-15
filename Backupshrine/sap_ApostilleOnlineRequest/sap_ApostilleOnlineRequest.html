@@ -1,0 +1,514 @@
+<template>
+  <lightning-card>
+    <div class="SE-mainBody">
+      <div class="SE-content">
+        <div class="SE-top">
+          <div class="SE-linkLable apostilleLabel">Apostille Request</div>
+        </div>
+        <div class="SE-Card firstDivForSearching">
+          <div class="SE-searchCardHeader searchheader searchTitleHeader">
+            <div class="SE-searchCardHeaderIcon searchtitle">
+              <lightning-icon icon-name="standard:search" size="medium"></lightning-icon>
+              <div class="SE-searchCardHeaderTitleText textalign">Search</div>
+            </div>
+            <div class="SE-searchCardHeaderTitle searchInputFieldsAndComboboxContainer">
+              <div class="SE-searchToggle">
+                <span class="slds-p-right_x-small">Advanced Search</span>
+                <lightning-input type="toggle" label="Advanced Search" name="advancedSearch"
+                  checked={showAdvancedSearch} onchange={handleToggleChange} variant="label-hidden"></lightning-input>
+              </div>
+            </div>
+          </div>
+          <div class="SE-searchCardContent searchInputFieldsAndComboboxContainer">
+            <div>
+              <lightning-layout>
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-input class="SE-searchCardInputLabel" label="Work Order#" name="workOrder" id="WorkOrder"
+                    type="text" value={workOrder} onchange={handleInputChange} placeholder="e.g 20240821-001">
+                  </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-input class="SE-searchCardInputLabel" name="lastName" label="Last Name" id="LastName"
+                    type="text" value={lastName} onchange={handleInputChange} placeholder="e.g Doe">
+                  </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-input class="SE-searchCardInputLabel" name="firstName" label="First Name" id="FirstName"
+                    type="text" value={firstName} onchange={handleInputChange} placeholder="e.g John">
+                  </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-input class="SE-searchCardInputLabel" name="organizationName" label="Organization Name"
+                    id="OrganizationName" type="text" value={organizationName} onchange={handleInputChange}
+                    placeholder="e.g Administration">
+                  </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item style="flex-basis: 20%" size="2">
+                  <lightning-input class="SE-searchCardInputLabel" name="emailAddress" label="Email Address"
+                    id="EmailAddress" value={emailAddress} onchange={handleInputChange}
+                    placeholder="e.g johndoe@gmail.com">
+                  </lightning-input>
+                </lightning-layout-item>
+              </lightning-layout>
+            </div>
+            <div>
+              <lightning-layout>
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-combobox class="SE-searchCardInputLabel comboboxItemBackgroundColorChange" name="status"
+                    label="Status" id="Status" value={status} options={statusOptions} onchange={handleInputChange}
+                    placeholder="Select Status">
+                  </lightning-combobox>
+                </lightning-layout-item>
+
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-input class="SE-searchCardInputLabel" name="receivedDate" placeholder="mm/dd/yyyy"
+                    label="Received Date" id="ReceivedDate" type="date" value={receivedDate}
+                    onchange={handleInputChange} date-style="short">
+                  </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                  <lightning-combobox class="SE-searchCardInputLabel" name="expedited" label="Expedited" id="expedited"
+                    options={expeditedOption} value={expedited} onchange={handleInputChange}>
+                  </lightning-combobox>
+                </lightning-layout-item>
+                <template if:true={showAdvancedSearch}>
+                  <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                    <lightning-combobox class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                      name="documentType" label="Type of Document" id="DocumentType" value={documentType}
+                      options={documentTypeOptions} onchange={handleInputChange} placeholder="Select type of document">
+                    </lightning-combobox>
+                  </lightning-layout-item>
+                  <lightning-layout-item style="flex-basis: 20%" size="2">
+                    <lightning-input class="SE-searchCardInputLabel" name="apostilleNumber"
+                      label="Apostille Certificate #" id="ApostilleNumber" type="text" value={apostilleNumber}
+                      onchange={handleInputChange} placeholder="e.g 123456-1">
+                    </lightning-input>
+                  </lightning-layout-item>
+                </template>
+              </lightning-layout>
+            </div>
+            <template if:true={showAdvancedSearch}>
+              <div>
+                <lightning-layout>
+
+                  <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                    <!-- <lightning-combobox class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                      name="signedBy" label="Official Name" id="SignedBy" value={signedBy} options={signedByOptions}
+                      onchange={handleInputChange} placeholder="Select signed by">
+                    </lightning-combobox> -->
+                    <lightning-input class="SE-searchCardInputLabel" name="signedBy" label="Official Name" id="SignedBy"
+                      type="text" value={signedBy} onchange={handleInputChange} placeholder="e.g John">
+                    </lightning-input>
+                  </lightning-layout-item>
+                  <lightning-layout-item style="flex-basis: 20%" size="2" class="slds-p-right_medium">
+                    <lightning-combobox class="SE-searchCardInputLabel comboboxItemBackgroundColorChange"
+                      name="officialCapacity" label="Title of Official" id="OfficialCapacity" value={officialCapacity}
+                      options={officialCapacityOptions} onchange={handleInputChange}
+                      placeholder="Select official capacity">
+                    </lightning-combobox>
+                  </lightning-layout-item>
+                  <lightning-layout-item style="flex-basis: 20%" size="2">
+                    <lightning-combobox class="SE-searchCardInputLabel comboboxItemBackgroundColorChange" name="country"
+                      label="Country" id="Country" value={country} options={countryOptions} onchange={handleInputChange}
+                      placeholder="Select Country">
+                    </lightning-combobox>
+                  </lightning-layout-item>
+                </lightning-layout>
+              </div>
+            </template>
+          </div>
+          <div class="SE-footer">
+            <div class="button-group">
+              <div class="clear-all" onclick={handleClear}>
+                <span class="clear-icon-wrapper">
+                  <lightning-icon icon-name="utility:close" size="xx-small" class="clear-icon"></lightning-icon>
+                </span>
+                <span class="clear-text">Clear All</span>
+              </div>
+              <lightning-button icon-name="utility:search" variant="brand" alternative-text="Search" label="Search"
+                onclick={handleSearch} title="Search" class="customButton">
+              </lightning-button>
+            </div>
+          </div>
+        </div>
+        <div class="SE-Card SE-searchCardContent secondDivForDataTable TrHoverBackGroundColorChange">
+          <div class="slds-grid slds-grid_align-end">
+            <div class="buttoncontainerfilter">
+              <div class="left-button">
+                <span class="slds-text-title_bold slds-m-right_x-small">Search Result:</span>
+                <lightning-badge label={recordCountValue} class="totoalcountbadge"> </lightning-badge>
+              </div>
+              <div class="right-buttons">
+                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay} onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                  onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                  onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-quarter" label="This Quarter" class={badgeClassThisQuarter}
+                  onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                  onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-button-menu icon-position="right" data-id="filterMenu" alternative-text="Filter By SStatus"
+                  label="Filter By Status" title="Filter" tooltip="Filter by status" icon-name="utility:filterList"
+                  onselect={handleFilterSelect}>
+                  <!-- <lightning-menu-item label="Submitted" value="Submitted"></lightning-menu-item> -->
+                  <lightning-menu-item label="Payment Captured" value="Payment Captured"></lightning-menu-item>
+                  <lightning-menu-item label="Payment Pending" value="Payment Pending"></lightning-menu-item>
+                  <lightning-menu-item label="Documents Received" value="Documents Received"></lightning-menu-item>
+                  <lightning-menu-item label="Cancelled By Staff" value="Cancelled By Staff"></lightning-menu-item>
+                  <lightning-menu-item label="Cancelled By Customer"
+                    value="Cancelled By Customer"></lightning-menu-item>
+                  <lightning-menu-item label="Order Completed - Mail"
+                    value="Order Completed - Mail"></lightning-menu-item>
+                  <lightning-menu-item label="Order Completed – Pick Up"
+                    value="Order Completed – Pick Up"></lightning-menu-item>
+                </lightning-button-menu>
+              </div>
+            </div>
+          </div>
+          <!-- <template if:true={isLoading}>
+            <div class="spinner-container">
+              <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+            </div>
+          </template> -->
+          <template if:true={showResults}>
+            <template if:true={recordCount}>
+              <div class="custom-table-spacing slds-scrollable_x">
+                <table
+                  class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered onlineReq-table custom-table">
+                  <thead>
+                    <tr class="custom-header">
+                      <th scope="col" onclick={sortByField} data-field="ApplicationID">
+                        <div class="slds-truncate" title="Work Order #">
+                          Work Order #
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" onclick={sortByField} data-field="SAP_Last_Name__c">
+                        <div class="slds-truncate" title="Last Name">
+                          Last Name
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" onclick={sortByField} data-field="SAP_First_Name__c">
+                        <div class="slds-truncate" title="First Name">
+                          First Name
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" onclick={sortByField} data-field="SAP_Organization_Name__c">
+                        <div class="slds-truncate" title="Organization Name">
+                          Organization Name
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" onclick={sortByField} data-field="SAP_Email_Address__c">
+                        <div class="slds-truncate" title="Email Address">
+                          Email Address
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" data-field="Document_Type__c">
+                        <div class="slds-truncate" title="Document Type">Document Type</div>
+                      </th>
+
+                      <th scope="col" onclick={sortByField} data-field="AppliedDate">
+                        <div class="slds-truncate" title="Received Date">
+                          Received Date
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" onclick={sortByField} data-field="Status">
+                        <div class="slds-truncate" title="WO Status">
+                          WO Status
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col" data-field="Status">
+                        <div class="slds-truncate" title="WO Status">Document Status</div>
+                      </th>
+                      <th scope="col" onclick={sortByField} data-field="Expedited">
+                        <div class="slds-truncate" title="Expedited">Expedited
+                          <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                            class="sort-icon"></lightning-icon>
+                        </div>
+                      </th>
+                      <th scope="col">
+                        <div class="slds-truncate" title="Actions">Actions</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template if:true={isRecordsLoading}>
+                      <tr class="no-border-row TrHoverBackGroundColorChange">
+                        <td colspan="5" class="slds-text-align_center loader-row">
+                          <lightning-spinner alternative-text="Loading records..." variant="brand"
+                            size="large"></lightning-spinner>
+                        </td>
+                      </tr>
+                    </template>
+                    <template if:false={isRecordsLoading}>
+                      <template for:each={paginatedResult} for:item="row">
+                        <tr key={row.Id} class="custom-column classFortableBodyUpdationSpecificCss">
+                          <td class={row.clickable} data-id={row.Id} onclick={toggleDocument}>
+                            <div class="slds-truncate tableText" title={row.workOrder}>
+                              <template if:true={row.hasDocuments}
+                                class="slds-button slds-button_icon slds-m-right_x-small" aria-expanded={row.isExpanded}
+                                aria-controls="documents-{row.Id}">
+                                <span class="slds-icon_container slds-icon-border-filled icon-border">
+                                  <lightning-icon class="upDownIcon" icon-name={row.iconName} size="xx-small"
+                                    alternative-text="Toggle"></lightning-icon>
+                                </span>
+                              </template>
+                              <template if:true={row.hasDocuments}>
+                                <span class="tableText" title={row.WorkOrder}>{row.WorkOrder}</span>
+                                <template if:false={row.isExpanded}>
+                                  <span class="doc-count">+{row.docCount}</span>
+                                </template>
+                              </template>
+                              <template if:false={row.hasDocuments}>
+                                <span class="tableTextChild" title={row.WorkOrder}>{row.WorkOrder}</span>
+                              </template>
+                            </div>
+                          </td>
+                          <td class="column2">
+                            <div class="slds-truncate" title={row.LastName}>{row.LastName}</div>
+                          </td>
+                          <td class="column3">
+                            <div class="slds-truncate" title={row.FirstName}>{row.FirstName}</div>
+                          </td>
+                          <td class="column4">
+                            <div class="slds-truncate" title={row.OrganizationName}>{row.OrganizationName}</div>
+                          </td>
+                          <td class="column5">
+                            <div class="slds-truncate" title={row.EmailAddress}>{row.EmailAddress}</div>
+                          </td>
+                          <td class="column6">
+                            <div class="slds-truncate" title={row.DocumentType}>{row.documentType}</div>
+                          </td>
+
+                          <td class="column7">
+                            <div class="slds-truncate" title={row.ReceivedDate}>{row.AppliedDate}</div>
+                          </td>
+                          <td class="column8">
+                            <div class={row.unexpandedStatusClass} title={row.Status}>{row.Status}</div>
+                          </td>
+                          <td class="column8">
+                            <template if:true={row.isExpanded}>
+                              <div class="slds-truncate" title={row.documentStatus}>{row.documentStatus}</div>
+                            </template>
+                            <template if:false={row.hasDocuments}>
+                              <div class="slds-truncate" title={row.documentStatus}>{row.documentStatus}</div>
+                            </template>
+                          </td>
+                          <td class="column8">
+                            <div class={row.unexpandedStatusClass} title={row.expedited}>{row.expedited}</div>
+                          </td>
+                          <td class="column9">
+                            <lightning-button-menu alternative-text="Actions"
+                              class="slds-button_icon slds-button_icon-inverse custom-button-menu" variant="bare"
+                              icon-name="utility:threedots_vertical" onselect={handleAction} menu-alignment="auto"
+                              data-id={row.Id} data-doc={row.documentType} data-docid={row.docId}
+                              data-certificate={row.certificateNumber} data-docstatus={row.documentStatus}
+                              data-status={row.Status}>
+                              <lightning-menu-item label="View Request" variant="base"
+                                value="view_request"></lightning-menu-item>
+                              <lightning-menu-item label="Process Apostille Request" variant="base"
+                                value="edit_request"></lightning-menu-item>
+                              <lightning-menu-item label="Add Payment" variant="base"
+                                value="add_paymnet"></lightning-menu-item>
+                              <template if:true={row.isPaymentCapturedAndPending}>
+                                <lightning-menu-item label="Cancel Work Order" variant="base"
+                                  value="cancel_work_order"></lightning-menu-item>
+                              </template>
+                              <template if:true={row.isCompleted}>
+                                <lightning-menu-item label="View Apostille Certificate" variant="base"
+                                  value="view_apostille_certificate"></lightning-menu-item>
+                                <lightning-menu-item label="Print Order Detail" variant="base"
+                                  value="view_order_details_report"></lightning-menu-item>
+                              </template>
+                              <template if:false={row.isCompleted}>
+                                <lightning-menu-item label="Reject Work Order" variant="base"
+                                  value="reject_work_order"></lightning-menu-item>
+                              </template>
+                            </lightning-button-menu>
+                          </td>
+                        </tr>
+                        <template if:true={row.isExpanded}>
+                          <template for:each={row.documents} for:item="document">
+                            <tr key={document.Id} class="custom-column-child">
+                              <td class="childcolumn1">
+                                <div class="slds-truncate tableTextChild" title={document.ApplicationID}>
+                                  {document.ApplicationID}</div>
+                              </td>
+                              <td class="childcolumn2">
+                                <div class="slds-truncate" title={row.LastName}>{row.LastName}</div>
+                              </td>
+                              <td class="childcolumn3">
+                                <div class="slds-truncate" title={row.FirstName}>{row.FirstName}</div>
+                              </td>
+                              <td class="childcolumn4">
+                                <div class="slds-truncate" title={row.OrganizationName}>{row.OrganizationName}</div>
+                              </td>
+                              <td class="childcolumn5">
+                                <div class="slds-truncate" title={row.EmailAddress}>{row.EmailAddress}</div>
+                              </td>
+                              <td class="childcolumn6">
+                                <div class="slds-truncate" title={document.DocType}>{document.DocType}</div>
+                              </td>
+                              <td class="childcolumn7">
+                                <div class="slds-truncate" title={row.AppliedDate}>{row.AppliedDate}</div>
+                              </td>
+                              <td class="childcolumn8">
+                                <div class={document.statusClass} title={document.Status}></div>
+                              </td>
+                              <td class="childcolumn8">
+                                <div class={document.statusClass} title={document.Status}>{document.Status}</div>
+                              </td>
+                              <td class="childcolumn8">
+                                <div class={document.statusClass} title={row.expedited}>{row.expedited}</div>
+                              </td>
+                              <td class="childcolumn9">
+                                <lightning-button-menu alternative-text="Actions"
+                                  class="slds-button_icon slds-button_icon-inverse custom-button-menu" variant="bare"
+                                  icon-name="utility:threedots_vertical" onselect={handleAction} menu-alignment="auto"
+                                  data-id={row.Id} data-doc={document.DocType} data-status={row.Status}
+                                  data-certificate={document.certificateNumber} data-docstatus={document.Status}
+                                  data-docid={document.Id}>
+                                  <lightning-menu-item label="View Request" variant="base"
+                                    value="view_request"></lightning-menu-item>
+                                  <lightning-menu-item label="Process Apostille Request" variant="base"
+                                    value="edit_request"></lightning-menu-item>
+                                  <lightning-menu-item label="Add Payment" variant="base"
+                                    value="add_paymnet"></lightning-menu-item>
+                                  <template if:true={row.isPaymentCapturedAndPending}>
+                                    <lightning-menu-item label="Cancel Work Order" variant="base"
+                                      value="cancel_work_order"></lightning-menu-item>
+                                  </template>
+                                  <template if:true={row.isCompleted}>
+                                    <lightning-menu-item label="View Apostille Certificate" variant="base"
+                                      value="view_apostille_certificate"></lightning-menu-item>
+                                    <lightning-menu-item label="Print Order Detail" variant="base"
+                                      value="view_order_details_report"></lightning-menu-item>
+                                  </template>
+                                  <template if:false={row.isCompleted}>
+                                    <lightning-menu-item label="Reject Work Order" variant="base"
+                                      value="reject_work_order"></lightning-menu-item>
+                                  </template>
+                                </lightning-button-menu>
+                              </td>
+                            </tr>
+                          </template>
+                        </template>
+                      </template>
+                    </template>
+                  </tbody>
+                </table>
+              </div>
+              <template if:true={showPages}>
+                <div class="pagination-container">
+                  <lightning-button label="Prev" icon-name="utility:jump_to_left" icon-position="left"
+                    onclick={handlePreviousPage} variant="neutral" disabled={isPreviousDisabled}
+                    class="pagination-button">
+                  </lightning-button>
+
+                  <div class="page-info">
+                    <span class="page-range">&nbsp; {startRecord}-{endRecord} of {totalRecords} &nbsp;</span>
+                    <span class="page-text">
+                      | Page &nbsp;
+                      <lightning-input type="number" value={currentPage} label="Current Page" variant="label-hidden"
+                        class="current-page-input" onblur={handlePageChange}>
+                      </lightning-input>
+                      &nbsp; of {totalPages}
+                    </span>
+                  </div> &nbsp;
+
+                  <lightning-button label="Next" icon-name="utility:jump_to_right" icon-position="right"
+                    onclick={handleNextPage} variant="neutral" disabled={isNextDisabled} class="pagination-button">
+                  </lightning-button>
+                </div>
+              </template>
+
+            </template>
+            <template if:false={recordCount}>
+              <p class="no-data-message">You have not submitted any apostille requests.</p>
+            </template>
+          </template>
+        </div>
+      </div>
+    </div>
+  </lightning-card>
+  <template if:true={rejectionModal}>
+    <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+      <div class="rejectionModal slds-modal__container">
+        <header class="slds-modal__header rejectionHeader">
+          <div class="headerContainer">
+            <h2 class="headingClass" title="Upload File">Rejection/Cancellation Reason(s)</h2>
+            <div class="fileUploadClose">
+              <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close"
+                onclick={closeRejectionModal}>
+                <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                <span class="slds-assistive-text">Close</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="slds-modal__content slds-p-around_medium rejectionModalContent">
+          <div class="modalcontent">
+            <div class="contentheader">
+              <h3 class="selectTitle slds-text-title_bold">Select Rejection Reason(s)</h3>
+              <button class="slds-button slds-button_neutral resetButton" onclick={handleReset}>Reset</button>
+            </div>
+            <div class="contentBody">
+              <template if:true={rejectionReasonOptions}>
+                <template for:each={rejectionReasonOptions} for:item="reason">
+                  <div key={reason.value} class="slds-p-top_small">
+                    <lightning-input class="checkboxText" type="checkbox" label={reason.label} data-value={reason.value}
+                      onchange={handleReasonChange}> </lightning-input>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </div>
+
+          <div class="slds-p-top_medium customReasonContainer">
+            <lightning-textarea id="customReason" label="Custom Rejection Reason (if applicable)"
+              class="SE-searchCardInputLabel rejectionTextArea"
+              placeholder="Enter additional rejection reason if any..." value={customRejectionReason}
+              onchange={handleCustomReasonChange}>
+            </lightning-textarea>
+          </div>
+        </div>
+
+        <footer class="footerRejection">
+          <div class="footerButtonContainer">
+            <button class="slds-button slds-button_neutral cancelButtonFooter"
+              onclick={closeRejectionModal}>Cancel</button>
+            <button class="slds-button slds-button_brand rejectionButtonFooter" onclick={handleRejection}>Confirm
+              Rejection</button>
+          </div>
+        </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+  <template if:true={footerOprions}>
+    <div class="spinner-container">
+      <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+      <p class="saving-message">Saving...</p>
+    </div>
+  </template>
+  <c-sap_-pdf-genrator data-id="pdfGenerator" applied-date={appliedDate} work-order-number={workOrderNumber}
+    address-line={addressLine} city={cityModal} state={stateModal} zip-code={zipCodeModal}
+    individual-name={individualName} item-details={itemDetails} payment-details={paymentDetails}>
+  </c-sap_-pdf-genrator>
+</template>

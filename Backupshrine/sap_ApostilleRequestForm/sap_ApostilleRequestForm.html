@@ -1,0 +1,263 @@
+<template>
+    <template if:true={isLoading}>
+        <!-- Loader -->
+        <div class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+    <div class="document-info-container classForCardHeader">
+        <!-- Header Section -->
+        <div class="custom-card-header classForSpecificlargeIcon">
+            <lightning-icon icon-name="standard:account" size="large" class="header-icon"></lightning-icon>
+            <div class="classForTitle">
+                <template if:true={readOnly}>
+                <h1 class="header-title">{labels.ApostilleRequestFormReview}</h1>
+                <p class="header-subtitle">{labels.EnterYourContactAndOrganizationReview}</p>
+                </template>
+                <template if:false={readOnly}>
+                    <h1 class="header-title">{labels.ApostilleRequestForm}</h1>
+                    <p class="header-subtitle">{labels.EnterYourContactAndOrganization}</p>
+                    </template>
+            </div>
+        </div>
+
+        <template if:false={readOnly}>
+        <div class="instruction-section slds-p-around_medium">
+            <h2 class="instruction-text slds-m-bottom_x-small">{labels.ApostilleReqFormInstructionHeader}</h2>
+            <p class="header-subtitle slds-m-bottom_x-small"> {labels.InstructionLine1}</p>
+            <p class="header-subtitle slds-m-bottom_x-small">{labels.InstructionLine2}</p> 
+            <p class="instruction-text slds-m-bottom_x-small">{labels.InstructionLine3}</p> 
+            <p class="header-subtitle slds-m-bottom_x-small">{labels.InstructionLine4}</p>
+            <p class="header-subtitle slds-m-bottom_x-small">{labels.InstructionLine5}</p> 
+            <p class="instruction-text slds-m-bottom_x-small">{labels.InstructionLine6}</p> 
+            <p class="header-subtitle slds-m-bottom_x-small">{labels.InstructionLine7} <a href="mailto:bsd@ct.gov" class="slds-text-link">bsd@ct.gov</a>.</p>
+        </div>
+        </template>
+
+        <!-- Input Fields Section -->
+        <div class="input-section inputSectionClassForSpecificCss">
+            <div class="input-group ">
+                <div class="form-group half-width">
+                    <label class="input-title"><span class="required-indicator">*</span> {labels.FirstName}</label>
+                    <lightning-input 
+                        label="First Name" 
+                        class="input-field" 
+                        name="firstName" 
+                        variant="label-hidden" 
+                        value={firstName} 
+                        required 
+                        type="text" 
+                        pattern="[a-zA-Z][a-zA-Z \-']*[a-zA-Z]"
+                        message-when-pattern-mismatch="Name can only contain letters, hyphens, apostrophes and spaces"
+                        disabled={readOnly} 
+                        onchange={handleInputChange} 
+                        uppercase>
+                    </lightning-input>
+                </div>
+                <div class="form-group half-width">
+                    <label class="input-title"><span class="required-indicator">*</span> {labels.LastName}</label>
+                    <lightning-input 
+                        label="Last Name" 
+                        class="input-field" 
+                        name="lastName" 
+                        variant="label-hidden" 
+                        value={lastName} 
+                        required 
+                        type="text" 
+                        pattern="[a-zA-Z][a-zA-Z \-']*[a-zA-Z]"
+                        message-when-pattern-mismatch="Name can only contain letters, hyphens, apostrophes and spaces"
+                        disabled={readOnly} 
+                        onchange={handleInputChange} 
+                        uppercase>
+                    </lightning-input>                
+                </div>
+            </div>
+
+            <div class="input-group">
+                <!-- <div class="form-group">
+                    <label class="input-title" for="businessName">Business Name</label>
+                    <lightning-input label="Business Name" variant="label-hidden" name="businessName" value={businessName}  placeholder={businessNamePlaceholder} class="singleinput-field" read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>
+                </div> -->
+                 <div class="form-group half-width">
+                    <label class="input-title" for="organizationname"> {labels.OrganizationName}</label>
+                    <template if:true={CurrentLanguage}>
+                    <lightning-input label="Nombre de la organización" class="input-field" name="organizationName" variant="label-hidden" value={organizationName} disabled={readOnly} onchange={handleInputChange} uppercase></lightning-input>
+                </template>
+
+                <template if:false={CurrentLanguage}>
+                    <lightning-input label="Organization Name" class="input-field" name="organizationName" variant="label-hidden" value={organizationName} disabled={readOnly} onchange={handleInputChange} uppercase></lightning-input>
+                </template>
+                </div> 
+                <!-- <div class="form-group half-width" style="display: none;"></div>
+                    <label class="input-title"><span class="required-indicator">*</span> Test</label>
+                <lightning-input label="Last Name Test" class="input-field" name="lastNametest" variant="label-hidden" read-only={readOnly} onchange={handleInputChange}></lightning-input>
+                </div>  -->
+            </div>
+            
+            <!-- Organization Name Field -->
+            
+
+            <div class="input-group ">
+                <div class="form-group half-width">
+                    <label class="input-title" for="email"><span class="required-indicator">*</span> {labels.EmailAddress} </label>
+                    <div class="icon-input-container classForApostilleRequestFormLeftIconCss"> 
+                        <lightning-icon icon-name="utility:email" size="x-small" class="left-icon"></lightning-icon>
+                        <template if:true={CurrentLanguage}>
+                        <lightning-input label="Dirección de correo electrónico"
+                          variant="label-hidden" name="email" value={email} required class="input-field email-field ClassForemailInput" type="email"  
+                         disabled={readOnly} onchange={handleInputChange}></lightning-input> 
+                    </template>   
+                    
+                    <template if:false={CurrentLanguage}>
+                        <lightning-input label="Email Address"  variant="label-hidden" name="email" value={email} required class="input-field email-field ClassForemailInput" type="email"
+                        disabled={readOnly} onchange={handleInputChange}></lightning-input> 
+                    </template> 
+                    </div>
+                </div>
+                <div class="form-group half-width">
+                    <label class="input-title" for="phone"><span class="required-indicator">*</span> {labels.CellPhoneNumber} </label>
+                    <div class="icon-input-container classForApostilleRequestFormLeftIconCss"> 
+                        <lightning-icon icon-name="utility:call" size="x-small" class="left-icon"></lightning-icon>
+                        <template if:true={CurrentLanguage}>
+                        <lightning-input label="Número de teléfono celular" variant="label-hidden" name="phone" value={phone} required class="input-field phone-field ClassForPhoneInput" type="tel" maxlength="14" pattern="\(\d{3}\) \d{3}-\d{4}"  message-when-pattern-mismatch="Phone number format (860) 569-1111" disabled={readOnly} onchange={handleInputChange} onkeydown={handlePhoneKeyDown} placeholder="(123) 456-7890"></lightning-input>                      
+                    </template>
+                    <template if:false={CurrentLanguage}>
+                        <lightning-input label="Cell Phone Number"  variant="label-hidden" name="phone" value={phone} required class="input-field phone-field ClassForPhoneInput" type="tel" maxlength="14" pattern="\(\d{3}\) \d{3}-\d{4}"  message-when-pattern-mismatch="Phone number format (860) 569-1111" disabled={readOnly} onchange={handleInputChange} onkeydown={handlePhoneKeyDown} placeholder="(123) 456-7890"></lightning-input>                      
+                    </template>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dotted-line"></div>
+            
+            <!-- Address Fields -->
+           <template if:true={CurrentLanguage}>
+            <div class="form-group full-width">
+                <!-- Template when readOnly is true, show address lookup -->
+                <template if:true={readOnly}>
+                    <lightning-input-address class='address'
+                        address-lookup-placeholder="Buscar país, ciudad, estado, calle...."
+                        street={addressLine1}    
+                        street-label="Dirección Línea 1"
+                        street-placeholder="por ejemplo, 123 Main St"
+                        subpremise={suite}
+                        subpremise-placeholder="por ejemplo, Apto 4B, Suite 200, 2do piso"
+                        subpremise-label="Suite/Apartamento/Piso"
+                        city-label="Ciudad"
+                        city={city}
+                        city-placeholder="Seleccionar ciudad"
+                        province-label="Estado"
+                        province={state} province-disabled
+                        province-placeholder="Seleccionar estado"
+                        postal-code={zipCode}
+                        postal-code-label="Código postal"
+                        postal-code-placeholder="por ejemplo, 10001"
+                        country-label="País"
+                        country={country}
+                        country-placeholder="Seleccionar país"
+                        onchange={handleAddressChange}
+                        disabled={readOnly} 
+                        show-compact-address
+                        required>
+                    </lightning-input-address>
+                </template>
+            
+                <!-- Template when readOnly is false, hide address lookup -->
+                <template if:false={readOnly}>
+                    <lightning-input-address class='address'
+                        address-lookup-placeholder="Buscar país, ciudad, estado, calle...."
+                        street={addressLine1}    
+                        street-label="Dirección Línea 1"
+                        street-placeholder="por ejemplo, 123 Main St"
+                        subpremise={suite}
+                        subpremise-placeholder="por ejemplo, Apto 4B, Suite 200, 2do piso"
+                        subpremise-label="Suite/Apartamento/Piso"
+                        city-label="Ciudad"
+                        city={city}
+                        city-placeholder="Seleccionar ciudad"
+                        province-label="Estado"
+                        province={state} province-disabled
+                        province-placeholder="Seleccionar estado"
+                        postal-code={zipCode}
+                        postal-code-label="Código postal"
+                        postal-code-placeholder="por ejemplo, 10001"
+                        country-label="País"
+                        country={country}  
+                        country-placeholder="Seleccionar país"
+                        onchange={handleAddressChange}
+                        disabled={readOnly}
+                        show-address-lookup 
+                        show-compact-address
+                        required>
+                    </lightning-input-address>
+                </template>
+            </div>
+           </template>     
+           <template if:false={CurrentLanguage}>
+            <div class="form-group full-width">
+                <!-- Template when readOnly is true, show address lookup -->
+                <template if:true={readOnly}>
+                    <lightning-input-address class='address'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={addressLine1}    
+                        street-label="Address Line 1"
+                        street-placeholder="e.g., 123 Main St"
+                        subpremise={suite}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={city}
+                        city-placeholder="Select City"
+                        province-label="State"
+                        province={state} province-disabled
+                        province-placeholder="Select State"
+                        postal-code={zipCode}
+                        postal-code-label="Zip Code"
+                        postal-code-placeholder="e.g., 10001"
+                        country-label="Country"
+                        country={country}  
+                        country-placeholder="Select Country"
+                        onchange={handleAddressChange}
+                        disabled={readOnly} 
+                        show-compact-address
+                        required>
+                    </lightning-input-address>
+                </template>
+            
+                <!-- Template when readOnly is false, hide address lookup -->
+                <template if:false={readOnly}>
+                    <lightning-input-address class='address'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={addressLine1}    
+                        street-label="Address Line 1"
+                        street-placeholder="e.g., 123 Main St"
+                        subpremise={suite}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={city}
+                        city-placeholder="Select City"
+                        province-label="State"
+                        province={state} province-disabled
+                        province-placeholder="Select State"
+                        postal-code={zipCode}
+                        postal-code-label="Zip Code"
+                        postal-code-placeholder="e.g., 10001"
+                        country-label="Country"
+                        country={country}  
+                        country-placeholder="Select Country"
+                        onchange={handleAddressChange}
+                        disabled={readOnly}
+                        show-address-lookup 
+                        show-compact-address
+                        required>
+                    </lightning-input-address>
+                </template>
+            </div>
+           </template>        
+        </div>
+    </div>
+    </template>
+</template>

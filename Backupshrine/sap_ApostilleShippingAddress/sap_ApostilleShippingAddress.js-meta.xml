@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+                <property name="sameAsContactAddress" type="Boolean" label="Same as Contact Address" description="Indicates if the address is the same as the contact address" />
+                <property name="sameAsContactAddressString" type="String" label="Same as Contact Address String" description="Indicates if the address is the same as the contact address string" />
+                <property name="businessName" type="String" label="Business Name" description="Name of the business or organization" />
+                <property name="firstName" type="String" label="First Name" description="First name of the recipient" />
+                <property name="lastName" type="String" label="Last Name" description="Last name of the recipient" />
+                <property name="addressLine1" type="String" label="Address Line 1" description="First line of the address" />
+                <property name="suite" type="String" label="Suite/Apartment/Floor" description="Additional address information such as suite or apartment" />
+                <property name="city" type="String" label="City" description="City of the address" />
+                <property name="state" type="String" label="State" description="State of the address" />
+                <property name="zipCode" type="String" label="Zip Code" description="Postal code of the address" />
+                <property name="country" type="String" label="Country" description="Country of the address" />
+                <property name="readOnly" type="Boolean" label="readOnly" description="ReadOnly Field" />
+                <property name="showError" type="Boolean" label="showError" description="showErrora from flow" />
+                <property name="isValid" type="Boolean" label="is Valid" description="isValid from flow" role="outputOnly" />
+                <property name="isValidValue" type="String" label="isValid Value" description="isValid Value" role="inputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

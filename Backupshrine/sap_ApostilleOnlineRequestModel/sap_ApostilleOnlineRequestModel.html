@@ -1,0 +1,1535 @@
+<template>
+  <template if:true={isLoading}>
+    <div class="spinner-container">
+      <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+    </div>
+  </template>
+  <template if:false={isLoading}>
+    <div class="SE-ModalHeaderMain">
+      <div>
+        <lightning-button-icon icon-name="utility:back" size="large" alternative-text="Close" onclick={goBackModal}
+          class="custom-modal__back"> </lightning-button-icon>
+        <div class="SE-ModalHeaderTitle" style="margin-left: 40px">
+          <h2>{headerText}</h2>
+        </div>
+      </div>
+      <div>
+        <template if:true={isReadOnly}>
+          <lightning-button icon-name="utility:edit" alternative-text="Process Order" class="edit-button"
+            onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+            label="Process Order"></lightning-button>
+        </template>
+      </div>
+    </div>
+    <div class="SE-ModalHeader">
+      <div class="SE-modalMainBody">
+        <div class="SE-modalFormStack">
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSectionHeader">
+              <div class="SE-modalFormStackSectionHeaderIcon">
+                <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+              </div>
+              <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                <h2 class="slds-text-heading_small headerTitle">Apostille Request Details</h2>
+                <p class="slds-text-body_small">Enter customer's contact and organization details to proceed.Fields
+                  marked with an asterisk(*) are mandatory.</p>
+              </div>
+            </div>
+            <div class="SE-modalFormStackSectionContent">
+              <div class="slds-grid SE-modalFormStackSectionInputRow">
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="workOrderNumber"><span class="required-indicator">*</span>Work Order
+                    #</label>
+                  <lightning-input label="Work Order #" name="workOrderNumber" variant="label-hidden"
+                    id="workOrderNumber" placeholder="e.g 2023-10117" value={workOrderNumber} required disabled
+                    onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <lightning-input class="SE-searchCardInputLabel" label="Last Name" id="lastName" name="lastName"
+                    type="text" message-when-pattern-mismatch="Last name should only contain letters."
+                    onchange={handleInputChange} placeholder="e.g Doe" value={lastName} disabled={isReadOnly} required>
+                  </lightning-input>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <lightning-input class="SE-searchCardInputLabel" label="First Name" id="firstName" name="firstName"
+                    type="text" value={firstName}
+                    message-when-pattern-mismatch="First name should only contain letters." onchange={handleInputChange}
+                    placeholder="e.g John" required disabled={isReadOnly}>
+                  </lightning-input>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="organizationName">Organization Name</label>
+                  <lightning-input label="Organization Name" name="organizationName" variant="label-hidden"
+                    id="organizationName" placeholder="e.g xyz" value={organizationName} disabled={isReadOnly}
+                    onchange={handleInputChange}></lightning-input>
+                </div>
+              </div>
+              <div class="slds-grid SE-modalFormStackSectionInputRow75">
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="emailAddress"><span class="required-indicator">*</span>Email
+                    Address</label>
+                  <lightning-input class="SE-searchCardInputLabel" label="Email Address" name="emailAddress"
+                    variant="label-hidden" id="emailAddress" placeholder="e.g john@gmail.com" value={emailAddress}
+                    required disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="phoneNumber"> <span class="required-indicator">*</span>Phone Number
+                  </label>
+                  <lightning-input label="Phone Number" class="SE-searchCardInputLabel" name="phoneNumber"
+                    variant="label-hidden" id="phoneNumber" value={phoneNumber} required disabled={isReadOnly}
+                    onchange={handleInputChange} type="tel" maxlength="14" pattern="\(\d{3}\) \d{3}-\d{4}"
+                    placeholder="e.g (123) 456-7890" message-when-pattern-mismatch="Phone number format (860) 569-1111"
+                    onkeydown={handlePhoneKeyDown}></lightning-input>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="workOrderStatus">Work Order Status</label>
+                  <!-- <lightning-combobox label="Work Order Status" name="workOrderStatus" variant="label-hidden"
+                    placeholder="Select Status" options={apostilleStatusOptions} value={workOrderStatus}
+                    disabled={isWorkOrderStatusEnabled}
+                     onchange={handleInputChange}></lightning-combobox> -->
+                  <lightning-combobox label="Work Order Status" name="workOrderStatus" variant="label-hidden"
+                    placeholder="Select Status" options={apostilleStatusOptions} value={workOrderStatus}
+                    disabled={isReadOnly} onchange={handleInputChange}></lightning-combobox>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSection">
+              <div class="SE-modalFormStackSectionHeader">
+                <div class="SE-modalFormStackSectionHeaderIcon">
+                  <lightning-icon icon-name="standard:article" size="medium"></lightning-icon>
+                </div>
+                <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                  <h2 class="slds-text-heading_small headerTitle">Work Order Transaction</h2>
+                  <p class="slds-text-body_small">Enter customer's contact and organization details to proceed. Fields
+                    marked with an asterisk (*) are mandatory.</p>
+                </div>
+              </div>
+              <div class="SE-modalFormStackSectionContent">
+                <div class="slds-grid SE-modalFormStackSectionInputRow">
+                  <div class="document-table">
+                    <div class="slds-scrollable">
+                      <table class="slds-table slds-table_cell-buffer slds-table_bordered table1">
+                        <thead>
+                          <tr>
+                            <th scope="col" class="slds-document-header">
+                              <div class="slds-truncate" title="Question">Question</div>
+                            </th>
+                            <th scope="col">
+                              <div class="slds-truncate" title="Response">Response</div>
+                            </th>
+                            <template if:true={isDestinationCountrySame}>
+                              <th scope="col">
+                                <div class="slds-truncate">Destination Country</div>
+                              </th>
+                              <th scope="col">
+                                <div class="slds-truncate">Hague Status</div>
+                              </th>
+                            </template>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              <div title="Is the destination country for all the document(s) the same?">Is the
+                                destination country for all the document(s) the same?</div>
+                            </td>
+                            <td>
+                              <div class="input-radio-group sameCountry" style="width: 90px">
+                                <lightning-input type="radio" name="destinationCountrySameString" label="Yes"
+                                  variant="label-hidden" value="yes" checked={isDestinationCountrySame}
+                                  onchange={handleInputChangeDocument} disabled={isReadOnly}></lightning-input>
+                                <label class={radioCssDes}>Yes</label>
+                                <lightning-input type="radio" name="destinationCountrySameString" label="No"
+                                  variant="label-hidden" value="no" checked={isNotDestinationCountrySame}
+                                  onchange={handleInputChangeDocument} disabled={isReadOnly}></lightning-input>
+                                <label class={radioCssCheckedDes}>No</label>
+                              </div>
+                            </td>
+                            <template if:true={isDestinationCountrySame}>
+                              <td>
+                                <div class="input-radio-group prelineCombobox">
+                                  <lightning-combobox variant="label-hidden" name="selectedCountry"
+                                    value={selectedCountry} placeholder={selectCountry} options={countryOptions}
+                                    required onchange={handleInputChangeDocument} disabled={isReadOnly}
+                                    menu-alignment="auto"></lightning-combobox>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="input-radio-group sameCountry">
+                                  <lightning-input type="radio" name="selectedHagueStatus" label="Yes"
+                                    variant="label-hidden" value="Yes" onchange={handleInputChangeDocument}
+                                    class="radioButton" checked={isHagueStatusYes} disabled></lightning-input>
+                                  <label class="radioOptions">Yes</label>
+                                  <lightning-input type="radio" name="selectedHagueStatus" label="No"
+                                    variant="label-hidden" value="No" onchange={handleInputChangeDocument}
+                                    class="radioButton" checked={isHagueStatusNo} disabled></lightning-input>
+                                  <label class="radioOptions">No</label>
+                                </div>
+                              </td>
+                            </template>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="input-radio-group">
+                  <label class="boldFont">Would you like to expedite the request?</label>
+                  <lightning-input type="radio" name="expediteRequestString" label="Yes" value="yes"
+                    variant="label-hidden" checked={isExpediteSelected} onchange={handleInputChangeDocument}
+                    class="radioButton" disabled={isReadOnly}></lightning-input>
+                  <label class={radioCssExp} style="margin-right: 10px">Yes</label>
+                  <lightning-input type="radio" name="expediteRequestString" label="No" value="no"
+                    variant="label-hidden" checked={isNotExpediteSelected} onchange={handleInputChangeDocument}
+                    class="radioButton" disabled={isReadOnly}></lightning-input>
+                  <label class={radioCssCheckedExp} style="margin-right: 10px">No</label>
+                  <template if:true={isExpediteSelected}>
+                    <span>(+ ${expediteFee}.00 on each document)</span>
+                  </template>
+                </div>
+                <div class="add-document-container" if:false={isReadOnly}>
+                  <lightning-button label="Add Document" variant="brand" onclick={handleAddDocument}
+                    icon-name="utility:add" icon-position="left" class="save-button"></lightning-button>
+                </div>
+                <div class="spacer-container" if:true={isReadOnly}></div>
+                <div class="document-table-Main">
+                  <div class="slds-scrollable">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                      <thead style="height: 52px">
+                        <tr>
+                          <th scope="col" class="slds-document-header column-type">
+                            <div class="slds-truncate">Type of Document</div>
+                          </th>
+                          <template if:false={isDestinationCountrySame}>
+                            <th scope="col" class="column-destination">
+                              <div class="slds-truncate">Destination Country</div>
+                            </th>
+                            <th scope="col" class="column-hague">
+                              <div class="slds-truncate">Hague</div>
+                              <div class="slds-truncate">Status</div>
+                            </th>
+                          </template>
+                          <th scope="col" class="column-person-name">
+                            <div class="slds-truncate">Name of the Person</div>
+                            <div class="slds-truncate">Listed on the Document</div>
+                          </th>
+                          <th scope="col" class="column-title-official">
+                            <div class="slds-truncate">Title of Official Signing</div>
+                            <div class="slds-truncate">the document</div>
+                          </th>
+                          <th scope="col" class="column-notary-name">
+                            <div class="slds-truncate">Name of the Notary</div>
+                            <div class="slds-truncate">Public/Public Official</div>
+                          </th>
+                          <th scope="col" class="column-authority">
+                            <div class="slds-truncate">Signing Authority</div>
+                          </th>
+                          <th scope="col" class="column-status">
+                            <div class="slds-truncate">Status</div>
+                          </th>
+                          <th scope="col" class="column-rejection-reason">
+                            <div class="slds-truncate">Rejection/Cancellation</div>
+                            <div class="slds-truncate">Reason</div>
+                          </th>
+                          <template if:true={filteredDocuments}>
+                            <th scope="col" class="column-file">
+                              <div class="slds-truncate">Uploaded</div>
+                              <div class="slds-truncate">Documents</div>
+                            </th>
+                          </template>
+                          <th scope="col" class="column-fee">
+                            <div class="slds-truncate">Fee</div>
+                          </th>
+                          <th scope="col" class="column-action">
+                            <div></div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <template if:true={documents.length}>
+                          <template for:each={documents} for:item="doc">
+                            <tr key={doc.id} style="height: 40px">
+                              <td class="table-cell column-type">
+                                <template if:true={isReadOnly}>
+                                  <div title={doc.typeOfDocument} class="tableOnReadMode">{doc.typeOfDocument}</div>
+                                </template>
+                                <template if:false={isReadOnly}>
+                                  <lightning-combobox variant="label-hidden" name="typeOfDocument"
+                                    value={doc.typeOfDocument} placeholder={documentType} options={documentTypes}
+                                    data-id={doc.id} onchange={handleDocumentChange}
+                                    class="align-combobox prelineCombobox"></lightning-combobox>
+                                </template>
+                              </td>
+                              <template if:false={isDestinationCountrySame}>
+                                <td class="table-cell column-destination">
+                                  <template if:true={isReadOnly}>
+                                    <div title={doc.destinationCountry} class="tableOnReadMode">{doc.destinationCountry}
+                                    </div>
+                                  </template>
+                                  <template if:false={isReadOnly}>
+                                    <lightning-combobox variant="label-hidden" name="destinationCountry"
+                                      value={doc.destinationCountry} placeholder={destinationCountry}
+                                      options={countryOptions} data-id={doc.id} onchange={handleDocumentChange}
+                                      class="align-combobox prelineCombobox"></lightning-combobox>
+                                  </template>
+                                </td>
+                                <td class="table-cell column-hague">
+                                  <div title={doc.hague} class="tableOnReadMode">{doc.hague}</div>
+                                </td>
+                              </template>
+                              <td class="table-cell column-person-name">
+                                <template if:true={isReadOnly}>
+                                  <template if:true={doc.checkDocumentType}>
+                                    <div title={doc.copyNumber} class="tableOnReadMode">{doc.copyNumber}</div>
+                                  </template>
+                                  <template if:false={doc.checkDocumentType}>
+                                    <div title={doc.personName} class="tableOnReadMode">{doc.personName}</div>
+                                  </template>
+                                </template>
+                                <template if:false={isReadOnly}>
+                                  <template if:false={doc.checkDocumentType}>
+                                    <lightning-input label="personName" variant="label-hidden" name="personName"
+                                      class="align-input" value={doc.personName} placeholder={personName}
+                                      data-id={doc.id} onchange={handleDocumentChange}></lightning-input>
+                                  </template>
+                                  <template if:true={doc.checkDocumentType}>
+                                    <lightning-input label="personName" variant="label-hidden" name="copyNumber"
+                                      class="align-input" value={doc.copyNumber} placeholder={copyNumberPlaceholder}
+                                      data-id={doc.id} onchange={handleDocumentChange}></lightning-input>
+                                  </template>
+                                </template>
+                              </td>
+                              <td class="table-cell column-person-name">
+                                <template if:true={isReadOnly}>
+                                  <div title={doc.signedByPosition} class="tableOnReadMode">{doc.signedByPosition}</div>
+                                </template>
+                                <template if:false={isReadOnly}>
+                                  <lightning-combobox variant="label-hidden" name="signedByPosition"
+                                    value={doc.signedByPosition} placeholder="Select Position" data-id={doc.id}
+                                    options={signedByPositionOptions} onchange={handleDocumentChange}
+                                    class="align-combobox prelineCombobox">
+                                  </lightning-combobox>
+                                </template>
+                              </td>
+                              <td class="table-cell column-notary-name">
+                                <template if:true={isReadOnly}>
+                                  <div title={doc.signedByName} class="tableOnReadMode">{doc.signedByName}</div>
+                                </template>
+                                <template if:false={isReadOnly}>
+                                  <div class="slds-form-element slds-input-has-icon slds-input-has-icon_right">
+                                    <lightning-input label="signedByName" variant="label-hidden" name="signedByName"
+                                      class="align-input signedByNameField" value={doc.signedByName}
+                                      placeholder={signedByName} data-id={doc.id} onchange={handleDocumentChange}>
+                                    </lightning-input>
+                                    <lightning-icon icon-name="utility:search" size="xx-small"
+                                      alternative-text="Search icon"
+                                      class="slds-input__icon slds-input__icon_right slds-icon-text-default signedByNameField"
+                                      data-id={doc.id} onclick={handleSearch}>
+                                    </lightning-icon>
+                                  </div>
+                                </template>
+                              </td>
+                              <td class="table-cell column-authority">
+                                <template if:true={isReadOnly}>
+                                  <div title={doc.autorityName} class="tableOnReadMode">{doc.autorityName}</div>
+                                </template>
+                                <template if:false={isReadOnly}>
+                                  <lightning-combobox variant="label-hidden" name="autority" value={doc.autority}
+                                    placeholder="Select Signing Authority" options={AutorityOptions} data-id={doc.id}
+                                    onchange={handleDocumentChange}
+                                    class="align-combobox prelineCombobox"></lightning-combobox>
+                                </template>
+                              </td>
+                              <td class="table-cell column-status">
+                                <template if:true={isReadOnly}>
+                                  <div title={doc.status} class="tableOnReadMode">{doc.status}</div>
+                                </template>
+                                <template if:false={isReadOnly}>
+                                  <lightning-combobox variant="label-hidden" name="status" value={doc.status}
+                                    placeholder="Status" options={statusOptions} data-id={doc.id}
+                                    onchange={handleDocumentChange}
+                                    class="align-combobox prelineCombobox"></lightning-combobox>
+                                </template>
+                              </td>
+                              <td class="table-cell column-rejection-reason">
+                                <template if:true={doc.statusRejected}>
+                                  <template if:true={isReadOnly}>
+                                    <template if:true={doc.rejectionReason}>
+                                      <div title={doc.rejectionReason} class="tableOnReadMode">{doc.rejectionReason}
+                                      </div>
+                                    </template>
+                                    <template if:true={doc.customRejectionReason}>
+                                      <div title={doc.customRejectionReason} class="tableOnReadMode">
+                                        {doc.customRejectionReason}</div>
+                                    </template>
+                                  </template>
+                                  <template if:false={isReadOnly}>
+                                    <template if:true={doc.rejectionReason}>
+                                      <lightning-input type="text" label="rejectionReason" name="rejectionReason"
+                                        variant="label-hidden" class="align-input" value={doc.rejectionReason}
+                                        placeholder="Select a reason" data-id={doc.id} onclick={openRejectionModal}
+                                        readonly required>
+                                      </lightning-input>
+                                    </template>
+                                    <template if:true={doc.customRejectionReason}>
+                                      <lightning-input type="text" label="customRejectionReason"
+                                        name="customRejectionReason" variant="label-hidden" class="align-input"
+                                        value={doc.customRejectionReason} placeholder="Select a reason" data-id={doc.id}
+                                        onclick={openRejectionModal} readonly required>
+                                      </lightning-input>
+                                    </template>
+                                    <template if:false={doc.customRejectionReason}>
+                                      <template if:false={doc.rejectionReason}>
+                                        <lightning-input type="text" label="customRejectionReason"
+                                          name="customRejectionReason" variant="label-hidden" class="align-input"
+                                          placeholder="Select a reason" data-id={doc.id} onclick={openRejectionModal}
+                                          readonly required>
+                                        </lightning-input>
+                                      </template>
+                                    </template>
+                                  </template>
+                                </template>
+                              </td>
+                              <template if:true={doc.uploadedFiles}>
+                                <td class="table-cell column-file">
+                                  <template if:true={isReadOnly}>
+                                    <template if:true={doc.uploadedFiles.length}>
+                                      <template for:each={doc.uploadedFiles} for:item="file">
+                                        <template if:true={file.documentId}>
+                                          <div class="file-name-container" key={file.documentId}>
+                                            {file.filename}
+                                            <!-- <a href="javascript:void(0)"
+                                                                                            data-document-id={file.documentId}
+                                                                                            data-doc-id={doc.id}
+                                                                                            onclick={previewHandler}
+                                                                                            key={file.documentId}
+                                                                                            class="slds-text-link"
+                                                                                            title={file.filename}>
+                                                                                            {file.filename}
+                                                                                        </a> -->
+                                          </div>
+                                        </template>
+                                      </template>
+                                    </template>
+                                  </template>
+                                  <template if:false={isReadOnly}>
+                                    <template if:true={doc.uploadedFiles.length}>
+                                      <div class="file-content">
+                                        <template for:each={doc.uploadedFiles} for:item="file">
+                                          <template if:true={file.documentId}>
+                                            <div class="file-name-container" key={file.documentId}>
+                                              <a href="javascript:void(0)" data-document-id={file.documentId}
+                                                data-doc-id={doc.id} onclick={previewHandler} key={file.documentId}
+                                                class="slds-text-link" title={file.filename}>
+                                                {file.filename}
+                                              </a>
+                                            </div>
+                                          </template>
+                                        </template>
+                                        <lightning-button-menu alternative-text="Actions"
+                                          class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                          variant="bare" icon-name="utility:threedots_vertical" menu-alignment="auto">
+                                          <lightning-menu-item label="Re-upload" variant="base" data-value="reUpload"
+                                            onclick={handleUploadForDocument} data-id={doc.id} data-row-id={doc.rowId}>
+                                          </lightning-menu-item>
+                                          <lightning-menu-item style="color: rgba(186, 5, 23, 1)" label="Delete"
+                                            variant="base" value="deleteDoc" onclick={deleteFileSot} data-id={doc.id}
+                                            data-row-id={doc.rowId}>
+                                          </lightning-menu-item>
+                                        </lightning-button-menu>
+                                      </div>
+                                    </template>
+                                    <template if:false={doc.uploadedFiles.length}>
+                                      <template if:true={doc.checkDocumentType}>
+                                        <lightning-button-icon class="upload-icon" variant="label-hidden"
+                                          icon-name="utility:upload" alternative-text="Upload"
+                                          onclick={handleUploadForDocument} data-row-id={doc.rowId}
+                                          data-id={doc.id}></lightning-button-icon>
+                                      </template>
+                                    </template>
+                                  </template>
+                                </td>
+                              </template>
+                              <td class="table-cell column-fee">
+                                <div title={doc.feeDisplay} class="tableOnReadMode">{doc.feeDisplay}</div>
+                              </td>
+                              <td if:false={isReadOnly} class="table-cell column-action">
+                                <template if:true={doc.isAddedByAgent}>
+                                  <lightning-button-menu alternative-text="Actions"
+                                    class="slds-button_icon slds-button_icon-inverse custom-button-menu" variant="bare"
+                                    icon-name="utility:threedots_vertical" onselect={handleAction} menu-alignment="auto"
+                                    data-id={doc.id}>
+                                    <lightning-menu-item label="Delete" variant="base" checked="false"
+                                      value="delete_doc"></lightning-menu-item>
+                                    <template if:true={isAdminUser}>
+                                      <lightning-menu-item label="No Fee" variant="base" checked={doc.isNoFee}
+                                        value="no_fee"></lightning-menu-item>
+                                    </template>
+                                  </lightning-button-menu>
+                                </template>
+                              </td>
+                              <td if:true={isReadOnly} class="table-cell column-action">
+                                <template if:true={doc.isNoFee}>
+                                  <div>No Fee</div>
+                                </template>
+                              </td>
+                            </tr>
+                          </template>
+                        </template>
+                        <template if:false={documents.length}>
+                          <tr>
+                            <td colspan="6" class="no-documents">No documents added yet. Click "Add Document" to start.
+                            </td>
+                          </tr>
+                        </template>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <template if:true={showExpediteAdoptionError}>
+                  <div class="slds-text-color_error slds-m-top_small">Adoption documents cannot be expedited. Please
+                    file a separate request.</div>
+                </template>
+                <template if:true={documents.length}>
+                  <div class="total-fee">
+                    <template if:true={isExpediteSelected}>
+                      <span>Total: {formattedTotalFee} (Expedite: {formattedExpediteFee})</span>
+                    </template>
+                    <template if:false={isExpediteSelected}>
+                      <span>Total: {formattedTotalFee}</span>
+                    </template>
+                    <template if:true={showError}>
+                      <div class="slds-text-color_error slds-m-top_x-small errorText">Please select rejection reason
+                      </div>
+                    </template>
+                    <template if:true={showDocError}>
+                      <div class="slds-text-color_error slds-m-top_x-small errorDocText">Please upload document</div>
+                    </template>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSectionHeader">
+              <div class="SE-modalFormStackSectionHeaderIcon">
+                <lightning-icon icon-name="action:add_contact" size="small"></lightning-icon>
+              </div>
+              <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                <h2 class="slds-text-heading_small headerTitle">Payment Details</h2>
+                <p class="slds-text-body_small">Enter payment details to continue further.</p>
+              </div>
+            </div>
+            <div class="SE-modalFormStackSectionContent">
+              <div class="slds-grid SE-modalFormStackSectionInputRow">
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="paymentType"> <span class="required-indicator">*</span>Payment Type
+                  </label>
+                  <lightning-combobox label="Payment Type" class="SE-searchCardInputLabel" data-id="paymentType"
+                    name="paymentType" variant="label-hidden" disabled={isReadOnly} value={paymentType}
+                    placeholder="Please select payment type" options={paymentTypeOptions} onchange={handleTypeChange}>
+                  </lightning-combobox>
+                </div>
+                <template if:true={isCreditCard}>
+                  <div class="slds-col SE-customCol">
+                    <label class="SE-inputLabel" for="cardType"> <span class="required-indicator">*</span>Card Type
+                    </label>
+                    <lightning-combobox label="Card Type" class="SE-searchCardInputLabel" data-id="cardType"
+                      name="cardType" variant="label-hidden" disabled={isReadOnly} value={cardType}
+                      placeholder="e.g. Visa" options={cardTypeOptions} onchange={handleInputChangePayment}>
+                    </lightning-combobox>
+                  </div>
+                  <div class="slds-col SE-customCol">
+                    <label class="SE-inputLabel" for="last4Digits"> <span class="required-indicator">*</span>Last 4
+                      digits of Credit Card </label>
+                    <lightning-input label="Last 4 Digits" class="SE-searchCardInputLabel" data-id="last4Digits"
+                      name="last4Digits" variant="label-hidden" disabled={isReadOnly} value={last4Digits}
+                      placeholder="e.g. 3421" type="text" onchange={handleInputChangePayment} maxlength="4"
+                      pattern="[0-9]{4}" onkeypress={handleKeyPress}
+                      message-when-pattern-mismatch="Please enter exactly 4 digits." required>
+                    </lightning-input>
+                  </div>
+                </template>
+                <template if:true={isCheck}>
+                  <div class="slds-col SE-customCol">
+                    <label class="SE-inputLabel" for="checkNumber"> <span class="required-indicator">*</span>Check #
+                    </label>
+                    <lightning-input label="Cheque Number" class="SE-searchCardInputLabel" data-id="checkNumber"
+                      name="checkNumber" variant="label-hidden" disabled={isReadOnly} value={checkNumber}
+                      placeholder="e.g 23890" type="text" onchange={handleInputChangePayment}>
+                    </lightning-input>
+                  </div>
+                </template>
+                <template if:true={isMoneyOrder}>
+                  <div class="slds-col SE-customCol">
+                    <label class="SE-inputLabel" for="moneyOrderNo"> <span class="required-indicator">*</span>Money
+                      Order No. # </label>
+                    <lightning-input label="Money Order No." class="SE-searchCardInputLabel" data-id="moneyOrderNo"
+                      name="moneyOrderNo" variant="label-hidden" disabled={isReadOnly} value={moneyOrderNo}
+                      placeholder="e.g 23890" type="text" onchange={handleInputChangePayment}>
+                    </lightning-input>
+                  </div>
+                </template>
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="paymentAmount"> <span class="required-indicator">*</span>Payment
+                    Amount </label>
+                  <lightning-input label="Payment Amount" class="SE-searchCardInputLabel" data-id="paymentAmount"
+                    name="paymentAmount" variant="label-hidden" value={paymentAmount} placeholder="e.g. $60.00"
+                    type="currency" disabled={isReadOnly} onchange={handleInputChangePayment} onkeypress={handleKeyPressAmount}>
+                  </lightning-input>
+                </div>
+                <template if:false={isReadOnly}>
+                  <template if:true={isAdd}>
+                    <div class="slds-col SE-customCol paymentButtonCss">
+                      <lightning-button label="Add Payment" variant="brand" icon-name="utility:add" class="save-button"
+                        onclick={handleAddPayment}></lightning-button>
+                    </div>
+                  </template>
+                  <template if:true={isEdit}>
+                    <div class="slds-col SE-customCol paymentButtonCss">
+                      <lightning-button label="Save Payment" variant="brand" class="save-button"
+                        onclick={handleEditPayment}></lightning-button>
+                    </div>
+                  </template>
+                </template>
+              </div>
+            </div>
+            <div class="SE-modalFormStackSectionContent paymentHistoryTable">
+              <template if:true={previousTrnxnPayment}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                  <thead class="custom-header">
+                    <tr>
+                      <th scope="col" class="docHeaderText">
+                        <div class="slds-truncate" title="Payment Type">Payment Type</div>
+                      </th>
+                      <th scope="col" class="docHeaderText">
+                        <div class="slds-truncate" title="Card Type">Card Type</div>
+                      </th>
+                      <th scope="col" class="docHeaderText">
+                        <div class="slds-truncate" title="Check # / MO # / Last four digits of CC">Check # / MO # / Last
+                          four digits of CC</div>
+                      </th>
+                      <th scope="col" class="docHeaderText">
+                        <div class="slds-truncate" title="Amount">Payment Amount</div>
+                      </th>
+                      <th scope="col" class="docHeaderText">
+                        <div class="slds-truncate" title="Date">Date</div>
+                      </th>
+                      <th scope="col" class="docHeaderText">
+                        <div class="slds-truncate" title="Date">Action</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <template for:each={previousTrnxnPayment} for:item="row">
+                      <tr key={row.Id} data-id={row.Id}>
+                        <td>
+                          <div class="slds-truncate" title={row.SAP_Payment_Type__c}>{row.SAP_Payment_Type__c}</div>
+                        </td>
+                        <td>
+                          <div class="slds-truncate" title={row.cardType}>{row.cardType}</div>
+                        </td>
+                        <td>
+                          <div class="slds-truncate" title={row.paymentNumber}>{row.paymentNumber}</div>
+                        </td>
+                        <td>
+                          <div class="slds-truncate slds-text-align_right" title={row.TotalFeeAmount}>
+                            {row.TotalFeeAmount}</div>
+                        </td>
+                        <td>
+                          <div class="slds-truncate" title={row.CreatedDate}>{row.CreatedDate}</div>
+                        </td>
+                        <td>
+                          <template if:true={isReadOnly}>
+                            <div class="slds-truncate">
+                              <lightning-button-icon icon-name="utility:edit" alternative-text="Edit Transaction"
+                                title="Edit Transaction" class="slds-m-right_small" variant="bare" disabled={isReadOnly}
+                                onclick={handleEditTransaction} data-id={row.Id}>
+                              </lightning-button-icon>
+                              <lightning-button-icon icon-name="utility:delete" alternative-text="Delete Transaction"
+                                title="Delete Transaction" variant="bare" class="slds-icon-text-error"
+                                disabled={isReadOnly} onclick={handleDeleteTransaction} data-id={row.Id}>
+                              </lightning-button-icon>
+                            </div>
+                          </template>
+                          <template if:false={isReadOnly}>
+                            <div class="slds-truncate">
+                              <lightning-button-icon icon-name="utility:edit" alternative-text="Edit Transaction"
+                                title="Edit Transaction" class="slds-m-right_small" variant="bare"
+                                disabled={row.isCommunityUser} onclick={handleEditTransaction} data-id={row.Id}>
+                              </lightning-button-icon>
+                              <lightning-button-icon icon-name="utility:delete" alternative-text="Delete Transaction"
+                                title="Delete Transaction" variant="bare" class="slds-icon-text-error"
+                                disabled={row.isCommunityUser} onclick={handleDeleteTransaction} data-id={row.Id}>
+                              </lightning-button-icon>
+                            </div>
+                          </template>
+                        </td>
+                      </tr>
+                    </template>
+                  </tbody>
+                </table>
+              </template>
+            </div>
+          </div>
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSectionHeader">
+              <div class="SE-modalFormStackSectionHeaderIcon">
+                <lightning-icon icon-name="standard:work_order" size="medium"></lightning-icon>
+              </div>
+              <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                <h2 class="slds-text-heading_small headerTitle">Return Mail information/Delivery Instructions</h2>
+                <p class="slds-text-body_small">Enter return delivery instructions for your document(s).</p>
+              </div>
+            </div>
+            <div class="input-section">
+              <div class="slds-form-element">
+                <div>
+                  <label class="slds-radio_button-group">
+                    <input class="option1" type="radio" name="deliveryOption1" value="includeReturnEnvelope"
+                      onchange={handleOptionChange} checked={isOption1Checked} disabled={isReadOnly} />
+                    <span class="slds-radio_faux"></span>
+                    <span class="slds-form-element__label">I will include a postage-paid, pre-addressed return envelope
+                      or shipping label will be included with the submitted document(s).</span>
+                  </label>
+                </div>
+                <template if:false={secondOptionisReadOnly}>
+                  <label class="slds-radio_button-group">
+                    <span class="slds-radio_faux"></span>
+                    <input class="option2" type="radio" name="deliveryOption" value="uploadShippingLabel"
+                      onchange={handleOptionChange} checked={pre_paid_shipping_label} disabled={isReadOnly} />
+                    <span class="slds-form-element__label">
+                      Upload the pre-paid shipping label
+                      <template if:false={isReadOnly}>
+                        <template if:true={pre_paid_shipping_label}>
+                          <a href="#" class="upload-link" onclick={handleUploadLinkClick}> (UPLOAD HERE)</a>
+                        </template>
+                      </template>
+                    </span>
+                  </label>
+                </template>
+                <template if:true={isOption2Checked}>
+                  <div class="uploaded-files">
+                    <template for:each={uploadedFiles} for:item="file" for:index="index">
+                      <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                        <template if:false={isReadOnly}>
+                          <div class="fileNameClass file-info" style="width: 15rem" onclick={handlePreview}
+                            data-id={file.documentId} data-name={file.filename}>
+                            <span class="fileContainer" style="border-color: grey">
+                              <lightning-icon icon-name="utility:document_preview"
+                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)" alternative-text="File"
+                                size="x-small">
+                              </lightning-icon>
+                              <a class="fileNameContainer" data-id={file.documentId} onclick={handlePreview}
+                                title={file.filename}> {file.filename} </a>
+                            </span>
+                          </div>
+                        </template>
+
+                        <template if:true={isReadOnly}>
+                          <div class="fileNameClass file-info" style="width: 15rem">
+                            <span class="fileContainer" style="border-color: grey">
+                              <lightning-icon icon-name="utility:document_preview"
+                                style="--slds-c-icon-color-foreground-default: grey" alternative-text="File"
+                                size="x-small">
+                              </lightning-icon>
+                              <div class="fileNameContainer" style="color: grey">{file.filename}</div>
+                            </span>
+                          </div>
+                        </template>
+
+                        <template if:false={isReadOnly}>
+                          <div>
+                            <span class="deleteButtonArea">
+                              <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete"
+                                size="x-small" alternative-text="Delete" title="Delete" data-index={index}
+                                onclick={handleDeleteFile}>
+                              </lightning-button-icon>
+                            </span>
+                          </div>
+                        </template>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- <template if:true={uploadedFilesForPrePaidShipping.length}>
+                                        <div class="uploaded-files">
+                                            <template for:each={uploadedFilesForPrePaidShipping} for:item="file" for:index="index">
+                                                <div key={file.documentId} style="width: 100%" class="uploaded-file">
+                                                    <div class="outerfileNameClass">
+                                                        <template if:false={isReadOnly}>
+                                                            <span class="fileContainer" data-id={file.documentId} data-filename={file.filename} onclick={handlePreview}>
+                                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211);" alternative-text="File" size="x-small">
+                                                                </lightning-icon>
+                                                                <a class="fileNameContainer" data-id={file.documentId} onclick={handlePreview} title={file.filename}>
+                                                                    {file.filename}
+                                                                </a>
+                                                            </span>
+                                                        </template>
+
+                                                        <template if:true={isReadOnly}>
+                                                            <span class="fileContainer disabled-file" style="border-color: grey">
+                                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: grey" alternative-text="File" size="x-small">
+                                                                </lightning-icon>
+                                                                <div class="fileNameContainer" style="color: grey">
+                                                                    {file.filename}
+                                                                </div>
+                                                            </span>
+                                                        </template>
+
+                                                    </div>
+                                                    <template if:false={isReadOnly}>
+                                                        <div class="deleteButtonArea">
+                                                            <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete" size="x-small" alternative-text="Delete" title="Delete" data-index={index} onclick={handleDeleteFile}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template> -->
+                </template>
+
+                <template if:false={isOption2Checked}>
+                  <div class="uploaded-files">
+                    <template for:each={uploadedFiles} for:item="file" for:index="index">
+                      <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                        <template if:false={isReadOnly}>
+                          <div class="fileNameClass file-info" style="width: 15rem" onclick={handlePreview}
+                            data-id={file.documentId} data-name={file.filename}>
+                            <span class="fileContainer" style="border-color: grey">
+                              <lightning-icon icon-name="utility:document_preview"
+                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)" alternative-text="File"
+                                size="x-small">
+                              </lightning-icon>
+                              <a class="fileNameContainer" data-id={file.documentId} onclick={handlePreview}
+                                title={file.filename}> {file.filename} </a>
+                            </span>
+                          </div>
+                        </template>
+
+                        <template if:true={isReadOnly}>
+                          <div class="fileNameClass file-info" style="width: 15rem">
+                            <span class="fileContainer" style="border-color: grey">
+                              <lightning-icon icon-name="utility:document_preview"
+                                style="--slds-c-icon-color-foreground-default: grey" alternative-text="File"
+                                size="x-small">
+                              </lightning-icon>
+                              <div class="fileNameContainer" style="color: grey">{file.filename}</div>
+                            </span>
+                          </div>
+                        </template>
+
+                        <template if:false={isReadOnly}>
+                          <div>
+                            <span class="deleteButtonArea">
+                              <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete"
+                                size="x-small" alternative-text="Delete" title="Delete" data-index={index}
+                                onclick={handleDeleteFile}>
+                              </lightning-button-icon>
+                            </span>
+                          </div>
+                        </template>
+                      </div>
+                    </template>
+                  </div>
+
+                  <!-- <template if:true={uploadedFilesForOtherOptions.length}>
+                                        <div class="uploaded-files">
+                                            <template for:each={uploadedFilesForOtherOptions} for:item="file" for:index="index">
+                                                <div key={file.documentId} style="width: 100%" class="uploaded-file">
+                                                    <div class="outerfileNameClass">
+                                                        <template if:false={isReadOnly}>
+                                                            <span class="fileContainer" data-id={file.documentId} data-filename={file.filename} onclick={handlePreview}>
+                                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211);" alternative-text="File" size="x-small">
+                                                                </lightning-icon>
+                                                                <a class="fileNameContainer" data-id={file.documentId} onclick={handlePreview} title={file.filename}>
+                                                                    {file.filename}
+                                                                </a>
+                                                            </span>
+                                                        </template>
+
+                                                        <template if:true={isReadOnly}>
+                                                            <span class="fileContainer disabled-file" style="border-color: grey">
+                                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: grey" alternative-text="File" size="x-small">
+                                                                </lightning-icon>
+                                                                <div class="fileNameContainer" style="color: grey">
+                                                                    {file.filename}
+                                                                </div>
+                                                            </span>
+                                                        </template>
+
+                                                    </div>
+                                                    <template if:false={isReadOnly}>
+                                                        <div class="deleteButtonArea">
+                                                            <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete" size="x-small" alternative-text="Delete" title="Delete" data-index={index} onclick={handleDeleteFile}>
+                                                            </lightning-button-icon>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template> -->
+                </template>
+                <template if:true={show2ndFileUpload}>
+                  <div class="file-upload">
+                    <lightning-input type="file" label="Upload File" name="fileUpload"
+                      onchange={handleFileUpload}></lightning-input>
+                  </div>
+                </template>
+                <template if:false={thirdOptionisReadOnly}>
+                  <label class="slds-radio_button-group">
+                    <input class="option3" type="radio" name="deliveryOption" value="pickup"
+                      onchange={handleOptionChange} checked={documentPickedUp} disabled={isReadOnly} />
+                    <span class="slds-radio_faux"></span>
+                    <span class="slds-form-element__label">Document(s) will be picked up</span>
+                  </label>
+                  <template if:false={showThirdOption}></template>
+                </template>
+                <template if:false={fourthOptionisReadOnly}>
+                  <label class="slds-radio_button-group {e_Apostille_customer_upload ? 'bold-text' : ''}">
+                    <input class="option4" type="radio" name="deliveryOption" value="eApostilleUpload"
+                      onchange={handleOptionChange} checked={e_Apostille_customer_upload} disabled={isReadOnly} />
+                    <span class="slds-radio_faux"></span>
+                    <span class="slds-form-element__label">
+                      Return via standard U.S. Mail, I accept the risk, and the Secretary of the State is not
+                      responsible for lost document(s). Excludes: International Mailing –
+                      Customer must provide a pre-paid shipping label.
+                    </span>
+                  </label>
+                </template>
+                <template if:false={e_Apostille_customer_uploadisReadOnly}>
+                  <template if:true={e_Apostille_customer_upload}>
+                    <template if:true={uploadedFileApostille.length}>
+                      <div class="uploaded-files">
+                        <template for:each={uploadedFileApostille} for:item="file" for:index="index">
+                          <div key={file.documentId} style="width: 100%" class="uploaded-file">
+                            <div class="outerfileNameClass">
+                              <span class="fileContainer">
+                                <lightning-icon icon-name="utility:document_preview"
+                                  style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)"
+                                  alternative-text="File" size="x-small"></lightning-icon>
+                                <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                              </span>
+                            </div>
+                            <div if:true={notReadOnly}>
+                              <span class="deleteButtonArea">
+                                <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete"
+                                  size="x-small" alternative-text="Delete" title="Delete" data-index={index}
+                                  onclick={handleDeleteFile2}></lightning-button-icon>
+                              </span>
+                            </div>
+                          </div>
+                        </template>
+                      </div>
+                    </template>
+                  </template>
+                  <template if:true={readOnlytitleuploadedFileApostille}>
+                    <div class="uploaded-files">
+                      <template for:each={titleuploadedFileApostille} for:item="file">
+                        <div key={file} style="width: 100%" class="uploaded-file">
+                          <div class="customBorderRadius">
+                            <span class="fileContainer">
+                              <lightning-icon icon-name="utility:document_preview"
+                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)" alternative-text="File"
+                                size="x-small"></lightning-icon>
+                              <span class="fileNameContainer" title={file}>{file}</span>
+                            </span>
+                          </div>
+                        </div>
+                      </template>
+                    </div>
+                  </template>
+                </template>
+              </div>
+            </div>
+            <template if:false={hasDocumentSelected}>
+              <div class="SE-modalFormStackSectionContent">
+                <div class="slds-grid SE-modalFormStackSectionInputRow40">
+                  <div class="slds-col SE-customCol">
+                    <label class="SE-inputLabel" for="selectretrunmailtype">Select Return Mail Type</label>
+                    <lightning-combobox label="Return Mail Type" name="selectretrunmailtype" variant="label-hidden"
+                      id="selectretrunmailtype" value={shippingMethod} options={shippingOptions} disabled={isReadOnly}
+                      onchange={handleShippingMethodChange}>
+                    </lightning-combobox>
+                  </div>
+                  <div class="slds-col SE-customCol">
+                    <label class="SE-inputLabel" for="fedEx">{dynamicLabel}</label>
+                    <lightning-input label={dynamicLabel} name="fedEx" variant="label-hidden" id="fedEx" value={fedEx}
+                      placeholder={dynamicLabel} disabled={isReadOnly} onchange={handleFedExChange}>
+                    </lightning-input>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <template if:false={documentPickedUp}>
+            <div class="SE-modalFormStackSection">
+              <div class="SE-modalFormStackSectionHeader">
+                <div class="SE-modalFormStackSectionHeaderIcon">
+                  <lightning-icon icon-name="standard:service_territory_member" size="medium"></lightning-icon>
+                </div>
+                <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                  <h2 class="slds-text-heading_small headerTitle">Shipping Address</h2>
+                  <p class="slds-text-body_small">Enter shipping address on which you would like your document(s) to be
+                    received.</p>
+                </div>
+              </div>
+              <div class="SE-modalFormStackSectionContent">
+                <div class="slds-grid SE-modalFormStackSectionInputRow"></div>
+                <div class="form-group full-width inputSectionClassForSpecificCss">
+                  <template if:true={isReadOnly}>
+                    <lightning-input-address class="address"
+                      address-lookup-placeholder="Search country, city, state, street...." street={addressLine1}
+                      street-label="Address Line 1" street-placeholder="e.g., 123 Main St" subpremise={suite}
+                      subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                      subpremise-label="Suite/Apartment/Floor" city-label="City" city={city}
+                      city-placeholder="Select City" province-label="State" province={state}
+                      province-placeholder="Select  State" postal-code={zipCode} postal-code-label="Zip Code"
+                      postal-code-placeholder="e.g., 10001" country-label="Country" country={country}
+                      country-placeholder="Select Country" disabled={isReadOnly} onchange={handleAddressChange}
+                      show-compact-address required>
+                    </lightning-input-address>
+                  </template>
+                  <template if:false={isReadOnly}>
+                    <lightning-input-address class="address SE-searchCardInputLabel"
+                      address-lookup-placeholder="Search country, city, state, street...." street={addressLine1}
+                      street-label="Address Line 1" street-placeholder="e.g., 123 Main St" subpremise={suite}
+                      subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                      subpremise-label="Suite/Apartment/Floor" city-label="City" city={city}
+                      city-placeholder="Select City" province-label="State" province={state}
+                      province-placeholder="Select  State" postal-code={zipCode} postal-code-label="Zip Code"
+                      postal-code-placeholder="e.g., 10001" country-label="Country" country={country}
+                      country-placeholder="Select Country" disabled={isReadOnly} onchange={handleAddressChange}
+                      show-address-lookup show-compact-address required>
+                    </lightning-input-address>
+                  </template>
+                  <p if:true={validationError} class="slds-text-color_error">{validationError}</p>
+                </div>
+              </div>
+            </div>
+          </template>
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSectionHeader">
+              <div class="SE-modalFormStackSectionHeaderIcon">
+                <lightning-icon icon-name="standard:service_resource" size="medium"></lightning-icon>
+              </div>
+              <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                <h2 class="slds-text-heading_small headerTitle">Additional Services Required</h2>
+                <p class="slds-text-body_small">Enter any additional services required</p>
+              </div>
+            </div>
+            <div class="SE-modalFormStackSectionContent">
+              <div class="slds-grid slds-wrap slds-p-horizontal_small">
+                <div class="slds-col slds-size_1-of-1">
+                  <label class="SE-inputLabel" for="memo">Additional Services Requested</label>
+                  <lightning-textarea name="memo" value={additionalServiceRequest} disabled={isReadOnly}
+                    onchange={handleAdditionalServiceChange}></lightning-textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSectionHeader">
+              <div class="SE-modalFormStackSectionHeaderIcon">
+                <lightning-icon icon-name="doctype:unknown" size="medium"></lightning-icon>
+              </div>
+              <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                <h2 class="slds-text-heading_small headerTitle">Memo & Notes</h2>
+                <p class="slds-text-body_small">Enter any memo or notes if required</p>
+              </div>
+            </div>
+            <div class="SE-modalFormStackSectionContent">
+              <div class="slds-grid SE-modalFormStackSectionInputRow">
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="memo">Memo</label>
+                  <lightning-textarea name="memo" value={memo} onchange={handleMemoChange}
+                    disabled={isReadOnly}></lightning-textarea>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="notes">Notes</label>
+                  <lightning-textarea name="notes" value={notes} onchange={handleNotesChange}
+                    disabled={isReadOnly}></lightning-textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="SE-modalFormStackSection">
+            <div class="SE-modalFormStackSectionHeader">
+              <div class="SE-modalFormStackSectionHeaderIcon">
+                <lightning-icon icon-name="standard:service_territory_member" size="medium"></lightning-icon>
+              </div>
+              <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                <h2 class="slds-text-heading_small headerTitle">Modification Details</h2>
+                <p class="slds-text-body_small">Enter the name of person modifying details</p>
+              </div>
+            </div>
+            <div class="SE-modalFormStackSectionContent">
+              <div class="slds-grid SE-modalFormStackSectionInputRow40">
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="modifiedBy">Modified By</label>
+                  <lightning-input label="Modified By" name="modifiedBy" variant="label-hidden" id="modifiedBy"
+                    value={modifiedBy} placeholder={modifiedBy} disabled="true">
+                  </lightning-input>
+                </div>
+                <div class="slds-col SE-customCol">
+                  <label class="SE-inputLabel" for="ModifiedDate">Modified Date</label>
+                  <lightning-input label="Modified Date" name="modifiedDate" variant="label-hidden" id="modifiedDate"
+                    type="date" value={ModifiedDate} placeholder={ModifiedDate} disabled="true" date-style="short">
+                  </lightning-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="SE-modalFooter">
+        <div class="slds-button-group">
+          <div class="button-left-group">
+            <template if:true={isReadOnly}>
+              <lightning-button label="Print Payment Receipt" variant="neutral" class="button-spacing print-buttons"
+                onclick={handlePrintPaymentReceipt}></lightning-button>
+              <lightning-button label="Print Apostille Submission Document" variant="neutral"
+                class="button-spacing print-buttons" onclick={printApostilleSubmissionDoc}></lightning-button>
+              <lightning-button label="Print Order Details" variant="neutral" class="button-spacing print-buttons"
+                onclick={handlePrintOrderDetails}></lightning-button>
+              <template if:true={checkStatusAsOrderComplete}>
+                <lightning-button label="Print All Certificates" variant="neutral" class="button-spacing print-buttons"
+                  onclick={handlePrintAllCertificate}></lightning-button>
+              </template>
+            </template>
+          </div>
+          <div class="button-right-group SE-modalFooterButtonGroup">
+            <template if:true={isReadOnly}>
+              <button class="slds-button SE-borderLessButton" onclick={goBackModal}>Cancel</button>
+            </template>
+            <template if:false={isReadOnly}>
+              <button class="slds-button SE-borderLessButton" onclick={cancelEditPage}>Cancel</button>
+              <lightning-button variant="brand" label="Save" class="save-button" onclick={handleAdd}></lightning-button>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+    <template if:true={footerOprions}>
+      <div class="spinner-container">
+        <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+        <p class="saving-message">Saving...</p>
+      </div>
+    </template>
+    <c-sap_-toast-message-state-modal></c-sap_-toast-message-state-modal>
+    <c-sap_-pdf-generator data-id="pdfgenerator" signed-by={signedBy} person-name={fullName}
+      judicial-district={judicialDistrict} letter-type={letterType} wet-sign={wetSign} position={position}>
+    </c-sap_-pdf-generator>
+    <c-sap_-pdf-genrator data-id="pdfGeneratorOrderDeails" applied-date={appliedDate}
+      work-order-number={workOrderNumberModal} address-line={addressLine} city={cityModal} state={stateModal}
+      zip-code={zipCodeModal} individual-name={individualName} item-details={itemDetails}
+      payment-details={paymentDetailsModal}></c-sap_-pdf-genrator>
+    <!-- PDF Generator Component -->
+    <c-sap_-pdf-genrator data-id="pdfGenerator" individual-application-id={recordId} auth-code={authCode} price={price}
+      payment-method={paymentMethod} payment-date={paymentDate} card-name={creditCardName}
+      card-last-digit={cardLastDigit}>
+    </c-sap_-pdf-genrator>
+
+    <template if:true={isModalOpen}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header headerClass">
+            <div class="headerContainer">
+              <h2 class="headingClass">
+                <template if:false={sotsUpload}>Upload Additional Shipping Label</template>
+                <template if:true={sotsUpload}>Upload File</template>
+              </h2>
+              <div class="fileUploadClose">
+                <template if:false={sotsUpload}>
+                  <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close"
+                    onclick={closeUploadModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                  </button>
+                </template>
+                <template if:true={sotsUpload}>
+                  <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close"
+                    onclick={closeUploadSotsModal}>
+                    <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                  </button>
+                </template>
+              </div>
+            </div>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium modalContent">
+            <div class="internalheading">
+              <span class="textClass">
+                <template if:false={sotsUpload}>Upload Additional Shipping Label</template>
+                <template if:true={sotsUpload}>Upload File</template>
+              </span>
+              <span style="color: red">*</span>
+            </div>
+            <template if:true={sotsUpload}>
+              <template if:true={isFileLoading}>
+                <div class="spinner-container">
+                  <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                </div>
+              </template>
+              <template if:false={isFileLoading}>
+                <div class="internalBorder">
+                  <lightning-input type="file" class="fileUploadContainer"
+                    accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" name="docUpload" label="Attachment"
+                    onchange={handleUploadFinishedSot}></lightning-input>
+                </div>
+              </template>
+            </template>
+            <template if:false={sotsUpload}>
+              <template if:true={prePaidFileLoader}>
+                <div class="spinner-container">
+                  <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                </div>
+              </template>
+              <template if:false={prePaidFileLoader}>
+                <div class="internalBorder">
+                  <lightning-input type="file" class="fileUploadContainer"
+                    accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" multiple label="Attachment"
+                    onchange={handleUploadFinished}></lightning-input>
+                </div>
+              </template>
+            </template>
+            <template if:true={uploadedFiles.length}>
+              <template if:false={sotsUpload}>
+                <template if:true={prePaidFileLoader}>
+                  <div class="spinner-container">
+                    <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                  </div>
+                </template>
+
+                <template if:false={prePaidFileLoader}>
+                  <div class="uploaded-files">
+                    <template for:each={uploadedFiles} for:item="file" for:index="index">
+                      <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                        <div class="fileNameClass file-info" onclick={handleFileDownload} data-id={file.documentId}
+                          data-name={file.filename}>
+                          <span class="fileContainer">
+                            <lightning-icon icon-name="utility:document_preview"
+                              style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)" alternative-text="File"
+                              size="x-small">
+                            </lightning-icon>
+                            <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                          </span>
+                        </div>
+                        <div>
+                          <span class="deleteButtonArea">
+                            <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete"
+                              size="x-small" alternative-text="Delete" title="Delete" data-index={index}
+                              onclick={handleDeleteFile}>
+                            </lightning-button-icon>
+                          </span>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </template>
+              </template>
+            </template>
+            <template if:true={sotsUpload}>
+              <template if:true={isFileLoading}>
+                <div class="spinner-container">
+                  <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                </div>
+              </template>
+              <template if:false={isFileLoading}>
+                <div class="uploaded-files">
+                  <template if:true={hasUploadedFiles}>
+                    <template for:each={hasUploadedFiles} for:item="doc">
+                      <template if:true={doc.uploadedFiles}>
+                        <template if:true={doc.uploadedFiles.length}>
+                          <template for:each={doc.uploadedFiles} for:item="file">
+                            <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                              <div class="fileNameClass">
+                                <span class="fileContainer">
+                                  <lightning-icon icon-name="utility:document_preview"
+                                    style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211)"
+                                    alternative-text="File" size="x-small">
+                                  </lightning-icon>
+                                  <span class="fileNameContainer" title={file.filename}> {file.filename} </span>
+                                </span>
+                              </div>
+                              <div>
+                                <span class="deleteButtonArea">
+                                  <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete"
+                                    size="x-small" alternative-text="Delete" title="Delete" data-id={file.documentId}
+                                    onclick={deleteFileSot}>
+                                  </lightning-button-icon>
+                                </span>
+                              </div>
+                            </div>
+                          </template>
+                        </template>
+                      </template>
+                    </template>
+                  </template>
+                </div>
+              </template>
+            </template>
+          </div>
+          <footer class="footerContainer">
+            <div class="footerButtonContainer">
+              <template if:true={sotsUpload}>
+                <button class="slds-button slds-button_neutral cancelButtonFooter"
+                  onclick={closeUploadSotsModal}>Cancel</button>
+              </template>
+              <template if:false={sotsUpload}>
+                <button class="slds-button slds-button_neutral cancelButtonFooter"
+                  onclick={closeUploadModal}>Cancel</button>
+              </template>
+              <button class="slds-button slds-button_brand uploadButtonFooter" onclick={handleUpload}>Upload</button>
+            </div>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- <template if:true={isModalOpen2}>
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header headerClass">
+                        <div class="headerContainer">
+                            <h2 class="headingClass" title="Upload Additional Shipping Label">Upload Additional Shipping
+                                Label</h2>
+                            <div class="fileUploadClose">
+                                <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton"
+                                    title="Close" onclick={closeUploadModal2}>
+                                    <lightning-icon icon-name="utility:close" alternative-text="close"
+                                        size="small"></lightning-icon>
+                                    <span class="slds-assistive-text">Close</span>
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium modalContent">
+                        <div class="internalheading">
+                            <span class="textClass">e-Apostille customer upload</span>
+                            <span style="color:     red;">*</span>
+                        </div>
+                        <div class="internalBorder ">
+                            <lightning-input type="file" class="fileUploadContainer"
+                                accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" multiple label="Attachment"
+                                onchange={handleUploadFinished2}></lightning-input>
+                        </div>
+                        <template if:true={uploadedFileApostille.length}>
+                            <div class="uploaded-files">
+                                <template for:each={uploadedFileApostille} for:item="file" for:index="index">
+                                    <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                                        <div class="fileNameClass">
+                                            <span class="fileContainer">
+                                                <lightning-icon icon-name="utility:document_preview"
+                                                    style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); "
+                                                    alternative-text="File" size="x-small"></lightning-icon>
+                                                <span class="fileNameContainer"
+                                                    title={file.filename}>{file.filename}</span>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span class="deleteButtonArea">
+                                                <lightning-button-icon class="deleteButtonContainer"
+                                                    icon-name="utility:delete" size="x-small" alternative-text="Delete"
+                                                    title="Delete" data-index={index}
+                                                    onclick={handleDeleteFile2}></lightning-button-icon>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </template>
+                    </div>
+                    <footer class="footerContainer">
+                        <div class="footerButtonContainer">
+                            <button class="slds-button slds-button_neutral cancelButtonFooter"
+                                onclick={closeUploadModal2}>Cancel</button>
+                            <button class="slds-button slds-button_brand uploadButtonFooter"
+                                onclick={handleUpload2}>Upload</button>
+                        </div>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template> -->
+    <template if:true={rejectionModal}>
+      <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+        <div class="rejectionModal slds-modal__container">
+          <header class="slds-modal__header rejectionHeader">
+            <div class="headerContainer">
+              <h2 class="headingClass" title="Upload File">Rejection/Cancellation Reason(s)</h2>
+              <div class="fileUploadClose">
+                <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close"
+                  onclick={closeRejectionModal}>
+                  <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+              </div>
+            </div>
+          </header>
+          <div class="slds-modal__content slds-p-around_medium">
+            <div class="modalcontent">
+              <div class="contentheader">
+                <h3 class="selectTitle slds-text-title_bold">Select Rejection Reason(s)</h3>
+                <button class="slds-button slds-button_neutral resetButton" onclick={handleReset}>Reset</button>
+              </div>
+              <template if:true={rejectionReasonOptions}>
+                <template for:each={rejectionReasonOptions} for:item="reason">
+                  <div key={reason.value} class="slds-p-top_small">
+                    <lightning-input class="checkboxText" type="checkbox" label={reason.label} data-value={reason.value}
+                      onchange={handleReasonChange}> </lightning-input>
+                  </div>
+                </template>
+              </template>
+            </div>
+            <div class="slds-p-top_medium">
+              <lightning-textarea id="customReason" label="Custom Rejection Reason (if applicable)"
+                class="SE-searchCardInputLabel rejectionTextArea"
+                placeholder="Enter additional rejection reason if any..." value={customRejectionReason}
+                onchange={handleCustomReasonChange}>
+              </lightning-textarea>
+            </div>
+          </div>
+          <footer class="footerRejection">
+            <div class="footerButtonContainer">
+              <button class="slds-button slds-button_neutral cancelButtonFooter"
+                onclick={closeRejectionModal}>Cancel</button>
+              <button class="slds-button slds-button_brand rejectionButtonFooter" onclick={handleRejection}>Confirm
+                Rejection</button>
+            </div>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={printAllCertificate}>
+      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+        class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container certificate_container">
+          <div class="slds-modal__header">
+            <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">Print All Certificates</h1>
+          </div>
+          <div class="slds-modal__content slds-p-around_small" id="modal-content-id-1">
+            <template if:true={documentsForPrintCertificate.length}>
+              <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                  <tr class="slds-line-height_reset">
+                    <th scope="col">
+                      <div class="slds-truncate" title="Name">Name / Copy No.</div>
+                    </th>
+                    <th scope="col">
+                      <div class="slds-truncate" title="Type of Document">Type of Document</div>
+                    </th>
+                    <th scope="col">
+                      <div class="slds-truncate" title="View Certificate">Certificate Number</div>
+                    </th>
+                    <th scope="col">
+                      <div class="slds-truncate" title="View Certificate">Download Certificate</div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template for:each={documentsForPrintCertificate} for:item="doc">
+                    <tr key={doc.docId}>
+                      <td>
+                        <template if:true={doc.copyNumber}>
+                          <div class="slds-truncate" title={doc.copyNumber}>{doc.copyNumber}</div>
+                        </template>
+                        <template if:false={doc.copyNumber}>
+                          <div class="slds-truncate" title={doc.personName}>{doc.personName}</div>
+                        </template>
+                      </td>
+                      <td>
+                        <div class="slds-truncate" title={doc.docType}>{doc.docType}</div>
+                      </td>
+                      <td>
+                        <div class="slds-truncate" title={doc.certificateNo}>{doc.certificateNo}</div>
+                      </td>
+                      <!-- <td>
+                        <a
+                          href="javascript:void(0);"
+                          title="View Certificate"
+                          data-id={doc.parentRecordId}
+                          data-doc={doc.docType}
+                          data-docid={doc.docId}
+                          data-certificate={doc.certificateNo}
+                          data-status={doc.status}
+                          data-signedby={doc.signedBy}
+                          data-position={doc.position}
+                          data-destination={doc.destination}
+                          data-haguestatus={doc.hagueStatus}
+                          data-lastmoddate={doc.lastModDate}
+                          data-signingauthorityname={doc.signingAuthorityName}
+                          data-signingauthoritytitle={doc.signningAuthorityTitle}
+                          data-sealstramp={doc.sealStramp}
+                          class="slds-text-link"
+                          onclick={openCertificateModal}>
+                          View Certificate
+                        </a>
+                      </td> -->
+                      <td>
+                        <a href="javascript:void(0);" title="View Certificate" data-id={doc.parentRecordId}
+                          data-doc={doc.docType} data-docid={doc.docId} data-certificate={doc.certificateNo}
+                          data-status={doc.status} data-signedby={doc.signedBy} data-position={doc.position}
+                          data-destination={doc.destination} data-haguestatus={doc.hagueStatus}
+                          data-lastmoddate={doc.lastModDate} data-signingauthorityname={doc.signingAuthorityName}
+                          data-signingauthoritytitle={doc.signningAuthorityTitle} data-sealstramp={doc.sealStramp}
+                          class="slds-text-link" onclick={openCertificateModalDownload}>
+                          Download Certificate
+                        </a>
+                      </td>
+                    </tr>
+                  </template>
+                </tbody>
+              </table>
+            </template>
+            <template if:false={documentsForPrintCertificate.length}>
+              <div class="slds-text-align_center slds-m-top_medium slds-m-bottom_medium">
+                <p class="slds-text-body_regular">There are no certificates to display.</p>
+              </div>
+            </template>
+          </div>
+          <div class="slds-modal__footer printCertiFooter">
+            <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+              onclick={closePrintAllCerti}>Cancel</button>
+          </div>
+        </div>
+        <template if:true={generateCertificate}>
+          <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+          </div>
+        </template>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+      <c-sap_-pdf-genrator data-id="pdfGenrator"> </c-sap_-pdf-genrator>
+      <c-sap_-apostille-pdf-generator></c-sap_-apostille-pdf-generator>
+      <c-sap_-toast-message-state-modal></c-sap_-toast-message-state-modal>
+    </template>
+    <template if:true={showConfirmationModal}>
+      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+        class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container certificate_container">
+          <header class="slds-modal__header">
+            <h2 class="slds-text-heading_medium">Confirm Deletion</h2>
+          </header>
+          <div class="slds-modal__content slds-p-around_small">
+            <p>Are you sure you want to delete this Payment?</p>
+          </div>
+          <footer class="slds-modal__footer printCertiFooter">
+            <lightning-button label="No" class="slds-button SE-borderLessButton"
+              onclick={cancelDelete}></lightning-button>
+            <lightning-button label="Yes" class="save-button" variant="brand"
+              onclick={confirmDelete}></lightning-button>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  </template>
+</template>

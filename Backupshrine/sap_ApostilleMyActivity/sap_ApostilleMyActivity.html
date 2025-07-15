@@ -1,0 +1,59 @@
+<template>
+        <div class="activity-header classForMyActivityTodayIconCss">
+            <h2 class="title">{labels.AllActivity}</h2>
+            <lightning-button 
+                icon-name="utility:date_input" 
+                size="small" 
+                label={labels.Today}
+                variant="Base" 
+                class="today-button"
+                onclick={TodayClicked} >
+            </lightning-button>
+        </div>
+
+        <hr>
+
+        <div>
+            <span class="card-description">{labels.MonitorActions}</span>
+        </div>
+
+        <!-- Activity Summary Section -->
+        <div class="activity-summary">
+            <div class="activity-card submitted">
+                <a href="/eApostille/dashboard/submittedrequests" class="anchor">
+                    <div class="card-header">
+                        <span class="card-title">{labels.Submitted}</span>
+                    </div>
+                    <div class="card-count-container">
+                        <span class="card-count">{submittedCountText}</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="activity-card approved">
+                <a href="/eApostille/dashboard/letterandcertificate" class="anchor">
+                    <div class="card-header">
+                        <span class="card-title">{labels.Completed}</span>
+                    </div>
+                    <div class="card-count-container">
+                        <span class="card-count">{completedCountText}</span>
+                    </div>
+                </a>
+            </div>
+            <div class="activity-card rejected">
+                <a href="/eApostille/dashboard/draft" class="anchor">
+                <div class="card-header">
+                    <span class="card-title">{labels.Draft}</span>
+                </div>
+                <div class="card-count-container">
+                    <span class="card-count">{draftedCountText}</span>
+                </div>
+            </a>
+            </div>
+        </div>
+
+        <template if:true={TodayButton}>
+            <c-sap_-calender  data-id="TodayButton" ondateselected={changeCountForSelectedDate} onclick={handleChildClick}></c-sap_-calender>
+        </template>
+
+</template>

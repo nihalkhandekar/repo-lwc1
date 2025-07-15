@@ -1,0 +1,155 @@
+<template>
+  <div class="fin-mainBody">
+    <div class="SE-content">
+      <template if:true={isLoading}>
+        <div class="spinner-container">
+          <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+        </div>
+      </template>
+      <template if:false={isLoading}>
+        <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+          <div class="slds-grid slds-grid_align-end">
+            <div class="buttoncontainerfilter buttoncontainerfilter">
+              <div class="left-button">
+                <span class="slds-text-title_bold slds-m-right_x-small">CORE-CT Deposit Summary</span>
+              </div>
+
+              <div class="right-buttons">
+                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay} onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek} onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth} onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-quarter" label="This Quarter" class={badgeClassThisQuarter} onclick={handleBadgeClick}> </lightning-badge>
+                <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear} onclick={handleBadgeClick}> </lightning-badge>
+
+                <lightning-button-menu
+                  icon-position="right"
+                  variant="bare"
+                  data-id="filterMenu"
+                  alternative-text="Filter By Disposition"
+                  title="Filter"
+                  icon-name="utility:filterList"
+                  label="Filter by Status"
+                  onselect={handleFilterSelect}>
+                  <lightning-menu-item label="Open" value="Open"></lightning-menu-item>
+                  <lightning-menu-item label="Closed" value="Closed"></lightning-menu-item>
+                  <lightning-menu-item label="Sealed" value="Sealed"></lightning-menu-item>
+                </lightning-button-menu>
+              </div>
+            </div>
+          </div>
+          <template if:true={recordCount}>
+            <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+              <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                <thead>
+                  <tr class="custom-header TrHoverBackGroundColorChange">
+                    <th scope="col" onclick={sortByField} data-field="SAP_Batch_Name__c">
+                      <div class="slds-truncate" title="Batch Code - Date">
+                        Batch Code - Date
+                        <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                      </div>
+                    </th>
+
+                    <th scope="col" onclick={sortByField} data-field="SAP_Transacation_Count__c">
+                      <div class="slds-truncate" title="Transaction Count ">
+                        Transaction Count
+                        <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                      </div>
+                    </th>
+
+                    <th scope="col" data-field="TotalFeeAmount">
+                      <div class="slds-truncate" title="Total Amount">
+                        Transaction Amount
+                      </div>
+                    </th>
+                    <th scope="col" onclick={sortByField} data-field="SAP_Batch_Status__c">
+                      <div class="slds-truncate" title="Batch Status">
+                        Batch Status
+                        <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                      </div>
+                    </th>
+                    <th scope="col">
+                      <div class="slds-truncate" title="Action"></div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <template if:true={isRecordsLoading}>
+                    <tr class="no-border-row TrHoverBackGroundColorChange">
+                      <td colspan="9" class="slds-text-align_center loader-row">
+                        <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                      </td>
+                    </tr>
+                  </template>
+                  <template if:false={isRecordsLoading}>
+                    <template for:each={paginatedResult} for:item="row">
+                      <tr key={row.UniqueId} class="custom-column">
+                        <td>
+                          <div class="slds-truncate" title={row.BatchName}>{row.BatchName}</div>
+                        </td>
+
+                        <td>
+                          <div class="slds-truncate" title={row.TransactionCount}>{row.TransactionCount}</div>
+                        </td>
+
+                        <td>
+                          <div class="slds-truncate slds-text-align_right" title={row.totalAmount}>{row.totalAmount}</div>
+                        </td>
+                        <td>
+                          <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-spread">
+                            <div class="slds-truncate slds-m-right_small" title={row.BatchStatus} data-status={row.BatchStatus}>{row.BatchStatus}</div>
+                            <div class="slds-p-around_xx-small lgc-bg">
+                              <lightning-button-menu
+                                alternative-text="Show menu"
+                                variant="border-filled"
+                                menu-alignment="auto"
+                                class="statusMenu"
+                                data-id={row.id}
+                                onselect={handleMenuSelect}>
+                                <lightning-menu-item value="Open" label="Open"></lightning-menu-item>
+                                <lightning-menu-item value="Closed" label="Closed"></lightning-menu-item>
+                                <lightning-menu-item value="Sealed" label="Sealed"></lightning-menu-item>
+                                <lightning-menu-item value="Unseal" label="Unseal"></lightning-menu-item>
+                              </lightning-button-menu>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div class="slds-truncate clickable-text" title="View Batch" onclick={handleViewBatch} data-id={row.id}>View Batch</div>
+                        </td>
+                      </tr>
+                    </template>
+                  </template>
+                </tbody>
+              </table>
+            </div>
+
+            <template if:true={showPages}>
+              <div class="pagination-container">
+                <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage} disabled={isPreviousDisabled} variant="neutral"> </lightning-button>
+
+                <div class="page-info">
+                  <span class="page-range">{startRecord}-{endRecord} of {totalRecords}</span>
+                  <span class="page-text">
+                    &nbsp; | Page &nbsp;
+                    <lightning-input type="number" value={currentPage} label="Current Page" variant="label-hidden" class="current-page-input" onchange={handlePageChange}>
+                    </lightning-input>
+                    &nbsp; of {totalPages}
+                  </span>
+                </div>
+
+                <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage} disabled={isNextDisabled} variant="neutral"> </lightning-button>
+              </div>
+            </template>
+          </template>
+          <template if:false={recordCount}>
+            <p class="no-data-message">“No requests found for the given criteria.”</p>
+          </template>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <c-sap_-finsys-dashboar-export-to-excel></c-sap_-finsys-dashboar-export-to-excel>
+  <c-sap_-finsys-dashboard-pdf-generator></c-sap_-finsys-dashboard-pdf-generator>
+</template>

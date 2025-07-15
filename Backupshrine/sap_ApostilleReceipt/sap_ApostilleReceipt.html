@@ -1,0 +1,36 @@
+<template>
+    <lightning-modal-header label="Receipt">
+            <lightning-icon class="close-icon" icon-name="utility:close" size="small" onclick={handleCancel}></lightning-icon>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="slds-p-around_small">
+            <p class="modal-text work-order">Work Order#: {workOrderNumber}</p>
+            <p class="modal-text total-amount">
+                Total Amount Paid: ${price}
+            </p>
+            <p class="modal-text">Payment Method: {paymentMethod}</p>
+            <p class="modal-text">Auth Code: {authCode}</p>
+            <p class="modal-text">Date of Payment: {PaymentDate}</p>
+        </div>
+    </lightning-modal-body>
+    
+    <lightning-modal-footer>
+        <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+        <lightning-button variant="brand" label="Download Payment Receipt" icon-name="utility:download" onclick={handleDownloadReceipt}></lightning-button>
+    </lightning-modal-footer>
+    <!-- <c-sap_-pdf-genrator data-id="pdfGenerator" records={records}></c-sap_-pdf-genrator> -->
+    <c-sap_-pdf-genrator data-id="pdfGenerator" 
+    work-order-numb={workOrderNumber} 
+    auth-code={authCode} 
+    price='{price}' 
+    payment-method={paymentMethod} 
+    payment-date={PaymentDate} 
+    requestor-name={requestorName}
+    paid-for={paidFor}
+    card-name={CreditCardName}
+    card-last-digit={CardLastDigit}
+    total-fee={totalFee} expedite-fee={expediteFee} documents-requested={documentsRequested}
+    ></c-sap_-pdf-genrator>
+
+</template>

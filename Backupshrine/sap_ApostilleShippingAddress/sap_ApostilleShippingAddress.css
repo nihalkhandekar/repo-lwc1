@@ -1,0 +1,204 @@
+/* Apostille Container */
+
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Regular.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Bold.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+
+/* Styles to ensure input borders are visible in read-only mode */
+/* .address input[readOnly],
+.input-field[readOnly] {
+    border: 1px solid #C9C9C9 !important; 
+    background-color: #FFFFFF !important; 
+    width: 100% !important;
+    
+    border-radius: 8px 8px 8px 8px !important;
+    font-weight: 400 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    opacity: 0px !important;
+    padding-left: 10px !important;
+    --slds-c-input-color-border: transparent;
+    height: 34px;
+} */
+
+
+.apostille-container {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
+    font-family: 'SF Pro', sans-serif;
+    max-width: 1200px; /* Limit container width */
+}
+
+
+
+/* Custom Card Header */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #FAFCFF;
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 0 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+/* Header Title */
+.header-text .title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    padding-left: 1.5rem;
+    font-family: 'SF Pro', sans-serif; 
+}
+
+/* Header Description */
+.header-text .description {
+    font-size: 0.75rem;
+    color: #6b7078;
+    padding-left: 1.5rem;
+    font-family: 'SF Pro', sans-serif; 
+}
+
+/* Input Section */
+.input-section {
+    background-color: #ffffff;
+    padding: 1rem;
+    border: 1px solid #FAFCFF;
+    border-radius: 0 0 1rem 1rem;
+    max-width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+/* Input Group */
+.input-group {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.input-group .input-field {
+    flex: 1;
+    min-width: calc(50% - 1rem); /* Ensure fields take up half width with spacing */
+}
+
+/* Organization Field Specific Styling */
+.organization-field {
+    width: 48.5%;
+    margin-bottom: 1.5rem;
+    font-family: 'SF Pro', sans-serif; /* Ensuring SF Pro is used */
+}
+
+/* Icon Input Container */
+.icon-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex: 1;
+}
+
+.slds-form-element__help .slds-form-element__helper {
+    display: inline;
+}
+
+.left-icon {
+    position: absolute;
+    left: 0.625rem;
+    z-index: 1;
+    pointer-events: none; /* Prevent icon from blocking input */
+}
+
+.icon-input-container .input-field {
+    padding-left: 0rem; /* Ensure the icon doesn't overlap input text */
+    
+}
+
+/* Dotted Line Divider */
+.dotted-line {
+    border-top: 1px dotted #aeaeae;
+    margin: 1.5rem 0;
+}
+
+.address {
+    --sds-c-textarea-color-background:#FFFFFF;
+    --textarea-color-background:#FFFFFF;
+    --sds-c-input-color-background:#FFFFFF;
+    --input-color-background:#FFFFFF;
+    --dxp-c-textarea-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --dxp-s-form-element-text-line-height: 20px;
+    --dxp-s-form-element-text-font-size: 14px;
+    --dxp-s-form-element-color-border:#C9C9C9;
+    --sds-c-textarea-text-color:#181818;
+    --dxp-s-form-element-text-color:#181818;
+    --lwc-borderWidthThin:1px;
+    --lwc-formLabelFontSize: 12px;
+    font-weight: 590;
+    --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+    --slds-c-input-color-background:#FFFFFF;
+    --slds-c-input-color-border:#C9C9C9;
+    --slds-c-input-radius-border:8px 8px 8px 8px;
+    --sds-c-textarea-radius-border:8px 8px 8px 8px;
+    --slds-c-textarea-color-background:#FFFFFF;
+    --slds-c-textarea-color-border:#C9C9C9;
+    --sds-c-input-text-color:#181818;
+    --sds-c-textarea-color-border:#C9C9C9;
+    --dxp-c-textarea-width-border:1px;
+    --sds-c-input-color-border:#C9C9C9;
+    --slds-c-textarea-radius-border:8px 8px 8px 8px;
+    --dxp-c-input-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --sds-c-input-radius-border:8px 8px 8px 8px;
+    --dxp-s-form-element-label-font-size: 12px;
+    --dxp-s-form-element-label-font-weight: 590;
+    --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+    --dxp-c-input-width-border: 1px;
+}
+.address .slds-form-element__control input[name="state"],
+.address .slds-form-element__control input[name="country"],
+.address .slds-form-element__control input[name="city"],
+.address .slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+
+.slds-form-element__control input[name="state"],
+.slds-form-element__control input[name="country"],
+.slds-form-element__control input[name="city"],
+.slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+
+
+/* Media Queries for Responsive Design */
+@media screen and (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .custom-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

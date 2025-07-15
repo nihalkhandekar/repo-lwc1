@@ -1,0 +1,144 @@
+<template>
+  <div class="containermain">
+    <!-- Left Section -->
+    <div class="containerleft">
+      <!-- Header Section -->
+      <div class="header1container">
+        <div class="header1icon">
+          <lightning-icon icon-name="standard:contract_line_outcome" size="large"></lightning-icon>
+        </div>
+        <div class="header1body">
+          <div class="header1bodyuppersection">{labels.Confirmation}</div>
+        </div>
+      </div>
+
+      <!-- Information Section -->
+      <div class="bodymain">
+        <span class="slds-form-element__label"><b>{labels.ThankYou}, {firstName} {lastName}</b></span>
+        <span class="slds-form-element__label">
+          {labels.YourapostillerequesthasbeensuccessfullysubmittedBelowarethedetailsofyourrequest}:
+          <span class="request-details"> {labels.WorkOrderNumber}: <b>{workOrderNumber}</b> </span>
+        </span>
+
+        <span class="slds-form-element__label"><b>{labels.NextSteps}</b></span>
+        <div class="next-steps">
+          <span class="slds-form-element__label"><b>{labels.PrintAndMailRS}</b></span>
+          <span class="slds-form-element__label">
+            {labels.PrintAndMailRStext}
+          </span>
+          <span class="slds-form-element__label">
+            {labels.PrintAndMailRStextTwo}
+          </span>
+          <span class="slds-form-element__label"><b>{labels.returnShippingLabel}</b></span>
+          <span class="slds-form-element__label">
+            {labels.returnShippingLabelone}
+          </span>
+          <span class="slds-form-element__label">
+            {labels.returnShippingLabeltwo}
+          </span>
+        </div>
+        
+        <span class="slds-form-element__label">
+          <span class="request-details"> <b>{labels.note}:</b>{labels.WeAreNotResponsibleFor} </span>
+        </span>
+        <div class="next-steps">
+          <span class="slds-form-element__label"><b>{labels.processingTimeline}:</b></span>
+          <span class="slds-form-element__label">
+            {labels.processingTimelineTextOne}
+          </span>
+          <span class="slds-form-element__label">
+            {labels.processingTimelineTextTwo}
+          </span>
+        </div>
+        
+
+
+        <!-- Preferred Method Section -->
+        <span class="slds-form-element__label"><b>{labels.shippingTitle}</b></span>
+        <div class="bodysection2">
+          <div class="bodysection2upperpart">
+            <p class="bodysection2upperpartleft">{labels.PreferredMethod}:</p>
+            <p class="bodysection2upperpartright">{labels.MailingAddress}:</p>
+          </div>
+          <div class="bodysection2lowerpart">
+            <p class="bodysection2lowerpartleft">{labels.HanddeliveryoforiginaldocumentorsendviaFedEUPSorDHL}:</p>
+            <p class="bodysection2lowerpartright">"Secretary of the State, Authentications and Apostille Unit, 165 Capitol Avenue Suite 1000, Hartford, CT 06106"</p>
+          </div>
+        </div>
+
+        <!-- First Class or Priority Mail Section -->
+        <div class="bodysection2">
+          <div class="bodysection2upperpart">
+            <p class="bodysection2upperpartleft">{labels.FirstClassOrPriorityMail}</p>
+            <p class="bodysection2upperpartright">{labels.MailingAddress}:</p>
+          </div>
+          <div class="bodysection2lowerpart">
+            <p class="bodysection2lowerpartleft">{labels.FirstClassorPrioritMailthroughtheUSPostalService}</p>
+            <p class="bodysection2lowerpartright">"Secretary of the State, Authentications and Apostille Unit, P.O. Box 150470, Hartford, CT 06115-0470"</p>
+          </div>
+        </div>
+        <span class="slds-form-element__label"><b>{labels.TrackyourRequest}:</b></span>
+        <span class="slds-form-element__label">
+          {labels.TrackyourRequestTextOne}
+        </span>
+        <span class="slds-form-element__label">
+          <span class="request-details">
+            <p class="track-link" onclick={navigateToTrack}>{labels.TrackYourApostilleRequest}</p>
+          </span>
+        </span>
+        <div class="button-container">
+          <lightning-button variant="brand" class="button-text download-button" label={labels.DownloadButtonConfirmation} icon-name="utility:download" onclick={handleDownload}></lightning-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="containerright">
+      <!-- Contact Header -->
+      <div class="header2container">
+        <div class="header2icon">
+          <lightning-icon icon-name="standard:answer_best" size="large"></lightning-icon>
+        </div>
+        <div class="header2body">
+          <div class="header2bodyuppersection">{labels.Questions}? {labels.ContactUs}?</div>
+          <div class="header2bodylowersection">{labels.ContactusifyouhaveanyquersperGivenMentionedDetailsBelow}</div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="body2main">
+        <div class="body2section1"><strong>{labels.Timing}: </strong> 08:30 am to 04:00 pm</div>
+        <div class="body2section1">
+          <strong>Email: </strong>
+          <a class="clicklink" href="#" onclick={handleClickMail}>bsd@ct.gov</a>
+          <template if:true={notify}>
+            <div class="slds-notify slds-notify_alert slds-alert_offline" role="alert">
+              <span class="slds-assistive-text">offline</span>
+              <span class="slds-icon_container slds-icon-utility-offline slds-m-right_x-small"> </span>
+              <h2>"mailto:bsd@ct.gov?subject=bsd%40ct.gov" {labels.copiedtoyourclipboard}</h2>
+            </div>
+          </template>
+        </div>
+
+        <div class="lineseprate"></div>
+
+        <!-- Support Ticket Section -->
+        <div class="body2section1">
+          {labels.Clickto}
+          <a class="clicklink" href="#" onclick={handleClickSupport}> {labels.CreateaSupportTicket}: </a>
+        </div>
+        <div class="body2section2">{labels.Supportticketsgodirectlytoourofficeandanagentwillreospondtoyoubyemail}</div>
+      </div>
+    </div>
+    <c-sap_-pdf-genrator
+      data-id="pdfGenerator"
+      individual-application-id={recordId}
+      auth-code={authCode}
+      price={price}
+      payment-method={paymentMethod}
+      payment-date={PaymentDate}
+      card-name={CreditCardName}
+      card-last-digit={CardLastDigit}>
+    </c-sap_-pdf-genrator>
+  </div>
+</template>

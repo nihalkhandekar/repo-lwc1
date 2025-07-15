@@ -1,0 +1,194 @@
+<template>
+
+    <lightning-modal-header class="SE-ModalHeader">
+        <div class="SE-ModalHeaderTitle specificHeader">
+            <h2>{headerText}</h2>
+
+            <template if:true={isReadOnly}>
+                <lightning-button icon-name="utility:edit" alternative-text="Edit" class="edit-button editButtonCss"
+                    onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+                    label="Edit"></lightning-button>
+            </template>
+        </div>
+        <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={closeModal}
+            class="custom-modal__close cancelButtonCss">
+        </lightning-button-icon>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="SE-modalMainBody modalBodyCssChange">
+            <div class="SE-modalFormStack">
+                <div class="SE-modalFormStackSection">
+
+                    <div class="SE-modalFormStackSectionHeader">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:user" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Personal Information</h2>
+                            <p class="slds-text-body_small">Enter required details of an individual to be added for
+                                state attorney inspector.</p>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                            <div class="slds-col SE-customCol customInputFieldHeightSet comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="Prefix">Prefix</label>
+                                <lightning-combobox label="Prefix" name="prefix" variant="label-hidden"
+                                    placeholder="Select prefix" options={prefixSelectOptions} value={prefix}
+                                    disabled={isReadOnly} onchange={handleFieldChange}></lightning-combobox>
+                            </div>
+                            <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                <label class="SE-inputLabel" for="lastName"><span
+                                        class="required-indicator">*</span>Last
+                                    Name</label>
+                                    <lightning-input label="Last Name" name="lastName" variant="label-hidden"
+                                        id="lastName" placeholder="e.g Doe" value={lastName} required class="SE-searchCardInputLabel"
+                                        disabled={isReadOnly} aria-describedby="lastNameError"
+                                        onchange={handleFieldChange} pattern="^[^0-9]+$" 
+                                        message-when-pattern-mismatch="Last name should not contain numbers.">
+                                    </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                <label class="SE-inputLabel" for="middleInitial">Middle Initial</label>
+                                <lightning-input label="Middle Initial" name="middleName" variant="label-hidden"
+                                    id="middleInitial" placeholder="e.g R" value={middleName} disabled={isReadOnly} class="SE-searchCardInputLabel"
+                                    onchange={handleFieldChange} pattern="^[^0-9]+$" 
+                                    message-when-pattern-mismatch="Middle Initial should not contain numbers.">
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol customInputFieldHeightSet">
+
+                                <label class="SE-inputLabel" for="firstName"><span
+                                    class="required-indicator">*</span>First Name</label>
+                                <lightning-input label="First Name" name="firstName" variant="label-hidden" required
+                                    id="firstName" placeholder="e.g R" value={firstName} disabled={isReadOnly}  class="SE-searchCardInputLabel"
+                                    onchange={handleFieldChange}  pattern="^[^0-9]+$" 
+                                    message-when-pattern-mismatch="First name should not contain numbers.">
+                                </lightning-input>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                            <div class="slds-col SE-customCol customInputFieldHeightSet comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="Suffix">Suffix</label>
+                                <lightning-combobox variant="label-hidden" label="Suffix" name="suffix" value={suffix}
+                                placeholder="Select suffix" options={suffixSelectOptions}
+                                onchange={handleFieldChange} read-only={isReadOnly}></lightning-combobox>
+                            </div>
+                            <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                <label class="SE-inputLabel" for="Phone">Phone</label>
+                                <lightning-input label="phone" name="phone" variant="label-hidden" value={phone}
+                                disabled={isReadOnly} placeholder="e.g (123) 456-7890" onkeydown={handlePhoneKeyDown} onchange={handleFieldChange} class="SE-searchCardInputLabel"
+                                    maxlength="14"
+                                    pattern="^.{14}$"
+                                  message-when-pattern-mismatch="Invalid Phone Number."></lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol customInputFieldHeightSet"></div>
+                            <div class="slds-col SE-customCol customInputFieldHeightSet"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="SE-modalFormStackSection">
+
+                    <div class="SE-modalFormStackSectionHeader">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:service_territory_member"
+                                size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Address Details</h2>
+                            <p class="slds-text-body_small">Enter address details of the individual to complete the
+                                process.</p>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col">
+                                <div class="form-group slds-form-element_compound slds-form-element slds-m-top_medium">
+                                    <template if:true={isReadOnly}>
+                                        <lightning-input-address 
+                                        class='address'
+                                        address-lookup-placeholder="Search country, city, state, street...."
+                                        street={address1}    
+                                        street-label="Address Line 1"
+                                        subpremise={address2}
+                                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                                        subpremise-label="Suite/Apartment/Floor"
+                                        city-label="City"
+                                        city={city}
+                                        province-label="State"
+                                        province={state}
+                                        postal-code={zipCode}
+                                        postal-code-label="Zip Code"
+                                        country-label="Country"
+                                        country={country}
+                                        onchange={handleAddressChange}
+                                        show-compact-address	
+                                        disabled
+                                        required>
+                                    </lightning-input-address>
+                                    
+                                    
+                                       <!-- Custom error message section -->
+                                    
+                                    </template>
+                                    <template if:false={isReadOnly}>
+                                        <lightning-input-address 
+                                        class='address'
+                                        address-lookup-placeholder="Search country, city, state, street...."
+                                        street={address1}    
+                                        street-label="Address Line 1"
+                                        subpremise={address2}
+                                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                                        subpremise-label="Suite/Apartment/Floor"
+                                        city-label="City"
+                                        city={city}
+                                        province-label="State"
+                                        province={state}
+                                        postal-code={zipCode}
+                                        postal-code-label="Zip Code"
+                                        country-label="Country"
+                                        country={country}
+                                        onchange={handleAddressChange}
+                                        show-address-lookup
+                                        show-compact-address	
+                                        required>
+                                    </lightning-input-address>
+                                    </template>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </lightning-modal-body>
+
+
+    <lightning-modal-footer class="SE-modalFooter">
+        <div class='slds-button-group'>
+            <div class="button-left-group">
+
+            </div>
+            <div class="button-right-group SE-modalFooterButtonGroup">
+                <button class="slds-button SE-borderLessButton" onclick={closeModal}>Cancel</button>
+
+                <lightning-button variant="brand" label="Save" disabled={isReadOnly} class="save-button"
+                    onclick={handleAdd}></lightning-button>
+            </div>
+        </div>
+    </lightning-modal-footer>
+    <c-sap_-toast-message-state-modal></c-sap_-toast-message-state-modal>
+
+
+</template>

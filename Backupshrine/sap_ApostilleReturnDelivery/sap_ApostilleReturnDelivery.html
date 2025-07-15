@@ -1,0 +1,504 @@
+<template>
+    <!-- Main Container -->
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header classForSpecificlargeIcon">
+            <lightning-icon icon-name="standard:entitlement" size="large" class="header-icon"></lightning-icon>
+            <div class="classForTitle">
+                <h1 class="header-title">{labels.ReturnDeliveryInstructions}</h1>
+                <p class="header-subtitle">{labels.YouAreResponsibleFor}</p>
+            </div>
+        </div>
+
+        <!-- Delivery Instructions Section -->
+        <div class="input-section">
+            <p class="input-header">{labels.DeliveryInstructions}</p>
+             <!-- 1st Option -->
+            <template if:false={firstOptionisReadOnly}>
+              
+            <div>
+                <label class="slds-radio_button-group">
+                    <input class = "option1" type="radio" name="deliveryOption1" value="includeReturnEnvelope" onchange={handleOptionChange}  checked={isOption1Checked} disabled={isOption1Disabled}/>
+                    <span class="slds-radio_faux"></span>
+                    <span class="slds-form-element__label">{labels.IWillIncludePostageaid}</span>
+                </label>
+
+
+                 <!-- <template if:false={showfirstOption}> -->
+                <!-- <template if:true={showSelectedSubOptions}>
+                    <div>
+                        <span style="margin: 22px" title={shippingMethod}>{labels.APrepaidShippingLabelHasBeenUploaded}</span>
+                    </div>
+                </template>  -->
+            
+
+                <!-- Show Shipping Options if 1st option is selected -->
+                <!-- <template if:true={showShippingOptions}>
+                    <div class="shipping-options comboboxSpecificCss">
+                        <lightning-combobox label="" name="shippingMethod" value={shippingMethod} options={shippingOptions} onchange={handleInputChange}></lightning-combobox> -->
+                        <!-- <lightning-icon icon-name="utility:chevrondown" alternative-text="Approved" title="Approved"></lightning-icon> -->
+
+                    <!-- </div>
+                </template> -->
+                <!-- </template> -->
+
+
+            </div>
+       
+            </template>
+            <div class="slds-form-element">
+               
+               
+
+                <!-- 2nd Option -->
+                <template if:false={secondOptionisReadOnly}>
+                  <label class="slds-radio_button-group">
+                      <span class="slds-radio_faux"></span>
+                      <input class = "option2" type="radio" name="deliveryOption" value="uploadShippingLabel" onchange={handleOptionChange} checked={isOption2Checked} disabled={isOption2Disabled}/>
+                     
+                      <span class="slds-form-element__label">
+                        {labels.APrepaidShippingLabelHasBeenUploaded}
+                       
+                          <template if:true={showUploadLink}>
+                            <a href="javascript:void(0);" class="upload-link" onclick={handleUploadLinkClick}>  (UPLOAD HERE)</a>
+                        </template>
+                    </span>
+
+                    
+
+                    </label>
+                    </template>
+
+                   <!-- below 2nd Option -->
+                   <template if:false={pre_paid_shipping_labelisReadOnly}>
+                   <template if:true={pre_paid_shipping_label}>
+                    <template if:true={uploadedFiles.length}>
+                        <div class="uploaded-files">
+                            <template for:each={uploadedFiles} for:item="file" for:index="index">
+                                <div key={file.documentId} style="width: 100%" class="uploaded-file">
+                                    <!-- <div class="uploaded-file"> -->
+                                        <div class="outerfileNameClass">
+                                            <span class="fileContainer">
+                                                <lightning-icon icon-name="utility:fallback" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); " alternative-text="File" size="x-small"></lightning-icon>
+                                                <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                                            </span>
+                                        </div>
+                                        <div if:true={notReadOnly}>
+                                            <span class="deleteButtonArea">
+                                                <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete" size="x-small" alternative-text="Delete" title="Delete" data-index={index} onclick={handleDeleteFile} ></lightning-button-icon>
+                                            </span> 
+                                        </div>
+
+                                </div>
+                            </template>
+                        </div>
+                    </template> 
+
+                    
+           
+
+
+                </template>
+                <!-- for other screen flow -->
+
+                    <!-- <template if:false={pre_paid_shipping_labelisReadOnly}> -->
+                        <template if:true={readOnlytitleuploadedFiles}>
+                            <div class="uploaded-files">
+                               
+                                <template for:each={titleuploadedFiles} for:item="file">
+                                    <div key={file} style="width: 100%" class="uploaded-file">
+                                        <!-- <div class="uploaded-file"> -->
+                                            <div class="customBorderRadius">
+                                                <span class="fileContainer">
+                                                    <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); " alternative-text="File" size="x-small"></lightning-icon>
+                                                    <span class="fileNameContainer" title={file}>{file}</span>
+                                                </span>
+                                            </div>
+    
+                                    </div>
+                                </template>
+                            </div>
+                        </template> 
+                    <!-- </template> -->
+                </template>
+                <!-- below 2nd Option --> 
+
+
+                <!-- Show File Upload if 2nd option is selected -->
+                <template if:true={show2ndFileUpload}>
+                    <div class="file-upload">
+                        <lightning-input type="file" label="Upload File" name="fileUpload" onchange={handleFileUpload}></lightning-input>
+                    </div>
+                </template>
+
+                <!-- 3rd Option -->
+                 <!-- <template if:true={parentThirdOptionReadOnly}> -->
+                <template if:false={thirdOptionisReadOnly}>
+                <label class="slds-radio_button-group">
+                    <input class = "option3" type="radio" name="deliveryOption" value="pickup" onchange={handleOptionChange} checked={isOption3Checked} disabled={isOption3Disabled}/>
+                    <span class="slds-radio_faux"></span>
+                    <span class="slds-form-element__label">{labels.DocumentWillBePickedUpWeWillSendAnEmailwhentheOrder}</span>
+                </label>
+                <template if:false={showThirdOption}></template>
+                </template>
+                <!-- </template> -->
+
+                <!-- 4th Option -->
+                <template if:false={fourthOptionisReadOnly}>
+                <label class="slds-radio_button-group">
+                    <input class = "option4" type="radio" name="deliveryOption" value="eApostilleUpload" onchange={handleOptionChange} checked={isOption4Checked} disabled={isOption4Disabled} />
+                    <span class="slds-radio_faux"></span>
+                    <span class="slds-form-element__label">
+                        {labels.eApostilleCustomerUpload}
+                        <!-- <template if:true={showEapostilleUploadLink}>
+                            <a href="javascript:void(0);" class="upload-link" onclick={handleUploadLinkClick2}>  (UPLOAD HERE)</a>
+                        </template> -->
+                    </span>
+                </label>
+                </template>
+
+
+                <!-- files diplay below last option-->
+                <template if:false={e_Apostille_customer_uploadisReadOnly}>
+                    <template if:true={e_Apostille_customer_upload}>
+                        <template if:true={uploadedFileApostille.length}>
+                            <div class="uploaded-files">
+                                <template for:each={uploadedFileApostille} for:item="file" for:index="index">
+                                    <div key={file.documentId} style="width: 100%" class="uploaded-file">
+                                        <!-- <div class="uploaded-file"> -->
+                                            <div class="outerfileNameClass">
+                                                <span class="fileContainer">
+                                                    <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); " alternative-text="File" size="x-small"></lightning-icon>
+                                                    <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                                                </span>
+                                            </div>
+                                            <div if:true={notReadOnly}>
+                                                <span class="deleteButtonArea">
+                                                    <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete" size="x-small" alternative-text="Delete" title="Delete" data-index={index} onclick={handleDeleteFile2} ></lightning-button-icon>
+                                                </span> 
+                                            </div>
+                    
+                                    </div>
+                                </template>
+                            </div>
+                        </template> 
+                    </template>
+
+
+                    <!-- for other screen flow -->
+
+                                    <!-- <template if:false={pre_paid_shipping_labelisReadOnly}> -->
+                                        <template if:true={readOnlytitleuploadedFileApostille}>
+                                            <div class="uploaded-files">
+                                            
+                                                <template for:each={titleuploadedFileApostille} for:item="file">
+                                                    <div key={file} style="width: 100%" class="uploaded-file">
+                                                        <!-- <div class="uploaded-file"> -->
+                                                            <div class="customBorderRadius">
+                                                                <span class="fileContainer">
+                                                                    <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); " alternative-text="File" size="x-small"></lightning-icon>
+                                                                    <span class="fileNameContainer" title={file}>{file}</span>
+                                                                </span>
+                                                            </div>
+                    
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </template> 
+                                    <!-- </template> -->
+                </template>
+
+                <!--files diplay below last option-->
+            <!-- <template if:true={isOption3Checked}>
+                <div class="dotted-line"></div>
+                <div class="input-radio-group">
+                    <label class="boldFont">{labels.SameAsContactAddress}</label>
+                    <lightning-input type="radio" name="sameAddressString" label="Yes" value="yes" variant="label-hidden" checked={isSameAsContactSelected}  onchange={handleInputChange} class="radioButton" disabled={isReadOnly}></lightning-input>
+                    <label class={radioCssCon}>{labels.Yes}</label>
+                    <lightning-input type="radio" name="sameAddressString" label="No" value="no" variant="label-hidden" checked={isNotSameAsContactSelected} onchange={handleInputChange}  class="radioButton" disabled={isReadOnly}></lightning-input>
+                    <label class={radioCssCheckedCon}>{labels.No}</label>
+                </div>
+
+                <div class="slds-p-horizontal_medium">
+                    <p class="required-label">
+                        <span class="required-indicator">*</span> 
+                        {labels.WhoOrWhatAgencyisMailingThe}
+                    </p>
+                </div>
+                <div class="form-group">
+                   
+                    <div class="inputSectionClassForSpecificCss">
+                        <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                            <label class="input-title" for="businessName"> {labels.BusinessName}</label>
+                            <lightning-input label="Business Name" class="input-field" name="businessName" variant="label-hidden" value={businessName} placeholder={businessNamePlaceholder} disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                        </div> 
+                    </div>
+                   
+                </div>
+                
+                <div class="input-group inputSectionClassForSpecificCss">
+                    <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                        <label class="custom-label" for="firstName"> <span class="required-indicator">*</span>{labels.FirstName}</label>
+                        <lightning-input 
+                            label="First Name"
+                            name="firstName" 
+                            variant="label-hidden"
+                            id="firstName" 
+                            placeholder={firstnamePlaceholder}
+                            value={firstName} 
+                            required 
+                            class="input-field" 
+                            disabled={isReadOnly} 
+                            pattern="[a-zA-Z][a-zA-Z \-']*[a-zA-Z]"
+                            message-when-pattern-mismatch="Name can contain letters, hyphens (-), apostrophes ('), and spaces"
+                            onchange={handleInputChange}
+                            uppercase>
+                        </lightning-input>
+                    </div>
+                
+                    <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                        <label class="custom-label" for="lastName"><span class="required-indicator">*</span>{labels.LastName}</label>
+                        <lightning-input 
+                            label="Last Name"
+                            name="lastName" 
+                            variant="label-hidden"
+                            id="lastName" 
+                            placeholder={lastnamePlaceholder}
+                            value={lastName} 
+                            required 
+                            class="input-field" 
+                            disabled={isReadOnly} 
+                            pattern="[a-zA-Z][a-zA-Z \-']*[a-zA-Z]"
+                            message-when-pattern-mismatch="Name can contain letters, hyphens (-), apostrophes ('), and spaces"
+                            onchange={handleInputChange}
+                            uppercase>
+                        </lightning-input>
+                    </div>
+                </div>
+                
+                <div class="input-group inputSectionClassForSpecificCss">
+                    <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                        <label class="custom-label" for="email"><span class="required-indicator">*</span>{labels.EmailAddress} </label>
+                        <div class="icon-input-container classForDocumentInfoIconSpecificCss"> 
+                            <lightning-icon icon-name="utility:email" size="x-small" class="left-icon"></lightning-icon>
+                            <lightning-input 
+                                label="Email"
+                                name="email" 
+                                variant="label-hidden"
+                                id="email"
+                                placeholder={emailPlaceholder}
+                                value={email} 
+                                required 
+                                type="email"
+                                pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                                message-when-type-mismatch="Please enter a valid email address"
+                                class="input-field email-field" 
+                                disabled={isReadOnly} 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                
+                    <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                        <label class="custom-label" for="phone"><span class="required-indicator">*</span>{labels.CellPhoneNumber}</label>
+                        <div class="icon-input-container classForDocumentInfoIconSpecificCss">
+                            <lightning-icon icon-name="utility:call" size="x-small" class="left-icon"></lightning-icon>
+                            <lightning-input 
+                                label="Phone"
+                                name="phone" 
+                                variant="label-hidden"
+                                id="phone"
+                                placeholder={phonePlaceholder}
+                                value={phone} 
+                                required 
+                                type="tel"
+                                pattern="\(\d{3}\) \d{3}-\d{4}" 
+                                message-when-pattern-mismatch="Phone number format (860) 569-1111"
+                                class="input-field phone-field" 
+                                disabled={isReadOnly} 
+                                onchange={handleInputChange} onkeydown={handlePhoneKeyDown}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group inputSectionClassForSpecificCss">
+                    <div class="form-group half-width classForAppostileRequestFormBorderCss">
+                        <label class="custom-label" for="emailRequestor"><span class="required-indicator">*</span>{labels.EmailAddressOfThePersonReceivingTheApostille}</label>
+                        <div class="icon-input-container classForDocumentInfoIconSpecificCss"> 
+                            <lightning-icon icon-name="utility:email" size="x-small" class="left-icon"></lightning-icon>
+                            <lightning-input 
+                                label="Email Requestor"
+                                name="emailRequestor" 
+                                variant="label-hidden"
+                                id="emailRequestor"
+                                placeholder={emailPlaceholder}
+                                value={emailRequestor} 
+                                required 
+                                type="email"
+                                pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                                message-when-type-mismatch="Please enter a valid email address"
+                                class="input-field email-field" 
+                                disabled={isReadOnly} 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </div>
+            </template> -->
+
+            
+                
+
+            </div>
+            
+        </div>
+        
+
+        
+    </div>
+
+    <!-- Modal Popup Section Start Here-->
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Header -->
+                <header class="slds-modal__header headerClass">
+                    <div class="headerContainer"> 
+                        <h2 class="headingClass" title="Upload Additional Shipping Label">{labels.ReturnDeliveryInstructions}</h2>
+                        <div class="fileUploadClose">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close" onclick={closeUploadModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <!-- Modal/Popup Body -->
+                <div class="slds-modal__content slds-p-around_medium modalContent">
+                        <div class="internalheading">
+                            <span class="textClass" >{labels.UploadMultiplePrepaidShippingLabel}</span>
+                            <span style="color:     red;">*</span>
+                        </div>
+                        
+                        <div class="internalBorder ">
+                            <lightning-input type="file" 
+                            class="fileUploadContainer"
+                            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf"
+                            multiple
+                            label="Attachment" onchange={handleUploadFinished}></lightning-input>                       
+                        </div>
+                    
+                    <template if:true={uploadedFiles.length}>
+                        <div class="uploaded-files">
+                            <template for:each={uploadedFiles} for:item="file" for:index="index">
+                                <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                                    <!-- <div class="uploaded-file"> -->
+                                        <div class="fileNameClass">
+                                            <span class="fileContainer">
+                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); " alternative-text="File" size="x-small"></lightning-icon>
+                                                <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                                            </span>
+                                        </div>
+                                        <div >
+                                            <span class="deleteButtonArea">
+                                                <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete" size="x-small" alternative-text="Delete" title="Delete" data-index={index} onclick={handleDeleteFile} ></lightning-button-icon>
+                                            </span> 
+                                        </div>
+                                       
+                                        
+                                    <!-- </div> -->
+                                   
+
+                                  
+                                </div>
+                            </template>
+                        </div>
+                    </template>     
+                </div>
+                <!-- <footer class="slds-modal__footer footerContainer"> -->
+                <footer class="footerContainer">
+                    <div class="footerButtonContainer">
+                        <button class="slds-button slds-button_neutral cancelButtonFooter" onclick={closeUploadModal}>{labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand uploadButtonFooter" onclick={handleUpload}>{labels.Upload}</button>
+                       
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+
+
+
+    <!-- new modal container  -->
+
+    <template if:true={isModalOpen2}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Header -->
+                <header class="slds-modal__header headerClass">
+                    <div class="headerContainer"> 
+                        <h2 class="headingClass" title="Upload Additional Shipping Label">{labels.UploadAdditionalShippingLabel}</h2>
+                        <div class="fileUploadClose">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton" title="Close" onclick={closeUploadModal2}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <!-- Modal/Popup Body -->
+                <div class="slds-modal__content slds-p-around_medium modalContent">
+                        <div class="internalheading">
+                            <span class="textClass" >{labels.eApostilleCustomerUpload}</span>
+                            <span style="color:     red;">*</span>
+                        </div>
+                        
+                        <div class="internalBorder ">
+                            <lightning-input type="file" 
+                            class="fileUploadContainer"
+                            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf"
+                            multiple
+                            label="Attachment" onchange={handleUploadFinished2}></lightning-input>
+
+                           
+                        </div>
+                    
+                    <template if:true={uploadedFileApostille.length}>
+                        <div class="uploaded-files">
+                            <template for:each={uploadedFileApostille} for:item="file" for:index="index">
+                                <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                                    <!-- <div class="uploaded-file"> -->
+                                        <div class="fileNameClass">
+                                            <span class="fileContainer">
+                                                <lightning-icon icon-name="utility:document_preview" style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); " alternative-text="File" size="x-small"></lightning-icon>
+                                                <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                                            </span>
+                                        </div>
+                                        <div >
+                                            <span class="deleteButtonArea">
+                                                <lightning-button-icon class="deleteButtonContainer" icon-name="utility:delete" size="x-small" alternative-text="Delete" title="Delete" data-index={index} onclick={handleDeleteFile2} ></lightning-button-icon>
+                                            </span> 
+                                        </div>
+    
+                                </div>
+                            </template>
+                        </div>
+                    </template>     
+                </div>
+                <!-- <footer class="slds-modal__footer footerContainer"> -->
+                <footer class="footerContainer">
+                    <div class="footerButtonContainer">
+                        <button class="slds-button slds-button_neutral cancelButtonFooter" onclick={closeUploadModal2}>{labels.Cancel}</button>
+                        <button class="slds-button slds-button_brand uploadButtonFooter" onclick={handleUpload2}>{labels.Upload}</button>
+                       
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

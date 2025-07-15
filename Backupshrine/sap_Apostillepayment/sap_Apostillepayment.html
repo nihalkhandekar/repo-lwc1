@@ -1,0 +1,133 @@
+<template>
+  <div class="document-info-container classForapostillePaymentThirdScreenCss">
+    <template if:true={isLoading}>
+      <div class="loader-container">
+        <div class="loader"></div>
+      </div>
+    </template>
+    <template if:true={isProcessingRecord}>
+      <lightning-spinner alternative-text="Processing Payment..." size="large"></lightning-spinner>
+    </template>
+    <!-- Header Section -->
+    <div class="custom-card-header classForapostillePaymentThirdScreenIconCss">
+      <lightning-icon icon-name="custom:custom17" size="large" class="header-icon"></lightning-icon>
+      <div>
+        <h1 class="header-title">{labels.Payment}</h1>
+        <p class="header-subtitle">{labels.PleaseCompleteThePaymentBelowToFinalizeYourOrder}</p>
+      </div>
+    </div>
+
+    <div class="input-section">
+      <p class="radioFont slds-p-around_small">{labels.InstructionPayment}</p>
+      <div class="input-group">
+        <div class="input-radio-group">
+          <label class="radioFont">{labels.PaymentType}:</label>
+          <lightning-input
+            type="radio"
+            name="paymentType"
+            variant="label-hidden"
+            label="Credit Card"
+            checked={isCreditCard}
+            value="Card"
+            onchange={handlePaymentTypeChange}></lightning-input>
+          <label class={radioCssDes}>{labels.Card} &nbsp; </label>
+          <lightning-input
+            type="radio"
+            name="paymentType"
+            variant="label-hidden"
+            label="Check"
+            checked={isCheck}
+            value="Check"
+            onchange={handlePaymentTypeChange}></lightning-input>
+          <label class={radioCssDes}>{labels.Check}</label>
+        </div>
+      </div>
+
+      <div class="form-group half-width">
+        <label class="input-title"><span class="required-indicator">*</span>{labels.TotalAmountDue}</label>
+        <p class="price">${price}</p>
+      </div>
+
+      <!-- Credit Card Details Template -->
+
+      <!-- Failure Message -->
+
+      <div class="checkbox-line">
+        <input type="checkbox" checked={isChecked} onchange={handleCheckboxChange} />
+        <label class="checkbox-label">
+          {labels.Ihavereadandagreetothetermsfthisonlinesubmission}
+          <strong class="required-star">*</strong>
+        </label>
+      </div>
+
+      <template if:true={isPaymentFailed}>
+        <div class="slds-box slds-theme_error slds-m-bottom_small">
+          <strong>{labels.Payment} {labels.failed}!</strong>
+          {labels.TherewasanissueprocessingyourpaymentPleasetragain}
+        </div>
+        <br />
+      </template>
+
+      <template if:true={isCreditCard}>
+        <template if:false={isPaymentCompleted}>
+          <template if:true={isPaypalSelected}>
+            <template if:false={isPaymentSuccessful}>
+              <iframe id="ApostillePaypalPaymentVF" src={paypalPaymentUrl} width="100%" height="230px" allowfullscreen style="border: none"> </iframe>
+            </template>
+          </template>
+          <template if:true={isAuthorizeNetSelected}>
+            <c-sap_-authorization-gateway
+              record-id={recordId}
+              documents-json={documentsJson}
+              amount={price}
+              istermschecked={isChecked}
+              onpaymentcomplete={handleAuthNetPaymentComplete}>
+            </c-sap_-authorization-gateway>
+            <div class="slds-p-around_medium"></div>
+          </template>
+        </template>
+      </template>
+
+      <!-- Check Payment Template -->
+      <template if:true={isCheck}>
+        <!-- <div class="check-stack">
+                        <div class="check-header">{labels.PleaseSendaCheckForTheTotalAmountDueAlongWithYourDocumentToTheFollowingAddress}:</div>
+                        <div class="check-content">{labels.SecretaryOfTheState}</div>
+                        <div class="check-content">{labels.AuthenticationsAndApostilleUnit}</div>
+                        <div class="check-content">{labels.POBox150470}</div>
+                        <div class="check-content">Hartford, CT 06115-0470</div>
+                    </div> -->
+
+        <div class="container">
+          <div class="header1">
+            <div class="header-item">{labels.PreferredMethod}:</div>
+            <div class="header-item">{labels.MailingAddress}:</div>
+          </div>
+          <div class="content1">
+            <div class="column">{labels.HanddeliveryoforiginaldocumentorsendviaFedEUPSorDHL}</div>
+            <div class="column">
+              <div>"Secretary of the State, Authentications and Apostille Unit, 165 Capitol Avenue Suite 1000, Hartford, CT 06106"</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="header1">
+            <div class="header-item">{labels.FirstClassOrPriorityMail}:</div>
+            <div class="header-item">{labels.MailingAddress}:</div>
+          </div>
+          <div class="content1">
+            <div class="column">{labels.FirstClassorPrioritMailthroughtheUSPostalService}</div>
+            <div class="column">
+              <div>"Secretary of the State, Authentications and Apostille Unit, P.O. Box 150470, Hartford, CT 06115-0470"</div>
+            </div>
+          </div>
+        </div>
+      </template>
+
+      <template if:true={isPaymentSuccessful}>
+        <div class="slds-box slds-theme_success slds-m-bottom_small"><strong>{labels.Payment} {labels.successful}!</strong>{labels.Yourpaymenthasbeenprocessedsuccessfully}</div>
+      </template>
+    </div>
+  </div>
+</template>
