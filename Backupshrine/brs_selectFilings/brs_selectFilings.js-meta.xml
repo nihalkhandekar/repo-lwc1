@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="businessId" type="string" label="Business Id" description="" />
+            <property name="isUCC" type="Boolean" label="isUCC" description="" />
+            <property name="workOrderId" type="string" label="Work Order Id" description="" />
+            <property name="noDocPresent" type="Boolean" label="noDocPresent" description="" />
+            <property name="isOnlyPlainCopies" type="Boolean" label="isOnlyPlainCopies" description="" />
+            <property name="amount" type="integer" label="amount" description="" />
+            <property name="copyType" type="string" label="copyType" description="" />
+            <property name="uccAmount" type="integer" label="uccAmount" description="" />
+            <property name="expeditedAmount" type="integer" label="expedited amount" description="" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

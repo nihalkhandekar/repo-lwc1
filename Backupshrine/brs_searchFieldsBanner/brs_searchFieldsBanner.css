@@ -1,0 +1,221 @@
+.banner {
+    width: 100%;
+    background-image: url("/business/resource/BRS_Assets/images/lien-search-banner-mobile.png");
+    background-position: right top;
+    padding-top: 40px;
+    padding-bottom: 8px;
+    background-size: cover;
+    position: relative;
+}
+
+
+.hide-heading .banner-heading {
+    display: none;
+}
+
+.form-column {
+    margin-bottom: 32px;
+}
+
+.banner-heading {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.search-btn {
+    margin-top: 6px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.search-btn img {
+    width: 16px;
+    margin-left: 4px;
+}
+
+.searchbox-with-icon {
+    display: flex;
+}
+
+.searchbox-with-icon .slds-form-element {
+    flex-grow: 1;
+}
+
+.searchbox-with-icon .slds-input {
+    border-radius: 4px 0 0 4px !important;
+}
+
+.searchbox-with-icon .search-icon {
+    border-radius: 0 4px 4px 0;
+    width: 66px;
+    height: 56px;
+    background-color: #005292;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.searchbox-with-icon .search-icon img {
+    width: 26px;
+}
+
+.email-csv-section {
+    background-color: #ffffff;
+    padding: 24px 0px;
+}
+
+.email-csv-section .icon {
+    width: 60px;
+    margin-right: 32px;
+    display: none;
+}
+
+.email-csv-section p {
+    color: #2d2c2c;
+}
+
+.buttons-section .slds-button {
+    margin: 0;
+    margin-top: 20px;
+    display: block;
+}
+
+.advanced-search-text {
+    color: #FFFFFF;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.11px;
+    line-height: 27px;
+    text-align: center;
+    margin-top: 8px;
+}
+
+.advanced-search-text span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.back-button {
+    color: #FFFFFF;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 22px;
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    width: unset;
+}
+
+.back-button img {
+    width: 16px;
+    margin-right: 8px;
+}
+
+.brs-container {
+    position: relative;
+}
+
+.hide-heading.banner .back-button {
+    top: -28px;
+}
+
+.back-button {
+    top: -14px;
+}
+
+.email-csv-container{
+    align-items: center;
+}
+
+.full-width{
+    width: 100%;
+}
+
+@media print{
+    .brs-container{
+        display: none;
+    }
+    .email-csv-section, .banner.hide-heading{
+        padding: 0px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .hide-heading.banner {
+        height: 230px;
+        padding-top: 56px;
+    }
+
+    .hide-heading.not-advanced-screen.banner {
+        height: 260px;
+    }
+
+    .banner {
+        padding-top: 48px;
+        padding-bottom: 40px;
+        height: 410px;
+        background-position: right center;
+        background-image: url("/business/resource/BRS_Assets/images/lien-search-bg.jpg");
+    }
+
+    .form-column {
+        padding-left: 9px;
+        padding-right: 9px;
+        margin-bottom: 0px;
+    }
+
+    .form-column:first-child {
+        padding-left: 0;
+    }
+
+    .form-column:last-child {
+        padding-right: 0;
+    }
+
+    .banner-heading {
+        margin-bottom: 40px;
+    }
+
+    .search-btn {
+        margin-top: 34px;
+        width: 100%;
+    }
+
+    .email-csv-section p {
+        padding-right: 32px;
+    }
+
+    .email-csv-section .icon {
+        display: block;
+    }
+
+    .buttons-section {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    .buttons-section .slds-button {
+        margin: 0;
+        display: inline-flex;
+        width: unset;
+    }
+
+    .buttons-section .slds-button.share-link {
+        margin-right: 12px;
+        margin-bottom: 8px;
+    }
+    .back-button {
+        left: 0;
+    }
+
+    .full-width{
+        width: auto;
+    }
+    
+    .pl-90{
+         padding-left:90px;
+    }
+}

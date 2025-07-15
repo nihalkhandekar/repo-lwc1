@@ -1,0 +1,50 @@
+.sortWrapper {
+    display: flex;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.sortOptions {
+    display: flex;
+    justify-content: flex-end;
+    right: 0;
+    position: absolute;
+    z-index: 5;
+    top: 34px;
+    min-width: 174px;
+}
+
+.sortoptionWrapper {
+    border: 1px solid #d0cfcf;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 #e7e9f2;
+}
+
+.oneSort {
+    padding: 10px 25px;
+}
+
+.oneSort:hover {
+    background-color: #f7f9fa;
+}
+
+.chevron-wrapper {
+    margin-left: 12px;
+}
+
+.sort .small,
+.sort .chevron-wrapper,
+.sortOptions {
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 1024px) {
+    .sortWrapper {
+        justify-content: flex-end;
+    }
+}

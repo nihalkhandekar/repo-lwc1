@@ -1,0 +1,22 @@
+<template>
+    <div class="landing-page">
+        <div class="landing-page-banner">
+            <h4 class="flowContainer">{labels.UCC_FilingTypeQuestion}</h4>
+        </div>
+        <div class="flowContainer brs-wrapper">
+            <div class="landing-page-card">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12">
+                        <h5 class="question">{labels.UCC_FilingTypeSubQuestion}</h5>
+                        <p class="large question-desc">{labels.UCC_FilingTypeDescription}</p>
+
+                        <c-generic-radio_brs radio-options={radioOptions} onctbosdatachange={handleRadioClick}
+                            name="FilingType" answer={value} has-error={showErrorMessage}>
+                        </c-generic-radio_brs>
+                        <p class="error-text" if:true={showErrorMessage}>{labels.Selection_Required}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

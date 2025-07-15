@@ -1,0 +1,20 @@
+<template>
+  <lightning-tabset selected-tab-id={firstTabName} class="tabset">
+    <lightning-tab
+      label={firstTabName}
+      id={firstTabName}
+      class="slds-m-bottom_large slds-size_1-of-1 tabLink"
+    >
+      <slot name="firstTabContent"> </slot>
+    </lightning-tab>
+    <template if:false={hideSecondTab}>
+      <lightning-tab
+        label={secondTabName}
+        id={secondTabName}
+        class="slds-m-bottom_large slds-size_1-of-1 tabLink"
+      >
+        <slot name="secondTabContent"></slot>
+      </lightning-tab>
+     </template>
+    </lightning-tabset>
+</template>

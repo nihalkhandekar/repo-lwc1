@@ -1,0 +1,28 @@
+.card{
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 16px 0 #E7E9F2;
+}
+
+.card-body{
+  padding: 16px 24px 24px 24px;
+}
+
+.theme1 .card-body{
+  padding: 36px 36px 36px 32px;
+}
+
+.theme1 .card-footer-btns {
+  padding: 16px 32px;
+}
+
+.theme2 .card-body{
+  padding: 28px 38px;
+}
+
+@media only screen and (max-width: 1023px) {
+  .theme2 .card-body{
+    padding: 24px 20px;
+  }  
+}

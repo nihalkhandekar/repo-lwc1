@@ -1,0 +1,26 @@
+<template>
+    <div class="sortWrapper">
+        <div class="sort">
+            <p class="smallBold">{label.Sort_by}: &nbsp;</p>
+            <div class="sort" tabindex="0" onclick={handleExpandSort} onkeydown={handleExpandSortKey}>
+                <p class="small">{selectedSort}</p>
+                <div class="chevron-wrapper">
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        title="chevrondown" class="chevron-container-down"></lightning-icon>
+                </div>
+            </div>
+            <template if:true={expandSort}>
+                <div class="sortOptions">
+                    <div class="sortoptionWrapper">
+                        <template if:true={options} for:each={options} for:item="opt" for:index="index">
+                            <div class="oneSort" data-id={opt} tabindex="0" onclick={handleSort}
+                                onkeydown={handleSortKey} key={opt}>
+                                <p class="small">{opt}</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

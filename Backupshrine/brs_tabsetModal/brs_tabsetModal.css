@@ -1,0 +1,54 @@
+.headerModal h6 {
+  color: #2d2c2c;
+  padding-bottom: 4px;
+}
+.tabLink {
+  margin-top: 10px;
+}
+.nothing-to-show {
+  display: inline-block;
+  width: 85%;
+  vertical-align: text-top;
+}
+.no-changes-container,
+.no-section-data-container {
+  color: #757575;
+}
+
+.no-changes-container {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.no-changes-data {
+  width: 100%;
+}
+.no-section-data {
+  margin-right: 8px;
+}
+.no-changes {
+  margin-bottom: 8px;
+}
+.line-index {
+  margin-left: 12px;
+  list-style-type: decimal;
+}
+.line-index li {
+  padding-left: 16px;
+  display: list-item;
+}
+.tabset-modal li {
+  width: 100%;
+}
+.generic-table {
+  margin-bottom: 16px;
+}
+.no-section-data {
+  width: 16px;
+  height: 16px;
+}
+.pills {
+  text-align: right;
+  display: inline-block;
+  margin: 16px 0;
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="Record Id" description=""/>
+            <property name="objectApiName" type="String" label="Object Api Name" description=""/>
+            <property name="finalFilings" type="String" label="All Selected Filings" description=""/>
+            <property name="allfinalFilings" type="String" label="All Selected Filings List" description=""/>
+            <propertyType name="T" extends="SObject" label="Input Type" description="Generic sObject data type used for input sObject properties" />
+            <property name="inputValue" type="{T[]}" label="input value" role="inputOnly" />
+            <property name="inputValueStock" type="{T[]}" label="input value stock" role="inputOnly" />
+            <property name="inputValueContact" type="{T[]}" label="input value contact" role="inputOnly" />
+            <property name="inputAgentValue" type="{T[]}" label="input value agent" role="inputOnly" />
+            <property name="inputAgentConfirmationValue" type="String" label="input value agent confirmation" role="inputOnly" />
+            <property name="inputAttachmentValue" type="{T[]}" label="input value attachment" role="inputOnly" />
+             <property name="inputContentDocument" type="{T[]}" label="input content document" role="inputOnly" />
+  
+
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

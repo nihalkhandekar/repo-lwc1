@@ -1,0 +1,59 @@
+<template>
+    <template for:each={allTradeAndService} for:item="tradeDetails" for:index="index">
+        <div key={tradeDetails.registrationNumber} class="business-card" data-name={index} tabindex="0"
+            aria-label={tradeDetails.ownerName} onkeypress={showTSDetailsKeyPress} onclick={showTSDetails}>
+            <div class="business-card-header">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_6-of-12 slds-large-size_6-of-12">
+                        <p class="reg-number">{label.Reg_No_Comparable} {tradeDetails.registrationNumber}</p>
+                    </div>
+                    <div class="slds-size_6-of-12 slds-large-size_6-of-12">
+                        <span class="slds-float_right">
+                            <c-brs_badges class-name={tradeDetails.badgeClassName} text={tradeDetails.status}>
+                            </c-brs_badges>
+                        </span>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-large-size_12-of-12 d-flex">
+                        <div class="details">
+                            <h6 class="business-name">{tradeDetails.ownerName}</h6>
+                            <p class="location-address small">
+                                <img src={locationIcon} alt="location" />
+                                {tradeDetails.fullAddress}
+                            </p>
+                            <div class="hr-line" if:true={tradeDetails.showDetails}></div>
+                        </div>
+                        <button data-name={index} class="arrow-button" onclick={onAccordianClick} aria-expanded="false">
+                            <template if:true={tradeDetails.showDetails}>
+                                <img src={arrowIcon} alt="" class="up arrow-icon" aria-label={label.Hide_Details}/>
+                            </template>
+                            <template if:false={tradeDetails.showDetails}>
+                                <img src={arrowIcon} alt="" class="arrow-icon" aria-label={label.Show_Details} />
+                            </template>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="business-card-body" if:true={tradeDetails.showDetails}>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_1-of-1 slds-large-size_4-of-12 business-card-body-left">
+                        <p class="small grey-title">{label.Registration_date}</p>
+                        <p class="small desc">{tradeDetails.registrationDateFormatted}</p>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_6-of-12 business-card-body-right">
+                        <p class="small  grey-title">{label.Description_of_mark}</p>
+                        <p class="small desc">{tradeDetails.description}
+                            <template if:false={tradeDetails.showLess}>
+                                <span onclick={onShowMoreText} if:true={tradeDetails.hasShowMore}
+                                    class="anchor-btn margin-l-4" tabindex="0" role="button">
+                                    {label.showMore}
+                                </span>
+                            </template>
+                        </p>
+                        <p onclick={onShowLessText} data-name={index} class="anchor-btn small" tabindex="0"
+                            role="button" if:true={tradeDetails.showLess}>{label.businessProfile_show_less}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

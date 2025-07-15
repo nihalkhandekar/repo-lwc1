@@ -1,0 +1,48 @@
+.landing-page .flowContainer {
+    margin: auto;
+    background: none;
+}
+
+.landing-page-banner {
+    background: var(--c-landingPageBg) no-repeat;
+    height: 145px;
+    background-size: cover;
+}
+
+.landing-page-banner h4 {
+    color: #ffffff;
+    padding: 32px 20px;
+}
+
+.landing-page-card {
+    background-color: #ffffff;
+    padding: 32px 20px;
+    margin-top: 0;
+    width:100%;
+}
+
+.question,
+.question-desc {
+    margin-bottom: 24px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .landing-page .flowContainer {
+        max-width: 1136px;
+    }
+
+    .landing-page-banner {
+        height: 316px;
+    }
+
+    .landing-page-banner h4 {
+        padding: 32px 0;
+    }
+
+    .landing-page-card {
+        border-radius: 4px 4px 0 0;
+        box-shadow: 0 4px 8px 0 #e7e9f2;
+        padding: 68px 94px 48px 74px;
+        margin-top: -190px;
+    }
+}

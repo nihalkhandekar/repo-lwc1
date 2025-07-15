@@ -1,0 +1,54 @@
+<!--
+  @description       : 
+  @author            :satakshi chaudhary
+  @group             : 
+  @last modified on  : 04-09-2021
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   03-26-2021   satakshi chaudhary                   Version
+-->
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="bgwhite slds-p-around_medium">
+        <lightning-radio-group name="radioGroup1" label={label.DebtorType} options={typeOptions} value={debtorType}
+            type="radio" onchange={handleTypeSelection}>
+        </lightning-radio-group>
+
+        <div class="slds-grid slds-gutters">
+            <template if:true={isIndividualSearch}>
+                <div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+                    <lightning-input type="text" data-id="firstnameId" label={label.first_name_search} name="firstName"
+                        value={firstName} onchange={handleChange}></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+                    <lightning-input type="text" data-id="lastnameId" label={label.last_name_search} name="lastName"
+                        value={lastName} onchange={handleChange} required></lightning-input>
+                </div>
+            </template>
+            <template if:false={isIndividualSearch}>
+                <div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+                    <lightning-input type="text" data-id="businessname" label={label.business_name_search}
+                        name="businessName" value={businessName} onchange={handleChange} required></lightning-input>
+                </div>
+            </template>
+        </div>
+        
+        <div class="slds-p-around_medium">
+            <lightning-button label={label.Search_debtor} variant="brand" onclick={informationRequest}>
+            </lightning-button>
+        </div>
+
+        <div if:true={gridData}>
+            <div class="slds-p-vertical_medium">
+                <lightning-tree-grid columns={gridColumns} data={gridData} key-field="Id" hide-checkbox-column>
+                </lightning-tree-grid>
+            </div>
+        </div>
+        <div if:false={gridData}>
+            <p>{label.nodataError}</p>
+        </div>
+    </div>
+</template>

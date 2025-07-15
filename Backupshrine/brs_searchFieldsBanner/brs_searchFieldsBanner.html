@@ -1,0 +1,220 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class={bannerClassName}>
+        <div class="slds-grid slds-wrap brs-container pl-90 slds-grid_align-center">
+            <button if:true={showBack} class="slds-button slds-button_natural back-button" onclick={handleAdvancedSearch}>
+                <img src={backIcon} alt="" />
+                {label.Back}
+            </button>
+            <div class="slds-size_1-of-1 slds-large-size_12-of-12">
+                <h1 class="banner-heading">{pageHeading}</h1>
+            </div>
+            <!--Business Search Code Start-->
+            <template if:true={isBusinessSearch}>
+                <div if:false={showAdvancedSearch} class="slds-size_1-of-1 slds-large-size_10-of-12 white-theme form-column">
+                    <label class="slds-form-element__label">{label.business_search_label}</label>
+                    <div class="searchbox-with-icon hide-label">
+                        <lightning-input autocomplete="off" message-when-value-missing={label.business_search_error_msg} max-length="255"
+                            placeholder={label.business_search_placeholder} type="text" required 
+                            onchange={onBusinessNameChange} onblur={onBusinessNameBlur}
+                           onkeyup={checkEnter} value={businessName}
+                            class="search-input no-right-radius">
+                        </lightning-input>
+                        <span class="search-icon" onclick={onBusinessSearch} onkeyup={checkEnter} aria-label="Search" role="button" tabindex="0">
+                            <img src={searchIconWhite} alt="" />
+                        </span>
+                    </div>
+                    <p class="advanced-search-text">{label.business_advancedsearch_text} <span onclick={handleAdvancedSearch}>{label.advancedsearch}</span></p>
+                </div>
+                <template if:true={showAdvancedSearch}>                    
+                    <div class="slds-size_1-of-1 slds-large-size_4-of-12 white-theme form-column">
+                        <lightning-combobox label={label.SearchBy} value={selectedSearchType} placeholder="" options={businessSearchByOptions}
+                            required onchange={onBusinessSearchTypeChange} autocomplete="off">
+                        </lightning-combobox>
+                        <div if:true={showCheckBox}>
+                            <c-generic-multi-select class="white-theme" list-data={CheckboxOptions} value={isChecked}
+                                oncheckboxinputselection={handleCheckBoxChange} add-class="white-theme">
+                            </c-generic-multi-select>
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_8-of-12 white-theme form-column" if:false={isPrincipalOrAgent}>
+                        <label class="slds-form-element__label">{getAdvancedInputLabel}</label>
+                        <div class="searchbox-with-icon hide-label" if:true={reRenderInput}>
+                            <lightning-input autocomplete="off" message-when-value-missing={label.business_search_error_msg} max-length="255"
+                                placeholder={getAdvancedInputPlaceholder} type="text" required
+                                onchange={onBusinessNameChange} value={businessName} onblur={onBusinessNameBlur}
+                                class="search-input no-right-radius" onkeyup={checkEnter}>
+                            </lightning-input>
+                            <span class="search-icon" onkeyup={checkEnter} onclick={onBusinessSearch} aria-label="Search" role="button" tabindex="0">
+                                <img src={searchIconWhite} alt="" />
+                            </span>
+                        </div>
+                    </div>
+                    <template if:true={isPrincipalOrAgent}>
+                        <div class="slds-size_1-of-1 slds-large-size_3-of-12 white-theme form-column">
+                            <lightning-input autocomplete="off" message-when-value-missing={label.field_is_mandatory} max-length="80"
+                                placeholder={label.debtor_surname_placeholder} type="text" label={label.Last_Name_Required} required
+                                onchange={onSurNameChange} onblur={onSurNameBlur} value={surName} class="search-input lname" onkeyup={checkEnter}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-size_1-of-1 slds-large-size_3-of-12 white-theme form-column fname">
+                            <lightning-input autocomplete="off" max-length="80" placeholder={label.debtor_firstname_placeholder} type="text"
+                                label={label.First_Name} onchange={onFirstNameChange} onblur={onFirstNameBlur} value={firstName}
+                                onkeyup={checkEnter}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-size_1-of-1 slds-large-size_2-of-12 form-column">
+                            <button onclick={onBusinessSearch} class="slds-button primaryBtnSmall search-btn">
+                                {label.Search}
+                                <img src={searchIconWhite} alt="" />
+                            </button>
+                        </div>
+                    </template>
+                </template>
+            </template>
+            <!--Business Search Code End-->
+
+            <!--lien Search Code Start-->
+            <template if:false={isBusinessSearch}>
+                <div class="slds-size_1-of-1 slds-large-size_4-of-12 white-theme form-column">
+                    <lightning-combobox label={label.SearchBy} value={selectedSearchType} placeholder=""
+                        options={searchByOptions} required onchange={onSearchTypeChange} autocomplete="off">
+                    </lightning-combobox>
+                    <div if:true={showCheckBox}>
+                        <c-generic-multi-select class="white-theme" list-data={CheckboxOptions} value={isChecked}
+                            oncheckboxinputselection={handleLienCheckBoxChange} add-class="white-theme">
+                        </c-generic-multi-select>
+                    </div>
+                </div>
+
+                <div if:true={isLien} class="slds-size_1-of-1 slds-large-size_8-of-12 white-theme form-column">
+                    <label class="slds-form-element__label">{label.enter_lien_number_label}</label>
+                    <div class="searchbox-with-icon hide-label">
+                        <lightning-input autocomplete="off" message-when-value-missing={label.field_is_mandatory} max-length="10"
+                            placeholder={label.LienNumber_Placeholder} type="text" required onchange={onLienNumberChange}
+                            onkeypress={onLienNumberKeyPress} onkeyup={checkEnter} value={lienNumber}
+                            class="search-input no-right-radius">
+                        </lightning-input>
+                        <span class="search-icon" onkeyup={checkEnter} onclick={onSearch} aria-label="Search" role="button" tabindex="0">
+                            <img src={searchIconWhite} alt="" />
+                        </span>
+                    </div>
+                </div>
+
+                <div if:true={isOrganization} class="slds-size_1-of-1 slds-large-size_8-of-12 white-theme form-column">
+                    <label class="slds-form-element__label">{label.debtor_organization_name_label}*</label>
+                    <div class="searchbox-with-icon hide-label">
+                        <lightning-input autocomplete="off" message-when-value-missing={label.field_is_mandatory} max-length="80"
+                            placeholder={label.debtor_organization_name_label} type="text" required
+                            onchange={onOrganizationChange} onblur={onOrganizationBlur} value={organizationName}
+                            class="search-input no-right-radius" onkeyup={checkEnter}>
+                        </lightning-input>
+                        <span class="search-icon" onkeyup={checkEnter} onclick={onSearch} aria-label="Search" role="button" tabindex="0">
+                            <img src={searchIconWhite} alt="" />
+                        </span>
+                    </div>
+                </div>
+
+                <template if:true={isIndividual}>
+                    <div class="slds-size_1-of-1 slds-large-size_3-of-12 white-theme form-column">
+                        <lightning-input autocomplete="off" message-when-value-missing={label.field_is_mandatory} max-length="80"
+                            placeholder={label.debtor_surname_placeholder} type="text" label={label.debtor_surname} required
+                            onchange={onSurNameChange} onblur={onSurNameBlur} value={surName} class="search-input lname" onkeyup={checkEnter}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_3-of-12 white-theme form-column fname">
+                        <lightning-input autocomplete="off" max-length="80" placeholder={label.debtor_firstname_placeholder} type="text"
+                            label={label.debtor_firstname} onchange={onFirstNameChange} onblur={onFirstNameBlur} value={firstName}
+                            onkeyup={checkEnter}>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_2-of-12 form-column">
+                        <button onclick={onSearch} class="slds-button primaryBtnSmall search-btn">
+                            {label.Search}
+                            <img src={searchIconWhite} alt="" />
+                        </button>
+                    </div>
+                </template>
+            </template>
+            <!--lien Search Code End-->
+        </div>
+    </div>
+    <div class="email-csv-section">
+        <div class="slds-grid slds-wrap brs-container email-csv-container">
+            <div class="slds-size_1-of-1 slds-large-size_1-of-12">
+                <img src={sotsIcon} alt="" class="icon" />
+            </div>
+            <div class="slds-size_1-of-1 slds-large-size_9-of-12" if:false={hasResults}>                
+                <template if:false={isBusinessSearch}>
+                    <p class="large">
+                        {label.lien_search_help_text}
+                    </p>
+                    <p class="large">
+                        {label.UCC_filings_are_updated_through} <span class="largeBold">{uccDate}</span>
+                    </p>
+                    <p class="large">
+                        {label.IRS_liens_are_updated_through} <span class="largeBold">{irsDate}</span>
+                    </p>
+                </template>
+                <p class="large" if:true={isBusinessSearch}>
+                    {label.business_search_help_text}
+                 </p>
+            </div>
+            <template if:true={hasResults}>
+                <template if:false={showPrintButton}>
+                    <div class="slds-size_1-of-1 slds-large-size_6-of-12">
+                        <p class="large">
+                            {label.export_to_csv_help_text}                        
+                        </p>
+                        <template if:false={isBusinessSearch}>
+                            <p class="large">
+                                {label.UCC_filings_are_updated_through} <span class="largeBold">{uccDate}</span>
+                            </p>
+                            <p class="large">
+                                {label.IRS_liens_are_updated_through} <span class="largeBold">{irsDate}</span>
+                            </p>
+                        </template>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_5-of-12 buttons-section">  
+                        <div class="slds-float_right full-width">
+                                <button onclick={handleShareLink} class="slds-button secondary-btn higher share-link">
+                                    {label.share_link}
+                                </button>
+                                <button onclick={handleExportCsv} class="slds-button secondary-btn higher">
+                                    {label.export_to_csv}
+                                </button>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={showPrintButton}>
+                    <div class="slds-size_1-of-1 slds-large-size_7-of-12">
+                        <p class="large">
+                           {label.print_help_text}
+                         </p>
+                         <template if:false={isBusinessSearch}>
+                            <p class="large">
+                                {label.UCC_filings_are_updated_through} <span class="largeBold">{uccDate}</span>
+                            </p>
+                            <p class="large">
+                                {label.IRS_liens_are_updated_through} <span class="largeBold">{irsDate}</span>
+                            </p>
+                        </template>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_4-of-12 buttons-section">  
+                        <div class="slds-float_right full-width">
+                            <button onclick={handlePrintToPdf} class="slds-button secondary-btn higher">
+                                {label.checklistpage_print}
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </div>
+    <template if:true={showEmailModal}>
+        <c-email-modal onsubmitemail={submitEmail} onclosemodal={handleShareLink}></c-email-modal>
+    </template>
+</template>

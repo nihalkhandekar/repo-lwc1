@@ -1,0 +1,95 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+
+            <!--Agent Review-->
+<template if:true={agentRecs}>
+            
+    <lightning-datatable data={agentRecs} 
+        columns={agentColumns} 
+        key-field="Id"
+        hide-checkbox-column ="true">
+        </lightning-datatable>
+            </template>
+                            
+             <!--ConentDocument Review-->
+<template if:true={documentRecs}>
+            
+    <lightning-datatable data={documentRecs} 
+        columns={documentColumns} 
+        key-field="Title"
+        hide-checkbox-column ="true">
+        </lightning-datatable>
+            </template>                          
+
+
+<!--Business Filings Attachments-->
+
+            <template if:true={attachmentRecs}>
+<lightning-datatable data={attachmentRecs} 
+       columns={attachementColumns} 
+       key-field="Name"
+       hide-checkbox-column ="true"
+       onrowaction={handleFileAction}>
+                        
+</lightning-datatable>
+</template>  
+
+ <!--Principal 3-->
+
+ <!--<div class="slds-m-around_medium">-->
+    
+    <template if:true={principalRecs}>
+
+            <lightning-datatable data={principalRecs} 
+                                 columns={columns} 
+                                 key-field="Id"
+                                 hide-checkbox-column ="true">
+                         </lightning-datatable>
+    </template>               
+
+            <!--AgentConfirmation Review-->
+<template if:true={agentConfirmationRecs}>
+                 <div class="slds-modal__container">
+                       
+                        
+                
+                            <lightning-datatable data={agentConfirmationRecs} 
+                                                 columns={agentConfirmationColumns} 
+                                                 key-field="Id"
+                                                 hide-checkbox-column ="true">
+                                         </lightning-datatable>
+                
+                                        </div>
+                                    </template>              
+
+        <!--Stock Corporation-->
+
+        <template if:true={stockRecs}>
+
+            <lightning-datatable data={stockRecs} 
+                                 columns={stockColumns} 
+                                 key-field="Id"
+                                 hide-checkbox-column ="true">
+                         </lightning-datatable>
+                        </template>              
+        <!--Contact-->
+   <!--   <div class="slds-modal__container">-->  
+        <template if:true={contactRecs}>
+
+            <lightning-datatable data={contactRecs} 
+                                 columns={contactColumns} 
+                                 key-field="Id"
+                                 hide-checkbox-column ="true">
+                         </lightning-datatable>
+                        </template>              
+
+     <!--                   </div> -->
+
+
+
+</template>

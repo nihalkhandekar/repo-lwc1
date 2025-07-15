@@ -1,0 +1,243 @@
+.business-name {
+    margin-bottom: 4px;
+}
+
+.grey-text {
+    color: #757575;
+}
+
+.business-name .badge {
+    position: relative;
+    top: -4px;
+    margin-left: 16px;
+}
+
+.business-location {
+    color: #2D2C2C;
+    margin-bottom: 32px;
+}
+
+.sectionWrapper,
+.expandedSection {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+}
+
+.sectionWrapper,
+.subSectionHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.sectionWrapper {
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+    padding: 16px 32px;
+}
+
+.sectionWrapper h6 {
+    margin: auto 0;
+}
+
+.business-details .subSectionWrapper {
+    padding-top: 16px;
+}
+.subSectionWrapper {
+    /* border-bottom: 1px solid #D0CFCF; */
+    padding-top: 24px;
+    padding-left: 32px;
+    background: #FFFFFF;
+}
+
+.subSectionWrapper:last-child {
+    border-bottom: none;
+}
+
+.expandedSection {
+    margin-top: 4px;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+}
+
+.chevronContainer {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+hr {
+    margin-top: 0;
+    margin-right: 76px;
+    margin-bottom: 24px;
+}
+
+.margin-b-0{
+    margin-bottom: 0;
+}
+
+.padding-b-20{
+    padding-bottom: 20px;
+}
+
+.block-separator{
+    margin:0;
+}
+
+.cardWrapper {
+    display: flex;
+    padding: 24px 0;
+    margin-right: 32px;
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.cardWrapper:first-child {
+    padding-top: 0;
+}
+
+.cardWrapper:last-child {
+    border-bottom: none;
+}
+
+.iconWrapper {
+    padding-top: 16px;
+}
+
+.icon {
+    width: 20px;
+}
+
+.contentWrapper {
+    margin-left: 20px;
+    width:100%;
+}
+
+.subSectionWrapper.lastSection {
+    padding-right: 8px;
+    padding-left: 8px
+}
+
+.subSectionWrapper.lastSection .cardWrapper {
+    margin-right: 0;
+    padding-left: 24px;
+}
+
+.subSectionWrapper.cardSection {
+    padding: 0;
+}
+
+.pt-0 {
+    padding-top: 0;
+}
+
+.padding-t.large {
+    padding: 24px 32px;
+}
+
+.cust-anchor {
+    color: #09538B;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    text-decoration: underline;
+}
+
+.filingSection.expandedSection {
+    border: none;
+    background-color: transparent;
+}
+
+.mobile-scholarcontent{
+    margin-bottom: 40px;
+}
+
+.margin-t-20 {
+    margin-top: 20px;
+}
+
+.loadmore_Block {
+    margin-top: 40px;
+    padding: 46px 0;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px dashed #999999;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.loadmore_Block .large {
+    color: #09538B;
+    text-decoration: underline;
+}
+
+.loadMoreIcon{
+    margin-right: 12px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .padding-r-mobile{
+        padding-right: 20px;
+    }
+    .padding-t.large {
+        padding: 24px;
+    }
+    .cardWrapper.padding-t-m{
+        padding-top:24px;
+    }
+    .sectionWrapper {
+        padding: 16px 20px;
+    }
+
+    .business-details .subSectionWrapper {
+        padding-top: 0;
+    }
+
+    .subSectionWrapper {
+        padding-top: 0;
+        padding-left: 20px;
+    }
+
+    .subSectionHeader {
+        padding-top: 20px;
+    }
+
+    hr {
+        margin-right: 60px;
+        margin-bottom: 24px;
+    }
+
+    .cardWrapper {
+        flex-direction: column;
+        padding: 16px 0;
+    }
+
+    .cardWrapper .small {
+        margin-bottom: 4px;
+    }
+
+    .iconWrapper {
+        padding-bottom: 8px;
+    }
+
+    .contentWrapper {
+        margin-left: 0;
+    }
+
+    .subSectionWrapper.lastSection {
+        padding-right: 20px;
+        padding-left: 20px
+    }
+
+    .subSectionWrapper.lastSection .cardWrapper {
+        padding: 20px 0 16px 0;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .business-location {
+        margin-bottom: 56px;
+    }
+}

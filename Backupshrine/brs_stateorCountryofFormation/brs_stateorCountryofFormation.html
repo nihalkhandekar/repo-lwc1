@@ -1,0 +1,29 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <div class="inputForm">
+        <template if:true={isUSCountry}>
+            <c-lookup items={picklistOptions} label={label} class="cust-address-lookup" source={source}
+                onkeydown={handleChange} onkeyup={handleChange} has-error={showErrorMessage} ontextchange={handleChange}
+                ontextinput={handleChange} onselect={handleSelect} originfield="city" autocomplete
+                onchange={handleChange} onblurcitylookup={handleBlur} value={selectedStateValue} max-length="50">
+            </c-lookup>
+        </template>
+        <template if:false={isUSCountry}>
+            <c-lookup items={picklistOptions} label={label} class="cust-address-lookup" source={source}
+                onkeydown={handleChange} onkeyup={handleChange} has-error={showErrorMessage} ontextchange={handleChange}
+                ontextinput={handleChange} onselect={handleSelect} originfield="city" autocomplete
+                onchange={handleChange} onblurcitylookup={handleBlur} value={selectedCountryValue} max-length="50">
+            </c-lookup>
+        </template>
+    </div>
+    <template if:true={showErrorMessage}>
+        <div class="slds-has-error">
+            <span class="slds-form-element__help">{getErrorMsg}</span>
+        </div>
+    </template>
+</template>

@@ -1,0 +1,33 @@
+<!--*********************************************************************************************
+ * NAME:  brs_timePicker.html
+ * DESCRIPTION: Created a time picker which display 12 hr time format as a dropdown
+ *
+ * @AUTHOR: sagpanda@deloitte.com
+ * @DATE: 02/6/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ *Sagarika                         02/16/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+    <h6>{label}</h6>
+    <div class="slds-grid slds-wrap slds-gutters mt-32">
+        <div class="slds-col slds-large-size_4-of-12">
+            <lightning-combobox label={customlabel.Hour} value={hour} onchange={onHourChange} options={hourOptions}
+            placeholder="" autocomplete="off" required={required}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-large-size_4-of-12">
+            <lightning-combobox label={customlabel.Minute} value={min} onchange={onMinChange} options={minOptions}
+            placeholder="" autocomplete="off" required={required}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-large-size_4-of-12 mt-8">
+            <lightning-combobox label=" " value={amPm} onchange={onAmPMChange} options={amPmOptions}
+                 autocomplete="off" required={required}>
+            </lightning-combobox>
+        </div>
+    </div>
+</template>

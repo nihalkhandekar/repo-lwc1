@@ -1,0 +1,71 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <template if:false={showSearchBuisness}>
+        <h5 class="serach-buisness-heading">{searchBusinessHeading}</h5>
+    </template>
+    <div class="search-buisness-input-box">
+        <lightning-input  class="business-search" name="biz-search" type="text" data-id="biz-search" required value={searchInput}
+            autocomplete="off" onchange={setSearchData} placeholder={label.business_placeholder} onkeyup={checkEnter}
+            onblur={handleBlur}>
+        </lightning-input>
+    </div>
+    <div class="search-buisness-btn">
+        <button class="slds-button slds-button_stretch secondaryBtn higher" onclick={searchBusiness}>
+            {searchButtonText}
+        </button>
+    </div>
+    <template if:true={showActiveBuisness}>
+        <template if:true={searchResult.length}>
+            <div class="searchContent">
+                <h4>{searchResult.length} {label.linkFindBiz_BusinessFound}</h4>
+                <div class="search-helpText">{searchHelpText}</div>
+                <div class="sortSection slds-m-top_x-large slds-m-bottom_large slds-grid slds-wrap">
+                    <p class="small"><b>{label.linkFindBiz_ShowingResults}</b> {testOptions.length} {label.Recovery_Of}
+                        {searchResult.length}</p>
+                    <c-brs_sort-drop-down options={sortOptions} onsortselected={handleSort}
+                        selected-sort={selectedSort}>
+                    </c-brs_sort-drop-down>
+                </div>
+                <div class="theme3 theme5 slds-m-top_large">
+                    <template if:false={isRevocationOfDissolutionFlow}>
+                        <c-brs_link_generic-radio-input radio-options={testOptions} maintain={maintain} name="theme3"
+                        show-foreign-id={showForeignId} onctbosdatachange={handleBusinessSelection} answer={value} has-error={showError}
+                        input-name="search-buisness-radio" dom-has-multiple-radios ></c-brs_link_generic-radio-input>
+                    </template>
+                    <template if:true={isRevocationOfDissolutionFlow}>
+                        <c-brs_link_generic-radio-input radio-options={testOptions} maintain name="theme3"
+                        show-foreign-id={showForeignId} onctbosdatachange={handleBusinessSelection} answer={value} has-error={showError}
+                        input-name="search-buisness-radio" dom-has-multiple-radios ></c-brs_link_generic-radio-input>
+                    </template>
+                   
+                </div>
+                <template if:true={loadMoreBusiness}>
+                    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12"
+                        onclick={showFiveItems}>
+                        <p class="large"><img src={loadMoreIcon} class="loadMoreIcon" alt="loadMoreIcon"
+                                title="loadMoreIcon" aria-hidden="true" />{label.showMoreResults}</p>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </template>
+    <template if:true={noActiveBuisness}>
+        <div class="searchContent">
+            <h4>{searchResult.length} {label.linkFindBiz_BusinessFound}</h4>
+        </div>
+        <div class="slds-p-around_xx-large noBizFound">
+            <img src={noBizFoundImg} alt="searchIcon">
+            <div class="noBizFoundText">
+                <div class="noBizFoundText">
+                    <p class="largeBold">{label.search_Business_NoBusiness}</p>
+                    <p class="large">{label.search_Business_NewSearch}</p>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

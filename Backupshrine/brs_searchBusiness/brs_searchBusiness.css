@@ -1,0 +1,84 @@
+.serach-buisness-heading{
+    padding-top: 54px;
+    padding-bottom: 36px;
+}
+.search-buisness-btn{
+    padding-top: 16px;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+}
+/* .searchResultHeading {
+    color: #333232;
+    font-family: Lato;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+} */
+.sortSection {
+    justify-content: space-between;
+    flex-direction: column;
+}
+.chevron-wrapper {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+.loadmore_Block {
+    margin-top: 40px;
+    padding: 46px 0;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px dashed #999999;
+    cursor: pointer;
+    border-radius: 4px;
+}
+.loadmore_Block .large {
+    color: #09538B;
+    text-decoration: underline;
+}
+.searchContent{
+     margin-top: 80px;
+}
+.search-helpText{
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  margin-top: 16px;
+}
+
+.loadMoreIcon{
+    margin-right: 11px;
+}
+
+.noBizFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed #D0CFCF;
+    padding-top: 44px;
+    border-radius: 4px;
+}
+
+.noBizFoundText {
+    width: 100%;
+    margin-top: 24px;
+    text-align: center;
+}
+
+@media only screen and (min-width: 1023px) {
+    .noBizFound {
+        flex-direction: row;
+    }
+
+    .noBizFoundText {
+        margin-left: 32px;
+        margin-top: 0px;
+        text-align: start;
+    }
+    .sortSection{
+        flex-direction: row;
+    }
+ }

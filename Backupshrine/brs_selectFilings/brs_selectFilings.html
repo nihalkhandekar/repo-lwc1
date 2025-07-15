@@ -1,0 +1,77 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+        <template if:false={isUCC}>
+            <button class="slds-button slds-button_natural" onclick={openModal}>
+                <img src={addIcon} class="addIcon" alt="" />
+                <span class="large underline-text" if:false={isEdit}>{label.select_filings}</span>
+                <span class="large underline-text" if:true={isEdit}>{label.Edit_or_select_more}</span>
+            </button>
+        </template>
+        <template if:true={isUCC}>
+            <template if:false={hideAddOpt}>
+                <button class="slds-button slds-button_natural" onclick={openUccModal}>
+                    <img src={addIcon} class="addIcon" alt="" />
+                    <span class="large underline-text">{label.UCC_CopyReq_AddFile}</span>
+                </button>
+            </template>
+        </template>
+        <div if:true={showSelectedFilings} class="mt-24">
+            <c-generic-table tablecolumns={tablecolumns} tabledata={tableData} customtable></c-generic-table>
+        </div>
+        <div if:true={showSelectedUccFilings} class="mt-24">
+            <div class="card">
+                <div class="cardTitle">
+                    <img src={expiredIcon} class="cardIcon" alt=""/>
+                    <p class="small">{label.UCC_CopyReq_FileNo}</p>
+                </div>
+                <div class="">
+                    <template if:true={filingList} for:each={filingList} for:item="item" for:index="index">
+                        <div class="rightContent" key={item.filingId}>
+                            <p class="largeBold">{item.filingNo}</p>
+                            <img src={closeIcon} class="closeIcon" data-id={item.filingId} onclick={deleteFileEntry} alt="" />
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div class="amount-box mt-24">
+            <div class="slds-grid slds-wrap" if:true={expeditedAmount}>
+                    <div class="slds-col slds-large-size_10-of-12 slds-size_12-of-12">
+                        <p class="large">{label.ExpeditedAmount}</p>
+                    </div>
+                    <div class="slds-col slds-large-size_2-of-12 slds-size_12-of-12 amount-section">
+                        <p class="large">${expeditedAmount}</p>
+                    </div>
+            </div>
+            <hr class="my-12" if:true={expeditedAmount}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-large-size_10-of-12 slds-size_12-of-12">
+                    <p class="largeBold">{label.TotalAmount}</p>
+                </div>
+                <div class="slds-col slds-large-size_2-of-12 slds-size_12-of-12 amount-section">
+                    <p class="largeBold">${totalAmount}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <template if:true={isUccModalOpen}>
+        <c-brs_ucc-filing-modal is-modal-open={isUccModalOpen} filing-data-list={filingList} onaddfileno={AddFileEntry} onclosemodal={closeUccModal}
+            copytype={copyType} amount={uccAmount}>
+        </c-brs_ucc-filing-modal>
+    </template>
+    <template if:true={isModalOpen}>
+        <template if:true={filings}>
+            <c-brs_business-filings-table filing-list={filings} onfilingselect={handleFilingSelection}
+                open-modal={isModalOpen} onmodalclose={closeModal}></c-brs_business-filings-table>
+        </template>
+    </template>
+    <template if:false={isModalOpen}>
+        <p class="error-text" if:true={showError}>{errorMsg}</p>
+    </template>
+    <c-brs_next-back-buttons nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate} onhandleback={back}>
+    </c-brs_next-back-buttons>
+</template>

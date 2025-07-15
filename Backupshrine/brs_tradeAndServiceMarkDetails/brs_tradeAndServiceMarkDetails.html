@@ -1,0 +1,274 @@
+<template>
+    <div class="slds-m-bottom_medium">
+        <h5 class="business-name">{details.ownerName} <span class="badge">
+                <c-brs_badges class-name={details.badgeClassName} text={details.status}>
+                </c-brs_badges>
+            </span></h5>
+        <p class="business-location large">{details.fullAddress}</p>
+        <div class="mobile-show mobile-scholarcontent">
+            <c-brs_header scholar-content={scholerContent} show-scholar-only></c-brs_header>
+        </div>
+        <div class="sectionWrapper">
+            <h6>{label.Mark_Information}</h6>
+            <div class="chevronContainer" onkeypress={handleBDExpandKeyPress} onclick={handleBDExpand} role="button"
+                tabindex="0">
+                <template if:false={expandBusinessDetails}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandBusinessDetails}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+            </div>
+        </div>
+        <template if:true={expandBusinessDetails}>
+            <div class="expandedSection padding-b-20 business-details">
+                <div class="subSectionWrapper">
+                    <div class="subSectionHeader">
+                        <p class="largeBold text-capitalize">{label.businessProfile_generalInfo}</p>
+                        <div class="chevronContainer" onkeypress={expandGISubSectionKeyPress}
+                            onclick={expandGISubSection} role="button" tabindex="0">
+                            <template if:false={showGISubSection}>
+                                <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="add"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                            <template if:true={showGISubSection}>
+                                <lightning-icon icon-name="utility:dash" size="xx-small" alternative-text="dash"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+                    <hr class="margin-b-0" if:false={showGISubSection} />
+                    <template if:true={showGISubSection}>
+                        <hr />
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Registration_number}</p>
+                                    <p class="small">{details.registrationNumber}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Class_of_goods_services}</p>
+                                    <p class="small">{details.clsOfGoodsAndServices}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Date_of_1st_use_in_CT}</p>
+                                    <p class="small">{details.datefFirstUseInCT}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Renewal_date}</p>
+                                    <p class="small">{details.renewalDateFormatted}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.First_Expiration_date}</p>
+                                    <p class="small">{details.firstexpirationDate}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Disclaimer}</p>
+                                    <p class="small">{details.disclaimer}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Mark_used_for}</p>
+                                    <p class="small">{details.markUsedFor}</p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Mark_type}</p>
+                                    <p class="small">{details.markType}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Registration_date}</p>
+                                    <p class="small">{details.registrationDateFormatted}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Date_of_1st_use_anywhere}</p>
+                                    <p class="small">{details.datefFirstUseInAnywhere}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Expiration_date}</p>
+                                    <p class="small">{details.expirationDate}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Description_of_mark}</p>
+                                    <p class="small">{details.descOfMark}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Keywords}</p>
+                                    <p class="small">{details.keyWords}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Method_of_use}</p>
+                                    <p class="small">{details.methodOfUse}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <hr class="block-separator" if:true={showGISubSection} />
+                <div class="subSectionWrapper">
+                    <div class="subSectionHeader">
+                        <p class="largeBold text-capitalize">{label.Owner_information}</p>
+                        <div class="chevronContainer" onkeypress={expandPDSubSectionKeyPress}
+                            onclick={expandPDSubSection} role="button" tabindex="0">
+                            <template if:false={showPDSubSection}>
+                                <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="add"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                            <template if:true={showPDSubSection}>
+                                <lightning-icon icon-name="utility:dash" size="xx-small" alternative-text="dash"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>
+                    <hr class="margin-b-0" if:false={showPDSubSection} />
+                    <template if:true={showPDSubSection}>
+                        <hr />
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Owner_name}</p>
+                                    <p class="small">{details.ownerName}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.State_Country_of_Formation}</p>
+                                    <p class="small" if:true={isIndividualType}>{label.None}</p>
+                                    <p class="small" if:false={isIndividualType}>{details.stateCountryOfFormation}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Owner_address}</p>
+                                    <p class="small">{details.fullAddress}</p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Owner_type}</p>
+                                    <p class="small">{details.ownerType}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium padding-r-mobile">
+                                    <p class="small grey-text">{label.Partner_names}</p>
+                                    <p class="small">{details.partnerNames}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="slds-m-bottom_medium">
+        <div class="sectionWrapper">
+            <h6>{label.Mark_History}</h6>
+            <div class="chevronContainer" onkeypress={handleNHsubExpandKeyPress} onclick={handleNHsubExpand}
+                role="button" tabindex="0">
+                <template if:false={expandNH}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandNH}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+            </div>
+        </div>
+        <template if:true={expandNH}>
+            <div class="expandedSection">
+                <div class="subSectionWrapper">
+                    <p class="large cardWrapper padding-t-m" if:false={hasMarkHistory}>{label.None}</p>
+                    <template for:each={details.markHistory} for:item="mark" for:index="index">
+                        <div key={mark.filingNumber} class="cardWrapper">
+                            <div class="iconWrapper">
+                                <img src={activeIcon} class="icon">
+                            </div>
+                            <div class="contentWrapper">
+                                <p class="smallBold grey-text">{label.Filing_number_label} {mark.filingNumber}</p>
+                                <p class="largeBold">{mark.filingType}</p>
+                                <div class="slds-grid slds-wrap slds-gutters margin-t-20" if:true={mark.markImage}>
+                                    <div
+                                        class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <div class="slds-m-bottom_x-small">
+                                            <p class="small grey-text">{label.Mark_image}</p>
+                                            <p>
+                                                <a class="cust-anchor" href={mark.markImage} target="_blank">{label.View_mark}</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="slds-m-bottom_medium">
+        <div class="sectionWrapper">
+            <h6>{label.brs_FilingHistory}</h6>
+            <div class="chevronContainer" onkeypress={handlefhsubExpandKeyPress} onclick={handlefhsubExpand}
+                role="button" tabindex="0">
+                <template if:false={expandfh}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandfh}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+            </div>
+        </div>
+        <template if:true={expandfh}>
+            <div class="expandedSection filingSection">
+                <div class="subSectionWrapper cardSection">
+                    <p class="large cardWrapper padding-t" if:false={hasFilingHistory}>{label.None}</p>
+                    <template if:true={details.filingHistory} for:each={details.filingHistory} for:item="filing"
+                        for:index="index">
+                        <div class="" key={filing.filingNumber} if:true={filing.show}>
+                            <c-brs_filing-cards header={filing.filingType} cardname={filing.filingNumber}
+                                carddate={filing.filingDate} carddatelabel={label.filing_date}>
+                                <div slot="body" class="slds-grid slds-wrap slds-size_12-of-12 slds-gutters">
+                                    <div
+                                        class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.brs_Volume}</p>
+                                        <p class="small">{filing.volume}</p>
+                                    </div>
+                                    <div
+                                        class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.Start_page}</p>
+                                        <p class="small">{filing.startPage}</p>
+                                    </div>
+                                    <div
+                                        class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.No_of_pages}</p>
+                                        <p class="small">{filing.noOfPages}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12"
+                                        if:true={filing.digitalCopy}>
+                                        <p class="small grey-text">{label.brs_Digitalcopy}</p>
+                                        <p>
+                                            <a class="cust-anchor" href={filing.digitalCopy}
+                                                target="_blank">{label.brs_ViewasPDF}</a>
+                                        </p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12"
+                                        if:true={filing.markImage}>
+                                        <p class="small grey-text">{label.Mark_image}</p>
+                                        <p>
+                                            <a class="cust-anchor" href={filing.markImage} target="_blank">{label.View_mark}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </c-brs_filing-cards>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <template if:true={hasMoreBusiness}>
+                <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12"
+                    onkeypress={showFewMoreItemsKeyPress} onclick={showFewMoreItems} role="button" tabindex="0">
+                    <p class="large"><img src={loadMoreIcon} class="loadMoreIcon" alt="" />{label.showMoreResults}</p>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

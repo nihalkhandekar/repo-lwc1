@@ -1,0 +1,267 @@
+.slds-modal__header {
+  text-align: left;
+}
+
+.shares-input-container {
+  padding-top: 56px;
+}
+
+.shares-label {
+  height: 27px;
+  width: 208px;
+  color: #757575;
+  font-family: KarlaBold;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+}
+
+.stock-modal-link {
+  padding-top: 32px;
+}
+
+.no-border {
+  border: none;
+}
+
+.modal-header-info-text {
+  width: 100%;
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  padding-top: 10px;
+}
+.modal-header-info-text a {
+  display: inline-block;
+}
+
+.shares-display-box {
+  box-sizing: border-box;
+  width: 238px;
+  border: 1px solid #ECEBEB;
+  border-radius: 4px;
+  background-color: #F7F9FA;
+  padding: 8px;
+}
+
+.total-shares-val-text {
+  height: 22px;
+  width: 106px;
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+}
+
+.terms-limitations-text {
+  height: 48px;
+  width: 679px;
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+}
+
+.main-container {
+  padding: 30px;
+}
+
+.closePopup {
+  font-size: 25px;
+  color: #09538B;
+}
+
+.slds-input {
+  width: 80% !important;
+}
+
+.stock-heading {
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+}
+
+.warning-text {
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+}
+
+.slds-modal__header {
+  padding-bottom: none;
+}
+
+.selection-container {
+  border: 1px solid #D0CFCF;
+  /* border-radius: 4px; */
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 #E7E9F2;
+}
+
+.error-block {
+  color: #DB2426 !important;
+  font-family: KarlaBold;
+  font-size: 14px;
+}
+
+.slds-form-element__control {
+  width: 90%;
+}
+
+.header-text {
+  color: #2D2C2C;
+  font-family: Lato;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0.16px;
+  line-height: 28px;
+}
+
+.stock-classes {
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px 0 #E7E9F2;
+}
+
+.stock-classes:nth-last-of-type(1) {
+  margin-bottom: 30px;
+}
+
+.stock-classes .username {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  padding: 20px;
+  width: 80%;
+  display: inline-block;
+}
+
+.stock-classes .edit {
+  text-align: center;
+  background: #F7F9FA;
+  padding: 24px 20px 24px 24px;
+  width: 20%;
+  display: inline-block;
+}
+
+.stock-classes img {
+  width: 16px;
+  margin-right: 8px;
+}
+
+.stock-classes .edit button {
+  color: #09538B;
+  font-family: 'KarlaBold', sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  line-height: 17px;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+
+.class-of-share {
+  padding-bottom: 32px;
+}
+
+.stockForm .slds-textarea {
+  height: 56px;
+}
+
+.margin-t-0 {
+  margin-top: 0;
+}
+
+.slds-button.yes-button,
+.slds-button.no-button {
+  justify-content: center;
+  margin: 0;
+}
+
+.slds-button.no-button {
+  margin-top: 16px;
+}
+
+.slds-text-link {
+  font-size: 16px;
+}
+.slds-text-link, .add-more-link {
+  text-decoration: underline;
+}
+.slds-text-link:hover , .add-more-link:hover {
+  text-decoration: none;
+}
+.slds-button.add-more[disabled] .add-more-link, .slds-button.add-more:disabled .add-more-link {
+  color:rgb(217, 219, 221);
+}
+.slds-button.add-more[disabled] img, .slds-button.add-more:disabled img{
+  opacity: 0.1;
+}
+.add-more-link {
+  color:#09538B;
+}
+.add-more {
+  position: relative;
+  left: -5px;
+  line-height: 1;
+}
+.add-more span:first-child {
+  width: 30px;
+}
+
+.field-wrapper {
+  position: relative;
+}
+
+.delete-button-icon {
+  position: absolute;
+  top: 70px;
+  right: 0.75rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .delete-button-icon {
+    position: absolute;
+    top: 70px;
+    right: -25px;
+  }
+
+  .slds-button.yes-button {
+    float: right;
+    margin-left: 20px;
+  }
+
+  .slds-button.no-button {
+    margin-top: 0;
+  }
+
+  .slds-button.yes-button,
+  .slds-button.no-button {
+    min-width: 138px;
+  }
+
+  .popup-header {
+    padding-top: 16px;
+  }
+
+}
+
+@media only screen and (max-width: 1024px) {
+
+  .stock-classes .username,
+  .stock-classes .edit {
+    width: 100%;
+    display: block;
+  }
+}

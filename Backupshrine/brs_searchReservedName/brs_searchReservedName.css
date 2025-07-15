@@ -1,0 +1,18 @@
+.search-buisness-btn {
+  margin-top: 8px;
+}
+.results-found,
+.no-results-found {
+  margin-top: 80px;
+}
+.reserved-name-found {
+  margin-bottom: 16px;
+}
+.search-again-text {
+  margin-bottom: 32px;
+}
+.search-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}

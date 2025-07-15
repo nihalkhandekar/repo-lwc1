@@ -1,0 +1,128 @@
+.tab-card {
+    background: #FFFFFF;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    position: relative;
+}
+
+.tab-card ul {
+    position: absolute;
+    top: 100%;
+    background: #FFFFFF;
+    left: -1px;
+    right: -1px;
+    z-index: 1;
+    border-top: 1px solid #ECEBEB;
+    border: 1px solid #D0CFCF;
+    box-shadow: 0px 8px 16px rgba(231, 233, 242, 0.25);
+}
+
+.tab-card li {
+    font-size: 14px;
+    color: #2D2C2C;
+    line-height: 17px;
+    position: relative;
+    padding: 20px 20px 10px 20px;
+    cursor:pointer;
+}
+
+.tab-card li:last-child {
+    padding-bottom: 20px;
+}
+
+.tab-card li .icon {
+    display:none;
+}
+
+.tab-header {
+    display: block;
+    color: #09538B;
+    text-transform: uppercase;
+    padding: 24px 20px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+
+.tab-card ul.hide{
+   display:none;
+}
+.tab-card ul.show{
+    display:block;
+ }
+
+@media only screen and (min-width: 1024px) {
+    .tab-card ul.hide{
+        display:flex;
+     }
+     .tab-card ul.show{
+         display:flex;
+      }
+    .tab-header {
+        display: none;
+    }
+
+    .tab-card ul {
+        display: flex;
+        position: static;
+        top: unset;
+        border: none;
+    }
+
+    .tab-card li {
+        padding: 28px 0 26px 0;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        text-align: center;
+        color: #678598;
+        font-family: KarlaBold;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tab-card li .icon {
+        height: 24px;
+        margin-right: 8px;
+        display:inline-block;
+    }
+
+    .tab-card li .active-icon {
+        display:none;
+    }
+
+    .tab-card li.active .active-icon {
+        display:block;
+    }
+
+    .tab-card li.active .passive-icon {
+        display:none;
+    }
+
+    .tab-card li:last-child {
+        padding-bottom: 26px;
+    }
+
+    .tab-card li.active {
+        color: #09538B;
+    }
+
+    .tab-card li::after {
+        content: "";
+        height: 0;
+        width: 0;
+        border: 8px solid;
+        border-color: transparent transparent #C4C4C4 transparent;
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+
+    .tab-card li.active::after {
+        border-color: transparent transparent #3A95D3 transparent;
+    }
+}

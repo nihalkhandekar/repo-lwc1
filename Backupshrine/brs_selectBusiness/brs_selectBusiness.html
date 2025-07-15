@@ -1,0 +1,393 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <template if:false={showSearchBuisness}>
+        <c-brs_header heading-text={label.select_Business_Heading} 
+            scholar-content={scholarContent}></c-brs_header>
+        <template if:true={loadBuisness}>
+            <template if:true={businessList.length}>
+                <div class="searchContent">
+                    <div class="sortSection slds-m-top_x-large slds-m-bottom_large slds-grid slds-wrap">
+                        <p class="small"><b>{label.linkFindBiz_ShowingResults}</b> {testOptions.length}
+                            {label.Recovery_Of} {businessList.length}</p>
+                        <c-brs_sort-drop-down options={sortOptions} onsortselected={handleSort}
+                            selected-sort={selectedSort}>
+                        </c-brs_sort-drop-down>
+                    </div>
+                    <div class="theme3 theme5 slds-m-top_large">
+                        <c-brs_link_generic-radio-input radio-options={testOptions} name="theme3"
+                            onctbosdatachange={handleBusinessSelection} answer={value} value={value}
+                            has-error={showError} maintain={showCardArrowDropdown} show-foreign-id={isForeignInvestigationFlow}>
+                        </c-brs_link_generic-radio-input>
+                    </div>
+                    <template if:true={loadMoreBusiness}>
+                        <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12"
+                            onclick={showFiveItems}>
+                            <p class="large"><img src={loadMoreIcon} class="loadMoreIcon" alt="loadMoreIcon"
+                                    title="loadMoreIcon" aria-hidden="true" />{label.showMoreResults}</p>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={maintain}>
+                <h5 class="search-buisness-heading">{searchBusinessLabel}</h5>
+            </template>
+            <template if:true={maintain}>
+                <h5 class="search-buisness-heading">{promptText}
+                </h5>
+            </template>
+            <div class="search-buisness-btn">
+                <button class="slds-button slds-button_stretch secondaryBtn higher" onclick={goToSearchBusiness}>
+                    <span>
+                        <img src={searchIcon} class="searchIcon" alt="searchIcon" title="searchIcon"
+                            aria-hidden="true" />
+                    </span>&nbsp;&nbsp;{searchButtonLabel}
+                </button>
+            </div>
+        </template>
+        <template if:false={loadBuisness}>
+                     <!--SCBCG-209,210--> 
+                    <div class="slds-grid slds-gutters_xx-small" >
+                        <div class="slds-col slds-grow-none slds-align-middle">
+                            <img src={noBiz} alt="searchIcon">
+                        </div>
+                        <div class="slds-col slds-align-middle">
+                        <span> 
+                            <p class="largeBold">{label.select_Business_NoBusiness}</p>
+                            <p class="large">{label.select_Business_NewSearch}</p>
+                         </span>
+                        </div>
+                    </div>
+      
+                        <c-brs_search-business onfindevent={handleFindEvent} maintain={maintain} filling-name={filingName}
+                show-foreign-id={isForeignInvestigationFlow} show-search-buisness={showSearchBuisness} value={value} search-input={searchInput} show-error={showError}
+                onpageload={retrieveSelectedBusiness} maintennace-type={maintennaceType} is-maintenance-flow={isMaintenanceFlow} onsearchclicked={hideError}></c-brs_search-business>
+        </template>
+    </template>
+    <template if:true={showSearchBuisness}>
+        <c-brs_header heading-text={label.search_Business_Heading} sub-heading-text={selectBusinessSubHeading}
+            scholar-content={SearchscholarContent}></c-brs_header>
+        <c-brs_search-business onfindevent={handleFindEvent} maintain={maintain} filling-name={filingName}
+            show-foreign-id={isForeignInvestigationFlow} show-search-buisness={showSearchBuisness} value={value} search-input={searchInput} show-error={showError}
+            onpageload={retrieveSelectedBusiness} maintennace-type={maintennaceType} is-maintenance-flow={isMaintenanceFlow} onsearchclicked={hideError}></c-brs_search-business>
+    </template>
+    <template if:true={showINTERIMPopUp}>
+        <!-- Interim Popup -->
+        <div class="interim-popup-wrapper">
+            <c-modal open={showINTERIMPopUp} onmodalclose={closeInterimPopup} size={modalSize}>
+                <div slot="header" style="text-align:left" class="headerModal slds-size_1-of-1">
+                    <h6 class="imp-notice">{label.BRS_Imp_Notice}</h6>
+                </div>
+                <div slot="body"
+                    class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                    <p class="large" if:true={showObtainCertText}>
+                        {label.BRS_Filing_Due}
+                    </p>
+                    <template if:false={showObtainCertText}>
+                        <p class="large" if:true={showSkipButton}>
+                            {label.BRS_Filing_Due}
+                        </p>
+                    </template>
+                    <template if:true={firstReportFlag}>
+                        <template  if:false={showObtainCertText}>
+                            <p class="large" if:false={showSkipButton}>
+                                {label.BRS_First_Rep_Text}
+                            </p>
+                        </template>
+                    </template>
+                    <div class="report-wrapper">
+                        <div class="inner-wrapper">
+                            <div class="icon-div">
+                                <img src={alertimage} class="alertIcon" alt='alert'>
+                            </div>
+                            <template if:false={firstReportFlag}>
+                                <div class="report-details">
+                                    <p class="largeBold report-title">
+                                        {label.BRS_Ann_Report_Due}
+                                    </p>
+                                    <p class="large report-pend">
+                                        {annualCountText}
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={showObtainCertText}>
+                                <template if:true={firstReportFlag}>
+                                    <div class="report-details">
+                                        <p class="largeBold report-title">
+                                            {label.First_Report_Due}
+                                        </p>
+                                        <p class="large report-pend">
+                                            {label.First_Report_Due_Obtaincert}
+                                        </p>
+                                    </div>
+                                </template>
+                            </template>
+                            <template if:false={showObtainCertText}>
+                                <template if:true={firstReportFlag}>
+                                    <div class="report-details">
+                                        <p class="largeBold report-title">
+                                            {firstReportText}
+                                        </p>
+                                        <template if:false={isOverDue}>
+                                            <p class="large report-pend">
+                                                {firstCountText}
+                                            </p>
+                                        </template>
+                                    </div>
+                                </template>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+                    <template if:false={firstReportFlag}>
+                        <template if:false={showObtainCertText}>
+                            <p class="large action-text slds-m-bottom_large">
+                                {label.BRS_Filing_Action}
+                            </p>
+							<p class="large action-text">
+                                {label.BRS_Filing_Action1}
+                            </p>
+                        </template>
+                        <template if:true={showObtainCertText}>
+                            <p class="large action-text">
+                                {label.brs_ObtainCertFlow_Interim_Annual}
+                            </p>
+                        </template>
+                    </template>
+                    <template if:true={firstReportFlag}>
+                        <template if:true={showObtainCertText}>
+                            <p class="large action-text">
+                                {label.brs_ObtainCertFlow_Interim_First}
+                            </p>
+                        </template>
+                        <p class="large action-text" if:false={showObtainCertText}>{label.FirstReportDueDescMessage}</p>
+                    </template>
+                    <div class={btnContainerClass}>
+                        <template if:true={showSkipButton}>
+                            <template if:false={showObtainCertText}>
+                                <button title={label.BRS_Skip} onclick={handleSkip}
+                                    class="higher slds-button secondaryBtn">
+                                    {label.BRS_Skip}
+                                </button>
+                            </template>
+                        </template>
+                        <button title={label.BRS_File_Now} onclick={handleFileNow}
+                            class="higher slds-button primaryBtn">
+                            {label.BRS_File_Now}
+                        </button>
+                    </div>
+                </div>
+            </c-modal>
+        </div>
+    </template>
+    <template if:true={showLegalExistenancePopupJS}>
+        <!-- Legal Existance Popup -->
+        <c-modal open={showLegalExistenancePopupJS} onmodalclose={closeLegalExistenancePopup} size={modalSize}>
+            <div slot="header" style="text-align:left" class="headerModal">
+                <h6 class="imp-notice">{label.BRS_Imp_Notice}</h6>
+            </div>
+            <div slot="body" class="slds-m-bottom_large">
+                <p class="large">{label.BRS_LegalCert_Popup_Subtext}</p>
+                <div class="pls-note-wrapper">
+                    <c-qn-a_-question-help-text helptextnotes={label.Legal_Cert_Pls_Note}
+                        questionid={label.Legal_Cert_Pls_Note}>
+                    </c-qn-a_-question-help-text>
+                </div>
+                <div class="report-wrapper">
+                    <div class="inner-wrapper">
+                        <div class="icon-div">
+                            <img src={alertimage} class="alertIcon" alt='alert'>
+                        </div>
+                        <div class="cert-details">
+                            <p class="cert-title largeBold">
+                                {label.BRS_LegalCert_Popup_Title}
+                            </p>
+                            <p class="cert-date">
+                                {requestDateLabel}
+                            </p>
+                            <div class="cert-link">
+                                <button class="slds-button slds-button_natural" onclick={goToAccountDashboard}>
+                                    {label.BRS_LegalCert_Popup_Link}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small">
+                <button title={label.BRS_Continue} onclick={handleLegalExistanceConfirm}
+                    class="slds-button primaryBtn higher">
+                    {label.BRS_Continue}
+                </button>
+            </div>
+        </c-modal>
+    </template>
+    <template if:true={showConfirm}>
+        <c-modal no-scroll open={showConfirm} onmodalclose={closeConfirmModal} size={modalSize}>
+            <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+                <h6 class="biz-confirm-header">{fileReportHeader}</h6>
+            </div>
+            <div slot="body"
+                class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="theme5 theme3">
+                    <template if:true={isAgentResignation}>
+                        <div class="slds-m-bottom_x-large please-note">
+                            <p class="please-note-copy-1">{label.Please_Note}</p>
+                            <p class="please-note-copy-2">
+                                {label.agent_resignation_content}
+                            </p>
+                        </div>
+                    </template>
+                    <c-brs_link_generic-radio-input radio-options={selectedBuisness} maintain={maintain} name="theme3"
+                        answer={value} disabled="true" value={value} input-name="selected-buisness-radio"
+                        dom-has-multiple-radios show-foreign-id={isForeignInvestigationFlow}>
+                    </c-brs_link_generic-radio-input>
+                </div>
+                <div class="ack-section">
+                    <c-generic-multi-select class={inputClassName} list-data={CheckboxOptions} value={isChecked}
+                        oncheckboxinputselection={handleCheckBoxChange} add-class="acknowledgeField">
+                    </c-generic-multi-select>
+                    <p class="error-text" if:true={showCheckboxError}>
+                        {label.select_Business_Acknowledgement_Error}</p>
+                </div>
+            </div>
+            <div slot="actions" class="modal-footer slds-grid slds-size_1-of-1 margin-t-0">
+                <div class="slds-col button-wrapper slds-order_2">
+                    <button class="slds-button primaryBtnSmall slds-float_right" onclick={handleNext}>
+                        {label.Next}
+                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" aria-hidden="true" />
+                    </button>
+                </div>
+                <div class="slds-col slds-order_1">
+                    <button class="slds-button slds-button_natural slds-float_left back-btn natural-button-large"
+                        onclick={closeConfirmModal}> {label.Cancel_Label}</button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+    <template if:true={showAcknowledgmentConfirm}>
+        <c-modal open={showAcknowledgmentConfirm} onmodalclose={closeAcknowledgmentConfirm} size={modalSize} class="acknowledge-header-container">
+            <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+                <h6 class="acknowledgement-header">{label.ReviewPage_Acknowledgement}</h6>
+                <p class="acknowledgement-subheader">{label.acknowledge_confirm}</p>
+            </div>
+            <div slot="body"
+                class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1 content-text">
+                <div>
+                    <p class="content-one">
+                        {ackConfirmText1}
+                    </p>
+                    <p class="content-two">
+                        {ackConfirmText2}
+                    </p>
+                </div>
+            </div>
+            <div slot="actions" class="modal-footer slds-grid slds-m-vertical_small slds-size_1-of-1 sldsActionButtons">
+                <div class="slds-col button-wrapper slds-order_2">
+                    <button class="slds-button primaryBtnSmall slds-float_right" onclick={handleAcknoConfirm}>
+                        {label.Confirm}
+                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" aria-hidden="true" />
+                    </button>
+                </div>
+                <div class="slds-col slds-order_1">
+                    <button class="slds-button slds-button_natural slds-float_left back-btn natural-button"
+                        onclick={closeAcknowledgmentConfirm}>{label.Cancel_Label}</button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+    <template if:true={showNoLongerBusinessAvailiable}>
+        <c-modal class="business-available-popup" open={showNoLongerBusinessAvailiable} onmodalclose={closeNoLongerBusinessAvailiable} size={modalSize}>
+            <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+                <h6 class="acknowledgement-header">{label.availiable_business}</h6>
+                <p class="content-one slds-p-bottom_x-large no-bold">{label.availiable_business_subheader}</p>
+            </div>
+            <div slot="body"
+                class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1 acknowledgement-body">
+                <div>
+                    <div class="content-one">
+                        <p class="large">{label.business_name}</p>
+                        <h6 class="bs-name curious-blue">{selectedBusinessName}</h6>
+                    </div>
+                    <div class="special-content content-one">
+                        <p>{label.availiable_business_content}</p>
+                    </div>
+                </div>
+            </div>
+            <div slot="actions" class="modal-footer slds-grid button-hspace slds-size_1-of-1 sldsActionButtons">
+                <div class="slds-col button-wrapper slds-order_2">
+                    <button class="slds-button primaryBtnSmall slds-float_right" onclick={handleFileOffline}>
+                        {label.File_Offline}
+                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" aria-hidden="true" />
+                    </button>
+                </div>
+                <div class="slds-col slds-order_1">
+                    <button class="slds-button slds-button_natural slds-float_left back-btn natural-button"
+                        onclick={closeNoLongerBusinessAvailiable}>{label.Cancel_Label}</button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+    <c-modal if:true={showBusinessNameModal} open={showBusinessNameModal} onmodalclose={closeBusinessNameModal} size="small" no-scroll>
+        <div slot="header" class="slds-text-align_left">
+            <template if:true={isBusinessNameAvailable}>
+                <h6 class="margin-b-16 line-height-24">
+                    {label.businessNameChangeAvailableTitle}
+                </h6>
+                <p class="large margin-b-32">{label.How_do_you_want_to_proceed}</p>
+            </template>
+            <template if:false={isBusinessNameAvailable}>
+                <h6 class="margin-b-16 line-height-24">
+                    {label.businessNameChangeNotAvailableTitle}
+                </h6>
+                <p class="large margin-b-32">{label.DoYouWishToUpdateNameStateOfFormation}</p>
+            </template>
+        </div>
+        <div slot="body"
+            class="slds-large-size_12-of-12 slds-size_1-of-1">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_12-of-12 slds-large-size_7-of-12">
+                    <p class="large business-name-header">{label.Business_name_In_the_state_of_formation}</p>
+                    <h6 class="margin-b-24 curious-blue business-names">
+                        {businessNameStateFormation}
+                    </h6>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_5-of-12">
+                    <p class="large business-name-header">{label.Business_name_In_connecticut}</p>
+                    <h6 class="margin-b-48 curious-blue business-names">
+                        {selectedBusinessName}
+                    </h6>
+                </div>                
+            </div>
+            <c-generic-radio_brs name="business-options" radio-options={businessNameRadioOptions}
+            onctbosdatachange={onBusinessNameRadioSelect} answer='nameChangeSelectedRadio' has-error={businessNameRadioError}>
+            </c-generic-radio_brs>
+            <p class="error-text" if:true={businessNameRadioError}>{label.brs_Add_Incorporator_SelectType}</p>
+        </div>
+        <div slot="actions" class="modal-footer margin-t-0 slds-grid slds-size_1-of-1 sldsActionButtons">
+            <div class="slds-col button-wrapper slds-order_2">
+                <button class="slds-button primaryBtnSmall slds-float_right" onclick={goToNameChangeNextScreen}>
+                    {label.Next}
+                    <img src={chevronRightWhite} class="rightIcon" alt="" />
+                </button>
+            </div>
+            <div class="slds-col slds-order_1">
+                <button class="slds-button slds-button_natural slds-float_left back-btn natural-button-large "
+                    onclick={closeBusinessNameModal}>{label.Cancel_Label}</button>
+            </div>
+        </div>
+    </c-modal>
+    <p class="error-text" if:true={isErrorMessageShow}>{errorMessage}</p>
+    <p class="error-text" if:true={showError}>{selectBusinessErrorMsg}</p>
+    <p class="error-text" if:true={showNoFillingsDueAlert}>{noReportDueErrorMsg}</p>
+    <p class="error-text" if:true={showFirstReportDueError}>{label.First_Report_Due_Error}</p>
+    <p class="error-text" if:true={isLLPBusiness}>{label.brs_maintenance_interim_error}</p>
+    <p class="error-text" if:true={isCTBusiness}>{label.brs_maintenance_agent_error}</p>
+    <p class="error-text" if:true={showErrorMessage}>{errorMessage}&nbsp;<a if:true={isRejectedFiling} href={label.MyFilingsLink} target="_blank"
+        rel="noopener noreferrer">{label.My_filings_page}</a></p>
+    <c-brs_next-back-buttons nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate}
+        onhandleback={handleBack}></c-brs_next-back-buttons>
+</template>

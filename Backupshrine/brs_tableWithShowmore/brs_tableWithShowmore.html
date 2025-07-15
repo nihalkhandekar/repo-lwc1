@@ -1,0 +1,195 @@
+<template>
+  <template if:true={showSort}>
+    <div class="sort" onclick={handleExpandSort}>
+      <p class="smallBold">{label.sort_by}:&nbsp;</p>
+      <p class="small">{selectedSort}</p>
+      <div class="chevron-wrapper">
+        <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+          title="chevrondown" class="chevron-container-down"></lightning-icon>
+      </div>
+    </div>
+    <template if:true={expandSort}>
+      <div class="sortOptions">
+        <div class="sortoptionWrapper">
+          <div class="oneSort" data-id={label.name} onclick={handleSort}>
+            <p class="large">{label.name}</p>
+          </div>
+          <div class="oneSort" data-id={label.date} onclick={handleSort}>
+            <p class="large">{label.date}</p>
+          </div>
+        </div>
+      </div>
+    </template>
+  </template>
+  <div class="slds-grid  slds-wrap tab_wrapper">
+    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 table_details">
+      <template if:true={oldestdetail}>
+        <div class="table_details__oldest">
+          <div class="marker"></div>
+          <p class="largeBold">{label.action_item_oldest_file}</p>
+        </div>
+      </template>
+      <template if:true={queuedetail}>
+        <div class="table_details__queue">
+          <div class="marker"></div>
+          <p class="large">{queuedetail} {label.In_Queue}</p>
+        </div>
+      </template>
+      <template if:true={upcomingdetail}>
+        <div class="table_details__upcoming">
+          <div class="marker"></div>
+          <p class="large">{upcomingdetail} {label.Upcoming}</p>
+        </div>
+      </template>
+    </div>
+    <template if:true={itemData.length}>
+      <template for:each={itemData} for:item="actionObject" for:index="index">
+        <div key={actionObject} onclick={handleAIClick} data-id={actionObject.Account__c} data-name={actionObject.Id}
+          class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 parentWrapper">
+          <template if:true={actionObject.isUpcoming}>
+            <div class="upcomingCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12 slds-wrap">
+              <div class="card_content_wrapper slds-large-size_7-of-12 slds-size_6-of-6">
+                <div class="cardIcon_Wrapper">
+                  <div class="colorBar"></div>
+                  <div class="iconContainer">
+                    <img src={upcomingIcon} class="cardIcon" alt="" />
+                  </div>
+                </div>
+                <div class="card_content">
+                  <div class="iconContainer_mob">
+                    <img src={upcomingIcon} class="cardIcon" alt="" />
+                  </div>
+                  <p class="largeBold">{actionObject.Name}</p>
+                  <p class="large duedate">
+                    {label.due_Date}: {actionObject.dueDate}
+                  </p>
+                  <template if:true={actionObject.description}>
+                    <div class="large card_desc past-due-description">
+                      {actionObject.description}
+                    </div>
+                  </template>
+                  <div class="card_link card_right_mob">
+                    <p class="large amount-text">{label.Amount}</p>
+                    <p class="large">{actionObject.amount}</p>
+                  </div>
+                </div>
+                <template if:true={actionObject.isToDo}>
+                  <div class="card_radio_mobile">
+                    <input type="radio" disabled checked>
+                  </div>
+                </template>
+              </div>
+              <div class="card_content_wrapper slds-large-size_5-of-12 slds-size_6-of-6 card_right_details">
+                <div class="card_link">
+                  <p class="large amount-text">{label.Amount}</p>
+                  <p class="large">{actionObject.amount}</p>
+                </div>
+                <template if:true={actionObject.isToDo}>
+                  <div class="card_radio_desktop">
+                    <input type="radio" disabled checked>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </template>
+          <template if:true={actionObject.isPastDue}>
+            <template if:true={actionObject.isToDo}>
+              <div class="pastDue_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12 slds-wrap">
+                <div class="card_content_wrapper slds-large-size_7-of-12 slds-size_6-of-6">
+                  <div class="cardIcon_Wrapper">
+                    <div class="colorBar"></div>
+                    <div class="iconContainer">
+                      <img src={pastdueIcon} class="cardIcon" alt="" />
+                    </div>
+                  </div>
+                  <div class="card_content">
+                    <div class="iconContainer_mob">
+                      <img src={pastdueIcon} class="cardIcon" alt="" />
+                    </div>
+                    <p class="largeBold">{actionObject.Name}</p>
+                    <template if:false={actionObject.description}>
+                      <p class="large">
+                        {label.due_Date}: {actionObject.dueDate}
+                      </p>
+                    </template>
+                    <template if:true={actionObject.description}>
+                      <div class="large card_desc past-due-description">
+                        {actionObject.description}
+                      </div>
+                    </template>
+                    <div class="card_link card_right_mob">
+                      <p class="large amount-text">{label.Amount}</p>
+                      <p class="large">{actionObject.amount}</p>
+                    </div>
+                  </div>
+                  <div class="card_radio_mobile">
+                    <input type="radio" disabled checked>
+                  </div>
+                </div>
+                <div class="card_content_wrapper slds-large-size_5-of-12 slds-size_6-of-6 card_right_details">
+                  <div class="card_link">
+                    <p class="large amount-text">{label.Amount}</p>
+                    <p class="large">{actionObject.amount}</p>
+                  </div>
+                  <div class="card_radio_desktop" if:false={hideDescription}>
+                    <input type="radio" disabled checked>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <template if:false={actionObject.isToDo}>
+              <div class="todoCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12 slds-wrap">
+                <div class="card_content_wrapper slds-large-size_7-of-12 slds-size_6-of-6">
+                  <div class="cardIcon_Wrapper">
+                    <div class="colorBar"></div>
+                    <div class="iconContainer">
+                      <img src={todoIcon} class="cardIcon" alt="" />
+                    </div>
+                  </div>
+                  <div class="card_content">
+                    <div class="iconContainer_mob">
+                      <img src={todoIcon} class="cardIcon" alt="" />
+                    </div>
+                    <p class="largeBold">{actionObject.Name}</p>
+                    <template if:false={actionObject.description}>
+                      <p class="large">
+                        {label.due_Date}: {actionObject.dueDate}
+                      </p>
+                    </template>
+                    <template if:true={actionObject.description}>
+                      <div class="large card_desc past-due-description">
+                        {actionObject.description}
+                      </div>
+                    </template>
+                    <div class="card_link card_right_mob">
+                      <p class="large amount-text">{label.Amount}</p>
+                      <p class="large">{actionObject.amount}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card_content_wrapper slds-large-size_5-of-12 slds-size_6-of-6 card_right_details">
+                  <div class="card_link">
+                    <p class="large amount-text">{label.Amount}</p>
+                    <p class="large">{actionObject.amount}</p>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </template>
+        </div>
+      </template>
+    </template>
+  </div>
+  <template if:true={loadMoreBlock}>
+    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+      onclick={handleLoadMore}>
+      <p class="small">{label.businessProfile_load_more}</p>
+    </div>
+  </template>
+  <template if:true={showLess}>
+    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+      onclick={handleShowLess}>
+      <p class="small">{label.businessProfile_show_less}</p>
+    </div>
+  </template>
+</template>

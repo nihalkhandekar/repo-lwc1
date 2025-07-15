@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="value" type="string" label="value" description=""/>
+            <property name="showConfirm" type="Boolean" label="showConfirm" description=""/>
+            <property name="varFirstOrAnnual" type="String" label="varFirstOrAnnual" description=""/>
+            <property name="showSearchBuisness" type="Boolean" label="isSearchBuisnessClicked" description=""/>
+            <property name="searchInput" type="String" label="searchInput" description=""/>
+            <property name="businessListString" type="String" label="businessListString" description=""/>
+            <property name="scholarContent" type="String" label="scholarContent" description=""/>
+            <property name="SearchscholarContent" type="String" label="SearchscholarContent" description=""/>
+            <property name="maintennaceType" type="String" label="maintennaceType" description=""/>
+            <property name="varFirstOrAnnualReport" type="String" label="varFirstOrAnnual" description=""/>
+            <property name="flowName" type="String" label="flowName" description=""/>
+            <property name="filingId" type="String" label="filingId" description=""/>
+            <property name="maintain" type="Boolean" label="maintain" description=""/>
+            <property name="promptText" type="String" label="promptText" description=""/>
+            <property name="oldmaintenanceType" type="String" label="oldmaintenanceType" description=""/>
+            <property name="businessFilingType" type="String" label="Business Filing Type" description=""/>
+            <property name="isBusinessNameSameForNameChangeFlow" type="Boolean" label="Is BusinessNameSame For NameChange Flow" description=""/>
+            <property name="nameChangeSelectedRadio" type="String" label="Foreign Name Change Amendment selected radio value" description=""/>
+            <property name="isBusinessNameAvailable" type="Boolean" label="Is Businessname Available" description=""/>
+            <property name="category" type="String" label="Enter category for Paper Intake flow" description=""/>
+            <property name="domesticationBusinessType" type="String" label="Domestication Business Type" description=""/>
+            <property name="isDomestication" type="Boolean" label="Is Domestication" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

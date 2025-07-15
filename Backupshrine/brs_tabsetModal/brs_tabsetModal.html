@@ -1,0 +1,129 @@
+<template>
+  <c-modal
+    open={showPopup}
+    onmodalclose={closePopup}
+    size={modalSize}
+    class="tabset-modal"
+  >
+    <div
+      slot="header"
+      style="text-align: left"
+      class="headerModal slds-size_1-of-1"
+    >
+      <h6>{label.ReviewPage_updates}</h6>
+    </div>
+    <div slot="body">
+      <c-brs_tabset-links
+        first-tab-name={label.ReviewPage_deletionsAdditions}
+        second-tab-name={label.Changes}
+        hide-second-tab={hasNoChanges}
+      >
+        <div slot="firstTabContent">
+          <ul class="">
+            <li class="slds-grid slds-wrap" if:false={noDeletionsAdditions}>
+              <div class="slds-col slds-size_12-of-12">
+                <c-brs_badges class-name="greyPills" text={label.Deleted}  class="pills"></c-brs_badges>
+              </div>
+              <div class="slds-col slds-size_12-of-12">
+                <div class="slds-grid slds-wrap addressFields">
+                  <template if:true={noDataDeleted}>
+                    <div
+                      class="slds-col slds-size_12-of-12 no-section-data-container"
+                    >
+                      <img
+                        src={noChangesIcon}
+                        class="no-section-data"
+                        alt="no change icon"
+                      />
+                      <p class="small nothing-to-show grey-text">
+                        {label.ReviewPage_nothingToShow}
+                      </p>
+                    </div>
+                  </template>
+                  <template if:false={noDataDeleted}>
+                    <template
+                      for:each={deletedData}
+                      for:item="deletedRow"
+                      for:index="index"
+                    >
+                      <c-generic-table
+                        tablecolumns={tableColumns}
+                        tabledata={deletedRow}
+                        ontablerowaction={handleRowAction}
+                        class="generic-table hide-scroll slds-col deleted-table"
+                        key={deletedRow}
+                        customtable
+                      ></c-generic-table>
+                    </template>
+                  </template>
+                </div>
+              </div>
+              <div class="slds-col slds-size_12-of-12">
+                <c-brs_badges class-name="bluePills" text={label.Added} class="pills"></c-brs_badges>
+              </div>
+              <div class="slds-col slds-size_12-of-12">
+                <div class="slds-grid slds-wrap addressFields">
+                  <template for:each={createdData} for:item="createdRow">
+                    <c-generic-table
+                      tablecolumns={tableColumns}
+                      tabledata={createdRow}
+                      ontablerowaction={handleRowAction}
+                      class="generic-table hide-scroll slds-col"
+                      key={createdRow}
+                      customtable
+                    ></c-generic-table>
+                  </template>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <div
+            class="slds-grid slds-wrap no-changes-container"
+            if:true={noDeletionsAdditions}
+          >
+            <div class="no-changes-data">
+              <img src={noChangesIcon} class="no-changes" alt="no change icon"/>
+            </div>
+            <p class="no-changes-data small">{label.ReviewPage_noChanges}</p>
+          </div>
+        </div>
+        <div slot="secondTabContent" if:false={hasNoChanges}>
+          <ul class="line-index">
+            <template for:each={changedData} for:item="changedRow">
+              <li class="slds-grid slds-wrap" key={changedRow}>
+                <div class="slds-col slds-size_12-of-12">
+                  <c-brs_badges class-name="greyPills" text={label.Previous}  class="pills"></c-brs_badges>
+                </div>
+                <div class="slds-col slds-size_12-of-12">
+                  <div class="slds-grid slds-wrap addressFields">
+                    <c-generic-table
+                      tablecolumns={tableColumns}
+                      tabledata={changedRow.Previous}
+                      ontablerowaction={handleRowAction}
+                      class="generic-table hide-scroll slds-col"
+                      customtable
+                    ></c-generic-table>
+                  </div>
+                </div>
+                <div class="slds-col slds-size_12-of-12">
+                  <c-brs_badges class-name="greenPills" text={label.Updated}  class="pills"></c-brs_badges>
+                </div>
+                <div class="slds-col slds-size_12-of-12">
+                  <div class="slds-grid slds-wrap addressFields">
+                    <c-generic-table
+                      tablecolumns={tableColumns}
+                      tabledata={changedRow.Updated}
+                      ontablerowaction={handleRowAction}
+                      class="generic-table hide-scroll slds-col"
+                      customtable
+                    ></c-generic-table>
+                  </div>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </c-brs_tabset-links>
+    </div>
+  </c-modal>
+</template>

@@ -1,0 +1,24 @@
+<template>
+    <div class="tab-card">
+        <p class="tab-header smallBold" onkeyup={onHeaderEnter} onclick={showMenu} role="menu" tabindex="0">
+            {tabHeader}
+            <template if:false={showSubMenu}>
+                <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="add"
+                    class="chevron-container-down"></lightning-icon>
+            </template>
+            <template if:true={showSubMenu}>
+                <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="dash"
+                    class="chevron-container-down"></lightning-icon>
+            </template>
+        </p>
+        <ul class={subMenuClassName}>
+            <template for:each={tabList} for:item="eachTab" for:index="index">
+                <li tabindex="0" role="menu-item" key={eachTab.label} class={eachTab.className} onkeyup={onEnter} onclick={onTabClick} data-name={index}>
+                    <img src={eachTab.activeIcon} alt="" class="icon active-icon" />
+                    <img src={eachTab.icon} alt="" class="icon passive-icon" />
+                    {eachTab.label}
+                </li>
+            </template>
+        </ul>
+    </div>
+</template>

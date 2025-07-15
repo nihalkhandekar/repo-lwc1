@@ -1,0 +1,348 @@
+.search-buisness-btn {
+    padding-top: 24px;
+}
+
+.search-buisness-heading {
+    padding-top: 80px;
+}
+
+.popup-body {
+    padding: 40px 32px 16px 32px;
+}
+
+.margin-b-32 {	
+    margin-bottom: 32px;	
+}	
+.business-name-header{	
+    margin-bottom: 20px;	
+}
+
+.noBizFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed #D0CFCF;
+    padding-top: 43px;
+    border-radius: 4px;
+}
+
+.noBizFoundText {
+    width: 80%;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.modal-footer {
+    display: flex;
+    align-items: center;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cust-anchor {
+    font-family: Karla;
+    text-decoration: underline;
+    color: #09538b;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.buttons-wrapper .primaryBtn.slds-button:hover {
+    color: #ffffff;
+}
+/* Acknowledegment model css */
+
+.acknowledgement-header {
+    letter-spacing: 0.16px;
+    line-height: 28px !important;
+    padding-bottom: 16px;
+}
+.acknowledgement-subheader{
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.content-one {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+.content-two{
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 28px;
+}
+.please-note-copy-1 {
+    color: #8A5321;
+    font-family: KarlaBold !important;
+    font-size: 16px !important;
+    letter-spacing: 0.01px;
+    line-height: 24px !important;
+  }
+  
+  .please-note-copy-2 {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px !important;
+    letter-spacing: 0.01px;
+    line-height: 24px !important;
+  }
+  
+  .please-note {
+    box-sizing: border-box;
+    border: 1px solid #F6A053;
+    border-radius: 4px;
+    background-color: #FFF8F2;
+    padding: 12px 24px;
+  }
+  .no-bold {
+    font-weight: 400 !important;
+}
+.bs-name {
+    letter-spacing: 0.16px;
+    line-height: 28px !important;
+    padding-top: 4px;
+    padding-bottom: 32px;
+}
+.button-hspace {
+    padding-top:20px;
+    padding-bottom: 20px;
+}
+.special-content {
+    border-top: 1px solid #d4d4d4;
+    padding-top: 32px;
+    bottom: -1px;
+}
+  .content-text{
+    padding-top: 8px;
+  }
+/* ends here */
+
+.error-text a {
+    color: #DB2426;
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 1023.9px) {
+    .page-footer {
+        flex-direction: column-reverse;
+        margin-top: 36px;
+        padding-top: 0;
+    }
+
+    .business-name-header{	
+        line-height: 27px !important;	
+        font-size:18px !important;	
+    }	
+    .line-height-24{	
+        line-height: 24px !important;       	
+    }	
+    .business-names{	
+        line-height: 28px !important;; 	
+        font-size:22px !important;;	
+    }
+
+    .acknowledgement-subheader{
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .content-one {
+        font-size: 17px;
+        line-height: 25px;
+    }
+    .content-two {
+        font-size: 17px;
+        line-height: 25px;
+    }
+    .modal-footer {
+        flex-direction: column-reverse;
+        margin-top: 36px;
+        padding-top: 0;
+    }
+    .business-available-popup h6 {
+        letter-spacing: 0.47px;
+        line-height: 24px !important;
+    }
+    .business-available-popup .content-one {
+        letter-spacing: 0.12px;
+    }
+    .business-available-popup .modal-footer {
+        margin-top: 0px;
+        padding-top: 20px;
+    }
+    .slds-button.primaryBtnSmall {
+        width: 100%;
+    }
+
+    .button-wrapper {
+        margin-bottom: 32px;
+        width: 100%;
+    }
+}
+
+.sortSection {
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.chevron-wrapper {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.loadmore_Block {
+    margin-top: 40px;
+    padding: 46px 0;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px dashed #999999;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.loadmore_Block .large {
+    color: #09538B;
+    text-decoration: underline;
+}
+
+.loadMoreIcon {
+    margin-right: 11px;
+}
+
+.ack-section {
+    padding-top: 32px;
+}
+
+.selected-business {
+    padding-top: 40px;
+}
+
+.searchIcon {
+    width: 14px;
+}
+
+.biz-confirm-header {
+    color: #2D2C2C;
+}
+
+/* interim popup style */
+
+div.buttons-wrapper button.secondaryBtn,
+div.buttons-wrapper button.primaryBtn {
+    text-transform: unset;
+    padding: 0 40px;
+}
+
+.report-wrapper {
+    border: solid 1px #d0cfcf;
+    border-radius: 4px;
+    padding: 16px 0;
+    margin-top: 32px;
+}
+
+.inner-wrapper {
+    padding: 12px;
+    border-left: solid 8px #DB2426;
+    border-radius: 0 4px 4px 0;
+    display: flex;
+}
+
+.icon-div {
+    margin-right: 22px;
+}
+
+p.report-pend {
+    color: #E0282B;
+    margin-top: 8px;
+}
+
+.buttons-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 42px;
+}
+
+p.action-text {
+    text-align: left;
+}
+
+.buttons-wrapper.first-rep-btn {
+    justify-content: flex-end;
+}
+
+.cert-link {
+    margin-top: 24px;
+}
+
+.interim-popup-wrapper button.slds-button.primaryBtn,
+.cert-popup-wrapper button.slds-button.primaryBtn {
+    justify-content: center;
+}
+
+
+.margin-b-16 {
+    margin-bottom: 16px;
+}
+
+.margin-b-48 {
+    margin-bottom: 48px;
+}
+
+.margin-b-8 {
+    margin-bottom: 8px;
+}
+
+.margin-b-4 {
+    margin-bottom: 4px;
+}
+
+.margin-b-24{
+    margin-bottom: 24px;
+}
+
+.margin-t-0 {
+    margin-top: 0;
+}
+
+@media only screen and (min-width: 1023px) {
+    .noBizFound {
+        flex-direction: row;
+    }
+
+    .noBizFoundText {
+        width: 50%;
+        margin-left: 32px;
+        margin-top: 0px;
+        text-align: start;
+    }
+
+    .searchIcon {
+        width: 18px;
+    }
+
+    .sortSection{
+        flex-direction: row;
+    }
+   
+}
+h6.imp-notice {
+    color: #3A3939;
+    letter-spacing: 0.16px;
+}
+.cert-title {
+    color: #333232;
+}

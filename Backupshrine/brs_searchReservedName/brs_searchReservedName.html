@@ -1,0 +1,66 @@
+<template>
+   <template if:true={isLoading}>
+    <lightning-spinner
+      class="spinner-inner"
+      alternative-text="Loading"
+      variant="brand"
+      size="large"
+    >
+    </lightning-spinner>
+  </template>
+  <div class="search-container">
+    <div class="search-buisness-input-box">
+      <lightning-input
+        name="biz-search"
+        type="text"
+        data-id="biz-search"
+        required
+        value={selectedPin}
+        autocomplete="off"
+        onchange={setSearchData}
+        placeholder={label.SearchPin_Placeholder}
+        variant="label-hidden"
+        onkeydown={handleSearchNames}
+      >
+      </lightning-input>
+    </div>
+    <div class="search-buisness-btn">
+      <button
+        class="slds-button slds-button_stretch secondaryBtn higher"
+        onclick={searchReservedName}
+      >
+        <img src={searchIcon} class="search-icon" alt="search icon"/>
+        {label.Search_Business}
+      </button>
+    </div>
+    <div if:true={resultsFound} class="results-found">
+      <h4 class="reserved-name-found">{label.Reserved_Name_Found}</h4>
+      <p class="large search-again-text">{label.Search_Again_Text}</p>
+      <div class="theme3 theme5">
+        <c-link_generic-radio-input
+          radio-options={reservedNames}
+          name="theme3"
+          onctbosdatachange={handleSelectedReservedName}
+          answer={accountID}
+        ></c-link_generic-radio-input>
+      </div>
+    </div>
+    <div if:true={showNoResultsFound} class="no-results-found">
+      <c-brs_no-data-card
+        no-results-theme1="true"
+        no-results-found-content1={label.No_Reserved_Name_Found}
+        no-results-found-content2={label.No_Reserved_Name_Text}
+        no-results-header={label.No_Results_Found}
+      ></c-brs_no-data-card>
+    </div>
+    <p if:true={pinNotSelected} class="error-text">{label.Enter_Pin}</p>
+    <div>
+      <c-brs_next-back-buttons
+        nextlabel={label.Next}
+        prevlabel={label.Back}
+        onhandlenext={validate}
+        onhandleback={handleBack}
+      ></c-brs_next-back-buttons>
+    </div>
+  </div>
+</template>

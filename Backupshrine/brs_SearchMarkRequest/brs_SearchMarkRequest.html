@@ -1,0 +1,44 @@
+<!--
+  @description       : 
+  @author            :satakshi chaudhary
+  @group             : 
+  @last modified on  : 04-09-2021
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   03-26-2021   satakshi chaudhary                   Version
+-->
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="bgwhite slds-p-around_medium">
+        <lightning-combobox name="progress" label="" value={searchby} placeholder="Select"
+        options={searchOptions} variant="label-hidden" class="cust-sort-by" onchange={handleSortChange}>
+      </lightning-combobox>
+        <div class="slds-grid slds-gutters">
+           
+                <div class="slds-col slds-size_1-of-3 slds-p-around_medium">
+                    <lightning-input type="text" data-id="firstnameId" label="Search For" name="SearchFor"
+                        value={searchfor} onchange={handleChange}></lightning-input>
+                </div>
+               
+           
+           
+
+        </div>
+        <div class="slds-p-around_medium">
+            <lightning-button label="Search Mark" variant="brand" onclick={informationRequest}>
+            </lightning-button>
+        </div>
+        <div if:true={showData}>
+            <div class="slds-p-vertical_medium">
+                <lightning-tree-grid columns={gridColumns} data={gridData} key-field="dataId" hide-checkbox-column>
+                </lightning-tree-grid>
+            </div>
+        </div>
+        <div if:false={showData}>
+            <p>{noDataPresent}</p>
+        </div>
+    </div>
+</template>

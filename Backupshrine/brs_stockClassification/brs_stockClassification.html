@@ -1,0 +1,174 @@
+<!--*********************************************************************************************
+ * NAME:  brs_QuestionInput.html
+ * DESCRIPTION: Renders the stock classification page
+ *
+ * @AUTHOR: Sagarika Panda
+ * @DATE: 18/11/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Sagarika Panda                     23/10/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+    <div class="slds-grid">
+        <div class="slds-size_2-of-2">
+            <div class="slds-grid slds-wrap slds-gutters form-row">
+                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm" onkeydown={handleKeyPress}>
+                    <lightning-input name="authShares" type="number" data-id="authId"
+                        data-fieldname="Total_Authorized_Shares__c" required value={accinfo.Total_Authorized_Shares__c}
+                        onchange={setAccData} label={label.Total_Authorized_Shares} autocomplete="off"
+                        onblur={onSharesInputBlur}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                    <lightning-input type="number" id="input-02" data-fieldname="Franchise_Tax__c" value={tax}
+                        formatter="currency" currencycode="USD" disabled name="franchiseTax" label={label.Franchise_Tax}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-col slds-size_12-of-12" if:true={displayStockDetails}>
+                <div class="display-stock">
+                    <div class="stock-classes">
+                        <div class="username">
+                            {label.Stock_Classes} ({totalStocksEntered})
+                        </div>
+                        <div class="edit">
+                            <button class="slds-button slds-button_natural" onclick={openModal}>
+                                <img src={editIcon} alt="editIcon" />
+                                {label.Stock_Add_Edit}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="slds-col slds-size_12-of-12">
+                <p if:true={showTotalMisMatchErrorOnEdit} class="error-text margin-t-0">
+                    {label.Stock_Classification_Modal_Re_Edit_Error_Text}</p>
+                <c-qn-a_-question-help-text helptextnotes={topPleaseNoteSection} questionid={topPleaseNoteSection}
+                    inputclassname="no-margin">
+                </c-qn-a_-question-help-text>
+            </div>
+        </div>
+    </div>
+    <template if:true={isModalOpen}>
+        <c-modal no-scroll open={isModalOpen} onmodalclose={closeModal} size={modalSize}>
+            <div slot="header" style="text-align:left" class="headerModal slds-size_1-of-1">
+                <h6>{label.Stock_Classification_Modal_Header}</h6>
+            </div>
+            <div slot="body"
+                class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 modelHeader">
+                        <p class="modal-header-info-text">{label.Stock_Classification_Modal_Info_Text}&nbsp;
+                            <span><a href={link} target="_blank"
+                                    class="slds-text-link">{label.Stock_Classification_Modal_Limitation_Info_Link}</a></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-p-top_large">
+                        <div class="shares-display-box">
+                            <label class="shares-label">{label.Total_Authorized_Shares}</label>
+                            <div class="total-shares-val-text">{accinfo.Total_Authorized_Shares__c}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap">
+                    <div class="stock-class-grid slds-large-size_11-of-12 slds-size_12-of-12">
+                        <template for:each={stocksList} for:item="item" for:index="index">
+                            <div class="slds-grid slds-wrap slds-gutters field-wrapper slds-p-top_large" key={keyIndex}>
+                                <div class="slds-col slds-large-size_4-of-12 slds-size_10-of-12 inputForm">
+                                    <lightning-input onchange={validateFields} access-key={index} id={index}
+                                        data-field="Stock_Class__c" field-name="Stock_Class__c"
+                                        name="stockClass" value={item.Stock_Class__c} type="text"
+                                        required={item.required} placeholder={label.SC_class_ph}
+                                        label={label.Stock_Classification_Header_Add_Class} autocomplete="off">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                    <lightning-input onchange={validateFields} access-key={index} id={index}
+                                        data-field="Number_of_Stocks__c" field-name="Number_of_Stocks__c"
+                                        name='noOfStocks' placeholder={label.SC_noofstocks_ph}
+                                        label={label.Stock_Classification_Header_Add_No_Of_Stocks}
+                                        value={item.Number_of_Stocks__c} type="number" required autocomplete="off">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                    <lightning-input onchange={validateFields} access-key={index} id={index}
+                                        data-field="Par_Value__c" field-name="Par_Value__c" name='parVal'
+                                        value={item.Par_Value__c} placeholder={label.SC_parvalue_ph}
+                                        label={label.Stock_Classification_Header_Add_Par_Value}
+                                        type="number" formatter="currency" currencycode="USD" autocomplete="off"
+                                        step=".01">
+                                    </lightning-input>
+                                </div>
+                                <div class="delete-button-icon"
+                                    if:true={showDeleteIcon}>
+                                    <button class="slds-button slds-button_natural delete-button"
+                                        accesskey={index} id={index} onclick={removeRow}>
+                                        <span><img src={deleteIcon} alt="deleteIcon"
+                                                title="deleteIcon" /></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap slds-p-bottom_medium" if:true={showTextArea} key={keyIndex}>
+                                <div
+                                    class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 inputForm stockForm">
+                                    <lightning-textarea max-length="100"
+                                        class="small-textarea"
+                                        placeholder={label.Describeyourclassification}
+                                        value={item.Classification_Description__c} name="desc"
+                                        label={label.Stock_Classification_Header_Add__Terms}
+                                        onchange={validateFields} access-key={index} id={index} required>
+                                    </lightning-textarea>
+                                    <p class="warning-text" id={index}>
+                                        {label.Stock_Classification_Modal_Text_Limit_Info}</p>
+                                </div>
+                            </div>
+                        </template>
+                        <button class="slds-button slds-button_natural add-more" onclick={addRow}
+                            disabled={disableConfirmButton}>
+                            <span>
+                                <img src={addIcon} class="addIcon" alt="addIcon" title="addIcon" />
+                            </span>&nbsp;<span class="add-more-link">{label.Stock_Classification_Add_More}</span>
+                        </button>
+                        <p if:true={showTotalMisMatchError} class="error-block">
+                            {label.Stock_Classification_Modal_Total_Mis_Match_Text}</p>
+                    </div>
+                </div>
+            </div>
+            <div slot="actions" class="slds-size_1-of-1">
+                <button class="slds-button slds-button_brand slds-button_stretch higher primaryBtn"
+                        onclick={submitDetails}>{label.Stock_Classification_Modal_Confirm_Btn_Text}</button>
+            </div>
+        </c-modal>
+    </template>
+    <!--pop up for add class of share-->
+    <template if:true={showClassPopUP}>
+        <c-modal open={showClassPopUP} onmodalclose={closeClassOfShareModal} size={modalSize}>
+            <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+                <h6>{label.BusinessAuthorizartionText1} {accinfo.Total_Authorized_Shares__c} {label.BusinessAuthorizartionText2}</h6>
+            </div>
+            <div slot="body"
+                class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                    <p class="large class-of-share">
+                        {label.Class_Of_Share_SubText}
+                    </p>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1 removeButton">               
+                <button class="slds-button primaryBtn higher yes-button" onclick={openModal}>
+                    {label.Class_Of_Share_Yes_Button}
+                </button>
+                <button class="slds-button secondary-btn higher goto-summary-button no-button" onclick={handleNext}>
+                    {label.Class_Of_Share_No_Button}
+                </button>
+            </div>
+        </c-modal>
+    </template>
+    <c-brs_next-back-buttons nextlabel={nextLabel} prevlabel={backLabel} 
+    onhandlenext={validate} onhandleback={back}>
+  </c-brs_next-back-buttons>
+</template>

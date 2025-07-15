@@ -1,0 +1,10 @@
+<template>
+    <div class={className}>
+        <div class="card-body">
+            <slot name="header"></slot>
+        </div>
+        <div class="card-footer-btns" if:true={hasFooter}>
+            <slot name="footer"></slot>
+        </div>
+    </div>
+</template>

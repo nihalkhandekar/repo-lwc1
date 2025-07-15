@@ -1,0 +1,91 @@
+.addIcon {
+    height: 18px;
+    width: 18px;
+    margin-right: 8px;
+}
+
+.underline-text {
+    text-decoration: underline;
+}
+
+.amount-box {
+    background: #FFFFFF;
+    border: 1px solid #053756;
+    box-shadow: 0px 8px 16px #E7E9F2;
+    border-radius: 4px;
+    padding: 12px 24px;
+}
+
+.mt-24 {
+    margin-top: 24px;
+}
+
+.my-12{
+    margin: 12px 0px;
+}
+.card {
+    padding: 32px 28px 20px 24px;
+    background: #FFFFFF;
+    border: 1px solid #D0CFCF;
+    box-shadow: 0px 8px 16px #E7E9F2;
+    border-radius: 4px;
+    justify-content: space-between;
+}
+
+.cardIcon {
+    height: 18px;
+    margin-right: 22px;
+    margin-top: 4px;
+}
+
+.rightContent,
+.cardTitle,
+.card {
+    display: flex;
+}
+
+.rightContent {
+    align-items: center;
+    justify-content: space-between;
+}
+
+.closeIcon {
+    margin-left: 20px;
+}
+
+.slds-button {
+    color: #00528D;
+}
+
+.amount-section {
+    margin-top: 8px;
+}
+
+.cardTitle {
+    margin-bottom: 4px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .amount-section {
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .rightContent {
+        justify-content: normal;
+        margin-left: 40px;
+    }
+
+    .card {
+        flex-direction: column;
+    }
+
+    .cardIcon {
+        margin-top: 0;
+    }
+
+    .cardTitle {
+        margin-bottom: 16px;
+    }
+}
