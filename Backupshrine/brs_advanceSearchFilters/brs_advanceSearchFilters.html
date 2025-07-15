@@ -1,0 +1,89 @@
+<template>
+    <div class="mobileFilter">
+        <div class="dropDownNav" onclick={handleShowFilter}>
+            <p class="filter-text">{labels.select_filters}</p>
+            <lightning-button-icon icon-name="utility:chevrondown" variant="bare" class="chevron-icon"
+                alternative-text="chevron" title="chevron"></lightning-button-icon>
+        </div>
+        <template if:false={expandFilter}>
+            <div class="filterWrapper">
+                <!-- <h6 class="filterTitle">Filters</h6> -->
+                <template for:each={filters} for:item="item" for:index="index">
+                    <div class="filterSection" key={item.title}>
+                        <p class="large category-label" if:true={item.showCategoryLabel}>{item.categoryLabel}</p>
+                        <div class="filterType">
+                            <img src={item.src} class="filterIcon" alt="filter">
+                            <p class="largeBold">{item.MasterLabel}</p>
+                        </div>
+                        <!-- <template if:true={toggleFilter}> -->
+                        <c-generic-multi-select list-data={item.filterOptions}
+                            oncheckboxinputselection={handlecheckboxResult} data-id={item.searchType}
+                            value={item.selectedOptions} isfrommultiplequestion if:false={item.isDate}>
+                        </c-generic-multi-select>
+                        <div key={item.searchType} class="full-width" if:true={item.isDate}>
+                            <template for:each={item.filterOptions} for:item="date" for:index="index">
+                                <c-ctds_generic-data-types key={date.MasterLabel} data-id={date.MasterLabel}
+                                    typeof-data="Date" label={date.MasterLabel} ondateselection={handleDate}
+                                    placeholder={labels.Date_placeholder} date-value-output={date.selectedDate}>
+                                </c-ctds_generic-data-types>
+                            </template>
+                        </div>
+                        <p tabindex="0" role="button" data-id={item.searchType} onclick={showAllFilters}
+                            if:true={item.showMore} class="show-more">
+                            {item.showMore}
+                        </p>
+                        <!-- </template> -->
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={showSelectedFilter}>
+            <div class="filterContainer">
+                <template if:true={selectedFiltersList} for:each={selectedFiltersList} for:item="filter"
+                    for:index="index">
+                    <div key={filter} class="pills" id={filter.value}>
+                        {filter.label}
+                        <img src={closeIcon} class="closeIcon tabfocus" alt="closeIcon" tabindex="0"
+                            data-id={filter.parentIndex} id={filter.value} onclick={handleFilterClose}
+                            onkeypress={handleFilterClose} />
+                    </div>
+                </template>
+                <div class="clearFilter">
+                    <a href=# class="" onclick={handleClearFilters}>
+                        <p class="clear-all-text">{labels.clear_all_filters}</p>
+                    </a>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="desktopFilter">
+        <div>
+            <h6 class="filterTitle">{labels.rc_Filters_label}</h6>
+            <template for:each={filters} for:item="item" for:index="index">
+                <div class="filterSection" key={item.title}>
+                    <p class="large category-label" if:true={item.showCategoryLabel}>{item.categoryLabel}</p>
+                    <div class="filterType">
+                        <img src={item.src} class="filterIcon" alt="filter">
+                        <p class="largeBold">{item.MasterLabel}</p>
+                    </div>
+                    <div key={item.searchType} class="full-width" if:true={item.isDate}>
+                        <template for:each={item.filterOptions} for:item="date" for:index="index">
+                            <c-ctds_generic-data-types key={date.MasterLabel} data-id={date.MasterLabel}
+                                typeof-data="Date" label={date.MasterLabel} ondateselection={handleDate}
+                                placeholder={labels.Date_placeholder} date-value-output={date.selectedDate}>
+                            </c-ctds_generic-data-types>
+                        </template>
+                    </div>
+                    <c-generic-multi-select if:false={item.isDate} list-data={item.filterOptions}
+                        oncheckboxinputselection={handlecheckboxResult} data-id={item.searchType}
+                        value={item.selectedOptions} isfrommultiplequestion>
+                    </c-generic-multi-select>
+                    <p tabindex="0" role="button" data-id={item.searchType} onclick={showAllFilters}
+                        if:true={item.showMore} class="show-more">
+                        {item.showMore}
+                    </p>
+                </div>
+            </template>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountrecord" type="@salesforce/schema/Account"/>
+            <property name="addressStreet" type="string"/>
+            <property name="addressStreet1" type="string"/>
+            <property name="businessCity" type="string"/>
+            <property name="businessState" type="string"/>
+            <property name="businessZipcode" type="string"/>
+            <property name="businessStreet" type="string"/>
+            <property name="businessCountry" type="string"/>
+            <property name="mailingCity" type="string"/>
+            <property name="mailingZipcode" type="string"/>
+            <property name="mailingStreet" type="string"/>
+            <property name="mailingState" type="string"/>
+            <property name="mailingUnit" type="string"/>
+            <property name="mailingCountry" type="string"/>
+            <property name="businessUnit" type="string"/>
+            <property name="sameAsPrincipalCheckbox" type="boolean"/>
+            <property name="sameAsTopPrincipalCheckbox" type="boolean"/>
+            <property name="jurisdictionScreen" type="boolean"/>
+            <property name="checkboxTitle" type="string"/>
+            <property name="hideFirstCopyCheckBox" type="boolean"/>
+            <property name="showFirstCopyCheckBox" type="boolean"/>
+            <property name="errorMessage" type="string"/>
+            <property name="mailingAddressNotInCT" type="boolean"/>
+            <property name="selectedStateOrTerritoryFormation" type="string"/>
+            <property name="businessAddressFormat" type="string"/>
+            <property name="mailingAddressFormat" type="string"/>
+            <property name="businessInternationalAddress" type="string"/>
+            <property name="mailingInternationalAddress" type="string"/>
+            <property name="isUsAddress" label="isUsAddress" type="string"/>
+            <property name="showMailingAddress" label="showMailingAddress" type="Boolean"/>
+            <property name="isMailingRequired" label="isMailingRequired" type="Boolean"/>
+            <property name="isJurisdictionRequired" label="isJurisdictionRequired" type="Boolean"/>
+            <property name="flowName" label="Flow Name" type="string"/>
+            <property name="hasTwoAddressScreens" label="Has Two Address Screens" type="boolean"/>
+            <property name="isAddressChangedInFirstScreen" label="Is Address Changed In FirstScreen" type="boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

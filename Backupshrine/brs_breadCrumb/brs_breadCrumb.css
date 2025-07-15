@@ -1,0 +1,64 @@
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item {
+    padding: 4px 12px;
+    border-radius: 11.5px;
+    font-family: KarlaBold;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: left;
+    position: relative;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    background-color: #E0F2FF;
+    color: #09538B;
+}
+
+.breadcrumb-arrow {
+    height: 24px;
+    width: 24px;
+    background-image: url("/business/resource/CT_Assets/icons/chevronRightOrange.svg");
+    background-size: 16px;
+    background-repeat: no-repeat;
+    background-position:center;
+    margin-bottom: 16px;
+}
+
+.breadcrumb-arrow:first-child{
+    display: none;
+}
+
+.breadcrumb .breadcrumb-item:last-of-type {
+    cursor: default;
+    background-color: #FFFFFF;
+}
+
+.theme2 .breadcrumb .breadcrumb-item:last-of-type{
+    background-color: #F7F9FA;
+}
+
+@media print{
+    .breadcrumb{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .breadcrumb-arrow,
+    .breadcrumb-item {
+        margin-bottom: 0;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .breadcrumb-arrow {
+        height: 16px;
+        width: 16px;
+        }
+}

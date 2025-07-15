@@ -1,0 +1,843 @@
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner class="spinner-inner" alternative-text={label.loading_brs} variant="brand" size="large">
+    </lightning-spinner>
+  </template>
+  <div class="review-container annual-review-container">
+    <!-- 
+    BLOCK Name : Review/Overview Heading    
+    Description : Contains the first heading and subheading for the component
+    -->
+    <div class="slds-large-size_2-of-3 slds-size_1-of-1 heading">
+      <c-brs_header heading-text={screenHeading} sub-heading-text={screenSubHeading}></c-brs_header>
+    </div>
+    <!-- 
+    BLOCK Name : Checklist block
+    Description : Consists of the checklist pointers for user to view before submission
+    -->
+    <div class="slds-large-size_1-of-1 checkListContent">
+      <div class="slds-large-size_7-of-12 slds-size_1-of-1">
+        <!-- <div class="list-heading">
+        </div> -->
+        <div if:false={isAgentResignation} class="slds-large-size_10-of-12 slds-size_1-of-1 list">
+          <div class="list-icon">
+            <div class="inner-circle"></div>
+          </div>
+          <div class="list-content">
+            <p class="small">{firstCheckList}</p>
+          </div>
+        </div>
+        <div class="slds-large-size_10-of-12 slds-size_1-of-1 list">
+          <div class="list-icon">
+            <div class="inner-circle"></div>
+          </div>
+          <div class="list-content">
+            <p class="small">{secondCheckList}</p>
+          </div>
+        </div>
+        <div class="slds-large-size_10-of-12 slds-size_1-of-1 list">
+          <div class="list-icon">
+            <div class="inner-circle"></div>
+          </div>
+          <div class="list-content">
+            <p class="small">{thirdCheckList}</p>
+          </div>
+        </div>
+      </div>
+      <div class="slds-large-size_4-of-12">
+        <img src={reviewCheckList} class="reviewCheckList" title="reviewCheckList" aria-hidden="true"
+          role="presentation" />
+      </div>
+    </div>
+  </div>
+  <!-- 
+    BLOCK Name : Data Table block
+    Description : This block consists of all the data coming from backend.
+    -->
+  <template for:each={mapToShow} for:item="section">
+    <div key={section}>
+    <div class="slds-grid slds-wrap section sub-sections">
+      <div key={section} class="slds-large-size_1-of-1 slds-size_1-of-1 section-heading" if:true={section.showTitle}>
+        <div key={section} class="slds-large-size_8-of-12 slds-size_5-of-6 section-title">
+          {section.title}
+        </div>
+        <div if:true={isOverView} key={section} class="slds-large-size_4-of-12 slds-size_5-of-6">
+          <div key={section} class="verify-all-checkbox">
+            <c-generic-multi-select class={inputClassName} data-id={section.title} add-class="acknowledgeFieldOverView"
+              list-data={overViewVerifyAllInfo} oncheckboxinputselection={OverViewCheckboxChange}
+              value={section.isOverViewVerified}>
+            </c-generic-multi-select>
+          </div>
+        </div>
+      </div>
+      <div class="slds-large-size_12-of-12 slds-size_1-of-1 question-wrapper">
+        <template for:each={section.value} for:item="question">
+          <div class="slds-grid slds wrap section-row border" key={question.id} if:false={question.hideDataTableOnUI}>
+            <div key={question.id} class="question-container section-icon-mobile slds-size_1-of-12">
+              <div class="icon-container">
+                <img src={question.fieldimage} class="slds-m-right_small" role="presentation" aria-hidden="true"
+                  alt="" />
+              </div>
+            </div>
+            <div key={question.id} class="question-container slds-large-size_12-of-12 slds-size_11-of-12"
+              if:false={question.hideDataTableOnUI}>
+              <div key={question.questionLabel}
+                class="slds-large-size_5-of-12 slds-medium-size_7-of-12 slds-size_11-of-12 question slds-p-right_small">
+                <img src={question.fieldimage} class="section-icon-desktop slds-m-right_small" role="presentation"
+                  aria-hidden="true" alt="" />
+                <span class="largeBold">{question.questionLabel}</span>
+              </div>
+              <template if:false={question.isElectionStatus}>
+                <div if:false={question.isList} key={question.responseText} class={question.descriptionClass}>
+                  <p class="small question-description grey-text" if:false={question.showDocument}>
+                    <span if:true={question.showCountLabel}>{label.Total}&nbsp;</span>
+                    <lightning-formatted-rich-text value={question.responseText} if:false={question.dataIsChanged}>
+                    </lightning-formatted-rich-text>
+                    <lightning-formatted-rich-text value={question.associatedChangedDataValue}
+                      if:true={question.dataIsChanged}></lightning-formatted-rich-text>
+                  </p>
+                  <p class="small question-description grey-text" if:true={question.showDocument}>
+                    <button class="edit-link slds-button slds-button_natural natural-button"
+                      data-id={question.documentId} onclick={previewDocument}>
+                      {question.responseText}
+                    </button>
+                  </p>
+                </div>
+              </template>
+              <template if:false={question.isAgentOrPrincipal}>
+                <template if:false={question.showDataTable}>
+                  <div class="slds-large-size_2-of-12 slds-size_5-of-6" if:false={question.viewUpdatedLink}></div>
+                </template>
+                <template if:true={question.showDataTable}>
+                  <div class="slds-large-size_2-of-12 slds-size_5-of-6" if:false={question.viewUpdatedLink}></div>
+                </template>
+              </template>
+              <div class="slds-large-size_3-of-12 button-wrapper view-updates-link"
+                if:true={question.isAgentOrPrincipal}>
+                <template if:false={isOverView}>
+                  <button class="edit-link slds-button slds-but]ton_natural natural-button"
+                    onclick={viewAgentPrincipalUpdates} data-id={question.id} data-principal={question.isPrincipal}>
+                    {label.View_Updates_Text}
+                  </button>
+                </template>
+              </div>
+              <div
+                class="slds-large-size_1-of-12 slds-medium-size_11-of-12 slds-size_5-of-6 answer arrow-icon-container"
+                if:true={question.showDataTable}>
+                <div>
+                  <lightning-button-icon icon-name={iconName} onclick={hideAndShowTable} size="medium"
+                    data-id={question.id} aria-label="dropdown icon">
+                  </lightning-button-icon>
+                </div>
+              </div>
+              <div class="slds-large-size_3-of-12 button-wrapper view-updates-link" if:true={question.viewUpdatedLink}>
+                <button class="edit-link slds-button slds-button_natural natural-button" onclick={viewUpdates}
+                  data-id={question.id}>
+                  {label.View_Updates_Text}
+                </button>
+              </div>
+              <div class="slds-large-size_1-of-12 button-wrapper" if:false={question.hideEditButton}>
+                <button class="edit-link slds-float_right slds-button slds-button_natural natural-button"
+                  key={question.id} data-id={question.questionLabel} id={question.questionLabel}
+                  data-value={question.questionLabel} name={section.title} onclick={handleQuestionEdit}>
+                  {label.edit}
+                  <img src={editLinkIcon} class="slds-m-left_small icon" role="presentation" aria-hidden="true"
+                    alt="" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div data-id={question.id} key={question.id} class={className}>
+            <div class="slds-size_1-of-1" if:true={question.showDataTable}>
+              <div class="slds-grid slds-wrap">
+                <!-- Kyathi here is commented few lines -->
+
+                <div key={question.id} class="slds-size_1-of-1 table-display">
+                  <c-generic-table tablecolumns={question.tablecolumns} tabledata={question.tabledata}
+                    ontablerowaction={handleRowAction} customtable></c-generic-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+      <div class="slds-medium-size_1-of-12 slds-size_1-of-6 mob"></div>
+    </div> 
+    <template if:true={isOverView}>
+        <p class="error-text" if:true={section.showError}>{section.errorMessage}</p>
+    </template>
+    </div>
+  </template>
+  <template if:true={isOverView}>
+    <p class="error-text" if:true={overViewNotVerifiedError}>{label.verify_all_info}
+    </p>
+  </template>
+  <!-- 
+    BLOCK Name : Acknowledgement Block
+    Description : This is the acknowledgement section. This block is only visible when the screen is either Annual or First Report Summary
+    -->
+  <template if:true={showAcknowledgementSection}>
+    <!-- 
+      Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-930,1101,1107,1141
+      Change(s)/Modification(s) Description : This is the acknowledgement block for the acknowledgement section for Annual and First Report.
+                                              We have 2 different blocks rendering based on the report type. This acknowledgement section is 
+                                              embedded within the screen. In other case , in overview page this entire block is shown as a popup.
+      Change(s)/Modification(s) Made on : 2021-01-26
+      Change(s)/Modification(s) Made by : Avinash Shukla
+      -->
+    <template if:true={isFirstReport}>
+      <div class="slds-grid slds-wrap section acknowledgeWrapper inputForm">
+        <div class="slds-size_1-of-1 section-heading">
+          <!-- 
+          BLOCK Name : Acknowledgement Title
+          Description : Header for Acknowledgement
+          -->
+          <div class="slds-large-size_9-of-12 slds-size_5-of-6 section-title">
+            {label.ReviewPage_Acknowledgement}
+          </div>
+        </div>
+        <div class="slds-size_1-of-1">
+          <div class="question-container-acknowledgment slds-size_1-of-1 acknowledge-Checkboxes">
+            <div class="slds-grid slds-wrap date-time-block" if:true={showDateTime}>
+              <div class="slds-large-size_4-of-12 slds-size_12-of-12 inputForm full-width date-container">
+                <c-ctds_generic-data-types typeof-data="Date" label={label.effective_Date_label}
+                  ondateselection={handleDate} placeholder="MM/DD/YYYY" date-value-output={effectiveDate}>
+                </c-ctds_generic-data-types>
+                <p class="required-error-msg slds-form-element__help" if:true={showLlcDateTimeError}>
+                  {label.LLC_Filling_Date_Error}</p>
+              </div>
+            </div>
+            <div class="slds-grid slds-wrap date-time-block" if:true={showDateTime}>
+              <div class="slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                <c-brs_time-picker label={label.effective_Time_label} value={effectiveTime}
+                  ontimeselection={handleTime} ontimeselectionerror={handleTimeSelectionError}></c-brs_time-picker>
+                  <p class="required-error-msg slds-form-element__help" if:true={showDateTimeError}>
+                    {label.effective_Date_Time_Error}</p>
+                    <p class="required-error-msg slds-form-element__help" if:true={showDateTimeErrorFuture}>
+                      {label.brs_showDateTimeErrorFuture}</p>
+              </div>
+            </div>
+            <!--       BLOCK Name : Acknowledgement terms
+                            Description : Checkbox for Acknowledgement , must be checked in all cases to proceed to acknowledgement.
+                            -->
+            <template if:false={isLLPForeignDomestic}>
+              <div class="slds-p-bottom_medium slds-large-size_10-of-12 slds-size_12-of-12">
+                <c-generic-multi-select class={inputClassName} data-id="acknowledgeinput" add-class="acknowledgeField"
+                  list-data={acknowledgeCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}>
+                </c-generic-multi-select>
+                <p class="required-error-msg slds-form-element__help" if:true={showCheckboxError}>
+                  {label.acknowledgementErrorMsg}</p>
+              </div>
+  
+              <div class="radio-option slds-p-bottom_medium slds-grid slds-wrap">
+                <!-- 
+                  BLOCK Name : Choose Principal Radio Option
+                  Description : Selected by default for First Report. On selection showing the list of principal associated with the business
+                  -->
+                  <template if:false={hidePrincipal}>
+                <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium" qid="organiser-options"
+                  radio-options={choosePrincipalRadioOptions} value={selectedRadioOption}
+                  onctbosdatachange={handleRadioOptionSelection}>
+                </c-generic-radio-input>
+                </template>
+                <!-- 
+                  BLOCK Name : Choose Principal
+                  Description : This block is to be visible only in case the 'Choose Principal' radio option was clicked.
+                  -->
+                <template if:true={selectPrincipal}>
+                  <div class="slds-size_1-of-1 slds-p-right_small">
+                    <label>{label.ReviewPage_choosePrincipalRequired}</label>
+                    <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                      <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" variant="label-hidden"
+                        label={label.ReviewPage_choosePrincipalRequired} options={organizerOptions} value={selectedPrincipal} required
+                        onchange={handlePrincipalSelection}>
+                      </lightning-combobox>
+                    </div>
+                  </div>
+                  <template if:true={selectedPrincipalIsBusinessType}>
+                    <!-- 
+                      BLOCK Name : Signatory Name and Signatory title
+                      Description : This block to show when business structure is LLC or Bcorp,Stock or NOn Stock and Selected principal is type business.
+                      -->
+                    <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                      <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                        label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                        onchange={handleSignatoryName}>
+                      </lightning-input>
+                    </div>
+                    <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                      <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                        label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                        onchange={handleSignatoryTitle}></lightning-input>
+                    </div>
+                  </template>
+                </template>
+  
+                <!-- 
+                  BLOCK Name : Add Authoriser radio option
+                  Description : On selection by user, display
+                  -->
+                <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium" qid="organiser-options"
+                  radio-options={addAuthoriserRadioOptions} value={selectedRadioOption}
+                  onctbosdatachange={handleRadioOptionSelection}>
+                </c-generic-radio-input>
+                <!-- 
+                  BLOCK Name : Name and Title Block
+                  Description : This block is to be viewed only when 'Add Authorizer manually' is selected
+                  -->
+                <template if:true={addAuthorizerManully}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField" label={label.Name}
+                      value={signatoryName} required onchange={handleSignatoryName}>
+                    </lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField" label={label.Title}
+                      value={signatoryTitle} required onchange={handleSignatoryTitle}></lightning-input>
+                  </div>
+                </template>
+                <div if:true={isSelfNomiationCheckBox}>
+                  <c-generic-multi-select class="cb" add-class="acknowledgeFieldLLC" data-id="acknowledgeinput  "
+                    list-data={agentConfLLCCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}></c-generic-multi-select>
+                </div>
+  
+              </div>
+  
+              <!-- 
+                BLOCK Name : Signature Block
+                Description : Signature block , to be disabled and populated with the current user name.
+                -->
+              <div class="slds-grid slds-p-top_medium">
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small inputForm">
+                  <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                    label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template if:true={isAnnualReport}>
+      <div class="slds-grid slds-wrap section acknowledgeWrapper inputForm">
+        <div class="slds-size_1-of-1 section-heading">
+          <!-- 
+          BLOCK Name : Acknowledgement Title
+          Description : Header for Acknowledgement
+          -->
+          <div class="slds-large-size_9-of-12 slds-size_5-of-6 section-title">
+            {label.ReviewPage_Acknowledgement}
+          </div>
+        </div>
+        <div class="slds-size_1-of-1">
+          <div class="question-container-acknowledgment slds-size_1-of-1 acknowledge-Checkboxes">
+            <!-- 
+            BLOCK Name : Acknowledgement terms
+            Description : Checkbox for Acknowledgement , must be checked in all cases to proceed to acknowledgement.
+            -->
+            <div class="slds-p-bottom_medium">
+              <c-generic-multi-select class={inputClassName} data-id="acknowledgeinput" add-class="acknowledgeField"
+                list-data={acknowledgeCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}>
+              </c-generic-multi-select>
+              <p class="required-error-msg slds-form-element__help" if:true={showCheckboxError}>
+                {label.acknowledgementErrorMsg}</p>
+            </div>
+
+            <div class="radio-option slds-p-bottom_medium slds-grid slds-wrap">
+              <!-- 
+                BLOCK Name : Choose Principal Radio Option
+                Description : To be shown when business structure is LLC. On selection, showing the list of principal associated with the business
+                -->
+              <template if:true={isLLC}>
+                <template if:false={hidePrincipal}>
+                <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium  " qid="organiser-options"
+                  radio-options={choosePrincipalRadioOptions} value={selectedRadioOption}
+                  onctbosdatachange={handleRadioOptionSelection}>
+                </c-generic-radio-input>
+              </template>
+              </template>
+              <!-- 
+                BLOCK Name : Choose Principal
+                Description : This block is to be visible only in case the 'Choose Principal' radio option was clicked or WHEN Business structure is Bcorp, Stock and non Stock.
+                -->
+              <template if:true={selectPrincipal}>
+                <div class="slds-size_1-of-1 slds-p-right_small">
+                  <label>{label.ReviewPage_choosePrincipalRequired}</label>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" variant="label-hidden"
+                      label={label.ReviewPage_choosePrincipalRequired} options={organizerOptions} value={selectedPrincipal} required
+                      onchange={handlePrincipalSelection}>
+                    </lightning-combobox>
+                  </div>
+                </div>
+
+                <template if:true={selectedPrincipalIsBusinessType}>
+                  <!-- 
+                    BLOCK Name : Signatory Name and Signatory title
+                    Description : This block to show when business structure is LLC or Bcorp,Stock or NOn Stock and Selected principal is type business.
+                    -->
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                      onchange={handleSignatoryName}>
+                    </lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                      onchange={handleSignatoryTitle}></lightning-input>
+                  </div>
+                </template>
+              </template>
+              <!-- 
+                BLOCK Name : Add Authoriser radio option
+                Description : To be shown when business structure is LLC, On selection by user, display fields to input signatory manually.
+                -->
+              <template if:true={isLLC}>
+                <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium  " qid="organiser-options"
+                  radio-options={addPrincipalRadioOptions} value={selectedRadioOption}
+                  onctbosdatachange={handleRadioOptionSelection}>
+                </c-generic-radio-input>
+              </template>
+              <!-- 
+                BLOCK Name : Name and Title Block
+                Description : This block is to be viewed only when 'Add Authorizer manually' is selected
+                -->
+              <template if:true={addAuthorizerManully}>
+                <!-- 
+                    BLOCK Name : Type of Signatory 
+                    Description : This block is used to display , type of signatory. Only visible when business is LLC
+                    -->
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                  <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField acknowledgeFieldLLC"
+                    label={label.ReviewPage_typeSignatoryRequired} options={organizerTypeOptions} value={organizerType}
+                    required onchange={handleOrganizerType}>
+                  </lightning-combobox>
+                </div>
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                  <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField acknowledgeFieldLLC"
+                    label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                    onchange={handleSignatoryName}>
+                  </lightning-input>
+                </div>
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                  <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField acknowledgeFieldLLC"
+                    label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                    onchange={handleSignatoryTitle}></lightning-input>
+                </div>
+              </template>
+              <!-- 
+                BLOCK Name : LLP 
+                Description : If the selected business structure is LLP then we render this block.
+                -->
+              <template if:true={isLLP}>
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                  <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeFieldLLP"
+                    label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                    onchange={handleSignatoryName}>
+                  </lightning-input>
+                </div>
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                  <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeFieldLLP"
+                    label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                    onchange={handleSignatoryTitle}></lightning-input>
+                </div>
+              </template>
+            </div>
+
+            <!-- 
+              BLOCK Name : Signature Block
+              Description : Signature block , to be disabled and populated with the current user name.
+              -->
+            <div class="slds-grid slds-p-top_medium">
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small inputForm">
+                <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                  label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </template>
+
+
+  </template>
+
+  <template if:true={isAgent}>
+    <div class="slds-grid slds-wrap section acknowledgeWrapper inputForm">
+      <div class="slds-size_1-of-1 section-heading">
+        <div class="slds-large-size_9-of-12 slds-size_5-of-6 section-title">
+          {label.ReviewPage_Acknowledgement}
+        </div>
+      </div>
+      <div class="slds-size_1-of-1">
+        <div class="question-container-acknowledgment slds-size_1-of-1 acknowledge-Checkboxes">
+          <div class="slds-p-bottom_medium slds-large-size_10-of-12 slds-size_12-of-12">
+            <c-generic-multi-select class={inputClassName} data-id="acknowledgeinput" add-class="acknowledgeField"
+              list-data={acknowledgeCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}>
+            </c-generic-multi-select>
+            <p class="required-error-msg slds-form-element__help" if:true={showCheckboxError}>
+              {label.acknowledgementErrorMsg}</p>
+          </div>
+          <template if:true={isAgentBusiness}>
+            <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+              <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField" label={label.Agent_Name}
+                value={agentName} disabled>
+              </lightning-input>
+            </div>
+            <div class="slds-grid slds-wrap">
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField" label={label.Name}
+                  value={signatoryName} required onchange={handleSignatoryName}>
+                </lightning-input>
+              </div>
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField" label={label.Title}
+                  value={signatoryTitle} required onchange={handleSignatoryTitle}></lightning-input>
+              </div>
+            </div>
+          </template>
+          <div class="slds-grid slds-p-top_medium">
+            <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+              <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template if:true={isLLPForeignDomestic}>
+    <div class={ackBlockClassname}>
+      <div class="slds-size_1-of-1 section-heading" if:true={isWithdrawalLLP}>
+        <div class="slds-large-size_9-of-12 slds-size_5-of-6 section-title">
+          {label.ReviewPage_Acknowledgement}
+        </div>
+      </div>
+      <div class="slds-size_1-of-1">
+        <div class="question-container-acknowledgment slds-size_1-of-1 acknowledge-Checkboxes">
+          <div class="slds-p-bottom_medium slds-large-size_10-of-12 slds-size_12-of-12">
+            <c-generic-multi-select class={inputClassName} data-id="acknowledgeinput" add-class="acknowledgeField"
+              list-data={acknowledgeCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}>
+            </c-generic-multi-select>
+            <p class="required-error-msg slds-form-element__help" if:true={showCheckboxError}>
+              {label.acknowledgementErrorMsg}</p>
+          </div>
+          <div class="slds-grid slds-wrap">
+            <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+              <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeFieldLLP" label={label.Name}
+                value={signatoryName} required onchange={handleSignatoryName}>
+              </lightning-input>
+            </div>
+            <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+              <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeFieldLLP" label={label.Title}
+                value={signatoryTitle} required onchange={handleSignatoryTitle}></lightning-input>
+            </div>
+          </div>
+          <div class="slds-grid slds-p-top_medium">
+            <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small inputForm">
+              <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <p class="error-text" if:true={showErrorMessage}>
+    {errorMessage}
+  </p>
+  <!-- 
+    BLOCK Name : Navigational Block  
+    Description : Contains navigational buttons. The buttons rendered are conditional based on either overview page or summary page
+    -->
+  <div class="page-footer slds-grid slds-size_12-of-12">
+    <div class="button-wrapper slds-order_3">
+      <button title={nextLabel} onclick={handleContinue} if:true={continueButton}
+        class="slds-button primaryBtnSmall alignButton">
+        {nextLabel} &nbsp;
+        <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse" size="x-small">
+        </lightning-icon>
+      </button>
+      <button onclick={handleProceedToPayment} if:true={proceedToPaymentBtn}
+        class="slds-button primaryBtnSmall alignButton">
+        <template if:false={applyFlowButtonLabel}>{label.BRS_Proceed_Payment}&nbsp;</template>
+        <template if:true={applyFlowButtonLabel}>{buttonLabelFromFlow}&nbsp;</template>
+        <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse" size="x-small">
+        </lightning-icon>
+      </button>
+    </div>
+    <template if:true={showUpdateButton}>
+      <div class="slds-order_2">
+        <button class="slds-button secondary-btn update-button" onclick={handleUpdate}>{updateLabel}</button>
+      </div>
+    </template>
+    <div class="slds-col slds-order_1" if:true={goToDashBoardPage}>
+      <button tabindex="0" class="slds-button cust-anchor edit-link slds-button_natural natural-button"
+        onclick={handleBack}>{backLabel}</button>
+    </div>
+  </div>
+
+
+  <!-- Popup for continue to acknowlegment -->
+  <template if:true={continueForAcknowledgment}>
+    <section role="dialog" aria-label="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+      aria-describedby="modal-content-id-1"
+      class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header slds-modal__header_empty">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+              <label class="updates">
+                  <h5>
+                    {label.ReviewPage_Acknowledgement}
+                  </h5>
+              </label>
+            </div>
+            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+              <label class="closePopup slds-float_right" onclick={closeAcknowledgementPopup}>
+                <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+              </label>
+            </div>
+          </div>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-4">
+          <div class="slds-grid slds-wrap acknowledgeWrapper inputForm">
+            <template if:true={isAnnualReport}>
+              <div class="slds-grid slds-wrap acknowledgeWrapper inputForm popupAcknowledge">
+                <p>{label.Annual_Review_Fill_Box_Title}</p>
+                <div class="slds-size_1-of-1">
+                  <div class="question-container-acknowledgment slds-size_1-of-1 acknowledge-Checkboxes">
+                    <!-- 
+                  BLOCK Name : Acknowledgement terms
+                  Description : Checkbox for Acknowledgement , must be checked in all cases to proceed to acknowledgement.
+                  -->
+                    <div if:true={isSelfNomiationCheckBox}>
+                      <c-generic-multi-select class="cb" add-class="acknowledgeFieldLLC" data-id="acknowledgeinput  "
+                        list-data={agentConfLLCCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}></c-generic-multi-select>
+                    </div>
+                    <div class="slds-p-bottom_medium">
+                      <c-generic-multi-select class={inputClassName} data-id="acknowledgeinput"
+                        add-class="acknowledgeField" list-data={acknowledgeCheckboxOptions}
+                        oncheckboxinputselection={acknowledgeCheckboxChange}>
+                      </c-generic-multi-select>
+                      <p class="required-error-msg slds-form-element__help" if:true={showCheckboxError}>
+                        {label.acknowledgementErrorMsg}</p>
+                    </div>
+
+                    <div class="radio-option slds-p-bottom_medium slds-grid slds-wrap">
+                      <!-- 
+                      BLOCK Name : Choose Principal Radio Option
+                      Description : To be shown when business structure is LLC. On selection, showing the list of principal associated with the business
+                      -->
+                      <template if:true={isLLC}>
+                       <template if:false={hidePrincipal}>
+                        <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium" qid="organiser-options"
+                          radio-options={choosePrincipalRadioOptions} value={selectedRadioOption}
+                          onctbosdatachange={handleRadioOptionSelection}>
+                        </c-generic-radio-input>
+                         </template>
+                      </template>
+                      <!-- 
+                      BLOCK Name : Add Authoriser radio option
+                      Description : To be shown when business structure is LLC, On selection by user, display fields to input signatory manually.
+                      -->
+                      <template if:true={isLLC}>
+                        <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium" qid="organiser-options"
+                          radio-options={addPrincipalRadioOptions} value={selectedRadioOption}
+                          onctbosdatachange={handleRadioOptionSelection}>
+                        </c-generic-radio-input>
+                      </template>
+                      <!-- 
+                      BLOCK Name : Name and Title Block
+                      Description : This block is to be viewed only when 'Add Authorizer manually' is selected
+                      -->
+                      <template if:true={addAuthorizerManully}>
+                        <!-- 
+                          BLOCK Name : Type of Signatory 
+                          Description : This block is used to display , type of signatory. Only visible when business is LLC
+                          -->
+                        <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                          <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField"
+                            label={label.ReviewPage_typeSignatoryRequired} options={organizerTypeOptions}
+                            value={organizerType} required onchange={handleOrganizerType}>
+                          </lightning-combobox>
+                        </div>
+                        <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                          <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                            label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                            onchange={handleSignatoryName}>
+                          </lightning-input>
+                        </div>
+                        <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                          <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                            label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                            onchange={handleSignatoryTitle}></lightning-input>
+                        </div>
+                      </template>
+                      <!-- 
+                      BLOCK Name : Choose Principal
+                      Description : This block is to be visible only in case the 'Choose Principal' radio option was clicked or WHEN Business structure is Bcorp, Stock and non Stock.
+                      -->
+                      <template if:true={selectPrincipal}>
+                        <div class="slds-size_1-of-1 slds-p-right_small">
+                          <label>{label.ReviewPage_choosePrincipalRequired}</label>
+                          <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                            <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" variant="label-hidden"
+                              label={label.ReviewPage_choosePrincipalRequired} options={organizerOptions} value={selectedPrincipal} required
+                              onchange={handlePrincipalSelection}>
+                            </lightning-combobox>
+                          </div>
+                        </div>
+
+                        <template if:true={selectedPrincipalIsBusinessType}>
+                          <!-- 
+                          BLOCK Name : Signatory Name and Signatory title
+                          Description : This block to show when business structure is LLC or Bcorp,Stock or NOn Stock and Selected principal is type business.
+                          -->
+                          <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                            <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                              label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                              onchange={handleSignatoryName}>
+                            </lightning-input>
+                          </div>
+                          <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                            <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                              label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                              onchange={handleSignatoryTitle}></lightning-input>
+                          </div>
+                        </template>
+                      </template>
+                      <template if:true={isLLC}>
+                        <p class="required-error-msg slds-form-element__help" if:true={showRadioBtnError}>
+                          {label.errMsgGeneric}</p>
+                      </template>
+                      <!-- 
+                      BLOCK Name : LLP 
+                      Description : If the selected business structure is LLP then we render this block.
+                      -->
+                      <template if:true={isLLP}>
+                        <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                          <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeFieldLLP"
+                            label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                            onchange={handleSignatoryName}>
+                          </lightning-input>
+                        </div>
+                        <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                          <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeFieldLLP"
+                            label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                            onchange={handleSignatoryTitle}></lightning-input>
+                        </div>
+                      </template>
+
+                    </div>
+
+                    <!-- 
+                    BLOCK Name : Signature Block
+                    Description : Signature block , to be disabled and populated with the current user name.
+                    -->
+                    <div class="slds-grid slds-p-top_medium">
+                      <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small inputForm">
+                        <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                          label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+        <footer class="slds-modal__footer">
+          <div class="slds-col slds-order_2">
+            <button class="slds-button primaryBtn slds-button_brand" onclick={handleProceedToPaymentModal}>
+              {label.BRS_Proceed_Payment}
+            </button>
+          </div>
+        </footer>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+  <!-- Popup for BRS-930 -->
+  <template if:true={viewUpdatesPopup}>
+    <section role="dialog" aria-label="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+      aria-describedby="modal-content-id-1"
+      class="slds-modal slds-fade-in-open principal-popup slds-modal_medium page-scroll-popup">
+      <div class="slds-modal__container">
+        <header class="slds-modal__header slds-modal__header_empty">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+              <label class="updates">{label.ReviewPage_updates}</label>
+              <p class="updates-modal-subtext">{label.Specific_Updates}</p>
+            </div>
+            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+              <label class="closePopup slds-float_right" onclick={closeUpdatesPopup}>
+                <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+              </label>
+            </div>
+          </div>
+        </header>
+        <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-2"
+          if:true={primaryAndOtherUpdates}>
+          <div class="slds-grid slds-wrap previousList">
+            <c-brs_badges class-name="greyPills" text={label.Previous} class="pills"></c-brs_badges>
+          </div>
+          <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="slds-grid slds-wrap addressFields">
+              <c-generic-table class="primaryOtherDetails" tablecolumns={getPrimaryOtherDetails}
+                tabledata={primaryOtherDetailsData} customtable></c-generic-table>
+            </div>
+          </div>
+          <!-- Update block -->
+          <div class="slds-grid slds-wrap updateList">
+            <c-brs_badges class-name="greenPills" text={label.Updated} class="pills"></c-brs_badges>
+          </div>
+          <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="slds-grid slds-wrap addressFields">
+              <c-generic-table class="agentPreviousTable" tablecolumns={getPrimaryOtherDetailsUpdate}
+                tabledata={primaryOtherDetailsUpdateData} customtable></c-generic-table>
+            </div>
+          </div>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-3"
+          if:true={principalAgentUpdates}>
+          <div class="slds-grid slds-wrap previousList">
+            <div class="slds-col slds-large-size_2-of-12 slds-size_6-of-12 stateBlock">
+              <label class="state">{label.Previous}</label>
+            </div>
+          </div>
+          <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="slds-grid slds-wrap addressFields">
+              <c-generic-table class="agentPreviousTable" tablecolumns={getAgentPreviousColumns}
+                tabledata={agentPreviousTableData} customtable></c-generic-table>
+            </div>
+          </div>
+          <!-- Update block -->
+          <div class="slds-grid slds-wrap updateList">
+            <div class="slds-col slds-large-size_2-of-12 slds-size_6-of-12 updateBlock">
+              <label class="update">{label.Batch_Update}</label>
+            </div>
+          </div>
+          <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="slds-grid slds-wrap updateFields">
+              <c-generic-table class="agentUpdatedTable" tablecolumns={getAgentUpdatedColumns}
+                tabledata={agentUpdatedTableData} customtable></c-generic-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+  <!-- Popup for BRS-2386-->
+  <template if:true={showTabsetData}>
+    <c-brs_tabset-modal show-popup={viewPrincipalUpdatesPopup} onmodalclose={closePrincipalUpdatesPopup}
+      deleted-data={tabsetDeletedData} created-data={tabsetCreatedData} changed-data={changedData}
+      table-columns={tabsetColumns}></c-brs_tabset-modal>
+  </template>
+</template>

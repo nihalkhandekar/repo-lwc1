@@ -1,0 +1,167 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <template if:true={isLinkValid}>
+    <div class="success-container">
+        <div class="background">
+        </div>
+        <div class="slds-grid slds-wrap slds-grid_align-center">
+            <div class="slds-size_12-of-12 slds-large-size_8-of-12">
+                <div class="card-layout">
+                    <h2 class="white-text">{label.agent_appointment}</h2>
+                    <div class="card-body">
+                        <template if:false={showConfirmation}>
+                            <img src={userIdIcon} alt="" class="user-icon" />
+                            <h4>{label.Agent_Confirmation_Heading}</h4>
+                            <div class="section">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-12 section-icon-mobile">
+                                        <img src={calenderIcon} alt="" />
+                                    </div>
+                                    <div class="slds-col slds-size_11-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-grid slds-wrap right-container">
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <div class="left-section">
+                                                    <img src={calenderIcon} alt=""
+                                                        class="section-icon-desktop slds-m-right_small" />
+                                                    <p class="largeBold">{label.BRSLLCFirstScreen}</p>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <p class="large grey-text">{businessName}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="horizontal-line"></div>
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-12 section-icon-mobile">
+                                        <img src={personIcon} alt="" />
+                                    </div>
+                                    <div class="slds-col slds-size_11-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-grid slds-wrap right-container">
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <div class="left-section">
+                                                    <img src={personIcon} alt=""
+                                                        class="section-icon-desktop slds-m-right_small" />
+                                                    <p class="largeBold">{label.Agent_Name}</p>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <p class="large grey-text">{agentName}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div if:true={accepted}>
+                                <c-generic-multi-select class="cb" data-id="acknowledgeinput"
+                                    add-class="acknowledgeField" list-data={acceptCheckbox}></c-generic-multi-select>
+                                <div class="slds-grid signature-block">
+                                    <div class="slds-large-size_1-of-2 slds-size_1-of-1 slds-p-right_small inputForm">
+                                        <lightning-input data-id="acknowledgeinput" class="acknowledgeField" type="text"
+                                            label={label.name_electronic_signature_required} value={nameSignature} required
+                                            onchange={handleName} placeholder={label.Enter_here_text} onblur={handleNameInputBlur}></lightning-input>
+                                    </div>
+                                    <template if:true={showTitle}>
+                                        <div
+                                            class="slds-large-size_1-of-2 slds-size_1-of-1 slds-p-right_small inputForm">
+                                            <lightning-input data-id="acknowledgeinput" class="acknowledgeField"
+                                                type="text" label={label.Title_Required} value={agentTitle} required
+                                                onchange={handleTitle} placeholder={label.Enter_here_text} onblur={handleTitleInputBlur}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="button-section">
+                                <button class="slds-button slds-button_brand slds-button_stretch primaryBtn higher"
+                                    disabled={isDisabled} onclick={handleClick} data-id={buttonTitle}>{buttonTitle}</button>
+                            </div>
+                        </template>
+                        <template if:true={showConfirmation}>
+                            <template if:false={accepted}>
+                                <img src={declinedIcon} alt="" class="user-icon" />
+                                <h4>{label.Decline_heading}</h4>
+                            </template>
+                            <template if:true={accepted}>
+                                <img src={acceptedIcon} alt="" class="user-icon" />
+                                <h4>{label.Accepted_heading}</h4>
+                            </template>
+                            <p class="large confirmation-msg-block">{confirmationMessage}</p>
+                            <div class="section">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_1-of-12 section-icon-mobile">
+                                        <img src={calenderIcon} alt="" />
+                                    </div>
+                                    <div class="slds-col slds-size_11-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-grid slds-wrap right-container">
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <div class="left-section">
+                                                    <img src={calenderIcon} alt=""
+                                                        class="section-icon-desktop slds-m-right_small" />
+                                                    <p class="largeBold">{label.BRSLLCFirstScreen}</p>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <p class="large grey-text">{businessName}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="horizontal-line" if:true={accepted}></div>
+                                <div class="slds-grid slds-wrap" if:true={accepted}>
+                                    <div class="slds-col slds-size_1-of-12 section-icon-mobile">
+                                        <img src={personIcon} alt="" />
+                                    </div>
+                                    <div class="slds-col slds-size_11-of-12 slds-large-size_12-of-12">
+                                        <div class="slds-grid slds-wrap right-container">
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <div class="left-section">
+                                                    <img src={personIcon} alt=""
+                                                        class="section-icon-desktop slds-m-right_small" />
+                                                    <p class="largeBold">{label.name_electronic_signature}</p>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+                                                <p class="large grey-text">{nameSignature}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+								<template if:true={showTitle}>
+									<div class="horizontal-line" if:true={accepted}></div>
+									<div class="slds-grid slds-wrap" if:true={accepted}>
+										<div class="slds-col slds-size_1-of-12 section-icon-mobile">
+											<img src={personIcon} alt="" />
+										</div>
+										<div class="slds-col slds-size_11-of-12 slds-large-size_12-of-12">
+											<div class="slds-grid slds-wrap right-container">
+												<div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+													<div class="left-section">
+														<img src={personIcon} alt=""
+															class="section-icon-desktop slds-m-right_small" />
+														<p class="largeBold">{label.Title}</p>
+													</div>
+												</div>
+												<div class="slds-col slds-size_11-of-12 slds-large-size_6-of-12">
+													<p class="large grey-text">{title}</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</template>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<template if:false={isLinkValid}>
+    <div class="center"> {label.Invalid_Page} </div>
+</template>
+</template>

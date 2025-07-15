@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountRecord" label="Account" type="@salesforce/schema/Account"/>
+            <property name="businessfilingRecord" label="Business Filing Record" type="@salesforce/schema/Business_Filing__c"/>
+            <property name="flowname" label="Flow Name" type="string"/>
+            <property name="flowtype" label="Flow Type" type="string"/>
+            <property name="sectionandquestion" label="Section/Question Name" type="string[]"/>
+            <property name="isOverView" label="Over View ?" type="Boolean"/>
+            <property name="isFirstReport" label="Is First Report ?" type="Boolean"/>
+            <property name="isAnnualReport" label="Is Annual Report ?" type="Boolean"/>
+            <property name="screenHeading" label="Screen Heading" type="String"/>
+            <property name="screenSubHeading" label="Screen Heading" type="String"/>
+            <property name="sectionName" label="Selected section" type="String"/>
+            <property name="questionLabel" label="Selected Question" type="String"/>
+            <property name="gotoConfirmation" label="gotoCOnfirmation" type="String"/>
+            <property name="gotopayment" label="GO to payment" type="Boolean"/>
+            <property name="applyFlowButtonLabel" label="Apply Button Label" type="Boolean"/>
+            <property name="buttonLabelFromFlow" label="Acknowledgement Button Label" type="String"/>
+            <property name="authorizedDate" label="Authorized Date" type="Date"/>
+            <property name="dateOfDissolution" label="Date of Dissolution" type="Date"/>
+            <property name="effectiveDate" label="Effective Date" type="Date"/>
+            <property name="effectiveTime" label="Effective Time" type="String"/>
+            <property name="showDateTime" label="showDateTime" type="Boolean"/>
+            <property name="enteredTime" label="Effective Time (DateTime)" type="DateTime"/>
+            <property name="twentyFourHourTime" label="Effective Time in 24hr Format" type="string"/>
+            <property name="effectiveTimeData" label="Effective Time for close business" type="String"/>
+            <property name="editHideForStateOfFormationName" label="Hide Edit Button For State Of Formation Name" type="Boolean"/>
+            <property name="goToDashBoardPage" type="Boolean" label="Go to Dashboard Page" description=""/>
+            <property name="signatoryName" label="Signatory Name" type="string"/>
+            <property name="signatoryTitle" label="Signatory Title" type="string"/>
+            <property name="signatoryType" label="Signatory Type" type="string"/>
+            <property name="selectedPrincipal" label="Selected Principal" type="string"/>
+            <property name="organizerType" label="Organizer Type" type="string"/>
+            <property name="addAuthorizerManully" label="show Add Authorizer" type="Boolean"/>
+            <property name="selectPrincipal" label="selectPrincipal" type="Boolean"/>
+            <property name="selectedPrincipalIsBusinessType" label="selectedPrincipalIsBusinessType" type="Boolean"/>
+            <property name="ackCheckValue" label="ackCheckValue" type="Boolean"/>
+            <property name="isSelfNomiationCheckBox" label="isSelfNomiationCheckBox" type="Boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

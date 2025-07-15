@@ -1,0 +1,67 @@
+<template>
+  <div class="check-box-section">
+      <h6 class="checkbox-title">{label1}</h6>
+      <template if:true={showFirstCopyCheckBox}>
+        <div class="theme1 copy-checkbox" if:true={showPrincipalCheckboxs}>
+          <div class="dec-checkbox">
+            <c-generic-multi-select list-data={topPrincipalAddressCheckboxOptions} value={isTopPrincipalAddressChecked}
+              oncheckboxinputselection={onCopyTopPrincipalAddressCheck}>
+            </c-generic-multi-select>
+          </div>
+        </div>
+      </template>
+  </div>
+
+  <template if:true={jurisdictionScreen}>
+    <c-brs_address is-international-address={isInternationalAddress} source={source} class="principalAddress"
+      unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={principalAddressFields}
+      disabled={sameAsTopPrincipalCheckbox} default-state={defaultState} default-country={defaultCountry} onaddresschange={onPrincipalAddressChange} fieldreq={isJurisdictionRequired}>
+    </c-brs_address>
+  </template>
+  <template if:false={jurisdictionScreen}>
+    <c-brs_address can-be-outside-us={canBeOutSideUS} source={source} class="principalAddress" unitlabel={label.AddressUnit_Apt}
+      autocomplete set-retained-address={principalAddressFields} disabled={sameAsTopPrincipalCheckbox} 
+      default-state={defaultState} default-country={defaultCountry} onaddresschange={onPrincipalAddressChange}>
+    </c-brs_address>
+  </template>
+
+
+  <div class="check-box-section mailing-section" if:true={showMailingAddress}>
+      <h6 class="checkbox-title">{label2}</h6>
+      <div class="theme1 copy-checkbox" if:true={showPrincipalCheckboxs}>
+        <div class="dec-checkbox">
+          <c-generic-multi-select list-data={principalAddressCheckboxOptions} value={isPrincipalAddressChecked}
+            oncheckboxinputselection={onCopyPrincipalAddressCheck}>
+          </c-generic-multi-select>
+        </div>
+      </div>
+  </div>
+
+
+  <template if:true={jurisdictionScreen}>
+    <template if:true={isJurisdictionLLPFlow}>
+      <c-brs_address can-be-outside-us source={source} class="mailingAddress" unitlabel={label.AddressUnit_Apt} autocomplete 
+        set-retained-address={mailingAddressFields} onaddresschange={onMailingAddressChange} disabled={sameAsPrincipalCheckbox} accept-po={acceptPoBox} 
+        >
+      </c-brs_address>
+    </template>
+    <template if:false={isJurisdictionLLPFlow}>
+      <c-brs_address is-international-address={isInternationalAddress} source={source} class="mailingAddress"
+        unitlabel={label.AddressUnit_Apt} autocomplete  set-retained-address={mailingAddressFields}
+        disabled={sameAsPrincipalCheckbox} accept-po={acceptPoBox} onaddresschange={onMailingAddressChange} default-country={defaultCountry} default-state={defaultState} fieldreq={isMailingRequired}>
+      </c-brs_address>
+    </template>
+  </template>
+
+  <template if:false={jurisdictionScreen}>
+    <c-brs_address can-be-outside-us={canBeOutSideUS} source={source} class="mailingAddress" unitlabel={label.AddressUnit_Apt}
+      autocomplete if:true={showMailingAddress} set-retained-address={mailingAddressFields} fieldreq={isMailingRequired}
+      disabled={sameAsPrincipalCheckbox} accept-po={acceptPoBox} onaddresschange={onMailingAddressChange} default-country={defaultCountry} default-state={defaultState}>
+    </c-brs_address>
+  </template>
+
+  
+  <template if:true={showErrorMessage}>
+    <p class="error-text">{errorMessage}</p>
+  </template>
+</template>

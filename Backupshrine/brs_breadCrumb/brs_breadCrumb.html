@@ -1,0 +1,13 @@
+<template>
+        <div class={theme}>
+                <ul class="breadcrumb">
+                        <template for:each={items} for:item="item" for:index="index">
+                                <li class="breadcrumb-arrow" key={item}></li>
+                                <li data-name={item} key={item} class="breadcrumb-item" data-index={index}
+                                        onclick={onBreadCrumbClick}>
+                                        {item}
+                                </li>
+                        </template>
+                </ul>
+        </div>
+</template>

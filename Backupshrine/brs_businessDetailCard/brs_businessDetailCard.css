@@ -1,0 +1,144 @@
+.business-card {
+    border: 1px solid #d0cfcf;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 #e7e9f2;
+    padding: 16px 16px 0 16px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
+
+.reg-number {
+    color: #808080;
+    font-family: KarlaBold;
+    font-size: 14px;
+    letter-spacing: 0.01px;
+    line-height: 21px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.location-address {
+    color: #757575;
+    font-family: Karla;
+    display: flex;    
+    padding-bottom: 16px;
+}
+
+.location-address img {
+    width: 16px;
+    margin-right: 12px;
+}
+
+.business-name {
+    margin-bottom: 16px;
+}
+
+
+.details {
+    flex-grow:1;
+}
+
+.arrow-button {
+    height: 42px;
+    width: 42px;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    margin-left: auto;
+    padding:0;
+    margin-right: -16px;
+    flex: 0 0 42px;
+    position: relative;
+}
+
+.arrow-button img {
+    height: 24px;
+    width: 24px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    margin: 0;
+}
+
+.arrow-button img.up {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+.d-flex{
+    display: flex;
+    align-items: flex-end;
+}
+.business-card-body{
+    padding:16px 0;
+}
+
+.grey-title{
+    color: #757575;
+}
+.desc{
+    color: #2D2C2C;
+}
+
+.show-less,
+.desc span.total{
+    color: #075E96; 
+    text-decoration: underline;
+}
+
+.desc span.total{
+    margin-left:4px;
+}
+
+.business-card-body-left .margin-t-8:first-child{
+    margin-top: 0;
+}
+
+.margin-t-8{
+    margin-top:8px;
+}
+
+.hr-line{
+    height:1px;
+    background: #ECEBEB;
+}
+.business-card-body-left{
+    margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .business-card {
+        padding: 16px 38px 0px 24px;
+    }
+
+    .reg-number {
+        font-size: 16px;
+        letter-spacing: 0.01px;
+        line-height: 24px;
+    }
+
+    .business-name {
+        margin-bottom: 12px;
+    }
+
+    .location-address{
+    padding-bottom: 32px;
+    }
+
+    .location-address img {
+        margin-right: 4px;
+    }
+    .arrow-button {
+        margin-right: -39px;
+    }
+    .business-card-body{
+        padding:32px 0;
+    }
+    .business-card-body-left{
+        padding-right: 24px;
+        margin-bottom: 0;
+    }
+    .business-card-body-right{
+        padding-left: 24px;
+    }
+}

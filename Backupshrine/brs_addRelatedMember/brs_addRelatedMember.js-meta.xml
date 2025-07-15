@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="membertype" type="String" label="Member Type" description="Use this attribute to indicate the entity being modified/created. Eg : Debtor, Secured Party, Assignor, etc."/>
+            <property name="newUCCId" type="String" label="newUCCId" description="Use this attribute to pass UCC Filing record ID.This will be used to associate all entities created. Eg : Debtor, Secured Party, Assignor, etc."/>
+            <property name="duplicateMemberInfoAr" type="String[]" label="duplicateRCCRelatedInfoList" description=""/>
+            <property name="newUccLienRelatedInfo" type="@salesforce/schema/UCC_Related_Info__c" label="newUccLienRelatedInfo" description=""/>
+            <property name="UCCLienSecuredParty" type="String[]" label="UCC Lien Secured Party" description="This gives the list of secured party associated with the current UCC filing record."/>
+            <property name="typedescription" type="String" label="Description" description="Use this description to display related information about the member type being created/ modified."/>
+            <property name="hideBackButton" type="boolean" label="hideBackButton" description="Use to hide Back/Previous button."/>
+            <property name="selectedLienType" type="String" label="selectedLienType" description="specifies the Lien type selected for filling"/>
+			<property name="showGoToSummaryButton" type="Boolean" label="Show Go To Summary" description=""/>
+            <property name="goToSummary" type="Boolean" label="Go to Summary Button Selected" description=""/>
+			<property name="goToDashBoardPage" type="Boolean" label="Go to Dashboard Page" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

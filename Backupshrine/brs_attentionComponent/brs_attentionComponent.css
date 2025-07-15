@@ -1,0 +1,35 @@
+.warning-box {
+    border: solid 1px #F6A053;
+    border-radius: 4px;
+}
+
+.warning-header {
+    padding: 8px 28px;
+    background-color: #FFF8F2;
+    display: flex;
+    border-bottom: 1px solid #F6A053;
+    border-radius: 4px 4px 0 0;
+    margin-left: 1px;
+    align-items: center;
+}
+
+.warning-img {
+    margin-right: 12px;
+    width: 20px;
+}
+
+.warningHead {
+    color: #8A5321;
+}
+
+.warning-message {
+    padding: 14px 24px;
+    margin-left: 1px;
+    background-color: #ffffff;
+    border-radius: 0 0 4px 4px;
+    color: #2d2c2c;
+}
+
+.warning-message.description p {
+    margin-bottom: 0.5rem;
+}

@@ -1,0 +1,12 @@
+.largeBold{
+    color: #2d2d2c;
+    display: block;
+    min-width: 324px;
+    margin-bottom: 16px;
+    margin-top: 32px; 
+    font-family: Karla;
+    font-size: 16px;
+}
+.slds-form-element__help{
+    font-size: 14px;
+}

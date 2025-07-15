@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="businessNameEntered" type="String" description="Business Name selected by User" label="Business name entered by user"/>
+            <property name="businessType" type="String" description="Selected business type eg : LLP, LLC, Stock etc" label="Business Type"/>
+            <property name="bType" type="String" description="Selected business type eg : Domestic or Foreign " label="Domestic or Foreign Business Type"/>
+            <property name="inputFieldLabel" type="String" description="Input field label" label="Input Field Label"/>
+            <property name="showConfirmationBlock" type="Boolean" description="Enable this feature if before going to next screen there is a need to show confirmation on input" label="Enable confirmation block"/>
+            <property name="confirmationBlockTitle" type="String" description="Confirmation block title" label="Confirmation block title"/>
+            <property name="confirmationBlockSubTitle" type="String" description="Confirmation block sub title" label="Confirmation block sub title"/>
+            <property name="confirmationBlockMessage" type="String" description="Confirmation block message" label="Confirmation block message"/>
+            <property name="showUserInput" type="Boolean" description="To enable show user input" label="Show user input on confirmation block"/>
+            <property name="placeholder" type="String" description="Placeholder for date input" label="Input placeholder. "/>
+            <property name="goToLegalDesignationScreen" type="Boolean" description="Used for the purpose of setting the user to legal designation page directly or via reserved business names screen." label="Used for storing value"/>
+            <property name="accountId" type="string" label="accountId" description=""/>
+            <property name="isRequired" type="Boolean" description="Check if input is required" label="Is Input Required"/>
+            <property name="isRequiredValidationMessage" type="String" description="Required validation error message" label="Required error message"/>
+            <property name="isDomestic" type="Boolean" description="Selected true for Domestic Business Type" label="Domestic Business Type"/>
+            <property name="oldBusinessType" type="string" label="oldBusinessType" description=""/>
+            <property name="isNameRes" type="Boolean" description="To check if this is a name reg flow" label="Is Name res flow"/>
+            <property name="flowName" type="string" description="Flow Name" label="Flow Name"/>
+            <property name="varNewFilingId" type="String" label="Clone Business Filing Id Responce" description=""/>
+            <property name="filingId" type="String" label="Filing Id" description=""/>
+            <property name="isGoToSummary" type="boolean" label="Go to Summary flag" description=""/>
+            <property name="showSummaryButton" type="boolean" label="Show Summary Button" description=""/>
+            <property name="isDisabled" type="boolean" label="Business Name Disable" description=""/>
+            <property name="goToDashBoardPage" type="Boolean" label="Go to Dashboard Page" description=""/>
+            <property name="isPaperFilingIntake" type="Boolean" description="To check if this is a Paper Filing Intake flow" label="Is Paper Filing Intake flow"/>
+            <property name="isEditClicked" type="boolean" label="Is Edit Clicked" description=""/>
+            <property name="showPleaseNoteSection" type="boolean" label="show Please Note section" description=""/>
+            <property name="errorMsg" type="String" description="Error Message" label="Error Message"/>
+            <property name="intakeReservation" type="boolean" description="Intake Revervation" label="Intake Revervation"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

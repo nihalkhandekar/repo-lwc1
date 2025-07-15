@@ -1,0 +1,64 @@
+.cert-legal-existance {
+    padding-bottom: 118px;
+}
+
+.cert-legal-existance_container h2 {
+    padding: 72px 0 48px 0;
+}
+
+.cert-legal-existance_container .desc {
+    margin-bottom: 48px;
+}
+
+.cert-legal-existance_container:first-child .cards-section:after {
+    position: absolute;
+    content: "";
+    height: 174px;
+    width: 165px;
+    top: -37px;
+    left: -68px;
+    right: unset;
+    background: url("/business/resource/CT_Assets/icons/building-inactive.svg");
+}
+
+.cert-legal-existance_container:last-child .cards-section:before {
+    position: absolute;
+    content: "";
+    right: -140px;
+    left: unset;
+    top: -100px;
+    height: 230px;
+    width: 230px;
+    background: url("/business/resource/CT_Assets/icons/card-inactive.svg");
+}
+
+.grey-background {
+    overflow: hidden;
+}
+
+.content-card-comp__item {
+    margin-bottom: 14px;
+}
+
+.cards-section {
+    margin: 0 -8px;
+    position: relative;
+}
+
+@media only screen and (min-width: 1024px) {
+    .cert-legal-existance_container:first-child .cards-section:after {
+        height: 268px;
+        width: 256px;
+        top: -160px;
+        right: -27px;
+        left: unset;
+    }
+
+    .cert-legal-existance_container:last-child .cards-section:before {
+        left: -170px;
+        right: unset;
+        top: -84px;
+        height: 256px;
+        width: 256px;
+    }
+}

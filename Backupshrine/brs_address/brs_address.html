@@ -1,0 +1,96 @@
+<template>
+    <div>
+        <form autocomplete="off" onsubmit={handleFormSubmit}>
+
+            <div class="slds-grid slds-wrap slds-gutters formRow" if:true={canBeOutsideUs}>
+                <div class={countryClass}>
+                    <lightning-combobox name="addressFormat" label={labels.Address_Format} value={addressCountryFormat}
+                        placeholder="" options={countryOptions} required={isFieldRequired} class=""
+                        onchange={handleAddressFormatChange} read-only={_disabled} autocomplete="off">
+                    </lightning-combobox>
+                </div>
+            </div>
+
+            <template if:true={isUSCountry}>
+                <div class="slds-grid slds-wrap slds-gutters slds-grid_align-center formRow address-unit-fields">
+                    <div class={addressClass}>
+                        <c-lookup input-icon-name="checkin" input-icon-position="left" items={addressDropdown}
+                            label={labels.ADDUPD_ADDRESS} has-error={streetError} class="cust-address-lookup"
+                            source={source} onkeydown={handleAddressChange} onkeyup={handleAddressChange}
+                            placeholder={labels.ADD_Addr_Field_Placeholder} originfield="street"
+                            ondonetyping={handleOnDoneTyping} onblurstreetlookup={handleStreetBlur}
+                            onchange={handleAddressChange} onselect={handleAddressSelect} autocomplete={autocomplete}
+                            value={addressStreet} disabled={_disabled} max-length="75"></c-lookup>
+                        <template if:true={streetError}>
+                            <div class="slds-has-error">
+                                <span class="slds-form-element__help">{streetHasError}</span>
+                            </div>
+                        </template>
+                    </div>
+                    <div class={aptClass}>
+                        <lightning-input type="text" label={unitLabel} class="cust-unit" value={addressUnit}
+                            onchange={handleAddUnitChange} onblur={handleAddUnitChangeBlur} read-only={_disabled} max-length="25"></lightning-input>
+                    </div>
+                </div>
+                <div class={fieldsWrapperClass}>
+                    <div class={cityClass}>
+                        <template if:true={isCityPicklist}>
+                            <c-lookup input-icon-name="checkin" input-icon-position="left" items={cityOptions}
+                                label={labels.ADDUPD_CITY} class="cust-address-lookup" source={source}
+                                onkeydown={handleCityDropChange} onkeyup={handleCityDropChange} has-error={cityError}
+                                placeholder={labels.ADD_City_Field_Placeholder} ontextchange={handleCityDropChange}
+                                ontextinput={handleCityDropChange} onselect={handleCitySelect} originfield="city"
+                                autocomplete={autocomplete} onchange={handleCityDropChange}
+                                onblurcitylookup={handleCityLookupBlur} value={addressCity} disabled={_disabled}
+                                max-length="50" onblur={checkValidCity}></c-lookup>
+                            <template if:true={cityError}>
+                                <div class="slds-has-error">
+                                    <span class="slds-form-element__help">{cityHasError}</span>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={isCityPicklist}>
+                            <div class="inputForm">
+                                <lightning-input type="text" message-when-value-missing={labels.ADD_City}
+                                    label={labels.ADDUPD_CITY} class="cust-city" value={addressCity}
+                                    onchange={handleCityChange} onblur={handleCityChangeBlur} max-length="50" required={isFieldRequired}
+                                    read-only={_disabled}>
+                                </lightning-input>
+                            </div>
+                        </template>
+                    </div>
+                    <div class={stateClass}>
+                        <lightning-combobox name="state" label={labels.ADDUPD_STATE} value={addressState} placeholder=""
+                            options={stateOptions} message-when-value-missing={labels.ADD_State}
+                            required={isFieldRequired} class="" read-only={isStateReadOnly}
+                            onchange={handleStateChange}></lightning-combobox>
+                    </div>
+                    <div class={zipClass} onkeydown={handleZipCodePress}>
+                        <lightning-input type="text" message-when-value-missing={labels.ADD_Zip}
+                            label={labels.ADDUPD_ZIP_CODE} value={addressZip} class="cust-zip"
+                            message-when-pattern-mismatch={labels.ADD_Zip_Pattern_Error}
+                            pattern="^([0-9]{5}|[0-9]{5}-[0-9]{4})$" max-length="10" autocomplete="" onblur={onZipBlur}
+                            onchange={handleZipCodeChange} required={isFieldRequired} read-only={_disabled}>
+                        </lightning-input>
+                    </div>
+                </div>
+            </template>
+            <template if:false={isUSCountry}>
+                <div class="slds-grid slds-wrap slds-gutters formRow cust-address">
+                    <div class={countryClass}>
+                        <lightning-textarea data-id="InternationalAddress" value={addressInternational}
+                            onchange={handleAddressInternational} onblur={handleAddressInternationalBlur} message-when-value-missing={labels.ADD_Address}
+                            label={labels.ADD_Int_Addr_Label} read-only={_disabled} required ={isFieldRequired} maxlength="500">
+                        </lightning-textarea>
+                    </div>
+                    <div class={countryClass}>
+                        <lightning-combobox name="country" label={labels.ADDUPD_CountryLabel} value={addressCountry}
+                            placeholder="" options={countriesList} required={isFieldRequired} class="address-country"
+                            onchange={handleCountryChange}  read-only={isCountryReadOnly} message-when-value-missing={labels.ADDUPD_CountryMandatory} autocomplete="off">
+                        </lightning-combobox>
+                    </div>
+                </div>
+            </template>
+        </form>
+    </div>
+</template>

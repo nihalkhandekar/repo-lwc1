@@ -1,0 +1,346 @@
+<template>
+    <div class="slds-m-bottom_medium">
+        <h5 class="business-name">{businessDetails.businessName} <span class="badge">
+                <c-brs_badges class-name={businessDetails.badgeClassName} text={businessDetails.businessStatus}>
+                </c-brs_badges>
+            </span></h5>
+        <p class="business-location large">{businessDetails.businessAddress}</p>
+        <div class="mobile-show mobile-scholarcontent">
+            <c-brs_header scholar-content={scholerContent} show-scholar-only></c-brs_header>
+        </div>
+        <div class="tab-container">
+            <div class="tab-list">
+                <c-brs_tab-list tab-list={tabList} ontabclick={onTabClick} tab-header={tabHeader}></c-brs_tab-list>
+            </div>
+        </div>
+        <div class="sectionWrapper business-details-header each-section">
+            <h6>{label.Business_Details}</h6>
+            <div class="chevronContainer" onclick={handleBDExpand}>
+                <template if:false={expandBusinessDetails}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandBusinessDetails}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+            </div>
+        </div>
+        <template if:true={expandBusinessDetails}>
+            <div class="expandedSection padding-b-20 business-details">
+                <div class="subSectionWrapper">
+                    <div class="subSectionHeader">
+                        <p class="largeBold text-capitalize">{label.businessProfile_generalInfo}</p>
+                        <div class="chevronContainer" onclick={expandGISubSection}>
+                            <template if:false={showGISubSection}>
+                                <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="add"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                            <template if:true={showGISubSection}>
+                                <lightning-icon icon-name="utility:dash" size="xx-small" alternative-text="dash"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>                    
+                    <hr class="margin-b-0" if:false={showGISubSection}/>
+                    <template if:true={showGISubSection}>
+                        <hr/>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.business_name_search}</p>
+                                    <p class="small">{businessDetails.businessName}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.businessProfile_bstatus}</p>
+                                    <p class="small">{businessDetails.businessStatus}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.businessProfile_state}</p>
+                                    <p class="small">{businessDetails.placeOfFormation}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.brs_Business_Address}</p>
+                                    <p class="small">{businessDetails.businessAddress}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium" if:true={businessDetails.officeInJurisdictionAddress}>
+                                    <p class="small grey-text">{label.BRS_Location_JurisdictionOffice}</p>
+                                    <p class="small">{businessDetails.officeInJurisdictionAddress}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.Annual_Report_Due1}</p>
+                                    <p class="small">{businessDetails.annualReportDue}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.brs_NAICcode}</p>
+                                    <p class="small">{businessDetails.naicsCode}</p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.Business_ID}</p>
+                                    <p class="small">{businessDetails.businessId}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.businessProfile_bdate}</p>
+                                    <p class="small">{businessDetails.dateFormed}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.BRSFirstScreen}</p>
+                                    <p class="small">{businessDetails.businessType}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.BRS_Location_MailingAddr}</p>
+                                    <p class="small">{businessDetails.mailingAddress}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium" if:true={businessDetails.mailingJurisdictionAddress}>
+                                    <p class="small grey-text">{label.Mailing_address_state_of_formation}</p>
+                                    <p class="small">{businessDetails.mailingJurisdictionAddress}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.brs_Lastreportfiled}</p>
+                                    <p class="small">{businessDetails.lastReportFiled}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.brs_NAICsubcode}</p>
+                                    <p class="small">{businessDetails.naicsSubCode}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium" if:true={businessDetails.serviceOfProcessAddr}>
+                                    <p class="small grey-text">{label.BRS_Location_SOPAddr}</p>
+                                    <p class="small">{businessDetails.serviceOfProcessAddr}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>                
+                <hr class="block-separator" if:true={showGISubSection}/>
+                <div class="subSectionWrapper principal-details">
+                    <div class="subSectionHeader">
+                        <p class="largeBold">{label.businessProfile_principal}</p>
+                        <div class="chevronContainer" onclick={expandPDSubSection}>
+                            <template if:false={showPDSubSection}>
+                                <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="add"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                            <template if:true={showPDSubSection}>
+                                <lightning-icon icon-name="utility:dash" size="xx-small" alternative-text="dash"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>   
+                    <hr class="margin-b-0" if:false={showPDSubSection}/>                 
+                    <template if:true={showPDSubSection}>
+                        <hr/>
+                        <p class="large cardWrapper pt-0" if:false={businessDetails.principalDetailsList}>{label.None}</p>
+                        <template for:each={businessDetails.principalDetailsList} for:item="principal" for:index="index">
+                            <div key={principal.businessPrincipalName} class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                    <div class="slds-m-bottom_medium">
+                                        <p class="small grey-text">{label.brs_PrincipalName}</p>
+                                        <p class="small">{principal.businessPrincipalName}</p>
+                                    </div>
+                                    <div class="slds-m-bottom_medium">
+                                        <p class="small grey-text">{label.brs_PrincipalTitle}</p>
+                                        <p class="small">{principal.principalTitle}</p>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                    <div class="slds-m-bottom_medium" if:true={principal.principalBusinessAddress}>
+                                        <p class="small grey-text">{label.brs_PrincipalBusinessaddress}</p>
+                                        <p class="small ">{principal.principalBusinessAddress}</p>
+                                    </div>
+                                    <div class="slds-m-bottom_medium" if:true={principal.principalResidenceAddress}>
+                                        <p class="small grey-text">{label.brs_PrincipalResidenceaddress}</p>
+                                        <p class="small">{principal.principalResidenceAddress}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>                
+                <hr class="block-separator" if:true={showPDSubSection}/>
+                <div class="subSectionWrapper">
+                    <div class="subSectionHeader">
+                        <p class="largeBold">{label.brs_AgentChange_AgentScreenHeading}</p>
+                        <div class="chevronContainer" onclick={expandADSubSection}>
+                            <template if:false={showADSubSection}>
+                                <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="add"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                            <template if:true={showADSubSection}>
+                                <lightning-icon icon-name="utility:dash" size="xx-small" alternative-text="dash"
+                                    class="chevron-container-down"></lightning-icon>
+                            </template>
+                        </div>
+                    </div>                    
+                    <hr class="margin-b-0" if:false={showADSubSection}/>  
+                    <template if:true={showADSubSection}>
+                        <hr/>
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <p class="slds-col large" if:false={businessDetails.businessAgentName}>{label.None}</p>
+                            <template if:true={businessDetails.businessAgentName}>
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium">
+                                    <p class="small grey-text">{label.Agent_Name}</p>
+                                    <p class="small">{businessDetails.businessAgentName}</p>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <div class="slds-m-bottom_medium" if:true={businessDetails.agentBusinessAddress}>
+                                    <p class="small grey-text">{label.brs_AgentBusinessaddress}</p>
+                                    <p class="small">{businessDetails.agentBusinessAddress}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium" if:true={businessDetails.agentMailingAddress}>
+                                    <p class="small grey-text">{label.brs_AgentMailingaddress}</p>
+                                    <p class="small">{businessDetails.agentMailingAddress}</p>
+                                </div>
+                                <div class="slds-m-bottom_medium" if:true={businessDetails.agentResidenceAddress}>
+                                    <p class="small grey-text">{label.brs_AgentResidenceaddress}</p>
+                                    <p class="small">{businessDetails.agentResidenceAddress}</p>
+                                </div>
+                            </div>
+                        </template>
+                        </div>
+                    </template>                    
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="slds-m-bottom_medium">
+        <div class="sectionWrapper filing-history-header each-section">
+            <h6>{label.brs_FilingHistory}</h6>
+            <div class="chevronContainer" onclick={handlefhsubExpand}>
+                <template if:false={expandfh}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandfh}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+
+            </div>
+        </div>
+        <template if:true={expandfh}>
+            <div class="expandedSection filingSection">
+                <div class="subSectionWrapper cardSection">
+                    <p class="large cardWrapper padding-t" if:false={businessDetails.filingList}>{label.None}</p>
+                    <template if:true={businessDetails.filingList} for:each={businessDetails.filingList}
+                        for:item="filing" for:index="index">
+                        <div class="" key={filing.filingId}>
+                            <c-brs_filing-cards show-view-details-btn={filing.showViewDetailsBtn} filing-id={filing.businessFilingId} icon-link={filing.filingDigitalCopy} no-expand-collapse header={filing.filingType} cardname={filing.filingId}
+                                carddate={filing.filingDateTime} carddatelabel={label.filing_date} onviewdetails={onViewDetails} cardtime={filing.filingTime} cardtimelabel={label.Filing_time}>
+                                <div slot="body" class="slds-grid slds-wrap slds-size_12-of-12 slds-gutters">
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.brs_VolumeType}</p>
+                                        <p class="small">{filing.filingVolumeType}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.brs_Volume}</p>
+                                        <p class="small">{filing.filingVolume}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.Start_page}</p>
+                                        <p class="small">{filing.startPage}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.brs_Pages}</p>
+                                        <p class="small">{filing.filingPages}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12" if:true={filing.filinTerminatedBusinessId}>
+                                        <p class="small grey-text">{label.brs_TerminatedbusinessID}</p>
+                                        <p class="small">{filing.filinTerminatedBusinessId}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12" if:true={filing.filingTerminatedBusinessName}>
+                                        <p class="small grey-text">{label.brs_Terminatedbusinessname}</p>
+                                        <p class="small">{filing.filingTerminatedBusinessName}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                        <p class="small grey-text">{label.BRS_Date_Generated}</p>
+                                        <p class="small">{filing.filingDateTime}</p>
+                                    </div>
+                                    <div class="slds-col slds-m-bottom_medium slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12" if:true={filing.filingDigitalCopy}>
+                                        <p class="small grey-text">{label.brs_Digitalcopy}</p>
+                                        <p>
+                                            <a class="cust-anchor" href={filing.filingDigitalCopy} target="_blank">{label.brs_ViewasPDF}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </c-brs_filing-cards>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="slds-m-bottom_medium">
+        <div class="sectionWrapper name-history-header each-section">
+            <h6>{label.brs_NameHistory}</h6>
+            <div class="chevronContainer" onclick={handleNHsubExpand}>
+                <template if:false={expandNH}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandNH}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+            </div>
+        </div>
+        <template if:true={expandNH}>
+            <div class="expandedSection">
+                <div class="subSectionWrapper">
+                    <p class="large cardWrapper m-pt-16" if:false={businessDetails.nameHistoryList}>{label.None}</p>
+                    <template for:each={businessDetails.nameHistoryList} for:item="nameHistory" for:index="index">
+                        <div key={nameHistory.nameHistoryNumber} class="cardWrapper">
+                            <div class="iconWrapper">
+                                <img src={passiveIcon} class="icon">
+                            </div>
+                            <div class="contentWrapper">
+                                <p class="small">{label.filing_number_search}: {nameHistory.nameHistoryNumber}</p>
+                                <p class="largeBold">{nameHistory.nameHistoryName}</p>
+                                <p class="large">{label.filing_date}: {nameHistory.nameHistoryfilingDate}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+    <div class="slds-m-bottom_medium">
+        <div class="sectionWrapper shares-header each-section">
+            <h6>{label.brs_Shares}</h6>
+            <div class="chevronContainer" onclick={handleSharessubExpand}>
+                <template if:false={expandShares}>
+                    <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+                <template if:true={expandShares}>
+                    <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                        class="chevron-container-down"></lightning-icon>
+                </template>
+
+            </div>
+        </div>
+        <template if:true={expandShares}>
+            <div class="expandedSection">
+                <div class="subSectionWrapper lastSection">
+                    <div class="cardWrapper">
+                        <p class="largeBold" if:true={businessDetails.totalShares}>{businessDetails.totalShares} {label.brs_totalshares}</p>
+                        <p class="large" if:false={businessDetails.totalShares}>{label.None}</p>
+                    </div>
+                    <template for:each={businessDetails.shareDetailsList} for:item="share" for:index="index">
+                        <div key={share.shareClass} class="cardWrapper">
+                            <div class="">
+                                <p class="smallBold grey-text">{label.brs_SharesClass} {share.shareClass}</p>
+                                <p class="largeBold">{share.shareNumber} {label.brs_Shares}</p>
+                                <p class="large grey-text">{label.brs_Valuepershare} ${share.valuePerShare}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+
+</template>

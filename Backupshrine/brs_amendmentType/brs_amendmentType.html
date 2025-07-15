@@ -1,0 +1,49 @@
+<!--*********************************************************************************************
+ * NAME:  brs_amendmentType.html
+ * DESCRIPTION: Screen to select amendmend type in UCC 3 flow
+ *
+ * @AUTHOR: Priyanka
+ * @DATE: 12/14/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Priyanka                          12/14/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+    <c-generic-radio_brs data-id="radio" radio-options={radioOptions} name="radio-options" answer={value}
+        onctbosdatachange={handleRadioSelect} has-error={hasError} required={required}></c-generic-radio_brs>
+
+    <p class="error-text" if:true={showErrorMessage}>{errorMessage}</p>
+
+    <c-brs_next-back-buttons nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate}
+        onhandleback={handleBack}></c-brs_next-back-buttons>
+
+    <c-modal open={showConfirmModal} onmodalclose={closeConfirmModal} size={modalSize}>
+        <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+            <!-- updated for BRS-2872 -->
+            <h6 if:true={isNotAssignment}>{label.Amendment_Header_text} {displayLabel}?</h6>
+            <h6 if:false={isNotAssignment}>{label.Amendment_header_text1} {displayLabel}?</h6>
+        </div>
+        <div slot="body"
+            class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+            <p>
+                {label.Amendment_subtext}
+            </p>
+        </div>
+        <div slot="actions" class="modal-footer slds-grid slds-m-vertical_small slds-size_1-of-1 sldsActionButtons">
+            <div class="slds-col button-wrapper slds-order_2">
+                <button class="slds-button primaryBtnSmall slds-float_right" onclick={handleNext}>
+                    {label.Confirm}
+                    <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" aria-hidden="true" />
+                </button>
+            </div>
+            <div class="slds-col slds-order_1">
+                <button class="slds-button slds-button_natural slds-float_left back-btn natural-button"
+                    onclick={closeConfirmModal}>{label.Cancel_Label}</button>
+            </div>
+        </div>
+    </c-modal>
+
+</template>

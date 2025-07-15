@@ -1,0 +1,262 @@
+.left-border {
+    border-left: 4px solid #09538B;
+}
+
+.slds-modal__header {
+    text-align: left;
+}
+
+.header-text {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 27px;
+}
+
+
+.backButtonUnderLine {
+    text-decoration: underline;
+}
+
+.no-border {
+    border: none;
+}
+
+.member-popup header {
+    padding: 32px 32px 0 32px;
+    text-align: left;
+}
+
+.member-popup .title {
+    color: #2D2C2C;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    margin-bottom: 8px;
+}
+
+.member-popup .desc {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.member-popup .closeIcon {
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.member-popup .popup-body {
+    padding: 40px 32px 16px 32px;
+}
+
+.member-popup .popup-body.radio-options {
+    padding-top: 0;
+    padding-bottom: 24px;
+}
+
+.radio-heading{
+    margin-bottom: 24px;
+}
+
+.member-popup footer {
+    padding: 32px;
+    background: #ffffff;
+}
+
+.member-popup footer button {
+    border-radius: 4px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.member-popup footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.member-popup footer button img {
+    height: 16px;
+}
+
+.member-list .username p {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding: 24px;
+}
+
+/* Customized css */
+
+.a-debtor-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 16px;
+}
+
+.agent-mailing-address {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 20px;
+}
+
+.orgAddress {
+    padding-top: 30px;
+}
+
+.orgName {
+    padding-top: 24px;
+}
+
+.individualDetails {
+    padding-top: 10px;
+}
+
+.errorBtnDiv {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.primaryBtnSmall {
+    float: right;
+}
+
+.orgLocation {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 24px;
+}
+
+.addIcon {
+    height: 25px;
+}
+
+.addLabel {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 17px;
+    letter-spacing: 0.13px;
+    line-height: 25px;
+    text-decoration: underline;
+}
+
+.debtor-card-details {
+    box-sizing: border-box;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    margin-top: 20px;
+}
+
+.name {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.name-member {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-top: 4px;
+    padding-left: 24px;
+}
+
+.addressClass {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 12px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.iconCls {
+    height: 17px;
+}
+
+.statusText {
+    float: right;
+    margin-right: 24px;
+}
+
+
+
+.manual-submitter-div {
+    padding: 48px 20px 0px 28px;
+}
+
+.add-submitter-div {
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .add-submitter-div {
+        flex-direction: column;
+    }
+
+    .name {
+        font-size: 14px;
+        line-height: 21px;
+    }
+
+    .manual-submitter-div {
+        padding: 16px 0;
+    }
+
+    .member-popup header,
+    .member-popup .popup-body,
+    .member-popup footer {
+        padding: 24px;
+    }
+
+    .member-popup .popup-body.radio-options {
+        padding-bottom: 8px;
+    }
+
+    .errorBtnDiv {
+        flex-direction: column-reverse;
+    }
+
+    .backButtonUnderLine {
+        justify-content: center;
+        margin-top: 32px;
+    }
+
+    .slds-modal__footer .slds-button+.slds-button {
+        margin-left: 0;
+        margin-top: 16px;
+    }
+
+    .c-container .slds-grid.slds-gutters {
+        flex-wrap: wrap;
+    }
+}

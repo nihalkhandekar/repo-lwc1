@@ -1,0 +1,59 @@
+span {
+    border-radius: 11.5px;
+    font-family: KarlaBold;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    padding: 4px 12px;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.active {
+    background-color: #E0F2FF;
+    color: #09538B;
+}
+
+.inactive {
+    color: #2D2C2C;
+    background-color: #ECEBEB;
+}
+
+.greenPillsTheme1{
+    background-color: #d1ebdf;
+    color: #2D8D60;
+}
+
+.redPills{
+    background-color: #FFF9F9;
+    color: #2D2C2C;
+    border: 1px solid #DB2426;
+}
+
+.yellowPills{
+    color: #2D2C2C;
+    border: 1px solid #F6A053;
+    background-color: #FFF8F2;
+}
+/* Use below classes for Pills Styling*/
+  
+.greyPills {
+    background-color: #ecebeb;
+    color: #2d2c2c;
+}
+  
+.bluePills {
+    background-color: #e0f2ff;
+    color: #2d2c2c;
+}
+  
+.greenPills {
+    background-color: #d1ebdf;
+    color: #2d2c2c;
+}
+
+@media only screen and (max-width: 1023px) {
+    span {
+        font-size: 12px;
+    }
+}

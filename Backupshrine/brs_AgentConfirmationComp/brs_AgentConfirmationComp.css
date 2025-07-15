@@ -1,0 +1,101 @@
+.success-container {
+    background: #f7f9fa;
+}
+
+.background {
+    height: 312px;
+    background: var(--c-agentAcceptanceBg) no-repeat;
+    width: 100%;
+    background-size: cover;
+    border-radius: 4px;
+}
+  .card-layout{ 
+    margin: auto;
+    margin: -260px 20px 32px 20px;
+  }
+
+  .card-body{
+   padding: 36px 32px 32px;
+   background: #FFFFFF;
+   box-shadow: 0px 4px 8px #E7E9F2;
+   border-radius: 4px 4px 0px 0px; 
+   margin-top: 32px;
+}
+
+.user-icon {
+    width: 76px;
+    height: auto;
+    margin: auto;
+    display: block;
+    margin-bottom: 32px;
+}
+
+.horizontal-line{
+    border-top: 1px solid #D0CFCF;;
+    margin: 32px 0;
+  }
+  .section{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 8px #E7E9F2;
+    padding: 32px;
+    margin: 32px 0;
+}
+.section-icon-desktop{
+    display: none;
+  }
+  .section-icon-mobile{
+    display: inline-block;
+  }
+  .signature-block{
+      margin-top: 60px;
+  }
+  .button-section{
+    margin-top: 64px;
+    margin-bottom: 32px;
+  }
+  .left-section{
+      display: flex;
+  }
+  .confirmation-msg-block{
+      margin-top: 16px;
+  }
+  .right-container{
+      margin-left: 16px;
+  }
+  .center{
+    text-align: center;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .signature-block {
+      display: block;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .background {
+      height: 432px;
+  }
+    .card-layout{
+        max-width: 743px;
+        margin: -320px auto 166px;
+    }
+    .user-icon{
+        width: 100px;
+    }
+      .section-icon-desktop{
+        display: inline-block;
+      }
+      .section-icon-mobile{
+        display: none;
+      }
+      .section{
+          margin-top: 24px;
+      }
+      .right-container{
+        margin-left: 0px;
+    }
+    .heading{
+       text-align: center;
+    }
+  }

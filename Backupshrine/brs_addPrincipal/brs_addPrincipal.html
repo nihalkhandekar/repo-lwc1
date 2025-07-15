@@ -1,0 +1,915 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text={label.loading_brs} variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <template if:false={hideAddPrincipalButton}>
+        <button class="slds-button slds-button_natural add-principal-button" onclick={handleAddPrincipalPopup}>
+            <img src={addIcon} class="addIcon" alt="" />
+            <template if:false={hasPrincipals}>
+                {label.brs_Add_Principal}
+            </template>
+            <template if:true={hasPrincipals}>
+                {label.brs_Add_More}
+            </template>
+        </button>
+    </template>
+    <template if:true={showErrorMessage}>
+        <p class="error-text">{label.No_Principals_Error}</p>
+    </template>
+    <template if:true={hasPrincipals}>
+        <template for:each={principalListData} for:item="principal" for:index="index">
+            <div class={principal.cardClassName} key={principal.Id}>
+                <div class="slds-grid slds-wrap">
+                    <div class="principal-header">
+                        <div class="username">
+                            <label>{label.Name}</label>
+                            <template if:true={principal.isIndividual}>
+                                <p>{principal.Name__c}</p>
+                            </template>
+                            <template if:false={principal.isIndividual}>
+                                <p>{principal.Name__c}</p>
+                            </template>
+                        </div>
+                        <button data-name={index} class="arrow-button" onclick={onAccordianClick} aria-expanded="false">
+                            <template if:true={principal.showDetails}>
+                                <img src={arrowIcon} role="presentation" alt="" class="up"
+                                    aria-label={label.Show_Principal_details} width="24" height="24" />
+                            </template>
+                            <template if:false={principal.showDetails}>
+                                <img src={arrowIcon} role="presentation" alt="" aria-label={label.Show_Principal_details}
+                                    width="24" height="24" />
+                            </template>
+                        </button>
+                    </div>
+                </div>
+                <template if:true={principal.showDetails}>
+                    <div class="principal-details">
+                        <div class="slds-grid slds-wrap" if:true={principal.Designation__c}>
+                            <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row">
+                                <p class="sub-title">{label.Designation}</p>
+                                <p class="sub-desc">{principal.Designation__c}</p>
+                            </div>
+                            <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row">
+                                <p class="sub-title">{label.Title}</p>
+                                <p class="sub-desc">{principal.Principal_Title__c}</p>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row"
+                                if:false={principal.Designation__c}>
+                                <p class="sub-title">{label.Title}</p>
+                                <p class="sub-desc">{principal.Principal_Title__c}</p>
+                            </div>
+                            <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row">
+                                <p class="sub-title">{label.Email_Address}</p>
+                                <p class="sub-desc">
+                                    <span if:true={principal.hasEmail}>
+                                        {principal.Email__c}
+                                    </span>
+                                    <span if:false={principal.hasEmail}>
+                                        {label.None}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap details-row">
+                            <div class="slds-size_12-of-12">
+                                <p class="sub-title">{label.brs_Business_Address}</p>
+                                <p class="sub-desc" if:true={principal.hasBusinessAddress}>
+                                    {principal.Business_Address_1__c}</p>
+                                <p class="sub-desc" if:false={principal.hasBusinessAddress}>{label.None}</p>
+                            </div>
+                        </div>
+                        <template if:true={principal.isIndividual}>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-size_12-of-12">
+                                    <p class="sub-title">{label.brs_Residence_Address}</p>
+                                    <p class="sub-desc">{principal.Residence_Address_1__c}</p>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <div class="slds-grid slds-wrap card-footer">
+                    <div class="slds-size_12-of-12">
+                        <template if:true={isInterim}>
+                            <button if:true={principal.isTempPrincipal} onclick={editPrincipal}
+                                class="edit-btn slds-button slds-button_natural" data-id={principal.Id} data-name={index}>
+                                <img src={editIcon} alt="editIcon" role="presentation" />
+                                {label.brs_principalPopup_Edit}
+                            </button>
+                        </template>
+                        <button if:false={isInterim} onclick={editPrincipal}
+                            class="edit-btn slds-button slds-button_natural" data-id={principal.Id} data-name={index}>
+                            <img src={editIcon} alt="editIcon" role="presentation" />
+                            {label.brs_principalPopup_Edit}
+                        </button>
+    
+                        <button if:true={getIsAnnualOrInterimFlow} onclick={onShowDeleteConfirmation}
+                            class="delete-btn slds-button slds-button_natural" data-name={index} data-id={principal.Id}>
+                            <img src={deleteIcon} alt="deleteIcon" role="presentation" />
+                            {label.Remove}
+                        </button>
+                        <button if:false={getIsAnnualOrInterimFlow} onclick={deletePrincipal}
+                            class="delete-btn slds-button slds-button_natural" data-name={index} data-id={principal.Id}>
+                            <img src={deleteIcon} alt="deleteIcon" role="presentation" />
+                            {label.Remove}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+
+    <template if:true={showAddPrincipalPopup}>
+        <section role="dialog" tabindex="-1" aria-label={label.principal_modal_heading} aria-modal="true"
+            aria-describedby="principal-modal-content"
+            class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+            <div if:true={spinner}>
+                <div class="popup-spinner">
+                    <lightning-spinner alternative-text={label.Page_Is_Loading}></lightning-spinner>
+                </div>
+            </div>
+            <div class="slds-modal__container">
+
+                <template if:true={showZeroScreen}>
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <h6 class="title">{label.Add_Principal}</h6>
+                                <p class="desc">{label.Is_This_Principal_Also_Agent}</p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right"
+                                    onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_12-of-12">
+                                <div class="theme1">
+                                    <c-generic-radio_brs radio-options={agentYesNoOptions}
+                                        onctbosdatachange={onAgentAsPrincipalRadioCheck} name="agent-options"
+                                        answer={principal.hasAgentAsPrincipal}
+                                        has-error={principal.hasAgentAsPrincipalError}>
+                                    </c-generic-radio_brs>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={principal.hasAgentAsPrincipalError}>
+                            <p class="error-text">
+                                {label.pleaseSelectMssg}
+                            </p>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col">
+                                <button class="slds-button_stretch primaryBtn higher slds-button slds-button_brand"
+                                    onclick={gotoPrincipalOptionsOrAgent}>{label.Next}
+                                    <img src={chevronRightWhite} class="rightIcon" alt=""
+                                        role="presentation" />
+                                </button>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+
+
+                <template if:true={showFirstScreen}>
+                    <template if:false={showAgentDetails}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title" id="principal-modal-heading">{label.Add_Principal}</p>
+                                    <p class="desc">{label.brs_Principal_Descripation} </p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body" id="principal-modal-content">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-size_12-of-12">
+                                    <div class="theme1">
+                                        <c-generic-radio_brs radio-options={principalOptions}
+                                            onctbosdatachange={onPrincipalRadioCheck} name="principal-options"
+                                            answer={principal.Principal_Type__c}
+                                            has-error={principal.Principal_Type__c_Error}>
+                                        </c-generic-radio_brs>
+                                    </div>
+                                </div>
+                            </div>
+                            <template if:true={principal.Principal_Type__c_Error}>
+                                <p class="error-text">
+                                    {label.pleaseSelectMssg}
+                                </p>
+                            </template>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section" if:true={hasAddedAgentAsPrincipal}>
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={gotoSecondScreen}>{label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                            role="presentation" />
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <template if:false={editMode}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoAgentOptionsScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap" if:false={hasAddedAgentAsPrincipal}>
+                                <div class="slds-col">
+                                    <button class="slds-button_stretch primaryBtn higher slds-button slds-button_brand"
+                                        onclick={gotoSecondScreen}>{label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                            role="presentation" />
+                                    </button>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                    <template if:true={showAgentDetails}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.Assign_Agent_As_Principal}
+                                    </p>
+                                    <p class="desc">{label.fields_Mandatory}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-size_12-of-12">
+                                    <div class="margin-b-24">
+                                        <c-generic-table tablecolumns={getAgentPrincipalColumns}
+                                            tabledata={agentAsPrincipalTableData}></c-generic-table>
+                                    </div>
+                                </div>
+                                <template if:true={isIndividualFlow}>
+                                    <div class="slds-size_12-of-12 slds-large-size_4-of-12 inputForm slds-has-error"
+                                        if:true={showDesignationCheckBoxes}>
+                                        <label class="slds-form-element__label">{label.Designation}*</label>
+                                        <div class="designation-checkboxes">
+                                            <div class="dec-checkbox">
+                                                <c-generic-multi-select list-data={designationOfficerOptions}
+                                                    value={getIsDesignationOfficerChecked}
+                                                    oncheckboxinputselection={onDesignationOfficerCheck}>
+                                                </c-generic-multi-select>
+                                            </div>
+                                            <div class="dec-checkbox">
+                                                <c-generic-multi-select list-data={designationDirectorOptions}
+                                                    value={getIsDesignationDirectorChecked}
+                                                    oncheckboxinputselection={onDesignationDirectorCheck}>
+                                                </c-generic-multi-select>
+                                            </div>
+                                        </div>
+                                        <p if:true={principal.showDisignationError} class="slds-form-element__help">
+                                            {label.Selection_Required}</p>
+                                    </div>
+                                </template>
+                                <div class="slds-size_12-of-12 slds-large-size_4-of-12 inputForm">
+                                    <template if:true={showTitle}>
+                                        <lightning-combobox class="principal-combobox" required label={label.Title_Required}
+                                            value={principal.Principal_Title__c} onchange={onTitleChange}
+                                            options={TitleOptions}>
+                                        </lightning-combobox>
+                                    </template>
+                                    <template if:false={showTitle}>
+                                        <div class="margin-b-24">
+                                            <lightning-input max-length=255 class="principal-combobox principal-title"
+                                                type="text" label={label.Title_Required} required onchange={onTitleChange}
+                                                value={principal.Principal_Title__c} onblur={handleBlur} data-id="Principal_Title__c" placeholder={label.title_placeholder}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={submitAgenDetails}>{label.Confirm}
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <template if:false={editMode}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoAgentOptionsScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                </template>
+
+                <template if:true={isIndividualFlow}>
+                    <template if:true={showSecondScreen}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.brs_Individual_Principal}</p>
+                                    <p class="desc">{label.fields_Mandatory}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <div class="margin-b-24">
+                                        <lightning-input max-length="40" class="principal-input" type="text"
+                                            label={label.First_Name_Required} required onchange={handleFirstName} onblur={handleBlur} data-id="FirstName__c"
+                                            value={principal.FirstName__c} placeholder={label.First_Name_Placeholder} disabled={isNameDisable}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <div class="margin-b-24">
+                                        <lightning-input max-length="40" class="principal-input" type="text" onblur={handleBlur} data-id="LastName__c"
+                                            label={label.Last_Name_Required} required onchange={handleLastName}
+                                            value={principal.LastName__c} placeholder={label.Last_Name_Placeholder} disabled={isNameDisable}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <template if:true={showDesignationCheckBoxes}>
+                                    <div
+                                        class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 inputForm slds-has-error">
+                                        <div class="margin-b-24">
+                                            <label class="slds-form-element__label">{label.Designation}*</label>
+                                            <div class="designation-checkboxes">
+                                                <div class="dec-checkbox">
+                                                    <c-generic-multi-select list-data={designationOfficerOptions}
+                                                        value={getIsDesignationOfficerChecked}
+                                                        oncheckboxinputselection={onDesignationOfficerCheck}>
+                                                    </c-generic-multi-select>
+                                                </div>
+                                                <div class="dec-checkbox">
+                                                    <c-generic-multi-select list-data={designationDirectorOptions}
+                                                        value={getIsDesignationDirectorChecked}
+                                                        oncheckboxinputselection={onDesignationDirectorCheck}>
+                                                    </c-generic-multi-select>
+                                                </div>
+                                            </div>
+                                            <p if:true={principal.showDisignationError} class="slds-form-element__help">
+                                                {label.Selection_Required}</p>
+                                        </div>
+                                    </div>
+                                </template>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <template if:true={showTitle}>
+                                        <div class="margin-b-24">
+                                            <lightning-combobox class="principal-combobox" required label={label.Title_Required}
+                                                value={principal.Principal_Title__c} onchange={onTitleChange} placeholder={label.SelectanOptionPlaceholder}
+                                                options={TitleOptions}>
+                                            </lightning-combobox>
+                                        </div>
+                                    </template>
+                                    <template if:false={showTitle}>
+                                        <div class="margin-b-24">
+                                            <lightning-input max-length="255" class="principal-combobox principal-title"
+                                                type="text" onblur={handleBlur} data-id="Principal_Title__c" label={label.Title_Required} required onchange={onTitleChange}
+                                                value={principal.Principal_Title__c} placeholder={label.title_placeholder}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <lightning-input max-length="255" class="principal-email"
+                                        message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                        onchange={onEmailChange} pattern={emailPattern} value={principal.Email__c}
+                                        type="text" label={label.Email_Address}
+                                        onblur={validateEmail} placeholder={label.EmailPlaceHolder}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={gotoThirdScreen}>{label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                            role="presentation" />
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1" if:false={hideIndividualSecondScreenBack}>
+                                    <template if:false={principal.Id}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoFirstScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                    <template if:true={showThirdScreen}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.brs_Individual_Principal}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 inputForm">
+                                    <h6 class="margin-b-24">{label.brs_DoYouHaveBusinessAddress}</h6>
+                                    <div class="theme1">
+                                        <c-generic-radio_brs radio-options={businessRadioOptions}
+                                            onctbosdatachange={handleBusinessAdressRadioCheck}
+                                            name="BusinessAddressRadio" answer={selectedBusinessDecision}
+                                            has-error={showHasBusinessAddressError}>
+                                        </c-generic-radio_brs>
+                                    </div>
+                                    <p class="error-text" if:true={showHasBusinessAddressError}>
+                                        {label.Selection_Required}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={gotoFourthScreen}>{label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                            role="presentation" />
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <template if:false={principal.Id}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoSecondScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                    <template if:true={showFourthScreen}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.brs_Individual_Principal}</p>
+                                    <p class="desc">{label.fields_Mandatory}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <div class="margin-b-24">
+                                <c-generic-table tablecolumns={getIndividualPrincipalColumns}
+                                    tabledata={individualPrincipalTableData}></c-generic-table>
+                            </div>
+                            <template if:true={hasBusinessAddress}>
+                                <div class="slds-grid slds-wrap check-box-section">
+                                    <div class="slds-size_12-of-12 slds-large-size_3-of-12">
+                                        <p class="checkbox-title">{label.brs_Business_Address}</p>
+                                    </div>
+                                    <div class="slds-size_12-of-12 slds-large-size_8-of-12 inputForm">
+                                        <div class="theme1" if:true={showCopyPrincipalAddressCheckbox}>
+                                            <div class="dec-checkbox">
+                                                <c-generic-multi-select
+                                                    list-data={principalOfficeAddressCheckboxOptions}
+                                                    value={isPrincipalAddressChecked}
+                                                    oncheckboxinputselection={onCopyPrincipalAddressCheck}>
+                                                </c-generic-multi-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <c-brs_address can-be-outside-us source={source} class="busniessAddress"
+                                    unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={businessAddressFields}
+                                    disabled={copyPrincipalAddressCheck} onaddresschange={onBusinessAddressChange}
+                                    callonsetvalues>
+                                </c-brs_address>
+                            </template>
+                            <div class="slds-grid slds-wrap  check-box-section residence-section">
+                                <div class="slds-size_12-of-12 slds-large-size_3-of-12">
+                                    <p class="checkbox-title">{label.brs_Residence_Address}</p>
+                                </div>
+                                <div class="slds-size_12-of-12 slds-large-size_8-of-12 inputForm"
+                                    if:true={hasBusinessAddress}>
+                                    <div class="theme1">
+                                        <div class="dec-checkbox">
+                                            <c-generic-multi-select list-data={businessAddressCheckboxOptions}
+                                                value={isBusinessAddressChecked}
+                                                oncheckboxinputselection={onCopyBusinessAddressCheck}>
+                                            </c-generic-multi-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <c-brs_address can-be-outside-us source={source} class="residentialAddress"
+                                unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={residenceAddressFields}
+                                disabled={copyBusinessAddressCheck}>
+                            </c-brs_address>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={submitIndividualPrincipalForm}>{label.Confirm}
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                        onclick={gotoThirdScreen}>{label.Back}</button>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                </template>
+
+                <template if:false={isIndividualFlow}>
+                    <template if:true={showSecondScreen}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.brs_Business_Principal}</p>
+                                    <p class="desc">{label.brs_Busiess_Descripation}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content popup-body biz-result-modal">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-size_12-of-12">
+                                    <c-brs_business-search-table onbusinessselect={onPrincipalListRadioCheck}
+                                        onaddmanually={gotoThirdScreen} is-search-disabled={isNameDisable}
+                                        onsearchbusiness={handleSearchBusiness} search-key={searchKey}
+                                    	business-list={principalList} added-business-list ={principalList} ongetbusinessresults={handleGetResults}
+                                    	hide-add-manual-button={editMode} selected-radio-value={selectedRadio}>
+                                    </c-brs_business-search-table>
+                                    <template if:true={showPrincipalError}>
+                                        <p class="error-text">
+                                            <template if:true={editMode}>
+                                                {label.brs_AddPrincipalErrorMessage1}
+                                            </template>
+                                            <template if:false={editMode}>
+                                                {label.brs_AddPrincipalErrorMessage2}
+                                            </template>
+                                        </p>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={gotoFourthScreen}>{label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                            role="presentation" />
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <template if:false={principal.Id}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoFirstScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+
+
+                    <template if:true={showThirdScreen}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.Princial_Manaully_Business}</p>
+                                    <p class="desc">{label.Principal_Manaully_Business_Descripation}
+                                    </p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <div class="slds-grid slds-wrap slds-gutters form-row">
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <lightning-input max-length="255" class="principal-input"
+                                        onchange={onBusinessNameChange} type="text" label={label.Business_Name_Required}
+                                        onblur={handleBlur} data-id="Business_Name__c"
+                                        value={principal.Business_Name__c} disabled={isNameDisable}  placeholder={label.business_name_placeholder} required>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap form-row">
+                                <div class="slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <div class="theme1" if:true={showCopyPrincipalAddressCheckbox}>
+                                        <div class="dec-checkbox">
+                                            <c-generic-multi-select list-data={principalOfficeAddressCheckboxOptions}
+                                                value={isPrincipalAddressChecked}
+                                                oncheckboxinputselection={onCopyPrincipalAddressCheck}>
+                                            </c-generic-multi-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <c-brs_address can-be-outside-us source={source} class="manualAddress" unitlabel={label.AddressUnit_Apt}
+                                autocomplete set-retained-address={businessAddressFields}
+                                disabled={copyPrincipalAddressCheck}>
+                            </c-brs_address>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={gotoFourthScreen}>{label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                            role="presentation" />
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <template if:false={editMode}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoSecondScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+
+                    <template if:true={showFourthScreen}>
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title">{label.brs_Business_Principal_Details}</p>
+                                    <p class="desc">{label.fields_Mandatory}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right" onclick={handleAddPrincipalPopup} onkeypress={handleAddPrincipalPopupClose}>
+                                        <img src={closeIcon} class="closeIcon" alt="" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-size_12-of-12">
+                                    <div class="margin-b-24">
+                                        <c-generic-table tablecolumns={getBusinessPrincipalColumns}
+                                            tabledata={businessPrincipalTableData}></c-generic-table>
+                                    </div>
+                                </div>
+                            </div>
+                            <template if:true={showBusinessAddressForm}>
+                                <div class="check-box-section">
+                                    <p class="checkbox-title">{label.brs_Business_Address}</p>
+                                </div>
+                                <c-brs_address can-be-outside-us source={source} class="manualAddress" unitlabel={label.AddressUnit_Apt}
+                                    autocomplete set-retained-address={businessAddressFields}
+                                >
+                                </c-brs_address>
+                            </template>
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                    <template if:true={showTitle}>
+                                        <lightning-combobox class="principal-combobox" required label={label.Title_Required}
+                                            value={principal.Principal_Title__c} onchange={onTitleChange} placeholder={label.SelectanOptionPlaceholder}
+                                            options={TitleOptions}>
+                                        </lightning-combobox>
+                                    </template>
+                                    <template if:false={showTitle}>
+                                        <div class="margin-b-24">
+                                            <lightning-input max-length="255" class="principal-combobox" type="text"
+                                                label={label.Title_Required} required onchange={onTitleChange}
+                                                onblur={handleBlur} data-id="Principal_Title__c"
+                                                value={principal.Principal_Title__c} placeholder={label.title_placeholder}>
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                    <lightning-input max-length="255" type="email" name="email" label={label.Email_Address}
+                                        message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                        class="principal-email" onchange={onEmailChange} value={principal.Email__c}
+                                        pattern={emailPattern} onblur={validateEmail} autocomplete="off" placeholder={label.EmailPlaceHolder}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn higher slds-button_brand"
+                                        onclick={submitBusinessPrincipalForm}>{label.Confirm}
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <template if:true={selectedPrincipalAddressId}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoSecondScreen}>{label.Back}</button>
+                                    </template>
+                                    <template if:false={selectedPrincipalAddressId}>
+                                        <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                            onclick={gotoThirdScreen}>{label.Back}</button>
+                                    </template>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+
+    <!--confirmation modal-->
+    <template if:true={showConfirmationModal}>
+        <section role="dialog" tabindex="-1" aria-label={label.confirmation_title} aria-modal="true"
+            aria-describedby="confirmation-title-content"
+            class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+            <div class="slds-modal__container" id="confirmation-title-content">
+                <header class="slds-modal__header slds-modal__header_empty">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                            <p class="title" id="confirmation-title">{label.principal_confirmation_question}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                            <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right"
+                                onclick={closeConfirmationModal} onkeypress={closeConfirmationModalKeyPress}>
+                                <img src={closeIcon} class="closeIcon" alt="" />
+                            </label>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium popup-body">
+                    <p class="large" if:true={isAnnualFlow}>
+                        {label.principal_annual_confirmation_text}
+                    </p>
+                    <p class="large" if:false={isAnnualFlow}>
+                        {label.principal_confirmation_text}
+                    </p>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <div class="slds-grid slds-wrap modal-footer-section">
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={goToSummaryPage}>{label.Confirm}
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1">
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={closeConfirmationModal}>{label.Back}</button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!--delete principal modal for annual report-->
+    <template if:true={showDeleteConfirmation}>
+        <section role="dialog" tabindex="-1" aria-label={label.aria_delete_confirmation} aria-modal="true"
+            aria-describedby="delete-confirmation-content"
+            class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+            <div class="slds-modal__container" id="delete-confirmation-content">
+                <header class="slds-modal__header slds-modal__header_empty">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                            <p class="title" id="delete-confirmation">{label.delete_principal_confirm}</p>
+                            <p class="desc">{label.delete_principal_confirm_desc}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                            <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right"
+                                onclick={showHideDeletePrincipal} onkeypress={showHideDeletePrincipalKeyPress}>
+                                <img src={closeIcon} class="closeIcon" alt="" />
+                            </label>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium popup-body">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_12-of-12">
+                            <div class="principal-list">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="principal-header">
+                                        <div class="username">
+                                            <label>{label.Name}</label>
+                                            <p>{principal.Name__c}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="principal-details no-border">
+                                    <div class="slds-grid slds-wrap" if:true={principal.Designation__c}>
+                                        <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row">
+                                            <p class="sub-title">{label.Designation}</p>
+                                            <p class="sub-desc">{principal.Designation__c}</p>
+                                        </div>
+                                        <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row">
+                                            <p class="sub-title">{label.Title}</p>
+                                            <p class="sub-desc">{principal.Principal_Title__c}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row"
+                                            if:false={principal.Designation__c}>
+                                            <p class="sub-title">{label.Title}</p>
+                                            <p class="sub-desc">{principal.Principal_Title__c}</p>
+                                        </div>
+                                        <div class="slds-size_12-of-12 slds-large-size_5-of-12 details-row">
+                                            <p class="sub-title">{label.Email_Address}</p>
+                                            <p class="sub-desc">
+                                                <span if:true={principal.hasEmail}>
+                                                    {principal.Email__c}
+                                                </span>
+                                                <span if:false={principal.hasEmail}>
+                                                    {label.None}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap details-row">
+                                        <div class="slds-size_12-of-12">
+                                            <p class="sub-title">{label.brs_Business_Address}</p>
+                                            <p class="sub-desc" if:true={principal.hasBusinessAddress}>
+                                                {principal.Business_Address_1__c}</p>
+                                            <p class="sub-desc" if:false={principal.hasBusinessAddress}>{label.None}</p>
+                                        </div>
+                                    </div>
+                                    <template if:true={principal.isIndividual}>
+                                        <div class="slds-grid slds-wrap details-row">
+                                            <div class="slds-size_12-of-12">
+                                                <p class="sub-title">{label.brs_Residence_Address}</p>
+                                                <p class="sub-desc">{principal.Residence_Address_1__c}</p>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <div class="slds-grid slds-wrap modal-footer-section">
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand" onclick={deletePrincipal}
+                                data-id={principal.Id}>{label.Confirm}
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1">
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={showHideDeletePrincipal}>{label.Cancel_Label}</button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!--delete principal modal for annual report-->
+    <template if:true={showNoChangeErrorMessage}>
+        <p class="error-text">
+            {errorMessage}
+        </p>
+    </template>
+    <template if:true={isTempApis}>
+        <c-brs_next-back-buttons show-summary={showSummaryButton} gotosummarylabel={label.go_to_summary}
+            nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate} onhandleback={handleBack}
+            ongotosummary={goToSummaryPageWithOutConfirmation}></c-brs_next-back-buttons>
+    </template>
+</template>

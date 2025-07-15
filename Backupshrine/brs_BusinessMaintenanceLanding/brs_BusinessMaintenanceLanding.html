@@ -1,0 +1,31 @@
+<template>
+    <c-notification-banner text={labels.Business_Maintenance_Disclaimer} link-url={labels.AccountDashboard_comparable}
+        link-text={labels.Accessaccount_Dashboard}></c-notification-banner>
+
+    <c-banner-with-text type="businessinformation" banner-heading={labels.Maintain_Your_Business} blue-text={labels.One_Place}
+        banner-desc={labels.Business_Maintenance_subTitle}>
+    </c-banner-with-text>
+    <div class="grey-background">
+        <div class="cert-legal-existance slds-grid slds-wrap brs-container">
+            <div class="slds-size_12-of-12 slds-large-size_12-of-12">
+                <div class="cert-legal-existance_container-holder">
+                    <template for:each={dataForContentCard} for:item="contentcardItem">
+                        <div class="cert-legal-existance_container" key={contentcardItem}>
+                            <h2>{contentcardItem.mainTitle}</h2>
+                            <div class="slds-grid slds-wrap cards-section">
+                                <template for:each={contentcardItem.cardData} for:item="contentcard">
+                                    <div key={contentcard}
+                                        class="slds-size_1-of-1 slds-large-size_6-of-12 content-card-comp__item">
+                                        <c-brs_content-card contentdata={contentcard} hide-chevron={hideChevron}
+                                            is-link-present={isLinkPresent} navigationdata={contentcard.navPath}
+                                            showsubtitle={contentcard.showSubTitle}></c-brs_content-card>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,134 @@
+.filterWrapper {
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 2px 24px 20px 24px;
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    border: solid 1px #D0CFCF;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+    margin-top: 8px;
+}
+
+.dropDownNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px 14px 12px;
+    border: solid 1px  #D0CFCF;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+  }
+
+.mobileFilter {
+    display: block;
+    position: relative;
+}
+
+.filterTitle {
+    display: none;
+}
+
+.filterSection {
+    padding-top: 22px;
+}
+.desktopFilter {
+    display: none;
+}
+
+.closeIcon {
+    margin-right: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: -1px;
+}
+.pills {
+    border-radius: 11.5px;
+    background-color: #e0f2ff;
+    padding: 2px 4px 2px 12px;
+    color: #09538b;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    width: fit-content;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.chevron-icon svg.slds-icon {
+    width: 14px;
+  }
+
+  .filterIcon {
+    width: 20px;
+    margin-right: 12px;
+}
+.filterContainer{
+    padding-top: 20px;
+}
+
+.clearFilter {
+    border-bottom: 1px solid #DDDBDB;
+    width: 100%;
+    padding: 32px 0px;
+    text-decoration: underline;
+}
+
+.filterType {
+    display: flex;
+}
+
+.show-more{
+    color: #09538B;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.category-label{
+    padding-bottom: 24px;
+    color: #678598;
+}
+
+@media only screen and (max-width: 1023px) {
+    .clear-all-text{
+        font-size: 16px ;
+        line-height: 24px;
+        color:#00528D;
+    }
+    .filter-text{
+        font-size: 18px ;
+        line-height: 27px;
+    }
+    }
+
+@media only screen and (min-width: 1023px) {
+   .filterTitle {
+    display: block;
+    padding-bottom: 2px;
+   }
+
+   .filterSection {
+    padding-top: 30px;
+}
+
+.filterType {
+    padding-bottom: 12px;
+}
+
+.mobileFilter {
+    display: none;
+}
+
+.desktopFilter {
+    display: block;
+}
+
+}

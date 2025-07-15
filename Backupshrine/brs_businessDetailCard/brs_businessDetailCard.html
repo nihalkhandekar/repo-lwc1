@@ -1,0 +1,53 @@
+<template>
+
+    <template for:each={allBusiness} for:item="businessDetails" for:index="index">
+        <div tabindex="0" key={businessDetails.accountId} class="business-card" data-name={index} onclick={showBusinessDetails}>
+            <div class="business-card-header">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_6-of-12 slds-large-size_6-of-12">
+                        <p class="reg-number">{businessDetails.connecticutAlei}</p>
+                    </div>
+                    <div class="slds-size_6-of-12 slds-large-size_6-of-12">
+                        <span class="slds-float_right">
+                            <c-brs_badges class-name={businessDetails.badgeClassName}
+                                text={businessDetails.businessStatus}>
+                            </c-brs_badges>
+                        </span>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-large-size_12-of-12 d-flex">
+                        <div class="details">
+                            <h6 class="business-name">{businessDetails.businessName}</h6>
+                            <p class="location-address small">
+                                <img src={locationIcon} alt="location" />
+                                {businessDetails.businessAddress}
+                            </p>
+                            <div class="hr-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="business-card-body">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_1-of-1 slds-large-size_4-of-12 business-card-body-left">
+                        <p class="small grey-title">{label.Principals}</p>
+                        <div class="desc">
+                            <template for:each={businessDetails.principalList} for:item="principal">
+                                <p class="small margin-t-8" key={principal}>{principal}</p>
+                            </template>
+                            <template if:true={businessDetails.principalList.length}>
+                            <p data-name={index} class="show-less margin-t-8 small"
+                                if:true={businessDetails.showMore}
+                                onclick={showAllPrincipals} onkeyup={onEnter} role="link" tabindex="0">{label.View_all}</p>
+                            </template>
+                            <p class="small" if:false={businessDetails.principalList.length}>{label.None}</p>                           
+                        </div>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_6-of-12 business-card-body-right">
+                        <p class="small  grey-title">{label.Agent}</p>
+                        <p class="small desc">{businessDetails.businessAgentName}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

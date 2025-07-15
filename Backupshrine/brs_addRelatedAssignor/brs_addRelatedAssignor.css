@@ -1,0 +1,422 @@
+.left-border {
+    border-left: 4px solid #09538B;
+}
+
+.slds-modal__header {
+    text-align: left;
+}
+
+.header-text {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+
+.radio-heading {
+    margin-bottom: 24px;
+}
+
+.cust-anchor {
+    text-decoration: underline;
+}
+
+.no-border {
+    border: none;
+}
+
+.member-popup .title {
+    color: #2D2C2C;
+    font-family: 'Lato';
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    margin-bottom: 8px;
+}
+
+.member-popup .desc {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.member-popup .closeIcon {
+    height: 14px;
+    width: 14px;
+    cursor: pointer;
+}
+
+.member-popup .popup-body {
+    padding-top: 0;
+}
+
+.member-popup footer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.member-popup footer button img {
+    height: 16px;
+}
+
+.member-list .username p {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding: 24px;
+}
+
+/* Customized css */
+.a-debtor-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 16px;
+}
+
+.agent-mailing-address {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 20px;
+}
+
+.orgAddress {
+    padding-top: 30px;
+}
+
+.orgName {
+    padding-top: 24px;
+}
+
+.individualDetails {
+    padding-top: 24px;
+}
+
+.orgLocation {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 24px;
+}
+
+.addIcon {
+    height: 25px;
+}
+
+.addLabel {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+
+.debtor-card-details {
+    box-sizing: border-box;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.name {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.name-member {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-top: 20px;
+    padding-left: 24px;
+}
+
+.statusText {
+    float: right;
+    margin-right: 24px;
+}
+
+.addressClass {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 20px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+}
+
+.errorBtnDiv {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.primaryBtnSmall {
+    float: right;
+}
+
+.addressAssignee {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-bottom: 32px;
+    padding-top: 20px;
+}
+
+.iconCls {
+    height: 17px;
+}
+
+.assignorCards {
+    padding-top: 16px;
+}
+
+.ct-bos-multi-container-individual {
+    border: 0.0625rem solid transparent;
+    border-radius: 0.25rem;
+}
+
+.errorBorder {
+    border: 1px solid #DB2426 !important;
+}
+
+.answergiven {
+    border: 2px solid #09538b;
+    border-radius: 4px;
+    background-color: #09538b;
+    -webkit-transform: rotate(0deg) scale(1);
+    -ms-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.input-title {
+    padding-left: 2.5rem;
+    color: #2d2c2c;
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+
+
+/* Styling Checkbox Starts */
+
+.ct-bos-multi-checkbox-label {
+    position: relative;
+    margin: auto;
+    cursor: pointer;
+    font-size: 1.375rem;
+    line-height: 1.5rem;
+    height: 20px;
+    width: 20px;
+    clear: both;
+}
+
+.ct-bos-multi-checkbox-label input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.ct-bos-multi-checkbox-label .ct-bos-multi-checkbox-custom {
+
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    border-radius: 4px;
+    border: 2px solid #d0cfcf;
+    margin: auto;
+}
+
+.ct-bos-multi-checkbox-label input:checked~.ct-bos-multi-checkbox-custom {
+    border: 2px solid #09538b;
+    border-radius: 4px;
+    background-color: #09538b;
+    -webkit-transform: rotate(0deg) scale(1);
+    -ms-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.ct-bos-multi-checkbox-label .ct-bos-multi-checkbox-custom::after {
+    position: absolute;
+    content: "";
+    left: 0.75rem;
+    top: 0.75rem;
+    height: 0rem;
+    width: 0rem;
+    border-radius: 0.3125rem;
+    border: solid #fff;
+    border-width: 0 0.1875rem 0.1875rem 0;
+    -webkit-transform: rotate(0deg) scale(0);
+    -ms-transform: rotate(0deg) scale(0);
+    transform: rotate(0deg) scale(0);
+    opacity: 1;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+}
+
+.ct-bos-multi-checkbox-label input:checked~.ct-bos-multi-checkbox-custom::after {
+    -webkit-transform: rotate(45deg) scale(1);
+    -ms-transform: rotate(45deg) scale(1);
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+    left: 0.35rem;
+    top: 0.1rem;
+    width: 0.375rem;
+    height: 0.75rem;
+    border: solid #fff;
+    border-width: 0 0.125rem 0.125rem 0;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.ct-bos-override {
+    padding: 0;
+}
+
+.tabfocus:focus {
+    outline: 2px solid #2d2c2c;
+}
+
+.addressIcon {
+    height: 16px;
+    margin: auto 0;
+    margin-right: 8px;
+}
+
+input:checked~.checkbox-wrapper .checkmark-container {
+    background-color: #E0F2FF;
+    border-right: 1px solid #09538b;
+}
+
+input:checked~.checkbox-wrapper {
+    border: 1px solid #09538b;
+}
+
+/* custom checkbox theme styled */
+
+.ct-bos-multi-checkbox-label input:checked~.checkbox-wrapper .checkmark-container .ct-bos-multi-checkbox-custom {
+    border: 2px solid #09538b;
+    border-radius: 4px;
+    background-color: #09538b;
+    -webkit-transform: rotate(0deg) scale(1);
+    -ms-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+
+.ct-bos-multi-checkbox-label .checkbox-wrapper .checkmark-container .ct-bos-multi-checkbox-custom::after {
+    position: absolute;
+    content: "";
+    left: 0.75rem;
+    top: 0.75rem;
+    height: 0rem;
+    width: 0rem;
+    border-radius: 0.3125rem;
+    border: solid #fff;
+    border-width: 0 0.1875rem 0.1875rem 0;
+    -webkit-transform: rotate(0deg) scale(0);
+    -ms-transform: rotate(0deg) scale(0);
+    transform: rotate(0deg) scale(0);
+    opacity: 1;
+    transition: all 0.3s ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+}
+
+.ct-bos-multi-checkbox-label input:checked~.checkbox-wrapper .checkmark-container .ct-bos-multi-checkbox-custom::after {
+    -webkit-transform: rotate(45deg) scale(1);
+    -ms-transform: rotate(45deg) scale(1);
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+    left: 0.35rem;
+    top: 0.1rem;
+    width: 0.375rem;
+    height: 0.75rem;
+    border: solid #fff;
+    border-width: 0 0.125rem 0.125rem 0;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+@-moz-document url-prefix() {
+    .ct-bos-multi-checkbox-label .ct-bos-multi-checkbox-custom {
+        top: 0.5135rem;
+    }
+
+    .input-title {
+        display: inline-flex;
+    }
+}
+
+.desktopTheme {
+    display: inline-flex;
+}
+
+.mobileTheme {
+    display: none;
+}
+
+.field-name {
+    margin-right: 10px;
+}
+
+.org-name-member {
+    padding: 0;
+}
+
+@media only screen and (max-width: 1023px) {
+    .desktopTheme {
+        display: none;
+    }
+
+    .mobileTheme {
+        display: block;
+    }
+
+    .checkmark-container {
+        padding: 10px;
+    }
+}

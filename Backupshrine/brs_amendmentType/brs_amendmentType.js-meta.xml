@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="radioOptions" type="String" label="radioOptions" description=""/>
+            <property name="lapsedDate" type="Date" label="lapsedDate" description=""/>
+            <property name="lienRec" type="@salesforce/schema/UCC_Lien__c" label="lienRec" description=""/>
+            <property name="value" type="String" label="value" description=""/>
+            <property name="errorMsgWhenValMissing" type="String" label="errorMsgWhenValMissing" description=""/>
+            <property name="required" type="Boolean" label="required" description=""/>
+            <property name="lienType" type="String" label="lienType" description=""/>
+            <property name="showConfirmModal" type="Boolean" label="showConfirmModal" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

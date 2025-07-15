@@ -1,0 +1,150 @@
+<!-- 
+* @AUTHOR:   Avinash Shukla
+* @DATE:   2021-01-06
+* @description ::: This LWC component is used for BRS 31. Used for the purpose of checking availability of Business name entered by user. This is a genenric component and hence can be used in multiple places.
+* MODIFICATION LOG:
+* DEVELOPER                         DATE                               DESCRIPTION
+* ***************************************************************************************
+* Avinash Shukla                   2021-01-06                   Created the first version
+* 
+*********************************************************************************************/ 
+-->
+<template>
+    <div class="slds-grid slds-wrap">
+        <template if:true={showPleaseNoteSection}>
+            <c-qn-a_-question-help-text helptextnotes={topPleaseNoteSection} inputclassname="no-margin mb-32"
+                questionid={topPleaseNoteSection}>
+            </c-qn-a_-question-help-text>
+        </template>
+        <!-- Show Confirmation Block-->
+        <template if:false={isNameRes}>
+            <template if:true={showMessageContainer}>
+                <section role="dialog" tabindex="-1" aria-label="Confirmation modal" aria-modal="true"
+                    aria-describedby="modal-content-id-3"
+                    class="slds-modal slds-fade-in-open page-scroll-popup business-name-modal">
+                    <template if:true={showConfirmationBlockFE}>
+                        <div class="slds-modal__container">
+                            <header class="slds-modal__header no-border">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                        <!-- Commented below paragraph for BRS - 1840-->
+                                        <!-- <p id="modal-heading-02">
+                                        {confirmationBlockTitle}
+                                    </p>-->
+                                        <p class="modal-label-text">{confirmationBlockMessage}</p>
+                                    </div>
+                                    <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                        <label class="closePopup slds-float_right" onclick={closePopUp}>
+                                            <img aria-hidden="true" aria-label="close" tabindex="0" src={closeIcon}
+                                                class="closeIcon" alt="closeIcon" />
+                                        </label>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="slds-modal__content slds-p-around_medium popup-body" id="modal-content-id-1">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-col slds-size_12-of-12 desc">
+                                        <p class="question-title-transform"> {confirmationBlockSubTitle}</p>
+                                        <template if:true={showUserInput}>
+                                            <p class="modal-label-text">{businessNameEntered}</p>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                            <footer class="slds-modal__footer">
+                                <button title={labels.YesFe} onclick={userResponseYes}
+                                    class="slds-button higher primaryBtn slds-button_brand slds-float_right confirm-button">
+                                    {labels.YesFe}
+                                </button>
+                                <!-- Classes changed in below button to fix BUG BRS - 1840-->
+                                <button title={labels.NoFe} onclick={userResponseNo}
+                                    class="slds-button higher slds-button_neutral slds-float_right secondary-btn">
+                                    {labels.NoFe}
+                                </button>
+                            </footer>
+                        </div>
+                    </template>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </template>
+        <template if:true={isNameRes}>
+            <template if:true={showMessageContainer}>
+                <section role="dialog" tabindex="-1" aria-label="confirmation title" aria-modal="true"
+                    aria-describedby="confirmation-title-content"
+                    class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+                    <div class="slds-modal__container" id="confirmation-title-content">
+                        <header class="slds-modal__header slds-modal__header_empty">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <p class="title" id="confirmation-title">{labels.ModalHeadNameRes}
+                                    </p>
+                                </div>
+                                <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                    <label role="button" tabindex="0" aria-label="Close"
+                                        class="closePopup slds-float_right" onclick={closePopUp}>
+                                        <img src={closeIcon} class="closeIcon" alt="closeIcon" role="presentation" />
+                                    </label>
+                                </div>
+                            </div>
+                        </header>
+                        <div class="slds-modal__content slds-p-around_medium popup-body">
+                            <p class="large">
+                                {labels.ModalBodyNameRes}
+                            </p>
+                        </div>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button higher primaryBtn slds-button_brand"
+                                        onclick={goToSummaryPage}>{labels.ConfirmReservation}
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <button class="slds-button higher secondary-btn slds-float_left"
+                                        onclick={goToMainFlow}>{labels.FormButton}</button>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open"></div>
+            </template>
+        </template>
+        <!--Autoblur issue fix-->
+        <lightning-input variant="label-hidden" type="number" class="input1"></lightning-input>
+        <!-- for BRS-7698-->
+        <label class="business-label">{inputFieldLabel}</label>
+        <lightning-input type="text" variant="label-hidden" value={businessNameEntered} placeholder={placeholder}
+            date-style="short" required={isRequired} data-id="inputfields"
+            max-length=100 onblur={handleBusinessNameInputBlur} onkeyup={handleBusinessNameInput} onkeydown={handleBusinessNameInputDown}
+            message-when-value-missing={isRequiredValidationMessage} class="business-input" disabled={isDisabled} autocomplete="off">
+        </lightning-input>
+        <div class="helptext slds-size_1-of-1">{labels.Business_Name_Max_Characters}
+        </div>
+        <template if:true={showAvailability}>
+            <!--labels to show when the business name is available and when it is not available-->
+            <template if:false={businessNameAvailable}>
+                <template if:false={isNameRes}>
+                    <p if:false={isDomesticBusiness} class="helptext name-not-available">
+                        {errorMsg}</p>
+                    <p if:true={isDomesticBusiness} class="helptext name-not-available">
+                        {labels.businessNameNotAvailableMessageDomestic}</p>
+                </template>
+                <template if:true={isNameRes}>
+                    <p class="helptext name-not-available">
+                        {labels.businessNameNotAvailableMessageNameRes}</p>
+                </template>
+            </template>
+            <!--labels to show when the business name is available and when it is available-->
+            <template if:true={businessNameAvailable}>
+                <p class="helptext name-available">
+                    <span>{labels.businessNameAvailableMessageFE}&nbsp;</span>
+                </p>
+            </template>
+        </template>
+    </div>
+    <c-brs_next-back-buttons hide-back={isBackButtonDisplay} show-summary={showSummaryButton} gotosummarylabel={labels.go_to_summary}
+            nextlabel={labels.Next} prevlabel={labels.Back} onhandlenext={handleClickNext} onhandleback={back}
+            ongotosummary={goToSummaryPageClick}></c-brs_next-back-buttons>
+</template>

@@ -1,0 +1,413 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <c-brs_header heading-text={entityTitleMsg} description-text={typedescription} theme="theme1"></c-brs_header>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+            <button class="slds-button slds-button_natural" onclick={handleAddPopup}>
+                <img src={addIcon} class="addIcon" alt="addIcon" />
+                <span class="addLabel">{debtorName}</span>
+            </button>
+        </div>
+
+        <template for:each={allMembersInfoFromApex} for:item="memberInfo" for:index="index">
+            <div class="slds-grid slds-wrap debtor-card-details" key={memberInfo.uccAssignor.frontEndId}>
+                <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                    <p class="name">{labels.BRS_UCC_Assignee_Label}
+                        <template if:true={memberInfo.isDuplicate}>
+                            <span class="slds-badge slds-theme_warning statusText">{labels.Duplicate}</span>
+                        </template>
+                    </p>
+                </div>
+                <div class="slds-large-size_6-of-12 slds-size_12-of-12">
+                    <span>
+                        <template for:each={memberInfo.uccAssignees} for:item="assignee">
+                            <span key={assignee.frontEndId}>
+                                <template if:true={assignee.isIndividual}>
+                                    <p class="name-member">
+                                        {assignee.fullName}
+                                    </p> &nbsp;&nbsp;
+                                </template>
+                                <template if:true={assignee.isOrganisation}>
+                                    <p class="name-member">{assignee.Org_Name__c}
+                                    </p>
+                                </template>
+                                <p class="addressClass">
+                                    <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                                        aria-hidden="true" />
+                                    <span key={assignee.frontEndId}>
+                                        {assignee.fullAddress}
+                                    </span>
+                                </p>
+                            </span>
+                        </template>
+                    </span>
+                </div>
+                <div class="slds-large-size_1-of-12 slds-size_12-of-12">
+                </div>
+                <div class="slds-large-size_5-of-12 slds-size_12-of-12">
+                    <p class="addressAssignee"><b>{labels.BRS_UCC_Assignor_Label} :</b> <span>
+                            <template if:true={memberInfo.uccAssignor.isIndividual}>
+                                <p class="small">{memberInfo.uccAssignor.fullName}</p>
+                            </template>
+                            <template if:true={memberInfo.uccAssignor.isOrganisation}>
+                                <p class="small">{memberInfo.uccAssignor.Org_Name__c}</p>
+                            </template>
+                        </span>
+                    </p>
+                </div>
+                <div class="slds-large-size_12-of-12 slds-size_12-of-12 card-footer-btns">
+                    <button class="natural-button-with-icon slds-button slds-button_natural" data-id={index} data-name={memberInfo.isDuplicate} onclick={editRelatedInfo}>
+                        <img src={editIcon} alt="" class="icon" />
+                        <span>{labels.Edit_btn}</span>
+                    </button>
+                    <button class="natural-button-with-icon slds-button slds-button_natural" data-id={index} data-name={memberInfo.isDuplicate}
+                        onclick={onDuplicate}>
+                        <img src={duplicate} alt="" class="icon" />
+                        <span>{labels.Duplicate}</span>
+                    </button>
+                    <button class="natural-button-with-icon slds-button slds-button_natural" data-id={index} data-name={memberInfo.isDuplicate}
+                        onclick={deleteRelatedInfo}>
+                        <img src={deleteIcon} alt="" class="icon" />
+                        <span>{labels.Remove}</span>
+                    </button>
+                </div>
+            </div>
+        </template>
+        <p class="error-text" if:true={showErrorMessage}>
+            {errorMessageStr}
+        </p>
+    </div>
+
+    <c-brs_next-back-buttons nextlabel={nextLabel} prevlabel={prevLabel} onhandlenext={validate}
+		show-summary={showGoToSummaryButton} gotosummarylabel={labels.go_to_summary} ongotosummary={handleGoToSummary}
+        onhandleback={handlePropagateBack}></c-brs_next-back-buttons>
+
+    <!--Radio pop up to choose Individual or Organization-->
+    <template if:true={addMemberPopup}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open slds-modal_small member-popup add-member-popup page-scroll-popup">
+            <div class="slds-modal__container">
+                <template if:true={showFirstScreen}>
+                    <header class="slds-modal__header no-border">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="header-text" id="modal-heading-02">{labels.Add_an} {relatedMemberTypeforUI}
+                                </p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label class="closePopup slds-float_right" onclick={closePopUp}>
+                                    <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                                <template if:false={showLastScreen}>
+                                    <p class="a-debtor-desc">{labels.You_can_add_one_or_more} {relatedMemberTypeforUI}
+                                        {labels.to_the_lien}
+                                    </p>
+                                </template>
+                                <template if:true={showLastScreen}>
+                                    <p class="a-debtor-desc" if:false={isJudgment}>
+                                        {labels.select_Secured_Party_As_Assignee_UCC3}</p>
+                                    <p class="a-debtor-desc" if:true={isJudgment}>
+                                        {labels.select_Judgment_Creditors_As_Assignee}</p>
+                                </template>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium popup-body radio-options"
+                        id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_12-of-12">
+                                <p class="a-bold-debtor-desc radio-heading">{labels.is_the}
+                                    {relatedMemberTypeforUI} {labels.an_organization_or_an_individual}</p>
+                                <c-generic-radio_brs name="assignee-options" radio-options={memberOptions}
+                                    onctbosdatachange={handleOptions} answer={selectedTypeOption}
+                                    has-error={typeIsNotSelected}></c-generic-radio_brs>
+                                <template if:true={typeIsNotSelected}>
+                                    <div class="error-text">{labels.UCC_Flow_Select_Lien} {relatedMemberTypeforUI}
+                                        {labels.UCC_Flow_Select_Lien_Type}</div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal/Popup Box LWC footer starts here -->
+                    <footer class="slds-modal__footer">
+                        <button
+                            class="slds-button primaryBtn slds-button_brand next-button fullwidth slds-float_right higher"
+                            onclick={goToSecondScreen}>{labels.Next}
+                            <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" />
+                        </button>
+                    </footer>
+                </template>
+                <template if:true={addDetails}>
+                    <header class="slds-modal__header no-border">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                    <template if:false={showLastScreen}>
+                                        <p class="header-text" id="modal-heading-03">{labels.Add_L} {labels.An_Label} {type}
+                                            {labels.As_Label}
+                                            {relatedMemberTypeforUI}
+                                        </p>
+                                    </template>
+                                    <template if:true={showLastScreen}>
+                                        <p class="header-text" id="modal-heading-04">{labels.Select_Assignors}</p>
+
+                                    </template>
+
+                                </div>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label class="closePopup slds-float_right" onclick={closePopUp}>
+                                    <img src={closeIcon} class="closeIcon" alt="closeIcon" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                                <template if:false={showLastScreen}>
+                                    <p class="a-debtor-desc">{labels.You_can_add_one_or_more} {relatedMemberTypeforUI}
+                                        {labels.to_the_lien}
+                                    </p>
+                                </template>
+                                <template if:true={showLastScreen}>
+                                    <p class="a-debtor-desc" if:false={isJudgment}>
+                                        {labels.select_Secured_Party_As_Assignee_UCC3}</p>
+                                    <p class="a-debtor-desc" if:true={isJudgment}>
+                                        {labels.select_Judgment_Creditors_As_Assignee}</p>
+                                </template>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body radio-options"
+                        id="modal-content-id-2">
+                        <template if:true={showAddOrganizationDetails}>
+                            <p class="agent-mailing-address">{type} {labels.Information}</p>
+                            <div class="slds-grid slds-wrap orgName">
+                                <div class="inputForm">								
+                                    <lightning-input label={labels.organizations_name} type="text" data-id="Org_Name__c"
+                                        value={memberInfo.Org_Name__c} max-length="75" required
+                                        onchange={onInputChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <p class="agent-mailing-address orgLocation">{labels.UCC_Flow_Type_Location}</p>
+                            <div class="orgAddress">
+                                <c-brs_address can-be-outside-us source={source} class="mailingAddressOrganisation"
+                                    unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={businessAddressFields}
+                                    accept-po></c-brs_address>
+                            </div>
+                        </template>
+                        <!-- Modal/Popup Box LWC body starts here [Organisation Modal]-->
+                        <template if:true={showAddIndividualDetails}>
+                            <div if:true={addIndividualDetails}>
+                                <p class="agent-mailing-address">{type}'s {labels.Name}</p>
+                                <div class="slds-grid slds-wrap individualDetails">
+                                    <div class="c-container">
+                                        <div class="slds-grid slds-gutters">
+                                            <div class="slds-col inputForm">
+                                                <lightning-input type="text" label={labels.Surname}
+                                                    data-id="Individual_SurName__c" maxlength="80" required
+                                                    message-when-value-missing={labels.Surname_is_mandatory}
+                                                    value={memberInfo.Individual_SurName__c} onchange={onInputChange}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="slds-col inputForm">
+                                                <lightning-input type="text" label={labels.First_Name}
+                                                    data-id="Individual_First_Name__c" maxlength="80"
+                                                    value={memberInfo.Individual_First_Name__c}
+                                                    onchange={onInputChange}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="slds-col inputForm">
+                                                <lightning-input type="text" label={labels.Middle_Name}
+                                                    data-id="Individual_Middle_Name__c" maxlength="80"
+                                                    value={memberInfo.Individual_Middle_Name__c}
+                                                    onchange={onInputChange}>
+                                                </lightning-input>
+                                            </div>
+                                            <div class="slds-col inputForm">
+                                                <lightning-input type="text" label={labels.Suffix} data-id="Suffix__c"
+                                                    maxlength="80" value={memberInfo.Suffix__c}
+                                                    onchange={onInputChange}>
+                                                </lightning-input>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="agent-mailing-address">{labels.UCC_Flow_Type_Location}</p>
+                                <div class="individualDetails">
+                                    <c-brs_address can-be-outside-us source={source} class="mailingAddressIndividual"
+                                        unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={businessAddressFields}
+                                        accept-po></c-brs_address>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:true={addSelectedAssignors}>
+                            <p class="agent-mailing-address" if:true={isJudgment}>{labels.judgment_Creditor_Assignor}
+                            </p>
+                            <p class="agent-mailing-address" if:false={isJudgment}>{labels.secured_party_AssignorUCC3}</p>
+                            <template if:true={hasSecuredParties}>
+                                <template for:each={allSecuredPartiesfromApex} for:item="sParty" for:index="index">
+                                    <div class="ct-bos-multi-container-all assignorCards" key={sParty.Id}>
+
+                                        <div class="tabfocus" tabindex="0">
+                                            <div
+                                                class="ct-bos-multi-checkbox-container ct-bos-multi-container-individual">
+                                                <div class="slds-grid">
+                                                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                                                        <label class="ct-bos-multi-checkbox-label" tabindex="-1">
+                                                            <input class="ct-bos-multi-checkbox-input" type="checkbox"
+                                                                data-id={sParty.Id} aria-hidden="true" tabindex="-1"
+                                                                onchange={handleCheckbox} checked={sParty.isChecked} />
+                                                            <div class="checkbox-wrapper desktopTheme">
+                                                                <p class="checkmark-container">
+                                                                    <span
+                                                                        class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                                                                </p>
+                                                                <div class="checkbox-label boxShadow">
+                                                                    <p class="labelFirstRow">
+                                                                        <span
+                                                                            class="labelId"><b>{labels.Name}</b></span>
+                                                                    </p>
+                                                                    <template if:true={sParty.isIndividual}>
+                                                                        <p class="secured-name-member">
+                                                                            {sParty.fullName}
+                                                                        </p>
+                                                                    </template>
+                                                                    <template if:true={sParty.isOrganisation}>
+                                                                        <p class="secured-name-member">
+                                                                            {sParty.Org_Name__c}</p>
+                                                                    </template>
+                                                                    <p class="small labelId"><img src={fileimage}
+                                                                            class="addressIcon">
+                                                                        <span
+                                                                            if:false={sParty.International_Address__c}>
+                                                                            {sParty.Street__c},
+                                                                            {sParty.City__c}, {sParty.State__c},
+                                                                            {sParty.Zip_Code__c}, {sParty.Country__c}
+                                                                        </span>
+                                                                        <span if:true={sParty.International_Address__c}>
+                                                                            {sParty.International_Address__c},
+                                                                            {sParty.Country__c}
+                                                                        </span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mobileTheme checkbox-wrapper">
+                                                                <div class="radio-wrapper">
+                                                                    <div class="checkbox-label boxShadow">
+                                                                        <p class="labelFirstRow">{labels.Name}</p>
+                                                                        <p class="labelcontent">
+                                                                            <template if:true={sParty.isIndividual}>
+                                                                                <p class="name-member">
+                                                                                    {sParty.Individual_SurName__c},
+                                                                                    {sParty.Individual_Middle_Name__c},
+                                                                                    {sParty.Individual_First_Name__c},
+                                                                                    {sParty.Suffix__c}
+                                                                                </p>
+                                                                            </template>
+                                                                            <template if:true={sParty.isOrganisation}>
+                                                                                <p class="name-member">
+                                                                                    {sParty.Org_Name__c}</p>
+                                                                            </template>
+                                                                        </p>
+                                                                        <p class="small labelId"><img src={fileimage}
+                                                                                class="addressIcon">
+                                                                            <span
+                                                                                if:false={sParty.International_Address__c}>
+                                                                                {sParty.Street__c},
+                                                                                {sParty.City__c}, {sParty.State__c},
+                                                                                {sParty.Zip_Code__c},
+                                                                                {sParty.Country__c}
+                                                                            </span>
+                                                                            <span
+                                                                                if:true={sParty.International_Address__c}>
+                                                                                {sParty.International_Address__c},
+                                                                                {sParty.Country__c}
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <p class="checkmark-container">
+                                                                        <span
+                                                                            class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                        </template>
+                        <!-- Modal/Popup Box LWC footer starts here -->
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button primaryBtn slds-button_brand higher" onclick={handleConfirmButton}
+                            if:true={addSelectedAssignors}>{labels.Confirm}
+                        </button>
+                        <button class="slds-button primaryBtn slds-button_brand higher"
+                            onclick={nextbuttonforAssignment} if:true={addOginizationDetails}> {labels.Next}
+                        </button>
+                        <button class="slds-button primaryBtn slds-button_brand higher"
+                            onclick={nextbuttonforAssignment} if:true={addIndividualDetails}> {labels.Next}
+                        </button>
+                        <button class="slds-button natural-button slds-button_natural back-btn" onclick={handleBack}
+                            if:true={addOginizationDetails}>{labels.Back}
+                        </button>
+                        <button class="slds-button natural-button slds-button_natural back-btn" onclick={handleBack}
+                            if:true={addIndividualDetails}>{labels.Back}
+                        </button>
+                        <button class="slds-button natural-button slds-button_natural back-btn"
+                            onclick={goBackPreviousScreen} if:true={addSelectedAssignors}>{labels.Back}
+                        </button>
+                    </footer>
+                </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={confirmAddMemberPopup}>
+        <c-modal open={confirmAddMemberPopup} onmodalclose={closeConfirmPopup} size={modalSize}>
+            <div slot="header" class="headerModal slds-size_1-of-1">
+                <h6 class="confirm-header">{labels.BRS_Conf_Assignee}</h6>
+            </div>
+            <div slot="body" class="slds-m-bottom_large">
+                <p class="large">{labels.BRS_Conf_Assignee_Subtext}</p>
+                <div class="card-wrapper">
+                    <p class="name-title smallGreyBold">
+                        {labels.Name}
+                    </p>
+                    <h6 class="name-main">
+                        {confirmName}
+                    </h6>
+                    <p class="address small grey-text">
+                        <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                            aria-hidden="true" />{confirmAddress}
+                    </p>
+                </div>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+                <div class="buttons-wrapper">
+                    <button title={labels.Cancel_Label} onclick={closeConfirmPopup}
+                        class="slds-button natural-button slds-button_natural">
+                        {labels.Cancel_Label}
+                    </button>
+                    <button title={labels.Confirm} onclick={handleAddConfirm} class="slds-button primaryBtn higher">
+                        {labels.Confirm}
+                    </button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+</template>

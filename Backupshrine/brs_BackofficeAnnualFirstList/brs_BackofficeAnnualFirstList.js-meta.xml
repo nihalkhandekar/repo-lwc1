@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="recordId" type="String" label="Record Id" description=""/>
+            <property name="objectApiName" type="String" label="Object Api Name" description=""/>
+            <property name="finalFilings" type="String" label="All Selected Filings" description=""/>
+            <property name="allfinalFilings" type="String" label="All Selected Filings List" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

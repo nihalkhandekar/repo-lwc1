@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="flowName" type="String" label="Flow Name" description=""/>
+            <property name="accountrecord" type="@salesforce/schema/Account"/>
+            <propertyType name="U" extends="SObject" label="PrincipalListData"/>
+            <property name="principalListData" type="{U[]}"/>
+            <property name="businessRadioOptions" type="String" label="businessRadioOptions" description=""/>
+            <property name="principalOptions" type="String" label="principalOptions" description=""/>
+            <property name="agentYesNoOptions" type="String" label="Agent Options" description=""/>
+            <property name="isAgentTempType" type="boolean" label="IsAgentTempType" description=""/>
+            <property name="showConfirmationModal" type="boolean" label="Show Confirmation Modal" description=""/>
+            <property name="filingYear" type="String" label="Filing Year" description=""/>
+            <property name="filingId" type="String" label="Filing Id" description=""/>
+            <property name="isGoToSummary" type="boolean" label="Go to Summary flag" description=""/>
+            <property name="goToDashBoardPage" type="Boolean" label="Go to Dashboard Page" description=""/>
+            <property name="showSummaryButton" type="Boolean" label="Show Summary Button" description=""/>
+            <property name="tempHistory" label="Temp History Account" type="@salesforce/schema/Temp_History__c"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

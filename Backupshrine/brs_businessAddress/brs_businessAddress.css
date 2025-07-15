@@ -1,0 +1,27 @@
+.check-box-section {
+    margin-bottom: 16px;
+}
+
+.checkbox-title {
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+
+.mailing-section{
+    padding-top: 28px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .check-box-section {
+        display: flex;
+        margin-bottom: 12px;
+    }
+    .checkbox-title {
+        margin-bottom: 0;
+    }
+    
+    .copy-checkbox{
+        margin-top:2px;
+    }
+    
+}

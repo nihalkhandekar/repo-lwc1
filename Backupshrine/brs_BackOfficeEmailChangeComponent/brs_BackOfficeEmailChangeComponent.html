@@ -1,0 +1,61 @@
+<!--*********************************************************************************************
+ * NAME:  genericInput.html
+ * DESCRIPTION: Validates email and Phone based on Regex 
+ *
+ * @AUTHOR: Sagarika Panda
+ * @DATE:   2/11/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Sagarika Panda                     2/11/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+    <!-- <div class="SelectItemContainer edit-card" if:true={showEmailCard}>
+      <div class="content">{val}</div>
+      <div class="edit tabfocus" tabindex="0" onclick={handleEmailEdit} onkeypress={handleEmailEdit}>
+        <img class="slds-m-right_small" src={editIcon} alt="Edit Icon" aria-hidden="true" />
+        <span>{label.edit}</span>
+      </div>
+    </div> -->
+  <div if:true={showEmailCardTrack} class="inputForm">
+    <label class="slds-form-element__label">{label.GenericInput_Enter_Email_Text}</label>
+    <c-text-with-edit-card show-card={showEmailCardTrack} value={val} label={editOrUpdateLabel}
+    onhandleedit={handleEmailEdit}></c-text-with-edit-card>
+  </div>
+    <fieldset if:false={showEmailCardTrack} class="slds-form-element slds-form-element_compound slds-form-element_address">
+      <div class="slds-form-element__control">
+        <div class="slds-form-element__row form-row">
+          <div class="slds-size_6-of-12 slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control inputForm">
+                <lightning-input label={label.GenericInput_Enter_Email_Text} data-my-id="input-box1" type={type}
+                  value={val} required onchange={onAnswerChange} onblur={checkAnswerValidity}
+                  class="text" placeholder={label.Email_Placeholder_Label} oncopy={copyHandler} onpaste={copyHandler}
+                  message-when-value-missing={label.GenericInput_Invalid_Email} checked>
+                </lightning-input>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slds-form-element__row">
+          <div class="slds-size_6-of-12 slds-col">
+            <div class="slds-form-element">
+              <div class="slds-form-element__control inputForm">
+                <lightning-input label={label.GenericInput_Re_Enter_Email_Text} id="confirm-email" type={type}
+                  data-my-id="input-box2" placeholder={label.Email_Placeholder_Label} value={confirmval} required onchange={onConfirm} onblur={checkAnswerValidity}
+                  class="text" oncopy={copyHandler} onpaste={copyHandler}  checked>
+                </lightning-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <template if:true={isEmailNotChangedError}>
+      <div class="slds-has-error">
+          <span class="slds-form-element__help">{emailError}</span>
+      </div>
+  </template>
+  </template>

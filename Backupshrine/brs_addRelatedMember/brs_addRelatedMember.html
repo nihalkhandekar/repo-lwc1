@@ -1,0 +1,385 @@
+<!--*********************************************************************************************
+ * NAME:  brs_addRelatedMember.html
+ * DESCRIPTION:  	brs_addRelatedMember.html
+ *                    This LWC component is used for enabling user to create/delete/modify the Lien entities(Debtor,Secured Party, etc)
+                      Used in the Brs UCC Debtor flow. 
+                      This is a generic component used in multiple screens in salesforce flow. 
+ *
+ * @AUTHOR: Avinash Shukla
+ * @DATE:  12/02/2020       
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Avinash Shukla	                 12/02/2020                         Created the first version
+* Avinash Shukla				     2020-12-17                         Added bug fixes for BRS-1040
+*********************************************************************************************-->
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <c-brs_header heading-text={entityTitleMsg} description-text={typedescription} theme="theme1"></c-brs_header>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12 addDebtorBtn">
+            <button class="slds-button slds-button_natural" data-name="addmembercall" onclick={handleAddPopup}
+                if:false={hidedebtorbutton}>
+                <img src={addIcon} class="addIcon" alt="addIcon" />
+                <span class="addLabel">{debtorName}</span>
+            </button>
+        </div>
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+            <template for:each={allMembersInfoFromApex} for:item="memberInfo" for:index="index">
+                <div class="slds-large-size_12-of-12 slds-size_12-of-12 debtor-card-details"
+                    key={memberInfo.frontEndId}>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                        <p class="name">{label.Name}
+                            <template if:true={memberInfo.isDuplicateFlag}>
+                                <span class="slds-badge slds-theme_warning statusText">{label.Duplicate}</span>
+                            </template>
+                        </p>
+                    </div>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                        <template if:true={memberInfo.isIndividual}>
+                            <p class="name-member">
+                                {memberInfo.fullName}
+                            </p>
+                        </template>
+                        <template if:true={memberInfo.isOrganisation}>
+                            <p class="name-member">{memberInfo.Org_Name__c}</p>
+                        </template>
+                    </div>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                        <p class="addressClass small">
+                            <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                                aria-hidden="true" />
+                            <span>
+                                {memberInfo.fullAddress}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12 card-footer-btns">
+                        <button class="natural-button-with-icon slds-button  slds-button_natural" data-id={index}
+                            data-name={memberInfo.isDuplicate} onclick={editRelatedInfo}>
+                            <img src={editIcon} alt="" class="icon" />
+                            <span>{label.Edit}</span>
+                        </button>
+                        <button class="natural-button-with-icon slds-button  slds-button_natural" data-id={index}
+                            data-name={memberInfo.isDuplicate} if:false={hideDuplicateSubmitter} onclick={onDuplicate}>
+                            <img src={duplicate} alt="" class="icon" />
+                            <span>{label.Duplicate}</span>
+                        </button>
+                        <button class="natural-button-with-icon slds-button  slds-button_natural" data-id={index}
+                            data-name={memberInfo.isDuplicate} data-fid={memberInfo.frontEndId} onclick={deleteRelatedInfo}>
+                            <img src={deleteIcon} alt="" class="icon" />
+                            <span>{label.Remove}</span>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <p class="error-text" if:true={showErrorMessage}>
+            {errorMessageStr}
+        </p>
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+            <c-brs_next-back-buttons show-summary={showGoToSummaryButton} gotosummarylabel={label.go_to_summary}
+                nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate} ongotosummary={handleGoToSummary}
+                onhandleback={handlePropagateBack} hide-back={hideBackButton}>
+            </c-brs_next-back-buttons>
+        </div>
+    </div>
+
+    <!--Radio pop up to choose Individual or Organization-->
+    <template if:true={addMemberPopup}>
+        <section role="dialog" tabindex="-1" aria-label="dialog" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open slds-modal_small member-popup page-scroll-popup">
+            <div class="slds-modal__container">
+                <template if:true={addSubmitter}>
+                    <header class="slds-modal__header no-border">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="header-text" id="modal-heading-04">
+                                    {entityTitleMsg}
+                                </p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label class="closePopup slds-float_right" onclick={closePopUp} onkeypress={closePopUpKeyPress} role="button" tabindex="0" aria-label={label.modal_close}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                                <p class="a-debtor-desc large">
+                                    {helptxt}
+                                </p>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium popup-body radio-options"
+                        id="modal-content-id-5">
+                        <div class="slds-grid slds-wrap add-submitter-div">
+                            <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                <div class="margin-b-24">
+                                    <lightning-combobox label={label.UCC_Flow_Submitter_Name} value={selectedSubmitter}
+                                        onchange={onSubmitterChange} options={submitters} class="comboBoxElement"
+                                        placeholder={label.Select_Entity_Placeholder} autocomplete="off" required>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 manual-submitter-div">
+                                <button class="slds-button slds-button_natural" onclick={handleAddSubmitter}>
+                                    <img src={addIcon} class="addIcon" alt="addIcon" />
+                                    <span class="addLabel">{label.add_Submitter_Manual}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button primaryBtn slds-button_brand next-button slds-float_right higher"
+                            onclick={handleSubmitterConfirm}>
+                            {label.Confirm}
+                            <img src={chevronRightWhite} class="rightIcon" alt="" />
+                        </button>
+                    </footer>
+                </template>
+                <template if:true={showFirstScreen}>
+                    <header class="slds-modal__header no-border">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="header-text" id="modal-heading-02">
+                                    {entityTitleMsg}
+                                </p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label class="closePopup slds-float_right" onclick={closePopUp}  onkeypress={closePopUpKeyPress} role="button" tabindex="0" aria-label={label.modal_close}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                                <p class="a-debtor-desc large">
+                                    <!--1040 Bug fixes start here-->
+                                    <template if:true={isOtherTypes}>{label.you_can_add_multiple} {membertype}{label.s_to_the_lien} <template if:false={showFirstScreen}>{label.fields_Mandatory}</template>
+                                    </template>
+                                    <template if:true={isSecuredParty}>{label.you_can_add_more_than_one}
+                                        {label.Secured_Party_Label} {label.to_the_lien} <template if:false={showFirstScreen}>{label.fields_Mandatory}</template></template>
+                                    <!--1040 Bug fixes end here-->
+                                    <template if:true={isSubmitter}>{label.UCC_Flow_Only_One_MemberType} {membertype}
+                                        {label.UCC_Flow_Only_One_MemberType_Added} <template if:false={showFirstScreen}>{label.fields_Mandatory}</template></template>
+                                </p>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- Modal/Popup Box LWC body starts here -->
+                    <div class="slds-modal__content slds-p-around_medium popup-body radio-options"
+                        id="modal-content-id-1">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_12-of-12">
+                                <p class="a-debtor-desc largeBold radio-heading">
+                                    <template if:true={isOtherTypes}>{label.is_this} </template>
+                                    <template if:true={isSecuredParty}>{label.is_the} </template>
+									<template if:true={isSubmitter}>{label.is_the} </template> {membertype}
+                                    {label.an_organization_or_an_individual}
+                                </p>
+                                <c-generic-radio_brs name="related-member-options" radio-options={memberOptions}
+                                    onctbosdatachange={handleOptions} answer={selectedTypeOption}
+                                    has-error={typeIsNotSelected}></c-generic-radio_brs>
+                                <template if:true={typeIsNotSelected}>
+                                    <div class="error-text">
+                                        {label.UCC_Flow_Select_Lien} {membertype} {label.UCC_Flow_Select_Lien_Type}
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal/Popup Box LWC footer starts here -->
+                    <template if:false={isSubmitter}>
+                        <footer class="slds-modal__footer">
+                            <button class="slds-button_stretch  primaryBtn slds-button slds-button_brand higher"
+                                onclick={goToSecondScreen}>
+                                {label.Next}
+                                <img src={chevronRightWhite} class="rightIcon" alt="" />
+                            </button>
+                        </footer>
+                    </template>
+                    <template if:true={isSubmitter}>
+                        <footer class="slds-modal__footer">
+                            <div class="slds-grid slds-wrap modal-footer-section">
+                                <div class="slds-col slds-order_2">
+                                    <button class="slds-button primaryBtn slds-button_brand slds-float_right higher"
+                                        onclick={goToSecondScreen}>
+                                        {label.Next}
+                                        <img src={chevronRightWhite} class="rightIcon" alt="" />
+                                    </button>
+                                </div>
+                                <div class="slds-col slds-order_1">
+                                    <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                        onclick={goToAddSubmitter}>{label.Back}</button>
+                                </div>
+                            </div>
+                        </footer>
+                    </template>
+                </template>
+                <template if:true={addDetails}>
+                    <header class="slds-modal__header no-border">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <template if:false={isEditCall}>
+                                    <p class="header-text" id="modal-heading-03">
+                                        {label.Add_an} {typeLabel} {label.as_a_label} {membertype}
+                                        <!-- {label.add_an_organization_as} {membertype} -->
+                                    </p>
+                                </template>
+                                <template if:true={isEditCall}>
+                                    <p class="header-text" id="modal-heading-05">
+                                        {editModalHeader}
+                                    </p>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label class="closePopup slds-float_right" onclick={closePopUp} onkeypress={closePopUpKeyPress} role="button" tabindex="0" aria-label={label.modal_close}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                                <p class="a-debtor-desc large" if:false={isEditCall}>
+                                    <template if:true={isOtherTypes}>
+                                    {label.you_can_add_multiple} {membertype}{label.s_to_the_lien} <template if:false={showFirstScreen}>{label.fields_Mandatory}</template>
+                                    </template>
+                                    <template if:true={isSecuredParty}>
+                                        {label.you_can_add_more_than_one} {membertype} {label.to_the_lien} <template if:false={showFirstScreen}>{label.fields_Mandatory}</template>
+                                    </template>
+                                </p>
+                                <p class="a-debtor-desc large" if:true={memberInfo.isDuplicate}>
+                                    {label.ucc_duplicate_record_desc} {membertype} {label.to_the_lien}
+                                </p>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body radio-options"
+                        id="modal-content-id-2">
+                        <!-- Modal/Popup Box LWC body starts here [Organisation Modal]-->
+                        <!--Render this template when the selection is of type Organisaiton-->
+                        <template if:true={showAddOrganizationDetails}>
+                            <p class="agent-mailing-address">{label.Organization_information}</p>
+                            <div class="slds-grid slds-gutters slds-wrap form-row orgName">
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12 formCol inputForm">
+                                    <lightning-input label={label.organizations_name} type="text" data-id="Org_Name__c"
+                                        value={memberInfo.Org_Name__c} max-length="255" required
+                                        message-when-value-missing={label.NameMandatory} onchange={onInputChange} onblur={onInputBlur}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <p class="agent-mailing-address orgLocation address-header">{label.location}</p>
+                            <div class="orgAddress">
+                                <c-brs_address address-type={label.organizations} can-be-outside-us source={source}
+                                    class="mailingAddressOrganisation" unitlabel={label.AddressUnit_Apt} autocomplete
+                                    set-retained-address={businessAddressFields} accept-po>
+                                </c-brs_address>
+                            </div>
+                        </template>
+                        <!-- Modal/Popup Box LWC body starts here [Organisation Modal]-->
+                        <template if:true={showAddIndividualDetails}>
+                            <p class="agent-mailing-address">{label.Individual_name}</p>
+                            <div class="slds-grid slds-wrap individualDetails">
+                                <div class="c-container">
+                                    <div class="slds-grid slds-gutters slds-wrap form-row">
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                            <lightning-input type="text" label={label.Surname}
+                                                data-id="Individual_SurName__c" maxlength="80" required
+                                                message-when-value-missing={label.Surname_is_mandatory}
+                                                value={memberInfo.Individual_SurName__c} onchange={onInputChange} onblur={onInputBlur}>
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                            <lightning-input type="text" label={label.First_Name}
+                                                data-id="Individual_First_Name__c" maxlength="80"
+                                                value={memberInfo.Individual_First_Name__c} onchange={onInputChange} onblur={onInputBlur}>
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                            <lightning-input type="text" label={label.Middle_Name}
+                                                data-id="Individual_Middle_Name__c" maxlength="80"
+                                                value={memberInfo.Individual_Middle_Name__c} onchange={onInputChange} onblur={onInputBlur}>
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                            <lightning-input type="text" label={label.Suffix} data-id="Suffix__c"
+                                                maxlength="80" value={memberInfo.Suffix__c} onchange={onInputChange} onblur={onInputBlur}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="agent-mailing-address address-header">{label.Individual_address}</p>
+                            <div class="individualDetails">
+                                <c-brs_address address-type={label.mailing} can-be-outside-us source={source}
+                                    class="mailingAddressIndividual" unitlabel={label.AddressUnit_Apt} autocomplete
+                                    set-retained-address={businessAddressFields} accept-po>
+                                </c-brs_address>
+                            </div>
+                        </template>
+                        <!-- Modal/Popup Box LWC footer starts here -->
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap modal-footer-section">
+                            <div class="slds-col slds-order_2">
+                                <button class="slds-button primaryBtn slds-button_brand slds-float_right higher" onclick={handleConfirm}>
+                                    {label.Confirm}
+                                </button>
+                            </div>
+                            <div class="slds-col slds-order_1">
+                                <template if:true={showBack}>
+                                    <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                        onclick={handleBack}>{label.Back}</button>
+                                </template>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={confirmAddMemberPopup}>
+        <c-modal open={confirmAddMemberPopup} onmodalclose={closeConfirmPopup} size={modalSize}>
+            <div slot="header" class="headerModal slds-size_1-of-1">
+                <h6 class="confirm-header">{brsConfText}</h6>
+            </div>
+            <div slot="body" class="slds-m-bottom_large">
+                <p class="large">{brsSubtext}</p>
+                <div class="card-wrapper">
+                    <p class="name-title smallGreyBold">
+                        {label.Name}
+                    </p>
+                    <h6 class="name-main">
+                        {confirmName}
+                    </h6>
+                    <p class="address small grey-text">
+                        <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                            aria-hidden="true" />{confirmAddress}
+                    </p>
+                </div>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+                <div class="buttons-wrapper">
+                    <button title={label.Cancel_Label} onclick={closeConfirmPopup}
+                        class="slds-button natural-button slds-button_natural">
+                        {label.Cancel_Label}
+                    </button>
+                    <button title={label.Confirm} onclick={handleAddConfirm} class="slds-button primaryBtn higher">
+                        {label.Confirm}
+                    </button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+</template>

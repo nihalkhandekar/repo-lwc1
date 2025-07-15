@@ -1,0 +1,46 @@
+.formRow {
+  margin-bottom: 24px;
+}
+
+.formRow.popup-row {
+  margin-bottom: 0;
+}
+
+.input {
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 8px 0 #E7E9F2;
+  font-family: 'Karla', sans-serif;
+}
+
+.formCol.inputForm {
+  position: relative;
+  /* margin-bottom: 28px; */
+}
+
+.cust-state-read {
+  color: #757575;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  background-color: transparent;
+}
+
+.address-unit-fields {
+  align-items: baseline;
+}
+
+.formCol.popup-fields {
+  margin-bottom: 24px;
+}
+
+@media only screen and (max-width:1023.9px) {
+  .formCol {
+    margin-bottom: 24px;
+  }
+
+  .formCol:last-child {
+    margin-bottom: 0;
+  }
+}

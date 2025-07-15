@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="objectname" type="String" required="false" label="Object Name" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="recordtypeid" type="String" required="false" label="RecordTypeId" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="defaultRecordtypeName" type="String" required="false" label="Default Record Type Name" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="flowName" type="String" required="false" label="Flow Name" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="createdRecordID" type="String" required="false" label="Newly Created Record" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="parentApiName" type="String" required="false" label="Parent Field" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="parentRecordsToUpdate" type="String" required="false" label="Parent Field On Child" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="errorMessage" type="String" required="false" label="Error Message" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="defaulrRecordType" type="String" required="false" label="Default Record Do not use this" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="typeValue" type="String" required="false" label="CitizenShip" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="ftypeValue" type="String" required="false" label="Business Type" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="reaonlypage" type="String" required="false" label="Read Only Pages" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="AccountID" type="String" required="false" label="SelectedAccount" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="isAnnualReport" type="Boolean" required="false" label="IsAnnualFirstReport" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+            <property name="BusinessFilingList" type="String" required="false" label="BusinessFilingList" description="Input - This is the ID of the record to display or Output - The ID of a newly created record."/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

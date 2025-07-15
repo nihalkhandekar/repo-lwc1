@@ -1,0 +1,30 @@
+<template>
+    <template if:true={longtext}>
+        <div class="inputForm" >
+            <div class="text-area">
+              <lightning-textarea
+                data-id="inputfields"
+                value={fieldOutput}
+                placeholder={placeholder}
+                maxlength={maxchar}
+                label={label}
+                onchange={handleTextArea}
+                onblur={handleTextAreaBlur}
+              ></lightning-textarea>
+              <p class="smaller">{charLimitDesc}</p>
+          </div>
+          </div>
+          <br>
+        </template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <c-brs_generic-file-upload show-uploaded-files={showUploadedFiles} disable-upload={disableUpload} record-id={recordId} files-uploaded={filesUploaded} accepted-formats={acceptedFormats} required={required} onuploadfinish={handleUploaded} onremovefile={handleRemove} onpageload={handleOnLoad} hide-required-error="true"
+    onerror={handleError}></c-brs_generic-file-upload>
+    <p class="error-text" if:true={showErrorMessage}>
+        {errorMessage}
+    </p>
+</template>

@@ -1,0 +1,142 @@
+<template>
+    <template if:true={openModal}>
+        <c-modal no-scroll open={openModal} onmodalclose={closeModal} size={modalSize}>
+            <div slot="header" class="headerModal slds-size_1-of-1">
+                <h6>{label.Select_the_filings_for_your_copy_request}</h6>
+            </div>
+            <div slot="body" class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 modelHeader">
+                        <div class="slds-grid slds-wrap results-table-grid">
+                            <div class="slds-size_12-of-12 results-table">
+                                <div class="desktop">
+                                    <table
+                                        class="fixed table-bordered slds-table slds-table_bordered slds-border_left slds-border_right">
+                                        <thead>
+                                            <tr>
+                                                <template for:each={businessColumns} for:item="row">
+                                                    <th key={row.label}>
+                                                        {row.label}
+                                                    </th>
+                                                </template>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template for:each={updatedData} for:item="filing" for:index="index">
+                                                <tr key={filing.filingNo}>
+                                                    <td>
+                                                        <div class="ct-bos-multi-checkbox-container">
+                                                            <label class="ct-bos-multi-checkbox-label">
+                                                                <input class="ct-bos-multi-checkbox-input"
+                                                                    type="checkbox" checked={filing.checked}
+                                                                    onchange={oncheckboxClick} value={filing.filingNo}
+                                                                    name="table-checkbox" id={filing.filingNo}
+                                                                    data-id={filing.filingNo} />
+                                                                <div class="ct-bos-multi-checkbox-custom"></div>
+                                                                <span class="first-column">{filing.filingNo}</span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        {filing.filingType}
+                                                    </td>
+                                                    <td>
+                                                        {filing.filingDate}
+                                                    </td>
+                                                    <td class="no-border-combobox">
+                                                        <lightning-combobox value={filing.copyType}
+                                                            variant="label-hidden" onchange={handleCertTypeChange}
+                                                            options={certTypes} class="comboBoxElement-desktop"
+                                                            placeholder={label.Select_now} autocomplete="off"
+                                                            data-id={filing.filingNo} disabled={filing.disabled}>
+                                                        </lightning-combobox>
+                                                    </td>
+                                                    <td>
+                                                        <div class="ct-bos-multi-checkbox-container ml-32">
+                                                            <label class="ct-bos-multi-checkbox-label">
+                                                                <input class="ct-bos-multi-checkbox-input"
+                                                                    type="checkbox" checked={filing.isExpediteCopy}
+                                                                    onchange={onExpediteCheckboxClick}
+                                                                    value={filing.filingNo}
+                                                                    name="table-expedite-checkbox" id={filing.filingNo}
+                                                                    data-id={filing.filingNo}
+                                                                    disabled={filing.isExpeditCheckBoxDisabled} />
+                                                                <div class="ct-bos-multi-checkbox-custom"></div>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="mobile">
+                                    <template for:each={updatedData} for:item="filing" for:index="index">
+                                        <div class="each-result custom-radio" key={filing.filingNo}>
+                                            <div class="ct-bos-multi-checkbox-container">
+                                                <label class="ct-bos-multi-checkbox-label">
+                                                    <input class="ct-bos-multi-checkbox-input" type="checkbox"
+                                                        checked={filing.checked} onchange={oncheckboxClick}
+                                                        value={filing.filingNo} name="table-checkbox"
+                                                        id={filing.filingNo} data-id={filing.filingNo} />
+                                                    <div class="ct-bos-multi-checkbox-custom"></div>
+                                                </label>
+                                            </div>
+                                            <label for={filing.filingNo}>
+                                                <div class="each-row">
+                                                    <p class="each-column">{label.filing_no}</p>
+                                                    <p class="each-column">{filing.filingNo}</p>
+                                                </div>
+                                                <div class="each-row">
+                                                    <p class="each-column">{label.type}</p>
+                                                    <p class="each-column">{filing.filingType}</p>
+                                                </div>
+                                                <div class="each-row">
+                                                    <p class="each-column">{label.filing_date}</p>
+                                                    <p class="each-column">{filing.filingDate}</p>
+                                                </div>
+                                                <div class="each-row no-border-combobox">
+                                                    <p class="each-column">{label.copy_type}</p>
+                                                    <lightning-combobox value={filing.copyType} variant="label-hidden"
+                                                        onchange={handleCertTypeChange} options={certTypes}
+                                                        class="comboBoxElement-mobile" placeholder={label.Select_now}
+                                                        autocomplete="off" data-id={filing.filingNo}
+                                                        disabled={filing.disabled}>
+                                                    </lightning-combobox>
+                                                </div>
+                                                <div class="each-row">
+                                                    <p class="each-column">{label.Expedite_copy}</p>
+                                                    <div class="ct-bos-multi-checkbox-container checkbox-mobile">
+                                                        <label class="ct-bos-multi-checkbox-label">
+                                                            <input class="ct-bos-multi-checkbox-input" type="checkbox"
+                                                                checked={filing.isExpediteCopy}
+                                                                onchange={onExpediteCheckboxClick}
+                                                                value={filing.filingNo} name="table-expedite-checkbox"
+                                                                id={filing.filingNo} data-id={filing.filingNo}
+                                                                disabled={filing.isExpeditCheckBoxDisabled} />
+                                                            <div class="ct-bos-multi-checkbox-custom"></div>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                        <c-generic-data-table if:true={showResults} generickey="id" genericdata={filingList}
+                            class="mydatatable slds-table_striped" no-of-records-per-page='10' button-limit='4'
+                            onpaginationchange={updatePaginatedData} modal-theme>
+                        </c-generic-data-table>
+                        <p class="error-text" if:true={showError}>{errorMsg}</p>
+                    </div>
+                </div>
+            </div>
+            <div slot="actions" class="slds-size_1-of-1">
+                <button class="slds-button slds-button_brand higher primaryBtn" onclick={addFilings}>{label.Next}
+                    <img src={chevronRightWhite} class="rightIcon" alt="" />
+                </button>
+            </div>
+        </c-modal>
+    </template>
+</template>
