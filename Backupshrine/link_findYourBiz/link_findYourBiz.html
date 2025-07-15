@@ -1,0 +1,101 @@
+<template>
+    <!-- <c-link_failure></c-link_failure> -->
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+    <div class="slds-size_12-of-12">
+        <h3 class="slds-m-bottom_x-large headingClass">{label.pageHeader}</h3>
+        <div class="displayMobileLearnMore">
+            <c-learn-More pagename='findyourbiz'></c-learn-More>
+        </div>
+        <div class="searchHeader">
+            {label.searchHeader}
+        </div>
+        <div class="slds-m-top_x-large">
+            <div class="slds-m-bottom_xx-large slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="slds-form-element__control slds-m-top_large search-box inputTextElement " role="combobox"
+                    aria-expanded="false" aria-owns="ex1-listbox" aria-haspopup="listbox">
+                    <lightning-input variant="label-hidden" type="text" placeholder={label.searchPlaceholder}
+                        class="searchBox" aria-autocomplete="list" data-id="search-inputi12" onchange={onSearchChange}
+                        aria-controls="ex1-listbox" role="textbox" onkeypress={handleSearchBusinessKey}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-m-bottom_xx-large">
+                <button class="slds-button slds-button_neutral secondaryBtn" onclick={handleSearchBusinessTemp}>
+                    <lightning-icon icon-name="utility:search" size="xx-small" aria-hidden="true">
+                    </lightning-icon>&nbsp;
+                    {label.businessService_Search}
+                </button>
+            </div>
+        </div>
+    </div>
+    <template if:true={showResults}>
+        <template if:false={showNoDataCard}>
+            <template if:true={searchResult.length}>
+                <!--CTBOS-6128-->
+                <h4>{searchResult.length}&nbsp;
+                    <template if:true={hasSingleMatch}>{label.linkFindBiz_BusinessFound}</template>
+                    <template if:false={hasSingleMatch}>{label.linkFindBiz_BusinessesFound}</template>
+                </h4>
+
+                <div class="subHeading">{label.findBusinessHelpText}</div>
+                <div class="sortSection slds-m-top_x-large slds-m-bottom_large slds-grid slds-wrap">
+                    <p class="small"><b>{label.linkFindBiz_ShowingResults}</b> {testOptions.length} {label.Recovery_Of}
+                        {searchResult.length}</p>
+                    <div class="sort" onclick={handleExpandSort}>
+                        <p class="small"><b>{label.sort_by}:&nbsp;</b>
+                            {selectedSort}</p>
+                        <div class="chevron-wrapper">
+                            <lightning-icon icon-name="utility:chevrondown" size="xx-small"
+                                alternative-text="chevrondown" title="chevrondown" class="chevron-container-down">
+                            </lightning-icon>
+                        </div>
+                        <template if:true={expandSort}>
+                            <div class="sortOptions">
+                                <div class="sortoptionWrapper">
+                                    <div class="oneSort" data-id={label.bizName} onclick={handleSort}>
+                                        <p class="large">{label.bizName}</p>
+                                    </div>
+                                    <div class="oneSort" data-id={label.bizId} onclick={handleSort}>
+                                        <p class="large">{label.bizId}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <div class="theme3 theme5 slds-m-top_large">
+                    <c-link_generic-radio-input radio-options={testOptions} name="theme3"
+                        onctbosdatachange={handleRadioClick} answer={answer}></c-link_generic-radio-input>
+                </div>
+                <template if:true={loadMoreBusiness}>
+                    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12"
+                        onclick={showFiveItems}>
+                        <p class="small">{label.loadMoreResults}</p>
+                    </div>
+                </template>
+                <template if:true={showLessBusiness}>
+                    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12"
+                        onclick={showLessItems}>
+                        <p class="small">{label.bizDashboard_LessAI}</p>
+                    </div>
+                </template>
+            </template>
+        </template>
+        <template if:false={searchResult.length}>
+            <c-no-data-card main-text={label.linkFindBiz_NoBusiness} sub-text-bold={label.linkFindBiz_NewSearch}
+                sub-text={label.linkFindBiz_NewBusinessAlert} sub-head-text={label.findBusinessHelpText}>
+            </c-no-data-card>
+        </template>
+    </template>
+    <template if:true={showNoDataCard}>
+        <c-no-data-card main-text={label.tooManyBusinessSearch}
+            sub-head-text={label.findBusinessExceedLimit}></c-no-data-card>
+    </template>
+
+    <!-- Temporary button and modal created for basic HTML development -->
+    <!-- <button onclick={showModal} class="slds-button primaryBtnSmall">Open Verification Modal &nbsp;</button> -->
+    <!-- <c-modal_business-verify open={openModal} onmodalclose={closeModal} selected-business={selectedBusiness}></c-modal_business-verify> -->
+
+</template>

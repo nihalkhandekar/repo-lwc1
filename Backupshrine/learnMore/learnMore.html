@@ -1,0 +1,48 @@
+<template>
+    <div class="helpTextContainer_mob">
+        <!-- Div for label More Information in Mobile -->
+        <div class="toolTip" onclick={showDiv}>
+          <a href="#info" class="infoLink">{label.learnMore}</a>
+          <template if:false={showHelp}>
+            <lightning-icon
+              icon-name="utility:chevrondown"
+              size="xx-small"
+              alternative-text="chevrondown"
+              title="chevrondown"
+              class="chevron-container-down"
+            ></lightning-icon>
+          </template>
+          <template if:true={showHelp}>
+            <lightning-icon
+              icon-name="utility:chevronup"
+              size="xx-small"
+              alternative-text="chevronup"
+              title="chevronup"
+              class="chevron-container-up"
+            ></lightning-icon>
+          </template>
+        </div>
+        <!--code to determine which help text is shown-->
+        <template if:true={showHelp}>
+            <div class="helpTextContent">
+                <template if:true={findyourbiz}>
+                    <c-link_help-text componentname='Link Business'></c-link_help-text>
+                </template>
+                <template if:true={matchcred}>
+                    <c-link_help-text componentname='Match Credential'></c-link_help-text>
+                </template>
+                <template if:true={credconfirm}>
+                    <c-link_help-text componentname='Confirm Credential'></c-link_help-text>
+                </template>
+                <!--CTBOS-5251 | Header: Direct Search-->
+                <template if:true={credsearch}>
+                    <c-link_help-text componentname='Direct Search'></c-link_help-text>
+                </template>
+                <!--CTBOS-5251 | Header: Business credentials-->
+                <template if:true={linkcred}>
+                    <c-link_help-text componentname='Find Credential'></c-link_help-text>
+                </template>
+            </div>
+          </template>
+    </div>
+</template>

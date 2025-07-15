@@ -1,0 +1,62 @@
+<template>
+  <fieldset class="radio-main-wrapper" id={name} data-id="radio">
+    <template for:each={radioOptions} for:item="radioOption" for:index="index">
+      <label role="radio" tabindex="0" class="ct-bos-input-label_radio" data-id="radio-label" key={radioOption.label}
+        onmousedown={handleMouseClick} onkeydown={handleKeyDown} id={index} onkeypress={changeRadioFieldonTabHandler}>
+        <input data-id={index} type="radio" name={name} value={radioOption.value} onchange={changeRadioFieldHandler}
+          disabled={disabled} autocomplete="off" required={required} title={radioOption.id} aria-hidden="true"
+          tabindex="-1" />
+
+          
+        <template if:false={themeImage}>
+          <template if:false={theme6}>
+          <span class="checkmark"></span>
+          <p class="largeBold radio-label boxShadow slds-m-bottom_small">
+            <lightning-formatted-rich-text value={radioOption.label}></lightning-formatted-rich-text>
+          </p>
+        </template>
+          <template if:true={theme6}>
+            <div class="radio-wrapper">
+                <div>
+                  <p class="containerSpacing">
+                    <lightning-formatted-rich-text value={radioOption.label}></lightning-formatted-rich-text>
+                  </p>
+                </div>
+              <p class="checkmark-container">
+                <span class="checkmark containerTheme"></span>
+              </p>
+            </div>
+          </template>
+        </template>
+        <template if:true={themeImage}>
+          <div class="radio-wrapper">
+            <template if:false={theme4}>
+              <div class="radio-label boxShadow">
+                <p class="labelFirstRow">
+                  <span class="labelId"><b>{radioOption.businessId}</b></span>
+                  <template if:true={radioOption.status}>
+                    <span class="description"><b>{radioOption.status}</b></span>
+                  </template>
+                </p>
+                <span class="labelBoldContent">{radioOption.boldLabel}</span>
+                <span class="labelcontent"> {radioOption.label}</span>
+                <p class="small">{radioOption.subtext}</p>
+                <template if:true={radioOption.address}>
+                  <p class="small labelId"><img src={fileimage} class="addressIcon"> {radioOption.address}</p>
+                </template>
+              </div>
+            </template>
+            <template if:true={theme4}>
+              <img class="sectionImage" src={radioOption.imgSrc} />
+              <div class="label-section">{radioOption.label}</div>
+            </template>
+            <p class="checkmark-container">
+              <span class="checkmark containerTheme"></span>
+            </p>
+          </div>
+        </template>
+        <div class="ct-bos-multi-container-individual-checked"></div>
+      </label>
+    </template>
+  </fieldset>
+</template>

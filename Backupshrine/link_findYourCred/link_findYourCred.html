@@ -1,0 +1,29 @@
+<template>
+    <h3 class="">{label.linkFindBiz_FindCredential}</h3>
+    <template if:true={showExceedCard}>
+        <h6 class="pageSubTitle">{label.linkFindCred_TooManyCredFound}</h6>
+    </template>
+    <template if:false={showExceedCard}>
+        <h6 class="pageSubTitle">{label.linkFindCred_AddMultipleMsg}</h6>
+        <h5 class="slds-m-bottom_x-large">{label.linkBiz_hasCredMsg}</h5>
+        <p class="large slds-m-bottom_small">{label.linkBiz_addCredMsg}</p>
+    </template>
+    
+    <template if:true={showResults}>
+        <c-link_cred-results search-results={options} onselectval={updateCreds} ondeselectval={deSelectCreds} pre-selected-values={preSelectedValues}>
+        </c-link_cred-results>
+
+        <h6 class="slds-m-top_xx-large slds-p-top_x-large">
+            {label.linkBiz_addLicenseMsg}
+        </h6>
+        <p class="trysearch slds-m-vertical_large">{label.linkBiz_directSearchMsg}</p>
+        <button class="slds-button slds-button_brand secondaryBtn" onclick={openManualSearch}>
+            {label.linkBiz_findCredMsg}
+        </button>
+    </template>
+    <template if:true={showExceedCard}>
+        <c-no-data-card
+            findyourcred="findyourcred" onmanualsearch={openManualSearch}>
+        </c-no-data-card>
+    </template>
+</template>

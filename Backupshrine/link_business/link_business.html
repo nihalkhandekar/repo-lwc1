@@ -1,0 +1,104 @@
+<template>
+    <div class="flowContainer">
+        <div role="navigation" class="sideNav">
+            <template if:true={currentObj}>
+                <c-bos_side-nav progress={flowPercentage} linkbusinesscomplete={linkBusinessComplete}
+                    currentobj={currentObj} sidenavobj={sidenavobj}>
+                </c-bos_side-nav>
+            </template>
+        </div>
+        <div class="mainContent" data-type="mainContent">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_1-of-1 slds-large-size_9-of-12">
+                    <template if:true={findyourbiz}>
+                        <c-link_find-your-biz selected-business-list={selectedBusinessList}
+                            onfindevent={handleFindEvent} previous-added-biz={previousAddedBiz}
+                            maindataobj={mainDataObj} bizadded={bizAdd} onnoerror={noErrorDispatch}>
+                            </c-link_find-your-biz>
+                    </template>
+                    <template if:true={bizconfirm}>
+                        <c-link_biz-confirm maindataobj={mainDataObj} onaddbizevent={addBusiness}
+                            onafterremove={updateBizList} isbizadded={addAnotherBiz} onnoerror={noErrorDispatch}>
+                        </c-link_biz-confirm>
+                    </template>
+                    <template if:true={bizrole}>
+                        <c-link_biz-role currentobj={singleBusiness} maindataobj={mainDataObj}
+                            no-principal={noPrincipal} onselectval={handleprincipalcheckbox}
+                            onprincipalresponse={handlePrincipalSelection} onagentresponse={handleAgentSelection}
+                            bizid={bizRoleId} ondeselectval={handleRoleDeselect} onnoerror={noErrorDispatch}
+                            coming-from-parent={comingFromParent}>
+                        </c-link_biz-role>
+                    </template>
+                    <template if:true={linkcred}>
+                        <c-link_cred-link onfindlinkevent={handleFindLinkEvent} currentobj={singleBusiness}
+                            maindataobj={mainDataObj} isbackclick={addAnotherBiz} retaineddata={linkCredOption} 
+                            onnoerror={noErrorDispatch}>
+                        </c-link_cred-link>
+                    </template>
+                    <template if:true={findyourcred}>
+                        <c-link_find-your-cred maindataobj={mainDataObj} onupdatecreds={updateCreds}
+                            ondeselectcredss={deSelectCreds} onmanualsearch={updateCredSearch}
+                            credrecommends={credrecommends}></c-link_find-your-cred>
+                    </template>
+                    <template if:true={credmore}>
+                        <c-link_cred-recom-more maindataobj={mainDataObj} onupdatecreds={updateCreds}
+                            morecredrecom={morecredrecom} ondeselectcredss={deSelectCreds}
+                            onmanualsearch={updateCredSearch}></c-link_cred-recom-more>
+                    </template>
+                    <template if:true={credsearch}>
+                        <c-link_cred-manual-search maindataobj={mainDataObj} onupdatecreds={updateCreds}
+                            ondeselectcredss={deSelectCreds} onupdatesearchterm={updateCredSearchTerm}
+                            credsearchterm={credsearchterm}>
+                        </c-link_cred-manual-search>
+                    </template>
+                    <template if:true={credconfirm}>
+                        <c-link_cred-confirm currentobj={mainDataObj} onaftercredremove={handleCredRemove}>
+                        </c-link_cred-confirm>
+                    </template>
+                    <template if:true={matchcred}>
+                        <c-link_match-cred maindataobj={mainDataObj} onupdatecredmatch={afterCredMatch}
+                            onaftercredremove={handleCredRemove} onnoerror={noErrorDispatch}>
+                        </c-link_match-cred>
+                    </template>
+                    <template if:true={summary}>
+                        <c-link_summary maindataobj={mainDataObj} oneditevent={pageRedirect}
+                            linkcredentials={linkcredentials}></c-link_summary>
+                    </template>
+                    <c-bos_ctalinks addanotherbiz={addAnotherBiz} onnextevent={handleNextEvent} flowobj={flowObj}
+                        required-error={searchEmptyError} error-message={errorMessage} onbackevent={handleBackEvent}
+                        showcancel={showCancel} oncancelevent={handleCancelEvent} issummary={summary}
+                        is-cred-flow={isCredFlow}>
+                    </c-bos_ctalinks>
+                    <template if:true={openModal}>
+                        <c-modal_business-verify credpreverfied={credpreverfied}
+                            show-skip-now={showSkipNow} user-details={userDetails} open={openModal}
+                            onmodalclose={closeModal} selected-business={singleBusiness}
+                            onupdatebizpro={updatePreVerifiedBizPro} onupdatebiz={updatePreVerifiedBiz}
+                            onmovetonext={moveToNext} onverifylater={verifyLater} cred-verification={credVerification}
+                            oncredsuccess={credSuccess} creds-list={credsList}></c-modal_business-verify>
+                    </template>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-12"></div>
+                <div class="scholars slds-size_12-of-12 slds-large-size_2-of-12 qa-wrapper">
+                    <template if:true={findyourbiz}>
+                        <c-link_help-text componentname='Link Business'></c-link_help-text>
+                    </template>
+                    <template if:true={matchcred}>
+                        <c-link_help-text componentname='Match Credential'></c-link_help-text>
+                    </template>
+                    <template if:true={credconfirm}>
+                        <c-link_help-text componentname='Confirm Credential'></c-link_help-text>
+                    </template>
+                    <!--CTBOS-5251 | Header: Direct Search-->
+                    <template if:true={credsearch}>
+                        <c-link_help-text componentname='Direct Search'></c-link_help-text>
+                    </template>
+                    <!--CTBOS-5251 | Header: Business credentials-->
+                    <template if:true={linkcred}>
+                        <c-link_help-text componentname='Find Credential'></c-link_help-text>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

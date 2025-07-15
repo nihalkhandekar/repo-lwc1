@@ -1,0 +1,62 @@
+<template>
+    <h3 class="headingClass">{label.confirm_verbiage}</h3>
+    <h6 class="headHelp">{label.linkFindBiz_SelectedBusiness}</h6>
+    <div class="compContent">
+        <template if:true={maindataobj.bizList.length}>
+            <template for:each={maindataobj.bizList} for:item="curobj" for:index="index">
+                <div class="slds-m-bottom_small" key={curobj}>
+                    <!-- <c-bos_generic-Card statusval={curobj.status} labeltext={curobj.businessId} headertext={curobj.label}
+                        subheadertext={curobj.label} addressval={curobj.address} contactval={curobj.label}
+                        remove-section={remove} b-id={curobj.id} onremoveclick={handleRemove}>
+                    </c-bos_generic-Card> -->
+                    <c-bos_generic-Card currentobj={curobj} remove-section={remove} b-id={curobj.id}
+                        onremoveclick={handleRemove}></c-bos_generic-Card>
+                </div>
+            </template>
+        </template>
+        <template if:false={maindataobj.bizList.length}>
+            <div class="card_wrapper slds-size_1-of-1">
+                <div class="icon_container slds-size_2-of-12">
+                    <img src={buildingGroup} class="principalIcon" />
+                </div>
+                <div class="card_content">
+                    <h6>{label.linkFindBiz_NoBizSelected}</h6>
+                    <p class="large">{label.linkFindBiz_NoBizSelectedMsg}</p>
+                </div>
+            </div>
+        </template>
+    </div>
+    <h5 class="heading">{label.linkFindBiz_SelectAnotherBusiness}</h5>
+    <p class="large slds-m-bottom_large">{label.linkFindBiz_linkBusiness}</p>
+    <div class="desktopView">
+    <c-link_generic-radio-input radio-options={testOpts} onctbosdatachange={handleRadioClick} name="addbiz"
+        answer={addBiz}>
+    </c-link_generic-radio-input>
+    </div>
+    <div class="theme3 theme5 mobileView">
+        <c-link_generic-radio-input radio-options={testOpts} onctbosdatachange={handleRadioClick} name="theme6"
+        answer={addBiz}>
+    </c-link_generic-radio-input>
+    </div>
+    <template if:true={unlinkPopUp}>
+        <c-modal open={modalopen} onmodalclose={closeModal} size={modalSize}>
+            <div slot="header" style="text-align:left" class="headerModal slds-size_1-of-1">
+                <!--<h6>Are you sure you want to unlink this business?</h6>-->
+                <h6>{label.linkFinBiz_unlinkAlertMsg}</h6>
+            </div>
+            <div slot="body"
+                class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="listItem">
+                    <p class="large">
+                        {label.linkFindBiz_RemoveBusinessMsg}
+                    </p>
+                </div>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1 removeButton">
+                <button onclick={handleUnlinkButton} class="slds-button primaryBtn slds-align_absolute-center">
+                    {label.linkFindBiz_RemoveBusiness}
+                </button>
+            </div>
+        </c-modal>
+    </template>
+</template>

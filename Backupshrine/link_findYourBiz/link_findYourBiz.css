@@ -1,0 +1,134 @@
+.headingClass {
+    margin-bottom: 16px;
+    color: #2D2C2C;
+    letter-spacing: 0.31px;
+}
+
+.search-box {
+    border-radius: 4px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    display: flex;
+}
+
+.searchBox {
+    width: 100%;
+}
+
+.helptextClass {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+.searchHeader{
+    font-family: Lato;
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: bold;
+    color: #999999;
+}
+.sortSection {
+    justify-content: space-between;
+}
+
+.secondaryBtn {
+    width: 100%;
+    height: 56px;
+}
+
+.loadmore_Block {
+    margin-top: 32px;
+    padding: 16px 0;
+    text-align: center;
+    border-top: 1px solid #ecebeb;
+    border-bottom: 1px solid #ecebeb;
+    cursor: pointer;
+}
+.loadmore_Block .small {
+    color: #09538b;
+    text-decoration: underline;
+}
+.sort .small,.sort .chevron-wrapper,.sortOptions{
+    cursor:pointer;
+}
+.chevron-wrapper {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+.sort {
+    display: flex;
+    justify-content: flex-end;
+}
+.sortOptions {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    margin-top: 40px;
+    z-index: 9;
+}
+.sortoptionWrapper {
+    border: 1px solid #d0cfcf;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 #e7e9f2;
+}
+.oneSort {
+    padding: 10px 25px;
+}
+.oneSort:hover {
+    background-color: #f7f9fa;
+}
+
+.oneSort .large {
+    white-space: nowrap;
+}
+
+.errorValidation {
+    color: #DB2426;
+    font-family: "karla";
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+    padding-bottom: 24px;
+    
+}
+.displayMobileLearnMore{
+    display:none;
+}
+
+.subHeading{
+    font-family: 'Karla-Regular';
+    font-size: 18px;
+    line-height: 27px;
+    margin-top: 16px;
+}
+.secondaryBtn.slds-button {
+    background-color: transparent;
+}
+
+@media only screen and (max-width: 1023px) {
+    .sortSection {
+        flex-direction: column;
+    }
+    .sort {
+        margin: 32px 0 8px 0;
+    }
+    .displayMobileLearnMore{
+        display:block;
+    }
+    .searchHeader{
+        margin-bottom:30px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top: 16px;
+    }
+    .subHeading{
+        font-size: 17px;
+        line-height: 25px;
+    }
+}

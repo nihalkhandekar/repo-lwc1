@@ -1,0 +1,63 @@
+<template>
+    <h3 class="headingClass">{label.linkFindBiz_IdentifyBusinesss}</h3>
+    <div class="slds-p-bottom_xx-large">
+
+        <c-bos_generic-Card currentobj={currentobj}></c-bos_generic-Card>
+    </div>
+    <template if:true={principalData.length}>
+        <h5 class="slds-p-vertical_large">{label.Principal}</h5>
+        <p class="large slds-p-bottom_medium">{label.linkFindBiz_PrincipalMsg}</p>
+        <div class="theme3 theme5 ">
+            <c-link_generic-multi-select listdata={principalData} show-error={principalErrorMssg} oncheckboxinputselection={handleSelect}
+                onuncheckboxinputselection={handleDeSelect} name="theme3" isdisabled={checkDisabled}
+                isprincipal="principal" value={preSelectedValues}>
+            </c-link_generic-multi-select>
+            <c-link_generic-multi-select listdata={principalOptsDefault} show-error={principalErrorMssg} oncheckboxinputselection={handleNoneSelect}
+                onuncheckboxinputselection={handleNoneDeSelect} name="theme" isprincipal="principal"
+                value={preSelectedValues}>
+            </c-link_generic-multi-select>
+            <div if:true={principalErrorMssg}>
+                <span class="errorMsg">{label.linkBiz_selectRole}</span>
+            </div>
+        </div>
+    </template>
+    <template if:true={agentData.length}>
+        <h5 class="slds-p-bottom_large subHeader">{label.Agent}</h5>
+		<p class="large slds-p-bottom_medium">{label.linkFindBiz_AgentDetailMsg}</p>
+        <template for:each={agentData} for:item="agent" for:index="index">
+            <div key={agent}>
+                <!-- <c-bos_generic-Card labeltext={agent.code} headertext={agent.label} addressval={agent.address}>
+                    </c-bos_generic-Card> -->
+                <c-bos_generic-Card currentobj={agent}></c-bos_generic-Card>
+            </div>
+        </template>
+        <p class="large slds-p-top_large slds-p-bottom_medium">{label.linkFindBiz_AgentMsg}</p>
+        <div class="theme1">
+            <c-link_generic-radio-input radio-options={agentOpts} answer={agentSelectedAnswer} show-error={agentErrorMssg} name="theme1"
+                onctbosdatachange={handleAgentSelection}>
+            </c-link_generic-radio-input>
+            <div if:true={agentErrorMssg}>
+                <span class="errorMsg">{label.linkBiz_selectRole}</span>
+            </div>
+        </div>
+    </template>
+
+    <template if:false={principalData.length}>
+        <template if:false={agentData.length}>
+            <c-bos_help-Text headtext={helptexheader} bodytext={helptextbody}></c-bos_help-Text>
+            <h5 class="slds-p-vertical_large">{label.Principal}</h5>
+            <div class="card_wrapper slds-size_1-of-1">
+                <div class="icon_container slds-size_1-of-12">
+                    <img src={noPrincipalIcon} class="principalIcon" />
+                </div>
+                <div class="card_content">
+                    <h6>{label.linkFindBiz_NoPrincipal}</h6>
+                    <p class="large">
+						<lightning-formatted-rich-text value={label.linkFindBiz_NoPrincipalMsg}>
+						</lightning-formatted-rich-text>
+					</p>
+                </div>
+            </div>
+        </template>
+    </template>
+</template>

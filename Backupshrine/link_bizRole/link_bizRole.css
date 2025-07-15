@@ -1,0 +1,43 @@
+.card_wrapper {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    padding: 48px 24px 48px 32px;
+    display: flex;
+}
+
+.icon_container {
+    margin-right: 24px;
+}
+
+.principalIcon {
+    width: 60px;
+}
+
+.card_content .large {
+    padding-top: 8px;
+}
+
+.subHeader {
+    margin-top: 80px;
+}
+
+.errorMsg {
+    color: #DB2426;
+    font-family: 'Karla', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.27px;
+    line-height: 28px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .card_wrapper {
+        flex-direction: column;
+    }
+
+    .icon_container {
+        margin-bottom: 16px;
+    }
+}

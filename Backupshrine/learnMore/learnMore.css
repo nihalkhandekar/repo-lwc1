@@ -1,0 +1,40 @@
+.toolTip {
+    margin: 0;
+    background-color: #f7f9fa;
+    box-shadow: 0 2px 4px 0 #e7e9f2;
+    padding: 12px 24px;
+    color: #2d2c2c;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .infoText {
+    width: auto;
+    margin: 0 0 43px 0;
+    background-color: #f7f9fa;
+    box-shadow: 0 2px 4px 0 #e7e9f2;
+    padding: 12px 24px;
+    color: #2d2c2c;
+  }
+  .infoLink {
+    font-size: 17px;
+    line-height: 25px;
+    color: #757575;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .helpTextContent {
+    padding:20px;
+    padding-bottom: 24px;
+    
+  }
+  .helpTextContent,
+  .helpTextLink {
+    font-size: 14px;
+    line-height: 18px;
+    background-color: #f7f9fa;
+    border: 1px solid #ecebeb
+  }
+  .helpText{
+      margin-top:25px;
+  }

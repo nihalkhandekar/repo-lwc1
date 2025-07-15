@@ -1,0 +1,42 @@
+/*.browse {
+    color: #0074d9;
+    cursor: pointer;
+    margin-left: .25rem;
+  
+    &:hover {
+      color: #08f;
+      text-decoration: underline;
+    }
+  }
+.loader {
+    display: table;
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+  
+    & > p {
+      color: #999;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }*/
+.img {
+    display: block;
+    max-width: 100%;
+}
+.preview {
+    overflow: hidden;
+    width: 160px; 
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+}
+.exampleHolder{
+  position: relative;
+  display: inline-block;
+  margin-left: 15px;
+  width: 55px;
+  vertical-align: middle;
+  white-space: nowrap;
+}

@@ -1,0 +1,17 @@
+.questionCls{
+    color: #2D2C2C;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+.displayMobileLearnMore{
+    display:none;
+}
+
+@media only screen and (max-width: 1023px) {
+.displayMobileLearnMore{
+    display:block;
+}
+.paddingTop{
+    margin-top:25px;
+}
+}

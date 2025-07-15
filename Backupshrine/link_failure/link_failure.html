@@ -1,0 +1,41 @@
+<template>
+    <div class="mainWrapper slds-grid slds-gutters section-divider">
+        <div class="slds-size_12-of-12 slds-large-size_12-of-12 modify3">
+            <h2 class="mainHeading slds-hide_large"></h2>
+            <div class="slds-grid slds-wrap slds-align_absolute-center">
+                <div class="slds-size_3-of-12">
+                    <img class="iconEdit" src={conffailure} alt="error">
+                </div>
+                <div class="slds-size_1-of-12"></div>
+                <div class="slds-size_8-of-12">
+                    <h2 class="mainHeading slds-show_large">{label.link_failure_heading}</h2>
+                    <div class="mainsubHeading">
+                        {label.failure_error_heading}
+                    </div>
+                    <div class="appearanceWrapper slds-show_large">
+                        <div class="content">
+                            {label.failure_error_subheading}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="appearanceWrapper slds-hide_large">
+                <div class="content">
+                    {errorLabel}
+                </div>
+            </div>
+            <!-- <div class="mainWrapper slds-grid slds-gutters gap">
+                <button title="Return" onclick={handleReturn} class="slds-button primaryBtn modify2 slds-float_left">
+                    {labels.Conf_Return} &nbsp;
+                </button>
+                <hr class="slds-hide_large separator">
+                <button class="button slds-button__icon_right slds-button_neutral" onclick={printReceipt}>
+                    {labels.Conf_Print} &nbsp;
+                    <svg xmlns="http://www.w3.org/2000/svg" class="btn-icons">
+                        <use xlink:href={addIcon}></use>
+                    </svg>
+                </button>
+            </div> -->
+        </div>
+    </div>
+</template>

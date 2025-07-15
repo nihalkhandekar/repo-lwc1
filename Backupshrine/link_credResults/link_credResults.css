@@ -1,0 +1,86 @@
+.noBizHead {
+    margin-top: 40px;
+}
+
+.sortSection {
+    justify-content: space-between;
+}
+
+.sort .small,
+.sort .chevron-wrapper,
+.sortOptions {
+    cursor: pointer;
+}
+
+.chevron-wrapper {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.sort {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.sortOptions {
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    margin-top: 40px;
+    z-index: 9;
+}
+
+.sortoptionWrapper {
+    border: 1px solid #d0cfcf;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px 0 #e7e9f2;
+}
+
+.oneSort {
+    padding: 10px 25px;
+}
+
+.oneSort:hover {
+    background-color: #f7f9fa;
+}
+
+.oneSort .large {
+    white-space: nowrap;
+}
+
+.loadmore_Block {
+    margin-top: 32px;
+    padding: 16px 0;
+    text-align: center;
+    border-top: 1px solid #ecebeb;
+    border-bottom: 1px solid #ecebeb;
+    cursor: pointer;
+}
+
+.loadmore_Block .small {
+    color: #09538b;
+    text-decoration: underline;
+}
+
+.trysearch {
+    font-size: 18px;
+    font-family: 'Lato', sans-serif;
+    color: #2D2C2C;
+}
+
+.secondaryBtn {
+    width: 100%;
+    height: 56px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .sortSection {
+        flex-direction: column;
+    }
+
+    .sort {
+        margin-top: 32px;
+    }
+}

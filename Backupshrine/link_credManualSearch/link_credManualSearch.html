@@ -1,0 +1,44 @@
+<template>
+    <div class="slds-size_12-of-12">
+        <h3 class="slds-m-bottom_x-large headingClass">{label.bizDashboard_AddCredential}</h3>
+        <div class="displayMobileLearnMore">
+            <c-learn-More pagename='credsearch'></c-learn-More>
+        </div>
+        <h6 class="pageSubTitle">{label.linkFindCred_findCredMsg}</h6>
+        <h6 class="slds-m-bottom_x-large">1. {label.linkFindCred_findCredMsg1} 
+            <br><br>
+           {label.linkCred_OR}
+            <br><br>
+             2. {label.linkFindCred_findCredMsg2} </h6>
+
+        <div class="slds-m-top_x-large">
+            <div class="slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="slds-form-element__control slds-m-top_large search-box" role="combobox"
+                    aria-expanded="false" aria-owns="ex1-listbox" aria-haspopup="listbox">
+                    <input type="text" placeholder={label.linkFindCred_PlaceholderMsg} class="searchBox"
+                        aria-autocomplete="list" data-id="search-inputi12" onkeyup={onSearchChange}
+                        onkeypress={handleSearchBusinessKey} aria-controls="ex1-listbox" role="textbox" />
+                </div>
+                <div class="slds-form-element__help slds-m-bottom_large helptextClass">{label.linkFindCred_Eg}:
+                    ABC.0000000 or 12.3456789 or Tom's Tacos</div>
+            </div>
+            <div class="slds-m-bottom_xx-large">
+                <button class="slds-button slds-button_neutral secondaryBtn" onclick={handleSearchBusiness}>
+                    <lightning-icon icon-name="utility:search" size="xx-small" aria-hidden="true">
+                    </lightning-icon>&nbsp;
+                    {label.businessService_Search}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <template if:true={showResults}>
+        <c-link_cred-results search-results={creds} onselectval={updateCreds} ondeselectval={deSelectCreds} pre-selected-values={preSelectedValues}></c-link_cred-results>
+    </template> 
+    <template if:true={showNoDataCard}>
+        <c-no-data-card main-text={label.linkFindBiz_NoCredentials} sub-text-bold={label.linkFindCred_NewSearch} sub-text={label.linkFindBiz_NewCredAlert}></c-no-data-card>
+    </template>
+    <template if:true={showExceedCard}>
+        <c-no-data-card main-text={label.linkCred_tooManyCredentialSearch} sub-head-text={label.linkCred_NarrowSearchMsg}></c-no-data-card>
+    </template>
+</template>

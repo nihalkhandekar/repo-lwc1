@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Last Component" icon-name="custom:custom63">
+        <div class="slds-p-horizontal_medium">
+            <p>Shared Value: {sharedValue}</p>
+            <lightning-button 
+                label="Update Value" 
+                onclick={handleButtonClick}>
+            </lightning-button>
+            <template if:true={showError}>
+                <div class="slds-text-color_error">
+                    An error occurred. Please try again.
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

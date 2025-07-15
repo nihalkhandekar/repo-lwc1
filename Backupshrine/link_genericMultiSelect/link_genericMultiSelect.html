@@ -1,0 +1,144 @@
+<template>
+  <div class="ct-bos-multi-container-all">
+    <template if:false={isprincipal}>
+      <template for:each={updatedlistdata} for:item="item" for:index="index">
+        <div class="tabfocus" key={item.eLicense_Credential_ID} id={index} tabindex="0" onkeypress={handleOnChangeTab}>
+          <div class="ct-bos-multi-checkbox-container ct-bos-multi-container-individual">
+            <div class="slds-grid">
+              <div class="slds-col">
+                <label for={item.eLicense_Credential_ID} class="ct-bos-multi-checkbox-label"
+                  aria-label={item.eLicense_Credential_ID} onmousedown={handleMouseClick} onkeydown={handleKeyDown}
+                  tabindex="-1">
+                  <input id={item.eLicense_Credential_ID} class="ct-bos-multi-checkbox-input" type="checkbox"
+                    onchange={handleOnChange} value={item.eLicense_Credential_ID} aria-hidden="true" tabindex="-1" />
+                  <div if:true={answer}>
+                    {answer}
+                    <span class="answergiven"></span>
+                  </div>
+                  <template if:false={theme}>
+                    <span class="ct-bos-multi-checkbox-custom"></span>
+                    <p class="small input-title">
+                      <lightning-formatted-rich-text value={item.value}></lightning-formatted-rich-text>
+                    </p>
+                  </template>
+                  <template if:true={theme}>
+                    <div class="checkbox-wrapper desktopTheme">
+                      <p class="checkmark-container">
+                        <span class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                      </p>
+                      <div class="checkbox-label boxShadow">
+                        <p class="labelFirstRow">
+                          <!-- <lightning-formatted-rich-text value={item.Full_Credential_Code}></lightning-formatted-rich-text> -->
+                          <span class="labelId"><b>{item.Full_Credential_Code}</b></span>
+                          <span class="description"><b>{item.Credential_Public_Status}</b></span>
+                        </p>
+                        <span class="labelcontent"> {item.Credential_Type}</span>
+                        <p class="small slds-p-top_x-small">{item.Business_Individual_Name}</p>
+                        <p class="small labelId"><img src={fileimage} class="addressIcon"> {item.MainAddress}</p>
+                      </div>
+                    </div>
+                    <div class="mobileTheme checkbox-wrapper">
+                      <div class="radio-wrapper">
+                      <div class="checkbox-label boxShadow">
+                        <p class="labelFirstRow">
+                          <!-- <lightning-formatted-rich-text value={item.Full_Credential_Code}></lightning-formatted-rich-text> -->
+                          <span class="labelId"><b>{item.Full_Credential_Code}</b></span>
+                          <span class="description"><b>{item.Credential_Public_Status}</b></span>
+                        </p>
+                        <span class="labelcontent"> {item.Credential_Type}</span>
+                        <p class="small slds-p-top_x-small">{item.Business_Individual_Name}</p>
+                        <p class="small labelId"><img src={fileimage} class="addressIcon"> {item.MainAddress}</p>
+                      </div>
+                      <p class="checkmark-container">
+                        <span class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                      </p>
+                    </div>
+                    </div>
+                  </template>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+    <template if:true={isprincipal}>
+      <template for:each={updatedlistdata} for:item="item" for:index="index">
+        <div class="tabfocus" key={item.id} id={index} tabindex="0" onkeypress={handleOnChangeTab}>
+          <div class="ct-bos-multi-checkbox-container ct-bos-multi-container-individual">
+            <div class="slds-grid">
+              <div class="slds-col">
+                <label for={item.id} class="ct-bos-multi-checkbox-label" aria-label={item.id}
+                  onmousedown={handleMouseClick} onkeydown={handleKeyDown} tabindex="-1">
+                  <template if:false={isdisabled}>
+                    <input id={item.id} class="ct-bos-multi-checkbox-input" type="checkbox" onchange={handleOnChange}
+                      value={item.id} aria-hidden="true" tabindex="-1" />
+                  </template>
+                  <template if:true={isdisabled}>
+                    <input id={item.id} class="ct-bos-multi-checkbox-input" type="checkbox" onchange={handleOnChange}
+                      value={item.id} aria-hidden="true" tabindex="-1" disabled />
+                  </template>
+                  <div if:true={answer}>
+                    {answer}
+                    <span class="answergiven"></span>
+                  </div>
+                  <template if:false={theme}>
+                    <span class="ct-bos-multi-checkbox-custom"></span>
+                    <p class="small input-title">
+                      <lightning-formatted-rich-text value={item.value}></lightning-formatted-rich-text>
+                    </p>
+                  </template>
+                  <template if:true={theme}>
+
+                    <div class="checkbox-wrapper desktopTheme">
+                      <p class="checkmark-container">
+                        <span class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                      </p>
+                      <div class="checkbox-label boxShadow">
+                        <p class="labelFirstRow">
+                          <!-- <lightning-formatted-rich-text value={item.Full_Credential_Code}></lightning-formatted-rich-text> -->
+                          <span class="labelId"><b>{item.businessId}</b></span>
+                          <!-- <span class="description"><b>{item.Credential_Public_Status}</b></span> -->
+                        </p>
+                        <!-- <span class="labelcontent"> {item.subtext}</span> -->
+                        <p class="labelcontent slds-p-top_x-small">{item.boldLabel}</p>
+                        <template if:true={item.subtext}>
+                          <p class="small labelId">{item.subtext}</p>
+                        </template>
+                        <template if:true={item.address}>
+                          <p class="small labelId"><img src={fileimage} class="addressIcon"> {item.address}</p>
+                        </template>
+                      </div>
+                    </div>
+                      <div class="checkbox-wrapper mobileTheme">
+                        <div class="radio-wrapper">
+                        <div class="checkbox-label boxShadow">
+                          <p class="labelFirstRow">
+                            <!-- <lightning-formatted-rich-text value={item.Full_Credential_Code}></lightning-formatted-rich-text> -->
+                            <span class="labelId"><b>{item.businessId}</b></span>
+                            <!-- <span class="description"><b>{item.Credential_Public_Status}</b></span> -->
+                          </p>
+                          <!-- <span class="labelcontent"> {item.subtext}</span> -->
+                          <p class="labelcontent slds-p-top_x-small">{item.boldLabel}</p>
+                          <template if:true={item.subtext}>
+                            <p class="small labelId">{item.subtext}</p>
+                          </template>
+                          <template if:true={item.address}>
+                            <p class="small labelId"><img src={fileimage} class="addressIcon"> {item.address}</p>
+                          </template>
+                        </div>
+                        <p class="checkmark-container">
+                          <span class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </template>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+  </div>
+</template>

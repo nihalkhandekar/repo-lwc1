@@ -1,0 +1,40 @@
+<template>
+    <div class="sortSection slds-m-top_x-large slds-m-bottom_large slds-grid slds-wrap">
+	<h4 class="noBizHead">{testOpts.length} {label.linkFindBiz_CredentialFound}</h4>
+        <p class="small"><b>{label.linkFindBiz_ShowingResults}</b> {testOptions.length} {label.Recovery_Of} {testOpts.length}</p>
+        <div class="sort" onclick={handleExpandSort}>
+            <p class="small"><b>{label.sort_by}:&nbsp;</b>
+            {selectedSort}</p>
+            <div class="chevron-wrapper">
+            <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                title="chevrondown" class="chevron-container-down"></lightning-icon>
+            </div>
+            <template if:true={expandSort}>
+                <div class="sortOptions">
+                    <div class="sortoptionWrapper">
+                    <div class="oneSort" data-id={label.bizName} onclick={handleSort}>
+                        <p class="large">{label.bizName}</p>
+                    </div>
+                    <div class="oneSort" data-id={label.linkFindCred_CredId} onclick={handleSort}>
+                        <p class="large">{label.linkFindCred_CredId}</p>
+                    </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+    <div class="slds-m-top_large">
+        <c-link_generic-multi-select listdata={testOptions} oncheckboxinputselection={handleSelect} onuncheckboxinputselection={handleDeSelect} 
+        value={preSelectedValues} name="theme3"></c-link_generic-multi-select>
+    </div>
+    <template if:true={loadMoreBusiness}>
+        <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" onclick={showFiveItems}>
+            <p class="small">{label.loadMoreResults}</p>
+        </div>
+    </template>
+    <template if:true={showLessBusiness}>
+        <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" onclick={showLessItems}>
+            <p class="small">Show me less</p>
+        </div>
+    </template>
+</template>

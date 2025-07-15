@@ -1,0 +1,49 @@
+.flowContainer {
+    max-width: 1600px;
+    width: auto;
+    display: flex;
+    margin: 0 auto;
+    background-color: #f7f9fa;
+}
+
+.sideNav {
+    min-width: 280px;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.mainContent {
+    width: 100%;
+    background-color: #f7f9fa;
+    margin-bottom: 45px;
+    padding: 0 20px;
+    margin-top: 56px;
+}
+.scholars{
+    display:none;
+}
+
+@media only screen and (max-width: 1440px) {
+    .sideNav {
+        min-width: 240px;
+    }
+}
+
+@media only screen and (max-width: 1023.99px) {
+    .flowContainer {
+        flex-direction: column;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .mainContent {
+        padding: 0 5%;
+    }
+
+    .sideNav {
+        box-shadow: 0 4px 8px 0 #E7E9F2;
+    }
+    .scholars{
+        display: block;
+    }
+}

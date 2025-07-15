@@ -1,0 +1,32 @@
+<template>
+    <h3 class="headingClass">{label.linkFindBiz_ConfirmSelection}</h3>
+    <div class="displayMobileLearnMore">
+        <c-learn-More pagename='credconfirm'></c-learn-More>
+    </div>
+    <h6 class="headHelp">
+        {label.linkFindCred_CredReviewMsg}
+    </h6>
+    <div class="compContent">
+        <template if:true={credsList.length}>
+            <template for:each={credsList} for:item="curobj" for:index="index">
+                <div class="slds-m-bottom_small" key={curobj}>
+                    <c-bos_generic-Card currentobj={curobj} remove-section={remove} b-id={curobj.eLicense_Credential_ID}
+                        onremoveclick={handleRemove} showbizowner={showbizowner}></c-bos_generic-Card>
+                </div>
+            </template>
+        </template>
+        <template if:false={credsList.length}>
+            <div class="noCardSection slds-m-top_large">
+                <div class="leftSection"><img src={buildingGroup}></div>
+                <div class="rightSection">
+                    <div class="">
+                        <h6>{label.linkFindBiz_NoCredSelected}</h6>
+                    </div>
+                    <div class="">
+                        <p class="large">{label.linkFindBiz_linkCredMsg}</p>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

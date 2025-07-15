@@ -1,0 +1,33 @@
+<template>
+    <h3 class="">{label.linkFindBiz_FindCredential}</h3>
+    <!-- <h6 class="pageSubTitle">{label.linkFindCred_AddMultipleMsg}</h6> -->
+    <h5 class="slds-m-vertical_x-large">
+        {label.linkFindCred_GoodNews} 
+        <template if:false={showExceedCard}>
+            &nbsp;{options.length} &nbsp;{label.linkFindCred_CredPossibleMatches}
+        </template>
+        <template if:true={showExceedCard}>
+            <span>&nbsp;{label.linkFindCred_CredPossibleMatches}</span>
+        </template>
+    </h5>
+    <p class="large slds-m-bottom_small">
+        {label.linkFindCred_CredMatchMsg} 
+    </p>
+    <template if:true={showResults}>
+        <template if:false={showExceedCard}>
+            <c-link_cred-results search-results={options} onselectval={updateCreds} ondeselectval={deSelectCreds} pre-selected-values={preSelectedValues}></c-link_cred-results>
+        </template>
+        <template if:true={showExceedCard}>
+            <c-no-data-card count={label.CredentialAutoSearchLimit} 
+                main-text={label.linkCred_credFoundMsg} 
+                sub-text-bold={label.linkCred_NarrowSearchMsg}
+                sub-text={label.linkCred_TooManyCredMsg}>
+            </c-no-data-card>
+        </template>
+    </template>
+    <h6 class="slds-m-top_xx-large slds-p-top_xx-large">{label.linkBiz_addLicenseMsg}</h6>
+    <p class="trysearch slds-m-vertical_large">{label.linkBiz_directSearchMsg}</p>
+    <button class="slds-button slds-button_brand secondaryBtn" onclick={openManualSearch}>
+        {label.linkBiz_findCredMsg}
+    </button>
+</template>

@@ -1,0 +1,20 @@
+<template>
+    <h3 class="headingClass">{label.business_creds}</h3>
+    <div class="displayMobileLearnMore">
+        <c-learn-More pagename='linkcred'></c-learn-More>
+    </div>
+    <!-- <div class="slds-p-bottom_xx-large">
+        <c-bos_generic-Card statusval={currentobj.status} labeltext={currentobj.code} headertext={currentobj.label} subheadertext={currentobj.label} addressval={currentobj.address} contactval={currentobj.label}></c-bos_generic-Card>
+    </div> -->
+    <div class="slds-p-bottom_large paddingTop">
+        <h5>{label.linkFindCred_AddMsg}</h5>
+        <!-- <div class="slds-p-top_x-large">
+            <c-bos_help-Text headtext={label.helptexheader} bodytext={label.helptextbody}></c-bos_help-Text>
+        </div> -->
+    </div>
+    <div class="theme1">
+        <p class="slds-p-bottom_medium large questionCls">{label.linkFindCred_LinkMsg}</p>
+        <c-link_generic-radio-input radio-options={testOpts} name="credlink" onctbosdatachange={handleRadioClick}
+            answer={selectedValue}></c-link_generic-radio-input>
+    </div>
+</template>

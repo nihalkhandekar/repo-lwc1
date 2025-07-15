@@ -1,0 +1,45 @@
+h3.headingClass {
+    margin-bottom: 20px;
+}
+
+.headHelp {
+    color: #999999;
+    margin-bottom: 40px;
+}
+
+.compContent {
+    margin-bottom: 68px;
+}
+
+.listItem {
+    display: list-item;
+    margin-left: 16px;
+    padding-left: 12px;
+}
+
+.removeButton .primaryBtn {
+    width: 100%;
+}
+.noCardSection {
+    border-radius: 4px;
+    border: 1px solid #D0CFCF;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    display: flex;
+    padding: 48px 24px;
+    width: 100%;
+}
+.leftSection,
+.rightSection {
+    padding-right: 28px;
+}
+.displayMobileLearnMore{
+    display:none;
+}
+
+@media only screen and (max-width: 1023px) {
+.displayMobileLearnMore{
+    display:block;
+    margin-bottom: 32px;
+}
+}

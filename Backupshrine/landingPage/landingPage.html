@@ -1,0 +1,157 @@
+<template>
+  <!-- <div if:true={isGuestUserAccount}>
+    <template if:true={showLanguageDropdown}>
+      <c-Qn-A_-Language-Selection onlanguagechangehanlder={languageChangeHandler}></c-Qn-A_-Language-Selection>
+    </template>
+  </div> -->
+  <div class="header-image">
+    <div class="header_bottomRow_row_banner">
+      <div class="header_bottomRow_wrap">
+        <div class="header_bottomRow_wrapper_banner"></div>
+      </div>
+    </div>
+    <div class="slds-box mainSection">
+      <div class="mainContainer slds-wrap">
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12">
+            <h2>{label.LandingPage_Header}</h2>
+          </div>
+          <div class="slds-col slds-size_1-of-1 showInMobile">
+            <span class="slds-avatar slds-avatar--x-small">
+              <img src={timerIcon} alt="Completion Time" />
+            </span>
+            <span class="description cmptime slds-m-left_small">
+              {label.LandingPage_CompletionTime}
+            </span>
+          </div>
+          <div
+            class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 slds-align-bottom"
+          >
+            <button
+              class="slds-button slds-button_brand primaryBtn getStartedBtn"
+              onclick={handleClick}
+            >
+              {label.LandingPage_Button}&nbsp;&nbsp;
+              <lightning-icon
+                icon-name="utility:chevronright"
+                size="xx-small"
+                alternative-text="chevronright"
+                title="chevronright"
+                variant="inverse"
+				aria-hidden=true
+              ></lightning-icon>
+            </button>
+          </div>
+              
+          
+        
+        </div>
+        <div
+          class="slds-grid slds-wrap slds-m-top_large slds-p-bottom_small slds-m-bottom_xx-large hideInMobile"
+        >
+          <div class="slds-col slds-size_12-of-12">
+            <span class="slds-avatar slds-avatar--x-small">
+              <img src={timerIcon} alt="Completion Time" />
+            </span>
+            <span class="description cmptime slds-m-left_small">
+              {label.LandingPage_CompletionTime}
+            </span>
+          </div>
+        </div>
+        <hr class="hline slds-m-vertical_medium" />
+        <div class="slds-grid slds-wrap slds-m-vertical_xx-large">
+          <div
+            class="slds-col slds-size_1-of-1 slds-large-size_6-of-12 slds-order_3 slds-large-order_1"
+          >
+            <div class="slds-grid slds-grid_vertical">
+              <div class="slds-col slds-m-bottom_x-large">
+                <h5 class="slds-m-bottom_large">
+                  {label.LandingPage_MainSectionHeader}
+                </h5>
+                <p class="large">
+                  {label.LandingPage_MainSectionDesc}
+                </p>
+              </div>
+              <template if:true={isGuestUserAccount}>
+                <div class="slds-col slds-m-vertical_x-large">
+                  <div class="slds-m-bottom_large">
+                    <img src={accountIcon} alt="Create Account" />
+                  </div>
+                  <p class="large slds-m-bottom_x-small">
+                    <strong>{label.LandingPage_CreateAcccHeader}</strong>
+                  </p>
+                  <p class="large slds-m-bottom_medium">
+                    {label.LandingPage_CreateAccDesc}
+                  </p>
+                  <p class="large createActnBtn">
+                    <a onclick={navigateToAccount} oncontextmenu={navigateToAccount}>{label.LandingPage_CreateAccLink}						</a>
+                  </p>
+                </div>
+              </template>
+              <div class="slds-col slds-m-vertical_x-large">
+                <!--<div class="slds-m-bottom_large">
+                  <img src={saveIcon} alt="Save Checklist" />
+                </div>
+                <p class="large slds-m-bottom_x-small" tabindex="0">
+                  <strong>{label.LandingPage_SaveCheckList}</strong>
+                </p>
+                <template if:false={isLoggedIn}>
+                  <p class="large" tabindex="0">
+                    {label.LandingPage_SaveCheckListDesc}
+                  </p>
+                </template>-->
+                <template if:false={isGuestUserAccount}>
+                  <div class="slds-m-bottom_large">
+                    <img src={saveIcon} alt="Save Checklist" />
+                  </div>
+                  <p class="large slds-m-bottom_x-small" tabindex="0">
+                    <strong>{label.LandingPage_SaveCheckList}</strong>
+                  </p>
+                  <p class="large" tabindex="0">
+                    {label.LandingPage_UserLoggedIn}
+                  </p>
+                </template>
+              </div>
+            </div>
+          </div>
+          <div
+            class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-order_2 slds-large-order_2"
+          ></div>
+          <div
+            class="slds-col slds-size_1-of-1 slds-large-size_5-of-12 slds-order_1 slds-large-order_3 slds-m-bottom_x-large"
+          >
+            <div class="slds-box right">
+              <h6 class="slds-m-bottom_large">
+                {label.LandingPage_HelpTextLabel}
+              </h6>
+              <template for:each={splitLabel} for:item="label">
+                <p
+                  key={label}
+                  class="helpText slds-grid slds-m-vertical_medium large"
+                >
+                  <img
+                    class="slds-align-top slds-m-top_xxx-small checkIcon"
+                    src={checkmarkIcon}
+                    alt="Completion Time"
+                  />
+                  <span class="slds-m-left_small">{label}</span>
+                </p>
+              </template>
+            </div>
+          </div>
+
+          <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12 slds-order_4 slds-large-order_4"></div>
+          <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12 slds-order_4 slds-large-order_4"></div>
+          <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 slds-order_4 slds-large-order_4">
+            <button class="slds-button slds-button_brand primaryBtn getStartedBtn"
+              onclick={handleClick}>
+              {label.LandingPage_Button}&nbsp;&nbsp;
+              <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                title="chevronright" variant="inverse" aria-hidden=true></lightning-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
