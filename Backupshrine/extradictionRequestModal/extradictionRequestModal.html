@@ -1,0 +1,401 @@
+<template>
+    <template if:true={isLoading}>
+        <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+        <c-event-passer></c-event-passer>
+        <div class="SE-ModalHeaderMain ">
+            <div>
+                <lightning-button-icon icon-name="utility:back" size="large" alternative-text="go Back"
+                    onclick={cloeModels} class="custom-modal__back">
+                </lightning-button-icon>
+                <div class="SE-ModalHeaderTitle" style="margin-left: 40px;">
+                    <h2>{headerText}</h2>
+                </div>
+            </div>
+            <div>
+                <template if:true={isReadOnly}>
+                    <lightning-button icon-name="utility:edit" alternative-text="Edit" class="edit-button"
+                        onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+                        label="Edit"></lightning-button>
+                </template>
+            </div>
+        </div>
+
+        <!-- <div class="SE-ModalHeader"> -->
+            <div class="SE-modalMainBody modalBodyCssChange BodyPositionSet">
+                <div class="SE-modalFormStack">
+                    <div class="SE-modalFormStackSection firstComponent">
+
+                        <div class="SE-modalFormStackSectionHeader">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:user" size="medium"
+                                    class="modalAddressSectionIconChange"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Index Information for Documentations returned for
+                                    filling under C.G.S 54-179 (for Records Mgt Unit Use)</h2>
+                                <p class="slds-text-body_small">Enter index information for documentation.</p>
+                            </div>
+                        </div>
+
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="receivedForFillingDate">Received for filling with
+                                        Governor's Action</label>
+                                    <lightning-input label="Received For Filing" name="receivedForFillingDate"
+                                        variant="label-hidden" id="receivedForFillingDate" class="SE-notvalidate"
+                                        type="date" placeholder="mm/dd/yyyy" value={receivedForFillingDate}
+                                        date-style="short" disabled={isReadOnly} onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="extractedFileNumber">Extradicted File No.</label>
+                                    <lightning-input label="File Number" name="extractedFileNumber"
+                                        variant="label-hidden" id="extractedFileNumber" class="SE-searchCardInputLabel"
+                                        placeholder="e.g 1234" value={extractedFileNumber} disabled={isReadOnly}
+                                        onchange={handleInputChange} pattern="[0-9]+"
+                                        message-when-pattern-mismatch="Extradicted file number should only contain digits.">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="attorneyInspector">Attorney Inspector</label>
+                                    <lightning-combobox variant="label-hidden" label="Attorney Inspector"
+                                        name="attorneyInspector" value={attorneyInspector}
+                                        placeholder="Select attorney inspector" options={attorneyInspectorOptions}
+                                        onchange={handleInputChange} read-only={isReadOnly}
+                                        class="comboboxItemBackgroundColorChange"></lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="office">Office</label>
+                                    <lightning-combobox variant="label-hidden" label="Office" name="office"
+                                        value={office} placeholder="Select Office" options={officeOptions}
+                                        onchange={handleInputChange} read-only={isReadOnly}
+                                        class="comboboxItemBackgroundColorChange">
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <div class="slds-col">
+                                    <div
+                                        class="form-group slds-form-element_compound slds-form-element slds-m-top_medium">
+                                        <lightning-input-address class='address'
+                                            address-lookup-placeholder="Search country, city, state, street...."
+                                            street={location} street-label="Address Line 1" subpremise={address2}
+                                            subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                                            subpremise-label="Suite/Apartment/Floor" city-label="City" city={city}
+                                            province-label="State" province={state} postal-code={zipCode}
+                                            postal-code-label="Zip Code" country-label="Country" country={country}
+                                            onchange={handleAddressChange} show-address-lookup show-compact-address
+                                            required disabled={isReadOnly}>
+                                        </lightning-input-address>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <div class="slds-col">
+                                    <div class="slds-form-element slds-m-top_medium">
+                                        <label class="SE-inputLabel" for="comments">Comments (for SOTS use only)</label>
+                                        <div class="slds-form-element__control">
+                                            <textarea id="comments" class="SE-modalFormStackTextArea SE-notvalidate"
+                                                name="comments" placeholder="Enter comments..." value={comments}
+                                                onchange={handleInputChange} disabled={isReadOnly}></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSection secoundComponent">
+
+                        <div class="SE-modalFormStackSectionHeader">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:drafts" size="medium"
+                                    class="modalAddressSectionIconChange"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Name of Person Sought</h2>
+                                <p class="slds-text-body_small">Enter details of the person sought</p>
+                            </div>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
+                                <span class="slds-m-right_small slds-text-body_small">AKA = Also Known As</span>
+                                <lightning-button variant="brand" label="Add More AKA" title="Add More AKA"
+                                    icon-name="utility:add" class="save-button" onclick={handleAddMoreAKA}
+                                    disabled={isReadOnly}>
+                                </lightning-button>
+                            </div>
+                        </div>
+
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <!-- <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                <label class="SE-inputLabel" for="extradictedFrom">Extradicted From</label>
+                                <lightning-input label="Extradicted From" name="extradictedFrom" variant="label-hidden"
+                                    id="extradictedFrom" placeholder="Select extradicted from" value={extradictedFrom} disabled={isReadOnly}
+                                    onchange={handleInputChange}  class="SE-searchCardInputLabel" pattern="[A-Za-z ]+" message-when-pattern-mismatch="Extradicted from field should only contain letters." >
+                                </lightning-input>
+                            </div> -->
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <!-- <label class="SE-inputLabel" for="extradictedFrom">Extradicted From</label> -->
+                                    <lightning-combobox label="Extradicted From" name="extradictedFrom"
+                                        value={extradictedFrom} placeholder="Select Extradicted From"
+                                        options={extraditedFromOptions} onchange={handleInputChange}
+                                        read-only={isReadOnly}
+                                        class="comboboxItemBackgroundColorChange extradicted-from"></lightning-combobox>
+                                </div>
+                                <!-- <div class="slds-col SE-customCol50">
+                                <lightning-input type="checkbox" label="Esq." name="esq" id="esq" checked={esq}
+                                    class="esqclassalignment SE-notvalidate" onchange={handleEsqChange} disabled={isReadOnly}></lightning-input>
+                            </div> -->
+                            </div>
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet esq-row">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="lastName"><span
+                                            class="required-indicator">*</span>Last
+                                        Name</label>
+                                    <div class={lastNameErrorClass}>
+                                        <lightning-input label="Last Name" name="lastName" variant="label-hidden"
+                                            id="lastName" placeholder="e.g Doe" value={lastName} required
+                                            disabled={isReadOnly} class="SE-searchCardInputLabel"
+                                            aria-describedby="lastNameError" aria-invalid={isLastNameInvalid}
+                                            onchange={handleInputChange} pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+"
+                                            message-when-pattern-mismatch="Last name should only contain letters.">
+                                        </lightning-input>
+                                    </div>
+                                    <template if:true={isLastNameInvalid}>
+                                        <div>
+                                            Last Name is required.
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="middleInitial">Middle Initial</label>
+                                    <lightning-input label="Middle Initial" name="middleInitial" variant="label-hidden"
+                                        id="middleInitial" placeholder="e.g R" class="SE-searchCardInputLabel"
+                                        value={middleInitial} disabled={isReadOnly} onchange={handleInputChange}
+                                        pattern="^[A-Za-z]+(\.[A-Za-z]+)*\.?$"
+                                        message-when-pattern-mismatch="Middle name should only contain letters.">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="firstName"><span
+                                            class="required-indicator">*</span>First
+                                        Name</label>
+                                    <div class={firstNameErrorClass}>
+                                        <lightning-input label="First Name" name="firstName" variant="label-hidden"
+                                            id="firstName" placeholder="e.g John" value={firstName} required
+                                            aria-describedby="firstNameError" class="SE-searchCardInputLabel"
+                                            disabled={isReadOnly} aria-invalid={isFirstNameInvalid}
+                                            onchange={handleInputChange} pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+"
+                                            message-when-pattern-mismatch="First name should only contain letters.">
+                                        </lightning-input>
+                                    </div>
+                                    <template if:true={isFirstNameInvalid}>
+                                        <div>
+                                            First Name is required.
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="suffix">Suffix</label>
+                                    <lightning-combobox variant="label-hidden" label="Suffix" name="suffix"
+                                        value={suffix} placeholder="Select suffix" options={suffixSelectOptions}
+                                        onchange={handleInputChange} read-only={isReadOnly}></lightning-combobox>
+                                </div>
+                                <div class="slds-col SE-SE-customCol customInputFieldHeightSet esq-align">
+                                    <lightning-input type="checkbox" label="Esq." name="esq" id="esq" checked={esq}
+                                        class="esqclassalignment SE-notvalidate" onchange={handleEsqChange}
+                                        disabled={isReadOnly}></lightning-input>
+                                </div>
+                            </div>
+
+                            <template for:each={akaList} for:item="aka" for:index="index">
+                                <div key={aka.id}>
+                                    <!-- Remove AKA Button  -->
+                                    <div
+                                        class="slds-grid slds-grid_vertical-align-center slds-grid_align-end slds-col_bump-left">
+                                        <span class="slds-m-right_small slds-text-body_small">AKA = Also Known As</span>
+                                        <lightning-button variant="destructive-text" label="Remove AKA"
+                                            title="Remove AKA" icon-name="utility:dash"
+                                            class="modalFormStackAddMoreButton" onclick={handleRemoveAKA}
+                                            data-index={index} disabled={isReadOnly}>
+                                        </lightning-button>
+                                    </div>
+                                    <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet esq-row">
+                                        <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                            <label class="SE-inputLabel" for="akalastName"><span
+                                                    class="required-indicator">*</span>Last
+                                                Name</label>
+                                            <div class={lastNameErrorClass}>
+                                                <lightning-input label="Last Name" name="akalastName"
+                                                    variant="label-hidden" id="akalastName" placeholder="e.g Doe"
+                                                    value={aka.akalastName} required disabled={isReadOnly}
+                                                    class="SE-searchCardInputLabel" aria-describedby="lastNameError"
+                                                    aria-invalid={isLastNameInvalid} onchange={handleAkaFieldChange}
+                                                    data-index={index}>
+                                                </lightning-input>
+                                            </div>
+                                            <template if:true={isLastNameInvalid}>
+                                                <div>
+                                                    Last Name is required.
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                            <label class="SE-inputLabel" for="middleInitial">Middle Initial</label>
+                                            <lightning-input label="Middle Initial" name="akamiddleInitial"
+                                                variant="label-hidden" id="akamiddleInitial"
+                                                class="SE-searchCardInputLabel" placeholder="e.g R"
+                                                value={aka.akamiddleInitial} disabled={isReadOnly}
+                                                onchange={handleAkaFieldChange} data-index={index}>
+                                            </lightning-input>
+                                        </div>
+                                        <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                            <label class="SE-inputLabel" for="akafirstName"><span
+                                                    class="required-indicator">*</span>First
+                                                Name</label>
+                                            <div class={firstNameErrorClass}>
+                                                <lightning-input label="First Name" name="akafirstName"
+                                                    variant="label-hidden" id="akafirstName"
+                                                    class="SE-searchCardInputLabel" placeholder="e.g John"
+                                                    value={aka.akafirstName} required aria-describedby="firstNameError"
+                                                    disabled={isReadOnly} aria-invalid={isFirstNameInvalid}
+                                                    onchange={handleAkaFieldChange} data-index={index}>
+                                                </lightning-input>
+                                            </div>
+                                            <template if:true={isFirstNameInvalid}>
+                                                <div>
+                                                    First Name is required.
+                                                </div>
+                                            </template>
+                                        </div>
+                                        <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                            <label class="SE-inputLabel" for="akasuffix">Suffix</label>
+                                            <lightning-combobox variant="label-hidden" label="Suffix" name="suffix"
+                                                value={aka.akasuffix} placeholder="Select suffix"
+                                                options={suffixSelectOptions} class="comboboxItemBackgroundColorChange"
+                                                onchange={handleAkaFieldChange} read-only={isReadOnly}
+                                                data-index={index}></lightning-combobox>
+                                        </div>
+                                        <div class="slds-col SE-SE-customCol customInputFieldHeightSet esq-align">
+                                            <lightning-input type="checkbox" label="Esq." name="akaesq"
+                                                checked={aka.akaesq} id="akaesq"
+                                                class="esqclassalignment SE-notvalidate" onchange={handleAkaFieldChange}
+                                                disabled={isReadOnly} data-index={index}></lightning-input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSection thirdComponent">
+
+                        <div class="SE-modalFormStackSectionHeader">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="action:update_status" size="small"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Receipt information for Authentication Requests</h2>
+                                <p class="slds-text-body_small">Enter receipt information</p>
+                            </div>
+                        </div>
+    
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="requestDate">Request Date</label>
+                                    <lightning-input label="Request Date" name="requestDate" variant="label-hidden"
+                                        id="requestDate" type="date" class="SE-notvalidate" placeholder="mm/dd/yyyy"
+                                        value={requestDate} date-style="short" disabled={isReadOnly}
+                                        onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="responseDate">Response Date</label>
+                                    <lightning-input label="Response Date" name="responseDate" variant="label-hidden"
+                                        id="responseDate" type="Date" class="SE-notvalidate" placeholder="mm/dd/yyyy"
+                                        value={responseDate} date-style="short" disabled={isReadOnly}
+                                        onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="middleInitial">Number of Extradition Plain
+                                        Copies</label>
+                                    <lightning-input label="Number of Extradition Plain Copies" name="extradictionpc"
+                                        variant="label-hidden"
+                                        message-when-pattern-mismatch="Number of Extradition Plain Copies can only be Number"
+                                        pattern="[0-9]*" id="extradictionpc"
+                                        placeholder="Number of Extradition Plain Copies" class="SE-searchCardInputLabel"
+                                        value={extradictionpc} disabled={isReadOnly} onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <label class="SE-inputLabel" for="middleInitial">Number of Extradition Authentication /
+                                        Apostille</label>
+                                    <lightning-input label="Number of Extradition Authentication / Apostille"
+                                        name="extradictionAuth" variant="label-hidden"
+                                        message-when-pattern-mismatch="Number of Extradition Authentication / Apostille can only be Number"
+                                        pattern="[0-9]*" id="extradictionAuth"
+                                        placeholder="Number of Extradition Authentication / Apostille"
+                                        class="SE-searchCardInputLabel" value={extradictionAuth} disabled={isReadOnly}
+                                        onchange={handleInputChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-grid SE-modalFormStackSectionInputRow customGroupOFInputFieldMarginSet">
+                                <div class="slds-col SE-customCol customInputFieldHeightSet">
+                                    <div class="slds-form-element slds-m-top_medium">
+                                        <label class="SE-inputLabel" for="Notes">Notes on Receipt</label>
+                                        <div class="slds-form-element__control">
+                                            <textarea id="notes" class="SE-modalFormStackTextArea SE-notvalidate"
+                                                name="notes" placeholder="Enter notes on receipts..." value={notes}
+                                                onchange={handleInputChange} disabled={isReadOnly}></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                        </div>
+    
+                    </div>
+
+                </div>
+
+                
+            </div>
+        <!-- </div> -->
+
+        <div class="footer">
+            <div class="SE-modalFooter">
+                <div class='slds-button-group'>
+                    <div class="button-left-group">
+                        <template if:true={isReadOnly}>
+                            <lightning-button label="Receipt-Forward to CSP" variant="neutral"
+                                class="button-spacing print-buttons"
+                                onclick={handleReceiptForwardToCSP}></lightning-button>
+                            <lightning-button label="Receipt-Pickup by State Attorny" variant="neutral"
+                                class="button-spacing print-buttons"
+                                onclick={handleReceiptPickupbyAttorny}></lightning-button>
+                            <lightning-button label="CSP Mailing Label" variant="neutral"
+                                class="button-spacing print-buttons" onclick={handleCSPMailingLabel}></lightning-button>
+                            <lightning-button label="Send Email" variant="neutral" class="button-spacing print-buttons"
+                                onclick={handleSendEmail} disabled={isPrintEnabled}></lightning-button>
+                        </template>
+                    </div>
+                    <div class="button-right-group SE-modalFooterButtonGroup">
+                        <button class="slds-button SE-borderLessButton" onclick={cloeModels}>Cancel</button>
+                        <lightning-button variant="brand" label="Save" disabled={isReadOnly} class="save-button"
+                            onclick={handleAdd}></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <c-toast-message-state-modal></c-toast-message-state-modal>
+        <c-pdf-generator></c-pdf-generator>
+    </template>
+</template>

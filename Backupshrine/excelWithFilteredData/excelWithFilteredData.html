@@ -1,0 +1,65 @@
+<template>
+    <!-- <template if:true={showWayleaveLocationsFieldsModal}>
+        <div class="slds-modal__header">
+            <h2 class="slds-text-heading_medium">Select Fields</h2>
+        </div>
+        <div class="slds-modal__content slds-p-around_medium">
+            <lightning-checkbox-group
+                options={fieldOptions}
+                value={selectedFields}
+                onchange={handleCheckboxChange}
+            ></lightning-checkbox-group>
+        </div>
+        <div class="slds-modal__footer slds-grid slds-grid_align-end">
+            <div class="slds-col slds-no-flex">
+                <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+            </div>
+            <div class="slds-col slds-no-flex slds-p-left_small">
+                <lightning-button label="View Location" onclick={handleViewLocation}></lightning-button>
+            </div>
+        </div>
+    </template> 
+    
+    // '''this component is for choosing fields from option'''
+    -->
+
+    <!-- Modal for displaying wayleave locations -->
+    <!-- <template if:true={showWayleaveLocationsModal}>
+        <div class="slds-modal__header">
+            <h2 class="slds-text-heading_medium">Wayleave Locations</h2>
+        </div>
+        <div class="slds-p-around_medium">
+            <div class="slds-p-around_small">
+                <lightning-combobox
+                    style="font-weight: bold"
+                    label="Records For Download"
+                    value={selectedOption}
+                    options={downloadOptions}
+                    onchange={handleOptionChange}
+                >
+                </lightning-combobox>
+            </div>
+            <div class="slds-p-around_small">
+                <c-lwc-datatable-utility
+                    records={filteredWayleaveLocations}
+                    total-records={filteredWayleaveLocations.length}
+                    columns={selectedColumns}
+                    key-field="Id"
+                    hide-select-record-checkbox="true"
+                >
+                </c-lwc-datatable-utility>
+            </div>
+            <div class="slds-modal__footer slds-grid slds-grid_align-end">
+                <div class="slds-col slds-no-flex">
+                    <lightning-button label="Cancel" onclick={handleCancel}></lightning-button>
+                </div>
+                <div class="slds-col slds-no-flex slds-p-left_small">
+                    <lightning-button label="Copy to Clipboard" onclick={handleCopyToClipboard}></lightning-button>
+                </div>
+                <div class="slds-col slds-no-flex slds-p-left_small">
+                    <lightning-button label="Download As Excel" onclick={exportToExcel}></lightning-button>
+                </div>
+            </div>
+        </div>
+    </template> -->
+</template>

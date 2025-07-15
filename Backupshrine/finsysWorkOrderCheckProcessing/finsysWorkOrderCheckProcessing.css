@@ -1,0 +1,369 @@
+.custom-table-container {
+  margin-top: 24px;
+  overflow: visible;
+  margin-bottom: 24px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.custom-table {
+  width: 100%;
+  border: 1px solid #d8dde6;
+  border-radius: 12px;
+  overflow: visible;
+  font-family: "SF Pro", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+.return-reason-options .slds-dropdown{
+  position: absolute !important; /* Force dropdown to open in an absolute position */
+    z-index: 9999 !important; /* Ensure dropdown is on top */
+}
+
+.custom-table thead tr.custom-header th {
+  background-color: #f3f3f3;
+  font-weight: 700;
+  font-size: 13px;
+  color: #181818;
+  height: 42px;
+  vertical-align: middle;
+  border-width: 0px 1px 0px 0px;
+  border-style: solid;
+  border-color: #E5E5E5;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.custom-table tbody tr.custom-column td {
+  font-size: 14px;
+  color: #181818;
+  height: 50px; /* Increased row height slightly for proper alignment */
+  vertical-align: middle;
+  padding: 8px 12px;
+  text-align: left;
+  border-width: 1px 1px 0 0;
+  border-style: solid;
+  border-color: #E5E5E5;
+  box-sizing: border-box;
+  vertical-align: top; /* Aligns dropdown to the top */
+    overflow: visible; /* Prevents clipping */
+}
+
+.dropdown-container {
+  display: flex;
+  align-items: center; /* Centers the dropdown vertically */
+  justify-content: start; /* Aligns dropdown to the left */
+  height: 100%; /* Ensures the container fills the cell height */
+}
+
+.select-dropdown {
+  width: 100%; /* Ensures the dropdown spans the full width of the cell */
+  height: 40px; /* Matches the table row height */
+  padding: 0 8px; /* Adds consistent spacing inside the dropdown */
+  box-sizing: border-box; /* Ensures proper padding and sizing */
+  font-size: 14px; /* Matches table font size */
+  border: 1px solid #d8dde6; /* Optional styling for better dropdown visibility */
+  border-radius: 4px; /* Optional rounded edges */
+  background-color: #ffffff; /* Ensures consistent background color */
+  vertical-align: middle; /* Aligns with other content in the row */
+}
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.no-border-row {
+  border: none;
+}
+
+.slds-truncate {
+  overflow: visible;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-badge {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease;
+}
+
+.custom-badge:hover {
+  background-color: #4d4d4d; /* Darker shade of blue for hover effect */
+  color: #fff;
+}
+
+.custom-badge.active {
+  background-color: #4d4d4d; /* Color when active */
+  color: #fff; /* Text color when active */
+}
+
+.custom-table th:nth-child(1){
+  border-top-left-radius: 8px;
+}
+
+.custom-table  th:nth-child(1),
+.custom-table  td:nth-child(1) {
+  width: 8%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(2),
+.custom-table  td:nth-child(2) {
+  width: 8%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(3),
+.custom-table  td:nth-child(3) {
+  width: 10%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(4),
+.custom-table  td:nth-child(4) {
+  width: 15%; /* Adjusted for dropdown alignment */
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(5),
+.custom-table  td:nth-child(5) {
+  width: 15%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(6),
+.custom-table  td:nth-child(6) {
+  width: 7%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(7),
+.custom-table  td:nth-child(7) {
+  width: 6%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table  th:nth-child(8),
+.custom-table  td:nth-child(8) {
+  width: 8%;
+  border-top: 0px;
+  text-overflow: ellipsis;
+  overflow: visible;
+}
+
+.custom-table th:last-child,
+.custom-table td:last-child {
+  border-right: none;
+}
+.custom-table th:last-child{
+  border-top-right-radius: 8px;
+}
+
+
+.return-dropdown{
+  display: grid;
+}
+
+.custom-table-container .slds-form-element__label{
+  overflow: visible;
+  display: none;
+}
+
+lightning-input{
+  --slds-c-input-radius-border: 8px;
+  }
+
+lightning-combobox{
+  --slds-c-input-radius-border: 8px;
+}
+
+.record-checkbox{
+  --slds-c-checkbox-radius-border: 4px
+  --lwc-borderRadiusSmall: 4px
+}
+
+.slds-form-element .slds-checkbox [type=checkbox]+.slds-checkbox__label .slds-checkbox_faux{
+  border-radius: 4px;
+}
+
+.footerContainer{
+  height: 3.5rem;
+  box-shadow: 0px -1px 0px 0px #C9C9C9;
+  background: #F3F3F3;
+
+  height: 3.5rem;
+  padding: 0rem 0rem 0rem 25rem;
+  /* gap: 0px; */
+  /* border-radius: 0px 0px 4px 4px; */
+  border-bottom-right-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+
+}
+
+.modalContent {
+  display: inline-grid;
+  height: 14rem;
+  gap: 12px;
+  justify-items: center;
+}
+
+.uploaded-file {
+  display: flex; /* Use Flexbox to align items horizontally */
+  align-items: center; /* Vertically center the file name and delete button */
+  justify-content: space-between; /* Add spacing between file name and delete button */
+  padding: 0.5rem 0; /* Add some padding for better spacing */
+}
+
+.fileNameClass {
+  display: flex; /* Ensure the file name and icon are aligned horizontally */
+  align-items: center; /* Vertically align the icon and text */
+  flex: 1; /* Allow the file name to take up remaining space */
+}
+
+.fileContainer {
+  display: flex; /* Align icon and text horizontally */
+  align-items: center; /* Center-align icon and text */
+}
+
+.fileNameContainer {
+  margin-left: 0.5rem; /* Add spacing between the icon and file name */
+  white-space: nowrap; /* Prevent the file name from wrapping to the next line */
+  overflow: hidden; /* Handle long file names gracefully */
+  text-overflow: ellipsis; /* Show ellipsis if the file name is too long */
+}
+
+.deleteButtonArea {
+  margin-left: 1rem; /* Add spacing between the file name and delete button */
+}
+
+
+.footerButtonContainer{
+  display: flex;
+  /* position: fixed; */
+  width: 11.25rem;
+  height: 3.5rem;
+  left: 28.75rem;
+  padding: 0px 0.75rem 0px 0.75rem;
+  gap: 0.75rem;
+  align-items: center;
+
+}
+.cancelButtonFooter{
+  /* border: 1px solid #747474;
+  background: #FFFFFF; */
+  width: 70px;
+  height: 32px;
+  border: 1px solid #747474;
+  padding: 1px 16px 1px 16px;
+  width: 70px;
+  height: 32px;
+  gap: 10px;
+  background: #FFFFFF;
+  /* padding: 1px 16px 1px 16px;
+  gap: 10px;
+  border: 1px 0px 0px 0px; */
+  /* opacity: 0px; */
+}
+.uploadButtonFooter{
+  /* background: #0176D3; */
+  width: 74px;
+  height: 32px;
+  padding: 7px 16px 7px 16px;
+  /* gap: 10px; */
+  /* opacity: 0px; */
+
+}
+
+.custom-badge {
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease;
+  background-color: #f3f3f3;
+  color: #181818;
+
+}
+
+.custom-badge:hover {
+  background-color: #4d4d4d; /* Darker shade of blue for hover effect */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  color: #fff; /* Text color when active */
+}
+
+.custom-badge.active {
+  background-color: #4d4d4d; /* Color when active */
+  color: #fff; /* Text color when active */
+}
+
+
+/* hover sort icon code  */
+.custom-header .sort-icon {
+  visibility: hidden; 
+}
+
+.custom-header th:hover .sort-icon {
+  visibility: visible;
+  --slds-c-icon-color-foreground-default:#768eb8; /* Custom color for the sort icon when sorted */
+  transform: scale(0.9);
+
+}
+
+.custom-header .sorted .sort-icon {
+  visibility: visible; 
+  --slds-c-icon-color-foreground-default: #253858;
+  transform: scale(0.9);
+}
+
+.custom-header .sorted:hover .sort-icon {
+  --slds-c-icon-color-foreground-default: #253858; 
+  visibility: visible; 
+}
+
+.current-page-input{
+  width: 3%;
+  margin-top: -0.3rem;
+  text-align: center;
+}
+.page-info, .page-text{
+  display: contents;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center; /* Center-align the pagination numbers */
+  align-items: center; /* Vertically center-align */
+  max-width: 100%; /* Prevent overflow */
+  padding: 0.1rem; /* Add padding */
+  box-sizing: border-box;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+.pagination-button {
+  color: blue; /* Blue text color */
+  padding: 5px 10px; /* Padding for better appearance */
+  font-size: 14px; /* Font size for the button text */
+  --slds-c-button-radius-border: 8px;
+  --slds-c-button-text-color: #003a62;
+  outline: none; /* Remove default outline */
+}

@@ -1,0 +1,50 @@
+.slds-grid_align-start {
+    align-items: center; /* Ensures items are vertically centered */
+}
+
+.slds-p-left_small{
+    padding: 8px ;
+ }
+
+.slds-text-title_bold {
+    color: #033D68; /* Replace with the desired color code */ 
+}
+
+.left-button {
+    margin-right: auto;
+    display: flex;                /* Use Flexbox layout */            /* Space between the text and badge */
+}
+
+.custom-badge {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease;
+}
+
+
+.custom-badge:hover {
+    background-color: #4d4d4d; /* Darker shade of blue for hover effect */
+    color: #fff;
+}
+
+.custom-badge.active {
+    background-color: #4d4d4d; /* Color when active */ 
+    color: #fff; /* Text color when active */
+}
+
+.slds-badge_inverse {
+    --slds-c-badge-color-background: #f3f3f3 ;
+    --slds-c-badge-text-color: #181818;
+}
+
+.slds-has-button-menu .slds-th__action {
+    background-color: #181818 !important;
+}
+/* 
+
+lightning-input{
+    --slds-c-input-radius-border: 8px;
+    }
+
+lightning-combobox{
+    --slds-c-input-radius-border: 8px;
+}      */

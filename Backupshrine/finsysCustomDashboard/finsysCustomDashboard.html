@@ -1,0 +1,227 @@
+<template>
+    <div class="dashboard-container slds-p-around_medium">
+        <div class="slds-grid slds-gutters slds-wrap">
+            <div class="slds-col slds-size_1-of-3">
+                <div class="stats-card">
+                    <div class="card-header">
+                        <div class="title">Total Cumulative Deposited</div>
+                        <div class="amount green-text">{totalDeposited}</div>
+                    </div>
+                    <div class="date-range-container">
+                        <lightning-input 
+                            type="date" 
+                            label="Start Date"
+                            value={comulativeStartDate}
+                            onchange={handleComulativeStartDateChange}
+                            class="date-input">
+                        </lightning-input>
+                        <lightning-input 
+                            type="date" 
+                            label="End Date"
+                            value={comulativeEndDate}
+                            onchange={handleComulativeEndDateChange}
+                            class="date-input">
+                        </lightning-input>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slds-col slds-size_1-of-3">
+                <div class="stats-card">
+                    <div class="card-header">
+                        <div class="title">Total Open Batches</div>
+                        <div class="amount blue-text">{openBatches}</div>
+                    </div>
+                    <div class="date-range-container">
+                        <lightning-input 
+                            type="date" 
+                            label="Start Date"
+                            value={openBatchStartDate}
+                            onchange={handleOpenBatchStartDateChange}
+                            class="date-input">
+                        </lightning-input>
+                        <lightning-input 
+                            type="date" 
+                            label="End Date"
+                            value={openBatchEndDate}
+                            onchange={handleOpenBatchEndDateChange}
+                            class="date-input">
+                        </lightning-input>
+                        <lightning-combobox
+                            label="Select batch code"
+                            value={selectedOpenBatchCode}
+                            options={batchCodeOptions}
+                            onchange={handleOpenBatchCodeChange}
+                            placeholder="Select batch code">
+                        </lightning-combobox>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slds-col slds-size_1-of-3">
+                <div class="stats-card">
+                    <div class="card-header">
+                        <div class="title">Total Closed Batches</div>
+                        <div class="amount red-text">{closedBatches}</div>
+                    </div>
+                    <div class="date-range-container">
+                        <lightning-input 
+                            type="date" 
+                            label="Start Date"
+                            value={closedBatchStartDate}
+                            onchange={handleClosedBatchStartDateChange}
+                            class="date-input">
+                        </lightning-input>
+                        <lightning-input 
+                            type="date" 
+                            label="End Date"
+                            value={closedBatchEndDate}
+                            onchange={handleClosedBatchEndDateChange}
+                            class="date-input">
+                        </lightning-input>
+                        <lightning-combobox
+                            label="Select batch code"
+                            value={selectedClosedBatchCode}
+                            options={batchCodeOptions}
+                            onchange={handleClosedBatchCodeChange}
+                            placeholder="Select batch code">
+                    </lightning-combobox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Charts Container -->
+    <div class="dashboard-container slds-p-around_medium">
+        <div class="slds-grid slds-gutters">
+            <!-- Line Chart -->
+            <div class="slds-col slds-size_1-of-2">
+                <div class="chart-container">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid slds-has-flexi-truncate">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate slds-grow">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span class="slds-text-heading_medium">Cumulative Deposit Summary</span>
+                                    </h2>
+                                </div>
+                            </header>
+                            <div class="slds-no-flex">
+                                <div class="filter-button" onclick={handleLineChartFilterClick}>
+                                    <lightning-button-icon
+                                        icon-name="utility:filterList"
+                                        variant="bare"
+                                        size="medium"
+                                        alternative-text="Filter by Time period"
+                                        class="filter-icon">
+                                    </lightning-button-icon>
+                                    <span class="filter-text">Filter by Time period</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-card__body chart-wrapper">
+                            <div class="chart-canvas-container">
+                                <canvas lwc:dom="manual"></canvas>
+                            </div>
+                        </div>
+                        <template if:true={showLineChartFilterModal}>
+                            <div class="chart-filter-modal">
+                                <c-calender ondateselected={handleLineChartDateSelection}></c-calender>
+                            </div>
+                        </template>
+                        <div class="custom-footer_container">
+                            <div class="custom-card__footer slds-text-align_right">
+                                <lightning-button 
+                                    label="View Deposit Summary" 
+                                    variant="bare" 
+                                    onclick={handleViewDepositSummary}
+                                    class="slds-m-right_x-small">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Bar Chart -->
+            <div class="slds-col slds-size_1-of-2">
+                <div class="chart-container">
+                    <div class="slds-card">
+                        <div class="slds-card__header slds-grid">
+                            <header class="slds-media slds-media_center slds-has-flexi-truncate slds-grow">
+                                <div class="slds-media__body">
+                                    <h2 class="slds-card__header-title">
+                                        <span class="slds-text-heading_medium">Batches</span>
+                                    </h2>
+                                </div>
+                            </header>
+                            <div class="slds-no-flex slds-grid slds-grid_vertical-align-center">
+                                <!-- Controls wrapper -->
+                                <div class="slds-grid slds-grid_vertical-align-end">
+                                    <!-- Batch Code Combobox -->
+                                    <div class="slds-form-element slds-m-right_small">
+                                        <lightning-combobox
+                                            value={selectedBatchCodeForGraph}
+                                            options={batchCodeOptions}
+                                            onchange={handleBatchCodeGraphChange}
+                                            class="batch-filter-combo"
+                                            placeholder="Select Batch Code">
+                                        </lightning-combobox>
+                                    </div>
+                                    <!-- Time Period Filter -->
+                                    <div class="filter-button" onclick={handleBarChartFilterClick}>
+                                        <lightning-button-icon
+                                            icon-name="utility:filterList"
+                                            variant="bare"
+                                            size="medium"
+                                            alternative-text="Filter by Time period"
+                                            class="filter-icon">
+                                        </lightning-button-icon>
+                                        <span class="filter-text">Filter by Time period</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-card__body chart-wrapper">
+                            <div class="chart-canvas-container">
+                                <canvas lwc:dom="manual"></canvas>
+                            </div>
+                        </div>
+                        <template if:true={showBarChartFilterModal}>
+                            <div class="chart-filter-modal">
+                                <c-calender ondateselected={handleBarChartDateSelection}></c-calender>
+                            </div>
+                        </template>                    
+                        <div class="custom-card__footer slds-text-align_right">
+                            <lightning-button 
+                                label="View Activity" 
+                                variant="bare" 
+                                onclick={handleViewActivity}>
+                            </lightning-button>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="core-ct-dashboard-container slds-p-around_medium">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-1">
+                    <c-corect-batch-dashboard>
+                    </c-corect-batch-dashboard>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Modal -->
+        <!-- <template if:true={showFilterModal}>
+            <div class="modal-overlay">
+                <div class="modal-content">
+                    <c-calender ondateselected={handleDateSelection}></c-calender>
+                </div>
+            </div>
+        </template> -->
+    </div>
+
+</template>

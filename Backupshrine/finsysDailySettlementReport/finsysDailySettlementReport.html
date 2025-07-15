@@ -1,0 +1,85 @@
+<template>
+    <lightning-card>
+        <div class="SE-content">
+            <div class="SE-Card secondDivForSearching">
+                <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                    <div class="buttoncontainerfilter">
+                        <div class="left-button slds-p-left_small">
+                            <span class="slds-text-title_bold slds-m-right_x-small search-css">
+                                Transaction Summary
+                            </span>
+                        </div>
+
+                        <div class="right-buttons">
+                            <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonClick}>
+                                <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                                <span>Export to Excel</span>
+                            </div>
+                            <lightning-button icon-name="utility:download" variant="brand" label="Download PDF"
+                                onclick={handleDownloadPdf} class="customButton slds-m-left_small">
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loader when data is being fetched -->
+                <template if:true={isRecordsLoading}>
+                    <div class="slds-text-align_center loader-row">
+                        <lightning-spinner
+                            alternative-text="Loading records..."
+                            variant="brand"
+                            size="large"
+                        ></lightning-spinner>
+                    </div>
+                </template>
+
+                <!-- Table for displaying transaction summary -->
+                <template if:false={isRecordsLoading}>
+                    <div class="slds-scrollable_x custom-table-wrapper">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                            <thead>
+                                <tr class="custom-header">
+                                    <th class="left-align">Card Type</th>
+                                    <th class="right-align">Number of Transactions</th>
+                                    <th class="right-align">Amount</th>
+                                    <th class="right-align">Refund Amount</th>
+                                    <th class="right-align">Total Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={dailySettlementReport} for:item="record">
+                                    <tr key={record.cardType}>
+                                        <td class="left-align">{record.cardType}</td>
+                                        <td class="right-align">{record.transactionCount}</td>
+                                        <td class="right-align">{record.formattedTotalAmount}</td>
+                                        <td class="right-align">{record.formattedRefundAmount}</td>
+                                        <td class="right-align">{record.formattedTotalBalance}</td>
+                                    </tr>
+                                </template>
+                                <!-- Grand Total Row -->
+                                <template if:false={isNoData}>
+                                    <tr class="custom-grand-total">
+                                        <td class="left-align"><strong>Grand Total</strong></td>
+                                        <td class="right-align"><strong>{grandTotalTransactions}</strong></td>
+                                        <td class="right-align"><strong>{grandTotalAmount}</strong></td>
+                                        <td class="right-align"><strong>{grandTotalRefund}</strong></td>
+                                        <td class="right-align"><strong>{grandTotalBalance}</strong></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </template>
+
+                <!-- No Data Message -->
+                <template if:false={isDataPresent}>
+                    <div class="slds-text-align_center slds-m-top_medium">
+                        <p>No transactions found for the selected date.</p>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <c-finsys-export-to-excel></c-finsys-export-to-excel>
+        <c-finsys-reports-pdf-generator></c-finsys-reports-pdf-generator>
+    </lightning-card>
+</template>

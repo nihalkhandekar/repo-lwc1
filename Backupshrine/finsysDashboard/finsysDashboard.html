@@ -1,0 +1,88 @@
+<template>
+        <lightning-card>
+            <div class="SE-mainBody">
+                <div class="SE-content">
+                    <div class="SE-top">
+                        <div class="SE-linkLable">
+                            Dashboard
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="FS-upperside-total-card FS-upperside-total-cumulative-card">
+                                <div class="FS-cumulative-amount">
+                                    <div class="FS-cumulative-amount-leftside">
+                                        Total Cumulative Deposited
+                                    </div>
+                                    <div class="FS-cumulative-amount-rightside">
+                                        $150,372.00
+                                    </div>
+                                </div>
+                                <div class="FS-cumulative-amount-date">
+                                    <lightning-input type="date" label="From Date" value={cumulativeFromDate} onchange={handleCumulativeFromDateChange} ></lightning-input>
+                                    <lightning-input type="date" label="To Date" value={cumulativeToDate} onchange={handleCumulativeToDateChange} ></lightning-input>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="FS-upperside-total-card FS-upperside-total-openbatch-card">
+                                <div class="FS-open-batch">
+                                    <div class="FS-open-batch-leftside">
+                                        Total Open Batches
+                                    </div>
+                                    <div class="FS-open-batch-rightside">
+                                        35
+                                    </div>
+                                </div>
+                                <div class="FS-open-batch-date">
+                                    <lightning-input type="date" class="FS-open-batch-date-inside" label="From Date" value={openBatchFromDate} onchange={handleCumulativeFromDateChange} ></lightning-input>
+                                    <lightning-input type="date" class="FS-open-batch-date-inside" label="To Date" value={openBatchToDate} onchange={handleCumulativeToDateChange} ></lightning-input>
+                                    <lightning-combobox label="Batch Code" class="FS-open-batch-date-inside" value={openBatchCode} options={batchCodeOptions} onchange={handleBatchChange} placeholder="Select Batch Code"></lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-3">
+                            <div class="FS-upperside-total-card FS-upperside-total-closebatch-card">
+                                <div class="FS-close-batch">
+                                    <div class="FS-close-batch-leftside">
+                                        Total Closed Batches
+                                    </div>
+                                    <div class="FS-close-batch-rightside">
+                                        10
+                                    </div>
+                                </div>
+                                <div class="FS-close-batch-date">
+                                    <lightning-input type="date" class="FS-close-batch-date-inside" label="From Date" value={closeBatchFromDate} onchange={handleCumulativeFromDateChange} ></lightning-input>
+                                    <lightning-input type="date" class="FS-close-batch-date-inside" label="To Date" value={closeBatchToDate} onchange={handleCumulativeToDateChange} ></lightning-input>
+                                    <lightning-combobox label="Batch Code" class="FS-close-batch-date-inside" value={closeBatchCode} options={batchCodeOptions} onchange={handleBatchChange} placeholder="Select Batch Code"></lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div>
+                        <!-- <h1>Report-Dashboard</h1>
+                        <lightning-chart
+                            report-id="00O3S000000miGRUAY"
+                            chart-type="line"
+                        ></lightning-chart> -->
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </lightning-card>
+</template>

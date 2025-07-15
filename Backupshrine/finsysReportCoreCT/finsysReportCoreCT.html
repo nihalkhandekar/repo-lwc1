@@ -1,0 +1,534 @@
+<template>
+    <lightning-card>
+
+        <div class="SE-content">
+
+            <template if:true={isLoading}>
+                <div class="spinner-container">
+                    <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                </div>
+            </template>
+            <template if:false={isLoading}>
+                <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                    <div class="slds-grid slds-grid_align-end">
+                        <div class="buttoncontainerfilter buttoncontainerfilter">
+
+                            <div class="left-button">
+                                <span class="slds-text-title_bold slds-m-right_x-small">Regular Bank Deposits</span>
+                            </div>
+
+                            <div class="right-buttons">
+                                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-quarter" label="This Quarter"
+                                    class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                                </lightning-badge>
+                                <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                    onclick={handleBadgeClick}>
+                                </lightning-badge>
+
+                                <lightning-button-menu icon-position="left" variant="bare" data-id="filterMenu"
+                                    alternative-text="Filter By Disposition" title="Filter"
+                                    icon-name="utility:filterList" label="Filter by Time Period"
+                                    onselect={handleTimePeriodFilter} class="slds-button_icon slds-button_icon-inverse">
+                                    <lightning-menu-item label="This Month" value="ThisMonth"></lightning-menu-item>
+                                    <lightning-menu-item label="This Quarter" value="ThisQuarter"></lightning-menu-item>
+                                    <lightning-menu-item label="This Year" value="ThisYear"></lightning-menu-item>
+                                </lightning-button-menu>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CHECK SECTION -->
+                    <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                        <div class="slds-grid slds-grid_align-end">
+                            <div class="buttoncontainerfilter buttoncontainerfilter">
+
+                                <div class="left-button">
+                                    <span class="slds-text-title_bold slds-m-right_x-small">Check</span>
+                                    <lightning-badge label={recordCountValue} class="totoalcountbadge">
+                                    </lightning-badge>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={recordCount}>
+                            <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead>
+                                        <tr class="custom-header TrHoverBackGroundColorChange">
+                                            <th scope="col" onclick={sortByField} data-field="speedType">
+                                                <div class="slds-truncate" title="LastName">Speed Type
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="activityDescription">
+                                                <div class="slds-truncate" title="First Name">Activity Description
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="activityCode">
+                                                <div class="slds-truncate" title="MI">Activity Code
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="amount">
+                                                <div class="slds-truncate" title="Extradited From">Amount
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="transactionDate">
+                                                <div class="slds-truncate" title="File Number">Transaction Date
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="DepositDate">
+                                                <div class="slds-truncate" title="File Number">Deposit Date
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Action">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={isRecordsLoading}>
+                                            <tr class="no-border-row TrHoverBackGroundColorChange">
+                                                <td colspan="7" class="slds-text-align_center loader-row">
+                                                    <lightning-spinner alternative-text="Loading records..."
+                                                        variant="brand" size="large"></lightning-spinner>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template if:false={isRecordsLoading}>
+                                            <template for:each={paginatedResult} for:item="row">
+                                                <tr key={row.Id} class="custom-column">
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.speedType}>{row.speedType}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.activityDescription}>
+                                                            {row.activityDescription}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.activityCode}>
+                                                            {row.activityCode}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.amount}>{row.amount}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.transactionDate}>
+                                                            {row.transactionDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.DepositDate}>
+                                                            {row.DepositDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.action}>{row.action}</div>
+                                                    </td>
+
+                                                    <!-- <td>
+                                                            <lightning-button-menu alternative-text="Actions"
+                                                                class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                variant="bare" icon-name="utility:threedots_vertical" onselect={handleAction}
+                                                                menu-alignment="auto" data-id={row.Id}>
+                                                                <template if:false={row.isMenuOpen}>
+                                                                    <lightning-menu-item label="View Request" value="view"
+                                                                        data-id={row.Id}></lightning-menu-item>
+                                                                    <lightning-menu-item label="Edit Request" value="edit"
+                                                                        data-id={row.Id}></lightning-menu-item>
+                                                                </template>
+                                                            </lightning-button-menu>
+                                                        </td> -->
+
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="custom-footer">
+                                            <td class="slds-truncate">Total</td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate">$1518</td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate">
+                                                <div>
+                                                    <lightning-icon icon-name="doctype:pdf" size="small"
+                                                        alternative-text="PDF Document"
+                                                        class="slds-m-right_medium"></lightning-icon>
+                                                    <lightning-icon icon-name="doctype:csv" size="small"
+                                                        alternative-text="PDF Document"></lightning-icon>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+                            <!-- <div class="SE-pagination">
+                                <template if:true={showPages}>
+                                    <lightning-button class="clearCustomButton" label="<< Prev"
+                                        onclick={handlePreviousPage} disabled={isPreviousDisabled} variant="neutral">
+                                    </lightning-button>
+
+                                    <div class="page-info">
+                                        <span class="page-range">{startRecord}-{endRecord} of {totalRecords}</span>
+                                        <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                                    </div>
+
+                                    <lightning-button class="clearCustomButton" label="Next >>" onclick={handleNextPage}
+                                        disabled={isNextDisabled} variant="neutral">
+                                    </lightning-button>
+                                </template>
+                            </div> -->
+                        </template>
+                        <template if:false={recordCount}>
+                            <p class="no-data-message">“No requests found for the given criteria.”</p>
+                        </template>
+                    </div>
+
+                    <!-- CASH SECTION -->
+                    <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                        <div class="slds-grid slds-grid_align-end">
+                            <div class="buttoncontainerfilter buttoncontainerfilter">
+
+                                <div class="left-button">
+                                    <span class="slds-text-title_bold slds-m-right_x-small">Cash</span>
+                                    <lightning-badge label={recordCountValue} class="totoalcountbadge">
+                                    </lightning-badge>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={recordCount}>
+                            <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead>
+                                        <tr class="custom-header TrHoverBackGroundColorChange">
+                                            <th scope="col" onclick={sortByField} data-field="speedType">
+                                                <div class="slds-truncate" title="LastName">Speed Type
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="activityDescription">
+                                                <div class="slds-truncate" title="First Name">Activity Description
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="activityCode">
+                                                <div class="slds-truncate" title="MI">Activity Code
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="amount">
+                                                <div class="slds-truncate" title="Extradited From">Amount
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="transactionDate">
+                                                <div class="slds-truncate" title="File Number">Transaction Date
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="DepositDate">
+                                                <div class="slds-truncate" title="File Number">Deposit Date
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Action">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={isRecordsLoading}>
+                                            <tr class="no-border-row TrHoverBackGroundColorChange">
+                                                <td colspan="7" class="slds-text-align_center loader-row">
+                                                    <lightning-spinner alternative-text="Loading records..."
+                                                        variant="brand" size="large"></lightning-spinner>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template if:false={isRecordsLoading}>
+                                            <template for:each={paginatedResult} for:item="row">
+                                                <tr key={row.Id} class="custom-column">
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.speedType}>{row.speedType}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.activityDescription}>
+                                                            {row.activityDescription}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.activityCode}>
+                                                            {row.activityCode}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.amount}>{row.amount}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.transactionDate}>
+                                                            {row.transactionDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.DepositDate}>
+                                                            {row.DepositDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.action}>{row.action}</div>
+                                                    </td>
+
+                                                    <!-- <td>
+                                                                                    <lightning-button-menu alternative-text="Actions"
+                                                                                        class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                                        variant="bare" icon-name="utility:threedots_vertical" onselect={handleAction}
+                                                                                        menu-alignment="auto" data-id={row.Id}>
+                                                                                        <template if:false={row.isMenuOpen}>
+                                                                                            <lightning-menu-item label="View Request" value="view"
+                                                                                                data-id={row.Id}></lightning-menu-item>
+                                                                                            <lightning-menu-item label="Edit Request" value="edit"
+                                                                                                data-id={row.Id}></lightning-menu-item>
+                                                                                        </template>
+                                                                                    </lightning-button-menu>
+                                                                                </td> -->
+
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="custom-footer">
+                                            <td class="slds-truncate">Total</td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate">$1518</td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate">
+                                                <div>
+                                                    <lightning-icon icon-name="doctype:pdf" size="small"
+                                                        alternative-text="PDF Document"
+                                                        class="slds-m-right_medium"></lightning-icon>
+                                                    <lightning-icon icon-name="doctype:csv" size="small"
+                                                        alternative-text="PDF Document"></lightning-icon>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+<!-- 
+                            <div class="SE-pagination">
+                                <template if:true={showPages}>
+                                    <lightning-button class="clearCustomButton" label="<< Prev"
+                                        onclick={handlePreviousPage} disabled={isPreviousDisabled} variant="neutral">
+                                    </lightning-button>
+
+                                    <div class="page-info">
+                                        <span class="page-range">{startRecord}-{endRecord} of {totalRecords}</span>
+                                        <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                                    </div>
+
+                                    <lightning-button class="clearCustomButton" label="Next >>" onclick={handleNextPage}
+                                        disabled={isNextDisabled} variant="neutral">
+                                    </lightning-button>
+                                </template>
+                            </div> -->
+                        </template>
+                        <template if:false={recordCount}>
+                            <p class="no-data-message">“No requests found for the given criteria.”</p>
+                        </template>
+                    </div>
+
+                    <!-- MONEY ORDERS SECTION -->
+                    <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                        <div class="slds-grid slds-grid_align-end">
+                            <div class="buttoncontainerfilter buttoncontainerfilter">
+
+                                <div class="left-button">
+                                    <span class="slds-text-title_bold slds-m-right_x-small">Money Orders</span>
+                                    <lightning-badge label={recordCountValue} class="totoalcountbadge">
+                                    </lightning-badge>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={recordCount}>
+                            <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead>
+                                        <tr class="custom-header TrHoverBackGroundColorChange">
+                                            <th scope="col" onclick={sortByField} data-field="speedType">
+                                                <div class="slds-truncate" title="LastName">Speed Type
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="activityDescription">
+                                                <div class="slds-truncate" title="First Name">Activity Description
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="activityCode">
+                                                <div class="slds-truncate" title="MI">Activity Code
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="amount">
+                                                <div class="slds-truncate" title="Extradited From">Amount
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="transactionDate">
+                                                <div class="slds-truncate" title="File Number">Transaction Date
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="DepositDate">
+                                                <div class="slds-truncate" title="File Number">Deposit Date
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Action">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={isRecordsLoading}>
+                                            <tr class="no-border-row TrHoverBackGroundColorChange">
+                                                <td colspan="7" class="slds-text-align_center loader-row">
+                                                    <lightning-spinner alternative-text="Loading records..."
+                                                        variant="brand" size="large"></lightning-spinner>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template if:false={isRecordsLoading}>
+                                            <template for:each={paginatedResult} for:item="row">
+                                                <tr key={row.Id} class="custom-column">
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.speedType}>{row.speedType}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.activityDescription}>
+                                                            {row.activityDescription}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.activityCode}>
+                                                            {row.activityCode}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.amount}>{row.amount}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.transactionDate}>
+                                                            {row.transactionDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.DepositDate}>
+                                                            {row.DepositDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.action}>{row.action}</div>
+                                                    </td>
+
+                                                    <!-- <td>
+                                                                                    <lightning-button-menu alternative-text="Actions"
+                                                                                        class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                                        variant="bare" icon-name="utility:threedots_vertical" onselect={handleAction}
+                                                                                        menu-alignment="auto" data-id={row.Id}>
+                                                                                        <template if:false={row.isMenuOpen}>
+                                                                                            <lightning-menu-item label="View Request" value="view"
+                                                                                                data-id={row.Id}></lightning-menu-item>
+                                                                                            <lightning-menu-item label="Edit Request" value="edit"
+                                                                                                data-id={row.Id}></lightning-menu-item>
+                                                                                        </template>
+                                                                                    </lightning-button-menu>
+                                                                                </td> -->
+
+                                                </tr>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="custom-footer">
+                                            <td class="slds-truncate">Total</td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate">$1518</td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate"></td>
+                                            <td class="slds-truncate">
+                                                <div>
+                                                    <lightning-icon icon-name="doctype:pdf" size="small"
+                                                        alternative-text="PDF Document"
+                                                        class="slds-m-right_medium"></lightning-icon>
+                                                    <lightning-icon icon-name="doctype:csv" size="small"
+                                                        alternative-text="PDF Document"></lightning-icon>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+
+
+                            <!-- <div class="SE-pagination">
+                                <template if:true={showPages}>
+                                    <lightning-button class="clearCustomButton" label="<< Prev"
+                                        onclick={handlePreviousPage} disabled={isPreviousDisabled} variant="neutral">
+                                    </lightning-button>
+
+                                    <div class="page-info">
+                                        <span class="page-range">{startRecord}-{endRecord} of {totalRecords}</span>
+                                        <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                                    </div>
+
+                                    <lightning-button class="clearCustomButton" label="Next >>" onclick={handleNextPage}
+                                        disabled={isNextDisabled} variant="neutral">
+                                    </lightning-button>
+                                </template>
+                            </div> -->
+                        </template>
+                        <template if:false={recordCount}>
+                            <p class="no-data-message">“No requests found for the given criteria.”</p>
+                        </template>
+                    </div>
+
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

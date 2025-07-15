@@ -1,0 +1,173 @@
+.dashboard-container {
+    background: #f8fafc;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e2e8f0;
+    height: 100%;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.title {
+    font-size: 1rem;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.green-text {
+    color: rgb(34, 197, 94);
+}
+
+.blue-text {
+    color: rgb(63, 131, 248);
+}
+
+.red-text {
+    color: rgb(239, 68, 68);
+}
+
+.date-range-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.date-input {
+    font-size: 0.875rem;
+    min-width: 0;
+}
+
+.date-input lightning-input,
+.batch-select lightning-combobox {
+    --slds-c-input-spacing-horizontal-start: 0.5rem;
+    --slds-c-input-spacing-horizontal-end: 0.5rem;
+    --slds-c-input-height: 32px;
+}
+
+.date-input label,
+.batch-select label {
+    font-size: 0.75rem;
+}
+
+/* Filter icon CSS */
+
+.filter-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.filter-button:hover {
+    background-color: #f3f4f6;
+}
+
+.filter-text {
+    font-size: 0.875rem;
+    color: #1a1a1a;
+}
+
+.filter-icon {
+    --sds-c-icon-color-foreground-default: #1a1a1a;
+}
+
+.calendar-overlay {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9000;
+}
+.chart-wrapper {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.chart-canvas-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9000;
+    background: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chart-container {
+    position: relative;
+    top: 0px !important;
+}
+
+.modal-content {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    background: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10%);  /* Move up by 100% of its height /
+    margin-top: 0px;  / Add a small gap from the filter icon */
+}
+
+.chart-filter-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 9000;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.slds-card__footer {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #d8dde6;
+    margin-top: auto;
+}
+
+.slds-button_brand {
+    text-transform: none;
+    font-weight: normal;
+}
+
+.custom-card__footer{
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #d8dde6;
+    margin-top: auto;
+}
+
+.custom-footer_container{
+    margin-top: 23px;
+}

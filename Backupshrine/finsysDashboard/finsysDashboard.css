@@ -1,0 +1,105 @@
+.FS-upperside-total-card{
+    background-color: #ffff;
+    border-radius: 12px;
+    height: 125px;
+    padding: 10px;
+    margin: 5px;
+    border-top: 1px solid rgba(229, 229, 229, 1);   /* Top border */
+    border-right: 1px solid rgba(229, 229, 229, 1);  /* Right border */
+    border-bottom: 1px solid rgba(229, 229, 229, 1); /* Bottom border */
+}
+
+.FS-upperside-total-cumulative-card{
+    border-left: 5px solid #2e844a; 
+}
+
+.FS-upperside-total-openbatch-card{
+    border-left: 5px solid #09629f; 
+}
+
+.FS-upperside-total-closebatch-card{
+    border-left: 5px solid #ba0517; 
+}
+
+.FS-cumulative-amount, .FS-open-batch, .FS-close-batch{
+    display: flex;              /* Use flexbox for layout */
+    justify-content: space-between; /* Add space between the left and right text */
+    align-items: center;        /* Vertically center the items */
+    width: 100%; 
+}
+
+.FS-cumulative-amount .FS-cumulative-amount-leftside{
+    color: #2e844a;
+    font-family: "SF Pro", sans-serif;
+    font-weight: 700;
+    font-size: large;
+}
+
+.FS-cumulative-amount .FS-cumulative-amount-rightside{
+    background-color: #effceb;
+    border: 1px solid #194e31;
+    font-family: "SF Pro", sans-serif;
+    font-size: large;
+    font-weight: 700;
+    padding: 4px;
+    border-radius: 8px;
+    color: #2e844a;
+}
+
+.FS-open-batch-date, .FS-close-batch-date {
+    display: flex;              /* Use flexbox for layout */
+    justify-content: space-between; /* Add space between the left and right text */
+    align-items: center;        /* Vertically center the items */
+    width: 100%;
+    padding-top: 5px;
+}
+
+
+.FS-cumulative-amount-date {
+    display: flex;              /* Use flexbox for layout */
+    justify-content: space-between; /* Add space between the left and right text */
+    align-items: center;        /* Vertically center the items */
+    width: 100%;
+    padding-top: 10px;
+}
+
+.FS-open-batch .FS-open-batch-leftside{
+    color: #003a62;
+    font-family: "SF Pro", sans-serif;
+    font-weight: 700;
+    font-size: large;
+}
+
+.FS-open-batch .FS-open-batch-rightside{
+    background-color: #eef4ff;
+    border: 1px solid #09629f;
+    font-family: "SF Pro", sans-serif;
+    font-size: large;
+    font-weight: 700;
+    padding: 4px;
+    border-radius: 8px;
+    color: #09629f;
+}
+
+.FS-close-batch .FS-close-batch-leftside{
+    color: #8e030f;
+    font-family: "SF Pro", sans-serif;
+    font-weight: 700;
+    font-size: large;
+}
+
+.FS-close-batch .FS-close-batch-rightside{
+    background-color: #fef1ee;
+    border: 1px solid #ba0517;
+    font-family: "SF Pro", sans-serif;
+    font-size: large;
+    font-weight: 700;
+    padding: 4px;
+    border-radius: 8px;
+    color: #ba0517;
+}
+
+
+.FS-close-batch-date-inside, .FS-open-batch-date-inside{
+    padding: 5px;
+}

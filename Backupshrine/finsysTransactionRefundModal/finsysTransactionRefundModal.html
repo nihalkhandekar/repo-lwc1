@@ -1,0 +1,453 @@
+<template>
+    <lightning-modal-header class="SE-ModalHeader">
+        <div class="SE-ModalHeaderTitle specificHeader">
+            <h2>{headerText}</h2>
+        </div>
+        <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={closeModal}
+            class="custom-modal__close cancelButtonCss">
+        </lightning-button-icon>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="SE-modalMainBody modalBodyCssChange">
+            <div class="SE-modalFormStack">
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="bacth">Batch</label>
+                                <lightning-input label="Batch" name="bacth" variant="label-hidden"
+                                    id="bacth" disabled={isReadOnly} value={bacth} 
+                                    class="SE-searchCardInputLabel" onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="phoneNumber">Work Order Status</label>
+                                <lightning-combobox class="SE-notvalidate" label="Work Order Status" id="workOrderStatus"
+                                    name="workOrderStatus" disabled={isReadOnly} value={workOrderStatus} options={workOrderStatusOptions}
+                                    onchange={handleInputChange} variant="label-hidden">
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col SE-customCol50">
+                                <label class="SE-inputLabel" for="Comment">Comment</label>
+                                <lightning-input label="Comment" name="Comment" variant="label-hidden" class="SE-searchCardInputLabel"
+                                    id="Comment" value={Comment} disabled={isReadOnly} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Basic Info</h2>
+                            <p class="slds-text-body_small">Enter customer’s contact and organization details to proceed. Fields marked with an asterisk (*) are mandatory.</p>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="lastName"><span class="required-indicator">*</span>Last Name</label>
+                                <lightning-input label="Last Name" name="lastName" variant="label-hidden"
+                                    id="lastName" pattern="[A-Za-z]+" message-when-pattern-mismatch="Last name should only contain letters."
+                                    class="SE-searchCardInputLabel" value={lastName} required
+                                    disabled={isReadOnly} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="middleInitial">Middle Initial</label>
+                                <lightning-input label="Middle Initial" name="middleInitial" variant="label-hidden"
+                                    id="middleInitial" disabled={isReadOnly}  
+                                    class="SE-searchCardInputLabel"
+                                    pattern="[A-Za-z]+" message-when-pattern-mismatch="Middle name should only contains letters."
+                                    value={middleInitial} 
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="firstName"><span class="required-indicator">*</span>First Name</label>
+                                <div class={firstNameErrorClass}>
+                                    <lightning-input label="First Name" name="firstName" variant="label-hidden"
+                                        id="firstName" class="SE-searchCardInputLabel"
+                                        value={firstName} required disabled={isReadOnly} onchange={handleInputChange}
+                                        pattern="[A-Za-z]+" message-when-pattern-mismatch="First name should only contain letters.">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="organizationName">Organization Name</label>
+                                <lightning-input label="Organization Name" name="organizationName" variant="label-hidden"
+                                    id="organizationName" class="SE-searchCardInputLabel"
+                                    value={organizationName} disabled={isReadOnly} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                        
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="emailAddress"><span class="required-indicator">*</span>
+                                    Email Address</label>
+                                    <lightning-input label="Email Address" name="emailAddress" variant="label-hidden"
+                                        id="emailAddress" disabled={isReadOnly} 
+                                        class="SE-searchCardInputLabel" value={emailAddress} onchange={handleInputChange}>
+                                    </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="phoneNumber"><span class="required-indicator">*</span>Phone Number</label>
+                                    <lightning-input label="Phone Number" name="phoneNumber" variant="label-hidden"
+                                        id="phoneNumber" class="SE-searchCardInputLabel"
+                                        value={phoneNumber} required disabled={isReadOnly} onchange={handleInputChange}
+                                        pattern="[0-9]+" message-when-pattern-mismatch="Phone Number should only contain digits.">
+                                    </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol"></div>
+                            <div class="slds-col SE-customCol"></div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col">
+                                <div class="form-group slds-form-element_compound slds-form-element slds-m-top_medium">
+                                    <lightning-input-address 
+                                        class='address'
+                                        street={location} 
+                                        street-label="Address Line 1" 
+                                        city-label="City" 
+                                        city={city}
+                                        province-label="State" 
+                                        province={state} 
+                                        postal-code={zipCode}
+                                        postal-code-label="Zip Code" 
+                                        country-label="Country" 
+                                        country={country}
+                                        onchange={handleAddressChange} show-address-lookup show-compact-address required
+                                        disabled={isReadOnly}>
+                                    </lightning-input-address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:address" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Mailing Address</h2>
+                            <p class="slds-text-body_small">Enter customer’s mailing address.</p>
+                        </div>
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="input-radio-group">
+                                <div class="radio-line">
+                                    <label class="radioFont">Same as Customer Address</label>
+                                    <lightning-input 
+                                    type="radio" 
+                                    name="contactAddressSame" 
+                                    label="No" 
+                                    variant="label-hidden" 
+                                    value="No" 
+                                    checked={isNotsameAsContactAddressStringChecked} 
+                                    onchange={handleSameAddress} 
+                                    disabled={readOnly}>
+                                    </lightning-input>
+                                    <label class={radioCssDes}>No</label>
+                                </div>  
+                                <div class="radio-line">
+                                    <label class="radioFont">Address Type</label>
+                                    <lightning-input 
+                                        type="radio" 
+                                        name="overseasAddress" 
+                                        label="Overseas" 
+                                        variant="label-hidden" 
+                                        value="overseasAddress" 
+                                        checked={overseasAddressCheck} 
+                                    onchange={handleOverseasAddress} 
+                                    disabled={readOnly}>
+                                    </lightning-input>
+                                    <label class={radioCssDes}>Overseas</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col">
+                                <div class="form-group slds-form-element_compound slds-form-element slds-m-top_medium">
+                                    <lightning-input-address 
+                                        class='address'
+                                        street={location} 
+                                        street-label="Address Line 1" 
+                                        city-label="City" 
+                                        city={city}
+                                        province-label="State" 
+                                        province={state} 
+                                        postal-code={zipCode}
+                                        postal-code-label="Zip Code" 
+                                        country-label="Country" 
+                                        country={country}
+                                        onchange={handleAddressChange} show-address-lookup show-compact-address required
+                                        disabled={isReadOnly}>
+                                    </lightning-input-address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:article" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Work Order Transaction</h2>
+                            <p class="slds-text-body_small">Enter customer's contact and organization details to proceed. Fields marked with an asterisk (*) are mandatory.</p>
+                        </div>    
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="activity"><span class="required-indicator">*</span>Activity</label>
+                                <lightning-combobox class="SE-notvalidate" label="Select Activity" id="activity"
+                                    name="activity" value={activity} required options={activityOptions} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="activityCode"><span class="required-indicator">*</span>Activity Code</label>
+                                <lightning-combobox class="SE-notvalidate" label="Select Activity Code" id="activityCode"
+                                    name="activityCode" value={activityCode} options={activityCodeOptions} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-combobox>
+                            </div>
+                            <div class="slds-col SE-customCol"></div>
+                            <div class="slds-col SE-customCol"></div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel comboboxItemBackgroundColorChange" for="transactionDate">Transaction Date</label>
+                                <lightning-input class="SE-notvalidate" label="Transaction Date" id="transactionDate" variant="label-hidden"
+                                    name="transactionDate" type="date" value={transactionDate} read-only={isReadOnly}
+                                    onchange={handleInputChange} date-style="short">
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="feeAmount">Fee Amount</label>
+                                <lightning-input label="Fee Amount" name="feeAmount" variant="label-hidden" id="feeAmount" class="SE-notvalidate"
+                                    disabled={isReadOnly} value={feeAmount} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <lightning-input type="checkbox" label="Tax Exempt" name="taxExempt" id="taxExempt" disabled={isReadOnly}
+                                    class="esqclassalignment SE-notvalidate" onchange={handleInputChange}></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+ </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:contact" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Payment Details</h2>
+                            <p class="slds-text-body_small">Enter payment details to confirm work order processing.</p>
+                        </div>      
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="paymentCollection">Payment Collection</label>
+                                <lightning-combobox label="Payment Collection" name="paymentCollection" variant="label-hidden"
+                                     options={paymentCollectionOptions} value={paymentCollection}
+                                    onchange={handleInputChange} read-only={isReadOnly} class="SE-notvalidate">
+                                </lightning-combobox>
+                            </div> 
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="paymentType"><span class="required-indicator">*</span>Payment Type</label>
+                                <lightning-combobox class="SE-notvalidate" label="Payment Type" id="paymentType"
+                                    name="paymentType" value={paymentType} options={paymentTypeOptions} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-combobox>
+                            </div> 
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="cardType"><span class="required-indicator">*</span>Card Type</label>
+                                <lightning-combobox class="SE-notvalidate" label="Card Type" id="cardType"
+                                    name="cardType" value={cardType} options={cardTypeOptions} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-combobox>
+                            </div> 
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="cardDigit"><span class="required-indicator">*</span>Last 4 digits of Credit Card</label>
+                                <lightning-input class="SE-notvalidate" label="Card Digit" id="cardDigit"
+                                    name="cardDigit" value={cardDigit} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}
+                                    pattern="[0-9]+" message-when-pattern-mismatch="Credit card digits should only contain numeric value.">
+                                </lightning-input>
+                            </div> 
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="paymentAmount"><span class="required-indicator">*</span>Payment Amount</label>
+                                <lightning-input class="SE-notvalidate" label="Payment Amount" id="paymentAmount"
+                                    name="paymentAmount" value={paymentAmount} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}
+                                    pattern="[0-9]+" message-when-pattern-mismatch="Payment amount should only contain numeric value.">
+                                </lightning-input>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:assigned_resource" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Refund Details</h2>
+                            <p class="slds-text-body_small">Enter required details given below to proceed with refund.</p>
+                        </div>      
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColor Change">
+                                <label class="SE-inputLabel" for="refundMethod">Refund Method</label>
+                                <lightning-combobox class="SE-notvalidate" label="Refund Method" id="refundMethod"
+                                    name="refundMethod" value={refundMethod} options={refundMethodOptions} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-combobox>
+                            </div> 
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="refundDate">Date of Refund</label>
+                                <lightning-input class="SE-notvalidate" label="refundDate" id="refundDate"
+                                    name="refundDate" type="date" value={refundDate} variant="label-hidden"
+                                    onchange={handleInputChange} date-style="short" read-only={isReadOnly}>
+                                </lightning-input>
+                            </div> 
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="voucherId"><span class="required-indicator">*</span>Voucher ID</label>
+                                <lightning-input class="SE-notvalidate" label="voucherId" id="voucherId"
+                                    name="voucherId" value={voucherId} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-input>
+                            </div> 
+                            <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="refundAmount"><span class="required-indicator">*</span>Refund Amount</label>
+                                <lightning-input class="SE-notvalidate" label="Refund Amount" id="refundAmount"
+                                    name="refundAmount" value={refundAmount} variant="label-hidden"
+                                    onchange={handleInputChange} read-only={isReadOnly}>
+                                </lightning-input>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:budget_period" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Refund History</h2>
+                            <p class="slds-text-body_small">You can have a look at the refund history you have processed for this work order.</p>
+                        </div>     
+                    </div>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-scrollable_x custom-table-container">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead class="custom-header">
+                                        <tr>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="date">Date</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="refundId">Refund Transaction ID</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="originalTransactionId">Original Charge Transaction ID</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="voucherId">Voucher ID</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="refundStatus">Refund Status</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="paymentMethod">Payment Method</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="refundAmount">Refund Amount</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="refundReason">Reason for Refund</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class=" slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                            <td class="docContentText">
+                                                <div class="slds-truncate"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer class="SE-modalFooter">
+        <div class='slds-button-group'>
+            <div class="button-left-group">
+                <lightning-button label="Edit Customer" variant="neutral" class="button-spacing print-buttons">
+                </lightning-button> 
+            </div>
+            <div class="button-right-group SE-modalFooterButtonGroup">
+                <button class="slds-button SE-borderLessButton" onclick={closeModal}>Cancel</button>
+                <lightning-button variant="brand" label="Process Refund" class="save-button"
+                    onclick={handleAdd}></lightning-button>
+            </div>
+        </div>
+    </lightning-modal-footer>
+</template>

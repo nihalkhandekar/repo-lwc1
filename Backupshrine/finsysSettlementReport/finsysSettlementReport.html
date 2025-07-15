@@ -1,0 +1,161 @@
+<template>
+    <lightning-card>
+            <div class="SE-content">
+                <div class="SE-Card secondDivForSearching">
+                    <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                        <div class="buttoncontainerfilter">
+                            <div class="left-button slds-p-left_small">
+                                <span class="slds-text-title_bold slds-m-right_x-small search-css">Search Results</span>
+                                <lightning-badge label={recordsFound}
+                                    class="slds-badge_inverse result-no-css"></lightning-badge>
+                            </div>
+                            <div class="right-buttons">
+                                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-quarter" label="This Quarter"
+                                        class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonClick}>
+                                    <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                                    <span>Export to Excel</span>
+                                </div>
+                                <lightning-button icon-name="utility:download" variant="brand" label="Download PDF"
+                                    onclick={handleDownloadPdf} class="customButton slds-m-left_small">
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <template if:true={isrecordFound}>
+                        <div class="slds-scrollable_x custom-table-wrapper">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                <thead>
+                                    <tr class="custom-header">
+                                        <th scope="col" data-field="WorkOrderID" class={sortedClassWorkOrderID} onclick={handleSort}>
+                                            <div class="slds-truncate">
+                                                Work Order #
+                                                <lightning-icon icon-name={sortIcons.WorkOrderID}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                        <th scope="col" data-field="TransactionType" class={sortedClassTransactionType} onclick={handleSort}>
+                                            <div class="slds-truncate">
+                                                Transaction Type
+                                                <lightning-icon icon-name={sortIcons.TransactionType}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                        <th scope="col" data-field="PaymentNumber" class={sortedClassPaymentNumber} onclick={handleSort}>
+                                            <div class="slds-truncate" >
+                                                Check/Money Order/Card #
+                                                <lightning-icon icon-name={sortIcons.PaymentNumber}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                        <th scope="col" data-field="CreatedBy" class={sortedClassCreatedBy} onclick={handleSort}>
+                                            <div class="slds-truncate" >
+                                                Received By
+                                                <lightning-icon icon-name={sortIcons.CreatedBy}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                        <th scope="col" data-field="Amount" class={sortedClassAmount} onclick={handleSort}>
+                                            <div class="slds-truncate" >
+                                                Amount
+                                                <lightning-icon icon-name={sortIcons.Amount}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                        <th scope="col" data-field="Date" class={sortedClassDate} onclick={handleSort}>
+                                            <div class="slds-truncate" >
+                                                Date
+                                                <lightning-icon icon-name={sortIcons.Date}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                        <th scope="col" data-field="Comments" class={sortedClassComments} onclick={handleSort}>
+                                            <div class="slds-truncate" >
+                                                Notes
+                                                <lightning-icon icon-name={sortIcons.Comments}   class="sort-icon"
+                                        size="x-small"></lightning-icon>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template if:false={isRecordsLoading}>
+                                        <template for:each={settlementReport} for:item="row">
+                                            <tr key={row.Id} class={row.className}>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.WorkOrderID}>{row.WorkOrderID}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.TransactionType}>{row.TransactionType}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.PaymentNumber}>{row.PaymentNumber}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.CreatedBy}>{row.CreatedBy}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.Amount}>{row.Amount}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.Date}>{row.Date}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={row.Comments}>{row.Comments}</div>
+                                                </td>
+                                            </tr>
+                                        </template>
+
+                                    </template>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </template>
+                    <template if:true={isRecordsLoading}>
+                        <div class="slds-text-align_center loader-row">
+                            <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                        </div>
+                    </template>
+
+                    <template if:false={isrecordFound}>
+                        <div class="no-result-found">
+                            <h1 class="no-result-found-label">No Results Found</h1>
+                        </div>
+                    </template>
+
+                    <div class="pagination-container">
+                        <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                            disabled={isPreviousDisabled} variant="neutral">
+                        </lightning-button>
+    
+                        <div class="page-info">
+                            <span class="page-range">{startRecord}-{endRecord} of {recordsFound}</span>
+                            <span class="page-text"> | Page {currentPage} of {totalPages}</span>
+                        </div>
+    
+                        <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                            disabled={isNextDisabled} variant="neutral">
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+    </lightning-card>
+    <c-finsys-export-to-excel></c-finsys-export-to-excel>
+    <c-finsys-reports-pdf-generator></c-finsys-reports-pdf-generator>
+    
+</template>
