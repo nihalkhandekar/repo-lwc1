@@ -1,0 +1,43 @@
+<template>
+    <lightning-modal-header class="SE-ModalHeader">
+        <div class="SE-ModalHeaderTitle">
+            <h2>Print Payment Receipt</h2>
+        </div>
+        <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={cloeModels}
+            class="custom-modal__close">
+        </lightning-button-icon>
+    </lightning-modal-header>
+    <lightning-modal-body>
+ <!-- THIS IS FOR SHOWING MULTIPLE RECORDS OF ADD PAYMENT  -->
+        <template for:each={records} for:item="record">
+            <div key={record.workOrder}>
+                <p class="modal-text work-order">Work Order#: {workOrder}</p>
+                <p class="modal-text total-amount">
+                     Amount Paid: ${record.totalAmountPaid}
+                </p>
+                <p class="modal-text">Payment Method: {record.paymentMethod}</p>
+                <p class="modal-text">Auth Code: {authCode}</p>
+                <p class="modal-text">Date of Payment: {dateOfPayment}</p>
+                <p class="slds-var-m-margin-bottom_small"></p> 
+                <hr></hr>
+            </div>
+        </template>
+   
+    </lightning-modal-body>
+    <lightning-modal-footer class="SE-modalFooter">
+        <div class="slds-button-group">
+            <div class="button-left-group">
+                <lightning-button label="Send Payment Receipt via email" variant="neutral" class="button-spacing print-buttons"
+                    onclick={handleSendEmail}></lightning-button>
+            </div>
+            
+            <div class="button-right-group SE-modalFooterButtonGroup">
+                <button class="slds-button SE-borderLessButton" onclick={cloeModels}>Cancel</button>
+                <lightning-button variant="brand" label="Print Payment Receipt" class="save-button"
+                    onclick={handlePrint}></lightning-button>
+            </div>
+        </div>
+    </lightning-modal-footer>
+    <c-sap_-pdf-genrator data-id="pdfGenerator" records={records}></c-sap_-pdf-genrator>
+
+</template>

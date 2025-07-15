@@ -1,0 +1,184 @@
+<template>
+    <div class="publicofficials-container">
+        <h1 class="page-heading">Labels/Lists</h1>
+        <div class="label-container">
+            <h1 class="label-heading">Labels/Lists</h1>
+            <div class="list-block">
+                <!-- Left Side Content -->
+                <div class="left-list">
+                    <!-- Label Type Section -->
+                    <div class="type-container">
+                        <label class="label-hedear">Label Type</label>
+                        <div class="label-options">
+                            <label>
+                                <input type="radio" name="labelType" value="5160" checked onchange={handleLabelTypeChange}> 5160 Labels
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="5163"  onchange={handleLabelTypeChange}> 5163 Labels
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="Envelope" onchange={handleLabelTypeChange}> Envelope
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="Portrait" onchange={handleLabelTypeChange}> Portrait
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="Landscape" onchange={handleLabelTypeChange}> Landscape
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="CallingList" onchange={handleLabelTypeChange}> Calling List
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="5160Dymo"  onchange={handleLabelTypeChange}> 5160 Dymo Labels
+                            </label>
+                            <label>
+                                <input type="radio" name="labelType" value="5163Dymo" onchange={handleLabelTypeChange}> 5163 Dymo Labels
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Select Town Section -->
+                    <div class="town-container">
+                        <label class="town-title">Select Town</label>
+                        <div class="state-options">
+                            <label>
+                                <input type="checkbox" name="town" value="All" onchange={handleSelectAllTowns}> All
+                            </label>
+                            <template for:each={towns} for:item="town">
+                                <label key={town.Id}>
+                                    <input type="checkbox" name="town" value={town.Name} data-id={town.Id} onchange={handleTownChange}> {town.Name}
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Select Borough/City Section -->
+                    <div class="town-container">
+                        <label class="town-title">Borough/City</label>
+                        <div class="state-options">
+                            <label>
+                                <input type="checkbox" name="city" value="All" onchange={handleSelectAllCities}> All
+                            </label>
+                            <template for:each={cities} for:item="city">
+                                <label key={city.Id}>
+                                    <input type="checkbox" name="city" value={city.Name} data-id={city.Id} onchange={handleCityChange}> {city.Name}
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Content -->
+                <div class="right-list">
+                    <!-- Election Section -->
+                    <div class="label-container election-container">
+                        <label>
+                            <input type="checkbox" name="title" value="Election" onchange={handleTitleChange}> <label class="election-title">Election</label>
+                        </label>
+                        <div class="election-options">
+                            <label>
+                                <input type="radio" name="electionMonth" value="May" onchange={handleElectionMonthChange}> May
+                            </label>
+                            <label>
+                                <input type="radio" name="electionMonth" value="Nov" onchange={handleElectionMonthChange}> November
+                            </label>
+                            <label>
+                                <input type="radio" name="electionMonth" value="Both" onchange={handleElectionMonthChange}> Both
+                            </label>
+                        </div>
+                    </div>
+                    <label class="election-title">Title</label>
+
+                    <!-- Town Clerk Section -->
+                    <div class="label-container election-container clerk-container">
+                        <label>
+                            <input type="checkbox" name="title" value="Town Clerk" onchange={handleTitleChange}> <label class="election-title">Town Clerk</label>
+                        </label>
+                    </div>
+
+                    <!-- Registrars Section -->
+                    <div class="label-container election-container registrar-container">
+                        <label>
+                            <input type="checkbox" name="title" value="Registrars" onchange={handleTitleChange}> <label class="election-title">Registrars</label>
+                        </label>
+                        <div class="election-options registrars-options">
+                            <template for:each={registrarOptions} for:item="option">
+                                <label key={option}>
+                                    <input type="checkbox" name="registrarOption" value={option} onchange={handleRegistrarOptionChange}> {option}
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Mayor/1st Selectmen Section -->
+                    <div class="label-container election-container mayor-container">
+                        <label>
+                            <input type="checkbox" name="title" value="Mayor/1st Selectmen" onchange={handleTitleChange}> <label class="election-title">Mayor/1st Selectmen</label>
+                        </label>
+                        <div class="election-options mayor-options">
+                            <template for:each={mayorOptions} for:item="option">
+                                <label key={option}>
+                                    <input type="checkbox" name="mayorOption" value={option} onchange={handleMayorOptionChange}> {option}
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Legislator Section -->
+                    <div class="label-container election-container legislator-container">
+                        <label>
+                            <input type="checkbox" name="title" value="Legislator" onchange={handleTitleChange}> <label class="election-title">Legislator</label>
+                        </label>
+                        <div class="legislator-options">
+                            <div class="legislator-type-options">
+                                <template for:each={legislatorTypes} for:item="type">
+                                    <label key={type}>
+                                        <input type="checkbox" name="legislatorType" value={type} onchange={handleLegislatorTypeChange}> {type}
+                                    </label>
+                                </template>
+                            </div>
+                            <div class="election-options legislator-address-options">
+                                <template for:each={legislatorAddressOptions} for:item="address">
+                                    <label key={address}>
+                                        <input type="radio" name="legislatorAddress" value={address} onchange={handleLegislatorAddressChange}> {address}
+                                    </label>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ROV Section -->
+                    <div class="label-container election-container clerk-container">
+                        <label>
+                            <input type="checkbox" name="title" value="ROV Offices" onchange={handleTitleChange}> <label class="election-title">ROV Offices</label>
+                        </label>
+                    </div>
+
+                    <!-- Out of State Election Offices Section -->
+                    <div class="label-container election-container state-container">
+                        <input type="checkbox" name="title" value="Out of State" onchange={handleTitleChange}> <label class="election-title">Out of State Election Offices</label>
+                        <div class="state-options">
+                            <label>
+                                <input type="checkbox" name="state" value="All" onchange={handleSelectAllStates}> All
+                            </label>
+                            <template for:each={states} for:item="state">
+                                <label key={state.Id}>
+                                    <input type="checkbox" name="state" value={state.Name} data-id={state.Id} onchange={handleStateChange}> {state.Name}
+                                </label>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button Group -->
+            <div class="button-group">
+                <lightning-button label="Clear All" onclick={handleClear} variant="neutral" class="slds-m-right_x-small slds-button_neutral clear-font"></lightning-button>
+                <lightning-button label="Generate Labels" onclick={handleGenerateLabel} variant="brand" class="slds-button_brand searchbutton"></lightning-button>
+            </div>
+        </div>
+
+        <c-sap_-public-official-print></c-sap_-public-official-print> <!-- Assuming sap_PdfGenerator is the child LWC -->
+
+    </div>
+</template>

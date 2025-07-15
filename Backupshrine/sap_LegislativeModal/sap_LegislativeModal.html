@@ -1,0 +1,470 @@
+<template>
+    <div class="SE-ModalHeaderMain full-mode">
+        <div class="header-container specificHeader">
+            <lightning-button-icon icon-name="utility:back" size="large" alternative-text="Close"
+                onclick={goBackModal} class="custom-modal__back">
+            </lightning-button-icon>
+                <h2 class="slds-text-heading_medium">{headerText}</h2>
+                <!-- Conditionally render the Edit button when in view mode -->
+                <template if:true={isReadOnly}>
+                    <lightning-button  icon-name="utility:edit"
+                    alternative-text="Edit"
+                    class="edit-button editButtonCss"
+                    onclick={handleEditClick}
+                    title="Edit"
+                    variant="base"
+                    aria-label="Edit" label="Edit" ></lightning-button>
+
+                </template>
+        </div>
+    </div>
+    <div class="SE-ModalHeader">
+        <div class="custom-modal-body modalBodyCssChange">
+            <div class="personal-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:user" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Basic Info</h2>
+                        <p class="slds-text-body_small">Enter customer's contact and organization details to proceed. Fields marked with an asterisk (*) are mandatory.</p>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap comboboxItemBackgroundColorChange allignment-fix">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                        label="Title"
+                        name="Title"
+                        options={titleSelectOptions} 
+                        value={title} 
+                        disabled={isReadOnly}
+                        onchange={handleTitleChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                        label="Party"
+                        name="Party"
+                        options={partySelectOptions} 
+                        class="SE-searchCardInputLabel"
+                        value={party} 
+                        disabled={isReadOnly}
+                        onchange={handleFieldChange}
+                        required>
+                        </lightning-combobox>
+                    </div>
+                    <template if:true={boolAssembly}>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input 
+                            label="Assembly District"
+                            class="SE-searchCardInputLabel"
+                            name="Assembly District"
+                            value={district}                          
+                           disabled={isReadOnly}
+                            onchange={handleFieldChange}
+                            required >
+                            </lightning-input>
+                        </div>       
+
+                    </template>
+                    <template if:true={boolSenat}>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input 
+                            label="Senatorial District"
+                            class="SE-searchCardInputLabel"
+                            name="Assembly District"
+                            value={district}                          
+                           disabled={isReadOnly}
+                            onchange={handleFieldChange}
+                            required >
+                            </lightning-input>
+                        </div>       
+                        
+                    </template>
+                    <template if:true={boolDist}>
+                        <div class="slds-col slds-size_1-of-4">
+                            <lightning-input 
+                           label="District"
+                            name="Assembly District"
+                            class="SE-searchCardInputLabel"
+                            value={district}                          
+                           disabled={isReadOnly}
+                            onchange={handleFieldChange}
+                            required >
+                            </lightning-input>
+                        </div>       
+                        
+                    </template>
+                            
+                    
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange allignment-fix">
+                    <div class="slds-col slds-size_1-of-4 ">
+                        <lightning-combobox
+                            label="Prefix"
+                            name="Prefix"
+                            options={prefixSelectOptions} 
+                            value={prefix} 
+                            class="SE-searchCardInputLabel"
+                            disabled={isReadOnly}
+                            onchange={handlePrefixChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input 
+                        label="Last Name"
+                        name="lastName" 
+                        value={lastName}                          
+                       disabled={isReadOnly}
+                        onchange={handleFieldChange}
+                        class="SE-searchCardInputLabel"
+                        type="text"
+                        pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+"
+                        message-when-pattern-mismatch="Last name should only contain letters."
+                        required >
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input 
+                        label="First Name"
+                        name="firstName" 
+                        value={firstName}                          
+                        disabled={isReadOnly}
+                        onchange={handleFieldChange}
+                        class="SE-searchCardInputLabel"
+                        type="text"
+                        pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+"
+                        message-when-pattern-mismatch="First name should only contain letters."
+                        required >
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input 
+                        label="Middle Initial"
+                        name="middleName" 
+                        value={middleName}                          
+                        disabled={isReadOnly}
+                        onchange={handleFieldChange}
+                        class="SE-searchCardInputLabel"
+                        type="text"
+                        pattern="^[A-Za-z]+(\.[A-Za-z]+)*\.?$"
+                        message-when-pattern-mismatch="Middle name should only contain letters.">
+                        </lightning-input>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium comboboxItemBackgroundColorChange allignment-fix">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-combobox
+                        label="Suffix"
+                        name="Suffix"
+                        value={suffix} 
+                        options={suffixSelectOptions} 
+                        disabled={isReadOnly}
+                        onchange={handleSuffixChange}>
+                        </lightning-combobox>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input 
+                        label="Personal Name"
+                        name="personalName" 
+                        value={personalName}                          
+                        disabled={isReadOnly}
+                        onchange={handleFieldChange}
+                        class="SE-searchCardInputLabel"
+                        type="text"
+                        pattern="[A-Za-z]+"
+                        message-when-pattern-mismatch="Personal name should only contain letters.">
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input 
+                        label="Email"
+                        name="Email" 
+                        value={email}                          
+                        disabled={isReadOnly}
+                        onchange={handleemailChange}
+                        class="SE-searchCardInputLabel"
+                        onblur={validateEmailAddress}
+                        required>
+                        </lightning-input>
+                    </div>
+                    <div class="slds-col slds-size_1-of-4"></div>
+                </div>
+            </div>
+
+            <!-- <div class="slds-box slds-theme_shade slds-m-top_medium"> -->
+            <div class="address-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:service_territory_member" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">LOB Address</h2>
+                        <p class="slds-text-body_small">Enter address details to proceed further.</p>
+                    </div>
+                    <lightning-input
+                    type="radio"
+                    name="Preferred Address"
+                    label="Preferred Address"
+                    disabled={isReadOnly}
+                    data-type="LOB"
+                    checked={isLOBSelected} 
+                    onchange={handlePrefferedAddressChange}></lightning-input>
+                </div>
+            
+                <div class="form-group full-width slds-form-element_compound slds-form-element">
+                    <template if:true={isReadOnly}>
+                        <lightning-input-address 
+                        class='address'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={address1}    
+                        street-label="Address Line 1"
+                        subpremise={address2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={city}
+                        province-label="State"
+                        province={state}
+                        postal-code={zipCode}
+                        postal-code-label="Zip Code"
+                        country-label="Country"
+                        country={country}
+                        onchange={handleAddressChange}
+                        show-compact-address	
+                        disabled
+                        required>
+                    </lightning-input-address>
+                    </template>
+                    <template if:false={isReadOnly}>
+                        <lightning-input-address 
+                        class='address class="SE-searchCardInputLabel"'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={address1}    
+                        street-label="Address Line 1"
+                        subpremise={address2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={city}
+                        province-label="State"
+                        province={state}
+                        postal-code={zipCode}
+                        postal-code-label="Zip Code"
+                        country-label="Country"
+                        country={country}
+                        onchange={handleAddressChange}
+                        show-address-lookup
+                        show-compact-address	
+                        required>
+                    </lightning-input-address>
+                    </template>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium allignment-fix">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Fax" name="fax" disabled={isReadOnly} type="tel" value={fax} onchange={handleFieldChange} onkeypress={validateNumericInput}></lightning-input>
+                    </div>
+                     <div class="slds-col slds-size_1-of-4 business-extension">
+                        <lightning-input label="Telephone" name="telephone" class="SE-searchCardInputLabel" 
+                        maxlength="12" minlength = "12" message-when-too-short="Please enter 10 digits Phone Number"
+                        disabled={isReadOnly} type="tel"  value={telephone} onchange={handleFieldChange} onkeypress={handleKeyPress} required></lightning-input>
+                        <lightning-input label="Extension" name="extension" class="SE-searchCardInputLabel" disabled={isReadOnly} type="tel" value={extension} onchange={handleFieldChange} onkeypress={validateNumericInput}></lightning-input>
+                    </div>          
+                    <div class="slds-col slds-size_1-of-4">
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                    </div>
+                </div>
+            </div>
+
+            <div class="address-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:service_territory_member" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Business Address</h2>
+                        <p class="slds-text-body_small">Enter address details to proceed further.</p>
+                    </div>
+                    <lightning-input type="checkbox" label="Same as LOB Address" disabled={isReadOnly} value={isSameBusinessAddress} onchange={handleLobBusinessAddressChange}></lightning-input>
+                    <lightning-input
+                    type="radio"
+                    name="Preferred Address"
+                    label="Preferred Address"
+                    disabled={isReadOnly}
+                    data-type="Business"
+                    checked={isBusinessSelected} 
+                    onchange={handlePrefferedAddressChange}></lightning-input>
+                </div>
+            
+                <div class="form-group full-width slds-form-element_compound slds-form-element">
+                    <template if:true={isDisabledBusiness}>
+                        <lightning-input-address 
+                        class='address'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={businessAddress1}    
+                        street-label="Address Line 1"
+                        subpremise={businessAddress2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={businessCity}
+                        province-label="State"
+                        province={businessState}
+                        postal-code={businessZipCode}
+                        postal-code-label="Zip Code"
+                        country-label="Country"
+                        country={businessCountry}
+                        onchange={handleAddressChange}
+                        show-compact-address	
+                        disabled
+                        required>
+                    </lightning-input-address>
+                    </template>
+                    <template if:false={isDisabledBusiness}>
+                        <lightning-input-address 
+                        class='address SE-searchCardInputLabel'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={businessAddress1}    
+                        street-label="Address Line 1"
+                        subpremise={businessAddress2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={businessCity}
+                        province-label="State"
+                        province={businessState}
+                        postal-code={businessZipCode}
+                        postal-code-label="Zip Code"
+                        country-label="Country"
+                        country={businessCountry}
+                        onchange={handleAddressChange}
+                        show-address-lookup
+                        show-compact-address	
+                        required>
+                    </lightning-input-address>
+                    </template>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium allignment-fix">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Fax" name="fax" disabled={isDisabledBusiness} type="tel" value={businessFax} onchange={handleFieldChange} onkeypress={validateNumericInput}></lightning-input>
+                    </div>
+                     <div class="slds-col slds-size_1-of-4 business-extension">
+                        <lightning-input label="Telephone" class="SE-searchCardInputLabel" name="businessTelephone"
+                        maxlength="12" minlength = "12" message-when-too-short="Please enter 10 digits Phone Number"
+                         disabled={isDisabledBusiness} type="tel"  value={businessTelephone} onchange={handleFieldChange} onkeypress={handleKeyPress} required></lightning-input>
+                        <lightning-input label="Extension" class="SE-searchCardInputLabel" name="businessExtension" disabled={isDisabledBusiness} type="tel" value={businessExtension} onchange={handleFieldChange} onkeypress={validateNumericInput} ></lightning-input>
+                    </div>          
+                    <div class="slds-col slds-size_1-of-4">
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                    </div>
+                </div>
+            </div>
+
+            <div class="address-info-section">
+                <div class="slds-media slds-media_center slds-m-bottom_medium info-sections">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="standard:service_territory_member" size="medium" class="modalAddressSectionIconChange"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_small">Home Address</h2>
+                        <p class="slds-text-body_small">Enter address details to proceed further.</p>
+                    </div>
+                    <lightning-input type="checkbox" label="Same as LOB Address" disabled={isReadOnly} value={isSameHomeAddress} onchange={handleLobHomeAddressChange}></lightning-input>
+                    <lightning-input
+                    type="radio"
+                    name="Preferred Address"
+                    label="Preferred Address"
+                    disabled={isReadOnly}
+                    data-type="Home"
+                    checked={isHomeSelected} 
+                    onchange={handlePrefferedAddressChange}></lightning-input>
+                </div>
+            
+                <div class="form-group full-width slds-form-element_compound slds-form-element">
+                    <template if:true={isDisabledHome}>
+                        <lightning-input-address 
+                        class='address'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={homeAddress1}    
+                        street-label="Address Line 1"
+                        subpremise={homeAddress2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={homeCity}
+                        province-label="State"
+                        province={homeState}
+                        postal-code={homeZipCode}
+                        postal-code-label="Zip Code"
+                        country-label="Country"
+                        country={homeCountry}
+                        onchange={handleAddressChange}
+                        show-compact-address	
+                        disabled
+                        required>
+                    </lightning-input-address>
+                    </template>
+                    <template if:false={isDisabledHome}>
+                        <lightning-input-address 
+                        class='address SE-searchCardInputLabel'
+                        address-lookup-placeholder="Search country, city, state, street...."
+                        street={homeAddress1}    
+                        street-label="Address Line 1"
+                        subpremise={homeAddress2}
+                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                        subpremise-label="Suite/Apartment/Floor"
+                        city-label="City"
+                        city={homeCity}
+                        province-label="State"
+                        province={homeState}
+                        postal-code={homeZipCode}
+                        postal-code-label="Zip Code"
+                        country-label="Country"
+                        country={homeCountry}
+                        onchange={handleAddressChange}
+                        show-address-lookup
+                        show-compact-address	
+                        required>
+                    </lightning-input-address>
+                    </template>
+                </div>
+                <div class="slds-grid slds-gutters slds-wrap slds-m-top_medium allignment-fix">
+                    <div class="slds-col slds-size_1-of-4">
+                        <lightning-input label="Fax" name="homeFax" disabled={isDisabledHome} type="tel"  value={homeFax} onchange={handleFieldChange} onkeypress={handleKeyPress}></lightning-input>
+                    </div>
+                     <div class="slds-col slds-size_1-of-4 business-extension">
+                        <lightning-input label="Telephone" class="SE-searchCardInputLabel" name="homeTelephone" disabled={isDisabledHome} type="tel"
+                        maxlength="12" minlength = "12" message-when-too-short="Please enter 10 digits Phone Number"
+                          value={homeTelephone} onchange={handleFieldChange} onkeypress={validateNumericInput} required></lightning-input>
+                        <lightning-input label="Extension" class="SE-searchCardInputLabel" name="homeExtension" disabled={isDisabledHome} type="tel" value={homeExtension} onchange={handleFieldChange} onkeypress={validateNumericInput} ></lightning-input>
+                    </div>          
+                    <div class="slds-col slds-size_1-of-4">
+                    </div>
+                    <div class="slds-col slds-size_1-of-4">
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="space-info-section">
+                <div class="slds-media_center slds-m-bottom_medium custom-space"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="button-group">
+            <button class="slds-button SE-borderLessButton cancel-button button-font" onclick={goBackModal}>Cancel</button>
+            <template if:false={isReadOnly}>
+                <lightning-button variant="brand" class="button-font" label="Save" disabled={isReadOnly} onclick={handleAdd}></lightning-button>
+    
+            </template>
+        </div>
+    </div>
+    <c-sap_-toast-message-state-modal></c-sap_-toast-message-state-modal>
+</template>

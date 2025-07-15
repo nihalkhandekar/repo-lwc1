@@ -1,0 +1,360 @@
+<template>
+    <lightning-card>
+        <div class="SE-mainBody">
+            <div class="SE-content">
+                <div class="SE-Card">
+                    <div class="SE-searchCardHeader">
+                        <div class="SE-searchCardHeaderIcon">
+                            <lightning-icon icon-name="standard:search" size="medium"></lightning-icon>
+                        </div>
+                        <div class="SE-searchCardHeaderTitle">
+                            <div class="SE-searchCardHeaderTitleText">
+                                Search
+                            </div>
+                        </div>
+                    </div>
+                    <div class="SE-searchCardContent searchInputFieldsAndComboboxContainer">
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Refund ID" id="refundId"
+                                        name="refundId" type="text" value={refundId} onchange={handleInputChange}
+                                        placeholder="e.g 2024-10117">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" label="Last Name" id="lastName"
+                                        name="lastName" type="text" pattern="[A-Za-z]+" message-when-pattern-mismatch="Last name should only contain letters." value={lastName} onchange={handleInputChange}
+                                        placeholder="e.g Doe">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" label="First Name" id="firstName"
+                                        name="firstName" type="text" value={firstName} pattern="[A-Za-z]+" message-when-pattern-mismatch="First name should only contain letters." onchange={handleInputChange}
+                                        placeholder="e.g John">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Refund Method" id="refundMethod"
+                                        name="refundMethod" value={refundMethod} options={refundMethodOptions}
+                                        onchange={handleInputChange} placeholder="Select refund method">
+                                </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Status" id="status"
+                                        name="status" value={status} options={statusOptions}
+                                        onchange={handleInputChange} placeholder="Select status">
+                                </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Refund Amount" id="refundAmount"
+                                        name="refundAmount" value={refundAmount} 
+                                        onchange={handleInputChange} placeholder="e.g. $60.00">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="VoucherId/CC #"
+                                        id="voucherCheck" name="voucherCheck" value={voucherCheck}
+                                        onchange={handleInputChange} placeholder="e.g. 32145">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Refund Date" id="refundDate"
+                                    name="refundDate" type="date" value={refundDate} 
+                                    onchange={handleInputChange} date-style="short" placeholder="mm/dd/yyyy">
+                                </lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </div>
+                    
+                    <div class="SE-footer">
+                        <div class="button-group">
+                            <div class="clear-all" onclick={handleClear}>
+                                <span class="clear-icon-wrapper">
+                                    <lightning-icon icon-name="utility:close" size="xx-small" class="clear-icon"></lightning-icon>
+                                </span>
+                                <span class="clear-text">Clear All</span>
+                            </div>
+                            <lightning-button icon-name="utility:search" variant="brand" alternative-text="Search"
+                                label="Search" onclick={handleSearch} title="Search" class="customButton">
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+                <template if:true={isLoading}>
+                    <div class="spinner-container">
+                        <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                    </div>
+                </template>
+                <template if:false={isLoading}>
+                    <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                    <div class="slds-grid slds-grid_align-end">
+                        <div class="buttoncontainerfilter">
+
+                            <div class="left-button">
+                                <span class="slds-text-title_bold slds-m-right_x-small">Search Result:</span>
+                                <lightning-badge label={recordCountLabel} class="totoalcountbadge">
+                                </lightning-badge>
+                            </div>
+
+                            <div class="right-buttons">
+                                <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-quarter" label="This Quarter"
+                                class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-button-menu 
+                                icon-position="right" 
+                                data-id="filterMenu"
+                                alternative-text="Filter By Amount" 
+                                label="Filter By Amount" 
+                                icon-name="utility:filterList"
+                                menu-alignment="right"
+                                onselect={handleAmountFilterChange}>
+                                <lightning-menu-item value="0-50" label="$0 - $50"></lightning-menu-item>
+                                <lightning-menu-item value="51-100" label="$51 - $100"></lightning-menu-item>
+                                <lightning-menu-item value="101-200" label="$101 - $200"></lightning-menu-item>
+                                <lightning-menu-item value="201-300" label="$201 - $300"></lightning-menu-item>
+                                <lightning-menu-item value="301-400" label="$301 - $400"></lightning-menu-item>
+                                <lightning-menu-item value="all" label="All Amounts"></lightning-menu-item>
+                        </lightning-button-menu>
+                            </div>
+                        </div>
+                    </div>
+                        <template if:true={hasResults}>
+                            <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead>
+                                        <tr class="custom-header TrHoverBackGroundColorChange">
+                                            <th scope="col" onclick={sortByField} data-field="workOrderNumber">
+                                                <div class="slds-truncate" title="Work Order Number">Work Order Number
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Refund ID">Refund ID</div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="lastName">
+                                                <div class="slds-truncate" title="Last Name">Last Name
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="firstName">
+                                                <div class="slds-truncate" title="First Name">First Name
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Refund Method">Refund Method</div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="status">
+                                                <div class="slds-truncate" title="Status">Status
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Rejection Reason">Rejection Reason</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Refund Amount">Refund Amount</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="VoucherId/CC">VoucherId/CC #</div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Transaction Date">Refund Date</div>
+                                            </th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={isRecordsLoading}>
+                                            <tr class="no-border-row">
+                                                <td colspan="11" class="slds-text-align_center loader-row">
+                                                    <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template if:false={isRecordsLoading}>
+                                            <template for:each={data} for:item="row">
+                                                <tr key={row.Id} class="custom-column">
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.workOrderNumber}>
+                                                            <template if:true={row.hasFeeItem}>
+                                                                <template if:true={row.feeItemsCount}>
+                                                                    <span class="slds-icon_container slds-icon-border-filled icon-border">
+                                                                        <lightning-icon
+                                                                            class={iconClass}
+                                                                            data-id={row.Id}
+                                                                            onclick={toggleDocument}
+                                                                            icon-name={row.iconName}
+                                                                            size="xx-small"
+                                                                            alternative-text="Toggle">
+                                                                        </lightning-icon>
+                                                                    </span>
+                                                                    <span class="tableTextChild">{row.workOrderNumber}</span>
+                                                                    <span class="doc-count">+{row.feeItemsCount}</span>
+                                                                </template>
+                                                                <template if:false={row.feeItemsCount}>
+                                                                    <span class="tableTextNum">{row.workOrderNumber}</span>
+                                                                </template>
+                                                            </template>
+                                                            <template if:false={row.hasFeeItem}>
+                                                                <span class="tableTextNum">{row.workOrderNumber}</span>
+                                                            </template>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.refundId}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.lastName}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.firstName}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.refundMethod}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.status}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.rejectionReason}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate slds-text-align_right">{row.refundAmount}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.voucherId}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate">{row.transactionDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-button-menu alternative-text="Actions"
+                                                            class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                            variant="bare"
+                                                            icon-name="utility:threedots_vertical"
+                                                            onselect={handleAction}
+                                                            menu-alignment="auto"
+                                                            data-id={row.Id}
+                                                            data-value={row.firstFeeId}>
+                                                            <lightning-menu-item label="View Refund" value="view_request"></lightning-menu-item>
+                                                            <lightning-menu-item label="Edit Refund" value="edit_request"></lightning-menu-item>
+                                                        </lightning-button-menu>
+                                                    </td>
+                                                </tr>
+                                                
+                                                <!-- Expanded rows for fee items -->
+                                                <template if:true={row.isExpanded}>
+                                                    <template for:each={row.feeItems} for:item="feeItem">
+                                                        <tr key={feeItem.id} class="custom-column">
+                                                            <td>
+                                                                <div class="slds-truncate tableTextNum" title={row.workOrderNumber}>
+                                                                    {row.workOrderNumber}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{feeItem.refundId}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{row.lastName}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{row.firstName}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{feeItem.refundMethod}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{feeItem.status}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{feeItem.rejectionReason}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate slds-text-align_right">{feeItem.refundAmount}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{feeItem.checkCC}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate">{feeItem.createdDate}</div>
+                                                            </td>
+                                                            <td>
+                                                                <lightning-button-menu alternative-text="Actions"
+                                                                    class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                    variant="bare"
+                                                                    icon-name="utility:threedots_vertical"
+                                                                    onselect={handleAction}
+                                                                    menu-alignment="auto"
+                                                                    data-id={row.Id}
+                                                                    data-value={feeItem.id}>
+                                                                    <lightning-menu-item label="View Refund" value="view_request"></lightning-menu-item>
+                                                                    <lightning-menu-item label="Edit Refund" value="edit_request"></lightning-menu-item>
+                                                                </lightning-button-menu>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </template>
+                                            </template>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <template if:true={showPages}>
+                            <div class="pagination-container">
+                                
+                                        <lightning-button class="pagination-button" label="<< Prev"
+                                            onclick={handlePreviousPage} disabled={isPreviousDisabled}
+                                            variant="neutral">
+                                        </lightning-button>
+
+                                        <div class="page-info">
+                                            <span class="page-range">{startRecord}-{endRecord} of {totalRecords} &nbsp;</span>
+                                            <span class="page-text"> | Page &nbsp; 
+                                                <lightning-input 
+                                                type="number" 
+                                                value={currentPage} 
+                                                label="Current Page" 
+                                                variant="label-hidden"
+                                                class="current-page-input"
+                                                onchange={handlePageChange}>
+                                            </lightning-input> &nbsp;
+                                            of {totalPages}</span>
+                                        </div>
+
+                                        <lightning-button class="pagination-button" label="Next >>"
+                                            onclick={handleNextPage} disabled={isNextDisabled} variant="neutral">
+                                        </lightning-button>
+                                
+                            </div>
+                        </template>
+
+                        </template>
+                        <template if:false={hasResults}>
+                            <p class="no-data-message">No work order transaction found for the given criteria.</p>
+                        </template>
+                    </div>
+                </template>
+                </div>
+            </div> 
+    </lightning-card>
+</template>

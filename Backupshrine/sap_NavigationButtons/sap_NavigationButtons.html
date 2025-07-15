@@ -1,0 +1,36 @@
+<template>
+    <div class="button-container">
+        <!-- Back button is hidden on the first step -->
+        <template if:false={isFirstStep}>
+            <template if:true={showBackButton}>
+                <div class="back-button-container">
+                    <lightning-button 
+                        class="back-button" 
+                        variant="brand-outline" 
+                        label={labels.Back} 
+                        icon-name="utility:left" 
+                        onclick={handleBack}>
+                    </lightning-button>
+                </div>
+            </template>
+        </template>
+
+        <template if:true={showSaveDraftButton}>
+            <lightning-button 
+                variant="neutral" 
+                label={labels.SaveDraft} 
+                icon-name="utility:save" 
+                onclick={handleSaveDraft}>
+            </lightning-button>
+        </template>
+
+        <template if:false={isLastStep}>
+            <lightning-button variant="brand" label={getNextButtonLabel} icon-name="utility:right" onclick={handleNext} disabled={isButtonDisabled}></lightning-button>
+        </template>
+
+       <template if:true={isLastStep}>
+            <lightning-button variant="brand" label={labels.FileOnline} onclick={handleFinish} disabled={isButtonDisabledFile}></lightning-button>
+        </template>
+
+    </div>
+</template>
