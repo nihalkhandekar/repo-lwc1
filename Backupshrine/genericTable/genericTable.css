@@ -1,0 +1,23 @@
+.table-test table thead th > span {
+    background-color: #16325c;
+    color: white
+}
+.datatablebox {
+	border-top: 1px solid #ECEBEB ;
+    border-right: 1px solid #ECEBEB;
+    border-left: 1px solid #ECEBEB;
+	font-size: 16px;
+	border-radius: 4px;
+}
+.desktop-version {
+    display:none;
+}
+@media only screen and (min-width: 1024px) {
+    .mobile-version {
+        display:none;
+    }
+    .desktop-version {
+        display:block;
+    }
+    
+}

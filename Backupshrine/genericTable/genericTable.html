@@ -1,0 +1,16 @@
+<template>
+    <template if:false={customtable}>
+        <div class="datatablebox desktop-version">
+            <lightning-datatable data={tabledata} columns={tablecolumns} key-field="Id" hide-checkbox-column="true"
+            onrowaction={handleRowAction}
+            resize-column-disabled >
+            </lightning-datatable>
+        </div>
+        <div class="mobile-version">
+            <c-brs_mobile-table table-data={tabledata} table-columns={tablecolumns} onmobilerowaction={handleRowAction}></c-brs_mobile-table>
+        </div>
+    </template>
+    <template if:true={customtable}>
+        <c-brs_custom-table table-data={tabledata} table-columns={tablecolumns}></c-brs_custom-table>
+    </template>
+    </template>

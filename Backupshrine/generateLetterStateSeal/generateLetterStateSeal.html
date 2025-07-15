@@ -1,0 +1,62 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:letterhead" size="medium" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Generate Letter</h1>
+                <p class="description">Enter the details for thr letter.</p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group third-width">
+                    <label class="custom-label" for="signedBy">Signed by</label>
+                    <div class={signedByErrorClass}>
+                    <lightning-combobox
+                        name="signedBy"
+                        placeholder="Select signed by"
+                        variant="label-hidden"
+                        options={signedByOptions}
+                        value={signedBy}
+                        read-only={isReadOnly}
+                        class="input-field"
+                        onchange={handleInputChange}>
+                    </lightning-combobox>
+                    <div class="slds-form-element__help" id="signedByError" if:true={isSignedByInvalid}>
+                        Signed By is required.
+                    </div>
+                </div>
+                </div>
+
+                <!-- Custom Label for Last Name -->
+                <div class="form-group third-width">
+                    <label class="custom-label" for="letterType">Letter Type</label>
+                    <div class={letterTypeErrorClass}>
+                    <lightning-combobox
+                        name="letterType"
+                        placeholder="Select letter type"
+                        options={letterTypeOptions}
+                        read-only={isReadOnly}
+                        variant="label-hidden"
+                        value={letterType}
+                        class="input-field"
+                        onchange={handleInputChange}>
+                    </lightning-combobox>
+                    <div class="slds-form-element__help" id="letterTypeError" if:true={isLetterTypenvalid}>
+                        Letter Type is required.
+                    </div>
+                </div>
+                </div>
+                <div class="form-group third-width input-radio-group">
+                        <label class="boldFont" for="wetSignature">Wet Signature</label>                        
+                        <lightning-input type="radio" name="wetSignature" label="Yes" required="true" checked={isWetSignatureYes} variant="label-hidden" read-only={isReadOnly} class="slds-radio_faux" value="Yes" onchange={handleInputChange} disabled={isReadOnly}></lightning-input>
+                        <label class=custom-label-radio>Yes</label>
+                        <lightning-input type="radio" name="wetSignature" required="true" label="No" checked={isWetSignatureNo} variant="label-hidden" read-only={isReadOnly} class="slds-radio_faux" value="No" onchange={handleInputChange}  disabled={isReadOnly}   ></lightning-input>
+                        <label class=custom-label-radio>No</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

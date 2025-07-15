@@ -1,0 +1,58 @@
+<template>
+    <div if:true={showAttention} class={themeClass}>
+        <div class="attention-section">
+            <c-brs_attention-Component messageheader={messageheader} messagetext={messagetext}>
+            </c-brs_attention-Component>
+        </div>
+    </div>
+    <template if:true={showPagination}>
+        <template if:true={genericdata}>
+            <lightning-layout-item size="12">
+                <div class={themeClass}>
+                    <div class="slds-align_absolute-center pagination-list">
+                        <ul class="slds-list_horizontal slds-has-inline-block-links_space">
+                            <li if:false={checkStart}>
+                                <a class="paginationlink label-text" onclick={onPrev}>
+                                    <lightning-icon icon-name="utility:chevronleft" size="xx-small" alternative-text="chevronleft"
+                                    title="chevronright" class="chevron-container-left"></lightning-icon>
+                                    <span class="desktop-show">Prev</span>
+                                </a>
+                            </li>
+                            <template for:each={pageListFirst} for:item="pageNumber">
+                                <li key={pageNumber}>
+                                    <a class="paginationlink" data-id={pageNumber}
+                                        onclick={displayPageDetails}>{pageNumber} </a>
+                                </li>
+                            </template>
+                            <template if:true={showFirstDot}>
+                                <li><a class="paginationlink dots-text">. . .</a></li>
+                            </template>
+                            <template for:each={pageListToShow} for:item="pageNumber">
+                                <li key={pageNumber}>
+                                    <a class="paginationlink" data-id={pageNumber}
+                                        onclick={displayPageDetails}>{pageNumber} </a>
+                                </li>
+                            </template>
+                            <template if:true={showNextDot}>
+                                <li><a class="paginationlink dots-text">. . .</a></li>
+                            </template>
+                            <template for:each={pageListLast} for:item="pageNumber">
+                                <li key={pageNumber}>
+                                    <a class="paginationlink" data-id={pageNumber}
+                                        onclick={displayPageDetails}>{pageNumber}</a>
+                                </li>
+                            </template>
+                            <li if:false={checkEnd}>
+                                <a class="paginationlink label-text next-link" onclick={onNext}>
+                                    <span class="desktop-show">Next</span>
+                                    <lightning-icon icon-name="utility:chevronright" size="xx-small" alternative-text="chevronright"
+                                    title="chevronright" class="chevron-container-right"></lightning-icon>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </lightning-layout-item>
+        </template>
+    </template>
+</template>

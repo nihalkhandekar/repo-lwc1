@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+         <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="prevfirstName" type="String" label="prevfirstName" description="to display first name here"/>
+            <property name="prevmiddleName" type="String" label="prevmiddleName" description="to display middle name here" />
+            <property name="prevlastName" type="String" label="prevlastName" description="to display last name here" />
+            <property name="recordId" type="String" label="recordId" description="id for fetching detail" />
+            <property name="termStartPrev" type="String" label="prevtermstart" description="to display prev term start date here" />
+            <property name="termEndPrev" type="String" label="prevtermend" description="to display prev term end date here" />
+        </targetConfig>
+    </targetConfigs> 
+</LightningComponentBundle>

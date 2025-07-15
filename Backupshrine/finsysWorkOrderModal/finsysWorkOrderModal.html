@@ -1,0 +1,1134 @@
+<template>
+
+    <div class="SE-ModalHeaderMain">
+        <div>
+            <lightning-button-icon icon-name="utility:back" size="large" alternative-text="Close"
+                onclick={goToParentModal} class="custom-modal__back">
+            </lightning-button-icon>
+            <div class="SE-ModalHeaderTitle" style="margin-left: 40px;">
+                <h2>{headerText}</h2>
+            </div>
+        </div>
+        <div>
+            <template if:true={editButtonMode}>
+                <lightning-button icon-name="utility:edit" alternative-text="Edit" class="edit-button"
+                    onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+                    label="Edit"></lightning-button>
+            </template>
+        </div>
+    </div>
+    <div class="SE-ModalHeader">
+        <template if:true={creatingOrUpdating}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        <div class="SE-modalMainBody">
+            <div class="SE-modalFormStack">
+                <template if:false={showTransactionsMode}>
+                    <div class="SE-modalFormStackSectionContent FS-firstSec">
+                        <div class="slds-grid FS-secone">
+                            <!-- <div class="slds-col FS-colone comboboxItemBackgroundColorChange">
+                                <label class="SE-inputLabel" for="lastName"><span
+                                        class="required-indicator">*</span>Work
+                                    Order Status</label>
+                                <lightning-combobox class="SE-notvalidate SE-searchCardInputLabel"
+                                    label="Work Order Status" id="workOrderStatus" required variant="label-hidden"
+                                    name="workOrderStatus" disabled={isViewMode} value={workOrderStatus}
+                                    options={workOrderStatusOptions} onchange={handleInputChange}
+                                    placeholder="Select Work Order Status">
+                                </lightning-combobox>
+                            </div> -->
+                            <div class="slds-col FS-colone">
+                                <label class="SE-inputLabel" for="lastName"><span
+                                        class="required-indicator">*</span>Work
+                                    Order Date</label>
+                                <lightning-input class="SE-notvalidate SE-searchCardInputLabel" label="Work Order Date"
+                                    name="workOrderDate" type="date" required variant="label-hidden" data-index={index}
+                                    value={workOrderDate} disabled={isViewMode} onchange={handleInputChange}
+                                    date-style="short" placeholder="mm/dd/yyyy">
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col">
+                                <label class="SE-inputLabel" for="Comment">Comment</label>
+                                <lightning-input label="Comment" name="comment" variant="label-hidden"
+                                    class="SE-searchCardInputLabel" id="comment"
+                                    placeholder="e.g Anything you would like to add to the work order" value={comment}
+                                    disabled={isViewMode} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>
+
+                    <template if:true={showCustomerSearch}>
+                        <div class="SE-modalFormStackSection">
+                            <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                                <div class="SE-modalFormStackSectionHeaderIcon">
+                                    <lightning-icon icon-name="standard:search" size="medium"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                    <h2 class="slds-text-heading_small">Customer Search</h2>
+                                    <p class="slds-text-body_small">Search customer by Individual, organization name,
+                                        address,
+                                        email or by phone number to avoid duplicate entries.</p>
+                                </div>
+                            </div>
+
+                            <div class="SE-modalFormStackSectionContent">
+                                <div class="slds-grid slds-gutters slds-wrap">
+                                    <div
+                                        class="slds-col slds-size_1-of-1 slds-input-has-icon slds-input-has-icon_left FS-SearchSec">
+                                        <!-- Search icon with custom padding -->
+                                        <lightning-icon icon-name="utility:search" size="xx-small"
+                                            class="slds-input__icon slds-input__icon_left icon-padding"></lightning-icon>
+
+                                        <!-- Search input field with flex-grow to expand -->
+                                        <lightning-input type="text" label="Search" name="search" variant="label-hidden"
+                                            placeholder="Search customer..." class="search-input" value={search}
+                                            disabled={isViewMode} onchange={handleSearchChange}>
+                                        </lightning-input>
+
+                                        <!-- Search button aligned to the right -->
+                                        <!-- <lightning-button variant="brand" class="save-button" label="Search"
+                                            onclick={handleSearchCustomer}>
+                                        </lightning-button> -->
+                                    </div>
+                                </div>
+                                <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                    <div class="slds-scrollable_x custom-table-container">
+                                        <!-- Table displaying customer results -->
+                                        <template if:true={customerFound}>
+                                            <table
+                                                class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                                <thead class="custom-header">
+                                                    <tr>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Select">Select</div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Last Name">Last Name</div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="First Name">First Name
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Organization">Organization
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Address">Address</div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Email Address">Email
+                                                                Address
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Phone Number">Phone Number
+                                                            </div>
+                                                        </th>
+                                                        <th scope="col" class="docHeaderText">
+                                                            <div class="slds-truncate" title="Delinquent">Delinquent
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <template for:each={customerDetails} for:item="row">
+                                                        <tr key={row.Id} data-id={row.Id}>
+                                                            <td>
+                                                                <div class="slds-truncate">
+                                                                    <lightning-input type="radio"
+                                                                        name="customerSelection" data-id={row.Id}
+                                                                        checked={row.isChecked}
+                                                                        onchange={handleRadioChange}>
+                                                                    </lightning-input>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.LastName}>
+                                                                    {row.LastName}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.FirstName}>
+                                                                    {row.FirstName}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.Organization}>
+                                                                    {row.Organization}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.Address}>
+                                                                    {row.Address}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.Email}>{row.Email}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.Phone}>{row.Phone}
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="slds-truncate" title={row.DelinquentLabel}>
+                                                                    {row.DelinquentLabel}</div>
+                                                            </td>
+                                                        </tr>
+                                                    </template>
+                                                </tbody>
+                                            </table>
+                                        </template>
+
+
+                                        <!-- Display a message if no results are found -->
+                                        <template if:true={tableStatus}>
+                                            <p class="no-record-label">No matching records found</p>
+                                        </template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Basic Info</h2>
+                            <p class="slds-text-body_small">Enter customer’s contact and organization details to
+                                proceed. Fields marked with an asterisk (*) are mandatory.</p>
+                        </div>
+                    </div>
+
+                    <template if:true={isvisible}>
+                        <div class="alert-container">
+                            <div class="content-sec">
+                                <lightning-icon icon-name="utility:warning" size="xx-small"
+                                    class="slds-m-right_small my-icon">
+                                </lightning-icon>
+                                <span>This customer is delinquent and currently owes {accountBalance}. Please proceed
+                                    with caution or resolve the outstanding balance before continuing.</span>
+                                <button class="dismiss-button" onclick={handleDismiss}>
+                                    <lightning-icon icon-name="utility:close" size="xx-small" alternative-text="Close">
+                                    </lightning-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </template>
+
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="lastName"><span
+                                        class="required-indicator">*</span>Last Name</label>
+                                <lightning-input label="Last Name" name="lastName" variant="label-hidden" id="lastName"
+                                    placeholder="e.g Doe"
+                                    message-when-pattern-mismatch="Last name can only contain letters"
+                                    pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+" class="SE-searchCardInputLabel" value={lastName}
+                                    required disabled={isViewMode} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="middleInitial">Middle Initial</label>
+                                <lightning-input label="Middle Initial" name="middleInitial" variant="label-hidden"
+                                    id="middleInitial" disabled={isViewMode} placeholder="e.g R"
+                                    class="SE-searchCardInputLabel"
+                                    message-when-pattern-mismatch="Middle initial can only be letters"
+                                    pattern="^[A-Za-z]+(\.[A-Za-z]+)*\.?$" value={middleInitial}
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="firstName"><span
+                                        class="required-indicator">*</span>First Name</label>
+                                <div class={firstNameErrorClass}>
+                                    <lightning-input label="First Name" name="firstName" variant="label-hidden"
+                                        id="firstName" placeholder="e.g John" class="SE-searchCardInputLabel"
+                                        value={firstName} required disabled={isViewMode} onchange={handleInputChange}
+                                        message-when-pattern-mismatch="First name can only contain letters"
+                                        pattern="[A-Za-zÀ-ÖØ-öø-ÿ'-. ]+">
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="organizationName">Organization Name</label>
+                                <lightning-input label="Organization Name" name="organizationName"
+                                    variant="label-hidden" id="organizationName" placeholder="e.g ABC Corporation"
+                                    class="SE-searchCardInputLabel" value={organizationName} disabled={isViewMode}
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="emailAddress"><span
+                                        class="required-indicator">*</span>
+                                    Email Address</label>
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                                    <div class="emailfielclass">
+                                        <lightning-icon size="x-small"
+                                            class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default"
+                                            icon-name="utility:call"></lightning-icon>
+                                        <lightning-input label="Email Address" name="emailAddress"
+                                            variant="label-hidden" class="SE-searchCardInputLabel"
+                                            placeholder="e.g johndoe@gmail.com" disabled={isViewMode} type="email"
+                                            value={checkEmailAddress} required onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <!-- <label class="SE-inputLabel" for="emailAddress"><span class="required-indicator">*</span>
+                                        Email Address</label>
+                                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                                            <div class="emailfielclass">
+                                                <lightning-icon size="x-small" class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default SE-searchCardInputLabel" icon-name="utility:email"></lightning-icon>
+                                                <input type="text" placeholder="e.g johndoe@gmail.com" class="slds-input SE-searchCardInputLabel" name="emailAddress" required
+                                                value={checkEmailAddress} onchange={handleInputChange}  id="emailAddress" disabled={isReadOnly}/>
+                                            </div>
+                                        </div> -->
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="phoneNumber"><span class="required-indicator">*</span>
+                                    Phone Number</label>
+                                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                                    <div class="emailfielclass">
+                                        <lightning-icon size="x-small"
+                                            class="slds-icon slds-input__icon slds-input__icon_left slds-icon-text-default"
+                                            icon-name="utility:call"></lightning-icon>
+                                        <lightning-input label="Phone Number" name="phoneNumber" maxlength="14"
+                                            minlength="14" message-when-too-short="Please enter 10 digits Phone Number"
+                                            onkeydown={handleKeyPress} variant="label-hidden"
+                                            class="SE-searchCardInputLabel" placeholder="e.g (555) 555-5555"
+                                            disabled={isViewMode} type="tel" required value={phoneNumber}
+                                            onchange={handleInputChange}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="accountBalance ">Customer Account Balance</label>
+                                <lightning-input label="Customer Account Balance" name="accountBalance"
+                                    variant="label-hidden" id="accountBalance" placeholder="e.g $120.00"
+                                    class="SE-searchCardInputLabel" value={accountBalance} disabled
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol"></div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col">
+                                <div class="form-group slds-form-element_compound slds-form-element slds-m-top_medium">
+                                    <lightning-input-address class='address SE-searchCardInputLabel'
+                                        address-lookup-placeholder="Search country, city, state, street...."
+                                        street={location} street-label="Address Line 1" subpremise={address2}
+                                        subpremise-placeholder="e.g., Apt 4B, Suite 200, 2nd Floor"
+                                        subpremise-label="Suite/Apartment/Floor" city-label="City" city={city}
+                                        province-label="State" province={state} postal-code={zipCode}
+                                        postal-code-label="Zip Code" country-label="Country" country={country}
+                                        onchange={handleAddressChange} show-address-lookup show-compact-address required
+                                        disabled={isViewMode}>
+                                    </lightning-input-address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:article" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small">Transaction Details.</h2>
+                            <p class="slds-text-body_small">Enter customer's contact and organization details to
+                                proceed. Fields marked with an asterisk (*) are mandatory.</p>
+                        </div>
+                        <template if:false={isBRSModalMode}>
+                            <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
+                                <lightning-button variant="brand" label={workOrderLabel} title={workOrderLabel}
+                                    icon-name="utility:add" class="save-button" onclick={handleAddTransaction}
+                                    disabled={isViewMode}>
+                                </lightning-button>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="SE-modalFormStackSectionContent">
+                        <template for:each={transactionList} for:item="transaction" for:index="index">
+                            <div key={transaction.id}>
+                                <div class="slds-grid SE-modalFormStackSectionInputRow FS-row">
+                                    <template if:true={isViewMode}>
+                                        <div
+                                            class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                            <lightning-combobox label="Select Activity" name="activity"
+                                                data-index={index} value={transaction.activity}
+                                                options={activityOptions} onchange={handleActivityChange}
+                                                class="SE-notvalidate SE-searchCardInputLabel" disabled={isViewMode}
+                                                required placeholder="Select activity">
+                                            </lightning-combobox>
+                                        </div>
+                                    </template>
+                                    <template if:false={isViewMode}>
+                                        <div
+                                            class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                            <lightning-combobox label="Select Activity" name="activity"
+                                                data-index={index} value={transaction.activity}
+                                                options={activityOptions} onchange={handleActivityChange}
+                                                class="SE-notvalidate SE-searchCardInputLabel"
+                                                disabled={transaction.isFirst} required placeholder="Select activity">
+                                            </lightning-combobox>
+                                        </div>
+                                    </template>
+
+                                    <div
+                                        class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                        <lightning-combobox label="Select Activity Code" name="activityCode"
+                                            data-index={index} value={transaction.activityCode}
+                                            options={subActivityOptions} onchange={handleTransactionFieldChange}
+                                            class="SE-notvalidate SE-searchCardInputLabel" disabled={isViewMode}
+                                            required placeholder="Select activity code">
+                                        </lightning-combobox>
+                                    </div>
+                                    <div
+                                        class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                        <lightning-combobox label="Select Program Code" name="programCode"
+                                            data-index={index} value={transaction.programCode}
+                                            options={programCodeOptions} onchange={handleTransactionFieldChange}
+                                            class="SE-notvalidate SE-searchCardInputLabel" disabled={isViewMode}
+                                            required placeholder="Select program code">
+                                        </lightning-combobox>
+                                    </div>
+                                </div>
+                                <div class="slds-grid SE-modalFormStackSectionInputRow FS-row">
+                                    <div
+                                        class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange slds-size_1-of-4">
+                                        <lightning-combobox label="Payment Collection" name="paymentCollection"
+                                            data-index={index} options={paymentCollectionOptions}
+                                            value={transaction.paymentCollection}
+                                            onchange={handleTransactionFieldChange} disabled={isViewMode}
+                                            class="SE-notvalidate SE-searchCardInputLabel">
+                                        </lightning-combobox>
+                                    </div>
+                                    <div
+                                        class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                        <lightning-combobox class="SE-notvalidate SE-searchCardInputLabel"
+                                            label="Payment Type" name="paymentType" data-index={index}
+                                            options={paymentTypeOptions} value={transaction.paymentType} required
+                                            onchange={handleTransactionFieldChange} placeholder="Select Payment Type"
+                                            disabled={isViewMode}>
+                                        </lightning-combobox>
+                                    </div>
+                                    <template if:true={transaction.isSubCard}>
+                                        <div
+                                            class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                            <lightning-combobox class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Card Type" name="cardType" data-index={index}
+                                                options={cardTypeOptions} value={transaction.cardType} required
+                                                onchange={handleTransactionFieldChange} placeholder="Select Card Type"
+                                                disabled={isViewMode}>
+                                            </lightning-combobox>
+                                        </div>
+                                        <div
+                                            class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                            <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Last 4 digits of Card" name="cardDigit" data-index={index}
+                                                value={transaction.cardDigit} onchange={handleTransactionFieldChange}
+                                                required placeholder="e.g. 2389" disabled={isAddOrder} pattern="[0-9]+"
+                                                message-when-pattern-mismatch="Credit card digits should only contain numeric value.">
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                    <template if:true={transaction.isSubMoneyOrder}>
+                                        <div
+                                            class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                            <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Money Order Serial Number" name="serialNumber" data-index={index}
+                                                value={transaction.serialNumber} onchange={handleTransactionFieldChange}
+                                                required placeholder="e.g. 2389" disabled={isViewMode} pattern="[0-9]+"
+                                                message-when-pattern-mismatch="Credit card digits should only contain numeric value.">
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+                                    <template if:true={transaction.isSubCheck}>
+                                        <div
+                                            class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                            <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="CK Number" name="ckNumber" data-index={index}
+                                                value={transaction.ckNumber} onchange={handleTransactionFieldChange}
+                                                required placeholder="e.g. 2389" disabled={isViewMode} pattern="[0-9]+"
+                                                message-when-pattern-mismatch="Check number should only contain numeric value.">
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+
+
+                                </div>
+                                <div class="slds-grid SE-modalFormStackSectionInputRow FS-row">
+                                    <div
+                                        class="slds-col slds-size_1-of-4 SE-customCol comboboxItemBackgroundColorChange">
+                                        <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                            label="Filing fees" name="paymentAmount" data-index={index}
+                                            value={transaction.paymentAmount} onchange={handleTransactionFieldChange}
+                                            placeholder="e.g. $60.00" required disabled={isViewMode}
+                                            pattern="^\$[0-9]+(\.[0-9]{1,2})?$"
+                                            message-when-pattern-mismatch="Amount contain only numeric values.">
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-4 SE-customCol">
+                                        <lightning-input type="checkbox" label="Tax Exempt" name="taxExempt"
+                                            data-index={index} checked={transaction.taxExempt}
+                                            onchange={handleTransactionFieldChange} disabled={isViewMode}
+                                            class="esqclassalignment SE-notvalidate">
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-4 SE-customCol">
+                                        <lightning-input type="checkbox" label="Reporting Only" name="reportingOnly"
+                                            data-index={index} checked={transaction.reportingOnly}
+                                            onchange={handleTransactionFieldChange} disabled={isViewMode}
+                                            class="esqclassalignment SE-notvalidate">
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                    <div class="slds-grid SE-modalFormStackSectionInputRow">
+                        <div class="slds-scrollable_x multiple-table-container">
+                            <template if:true={ismultipleTransactionList}>
+                                <table
+                                    class="slds-table slds-table_cell-buffer slds-table_bordered multiple-table activity-table">
+                                    <thead class="multiple-header">
+                                        <tr>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Activity">Activity</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Sub Activity">Sub Activity</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Program Code">Program Code</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Payment Collection">Payment Collection
+                                                </div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Payment Type">Payment Type</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Card Type">Card Type</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Last 4 digits of Card">Last 4 digits
+                                                    of Card</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Money Order Serial Number">Money Order
+                                                    Serial Number</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="CK Number">CK Number</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Payment Amount">Payment Amount</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Tax Exempt">Tax Exempt</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Reporting Only">Reporting Only</div>
+                                            </th>
+                                            <th scope="col" class="docHeaderText">
+                                                <div class="slds-truncate" title="Action">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template for:each={multipleTransactionList} for:item="transaction">
+                                            <tr key={transaction.id}>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.activity}>
+                                                        {transaction.activity}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.activityCode}>
+                                                        {transaction.activityCode}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.programCode}>
+                                                        {transaction.programCode}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.paymentCollection}>
+                                                        {transaction.paymentCollection}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.paymentType}>
+                                                        {transaction.paymentType}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.cardType}>
+                                                        {transaction.cardType}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.cardDigit}>
+                                                        {transaction.cardDigit}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.serialNumber}>
+                                                        {transaction.serialNumber}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.ckNumber}>
+                                                        {transaction.ckNumber}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate slds-text-align_right"
+                                                        title={transaction.paymentAmount}>
+                                                        {transaction.paymentAmount}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.taxExemptDisplay}>
+                                                        {transaction.taxExemptDisplay}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate" title={transaction.reportingOnlyDisplay}>
+                                                        {transaction.reportingOnlyDisplay}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="slds-truncate">
+                                                        <lightning-button-icon icon-name="utility:edit"
+                                                            alternative-text="Edit Transaction" title="Edit Transaction"
+                                                            class="slds-m-right_small" variant="bare"
+                                                            disabled={isViewMode} onclick={handleEditTransaction}
+                                                            data-id={transaction.id}>
+                                                        </lightning-button-icon>
+                                                        <lightning-button-icon icon-name="utility:delete"
+                                                            alternative-text="Delete Transaction"
+                                                            title="Delete Transaction" variant="bare"
+                                                            disabled={isViewMode} class="slds-icon-text-error"
+                                                            onclick={handleDeleteTransaction} data-id={transaction.id}>
+                                                        </lightning-button-icon>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </template>
+                        </div>
+                    </div>
+                    <template if:false={isAddWorkMode}>
+                        <template if:false={isBRSModalMode}>
+                            <div class="slds-text-align_right slds-text-title_bold totalPaymentAmt">
+                                Total payment amount is: {totalTransactionFeeAmount}
+                            </div>
+                        </template>
+                    </template>
+
+
+                </div>
+
+                <template if:true={showRefundSec}>
+
+                    <template if:true={isAddRefundWorkMode}>
+                        <div class="SE-modalFormStackSection">
+                            <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                                <div class="SE-modalFormStackSectionHeaderIcon">
+                                    <lightning-icon icon-name="standard:assigned_resource"
+                                        size="medium"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                    <h2 class="slds-text-heading_small">Refund Details</h2>
+                                    <p class="slds-text-body_small">Enter required details below to proceed with
+                                        refund</p>
+                                </div>
+                            </div>
+
+                            <div class="SE-modalFormStackSectionContent">
+                                <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                    <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                        <label class="SE-inputLabel" for="refundMethod"><span
+                                                class="required-indicator">*</span>Refund Method</label>
+                                        <lightning-combobox class="SE-searchCardInputLabel" label="Refund Method"
+                                            id="refundMethod" required name="refundMethod" value={refundMethod}
+                                            options={refundMethodOptions} variant="label-hidden"
+                                            onchange={handleRefundMethod} placeholder="Select Payment Type">
+                                        </lightning-combobox>
+                                    </div>
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel comboboxItemBackgroundColorChange"
+                                            for="refundDate">Date of Refund</label>
+                                        <lightning-input class="SE-searchCardInputLabel" label="Date of Refund"
+                                            id="refundDate" variant="label-hidden" required name="refundDate"
+                                            type="date" value={refundDate} onchange={handleInputChange}
+                                            date-style="short" placeholder="mm/dd/yyyy">
+                                        </lightning-input>
+                                    </div>
+
+                                    <template if:false={showRefundCard}>
+                                        <div class="slds-col SE-customCol">
+                                            <label class="SE-inputLabel" for="voucherId"><span
+                                                    class="required-indicator">*</span>Voucher ID</label>
+                                            <lightning-input class="SE-searchCardInputLabel" label="Voucher ID"
+                                                id="voucherId" required name="voucherId" value={voucherId}
+                                                variant="label-hidden" onchange={handleInputChange}
+                                                placeholder="e.g. 2389" pattern="[0-9]+"
+                                                message-when-pattern-mismatch="Credit card digits should only contain numeric value.">
+                                            </lightning-input>
+                                        </div>
+                                    </template>
+
+
+                                    <template if:true={showRefundCard}>
+                                        <div
+                                            class="slds-col SE-customCol comboboxItemBackgroundColorChange slds-size_1-of-4">
+                                            <label class="SE-inputLabel" for="refundCard">
+                                                <span class="required-indicator">*</span>Refund to Card
+                                            </label>
+                                            <lightning-combobox class="SE-searchCardInputLabel" label="Refund Card"
+                                                name="refundCard" value={selectedRefundCard} options={refundCardOptions}
+                                                variant="label-hidden" onchange={handleRefundCardChange}
+                                                placeholder="Select Card for Refund"></lightning-combobox>
+                                        </div>
+                                    </template>
+
+
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel" for="refundAmount"><span
+                                                class="required-indicator">*</span>Refund Amount</label>
+                                        <lightning-input class="SE-searchCardInputLabel" label="Refund Amount"
+                                            id="refundAmount" required name="refundAmount" data-id="refund-amount-input"
+                                            value={refundAmount} variant="label-hidden"
+                                            pattern="^[0-9]+(\.[0-9]{0,2})?$"
+                                            message-when-pattern-mismatch="Amount contain only numeric values."
+                                            onchange={handleInputChange} placeholder="e.g. $60.00">
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <div class="slds-grid SE-modalFormStackSectionInputRow">
+
+                                    <div class="slds-col SE-customCol slds-size_1-of-4">
+                                        <label class="SE-inputLabel" for="refundReason"><span
+                                                class="required-indicator">*</span>Refund Reason</label>
+                                        <lightning-input class="SE-searchCardInputLabel" label="Refund Reason"
+                                            id="refundReason" required name="refundReason" value={refundReason}
+                                            variant="label-hidden" onchange={handleInputChange}
+                                            placeholder="e.g. Refund Reason">
+                                        </lightning-input>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </template>
+
+
+                    <!-- IF MODE IS VIEW or Edit REFUND -->
+                    <template if:false={isAddRefundWorkMode}>
+
+                        <div class="SE-modalFormStackSection">
+                            <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                                <div class="SE-modalFormStackSectionHeaderIcon">
+                                    <lightning-icon icon-name="standard:assigned_resource"
+                                        size="medium"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                    <h2 class="slds-text-heading_small">Refund Details</h2>
+                                    <p class="slds-text-body_small">Enter required details below to proceed with refund
+                                    </p>
+                                </div>
+                            </div>
+
+                            <template for:each={editRefundList} for:item="row">
+
+                                <div class="SE-modalFormStackSectionContent" key={row.id} data-id={row.id}>
+                                    <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                        <div class="slds-col SE-customCol comboboxItemBackgroundColorChange">
+                                            <label class="SE-inputLabel" for="refundMethod"><span
+                                                    class="required-indicator">*</span>Refund Method</label>
+                                            <lightning-combobox class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Refund Method" required name="refundMethod"
+                                                value={row.refundPaymentMethod} options={refundMethodOptions}
+                                                variant="label-hidden" onchange={handleRefundEditMethod}
+                                                placeholder="Select Payment Type" disabled={isViewMode}>
+                                            </lightning-combobox>
+                                        </div>
+                                        <div class="slds-col SE-customCol">
+                                            <label class="SE-inputLabel comboboxItemBackgroundColorChange"
+                                                for="refundDate">Date of Refund</label>
+                                            <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Date of Refund" variant="label-hidden" required name="refundDate"
+                                                type="date" value={row.refundDate}
+                                                onchange={handleRefundEditInputChange} date-style="short"
+                                                placeholder="mm/dd/yyyy" disabled={isViewMode}>
+                                            </lightning-input>
+                                        </div>
+                                        <template if:false={row.showRefundCard}>
+                                            <div class="slds-col SE-customCol">
+                                                <label class="SE-inputLabel" for="voucherId"><span
+                                                        class="required-indicator">*</span>Voucher ID</label>
+                                                <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                    label="Voucher ID" required name="voucherId" value={row.voucherId}
+                                                    variant="label-hidden" onchange={handleRefundEditInputChange}
+                                                    placeholder="e.g. 2389" pattern="[0-9]+"
+                                                    message-when-pattern-mismatch="Credit card digits should only contain numeric value."
+                                                    disabled={isViewMode}>
+                                                </lightning-input>
+                                            </div>
+                                        </template>
+
+
+                                        <template if:true={row.showRefundCard}>
+                                            <div
+                                                class="slds-col SE-customCol comboboxItemBackgroundColorChange slds-size_1-of-4">
+                                                <label class="SE-inputLabel" for="refundCard">
+                                                    <span class="required-indicator">*</span>Refund to Card
+                                                </label>
+                                                <lightning-combobox class="SE-notvalidate SE-searchCardInputLabel"
+                                                    label="Refund Card" name="refundCard" value={row.originalId}
+                                                    options={refundCardOptions} variant="label-hidden"
+                                                    onchange={handleRefundEditCardChange}
+                                                    placeholder="Select Card for Refund"
+                                                    disabled={isViewMode}></lightning-combobox>
+                                            </div>
+                                        </template>
+
+
+                                        <div class="slds-col SE-customCol">
+                                            <label class="SE-inputLabel" for="refundAmount"><span
+                                                    class="required-indicator">*</span>Refund Amount</label>
+                                            <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Refund Amount" required name="refundAmount"
+                                                value={row.refundAmount} variant="label-hidden"
+                                                pattern="^\[0-9]+(\.[0-9]{1,2})?$"
+                                                message-when-pattern-mismatch="Amount contain only numeric values."
+                                                onchange={handleRefundEditInputChange} placeholder="e.g. $60.00"
+                                                disabled={isViewMode}>
+                                            </lightning-input>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid SE-modalFormStackSectionInputRow">
+
+                                        <div class="slds-col SE-customCol slds-size_1-of-4">
+                                            <label class="SE-inputLabel" for="refundReason"><span
+                                                    class="required-indicator">*</span>Refund Reason</label>
+                                            <lightning-input class="SE-notvalidate SE-searchCardInputLabel"
+                                                label="Voucher ID" required name="refundReason" value={row.refundReason}
+                                                variant="label-hidden" onchange={handleRefundEditInputChange}
+                                                placeholder="e.g. Refund Reason" disabled={isRefundSectionEditMode}>
+                                            </lightning-input>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+                            </template>
+                        </div>
+                    </template>
+
+                    <div class="SE-modalFormStackSection">
+                        <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:budget_period" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small">Refund History</h2>
+                                <p class="slds-text-body_small">You can have look at the refund history you have
+                                    processed for this work order</p>
+                            </div>
+                        </div>
+
+
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                <div class="slds-scrollable_x custom-table-container">
+                                    <!-- Table displaying customer results -->
+                                    <template if:true={refundHistoryFound}>
+                                        <table
+                                            class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                            <thead class="custom-header">
+                                                <tr>
+                                                    <th scope="col" class="docHeaderText" style="width: 10%;">
+                                                        <div class="slds-truncate" title="Date">Date</div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 15%;">
+                                                        <div class="slds-truncate" title="Refund Transaction ID">Refund
+                                                            Transaction ID</div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 15%;">
+                                                        <div class="slds-truncate"
+                                                            title="Original Charge Transaction ID">
+                                                            Original Charge Transaction ID
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 10%;">
+                                                        <div class="slds-truncate" title="Voucher ID">Voucher ID</div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 10%;">
+                                                        <div class="slds-truncate" title="Payment Method">Refund Status
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 10%;">
+                                                        <div class="slds-truncate" title="Payment Method">Payment Method
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 10%;">
+                                                        <div class="slds-truncate" title="Refund Amount">Refund Amount
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col" class="docHeaderText" style="width: 20%;">
+                                                        <div class="slds-truncate" title="Reason for Refund">Reason for
+                                                            Refund</div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <template for:each={refundHistory} for:item="row">
+                                                    <tr key={row.id} data-id={row.id}>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.refundDateFormatted}>
+                                                                {row.refundDateFormatted}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.refundID}>
+                                                                {row.refundId}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.originalId}>
+                                                                {row.originalId}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.voucherId}>
+                                                                {row.voucherId}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.refundStatus}>
+                                                                {row.refundStatus}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.refundPaymentMethod}>
+                                                                {row.refundPaymentMethod}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate slds-text-align_right"
+                                                                title={row.refundAmount}>{row.refundAmount}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.refundReason}>
+                                                                {row.refundReason}</div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </template>
+
+                                    <!-- Display a message if no results are found -->
+                                    <template if:false={refundHistoryFound}>
+                                        <p class="no-refund-label">No history found</p>
+                                    </template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <template if:false={showRefundSec}>
+                    <template if:false={isBRSModalMode}>
+                        <div class="SE-modalFormStackSection">
+                            <div class="SE-modalFormStackSectionHeader modalAddressSectionIconChange">
+                                <div class="SE-modalFormStackSectionHeaderIcon">
+                                    <lightning-icon icon-name="standard:attach" size="medium"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                    <h2 class="slds-text-heading_small">Supporting Documents</h2>
+                                    <p class="slds-text-body_small">Please upload the documents you are applying for the
+                                        State Seal.</p>
+                                </div>
+                                <div class="slds-grid slds-grid_vertical-align-center slds-grid_align-end">
+                                    <lightning-button variant="brand" label="Add Document" title="Add Document"
+                                        icon-name="utility:add" class="save-button" onclick={handleAddDocument}
+                                        disabled={isViewMode}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+
+                            <div class="SE-modalFormStackSectionContent">
+                                <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                    <div class="SE-inputLabel">
+                                        Upload one or more required and supplemental documents.<br>
+                                        <span>Note: Special characters are automatically removed from the file
+                                            name.</span>
+                                    </div>
+                                </div>
+                                <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                    <div class="slds-scrollable_x custom-table-container">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered doc-table">
+                                            <thead class="custom-header">
+                                                <tr>
+                                                    <th scope="col" class="docHeaderText">Document Type</th>
+                                                    <th scope="col" class="docHeaderText">Upload Document</th>
+                                                    <th scope="col" class="docHeaderText">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Dynamic rows for additional documents -->
+                                                <template for:each={documentsList} for:item="document"
+                                                    for:index="index">
+                                                    <tr key={document.id}>
+                                                        <td class="docContentText">
+                                                            <lightning-combobox label="Document Type" name="docType"
+                                                                data-index={index}
+                                                                data-row-index={index}  value={document.docType}
+                                                                options={docTypeOptions}
+                                                                dropdown-alignment="bottom-left" disabled={isViewMode}
+                                                                onchange={handleDocumentFieldChange}
+                                                                placeholder="Select document type"
+                                                                variant="label-hidden"
+                                                                class="SE-searchCardInputLabel">
+                                                            </lightning-combobox>
+                                                        </td>
+                                                        <td class="docContentText file-upload-cell">
+                                                            <div class="file-upload-wrapper">
+                                                                <template if:false={document.docFile}>
+                                                                    <lightning-input type="file" label="Upload Document"
+                                                                        name="docFile" data-index={index}
+                                                                        onchange={handleDocumentFileUpload}
+                                                                        disabled={isViewMode} variant="label-hidden">
+                                                                    </lightning-input>
+                                                                </template>
+                                                                <template if:true={document.docFile}>
+                                                                    <div class="uploaded-file">
+                                                                        <a href={document.docFile.downloadLink}
+                                                                            target="_blank" title="View Document">
+                                                                            {document.docFile.fileName}
+                                                                        </a>
+                                                                        <lightning-button-icon
+                                                                            icon-name="utility:delete"
+                                                                            alternative-text="Remove"
+                                                                            onclick={handleRemoveFile}
+                                                                            data-index={index} disabled={isViewMode}
+                                                                            class="delete-button">
+                                                                        </lightning-button-icon>
+                                                                    </div>
+                                                                </template>
+                                                            </div>
+                                                        </td>
+                                                        <td class="docContentText">
+                                                            <template if:false={document.isRemovable}>
+                                                                <lightning-button-icon icon-name="utility:delete"
+                                                                    alternative-text="Remove Row"
+                                                                    onclick={handleRemoveDocument} data-index={index}
+                                                                    class="delete-button" disabled={isViewMode}>
+                                                                </lightning-button-icon>
+                                                            </template>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </template>
+                    <template if:true={isBRSModalMode}>
+                        <div></div>
+                    </template>
+                </template>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="SE-modalFooter">
+            <div class='slds-button-group'>
+                <div class="button-left-group">
+                    <template if:true={isViewMode}>
+                        <template if:false={isBRSModalMode}>
+                            <lightning-button label="Refund" variant="neutral" class="button-spacing print-buttons"
+                                onclick={refundRequest}></lightning-button>
+                            <!-- <lightning-button label="Generate Invoice" variant="neutral"
+                            class="button-spacing print-buttons"
+                            onclick={handleModalCertificateAction}></lightning-button> -->
+                            <lightning-button label="Print Payment Receipt" variant="neutral"
+                                class="button-spacing print-buttons"
+                                onclick={handlePrintPaymentReceipt}></lightning-button>
+                            <lightning-button label="Send Payment Receipt by Email" variant="neutral"
+                                class="button-spacing print-buttons" onclick={sendEmailModal}></lightning-button>
+                        </template>
+                        <template if:true={isBRSModalMode}>
+                            <div></div>
+                        </template>
+                    </template>
+                </div>
+                <div class="button-right-group SE-modalFooterButtonGroup">
+
+                    <template if:true={isAddWorkMode}>
+                        <button class="slds-button SE-borderLessButton" onclick={goBackModal}>Cancel</button>
+                        <lightning-button variant="brand" label="Create Work Order" class="save-button saveButton"
+                            onclick={handleAdd}></lightning-button>
+                    </template>
+
+                    <template if:true={isViewModeFooter}>
+                        <button class="slds-button SE-borderLessButton" onclick={goBackModal}>Cancel</button>
+                    </template>
+
+                    <template if:true={isEditMode}>
+                        <button class="slds-button SE-borderLessButton" onclick={cancelEditMode}>Cancel</button>
+                        <lightning-button variant="brand" label="Save" class="save-button saveButton"
+                            onclick={handleAdd}></lightning-button>
+                    </template>
+
+                    <template if:true={isAddRefundWorkMode}>
+                        <!-- <button class="slds-button SE-borderLessButton" onclick={goBackModal}>Cancel</button> -->
+                        <lightning-button variant="brand" label="Process Refund" class="save-button saveButton"
+                            onclick={handleAdd}></lightning-button>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template if:true={footerOprions}>
+        <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+            <p class="saving-message">Saving...</p>
+        </div>
+    </template>
+
+
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+    <c-finsys-pdf-generator></c-finsys-pdf-generator>
+
+
+</template>

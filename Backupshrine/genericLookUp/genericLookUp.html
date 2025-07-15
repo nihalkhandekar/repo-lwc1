@@ -1,0 +1,95 @@
+<template>
+  <div class="look-up-container" tabindex="0" onmousedown={handleMouseClick} onkeydown={handleKeyDown}>
+    <template if:true={isDisabled}>
+      <input
+        name="searchbox"
+        type="text"
+        class="slds-p-around_x-small"
+        disabled
+      />
+    </template>
+
+    <template if:false={isDisabled}>
+      <div class="input-wrapper">
+        <input
+          name="searchbox"
+          type="text"
+          class="slds-p-around_x-small searchBox"
+          aria-autocomplete="list"
+          aria-controls="listbox"
+          autocomplete="off"
+          role="textbox"
+          id="combobox"
+          onfocusin={showCrossIcon}
+          onkeyup={handleSearchTermChange}
+		  onkeydown={handleSearchTermChange}
+          placeholder={searchPlaceHolder}
+          aria-label={customlabel.searchTownVerbiage}
+        />
+        <span class="search-icon-wrapper">
+          <lightning-icon
+            icon-name="utility:search"
+            alternative-text="Search"
+            title="Search"
+            size="x-small"
+            class="search-icon"
+          ></lightning-icon>
+        </span>
+      </div>
+    </template>
+    <span class="cross-icon" onmousedown={handleCross}></span>
+
+    <template if:false={isValid}>
+      <div role="alert" class="slds-m-top_x-small ct-bos-error-container fade">
+        <span class="error-label">{errorText}</span>
+      </div>
+    </template>
+
+    <div class="Hid lookup-option-container slds-p-bottom_x-small Hide">
+      <template if:true={data}>
+        <template for:each={data} for:item="Record">
+          <div
+            key={Record.id}
+            id={Record.id}
+            data-id={Record.id}
+            class="data-list"
+            tabindex="0"
+            data-files={Record.id}
+            onclick={populateValue}
+            onmousedown={populateValue}
+            onkeydown={populateValueWithFocus}
+            onkeypress={populateValueWithFocus}
+          >
+            {Record.name}
+            <p lwc:dom="manual" class="search-list-heading"></p>
+            <p lwc:dom="manual" class="search-list-text"></p>
+          </div>
+        </template>
+      </template>
+      <template if:false={data.length}>
+        <div class="data-list">
+          {customlabel.label_noResults}
+        </div>
+      </template>
+    </div>
+    <div class="selectedItemContainer">
+      <template if:true={showSelectedArray}>
+        <template for:each={selectedArray} for:item="item">
+          <span key={item.id} class="pills" id={item.name}
+            >{item.name}
+
+            <img
+              src={closeIcon}
+              class="closeIcon tabfocus"
+              alt="closeIcon"
+              tabindex="0"
+              id={item.name}
+              onclick={handleClose}
+              onkeypress={handleClose}
+            />
+          </span>
+        </template>
+      </template>
+    </div>
+  </div>
+</template>

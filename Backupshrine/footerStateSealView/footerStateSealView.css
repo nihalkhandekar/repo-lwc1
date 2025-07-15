@@ -1,0 +1,28 @@
+.slds-button-group {
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f3f2f2; /* Adjust the background color to match your design */
+
+    z-index: 1000; /* Ensures the footer stays on top of other content */
+}
+
+.button-spacing {
+    margin-right: 0.5rem;
+}
+
+.button-left-group{
+    display: flex;
+    padding: 0.8rem;
+}
+
+.button-right-group {
+    display: flex;
+    padding: 0.8rem;
+}
+
+.custom-modal-width{
+    width: 95%;
+    max-width: 95%; /* Ensure it doesn't overflow on very small screens */
+}

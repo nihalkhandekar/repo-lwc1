@@ -1,0 +1,908 @@
+/* Modal container styling */
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   /* height: 100px;  Adjust as needed */
+    z-index: 20px;
+}
+
+.SE-ModalHeaderMain{
+    background-color: #EEF4FF;
+    height: 48px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    padding: 8px 12px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+.button-large{
+    height: 32px;
+}
+
+.custom-dropdown .slds-dropdown {
+    position: absolute;
+    z-index: 100001; /* Make sure it's above other elements */
+    overflow: visible; /* Ensure it's not clipped */
+}
+
+.custom-modal__back {
+    position: absolute;
+    /* top: 0.5rem; */
+    /* right: 0.5rem; */
+    --lwc-borderWidthThin: 0px;
+    display: flex;
+    align-items: start;
+    background: white;
+    border-radius: 8px;
+}
+
+.SE-ModalHeader{
+    width: 100%;
+    padding: 48px 12px 12px 12px !important;
+    background-color: #ffffff;
+    border-radius: 0px !important;
+    overflow-y: auto;
+    height: fit-content;
+    position: fixed;
+    max-height: calc(100vh - 170px);
+}
+
+.footer{
+    background-color: #F3F3F3;
+    /* height: 56px; */
+    border-radius: 0 0 8px 8px;
+    padding: 8px 12px;
+    /* margin-top: -24px; */
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    bottom: 0;
+}
+
+.no-record-label{
+    align-items: center;
+    text-align: center;
+    color: #747474;
+    font-size: 14px;
+    font-family: "SF Pro", sans-serif;
+}
+
+.no-refund-label{
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    color: #747474;
+    font-size: 14px;
+    font-family: "SF Pro", sans-serif;
+}
+
+.totalPaymentAmt{
+    padding: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.my-icon{
+    --slds-c-icon-color-foreground-default: #dd7a01;
+}
+
+.SE-modalFormStackSectionInputRow .slds-scrollable_x{
+    overflow: visible;
+    overflow-x: visible;
+}
+
+.alert-container {
+    margin: 1rem 0;
+    position: relative;
+    background-color: #fbf3e0;
+    margin-left: 12px;
+    margin-right: 12px;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 12px;
+    font-family: "SF Pro", sans-serif;
+    font-weight: 590;
+    color: #8c4b02;
+    border: 1px #e5e5e5;
+}
+
+.dismiss-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+}
+
+.content-sec{
+
+}
+
+
+/* Content body to allow scrolling */
+.custom-modal-body {
+    max-height: calc(85vh - 120px); /* Adjust based on header and footer height */
+    padding-right: 0.5rem; /* Add padding to avoid overlapping with scrollbar */
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.search-icon {
+    margin-right: 8px;
+    color: #888; /* Optional: set color for the search icon */
+}
+
+.icon-padding {
+    margin-left: 8px; /* Adjust the value as needed */
+}
+
+
+.personal-info-section{
+    margin-bottom: 1.5rem;
+}
+
+.SE-searchCardInputLabel input {
+    padding-left: 0; /* Adjust padding to align text after the icon */
+}
+
+.icon-input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex: 1;
+}
+
+.icon-input-container .input-field {
+    padding-left: 0rem; 
+}
+
+.left-icon{
+    padding-left: 0.5rem;
+}
+
+.docHeaderText .slds-truncate{
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: left;
+    color: #181818;   
+}
+
+.docContentText .slds-truncate{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #181818; 
+    overflow: visible !important;
+}
+
+.custom-header{
+    background-color: #F3F3F3;
+    border: 1px solid #E5E5E5;
+    overflow: visible;
+}
+
+.custom-table-container{
+    padding: 0 2px;
+    width: -webkit-fill-available;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    table-layout: fixed;
+}
+
+  .custom-table, .doc-table {
+    width: 100%;
+    border: 1px solid #d8dde6; 
+    border-radius: 12px;
+    overflow: visible;
+  }
+  
+  .custom-table thead tr.custom-header th,
+  .doc-table thead tr.custom-header th {
+    background-color: #f3f3f3;
+    font-weight: 700;
+    font-size: 13px;
+    color: #181818;
+    height: 32px; 
+    vertical-align: middle;
+    border-width: 1px solid #d8dde6;
+    border-style: solid;
+    border-color: #E5E5E5;
+    padding: 5px 12px 5px 12px !important;;
+    text-align: left;
+  }
+  
+  .custom-table tbody tr.custom-column td,
+  .doc-table tbody tr.custom-column td{
+    font-weight: 400;
+    font-size: 14px;
+    color: #181818;
+    height: 40px; 
+    vertical-align: middle;
+    border-width: 1px solid #d8dde6;
+    border-style: solid;
+    border-color: #E5E5E5;
+    overflow: visible; 
+    box-sizing: border-box;
+    padding: 5px 12px 5px 12px !important;;
+    text-align: left;
+  }
+
+td.docContentText {
+    border-left: 1px solid #d8dde6;
+}
+th.docHeaderText{
+    border-left: 1px solid #d8dde6;
+}
+
+.custom-table thead tr.custom-header th:first-child,
+.custom-table tbody tr.custom-column td:first-child,
+.doc-table thead tr.custom-header th:first-child,
+.doc-table tbody tr.custom-column td:first-child{
+    border-left: none;
+  }
+  
+  .custom-table thead tr.custom-header th:last-child,
+  .custom-table tbody tr.custom-column td:last-child,
+  .doc-table thead tr.custom-header th:last-child,
+.doc-table tbody tr.custom-column td:last-child {
+    border-right: none;
+  }
+
+.custom-table th:nth-child(2),
+.custom-table td:nth-child(2),
+.custom-table th:nth-child(3),
+.custom-table td:nth-child(3),
+.custom-table th:nth-child(4),
+.custom-table td:nth-child(4),
+.custom-table th:nth-child(7),
+.custom-table td:nth-child(7),
+.custom-table th:nth-child(8),
+.custom-table td:nth-child(8)
+{
+    max-width: 70px;
+    min-width: 70px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.custom-table th:nth-child(1),
+.custom-table td:nth-child(1){
+    max-width: 20px;
+    min-width: 20px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.custom-table th:nth-child(5),
+.custom-table td:nth-child(5){
+    max-width: 200px;
+    min-width: 200px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.custom-table th:nth-child(6),
+.custom-table td:nth-child(6){
+    max-width: 150px;
+    min-width: 150px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.doc-table th:nth-child(1),
+.doc-table td:nth-child(1){
+    max-width: 330px;
+    min-width: 330px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.doc-table th:nth-child(2),
+.doc-table td:nth-child(2){
+    max-width: 120px;
+    min-width: 120px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.doc-table th:nth-child(3),
+.doc-table td:nth-child(3){
+    max-width: 10px;
+    min-width: 10px;
+    text-overflow: ellipsis;
+    overflow: visible;
+}
+
+.file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Link Styling for Upload */
+.file-upload a {
+    color: #0070d2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.file-upload a:hover {
+    text-decoration: underline;
+}
+
+.file-upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.file-upload-text {
+    margin-top: 0.625rem;
+    color: #637381;
+}
+
+.delete-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wetsign-inline{
+    display: flex;
+    padding-top: 1.5rem;
+}
+
+.errorText{
+    color: var(--slds-g-color-error-base-40, #ea001e);
+    font-size: var(--lwc-fontSize, 0.75rem);
+    margin-top: var(--lwc-spacingXxxSmall, 0.125rem);
+    font-weight: 590;
+}
+
+
+.slds-modal__footer {
+    margin-top: 1.5rem;
+    border-top: 1px solid #dddbda;
+    border-radius: 0px 0px 16px 16px;
+}
+
+/* Close button styling */
+.slds-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.esq-align {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+}
+.reason-inline{
+    display: flex;
+}
+
+.wetsign-inline{
+    display: flex;
+    padding-top: 1.5rem;
+}
+
+.boldFont {
+    font-weight: 590;
+    font-size: 12px;
+    padding-right: 0.5rem;
+}
+
+.personal-info-section,
+.official-detail-info-section,
+.account-status-info-section,
+.generate-info-section,
+.table-info-section{
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border: 1px solid #dddbda;
+    border-radius: 12px;
+}
+
+.custom-space{
+    padding: 12px 16px 12px 16px;
+    background-color: #FFFFFF;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+
+.slds-button-group {
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f3f2f2; /* Adjust the background color to match your design */
+    font-size: 13px;
+}
+.button-left-group{
+    display: flex;
+
+    gap: 0.6rem;
+}
+
+.button-right-group {
+    display: flex;
+
+}
+
+/* Header container styling */
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Style for the Edit button */
+.edit-button {
+    background-color: #EEF4FF; /* White background */
+    border: 0px solid #d8dde6; /* Light border */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 8px 16px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 590;
+}
+
+.no-underline .slds-button {
+    text-decoration: none !important;
+}
+
+.no-underline .slds-button:hover {
+    text-decoration: none !important;
+}
+
+.full-width{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+
+.address {
+    --sds-c-textarea-color-background:#FFFFFF;
+    --textarea-color-background:#FFFFFF;
+    --sds-c-input-color-background:#FFFFFF;
+    --input-color-background:#FFFFFF;
+    --dxp-c-textarea-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --dxp-s-form-element-text-line-height: 20px;
+    --dxp-s-form-element-text-font-size: 14px;
+    --dxp-s-form-element-color-border:#C9C9C9;
+    --sds-c-textarea-text-color:#181818;
+    --dxp-s-form-element-text-color:#181818;
+    --lwc-borderWidthThin:1px;
+    --lwc-formLabelFontSize: 12px;
+    --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+    --slds-c-input-color-background:#FFFFFF;
+    --slds-c-input-color-border:#C9C9C9;
+    --slds-c-input-radius-border:8px 8px 8px 8px;
+    --sds-c-textarea-radius-border:8px 8px 8px 8px;
+    --slds-c-textarea-color-background:#FFFFFF;
+    --slds-c-textarea-color-border:#C9C9C9;
+    --sds-c-input-text-color:#181818;
+    --sds-c-textarea-color-border:#C9C9C9;
+    --dxp-c-textarea-width-border:1px;
+    --sds-c-input-color-border:#C9C9C9;
+    --slds-c-textarea-radius-border:8px 8px 8px 8px;
+    --dxp-c-input-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --sds-c-input-radius-border:8px 8px 8px 8px;
+    --dxp-s-form-element-label-font-size: 12px;
+    --dxp-s-form-element-label-font-weight: 590;
+    --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+    --dxp-c-input-width-border: 1px;
+}
+.address .slds-form-element__control input[name="state"],
+.address .slds-form-element__control input[name="country"],
+.address .slds-form-element__control input[name="city"],
+.address .slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+
+.slds-form-element__control input[name="state"],
+.slds-form-element__control input[name="country"],
+.slds-form-element__control input[name="city"],
+.slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+
+
+lightning-input{
+    --slds-c-input-radius-border: 8px;
+    }
+
+lightning-combobox{
+    --slds-c-input-radius-border: 8px;
+}
+
+lightning-textarea{
+    --slds-c-textarea-radius-border: 8px;
+}
+
+.save-button{
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+    --sds-c-button-brand-color-border-hover:  rgb(169, 224, 240);
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.custom-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    --lwc-borderWidthThin: 0px;
+}
+
+.clear-font{
+    color: #747474;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.print-buttons{
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background: #ffffff;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+
+/* Media query for responsive adjustments */
+@media (min-width: 48em) {
+    :host {
+        --slds-c-modal-sizing-medium: 80vw;
+    }
+}
+
+.custom-label {
+    font-size: 12px;
+    font-weight: 590;
+    font-family: "SF Pro", sans-serif;
+    color: #5c5c5c;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.required-indicator {
+    color: rgba(186, 5, 23, 1); ;
+    margin-right: 0.2rem;
+}
+
+.esqclassalignment, .indefinitetermalignment{
+    margin-top: 22.5px;
+    --slds-c-checkbox-color-border: rgb(201,201,201);
+    --slds-c-checkbox-radius-border: 4px;
+}
+
+.document-info-container {
+    background-color: #ffffff;
+    font-family: 'SF Pro', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+/* Header Section */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 0 0;
+    box-sizing: border-box;
+}
+
+/* Header Title */
+.header-text .title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding-left: 0.5rem;
+}
+
+/* Header Description */
+.header-text .description {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(92, 92, 92, 1);
+    padding-left: 0.5rem;
+}
+
+
+
+/* @media screen and (max-width: 768px) {
+
+    .custom-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+} */
+
+
+.custom-header {
+    width: 144px;       /* Set the width */
+    height: 32px; 
+    background-color: #f3f3f3; /* Customize the background color of the header */
+    font-weight: bold;
+    font-size: 14px;
+
+}
+
+.custom-column{
+    font-size: 14px;
+}
+
+.SE-modalFooterButtonGroup{
+    gap: 0px !important;
+}
+
+.SE-borderLessButton{
+    padding: 0 !important;
+}
+
+.saveButton{
+    padding-left: 16px !important;
+}
+
+
+
+.spacing{
+    padding: 3px;
+}
+
+.history-info-section {
+    display: flex;
+    justify-content: space-between; /* Space between the two tables */
+    width: 100%; /* Ensure it covers the full width */
+}
+
+.table-info-container {
+    flex: 1; /* Allow both containers to take equal space */
+    margin-right: 20px; /* Add space between the tables */
+}
+
+.table-info-container:last-child {
+    margin-right: 0; /* Remove margin for the last container */
+}
+
+.historytable{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.emailfielclass .slds-input:focus {
+    font-family: 'SF Pro', sans-serif; /* Change font family */
+    font-size: 13px; /* Change font size */
+    font-weight: 100;
+}
+
+.emailfielclass .slds-input:not(:focus) {
+    font-family: 'SF Pro', sans-serif; /* Font family when not focused */
+    font-size: 13px; /* Font size when not focused */
+    font-weight: normal; /* Font weight when not focused */
+}
+
+
+.file-upload-cell {
+    /* padding: 0.5rem 1rem; Add padding to the cell */
+    justify-content: center;
+}
+
+.file-upload-wrapper {
+    display: grid;
+    justify-content: center;
+}
+
+.uploaded-file {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem; /* Space between upload button and file name */
+}
+
+.uploaded-file-name {
+    max-width: 150px; /* Limit width of displayed file name */
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: ellipsis;
+    margin-right: 0.5rem; /* Space between file name and delete icon */
+}
+
+.delete-button {
+    margin-left: 0.5rem; /* Space between delete button and file name */
+}
+
+.doc-table th, .doc-table td {
+    vertical-align: middle; /* Align text vertically center */
+}
+
+.slds-file-selector__body {
+    display: inline-flex;
+    align-items: center;
+}
+
+.multiselect {
+    position: relative;
+    display: inline-block;
+    font-family: 'SF Pro', sans-serif;
+    width: 100%;
+}
+
+.selectBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    color: #747474;
+    font-family: 'SF Pro', sans-serif;
+    cursor: pointer;
+    user-select: none;
+}
+
+.selectBox .arrow {
+    border: solid #747474;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(45deg);
+    margin-left: 10px;
+}
+
+.checkboxes {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    z-index: 100;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.checkboxes label {
+    display: flex;
+    align-items: center;
+    margin: 5px 0; /* Add some vertical spacing */
+    gap: 5px; /* Add horizontal spacing between checkbox and label */
+}
+
+.checkboxes input[type="checkbox"] {
+    margin-right: 5px; /* Additional spacing if required */
+}
+
+.multiple-table-container {
+    padding: 0 10px;
+    width: -webkit-fill-available;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    table-layout: fixed;
+    overflow-x: auto; /* Ensures horizontal scrolling for small screens */
+}
+
+.multiple-table-container .activity-table {
+    width: 100%;
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Add border-radius to the first and last body cells */
+.multiple-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 12px; /* Bottom-left corner */
+}
+
+.multiple-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 12px; /* Bottom-right corner */
+}
+
+
+/* Add border-radius to the first and last header cells */
+.multiple-table thead tr.multiple-header th:first-child {
+    border-top-left-radius: 12px; /* Top-left corner */
+}
+
+.multiple-table thead tr.multiple-header th:last-child {
+    border-top-right-radius: 12px; /* Top-right corner */
+}
+
+.multiple-table thead tr.multiple-header th,
+.doc-table thead tr.multiple-header th {
+    background-color: #f3f3f3;
+    font-weight: 700;
+    font-size: 13px;
+    color: #181818;
+    height: 32px;
+    vertical-align: middle;
+    border-width: 1px solid #d8dde6;
+    border-style: solid;
+    border-color: #E5E5E5;
+    padding: 5px 12px 5px 12px !important;
+    text-align: left;
+}
+
+.multiple-table tbody tr.multiple-column td,
+.doc-table tbody tr.multiple-column td {
+    font-weight: 400;
+    font-size: 14px;
+    color: #181818;
+    height: 40px;
+    vertical-align: middle;
+    border-width: 1px solid #d8dde6;
+    border-style: solid;
+    border-color: #E5E5E5;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding: 5px 12px 5px 12px !important;
+    text-align: left;
+    text-overflow: ellipsis; /* Adds ellipsis for overflow text */
+    white-space: nowrap; /* Prevents wrapping of text */
+}
+
+.multiple-table thead tr.multiple-header th:first-child,
+.multiple-table tbody tr.multiple-column td:first-child,
+.doc-table thead tr.multiple-header th:first-child,
+.doc-table tbody tr.multiple-column td:first-child {
+    border-left: none;
+}
+
+.multiple-table thead tr.multiple-header th:last-child,
+.multiple-table tbody tr.multiple-column td:last-child,
+.doc-table thead tr.multiple-header th:last-child,
+.doc-table tbody tr.multiple-column td:last-child {
+    border-right: none;
+}
+
+/* Fixed Width for All Columns */
+.multiple-table th,
+.multiple-table td,
+.doc-table th,
+.doc-table td {
+    max-width: 70px;
+    min-width: 70px;
+    text-overflow: ellipsis;
+    overflow: hidden; /* Ensures content doesn't overflow */
+    white-space: nowrap; /* Prevents wrapping of text */
+}
+
+/* Alternating Row Colors */
+.multiple-table tbody tr:nth-child(even),
+.doc-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for alternating rows */
+}
+
+.multiple-table tbody tr:hover,
+.doc-table tbody tr:hover {
+    background-color: #f0f0f0; /* Highlight on hover */
+    transition: background-color 0.3s ease;
+}

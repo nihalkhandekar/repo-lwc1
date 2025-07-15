@@ -1,0 +1,43 @@
+<template>
+  <fieldset id={name}>
+    <template
+      for:each={radioOptions}
+      for:item="radioOption"
+      for:index="index"
+    >
+      <label
+        class="ct-bos-input-label_radio"
+        key={radioOption.label}
+        tabindex="0"
+        aria-label={radioOption.value}
+        onmousedown={handleMouseClick}
+        onkeydown={handleKeyDown}
+		    id={index}
+        onkeypress={changeRadioFieldonTabHandler}
+      >
+        <input
+          data-id={index}
+          id={index}
+          type="radio"
+          name={qid}
+          value={radioOption.value}
+          onchange={changeRadioFieldHandler}
+          disabled={disabled}
+          autocomplete="off"
+          required={required}
+          title={radioOption.value}
+          aria-hidden="true"
+		  tabindex="-1"
+        />
+        <span class="checkmark"></span>
+
+        <p class="small radio-label">
+          <lightning-formatted-rich-text
+            value={radioOption.label}
+          ></lightning-formatted-rich-text>
+        </p>
+        <div class="ct-bos-multi-container-individual-checked"></div>
+      </label>
+    </template>
+  </fieldset>
+</template>

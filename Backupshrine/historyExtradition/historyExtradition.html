@@ -1,0 +1,85 @@
+<template>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <div class="document-info-container">
+                    <div class="custom-card-header">
+                        <lightning-icon icon-name="standard:app_form_product_participant" size="medium" class="header-icon"></lightning-icon>
+                        <div class="header-text">
+                            <h1 class="title">Term History</h1>
+                            <p class="description">Below is the term history of the official.</p>
+                        </div>
+                    </div>
+                    <div class="slds-scrollable_x custom-table-container">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                            <thead>
+                                <tr class="custom-header">
+                                    <th scope="col">
+                                        <div class="slds-truncate">Start Term</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate">End Term</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="custom-column">
+                                    <td>
+                                        <div class="slds-truncate spacing">{displayTermStart}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate spacing">{displayTermEnd}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col">
+                <div class="document-info-container">
+                    <div class="custom-card-header">
+                        <lightning-icon icon-name="standard:person_name" size="medium" class="header-icon"></lightning-icon>
+                        <div class="header-text">
+                            <h1 class="title">Name History</h1>
+                            <p class="description">Below is the name history of the official.</p>
+                        </div>
+                    </div>
+                    <div class="slds-scrollable_x custom-table-container">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                            <thead>
+                                <tr class="custom-header">
+                                    <th scope="col">
+                                        <div class="slds-truncate">First Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate">Middle Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate">Last Name</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="custom-column">
+                                    <td>
+                                        <div class="slds-truncate spacing">{displayFirstName}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate spacing">{displayMiddleName}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate spacing">{displayLastName}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+</template>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="signedBy" type="String" label="Signed By" description="Person who signs the letter" />
+            <property name="letterType" type="String" label="Letter Type" description="Type of the letter" />
+            <property name="wetSignature" type="String" label="Wet Signature" description="Wet signature option" />
+            <property name="isReadOnly" type="Boolean" label="Read Only" description="Read-only flag for the fields" />
+            <property name="disposition_new" type="String" label="Disposition" description="Disposition status" />
+            <property name="signedbyError" type="Boolean" label="showError" description="showError" /> <!-- Added for Esq -->
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

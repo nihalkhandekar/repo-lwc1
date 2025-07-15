@@ -1,0 +1,62 @@
+.pagination-list .paginationlink {
+    font-size: 16px;
+    color: #09538B;
+    font-family: Karla;
+    min-width: 24px;
+    line-height: 27px;
+    user-select: none;
+    letter-spacing: 0.11px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    white-space: nowrap;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.pagination-list .paginationlink.highlight {
+    color: #FFFFFF;
+    font-family: Karla;
+    background-color: #09538B;
+}
+
+.pagination-list ul {
+    align-items: center;
+}
+
+.has-attention-card .pagination-list {
+    margin-top: 32px;
+}
+
+.pagination-list {
+    margin-top: 56px;
+}
+
+.pagination-list .paginationlink.dots-text {
+    padding: 0;
+}
+
+.modal-pagination .attention-section {
+    margin-top: 8px;
+}
+
+.modal-pagination .pagination-list {
+    margin-top: 8px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .pagination-list li {
+        margin: 0 4px;
+    }
+    .desktop-show {
+        display: inline;
+    }
+
+    .chevron-container-left {
+        padding-right: 12px;
+    }
+
+    .chevron-container-right {
+        padding-left: 12px;
+    }
+}

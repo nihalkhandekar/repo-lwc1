@@ -1,0 +1,56 @@
+<template>
+  <div class="ct-bos-multi-container-all">
+    <template for:each={listData} for:item="item" for:index="index">
+      <div class="slds-p-vertical_small tabfocus"  key={item.value} id={index} tabindex="0" onkeypress={handleOnChangeTab}>
+        <div
+          class="ct-bos-multi-checkbox-container ct-bos-multi-container-individual"
+        >
+          <div class="slds-grid">
+            <div class="slds-col slds-p-horizontal_none">
+              <label
+                for={item.value}
+                class="ct-bos-multi-checkbox-label"
+                aria-label={item.value}
+				        onmousedown={handleMouseClick}
+                onkeydown={handleKeyDown}
+                tabindex="-1"
+              >
+                <input
+                  id={item.value}
+                  class="ct-bos-multi-checkbox-input"
+                  type="checkbox"
+                  onchange={handleOnChange}
+                  value={item.value}
+                  aria-hidden="true"
+                  tabindex="-1"
+                  required={item.isRequired}
+                  disabled={item.isDisabled}
+                  checked={item.isChecked}
+                />
+                <div if:true={answer}>
+                  {answer}
+                  <span class="answergiven"></span>
+                </div>
+                <span class="ct-bos-multi-checkbox-custom"></span>
+
+                <p class="input-title">
+                  <template if:true={isbos}>
+                    <template if:false={filter}>
+                      <lightning-formatted-rich-text value={item.value}></lightning-formatted-rich-text>
+                    </template>
+                    <template if:true={filter}>
+                      <lightning-formatted-rich-text value={item.label}></lightning-formatted-rich-text>
+                    </template>
+                  </template>
+                  <template if:false={isbos}>
+                    <lightning-formatted-rich-text value={item.label}></lightning-formatted-rich-text>
+                  </template>
+                </p>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</template>

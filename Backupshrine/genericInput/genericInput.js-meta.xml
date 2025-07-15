@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountrecord" label="Account" type="@salesforce/schema/Account"/>
+            <property name="confirmval" type="String" label="value" description=""/>
+            <property name="val" type="String" label="value" description=""/>
+            <property name="value" type="String" label="value" description=""/>
+            <property name="showEmailCard" type="boolean" label="Show Email Card" description=""/>
+            <property name="validateEmailCard" type="boolean" label="Validate Email Card" description=""/>
+            <property name="changeEmailAddress" type="boolean" label="Change Email Address" description=""/>
+            <property name="originalEmailId" type="string" label="Original Email Address" description=""/>
+            <property name="isEmailNotChangedError" type="boolean" label="Is Email Not Changed Error" description=""/>
+            <property name="emailError" type="string" label="Email Error Text when No change" description=""/>
+            <property name="showUpdateLabel" type="boolean" label="show Update label" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

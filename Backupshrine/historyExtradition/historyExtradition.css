@@ -1,0 +1,88 @@
+.document-info-container {
+    background-color: #ffffff;
+    font-family: 'SF Pro', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+/* Header Section */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 0 0;
+    box-sizing: border-box;
+}
+
+/* Header Title */
+.header-text .title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding-left: 0.5rem;
+}
+
+/* Header Description */
+.header-text .description {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(92, 92, 92, 1);
+    padding-left: 0.5rem;
+}
+
+
+
+/* @media screen and (max-width: 768px) {
+
+    .custom-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+} */
+
+.custom-table-container {
+    padding: 24px; /* Adds padding around the table */
+}
+
+.custom-table-container {
+    padding: 24px; /* Adds padding around the table */
+}
+
+.custom-table {
+    border: 1px solid #d8dde6; /* Adds a border to the table */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-table thead tr.custom-header th {
+    background-color: #f3f3f3; /* Custom background color for the header */
+    font-weight: bold;
+}
+
+.custom-header {
+    width: 144px;       /* Set the width */
+    height: 32px; 
+    background-color: #f3f3f3; /* Customize the background color of the header */
+    font-weight: bold;
+    font-size: 14px;
+
+}
+
+.custom-column{
+    font-size: 14px;
+}
+
+.custom-table td {
+    border-right: 1px solid #d8dde6; /* Adjust color and thickness as needed */
+}
+
+.custom-table td:last-child {
+    border-right: none; /* Remove border from the last column */
+}
+
+.spacing{
+    padding: 3px;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="buttonsEnable" type="Boolean" label="buttonsEnable" description="buttonsEnable flag for Buttons" />
+            <property name="signedBy" type="String" label="Signed By" description="The person who signed the letter" />
+            <property name="letterType" type="String" label="Letter Type" description="The type of letter being generated" />
+            <property name="wetSignature" type="String" label="Wet Signature" description="Whether the letter has a wet signature" />
+            <property name="previousEnabled" type="Boolean" label="previousEnabled" description="buttonsEnable flag for Buttons" />
+            <property name="recordId" type="String" label="recordId" description="recordId of the user" />
+            <property name="requestFor" type="String" label="Request For" description="What the request is for" />
+            <property name="isAddRequestAction" type="Boolean" label="isAddRequestAction" description="isAddRequestAction flag for previous" />
+            <property name="isLastScreen" type="Boolean" label="isLastScreen" description="isLastScreen flag for previous" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

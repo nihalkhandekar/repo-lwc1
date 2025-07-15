@@ -1,0 +1,75 @@
+<template>
+    <div class="ct-bos-multi-container-all">
+        <template for:each={updatedlistdata} for:item="item" for:index="index">
+            <div if:true={item.showCard} class="tabfocus" key={item.Id} id={index} 
+                onkeypress={handleOnChangeTab}>
+                <div class="ct-bos-multi-checkbox-container ct-bos-multi-container-individual">
+                    <div class="slds-grid">
+                        <div class="slds-col">
+                            <label for={item.Id} class="ct-bos-multi-checkbox-label" tabindex="0" 
+                            role="checkbox" aria-checked={item.checked}>
+                                <template if:false={isdisabled}>
+                                    <input id={item.Id} class="ct-bos-multi-checkbox-input" type="checkbox"
+                                        onchange={handleOnChange} value={item.Id} aria-hidden="true"
+                                        checked={item.checked} tabindex="-1" disabled={item.isDisabled}/>
+                                </template>
+                                <template if:true={isdisabled}>
+                                    <input id={item.Id} class="ct-bos-multi-checkbox-input" type="checkbox"
+                                        onchange={handleOnChange} value={item.Id} aria-hidden="true" tabindex="-1"
+                                        disabled />
+                                </template>
+                                <div class="checkbox-wrapper desktopTheme">
+                                    <p class="checkmark-container">
+                                        <span class="ct-bos-multi-checkbox-custom containerTheme"></span>
+                                    </p>
+                                    <template if:true={isCertTypes}>
+                                        <div class="cert-outer-wrapper">
+                                            <div class="certificate-wrapper">
+                                                <h6 class="cert-title">
+                                                    {item.MasterLabel}
+                                                </h6>
+                                                <div class="slds-grid slds-wrap cert-details-wrapper">
+                                                    <div class="slds-size_12-of-12 slds-large-size_5-of-8 left-cert">
+                                                        <p class="small">
+                                                            {item.Certificate_Description__c}
+                                                        </p>
+                                                    </div>
+                                                    <div class="slds-size_12-of-12 slds-large-size_2-of-8">
+                                                        <p class="small grey-text">
+                                                            {label.BRS_Fee_Cert}
+                                                        </p>
+                                                        <p class="largeBold">
+                                                            ${item.Certificate_Price__c}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="sample-wrapper">
+                                                <button class="sample-link slds-button slds-button_natural natural-button"
+                                                    data-url={item.sampleUrl} onclick={handleViewSample}>
+                                                    <img src={eyeIcon} alt="view-icon"
+                                                        class="icon">{label.BRS_View_Sample}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </template>
+                                    <!-- Secured party checkboxe body starts here -->
+                                    <div if:true={isSecuredParty} class="sample-wrapper full-width">
+                                        <div>
+                                            <p class='smallBold grey-text checkbox-heading'>{item.heading}</p>
+                                            <h6 class='checkbox-name'>{item.name}</h6>
+                                            <p class='small address-with-icon grey-text'>
+                                                <img src={locationIcon} alt='' />{item.location}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <!-- Secured party checkboxe body ends here -->
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</template>

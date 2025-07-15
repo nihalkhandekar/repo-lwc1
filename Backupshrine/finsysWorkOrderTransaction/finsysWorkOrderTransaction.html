@@ -1,0 +1,498 @@
+<template>
+    <lightning-card>
+        <div class="SE-mainBody">
+            <div class="SE-content">
+                <div class="SE-Card">
+                    <div class="SE-searchCardHeader">
+                        <div class="SE-searchCardHeaderIcon">
+                            <lightning-icon icon-name="standard:search" size="medium"></lightning-icon>
+                        </div>
+                        <div class="SE-searchCardHeaderTitle">
+                            <div class="SE-searchCardHeaderTitleText">
+                                Search
+                            </div>
+                        </div>
+                    </div>
+                    <div class="SE-searchCardContent searchInputFieldsAndComboboxContainer">
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Work Order Number"
+                                        id="workOrderNumber" name="workOrderNumber" type="text" value={workOrderNumber}
+                                        onchange={handleInputChange} placeholder="e.g 20240821-001">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" label="Last Name" id="lastName"
+                                        name="lastName" type="text" pattern="[A-Za-z]+"
+                                        message-when-pattern-mismatch="Last name should only contain letters."
+                                        value={lastName} onchange={handleInputChange} placeholder="e.g Doe">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-searchCardInputLabel" label="First Name" id="firstName"
+                                        name="firstName" type="text" value={firstName} pattern="[A-Za-z]+"
+                                        message-when-pattern-mismatch="First name should only contain letters."
+                                        onchange={handleInputChange} placeholder="e.g John">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Select Activity/Category" id="activity"
+                                        name="activity" value={activity} options={activityOptions}
+                                        onchange={handleActivityChange} placeholder="Select activity">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Select Activity Code"
+                                        id="activityCode" name="activityCode" value={activityCode}
+                                        options={activityCodeOptions} onchange={handleInputChange}
+                                        placeholder="Select activity code">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                        
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Payment Type" id="paymentType"
+                                        name="paymentType" value={paymentType} options={paymentTypeOptions}
+                                        onchange={handleInputChange} placeholder="Select Payment Type">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Transaction Amount"
+                                        id="transactionAmount" name="transactionAmount" value={transactionAmount}
+                                        onchange={handleInputChange} placeholder="e.g. $60.00">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <!-- <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Voucher ID/MO/CC #"
+                                        id="voucher" name="voucher" value={voucher} placeholder="e.g. 32145" onchange={handleInputChange}>
+                                    </lightning-input>
+                                </lightning-layout-item> -->
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Work Order Status"
+                                        id="workOrderStatus" name="workOrderStatus" value={workOrderStatus}
+                                        options={workOrderStatusOptions} onchange={handleInputChange}
+                                        placeholder="Select Work Order Status">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Transaction From Date"
+                                        id="transactionDate" name="transactionDate" type="date" value={transactionDate}
+                                        onchange={handleInputChange} date-style="short" placeholder="mm/dd/yyyy">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-input class="SE-notvalidate" label="Transaction To Date"
+                                        id="transaction2Date" name="transaction2Date" type="date" value={transaction2Date}
+                                        onchange={handleInputChange} date-style="short" placeholder="mm/dd/yyyy">
+                                    </lightning-input>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+
+                        <div>
+                            <lightning-layout>
+                                <lightning-layout-item style="flex-basis: 20%;" size="2" class="slds-p-right_medium">
+                                    <lightning-combobox class="SE-notvalidate" label="Record Type"
+                                        id="worecordType" name="worecordType" value={worecordType}
+                                        options={recordTypeOptions} onchange={handleInputChange}
+                                        placeholder="Select Record Type">
+                                    </lightning-combobox>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                        </div>
+                    </div>
+
+                    <div class="SE-footer">
+                        <div class="button-group">
+                            <div class="clear-all" onclick={handleClear}>
+                                <span class="clear-icon-wrapper">
+                                    <lightning-icon icon-name="utility:close" size="xx-small"
+                                        class="clear-icon"></lightning-icon>
+                                </span>
+                                <span class="clear-text">Clear All</span>
+                            </div>
+                            <lightning-button icon-name="utility:search" variant="brand" alternative-text="Search"
+                                label="Search" onclick={handleSearch} title="Search" class="customButton">
+                            </lightning-button>
+                        </div>
+                    </div>
+                </div>
+                <template if:true={isLoading}>
+                    <div class="spinner-container">
+                        <lightning-spinner alternative-text="Loading..." variant="brand"
+                            size="large"></lightning-spinner>
+                    </div>
+                </template>
+                <template if:false={isLoading}>
+                    <div class="SE-Card SE-searchCardContent secondDivForDataTable">
+                        <div class="slds-grid slds-grid_align-end">
+                            <div class="buttoncontainerfilter">
+
+                                <div class="left-button">
+                                    <span class="slds-text-title_bold slds-m-right_x-small">Search Result:</span>
+                                    <lightning-badge label={recordCountLabel} class="totoalcountbadge">
+                                    </lightning-badge>
+                                </div>
+
+                                <div class="right-buttons">
+                                    <lightning-badge data-id="today" label="Today" class={badgeClassCurrentDay}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-quarter" label="This Quarter"
+                                        class={badgeClassThisQuarter} onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                        onclick={handleBadgeClick}>
+                                    </lightning-badge>
+                                    <lightning-button label="Add Work Order" icon-name="utility:add"
+                                        onclick={openAddModal} variant="brand" class="customButton">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </div>
+                        <template if:true={hasResults}>
+                            <div class="slds-scrollable_x custom-table-container TrHoverBackGroundColorChange">
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                                    <thead>
+                                        <tr class="custom-header TrHoverBackGroundColorChange">
+                                            <th scope="col" onclick={sortByField} data-field="workOrderNumber">
+                                                <div class="slds-truncate" title="workOrderNumber">Work Order Number
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="lastName">
+                                                <div class="slds-truncate" title="LastName">Last Name
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" onclick={sortByField} data-field="firstName">
+                                                <div class="slds-truncate" title="FirstName">First Name
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="activity">
+                                                <div class="slds-truncate" title="activity">Activity/Category
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="activityCode">
+                                                <div class="slds-truncate" title="activityCode">Activity Code
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="paymentType">
+                                                <div class="slds-truncate" title="paymentType">Payment Type
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="transactionAmount">
+                                                <div class="slds-truncate" title="transactionAmount">Transaction Amount
+                                                </div>
+                                            </th>
+                                            <!-- <th scope="col" data-field="voucher">
+                                            <div class="slds-truncate" title="voucher">Voucher ID/MO/CC #
+                                            </div>
+                                        </th> -->
+                                            <th scope="col" onclick={sortByField} data-field="workOrderStatus">
+                                                <div class="slds-truncate" title="workOrderStatus">WO Status
+                                                    <lightning-icon icon-name={sortIcon} alternative-text="Sort"
+                                                        size="x-small" class="sort-icon"></lightning-icon>
+                                                </div>
+                                            </th>
+                                            <th scope="col" data-field="date">
+                                                <div class="slds-truncate" title="date">Date
+                                                </div>
+                                            </th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template if:true={isRecordsLoading}>
+                                            <tr class="no-border-row">
+                                                <td colspan="9" class="slds-text-align_center loader-row">
+                                                    <lightning-spinner alternative-text="Loading records..."
+                                                        variant="brand" size="large"></lightning-spinner>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        <template if:false={isRecordsLoading}>
+                                            <template for:each={paginatedResult} for:item="row">
+                                                <template if:true={row.isApplication}>
+                                                    <!-- Main row -->
+                                                    <tr key={row.id} class="custom-column">
+                                                        <!-- Template for the table cell -->
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.workOrderNumber}>
+                                                                <template if:true={row.hasFeeItem}>
+                                                                    <template if:true={row.feeItemsCount}>
+                                                                        <span
+                                                                            class="slds-icon_container slds-icon-border-filled icon-border">
+                                                                            <lightning-icon class={iconClass}
+                                                                                data-id={row.id} onclick={toggleDocument}
+                                                                                icon-name={row.iconName} size="xx-small"
+                                                                                alternative-text="Toggle">
+                                                                            </lightning-icon>
+                                                                        </span>
+                                                                        <span
+                                                                            class="tableTextChild">{row.workOrderNumber}</span>
+                                                                        <!-- Only show document count when not expanded -->
+                                                                        <template if:false={row.isExpanded}>
+                                                                            <span
+                                                                                class="doc-count">+{row.feeItemsCount}</span>
+                                                                        </template>
+                                                                    </template>
+                                                                    <template if:false={row.feeItemsCount}>
+                                                                        <span
+                                                                            class="tableTextNum">{row.workOrderNumber}</span>
+                                                                    </template>
+                                                                </template>
+                                                                <!-- Row without fee items -->
+                                                                <template if:false={row.hasFeeItem}>
+                                                                    <span class="tableTextNum">{row.workOrderNumber}</span>
+                                                                </template>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.lastName}>{row.lastName}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.firstName}>{row.firstName}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.selectActivity}>
+                                                                {row.selectActivity}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.activityCode}>
+                                                                {row.activityCode}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.paymentType}>
+                                                                {row.paymentType}</div>
+                                                        </td>
+
+                                                    <template if:true={row.isExpanded}>
+                                                        <td>
+                                                            <div class="slds-truncate slds-text-align_right"
+                                                                title={row.feeAmount}>
+                                                                {row.feeAmount}</div>
+                                                        </td>
+                                                    </template>
+                                                    <template if:false={row.isExpanded}>
+                                                        <td>
+                                                            <div class="slds-truncate slds-text-align_right"
+                                                                title={row.feeAmount}>
+                                                                {row.feeAmount}</div>
+                                                        </td>
+                                                    </template>
+
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.workOrderStatus}>
+                                                            {row.workOrderStatus}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="slds-truncate" title={row.createdDate}>
+                                                            {row.createdDate}</div>
+                                                    </td>
+                                                    <td>
+                                                        <lightning-button-menu alternative-text="Actions"
+                                                            class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                            variant="bare" icon-name="utility:threedots_vertical"
+                                                            onselect={handleAction} menu-alignment="auto"
+                                                            data-id={row.id} data-recordtype={row.recordType}>
+                                                            <lightning-menu-item label="View" variant="base"
+                                                                value="view_request"></lightning-menu-item>
+                                                            <lightning-menu-item label="Edit" variant="base"
+                                                                value="edit_request"></lightning-menu-item>
+                                                            <lightning-menu-item label="Refund" variant="base"
+                                                                value="refund_request"></lightning-menu-item>
+                                                            <lightning-menu-item label="Print Payment Receipt" variant="base"
+                                                                value="paymentReceipt_Print"></lightning-menu-item>
+                                                            <lightning-menu-item label="Send Payment Receipt by Email"
+                                                                variant="base"
+                                                                value="paymentReceipt_Email"></lightning-menu-item>
+                                                        </lightning-button-menu>
+                                                    </td>
+                                                </tr>
+
+                                                    <!-- Expanded rows -->
+                                                    <template if:true={row.isExpanded}>
+                                                        <template for:each={row.feeItems} for:item="feeItem">
+                                                            <tr key={feeItem.Id} class="custom-column-child">
+                                                                <td>
+                                                                    <div class="slds-truncate tableTextNum">
+                                                                        {row.workOrderNumber}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{row.lastName}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{row.firstName}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{feeItem.selectActivity}
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{feeItem.activityCode}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{feeItem.paymentType}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate slds-text-align_right">
+                                                                        {feeItem.feeAmount}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{row.workOrderStatus}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="slds-truncate">{feeItem.createdDate}</div>
+                                                                </td>
+                                                                <td>
+                                                                    <lightning-button-menu alternative-text="Actions"
+                                                                        class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                        variant="bare"
+                                                                        icon-name="utility:threedots_vertical"
+                                                                        onselect={handleAction} menu-alignment="auto"
+                                                                        data-id={row.id}>
+                                                                        <lightning-menu-item label="View" variant="base" class="menuClass"
+                                                                            value="view_request"></lightning-menu-item>
+                                                                        <lightning-menu-item label="Edit" variant="base" class="menuClass"
+                                                                            value="edit_request"></lightning-menu-item>
+                                                                        <lightning-menu-item label="Refund" variant="base" class="menuClass"
+                                                                            value="refund_request"></lightning-menu-item>
+                                                                        <lightning-menu-item label="Print Payment Receipt" class="menuClass"
+                                                                                variant="base"
+                                                                            value="generate_Invoice"></lightning-menu-item>
+                                                                        <lightning-menu-item
+                                                                            label="Send Payment Receipt by Email" class="menuClass"
+                                                                                variant="base"
+                                                                            value="paymentReceipt_Email"></lightning-menu-item>
+                                                                    </lightning-button-menu>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </template>
+                                                </template>
+                                                <!-- For Work Orders -->
+                                                <template if:true={row.isWorkOrder}>
+                                                    <tr key={row.id} class="custom-column">
+                                                        <td>
+                                                            <div class="slds-truncate tableTextNum" title={row.workOrderName}>
+                                                                {row.workOrderName}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.lastName}>
+                                                                {row.lastName}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.firstName}>
+                                                                {row.firstName}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.selectActivity}>
+                                                                {row.selectActivity}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.activityCode}>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.paymentType}>
+                                                                {row.paymentType}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate slds-text-align_right" title={row.feeAmount}>
+                                                                {row.feeAmount}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.workOrderStatus}>
+                                                                {row.workOrderStatus}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="slds-truncate" title={row.createdDate}>
+                                                                {row.createdDate}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <lightning-button-menu alternative-text="Actions"
+                                                                class="slds-button_icon slds-button_icon-inverse custom-button-menu"
+                                                                variant="bare"
+                                                                icon-name="utility:threedots_vertical"
+                                                                onselect={handleAction}
+                                                                menu-alignment="auto"
+                                                                data-id={row.id}
+                                                                data-recordtype={row.recordType}>
+                                                                <lightning-menu-item label="View" variant="base" class="menuClass"
+                                                                    value="view_request"></lightning-menu-item>
+                                                            </lightning-button-menu>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </template>
+                                        </template>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                                <template if:true={showPages}>
+                                    <div class="pagination-container">
+                                    <lightning-button class="pagination-button" label="<< Prev"
+                                        onclick={handlePreviousPage} disabled={isPreviousDisabled} variant="neutral">
+                                    </lightning-button>
+
+                                    <div class="page-info">
+                                        <span class="page-range">{startRecord}-{endRecord} of {totalRecords}</span>
+                                        <span class="page-text"> &nbsp; | Page &nbsp;
+                                            <lightning-input 
+                                                type="number" 
+                                                value={currentPage} 
+                                                label="Current Page" 
+                                                variant="label-hidden"
+                                                class="current-page-input"
+                                                onchange={handlePageChange}>
+                                            </lightning-input> &nbsp;
+                                            of {totalPages}
+                                        </span>                                   
+                                     </div>
+
+                                    <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                                        disabled={isNextDisabled} variant="neutral">
+                                    </lightning-button>
+                                </div>
+                                </template>
+
+                        </template>
+                        <template if:false={hasResults}>
+                            <p class="no-data-message">No work order transaction found for the given criteria.</p>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </lightning-card>
+    <c-finsys-pdf-generator></c-finsys-pdf-generator>
+</template>
