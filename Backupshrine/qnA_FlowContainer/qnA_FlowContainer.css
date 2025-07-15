@@ -1,0 +1,233 @@
+.main-flow-wrapper .container {
+  /* border-bottom: 1px solid #ecebeb; */
+}
+.main-flow-wrapper .slds-tabs_default {
+  /*background-color: transparent;*/
+  padding: 2rem 1rem 2rem 0 !important;
+}
+.main-flow-wrapper ul {
+  text-align: center !important;
+  padding-top: 3rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 56% !important;
+  border-bottom: 0 !important;
+}
+.main-flow-wrapper ul li.slds-tabs_default__item {
+  padding: 0;
+  min-width: 9rem;
+}
+.main-flow-wrapper ul li.slds-tabs_default__item:before {
+  content: "";
+  border: 1px solid #c0c2c8;
+  display: block;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.main-flow-wrapper ul li.slds-tabs_default__item:first-child:before {
+  width: 50%;
+  margin-left: 50%;
+}
+.main-flow-wrapper ul li.slds-tabs_default__item:nth-last-child(2):before {
+  width: 50%;
+}
+.main-flow-wrapper ul li.slds-tabs_default__item:after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #c0c2c8;
+  background-color: #eff1ff;
+  margin-bottom: 2.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main-flow-wrapper ul li.slds-is-active.slds-tabs_default__item:after {
+  background-color: #4c65f2;
+  border: 1px solid #4c65f2;
+}
+.main-flow-wrapper ul li a {
+  display: block;
+  text-overflow: unset;
+  word-break: break-word;
+  white-space: normal;
+  height: 2rem;
+  line-height: 1;
+  color: #232529;
+  text-decoration: none !important;
+}
+.main-flow-wrapper ul li.slds-is-active a,
+.main-flow-wrapper ul li.slds-is-active a:hover {
+  color: #232529 !important;
+  font-weight: bold !important;
+}
+/* .slds-tabs_default__content {
+   border-radius: 8px;
+  box-shadow: 3px 3px 12px 0 rgba(208, 208, 208, 0.5);
+  background-color: #ffffff;
+  padding: 0 2rem 2rem; 
+} */
+.main-flow-wrapper h1.title {
+  color: #00202a;
+  font-size: 1rem;
+  display: inline-block;
+  margin-left: 0.5rem;
+  margin-bottom: 1rem;
+}
+.main-flow-wrapper h1.text {
+  font-size: 0.8rem;
+  color: #888888;
+}
+.main-flow-wrapper .button-container {
+  justify-content: space-between;
+  margin-bottom: 4rem;
+}
+.slds-button {
+  height: 40px;
+}
+.rightButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+.main-flow-wrapper .button-container .nxt-btn .slds-button {
+  /* width: 174px;
+  height: 40px;
+  background-color: #09538b; */
+  letter-spacing: 2px;
+}
+.main-flow-wrapper .nxt-btn .slds-button,
+.main-flow-wrapper .back-btn .slds-button {
+  text-transform: uppercase;
+  font-family: 'Karla',sans-serif;
+  font-size: 14px;
+}
+.back-btn {
+  margin-right: 32px;
+}
+.main-flow-wrapper .nxt-btn {
+  float: right;
+}
+
+.add-more {
+  display: block;
+}
+
+.progressSaved {
+  height: 40px;
+  color: #678598;
+  display: flex;
+  align-items: center;
+  margin-right: 32px;
+}
+
+.slds-button:hover,
+.slds-button_brand:hover {
+  background-color: #053756;
+}
+
+.main-flow-wrapper .nav-button {
+  margin-top: 80px;
+  font-family: 'Karla',sans-serif;
+  padding-top: 32px;
+  border-top: 1px solid #ecebeb;
+}
+.button-container {
+  display: flex;
+}
+.chevronright-icon {
+  position: absolute;
+  margin-left: 117px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+.error-container {
+  width: 100%;
+}
+.navigation{
+  position: relative;
+}
+.saveIcon {
+  padding-right: 8px;
+}
+.saveMyProgress {
+  justify-content: center;
+}
+.mobileBackShow {
+  display: none;
+}
+.mobileBackHide {
+  display: block;
+}
+
+@media only screen and (max-width: 64rem) {
+  .main-flow-wrapper .nav-button {
+    margin-top: 60px;
+    border-top: 1px solid #ecebeb;
+    padding-top: 32px
+  }
+  .main-flow-wrapper .button-container {
+    margin-bottom: 32px;
+  }
+  .chevronright-icon {
+    margin-left: 100px;
+  }
+  .error-container {
+    padding-bottom: 66px;
+    padding-top: 24px;
+  }
+  .main-flow-wrapper .container { 
+    border-bottom: none;
+  }  
+  .slds-nubbin_bottom-right:after {
+    top: unset !important;
+    bottom: -6px;
+  }
+  .slds-button {
+    width: 100%;
+  }
+  .button-container {
+    flex-direction: column;
+  }
+  .rightButtons {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+  .back-btn {
+    margin-right: 0;
+  }
+  .mobileBackShow {
+    display: block;
+  }
+  .mobileBackHide {
+    display: none;
+  }
+
+  .saveMyProgress {
+    display: flex;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .error-msg-wrapper {
+    width: 100%;
+    text-align: left;
+  }
+  .slds-nubbin_bottom-right:after {
+    top: unset !important;
+    bottom: -6px;
+  }
+}
+/* CSS for Edge Browser */
+_:-ms-lang(x),
+.main-flow-wrapper .saveIcon,
+.main-flow-wrapper .progressSaved,
+.saveMyProgress {
+  display: inline-block;
+}
+_:-ms-lang(x),
+.main-flow-wrapper .progressSaved {
+  padding: 6px 0;
+}
+_:-ms-lang(x),
+.main-flow-wrapper .saveIcon {
+  padding-bottom: 4px;
+}

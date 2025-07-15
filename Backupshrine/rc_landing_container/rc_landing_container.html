@@ -1,0 +1,162 @@
+<template>
+    <!-- <div if:true={isGuestUserAccount}>
+        <template if:true={showLanguageDropdown}>
+            <c-Qn-A_-Language-Selection onlanguagechangehanlder={languageChangeHandler}></c-Qn-A_-Language-Selection>
+        </template>
+    </div> -->
+    <div class="slds-grid slds-wrap wrapper">
+        <div class="slds-col slds-size_12-of-12">
+            <div class={activeClass}>
+                <c-rc_landing_header onsearch={handleSearch}></c-rc_landing_header>
+            </div>
+        </div>
+        <template if:true={homepage}>
+            <div class="slds-grid slds-wrap content_container recTopics">
+                <div class="slds-col slds-size_12-of-12">
+                    <c-bos-recommended-topics ongototopic={gotoTopic} ongotoalltopics={NavigateToAllTopics}>
+                    </c-bos-recommended-topics>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap content_container">
+                <template if:true={Popresources}>
+                    <h4 class="sectionHeader">{label.rcPopularResources}</h4>
+                    <template if:true={Popresources.length}>
+                        <template if:true={showPopResources}>
+                            <c-rc_generic_resource_card resources={Popresources} onresourceadd={reloadMyCollections}
+                                landingpage={landingMedia} onresourceremoved={handleResourceRemoved}>
+                            </c-rc_generic_resource_card>
+                        </template>
+                    </template>
+                </template>
+            </div>
+            <div class="content_container mediaResource">
+                <template if:true={mediaResources}>
+                    <h4 class="sectionHeader">{label.rcMediaResources}</h4>
+                    <template if:true={mediaResources.length}>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_12-of-12">
+                                <template if:true={showMediaResources}>
+                                    <c-rc_generic_video_card onresourceadd={reloadMyCollections} media={mediaResources}
+                                        landingpage={landingMedia} onmediaremoved={handleResourceRemoved}>
+                                    </c-rc_generic_video_card>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+            </div>
+            <template if:true={showMyCollections}>
+                <div class="slds-grid slds-wrap content_container collections">
+                    <div class="slds-col slds-size_12-of-12">
+                        <c-rc_my-collection ongotocollection={NavigateToCollectionPage}></c-rc_my-collection>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <template if:true={resultspage}>
+            <div if:true={indTopicPage} class="slds-grid slds-wrap slds-p-top_xx-large content_container">
+                <h4 class="slds-m-top_x-large">{indTopicName}</h4>
+                <hr>
+            </div>
+            <div class="slds-grid slds-wrap content_container">
+                <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 leftSection">
+                    <h6 if:false={indTopicPage} class="slds-p-bottom_medium slds-hide_large">{resLength} {label.results_for}
+                        “{searchTerm}”</h6>
+                    <c-rc_filters topic-id={searchId} onfilterselection={handleFilterChange}
+                        oncategoryselection={handleCategoryResult} search-string={searchTerm}>
+                    </c-rc_filters>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12 mainSection">
+                    <h6 if:false={indTopicPage} class="slds-p-top_xx-large slds-show_large">{resLength} {label.results_for}
+                        “{searchTerm}”</h6>
+                    <hr if:false={indTopicPage} class="slds-show_large">
+                    <template if:false={hideResources}>
+                        <div class="slds-p-bottom_small rheader">
+                            <h5 if:false={indTopicPage}>{label.rc_Resources}</h5>
+                            <h5 if:true={indTopicPage}>{label.rc_Resources} ({allResourcesCount})</h5>
+
+                            <span onclick={NavigateToCollectionPage} class="viewCollectWrapper" tabindex="0" onkeydown={NavigateToCollectionPageKey}>
+                                <img class="noImage" src={heartIcon} />
+                                <p class="large viewCollect">{label.viewCollections}</p>
+                            </span>
+                        </div>
+                        <template if:true={resources}>
+                            <template if:true={resources.length}>
+                                <template if:true={showPopResources}>
+                                <c-rc_generic_resource_card resources={resources} newlist={newCollections}
+                                        resultspage={resultspage} onresourceremoved={handleResourceRemoved}
+                                        onresourceadd={reloadMyCollections}>
+                                </c-rc_generic_resource_card>
+                            </template>
+                            </template>
+                            <template if:true={resourceLoadMore}>
+                                <div class="showAllWrapper">
+                                    <div class="showAllContent" onclick={showMoreResource} tabindex="0" onkeydown={showMoreResourceKey}>
+                                        <img class="showMore" src={showMore} />
+                                        <p class="large">{label.showMore}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={resources}>
+                            <c-rc_no-data-card></c-rc_no-data-card>
+                        </template>
+                    </template>
+                    <template if:false={hideMedia}>
+                        <div class="slds-m-top_xx-large slds-p-bottom_small rheader">
+                            <h5 if:false={indTopicPage}>{label.rc_Media}</h5>
+                            <h5 if:true={indTopicPage}>{label.rc_Media} ({allMediaCount})</h5>
+                            <span onclick={NavigateToCollectionPage} class="viewCollectWrapper" tabindex="0" onkeydown={NavigateToCollectionPageKey}>
+                                <img class="noImage" src={heartIcon} />
+                                <p class="large viewCollect">{label.viewCollections}</p>
+                            </span>
+                        </div>
+                        <template if:true={media}>
+                            <template if:true={media.length}>
+                                <template if:true={showMediaResources}>
+                                <c-rc_generic_video_card media={media} resultspage={resultspage}
+                                        onmediaremoved={handleResourceRemoved} onresourceadd={reloadMyCollections}>
+                                    </c-rc_generic_video_card>
+                                <template if:true={mediaLoadMore}>
+                                    <div class="showAllWrapper" onclick={showMoreMedia} tabindex="0" onkeydown={showMoreMediaKey}>
+                                        <div class="showAllContent">
+                                            <img class="showMore" src={showMore} />
+                                            <p class="large">{label.showMore}</p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
+                            </template>
+                            <template if:false={media.length}>
+                                <c-rc_no-data-card></c-rc_no-data-card>
+                            </template>
+                        </template>
+                        <template if:false={media}>
+                            <c-rc_no-data-card></c-rc_no-data-card>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <template if:true={collectionspage}>
+            <div class="slds-grid slds-wrap content_container">
+                <div class="slds-col slds-size_12-of-12">
+                    <c-rc_my-collection_add_disp></c-rc_my-collection_add_disp>
+                </div>
+            </div>
+        </template>
+        <template if:true={allTopicsPage}>
+            <div class="slds-grid slds-wrap content_container">
+                <div class="slds-col slds-size_12-of-12">
+                    <c-rc_all_topics_container ongototopic={gotoTopic}></c-rc_all_topics_container>
+                </div>
+            </div>
+        </template>
+    </div>
+    <template if:true={showModal}>
+        <c-rc_login-modal open={showModal} onmodalclose={handleModalClose}></c-rc_login-modal>
+    </template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>

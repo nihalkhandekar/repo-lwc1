@@ -1,0 +1,276 @@
+<!--*********************************************************************************************
+ * NAME:  QnA_FlowContainer.cmp
+ * DESCRIPTION: Core component to render the flow items (section/subsection/questions) from the
+ *              recieved configuration. 
+ *
+ * @AUTHOR: Pooja Dubey
+ * @DATE: 16/03/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Pooja Dubey                      16/03/2020                        Created the first version
+ * Pooja/Rohit						          28/04/2020						            updated framework logic
+ *
+*********************************************************************************************-->
+<template>
+  <div>
+    <div if:true={questionList}></div>
+
+    <div if:true={flowConfig}>
+      <div class="navigation">
+        <c-checklist-navigation 
+            setprogress={flowConfig.sections}
+            onactive={handleFlowIconActive}
+          ></c-checklist-navigation>
+      </div>
+      <div class={flowwrapper}>
+        <div if:true={spinner}>
+          <lightning-spinner
+            alternative-text="Page is loading..."
+          ></lightning-spinner>
+        </div>
+        <div class="slds-text-color_error" if:true={hasError}>
+          {messsage}
+        </div>
+        <lightning-tabset
+          selected-tab-id={selectedTab}
+          class="tabCustom tab-style"
+          active-tab-value={selectedTab}
+        >
+          <template
+            for:each={flowConfig.sections}
+            for:item="step"
+            for:index="ind"
+          >
+            <p key={step}></p>
+            <lightning-tab
+              onactive={handleTabActive}
+              label={step.title}
+              class="tab-style container"
+              id={ind}
+              key={step}
+              value={step.title}
+            >
+          
+            <div if:false={isReviewed}>
+              <p key={subsection}></p>
+              <div if:false={isReviewed} key={subsection}>
+                
+                <div if:true={isSingleQuestionPerPage}>
+                
+                  <template
+                    for:each={questionList}
+                    for:item="question"
+                    for:index="qID"
+                  >
+                    <div if:true={question.visible} key={question}>
+                      <c-Qn-A_-Question-Input
+                        data-id={question.id}
+                        question={question}
+                        key={question}
+                        onquestionresponsechange={questionResponseChange}
+                        ongetquestionidchange={getquestionidchange}
+                        subsectionindex={currentSubsectionIndex}
+                        sectionindex={currentSectionIndex}
+                        sindex={ind}
+                        questionindex={qId}
+                        haserror={question.haserror}
+                        parentquestion={parentquestion}
+                        helptextdetails={currentSubsection}
+                        questionwithresponse={questionWithResponse}
+                        currentquestionid={currentQuestionId}
+                        separatequestions={currentSubsection.separateQuestions}
+                        sectiontitle={step.id}
+						title={step.title}
+                      ></c-Qn-A_-Question-Input>
+                    </div>
+                  </template>
+                </div>
+               
+                <div if:false={isSingleQuestionPerPage}>
+                
+              
+                      <c-Qn-A_-Question-Input-Multiple
+                     
+                        onquestionresponsechange={multipleQuestionResponseChange}
+                        ongetquestionidchange={getquestionidchange}
+                        subsectionindex={currentSubsectionIndex}
+                        sectionindex={currentSectionIndex}
+                        sindex={ind}
+                        allquestionlist ={questionList}
+                        questionlist ={questionList}
+                        helptextdetails={currentSubsection}
+                        questionwithresponse={questionWithResponse}
+                        
+                        sectiontitle={step.id}
+                      ></c-Qn-A_-Question-Input-Multiple>
+                    
+                  </div>
+
+
+              </div>
+            </div>
+            <div if:true={isReviewed}>
+              <div if:false={isSingleQuestionPerPage}>
+                <c-Qn-A_-Review-Section-Multiple
+                data-id={step.id}
+                key={step}
+                onedithanlder={editMultipleHandle}
+                flowconfig={flowConfig}
+                allvisiblesection ={allSectionVisibleforMultipleQueston}
+              ></c-Qn-A_-Review-Section-Multiple>
+
+              </div>
+              <div if:true={isSingleQuestionPerPage}>
+              <c-Qn-A_-Review-Section
+                data-id={step.id}
+                key={step}
+                onedithanlder={editHandle}
+                flowconfig={flowConfig}
+                sectionlanguagemap={sectionLanguageMap}
+                allvisiblesection = {allSectionVisibleQueston}
+              ></c-Qn-A_-Review-Section>
+              </div>
+            </div>
+            </lightning-tab>
+          </template>
+          <div class="nav-button">
+            <template if:true={showUIError} class="error-container">
+              <div class="error-msg-wrapper" role="alert">
+                <section
+                  aria-label="Error Message"
+                  class="slds-popover slds-nubbin_bottom-right"
+                  role="dialog"
+                >
+                  <div class="slds-popover__body error-msg">
+                    <p class="small" tabindex="0">
+                      <template if:false={showCustomError}>
+                        {label.qnaQuestionErrorMessage}
+                      </template>
+                      <template if:true={showCustomError}>
+                        {label.SpecialCharactersError}
+                      </template>
+                    </p>
+                  </div>
+                </section>
+              </div>
+            </template>
+
+            <div class="button-container" if:true={isSingleQuestionPerPage}>
+              <div
+              class="slds-col slds-align-bottom"
+             >
+               <template if:false={isPreviousDisabled}>
+                  <lightning-button
+                  class="secondaryBtn mobileBackHide"
+                  label={label.label_backButton}
+                  disabled={isPreviousDisabled}
+                  onclick={handlePreviousNew}
+                  ></lightning-button>
+               </template>
+             </div>
+              <div
+                class="slds-col slds-align-bottom rightButtons"
+              >
+                <div class="saveMyProgress">
+                  <template if:true={isUserAlreadyLoggedIn}>
+                    <img src={checkIcon} class="saveIcon" alt="check Icon"/>
+                    <p class="large progressSaved">{label.progressSaved}</p>
+                  </template>
+                  <template if:false={isUserAlreadyLoggedIn}>
+                    <img src={saveIcon} class="saveIcon" alt="Save Icon"/>
+                    <lightning-button
+                    class="back-btn"
+                    label={label.saveProgress}
+                    onclick={handlesaveprogressMutliple} oncontextmenu={handlesaveprogressMutliple}
+                    ></lightning-button>
+                  </template>
+                </div>
+                <template if:false={isPreviousDisabled}>
+                  <lightning-button
+                    class="secondaryBtn mobileBackShow"
+                    label={label.label_backButton}
+                    disabled={isPreviousDisabled}
+                    onclick={handlePreviousNew}
+                  ></lightning-button>
+                </template>
+
+                <button
+                  class="slds-button slds-button_brand slds-float_right primaryBtn"
+                  onclick={handleIteratorNext}
+                >
+                  {saveContinueButtonLabel}&nbsp;&nbsp;
+                  <lightning-icon
+                    icon-name="utility:chevronright"
+                    size="xx-small"
+                    alternative-text="chevronright"
+                    title="chevronright"
+                    variant="inverse"
+					aria-hidden="true"
+                  ></lightning-icon>
+                </button>
+              </div>
+            </div>
+
+            <div class="button-container" if:false={isSingleQuestionPerPage}>
+              <div
+               class="slds-col slds-align-bottom"
+              >
+                <template if:false={isPreviousDisabled}>
+                  <lightning-button
+                    class="secondaryBtn mobileBackShow"
+                    label={label.label_backButton}
+                    disabled={isPreviousDisabled}
+                    onclick={handleMultiplePreviousNew}
+                  ></lightning-button>
+                </template>
+              </div>
+              <div
+                class="slds-col slds-align-bottom rightButtons"
+              >
+                <div class="saveMyProgress">
+                  <template if:true={isUserAlreadyLoggedIn}>
+                    <img src={checkIcon} class="saveIcon" alt="check Icon"/>
+                    <p class="large progressSaved">{label.progressSaved}</p>
+                  </template>
+                  <template if:false={isUserAlreadyLoggedIn}>
+                    <img src={saveIcon} class="saveIcon" alt="Save Icon"/>
+                    <lightning-button
+                    class="back-btn"
+                    label={label.saveProgress}
+                    onclick={handlesaveprogressMutliple} oncontextmenu={handlesaveprogressMutliple}
+                    ></lightning-button>
+                  </template>
+                </div>
+                <template if:false={isPreviousDisabled}>
+                  <lightning-button
+                    class="secondaryBtn mobileBackHide"
+                    label={label.label_backButton}
+                    disabled={isPreviousDisabled}
+                    onclick={handleMultiplePreviousNew}
+                  ></lightning-button>
+                </template>
+                <button
+                  class="slds-button slds-button_brand slds-float_right primaryBtn"
+                  onclick={handleMultipleIteratorNext}
+                >
+                  {saveContinueButtonLabel}&nbsp;&nbsp;
+                  <lightning-icon
+                    icon-name="utility:chevronright"
+                    size="xx-small"
+                    alternative-text="chevronright"
+                    title="chevronright"
+                    variant="inverse"
+                    aria-hidden="true"
+                  ></lightning-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </lightning-tabset>
+      </div>
+    </div>
+  </div>
+</template>

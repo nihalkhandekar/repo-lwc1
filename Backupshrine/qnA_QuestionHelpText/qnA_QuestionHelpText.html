@@ -1,0 +1,20 @@
+<template>
+  <div if:true={helpTextNotesPresent} class={inputclassname}>
+    <p class="slds-box slds-box_x-small large container">
+      <lightning-formatted-rich-text
+        value={helptextnotes}
+        class="note"
+        aria-label={helptextnotes}
+      ></lightning-formatted-rich-text>
+    </p>
+  </div>
+  <div if:true={headingHelpTextPresent}>
+    <p class="largeBold headinghelptext">
+      <lightning-formatted-rich-text
+        value={headinghelptext}
+        class="noteHeading"
+        aria-label={headinghelptext}
+      ></lightning-formatted-rich-text>
+    </p>
+  </div>
+</template>

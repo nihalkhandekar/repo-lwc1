@@ -1,0 +1,44 @@
+<template>
+    <template if:true={open}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-grid slds-wrap hPadding">
+                    <h5 class="slds-modal__title slds-hyphenate slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                        <!-- <slot name="header"></slot> -->
+                        {label.rc_Login_Header}
+                    </h5>
+                    <button
+                        class="slds-button slds-button_icon slds-button_icon-inverse mobile-close slds-col slds-size_1-of-12 tabfocus"
+                        title="Close" onclick={handleClose}>
+                        <lightning-icon size="x-small" icon-name="utility:close" alternative-text="Close">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">{label.labelClose}</span>
+                    </button>
+                </header>
+                <div class="slds-modal__content hPadding" id="modal-content-id-1">
+                    <!-- <slot name="body"></slot> -->
+                    <p class="large greyFont">{label.rc_Login_Content_top}</p>
+                    <div class="slds-grid slds-wrap modalContent">
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_7-of-12 modalLeftContent">
+                            <h6>{label.startNewCollection}</h6>
+                            <p class="large">{label.rc_Login_Content}</p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_5-of-12 modalRightContent">
+                            <img src={loginModalIng} class="modalImg">
+                        </div>
+                    </div>
+
+                </div>
+                <footer class="slds-modal__footer hPadding">
+                    <!-- <slot name="actions"></slot> -->
+                    <button class="slds-button secondaryBtn" onclick={handleLogin}>{label.Community_LoginButton}</button>
+                    <button class="slds-button slds-button_brand primaryBtn" onclick={handleCreateAcc}>{label.create_An_Account}</button>
+                </footer>
+            </div>
+        </section>
+        <template if:true={open}>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </template>
+</template>

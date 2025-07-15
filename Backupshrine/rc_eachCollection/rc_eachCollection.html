@@ -1,0 +1,75 @@
+<template>
+    <div class="slds-grid slds-wrap content_container">
+        <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 leftSection">
+            <c-rc_filters onfilterselection={handleFilterChange} oncategoryselection={handleCategoryResult}
+                search-string={searchTerm}>
+            </c-rc_filters>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12 mainSection">
+            <h6 class="slds-p-top_xx-large">{resLength} {label.rc_results_for} “{searchTerm}”</h6>
+            <hr>
+            <template if:false={hideResources}>
+                <div class="slds-p-bottom_small rheader">
+                    <h5>{label.rc_Resources}</h5>
+                    <span onclick={NavigateToCollectionPage} class="viewCollectWrapper">
+                        <img class="noImage" src={heartIcon} />
+                        <p class="large viewCollect">View your collection</p>
+                    </span>
+                </div>
+                <template if:true={resources}>
+                    <template if:true={resources.length}>
+                        <c-rc_generic_resource_card resources={resources} onnewcollection={handleNewCollection}>
+                        </c-rc_generic_resource_card>
+                    </template>
+                    <template if:true={resourceLoadMore}>
+                        <div class="showAllWrapper">
+                            <div class="showAllContent" onclick={showMoreResource}>
+                                <img class="showMore" src={showMore} />
+                                <p class="large">{label.rc_Show_More_Results}</p>
+                            </div>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={resources}>
+                    <c-rc_no-data-card></c-rc_no-data-card>
+                </template>
+            </template>
+            <template if:false={hideMedia}>
+                <div class="slds-m-top_xx-large slds-p-bottom_small rheader">
+                    <h5>{label.rc_Media}</h5>
+                    <span onclick={NavigateToCollectionPage} class="viewCollectWrapper">
+                        <img class="noImage" src={heartIcon} />
+                        <p class="large viewCollect">View your collection</p>
+                    </span>
+                </div>
+                <template if:true={media}>
+                    <template if:true={media.length}>
+                        <c-rc_generic_video_card media={media}></c-rc_generic_video_card>
+                        <template if:true={mediaLoadMore}>
+                            <div class="showAllWrapper" onclick={showMoreMedia}>
+                                <div class="showAllContent">
+                                    <img class="showMore" src={showMore} />
+                                    <p class="large">{label.rc_Show_More_Media}</p>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                    <template if:false={media.length}>
+                        <c-rc_no-data-card></c-rc_no-data-card>
+                    </template>
+                </template>
+                <template if:false={media}>
+                    <c-rc_no-data-card></c-rc_no-data-card>
+                </template>
+            </template>
+        </div>
+    </div>
+    <template if:true={openModal}>
+        <c-rc_new-collection open={openModal} onmodalclose={closeModal}
+            showerror={showLengthLimit} onaddcollection={afterAddCollection}>
+        </c-rc_new-collection>
+    </template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+      </div>
+</template>

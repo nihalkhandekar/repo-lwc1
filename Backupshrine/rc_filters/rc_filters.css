@@ -1,0 +1,122 @@
+.filterWrapper {
+    padding-top: 40px;
+}
+
+.filterIcon {
+    width: 20px;
+    margin-right: 12px;
+}
+
+.filterType {
+    display: flex;
+    padding-bottom: 14px;
+}
+
+.filterSection {
+    padding-top: 30px;
+    /* padding-bottom: 8px; */
+}
+
+.filterTitle {
+    padding-bottom: 2px;
+}
+
+.pills {
+    border-radius: 11.5px;
+    background-color: #e0f2ff;
+    padding: 4px 0;
+    padding-left: 12px;
+    color: #09538b;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: center;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.closeIcon {
+    margin-right: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+.mobileFilter {
+    display: none;
+}
+
+.desktopFilter {
+    display: block;
+}
+
+@media only screen and (max-width: 1023px) {
+    .mobileFilter {
+        display: block;
+        margin: 0 -20px;
+        position: relative;
+    }
+
+    .desktopFilter {
+        display: none;
+    }
+
+    .filterWrapper {
+        border-radius: 4px;
+        background-color: #FFFFFF;
+        padding: 2px 24px 20px 24px;
+        z-index: 1;
+        position: absolute;
+        width: 100%;
+    }
+
+    .filterTitle {
+        display: none;
+    }
+
+    .pills {
+        margin-top: 5px;
+    }
+
+    .filterSection {
+        padding-top: 22px;
+    }
+
+    .dropDownNav {
+        display: flex;
+        background-color: white;
+        justify-content: space-between;
+        padding: 24px 20px;
+        border-top: 1px solid #ECEBEB;
+        border-bottom: 1px solid #ECEBEB;
+    }
+
+    .dropDownNav .smallBold {
+        color: #09538B;
+    }
+
+    .downIcon {
+        width: 24px;
+    }
+
+    .filterContainer {
+        padding: 16px 20px 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .filterContainer a {
+        color: #09538B;
+        margin-top: 24px;
+        text-decoration: underline;
+    }
+
+    .clearFilter {
+        border-bottom: 1px solid #DDDBDB;
+        width: 100%;
+        padding-bottom: 32px;
+        padding-top: 16px;
+    }
+}

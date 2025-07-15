@@ -1,0 +1,95 @@
+<template>
+    <div class="mobileFilter">
+        <div class="dropDownNav" onclick={handleShowFilter}>
+            <p class="smallBold slds-text-title--caps">{label.rc_Filters_label}</p>
+            <img if:true={expandFilter} src={downArrow} class="downIcon">
+            <img if:false={expandFilter} src={upArrow} class="downIcon">
+        </div>
+        <template if:false={expandFilter}>
+            <div class="filterWrapper">
+                <h6 class="filterTitle">{label.rc_Filters_label}</h6>
+                <div class="filterSection">
+                    <div class="filterType">
+                        <img src={libraryIcon} class="filterIcon">
+                        <p class="largeBold">{label.rc_Result_type}</p>
+                    </div>
+                    <c-generic-multi-select filter={filter} list-data={options}
+                        oncheckboxinputselection={handleFiltercheckboxResult} value={selectedFilters} isbos={filter}>
+                    </c-generic-multi-select>
+                </div>
+                <template if:true={searchString}>
+                <div class="filterSection">
+                    <div class="filterType">
+                        <img src={filterIcon} class="filterIcon">
+                        <p class="largeBold">{label.rc_Category}</p>
+                    </div>
+                    <c-generic-multi-select filter={filter} list-data={categoryOptions}
+                        oncheckboxinputselection={handlecheckboxResult} value={selectedCategories} isbos={filter}>
+                    </c-generic-multi-select>
+                </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={showSelectedFilter}>
+            <div class="filterContainer">
+                <template if:true={selectedFilterList} for:each={selectedFilterList} for:item="filter"
+                    for:index="index">
+                    <span key={filter} class="pills" id={filter.value}>
+                        {filter.label}
+                        <img src={closeIcon} class="closeIcon tabfocus" alt="closeIcon" tabindex="0"
+                            data-id={filter.value} id={filter.label} onclick={handleFilterClose}
+                            onkeypress={handleFilterClose} />
+                    </span>
+                </template>
+                <template if:true={selectedCategoryList} for:each={selectedCategoryList} for:item="category"
+                    for:index="index">
+                    <span key={category} class="pills" id={category.value}>
+                        {category.label}
+                        <img src={closeIcon} class="closeIcon tabfocus" alt="closeIcon" tabindex="0"
+                            data-id={category.value} id={category.label} onclick={handleCategoryClose}
+                            onkeypress={handleCategoryClose} />
+                    </span>
+                </template>
+                <div class="clearFilter">
+                    <a href=# class="" onclick={handleClearFilters}>
+                        <p class="large">{label.rc_Clear_Filters}</p>
+                    </a>
+                </div>
+            </div>
+        </template>
+    </div>
+    <!--<template if:true={showFilter}> -->
+    <div class="desktopFilter">
+        <div class="filterWrapper">
+            <h6 class="filterTitle">{rc_Filters_label}</h6>
+            <div class="filterSection">
+                <div class="filterType">
+                    <img src={libraryIcon} class="filterIcon">
+                    <p class="largeBold">{label.rc_Result_type}</p>
+                </div>
+                <template if:true={toggleFilter}>
+                    <c-generic-multi-select list-data={options} oncheckboxinputselection={handleFiltercheckboxResult} value={selectedFilters} isbos={filter}>
+                    </c-generic-multi-select>
+                </template>
+            </div>
+            <template if:true={searchString}>
+            <div class="filterSection">
+                <div class="filterType">
+                    <img src={filterIcon} class="filterIcon">
+                    <p class="largeBold">{label.rc_Category}</p>
+                </div>
+                <template if:true={toggleFilter}>
+                    <c-generic-multi-select filter={filter} list-data={categoryOptions}
+                        oncheckboxinputselection={handlecheckboxResult} value={selectedCategories} isbos={filter}>
+                    </c-generic-multi-select>
+                </template>
+            </div>
+            </template>
+        </div>
+    </div>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+    <!-- </template> -->
+    <!-- name={question.id} value={answer} -->
+</template>

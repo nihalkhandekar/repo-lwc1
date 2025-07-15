@@ -1,0 +1,28 @@
+<template>
+  <!-- lightning button for open modal window -->
+  <div class="langWrapper">
+    <div class="slds-grid langwrap" onclick={openLangOpts} onkeypress={openLangOptsKey} tabindex="0">
+    <p class="small lang">{label.Language_Label}</p>
+    <lightning-icon
+    icon-name="utility:chevrondown"
+    class="chevronRight"
+    size="xx-small"
+    alternative-text="chevrondown"
+    title="chevrondown"
+    variant="inverse"
+    aria-hidden=true
+  ></lightning-icon>
+  </div>
+  </div>
+  <!--Use template if:true to display/hide popup based on isModalOpen value-->
+  <template if:true={showLangOpts}>
+    <div if:true={spinner}>
+      <lightning-spinner alternative-text="Page is loading..."></lightning-spinner>
+    </div>
+    <div class="langOptsWrapper">
+      <template for:each={picklistOptions} for:item="option">
+        <li class="langOpts" key={option.value} data-id={option.value} onclick={handleChange} onkeypress={handleChangeKey} tabindex="0"><p class="large">{option.label}</p></li>
+      </template>
+    </div>
+  </template>
+</template>

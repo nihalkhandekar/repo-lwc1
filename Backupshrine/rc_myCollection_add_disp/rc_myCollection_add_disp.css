@@ -1,0 +1,246 @@
+.wrapper {
+    display: flex;
+    /* background-color: #F7F9FA; */
+}
+
+.content_container {
+    display: flex;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+.content_container_new {
+    display: flex;
+    width: 1064px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.rheader {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.myCollectionAddDisp {
+    background-color: #f7f9fa;
+    min-height: 100vh;
+}
+
+.myCollectionAddDispGroup {
+    padding-top: 72px;
+    background-color: #fff;
+}
+
+.myCollectionAddDispHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.myCollectionBreadCrumb,
+.myCollectionAddDispHeader {
+    max-width: 1024px;
+    width: auto;
+    margin: 0 auto;
+}
+
+.primaryBtn {
+    padding: 20px 46px;
+    width: auto;
+}
+
+.secondaryBtn {
+    padding: 10px 36px;
+    width: auto;
+}
+
+.buttons .secondaryBtn {
+    margin-right: 24px;
+    padding: 20px 40px;
+    min-height: 40px;
+    height: auto;
+    width: auto;
+}
+
+.myCollectionBreadCrumb {
+    margin: 44px auto 0;
+    padding-bottom: 60px;
+}
+
+.myCollectionBreadCrumb ol li {
+    font-family: 'Karla', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    padding: 4px 12px;
+    border-radius: 11px;
+    background-color: #E0F2FF;
+}
+
+.myCollectionBreadCrumb ol li.active {
+    background-color: #F7F9FA;
+}
+
+.myCollectionAddDispHeaderTitle {
+    padding-bottom: 12px;
+}
+
+.collCardMainWrapper {
+    width: 100%;
+}
+
+.collectionCardWrapper {
+    margin: 0 auto;
+    padding-top: 40px;
+    max-width: 1024px;
+    width: 100%;
+}
+
+.collectionCard {
+    display: flex;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cardContent {
+    padding: 14px 24px;
+    cursor: pointer;
+    width: 79%;
+}
+
+.cardEdit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 21%;
+    background-color: #F7F9FA;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.cardEditTitle {
+    font-family: 'Karla', sans-serif;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.blueEdit {
+    margin-right: 10px;
+    width: 14px;
+}
+
+.titleWrapper {
+    /* max-width: 600px; */
+    word-break: break-word;
+}
+
+.cardContent .largeBold {
+    word-break: break-word;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media only screen and (width: 1024px) {
+    .myCollectionAddDispGroup {
+        padding: 48px 20px 0;
+    }
+
+    .content_container_new {
+        width: auto;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .myCollectionAddDispGroup {
+        padding-top: 48px;
+    }
+
+    .myCollectionAddDispHeader {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .myCollectionAddDispHeader,
+    .myCollectionBreadCrumb {
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .myCollectionBreadCrumb {
+        padding: 0 20px 20px;
+        margin: 0;
+    }
+
+    .myCollectionAddDispHeaderTitle {
+        padding-bottom: 20px;
+    }
+
+    .myCollectionBreadCrumb ol {
+        margin-bottom: 34px;
+    }
+
+    .collCardMainWrapper {
+        width: 100%;
+        margin: 0;
+    }
+
+    .collectCard {
+        padding: 0 20px;
+    }
+
+    .myCollectionBreadCrumb .primaryBtn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 16px;
+    }
+
+    .myCollectionBreadCrumb .secondaryBtn {
+        height: 56px;
+        width: 100%;
+    }
+
+    .cardEdit {
+        width: 30%;
+    }
+
+    .cardContent {
+        width: 70%;
+    }
+
+    .content_container_new {
+        width: 100%;
+    }
+
+    .primaryBtn {
+        width: 100%;
+        margin: 16px 0;
+    }
+
+    .buttons .secondaryBtn {
+        text-align: center;
+        width: 100%;
+    }
+
+    .noCollectionWrapper {
+        padding: 24px 20px 48px;
+    }
+
+    .buttons {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .titleWrapper {
+        max-width: unset;
+    }
+}

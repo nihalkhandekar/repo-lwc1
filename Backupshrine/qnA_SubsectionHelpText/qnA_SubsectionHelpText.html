@@ -1,0 +1,25 @@
+<template>
+  <div if:true={showHelpText} class="helpText">
+    <template if:true={staticTextPresent}>
+      <lightning-formatted-rich-text
+        value={helptextstatic}
+        class="helpTextContent"
+        aria-label={helptextstatic}
+      ></lightning-formatted-rich-text>
+    </template>
+    <template if:true={linkPresent}>
+      <template for:each={linkLabelUrlFinalList} for:item="item">
+        <div key={item.label} class="helpTextLink" >
+          <img
+            src={linkSearch}
+            class="linkSearch"
+            alt="linkSearch"
+            title="linkSearch"
+           
+          />
+          <a href={item.url} target="_blank"> {item.label} </a>
+        </div>
+      </template>
+    </template>
+  </div>
+</template>

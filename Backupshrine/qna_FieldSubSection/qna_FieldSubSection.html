@@ -1,0 +1,158 @@
+<!-- * ********************************************************************************************
+* NAME       :  QnA_FieldSubsectionComponent
+* DESCRIPTION:  This component display the Fields subsection type using record edit form both in Editable and 
+RealOnly mode and also display theReview mode. This component is called from QnA_FlowContainer and QnA_ReviewSection
+Components And hanlde all opertaions implmented on the subsection
+*
+* @AUTHOR Aayush Verma
+* @DATE 31/03/2020
+*
+*
+* MODIFICATION LOG:
+* DEVELOPER                         DATE                               DESCRIPTION
+* ================================================================================
+* Aayush Verma                       21/10/2019                         Created the first version
+*
+********************************************************************************************* -->
+<template>
+   <div if:true={spinner}>
+       <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+   </div>
+   <div if:true={isReview}>
+       <template for:each={subsection.previousIds} for:item='ids'>
+           <lightning-record-edit-form object-api-name={subsection.objectApiName} data-id={ids} 
+                                   onsuccess={handleEditSuccess} record-id={ids.recordId} 
+                                   key={ids}>
+               <lightning-messages>
+               </lightning-messages>
+               <lightning-layout multiple-rows="true" >
+                   <template for:each={subsection.labeledFields} for:item='field' onchange={handleLabeledFields}>
+                       <lightning-layout-item padding="around-small" data-id="field" key={field}>
+                            <div if:true={isOverriden}>
+                               <label>  {field.overriddenLabel} </label> 
+                               <lightning-output-field field-name={field.fieldName} variant="label-hidden" >
+                               </lightning-output-field>
+                           </div>
+                           <div if:false={isOverriden}>
+                               <lightning-output-field field-name={field.fieldName} >
+                               </lightning-output-field>
+                           </div>
+                       </lightning-layout-item>
+
+                   
+                   </template>
+               </lightning-layout>
+               
+               
+                   
+           </lightning-record-edit-form>
+       </template>
+       
+   </div>
+   <div if:false={isReview}>
+       <div if:true={subsection.objectApiName}>
+           <div if:false={previousRecordsIsEmpty}>
+               <template for:each={subsection.previousIds} for:item='ids' for:index='index'>
+                   <lightning-record-edit-form object-api-name={subsection.objectApiName} data-id={ids} 
+                                   onsuccess={handleEditSuccess} record-id={ids.recordId} 
+                                   key={ids}>
+                       <lightning-messages>
+                       </lightning-messages>
+                       <lightning-layout multiple-rows="true" >
+                           <template for:each={subsection.labeledFields} for:item='field' onchange={handleLabeledFields}>
+                               <lightning-layout-item padding="around-small" data-id="field" key={field}>
+                                   <div if:true={isOverriden}>
+                                       <label>{field.overriddenLabel}</label>
+                                       <div if:true={readOnlyMode}> 
+                                           <lightning-output-field variant="label-hidden" 
+                                                                   field-name={field.fieldName}>
+                                           </lightning-output-field>
+                                       </div>
+                                   </div>
+                                   <div if:false={isOverriden}>
+                                       <lightning-output-field variant="label-hidden" 
+                                                               field-name={field.fieldName}>
+                                       </lightning-output-field>
+                                   </div>
+                               </lightning-layout-item>
+                               
+                           </template>
+                       </lightning-layout>
+                       
+                       <div if:false={readOnlyMode}>
+                           <lightning-button
+                               class="slds-m-top_small"
+                               type="submit"
+                               name={index}
+                               label="Save">
+                           </lightning-button>
+                           <lightning-button
+                               class="slds-m-top_small"
+                               type="submit"
+                               name={index}
+                               label="Cancel"
+                               onclick={handleEditCancel}>
+                           </lightning-button>
+                       </div>
+                       <div if:true={readOnlyMode}>
+                           <lightning-button
+                               class="slds-m-top_small"
+                               type="submit"
+                               name={index}
+                               label="Edit"
+                               onchange={handleEditButtonSuccess}>
+                           </lightning-button>
+                       </div>
+                       <div if:true={subsection.hasParent}>
+                           <lightning-button
+                               class="slds-m-top_small"
+                               type="submit"
+                               name={index}
+                               label="Edit"
+                               onchange={handleEditButtonSuccess}>
+                           </lightning-button>
+                       </div>
+                   </lightning-record-edit-form>
+
+               </template>
+           </div>
+       </div>
+   </div>
+   <div if:false={parentWithFieldEnabledOrEmptyList}>
+       <lightning-record-edit-form object-api-name={subsection.objectApiName} data-id={ids} 
+                                   onsuccess={handleSuccess} record-id={ids.recordId} 
+                                   key={ids} onsubmit={onRecordSubmit}>
+           <lightning-messages></lightning-messages>
+           <lightning-layout multiple-rows="true" >
+               <template for:each={subsection.labeledFields} for:item='field' onchange={handleLabeledFields}>
+                   <lightning-layout-item padding="around-small" data-id="field" key={field}>
+                     
+                       <div if:true={isOverriden}>
+                           <label>  {field.overriddenLabel} </label> 
+                           <lightning-input-field field-name={field.fieldName} variant="label-hidden" >
+                           </lightning-input-field>
+                       </div>
+                       <div if:false={isOverriden}>
+                           <lightning-input-field field-name={field.fieldName} >
+                           </lightning-input-field>
+                       </div>
+                   </lightning-layout-item>
+               </template>
+           </lightning-layout>
+           <lightning-button
+               class="slds-m-top_small"
+               type="submit"
+               name={index}
+               label="Save"
+               onclick={submitForm}>
+           </lightning-button>
+           <lightning-button
+               class="slds-m-top_small"
+               type="submit"
+               name={index}
+               label="Cancel"
+               onclick={handleHiddenCancel}>
+           </lightning-button>
+       </lightning-record-edit-form>
+   </div>
+</template>

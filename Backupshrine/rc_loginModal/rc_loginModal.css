@@ -1,0 +1,118 @@
+.slds-modal__header {
+    border-bottom: none;
+}
+
+.hPadding {
+    padding: 0 40px;
+    bottom: -1px;
+}
+
+.slds-modal__footer {
+    border-top: 1px solid #d4d4d4;
+    border-width: thin;
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+.mobile-close {
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-bottom: auto;
+    margin-top: 10px;
+}
+
+.slds-modal {
+    box-shadow: 0 12px 24px 0 #DADBDE;
+}
+
+.slds-button:focus {
+    outline: 2px solid #2d2c2c;
+}
+
+.slds-modal__footer.hPadding {
+    display: flex;
+    justify-content: space-between;
+}
+
+header.hPadding {
+    text-align: left;
+    padding-top: 40px;
+    padding-bottom: 12px;
+}
+
+.greyFont {
+    color: #999999;
+}
+
+.modalContent {
+    display: flex;
+    margin: 36px 0 56px 0;
+}
+
+.modalLeftContent h6 {
+    margin-bottom: 8px;
+}
+
+.modalImg {
+    width: 132px;
+}
+
+.modalRightContent {
+    text-align: center;
+}
+
+.secondaryBtn,
+.primaryBtn {
+    width: 50%;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+	height: auto;
+    min-height: 40px;
+}
+
+.slds-modal__footer.hPadding .slds-button.slds-button_brand.primaryBtn {
+    margin-left: 20px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .hPadding {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    header.hPadding {
+        padding-top: 36px;
+        padding-bottom: 16px;
+    }
+
+    .mobile-close {
+        padding-top: 4px;
+        align-items: baseline;
+        margin-top: 0;
+        width: auto;
+    }
+
+    .modalContent {
+        margin: 24px 0;
+    }
+
+    .modalImg {
+        display: none;
+    }
+
+    .slds-modal__footer.hPadding {
+        flex-direction: column;
+    }
+
+    .secondaryBtn,
+    .primaryBtn {
+        width: 100%;
+    }
+
+    .slds-modal__footer.hPadding .slds-button.slds-button_brand.primaryBtn {
+        margin-left: 0;
+        margin-top: 24px;
+    }
+}

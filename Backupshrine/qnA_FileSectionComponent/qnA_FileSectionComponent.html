@@ -1,0 +1,119 @@
+<template>
+    <div if:true  = {spinner}>
+        <lightning-spinner id="spinner" alternative-text="Page is loading..."></lightning-spinner>
+    </div>
+    <div if:true = {isReview}>
+        <template for:each={subsection.files} for:item= "file" for:index= "fIndex">
+            
+            <div key={file.id} class="lnp-pipe slds-m-vertical_x-large"></div>
+            <lightning-layout key ={file.Id} class="slds-wrap service-container">
+                <lightning-layout-item size = "3">
+                    layout item 1 review is true-- added for testing
+                    <div if:true = {upFileLen}>
+                    <div>
+                        To show file attachment div remved filecard here review is true--added for testing
+                        {file.attachmentName}
+                    </div>
+                    <div if:true = {file.isRequired}>
+                        Required files div review is true--- added for testing
+                        <span> * </span>
+                    </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout key ={file.Id} multiple-rows= true>
+                Layout 2 review is true---added for testing
+                <template for:each={file.uploadedFiles} for:item= "fileData" for:index= "idIndex">
+                    Iteration 1 started review is true--- added for testing
+                    <div key ={fileData.Id} class="slds-grid file">
+                        <div class="slds-col">
+                          <div>
+                            <div>
+                              <!-- file card not supported in LWC-->
+                              <div>
+                                  div to show uploded file review is true--added for testing
+                                  {fileData}
+                            </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </template>
+            </lightning-layout>
+        </template>
+    </div>
+    <div if:false = {isReview}>
+        Review is false added for testing
+        
+        <template for:each={subsection.files} for:item= "file" for:index= "fIndex">
+            itertation 1 review is false
+            <div key={file.id} class="lnp-pipe slds-m-vertical_x-large">
+            <lightning-file-upload
+                        multiple={subsection.checkMultipleRecords}
+                        accept={accept}
+                        disabled={disabled}
+                        record-id={parentrecordid}
+                        name={computeFileName}
+                        onuploadfinished={handleUploadFinished}
+                ></lightning-file-upload></div>
+            <lightning-layout key ={file.Id} class="slds-wrap service-container">
+                <lightning-layout-item size = "3">
+                    layout item 3 review is false--added for testing
+                    <div if:true = {upFileLen}>
+                    <div>
+                        check length review false file name--added for testing
+                        {file.attachmentName}
+                    </div>
+                    <div if:true = {file.isRequired}>
+                        check if required review false--added for testing
+                        <span> * </span>
+                    </div>
+                    </div>
+                </lightning-layout-item>
+                <br>
+                <lightning-layout-item size = 9 >
+                    above file upload--old one--add below here
+                    
+                <lightning-layout-item>
+                    after file upload review is false added for testing
+                    <lightning-layout multiple-rows= true>
+                        <div if:true = {uploadedfilecount}>
+                            <template for:each={file.uploadedFiles} for:item= "fileData" for:index= "idIndex">
+                                iteration 2 iteration on uloaded files review false--added for testing
+                                <div key ={fileData.Id} class="slds-grid file">
+                                    <div class="slds-col">
+                                        <div>
+                                            <div class="delete-button">
+                                                <div data-value={fileData}>
+                                                    before lightning button review false --added for testing
+                                                    <lightning-button
+                                                    label= "X" 
+                                                    icon-position= left
+                                                    onclick ={deleteFile}
+                                                    name={ComputeButtonName}
+                                                    variant= "destructive"
+                                                    >
+        
+                                                    </lightning-button>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    fileId= {fileData}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                </div>
+                            </template>
+    
+                        </div>
+                    </lightning-layout>
+    
+                </lightning-layout-item>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+    </div>
+</template>

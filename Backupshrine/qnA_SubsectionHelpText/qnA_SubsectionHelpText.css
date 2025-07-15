@@ -1,0 +1,49 @@
+.helpText {
+  padding: 32px;
+  background-color: #f7f9fa;
+  border: 1px solid #ecebeb;
+}
+.helpTextHeading {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: bold;
+}
+.helpTextContent {
+  padding-top: 8px;
+  padding-bottom: 24px;
+}
+.helpTextContent,
+.helpTextLink {
+  line-height: 24px;
+  font-size: 16px;
+}
+.helpTextLink a {
+  color: #09538b;
+  width: 236px;
+  text-decoration: underline;
+}
+.helpTextLink {
+  display: flex;
+  padding-top: 24px;
+  align-items: center;
+}
+.linkSearch {
+  padding-right: 9px;
+  height: 58px;
+  max-width: none;
+}
+
+@media only screen and (max-width: 64rem) {
+  .helpText {
+    float: none;
+    margin-left: 0;
+    width: 100%;
+    padding: 24px;
+  }
+  .helpTextLink a {
+    width: 100%;
+  }
+  .linkSearch {
+    display: none;
+  }
+}

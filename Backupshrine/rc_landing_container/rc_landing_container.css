@@ -1,0 +1,97 @@
+.wrapper {
+    display: flex;
+    background-color: #F7F9FA;
+    padding-bottom: 64px;
+}
+
+.content_container {
+    display: flex;
+    width: 1064px;
+    margin: 0 auto;
+	padding:0 20px;
+}
+
+.content_container.mediaResource {
+    flex-direction: column;
+}
+
+.rheader {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+}
+
+.viewCollectWrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.viewCollect {
+    color: #005292;
+    padding-left: 8px;
+}
+
+.showAllWrapper {
+    border: 2px dashed #D0CFCF;
+    border-radius: 4px;
+    height: 125px;
+    margin-bottom: 60px;
+}
+
+.showAllWrapper,
+.showAllContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #09538B;
+}
+
+.showAllContent {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.showMore {
+    width: 30px;
+    padding-right: 8px;
+}
+
+.sectionHeader {
+    margin-top: 100px;
+    margin-bottom: 32px;
+}
+
+.myCollectionDispContainer {
+    width: 100%;
+    background-color: #F7F9FA;
+}
+
+.collections {
+    margin-bottom: 60px;
+}
+
+hr {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+@media only screen and (max-width: 1023px) {
+    .content_container {
+        padding: 20px;
+        width: 100%;
+    }
+    .wrapper {
+        padding-bottom: 16px;
+    }
+    .sectionHeader {
+        margin-top: 40px;
+        margin-bottom: 16px;
+    }
+    .rheader {
+        flex-direction: column;
+    }
+    .viewCollectWrapper {    
+        padding-top: 16px;
+    }
+}

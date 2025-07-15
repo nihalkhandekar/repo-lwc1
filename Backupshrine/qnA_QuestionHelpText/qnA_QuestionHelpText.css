@@ -1,0 +1,28 @@
+.container {
+  border: 1px solid #f6a053;
+  border-radius: 4px;
+  background-color: #fff8f2;
+  padding: 12px 24px;
+  margin-top: 40px;
+  margin-bottom: 16px;
+  width: 100%;
+}
+.note,
+.noteHeading {
+  color: #2d2c2c;
+  letter-spacing: 0.01px;
+}
+.headinghelptext {
+  display: block;
+  min-width: 324px;
+  margin-bottom: 16px;
+  margin-top: 40px;
+}
+
+.no-margin .container{
+  margin: 0px;
+}
+
+.mb-32{
+  margin-bottom: 32px;
+}

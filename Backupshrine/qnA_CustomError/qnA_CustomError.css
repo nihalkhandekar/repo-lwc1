@@ -1,0 +1,8 @@
+.errorContainer {
+  text-align: center;
+  padding: 16px 0;
+}
+.ssoError {
+  color: #db2426;
+  font-weight: bold;
+}

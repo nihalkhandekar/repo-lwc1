@@ -1,0 +1,175 @@
+<!-- * ********************************************************************************************
+* NAME       :  QnAReviewSection
+* DESCRIPTION:  This component display the complete data for all the other sections in readonly mode which inclules file
+, fields and question
+*
+* @AUTHOR Janani
+* @DATE 30/04/2020
+*
+*
+* MODIFICATION LOG:
+* DEVELOPER                         DATE                               DESCRIPTION
+* ================================================================================
+* Janani                 30/04/2020                       
+*
+********************************************************************************************* -->
+<template>
+  <template if:true={showCheckList}>
+    <div class="slds-size_1-of-1 reviewSection">
+      <div class="slds-large-size_1-of-2 slds-size_1-of-1 heading">
+        <div class="title">
+          <h2>{label. ReviewPage_heading}</h2>
+        </div>
+        <div class="sub-title">
+          <h5>{label.ReviewPage_subHeader}</h5>
+        </div>
+      </div>
+      <div class="slds-large-size_1-of-1 checkListContent">
+        <div class="slds-large-size_6-of-12 slds-size_1-of-1">
+          <div class="list-heading">
+            <h6>{label.ReviewPage_listHeader}</h6>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{label.ReviewPage_listItem1}</p>
+            </div>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{label.ReviewPage_listItem2}</p>
+            </div>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{label.ReviewPage_listItem3}</p>
+            </div>
+          </div>
+        </div>
+        <div class="slds-large-size_2-of-12"></div>
+        <div class="slds-large-size_4-of-12">
+          <img
+            src={reviewCheckList}
+            class="reviewCheckList"
+            alt="reviewCheckList"
+            title="reviewCheckList"
+            aria-hidden="true"
+          />
+        </div>
+      </div>
+    </div>
+  </template>
+  <template for:each={mapToShow} for:item="section">
+    <div key={section} class="slds-grid slds-wrap section">
+      <div
+        key={section}
+        class="slds-large-size_1-of-1 slds-size_1-of-1 section-heading"
+      >
+        <div
+          class="slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-6 iconContainer"
+        >
+          <span class="circle">
+            <img
+              src={section.image}
+              class="sectionIcon"
+              alt="sectionIcon"
+              title="sectionIcon"
+              aria-hidden="true"
+          /></span>
+        </div>
+        <div
+          key={section}
+          class="slds-large-size_9-of-12 slds-size_5-of-6 section-title"
+        >
+          {section.key}
+        </div>
+        <div class="slds-large-size_2-of-12 button-wrapper">
+          <button
+            class="slds-button slds-button_neutral secondary-btn"
+            data-id={section.key}
+            id={sId}
+            value={sID}
+            name={section.actualKey}
+            onclick={handleEdit}
+          >
+            {label.edit}
+          </button>
+        </div>
+      </div>
+      <div class="slds-large-size_12-of-12 slds-size_1-of-1 question-wrapper">
+        <template for:each={section.value} for:item="question">
+          <div
+            key={question.id}
+            class="question-container slds-large-size_12-of-12 slds-size_1-of-1"
+          >
+            <div
+              key={question.questionBody}
+              class="slds-large-size_1-of-12 slds-medium-size_1-of-12 slds-size_1-of-6"
+            ></div>
+            <div
+              key={question.questionBody}
+              class="slds-large-size_4-of-12 slds-medium-size_11-of-12 slds-size_5-of-6 question border"
+            >
+              <p class="largeBold">{question.questionBody}</p>
+            </div>
+            <div
+              key={question.questionBody}
+              class="slds-large-size_2-of-12 border"
+            ></div>
+
+            <div
+              if:false={question.isList}
+              key={question.responseText}
+              class="slds-large-size_4-of-12 slds-medium-size_11-of-12 slds-size_5-of-6 answer border"
+            >
+              <p class="small">
+                <lightning-formatted-rich-text
+                  value={question.responseText}
+                ></lightning-formatted-rich-text>
+              </p>
+            </div>
+            <div
+              if:true={question.isList}
+              key={question.responseText}
+              class="slds-large-size_4-of-12 slds-medium-size_11-of-12 slds-size_5-of-6 answer border"
+            >
+              <template
+                for:each={question.displayResponseArray}
+                for:item="answer"
+              >
+                <div key={answer} class="answerList">
+                  <p class="small">
+                    <lightning-formatted-rich-text
+                      value={answer}
+                    ></lightning-formatted-rich-text>
+                  </p>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+      <div class="slds-medium-size_1-of-12 slds-size_1-of-6 mob"></div>
+      <div class="slds-size_5-of-6 ">
+        <button
+          class="slds-button slds-button_neutral btn-wrapper secondary-btn"
+          data-id={section.key}
+          id={sId}
+          value={sID}
+          name={section.actualKey}
+          onclick={handleEdit}
+        >
+          {label.edit}
+        </button>
+      </div>
+    </div>
+  </template>
+</template>

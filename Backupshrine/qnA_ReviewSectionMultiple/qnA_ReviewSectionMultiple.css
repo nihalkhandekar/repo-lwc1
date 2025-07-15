@@ -1,0 +1,161 @@
+.reviewSection {
+  padding-top: 82px;
+  padding-bottom: 100px;
+  border-bottom: 2px dashed #d0cfcf;
+}
+.title,
+.list-heading,
+.list-content,
+.question,
+.answer {
+  color: #2d2c2c;
+}
+.sub-title {
+  color: #757575;
+  margin: 16px 0 108px 0;
+}
+.list {
+  padding-top: 32px;
+  display: flex;
+}
+.list-content {
+  margin-left: 35px;
+}
+.list-icon {
+  width: 20px;
+  height: 20px;
+  background-color: #e0f2ff;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+.inner-circle {
+  height: 8px;
+  width: 8px;
+  background-color: #09538b;
+  border-radius: 50%;
+  margin: auto;
+}
+.checkListContent,
+.section-heading,
+.question-container {
+  display: flex;
+}
+.section {
+  padding: 60px 0;
+  border-bottom: 2px dashed #d0cfcf;
+  overflow: hidden;
+}
+.section-title {
+  color: #2d2c2c;
+  font-family: 'Lato',sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+  letter-spacing: 0.25px;
+  line-height: 43px;
+  padding-bottom: 24px;
+  text-transform: capitalize;
+}
+.border {
+  border-bottom: 1px solid #ecebeb;
+  padding: 32px 0;
+}
+.circle {
+  border-radius: 50%;
+  border: 1px solid #ecebeb;
+  background-color: #f7f9fa;
+  height: 48px;
+  width: 48px;
+  display: flex;
+}
+.sectionIcon {
+  margin: auto;
+  height: 24px;
+}
+div.question-container:last-child .border,
+.section:last-child {
+  border-bottom: none;
+}
+.answerList {
+  display: list-item;
+  padding-bottom: 8px;
+  margin-left: 16px;
+}
+.secondary-btn.slds-button {
+  float: right;
+  width: max-content;
+}
+.btn-wrapper,
+.mob {
+  display: none;
+}
+.button-wrapper,
+.reviewCheckList {
+  display: block;
+}
+@media only screen and (max-width: 768px) {
+  .reviewSection {
+    padding: 56px 0;
+  }
+  .question-container {
+    flex-direction: column;
+    align-items: flex-end;
+    border-bottom: 1px solid #ecebeb;
+    padding: 32px 0;
+  }
+  .question-container:last-child {
+    border-bottom: none;
+  }
+  .mob {
+    display: block;
+  }
+  .border {
+    border-bottom: none;
+    padding: 0;
+  }
+  .checkListContent {
+    flex-direction: column-reverse;
+  }
+  .section {
+    padding: 44px 0 60px 0;
+  }
+  .sub-title {
+    margin: 16px 0 80px 0;
+  }
+  .question {
+    padding-bottom: 16px;
+  }
+  .section-heading,
+  .question-wrapper,
+  .btn-wrapper.secondary-btn {
+    width: 100%;
+  }
+  .section-title {
+    padding-left: 0;    
+    font-size: 28px;
+    line-height: 35px;
+  }
+  .circle {
+    width: 32px;
+    height: 32px;
+  }
+  .button-wrapper {
+    display: none;
+  }
+  .list-heading {
+    padding-top: 11px;
+  }
+  .list {
+    padding-top: 24px;
+  }
+  .btn-wrapper {
+    display: block;
+    width: 100%;
+    margin-top: 22px;
+    padding: 13px 0;
+  }
+  .reviewCheckList {
+    width: 94px;
+  }
+}

@@ -1,0 +1,210 @@
+.mediaWrapper {
+    justify-content: space-between;
+}
+
+.cardWrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 160px;
+    width: 49%;
+}
+
+.cardImg {
+    background-color: #ECEBEB;
+    height: 100%;
+    position: relative;
+    min-height: inherit;
+    border-radius: 4px;
+}
+
+.cardContent {
+    padding: 24px 0;
+    text-align: left;
+    min-height: auto;
+    position: relative;
+}
+
+.cardTitle {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.cardTitle a {
+    color: #2D2C2C;
+}
+
+.capsuleWrapper {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: absolute;
+    bottom: 4px;
+}
+
+.capsule {
+    color: #757575;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 12px;
+    background-color: #F7F9FA;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    margin-right: 8px;
+}
+
+.heartIconWrapper {
+    text-align: right;
+    cursor: pointer;
+}
+
+.playIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88px;
+    cursor: pointer;
+}
+
+.desc {
+    color: #757575;
+}
+
+.heartIconWrapper .slds-popover {
+    width: max-content;
+    text-align: left;
+    position: absolute;
+    /* bottom: 8px;
+    right: -40px; */
+    right: -54px;
+    top: 70px;
+    padding: 16px;
+    border: 1px solid #D0CFCF !important;
+}
+
+.slds-nubbin_top::before,
+.slds-nubbin_top::after,
+.heartIconWrapper .slds-popover {
+    border: 1px solid #D0CFCF !important;
+    border-bottom: none !important;
+    border-right: none !important;
+}
+
+.slds-popover__header,
+.slds-popover__body {
+    padding: 8px 0;
+}
+
+.slds-text-heading_small {
+    color: #6D7278;
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.slds-popover__body {
+    padding-bottom: 0;
+}
+
+.list {
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.newCollection {
+    padding-top: 16px;
+    color: #09538B;
+    font-family: 'Karla', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.plusIcon {
+    height: 24px;
+    margin-right: 8px;
+}
+
+.thumbnail {
+    width: inherit;
+}
+
+.titleText {
+    padding-right: 16px;
+}
+
+.toastContainer {
+    top: 108px;
+}
+
+.slds-theme--info a {
+    color: #09538B;
+    text-decoration: underline;
+}
+
+.slds-notify_toast,
+.slds-notify--toast {
+    margin: 0.5rem 0;
+    /* max-width: calc(100% - 136px); */
+}
+
+.shareIcon {
+    height: 32px;
+}
+
+.shareIcon {
+    height: 32px;
+}
+
+.socialIcon {
+    width: 42px;
+    margin-bottom: 28px;
+    margin-right: 24px;
+    margin-left: 24px;
+    cursor: pointer;
+}
+
+.socialIcon.mailIcon {
+    width: 48px;
+    margin-top: -2px;
+}
+
+.headerModal {
+    text-align: left;
+}
+
+.modalIcons {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 1023px) {
+    .shareIcon {
+        margin-top: -5px;
+        margin-left: 8px;
+    }
+
+    .titleWrapper {
+        justify-content: space-between;
+    }
+
+    .cardWrapper {
+        width: 100%;
+        margin-top: 0;
+    }
+
+    .slds-nubbin_top::before,
+    .slds-nubbin_top::after {
+        left: unset;
+        right: 26px;
+    }
+
+    .heartIconWrapper .slds-popover {
+        right: 0;
+    }
+}

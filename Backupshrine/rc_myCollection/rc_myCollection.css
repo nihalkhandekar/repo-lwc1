@@ -1,0 +1,86 @@
+.noCollectionHeader,
+.noCollectionLink,
+.cardArrow,
+.collectionCard {
+    display: flex;
+}
+
+.noCollectionCardWrapper {
+    flex-direction: column;
+    margin-top: 100px;
+}
+
+.noCollectionHeader {
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.noCollectionLink {
+    align-items: center;
+}
+
+.noCollectionLink a {
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.noCollectionLink .small {
+    color: #09538b;
+}
+
+.noCollectionLink .blueArrow {
+    margin-left: 12px;
+    width: 22px;
+    cursor: pointer;
+}
+
+.cardArrow .blueArrow {
+    margin: 0 42px;
+    width: 24px;
+}
+
+.collectionCard {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cardContent {
+    padding: 14px 24px;
+}
+
+.cardArrow {
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F9FA;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.colName {
+    padding: 8px;
+}
+
+@media only screen and (max-width: 1023px) {
+    .noCollectionHeader {
+        flex-direction: column;
+    }
+
+    .noCollectionLink {
+        margin-top: 16px;
+    }
+
+    .collectionCard {
+        margin-bottom: 16px;
+    }
+
+    .noCollectionCardWrapper {
+        margin-top: 0;
+    }
+    .cardArrow .blueArrow {
+        margin: 0 32px;
+    }
+}

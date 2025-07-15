@@ -1,0 +1,137 @@
+.headerContentWrapper {
+    width: fit-content;
+    min-width: 1024px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.search-box {
+    border: none;
+    box-shadow: none;
+    height: 60px;
+}
+.search-icon-wrapper {
+    padding-left: 16px;
+    padding-right: 16px;
+    background-color: #09538B;
+    border-radius: 0px 3px 3px 0px;
+    display: flex;
+    cursor: pointer;
+    margin: unset
+}
+.loginBannerWrapper {
+    background-color: white;
+    padding: 24px 20px;
+}
+.bannerImg {
+    width: 60px;
+}
+.loginBanner {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1024px; 
+    margin: 0 auto;
+}
+.loginBtn {
+    text-align: right
+}
+.bannerContent {
+    margin-left: 8px;
+}
+.secondaryBtn {
+    justify-content: center;
+    padding: 20px 40px;
+	min-height: 40px;
+    height: auto;
+    min-width: 322px;
+}
+.suggestions {
+    background-color: white;
+    text-align: left;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 16px 0;
+    border: 1px solid #D0CFCF;
+    border-radius: 0 4px 4px 4px;
+    border-top: 0;
+}
+.suggestions .item {
+    padding: 4px 24px;
+    cursor: pointer;
+
+}
+.suggestions .item:hover {
+    background-color: #ECEBEB;
+    font-weight: bold;
+}
+.helpText {
+    color: #FFF;
+    text-align: center;
+    font-size: 22px;
+}
+
+.globalSearchHeader h1 {
+    color: #FFF;
+}
+
+@media only screen and (width: 1024px) {
+    .headerContentWrapper {
+        width: 90%;
+        min-width: unset;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .search-box {
+        height: 54px;
+    }
+
+    .header_container {
+        background-size: unset;
+    }
+
+    .headerContentWrapper {
+        width: 90%;
+        min-width: unset;
+    }
+
+    .search-box input[type="text"] {
+        font-size: 17px;
+    }
+
+    .loginBannerWrapper {
+        padding: 24px;
+    }
+
+    .loginBanner {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .secondaryBtn {
+        margin-top: 16px;
+    }
+
+    .bannerContent {
+        margin-left: 0;
+    }
+
+    .bannerImg {
+        display: none;
+    }
+
+    .helpText {
+        font-size: 18px;
+    }
+
+    .globalSearchHeader {
+        margin-bottom: 24px;
+    }
+
+}

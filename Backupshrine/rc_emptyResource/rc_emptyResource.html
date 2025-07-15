@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-grid slds-wrap wrapper">
+        <div class="slds-col slds-size_12-of-12">
+            <div class="emptyResource">
+                <img src={emptyResourceIcon} class="emptyResourceImage">
+                <p class="large">{label.rc_Empty_Resource_Msg}</p>
+                <a onclick={goToRc} class="emptyResourceLink">
+                    {label.rc_Find_Resources}
+                    <img src={arrowIcon} class="arrowIcon">
+                </a>
+            </div>
+        </div>
+    </div>
+</template>

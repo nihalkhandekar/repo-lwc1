@@ -1,0 +1,131 @@
+<template>
+    <template if:true={showToast}>
+        <div class="demo-only">
+            <div class="slds-notify_container toastContainer">
+                <div class="slds-notify slds-notify_toast slds-theme--info" role="status">
+                    <span class="slds-assistive-text">info</span>
+
+                    <div class="slds-notify__content toastContent">
+                        <p class="slds-text-heading_small large toastMessage">
+                            {label.ResourceAdded}&nbsp;
+                            <a onclick={goToCollections}>{label.Gotomycollections}</a>
+                        </p>
+                    </div>
+                    <div class="slds-notify__close toastClose">
+                        <button class="slds-button slds-button_icon slds-button_icon-inverse" title="Close">
+                            <lightning-icon icon-name="utility:close" size="x-small" alternative-text="close"
+                                title="close" onclick={handleToastClose}>
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <div class="slds-grid slds-wrap mediaWrapper" data-id="videoCard">
+        <template if:true={openModal}>
+            <c-rc_video-modal video-url={videoUrl} open={openModal} onmodalclose={closeModal}></c-rc_video-modal>
+        </template>
+        <template for:each={updatedMedia} for:item="item">
+            <div class="cardWrapper slds-col slds-size_12-of-12 slds-large-size_6-of-12" key={item.article.Id}>
+                <div class="cardImg slds-col slds-size_12-of-12">
+                    <img class="thumbnail" src={item.imgSrc} />
+                    <img class="playIcon" data-id={item.article.Resource_Title_URL__c} src={playIcon}
+                        onclick={showModal} tabindex="0" onkeydown={showModalKey}/>
+                </div>
+                <div class="cardContent slds-col slds-size_12-of-12">
+                    <div class="slds-grid slds-col titleWrapper">
+                        <div class="slds-size_10-of-12 slds-large-size_10-of-12 titleText">
+                            <p class="largeBold cardTitle"><a target="_blank" onclick={updateViewState}
+                                    data-id={item.kaArticleId}
+                                    href={item.article.Resource_Title_URL__c}>{item.article.Title}</a></p>
+                        </div>
+                        <div class="slds-size_1-of-12 slds-large-size_1-of-12 heartIconWrapper">
+                            <a class="heartIcon" onclick={handleCollectionsPopup} data-id={item.article.Id} tabindex="0"
+                                onkeydown={handleCollectionsPopupKey}>
+                                <template if:false={item.isSaved}>
+                                    <img src={passiveHeartIcon} alt="Favourite Icon" />
+                                </template>
+                                <template if:true={item.isSaved}>
+                                    <img src={activeHeartIcon} alt="Favourite Icon" />
+                                </template>
+                            </a>
+                            <section data-name={item.article.Id} id={item.article.Id}
+                                aria-describedby="dialog-body-id-100" aria-labelledby="dialog-heading-id-105"
+                                class="slds-popover slds-nubbin_top slds-hide" role="dialog">
+                                <button
+                                    class="slds-button slds-button_icon slds-button_icon-small slds-float_right slds-popover__close"
+                                    title="Close dialog">
+                                    <svg class="slds-button__icon" aria-hidden="true">
+                                        <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                                    </svg>
+                                    <span class="slds-assistive-text">{label.rc_Close_Dialog}</span>
+                                </button>
+                                <header class="slds-popover__header">
+                                    <span class="slds-text-heading_small">{label.addToCollection}</span>
+                                </header>
+                                <div class="slds-popover__body">
+                                    <div class="list">
+                                        <c-generic-multi-select list-data={collectionsList}
+                                            oncheckboxinputselection={handleAddResource}
+                                            onuncheckboxinputselection={handleDeSelect} value={preSelectedCol}
+                                            resourcecenter={rc} isbos={rc}>
+                                        </c-generic-multi-select>
+                                    </div>
+                                    <div onclick={showColModal} class="newCollection">
+                                        <img src={addIconOrange} class="plusIcon">{label.rcNewCollection}
+                                    </div>
+                                </div>
+                            </section>
+                            <template if:true={openColModal}>
+                                <c-rc_new-collection open={openColModal} onmodalclose={closeColModal}
+                                    showerror={showLengthLimit} onaddcollection={afterAddCollection}>
+                                </c-rc_new-collection>
+                            </template>
+                        </div>
+                        <div class="slds-size_1-of-12 slds-large-size_1-of-12 heartIconWrapper">
+                            <img src={shareIcon} alt="Share Icon" class="shareIcon" tabindex="0"
+                                data-id={item.article.Resource_Title_URL__c} onclick={openShareModal}
+                                onkeyup={openShareModalKey} />
+                        </div>
+                    </div>
+                    <div>
+                        <p class="small desc">{item.article.Summary}</p>
+                    </div>
+
+                    <div class="capsuleWrapper slds-grid slds-wrap">
+                        <template for:each={item.mapDataCategories} for:item="pill" for:index="index">
+                            <div class="capsule" key={pill}>
+                                {pill}
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+    <template if:true={showLoginModal}>
+        <c-rc_login-modal open={showLoginModal} onmodalclose={handleModalClose}></c-rc_login-modal>
+    </template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+    <template if:true={showShareModal}>
+        <c-modal open={showShareModal} onmodalclose={closeShareModal} size={modalSize} hide-footer=true>
+            <div slot="header" class="headerModal">
+                <h6>{label.shareResources}</h6>
+            </div>
+            <div slot="body" class="slds-m-vertical_x-small">
+                <div class="modalIcons slds-grid slds-wrap">
+                    <img src={copyIcon} data-id="copy" tabindex="0" alt={label.Copy_To_Clipboard} title={label.Copy_To_Clipboard} class="slds-col slds-size_3-of-12 socialIcon" onclick={copyToClipboard} onkeyup={copyToClipboardKey}>
+                    <img src={emailIcon} tabindex="0" alt={label.Share_To_Email} title={label.Share_To_Email} class="slds-col slds-size_3-of-12 socialIcon mailIcon" onclick={shareToMail} onkeyup={shareToMailKey}>
+                    <img src={facebookIcon} tabindex="0" alt={label.Share_To_Facebook} title={label.Share_To_Facebook} class="slds-col slds-size_3-of-12 socialIcon" onclick={shareTofb} onkeyup={shareTofbKey}>
+                    <img src={pinterestIcon} tabindex="0" alt={label.SharePinterest} title={label.SharePinterest} class="slds-col slds-size_3-of-12 socialIcon" onclick={shareToPin} onkeyup={shareToPinKey}>
+                    <img src={linkedinIcon} tabindex="0" alt={label.ShareLinkedIn} title={label.ShareLinkedIn} class="slds-col slds-size_3-of-12 socialIcon" onclick={shareToLinked} onkeyup={shareToLinkedKey}>
+                    <img src={twitterIcon} tabindex="0" alt={label.ShareTwitter} title={label.ShareTwitter} class="slds-col slds-size_3-of-12 socialIcon" onclick={shareTotwitter} onkeyup={shareTotwitterKey}>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+</template>

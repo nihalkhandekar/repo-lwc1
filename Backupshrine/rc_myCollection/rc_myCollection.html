@@ -1,0 +1,43 @@
+<template>
+
+    <div class="slds-col slds-size_12-of-12 noCollectionCardWrapper">
+        <div class="noCollectionHeader">
+            <div class="">
+                <h4>{label.myCollections}</h4>
+                    <p class="large slds-p-top_x-small"> {label.myCollectionsContent}</p>
+            </div>
+            <div class="noCollectionLink">
+                <a href="javascript:void(0);" onclick={NavigateToAllCollections}>
+                    <p class="small">{label.rc_Manage_Collections}</p>
+                </a>
+                <img src={blueArrow} class="blueArrow" onclick={NavigateToAllCollections}>
+            </div>
+        </div>
+        <template if:true={NoDataCard}>
+            <c-rc_no-collection-card></c-rc_no-collection-card>
+        </template>
+        <template if:false={NoDataCard}>
+            <div class="slds-grid slds-gutters slds-wrap collectionCardWrapper">
+                <template if:true={collectionsList} for:each={collectionsList} for:item="EachCollection">
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12" key={EachCollection}>
+                        <div class="collectionCard">
+                            <div class="cardContent">
+                                <p class="largeBold">{EachCollection.listName}</p>
+                                <div class="description">{EachCollection.listLength} {label.rc_resource_s}</div>
+                            </div>
+                            <div class="cardArrow" data-id={EachCollection.listId} onclick={NavigateToCollection} tabindex="0" onkeydown={NavigateToCollectionKey}>
+                                <img src={blueArrow} class="blueArrow">
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:true={showModal}>
+            <c-rc_login-modal open={showModal} onmodalclose={handleModalClose}></c-rc_login-modal>
+        </template>
+    </div>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>

@@ -1,0 +1,132 @@
+<template>
+    <div class="slds-grid slds-wrap wrapper">
+        <div class="slds-grid slds-wrap content_container">
+            <div class="slds-col slds-size_12-of-12">
+                <div class="myCollectionAddDisp">
+                    <div class="myCollectionAddDispGroup">
+                        <div class="slds-grid slds-wrap myCollectionAddDispHeader">
+                            <template if:false={singleCollections}>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_7-of-12 myCollectionAddDispHeaderTitle titleWrapper">
+                                    <h3 class="myCollectionAddDispHeaderTitle ">{label.myCollections}</h3>
+                                    <p class="large">{label.myCollectionsContent}</p>
+                                </div>
+                                <button onclick={showModal}
+                                    class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_5-of-12 slds-button slds-button_brand primaryBtn">{label.startNewCollection}</button>
+                            </template>
+                            <template if:true={singleCollections}>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_7-of-12 myCollectionAddDispHeaderTitle titleWrapper">
+                                    <h3 class="myCollectionAddDispHeaderTitle">{singleColName}</h3>
+                                    <p class="large">{singleColLength} {label.rc_resource_s}</p>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-1 slds-large-size_5-of-12 buttons">
+                                    <button onclick={deleteCollection}
+                                        class="slds-button slds-button_brand secondaryBtn">{label.rc_Delete_Collection}</button>
+                                    <button onclick={openNewEditCollection}
+                                        class="slds-button slds-button_brand primaryBtn slds-text-title--caps">{label.Edit_btn}</button>
+                                </div>
+                            </template>
+                        </div>
+                        <div class="myCollectionBreadCrumb">
+
+                            <!--<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                                <li>Resource center</li>
+                                <img src={chevronRight} class="chevronRight" alt="chevronRight"/>
+                                <li class="active">My collection</li>
+                            </ol>-->
+                            <button onclick={NavigateToRCLanding}
+                                class="slds-button slds-button_brand secondaryBtn">{label.rc_Resource_Center}</button>
+
+                        </div>
+                    </div>
+                    <template if:false={singleCollections}>
+                    <template if:false={NoDataCard}>
+                        <div class="slds-grid slds-gutters slds-wrap collCardMainWrapper">
+                            <div class="slds-grid slds-wrap collectionCardWrapper">
+                                    <template if:true={collectionsList} for:each={collectionsList}
+                                        for:item="item">
+                                        <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 collectCard"
+                                            key={item}>
+                                            
+                                    <div class="collectionCard">
+                                        <div class="cardContent" data-id={item.id}
+                                                        data-name={item.listName} onclick={NavigateToIndv} tabindex="0" onkeydown={NavigateToIndvKey}>
+                                                    <p class="largeBold">
+                                                        {item.listName}
+                                                    </p>
+                                                    <div class="description">{item.listLength} {label.rc_resource_s}</div>
+                                        </div>
+                                                <div class="cardEdit" data-id={item.id}
+                                                    data-name={item.listName} onclick={openEditCollection} tabindex="0" onkeydown={openEditCollectionKey}>
+                                            <img src={blueEdit} class="blueEdit">
+                                            <div class="cardEditTitle edit">{label.Edit_btn}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                    <template if:true={NoDataCard}>
+                            <div class="noCollectionWrapper">
+                                <c-rc_no-collection-card></c-rc_no-collection-card>
+                            </div>
+                    </template>
+                    </template>
+                    <template if:true={singleCollections}>
+                        <template if:true={singleColLength}>
+                            <div class="slds-grid slds-wrap content_container_new">
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 leftSection">
+                                    <c-rc_filters onfilterselection={handleFilterChange} search-string={searchTerm}>
+                                    </c-rc_filters>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12 mainSection">
+                                    <template if:false={hideResources}>
+                                        <div class="slds-m-top_xx-large slds-p-bottom_small rheader">
+                                            <h5>{label.rc_Resources}</h5>
+                                        </div>
+                                        <template if:true={resources}>
+                                            <template if:true={resources.length}>
+                                              
+                                                <c-rc_generic_resource_card resources={resources}
+                                                    onnewcollection={handleNewCollection} onresourceremoved={handleResourceRemoved} collectionid={singleColId}>
+                                                </c-rc_generic_resource_card>
+                                            </template>
+                                        </template>
+                                        <template if:false={resources}>
+                                            <c-rc_no-data-card></c-rc_no-data-card>
+                                        </template>
+                                    </template>
+                                    <template if:false={hideMedia}>
+                                        <div class="slds-m-top_xx-large slds-p-bottom_small rheader">
+                                            <h5>{label.rc_Media}</h5>
+                                        </div>
+                                        <template if:true={media}>
+                                            <template if:true={media.length}>
+                                                <c-rc_generic_video_card media={media} onmediaremoved={handleResourceRemoved} collectionid={singleColId}></c-rc_generic_video_card>
+                                            </template>
+                                        </template>
+                                        <template if:false={media}>
+                                            <c-rc_no-data-card></c-rc_no-data-card>
+                                        </template>
+                                    </template>
+                                </div>
+                            </div>
+                        </template>
+                        <template if:false={singleColLength}>
+                            <c-rc_empty-resource></c-rc_empty-resource>
+                        </template>
+                    </template>
+                    <template if:true={openModal}>
+                        <c-rc_new-collection open={openModal} onmodalclose={closeModal} showerror={showLengthLimit}
+                            onaddcollection={afterAddCollection} colid={cId} colname={cName}
+                            oneditcollection={HandleEdit} showdelete={showDelete} ondeletecollection={handleDeleteCol}>
+                        </c-rc_new-collection>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+      </div>
+</template>

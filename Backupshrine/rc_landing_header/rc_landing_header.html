@@ -1,0 +1,63 @@
+<template>
+    <div class="header_container">
+        <div class="headerContentWrapper globalSearch">
+            <div class="globalSearchHeader"><h1>{label.resourceSearchTitle}</h1></div>
+            <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right search-box"
+                role="combobox" aria-expanded="false" aria-owns="ex1-listbox" aria-haspopup="listbox" id="ex1-combobox"
+                tabindex="0" onmousedown={handleMouseClick} onkeydown={handleKeyDown}>
+                <lightning-input placeholder={label.rcSearchPlaceHolder} onchange={handleSearchTermChange} value={valueTracker}
+                onkeyup={handleSearchTermChange} class="searchBox" data-id="search-input" id="ex1-input" variant="label-hidden"></lightning-input>
+                <span class="search-icon-wrapper" onclick={handleSearch}>
+                    <img src={searchIcon} alt="Search Icon" />
+                </span>
+            </div>
+            <p class="helpText slds-m-top_small">{label.rcLandingHelpText}</p>            
+            <div if:true={showSuggestions} class="suggestions">
+                <template for:each={suggestionsArray} for:item="suggestion">
+                    <p class="large item" onclick={handleSearch} data-target-id={suggestion} key={suggestion}>
+                        {suggestion}
+                    </p>
+                </template>
+            </div>
+        </div>
+    </div>
+    <template if:false={isLoggedIn}>
+        <div class="slds-grid slds-wrap loginBannerWrapper">
+            <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 loginBanner">
+                <div class="slds-col slds-size_12-of-12 slds-large-size_1-of-12">
+                    <img src={loginModalIng} class="bannerImg">
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_7-of-12">
+                    <p class="large bannerContent">
+                        <lightning-formatted-rich-text value={label.rcLandingPageContent}></lightning-formatted-rich-text>
+                    </p>
+                </div>
+                <div class="slds-col slds-size_12-of-12 slds-large-size_4-of-12 loginBtn">
+                    <button class="slds-button secondaryBtn" onclick={handleLogin}>{label.rc_Start_Collection}</button>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template if:true={isLoggedIn}>
+        <template if:false={isNotifEnabled}>
+            <div class="slds-grid slds-wrap loginBannerWrapper">
+                <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 loginBanner">
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_1-of-12">
+                        <img src={loginModalIng} class="bannerImg">
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_7-of-12">
+                        <p class="large bannerContent">
+                            {label.rcLandingPageAuthUser}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_4-of-12 loginBtn">
+                        <button class="slds-button secondaryBtn" onclick={handleAlerts}>{label.rcLandingPageAlerts}</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+      </div>
+</template>
