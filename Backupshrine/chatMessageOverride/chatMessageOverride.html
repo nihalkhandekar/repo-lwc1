@@ -1,0 +1,113 @@
+<template>
+    <template if:true={loading}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </template>
+    <template if:false={isAgent}>
+        <template if:true={isShowMessage}>
+            <lightning-formatted-rich-text class="chatMessage chasitor" value={content}>
+            </lightning-formatted-rich-text>
+        </template>
+        <template if:false={isShowMessage}>
+            <lightning-formatted-rich-text class="hideMessage" value={content}>
+            </lightning-formatted-rich-text>
+        </template>
+    </template>
+    <template if:true={isUrl}>
+        <lightning-formatted-rich-text class="chatMessage agent plainText" value={content}>
+        </lightning-formatted-rich-text>
+    </template>
+    <template if:true={isAgent}>
+        <template if:true={isPlainText}>
+            <div class="chatMessage agent plainText">
+                <lightning-formatted-rich-text value={content}>
+                </lightning-formatted-rich-text>
+            </div>
+        </template>
+
+        <template if:true={isTranscript}>
+            <div class="chatMessage agent plainText">
+                <lightning-formatted-rich-text value={content}>
+                </lightning-formatted-rich-text>
+            </div>
+        </template>
+
+        <template if:true={isKnowledge}>
+            <div class="chatMessage agent tabContainer">
+                <div class="btn-content" title="Page 1">
+                    <span><lightning-formatted-rich-text value={tab1Content}></lightning-formatted-rich-text></span>
+                  </div>
+                  
+                  <div class="btn-content" title="Page 2" style="display:none">
+                    <span><lightning-formatted-rich-text value={tab2Content}></lightning-formatted-rich-text></span> 
+                  </div>
+                  
+                  <div class="btn-content" title="Page 3" style="display:none">
+                    <span><lightning-formatted-rich-text value={tab3Content}></lightning-formatted-rich-text></span>
+                  </div>
+                  <template if:false={isSingleTabContent}>
+                    <div class="tab">
+                        <button class="buttonTab selected-tab" onclick={openTab} value="Page 1">{tab1Label}</button>
+                        <button class="buttonTab inactive-tab" onclick={openTab} value="Page 2">{tab2Label}</button>
+                        <button class="buttonTab inactive-tab" onclick={openTab} value="Page 3">{tab3Label}</button>
+                    </div>
+                </template>
+            </div>
+        </template>
+
+        <template if:true={isRichText}>
+            <template if:true={feedbackRequired}>
+                <div class="chatMessage agent richText fitWidth">
+                    <lightning-formatted-rich-text value={content}>
+                    </lightning-formatted-rich-text>
+                    <div class="feedback-container">
+                        <span class="feedback">Was this helpful?</span>
+                        <lightning-icon icon-name="utility:like" class="feedback like" onclick={handleFeedbackSelection}></lightning-icon>
+                        <lightning-icon icon-name="utility:dislike" class="feedback dislike" onclick={handleFeedbackSelection}></lightning-icon>
+                        <template if:true={feedbackSelected}>
+                            <div class="feedback-selected">Thanks! Your feedback has been received</div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <template if:false={feedbackRequired}>
+                <div class="chatMessage agent richText fitWidth">
+                    <lightning-formatted-rich-text value={content}>
+                    </lightning-formatted-rich-text>
+                </div>
+            </template>
+        </template>
+
+        <template if:true={isLongText}>
+            <div class="chatMessage agent longText">
+                <lightning-formatted-rich-text value={content}></lightning-formatted-rich-text>
+            </div>
+        </template>
+
+        <template if:true={isYoutube}>
+            <div class="chatMessage agent youtube">
+                <iframe src={content} allowfullscreen>
+                </iframe>
+            </div>
+        </template>
+
+        <template if:true={isImage}>
+            <div class="chatMessage agent image">
+                <img src={content} />
+            </div>
+        </template>     
+        
+        <template if:true={isHideQuestion}>
+            <div class="hideMessage">
+                <lightning-formatted-rich-text value={content}>
+                </lightning-formatted-rich-text>
+            </div>
+        </template>
+
+        <template if:true={isSnippetNotification}>
+            <div class="hideMessage">
+                <lightning-formatted-rich-text value={content}>
+                </lightning-formatted-rich-text>
+            </div>
+        </template>
+    </template>
+</template>

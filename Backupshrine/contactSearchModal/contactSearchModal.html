@@ -1,0 +1,248 @@
+<template>
+    <template if:false={isNameHistoryModalOpen}>
+        <div class="modal-backdrop setTablePadding" onclick={handleOutsideClick}>
+            <div class="modal-content-wrapper">
+                <div class="custom-modal publicOfficial slds-modal__container">
+                    <lightning-modal-body data-modal="true" class="modalBody">
+                        <!-- Loading Spinner -->
+                        <template if:true={isLoading}>
+                            <div class="slds-p-around_medium">
+                                <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+                            </div>
+                        </template>
+
+                        <template if:false={isLoading}>
+                            <div class="slds-scrollable table-container">
+                                <table class="slds-table  slds-table_cell-buffer slds-table_fixed-layout">
+                                    <thead class="tableHead">
+                                        <tr>
+                                            <th scope="col" class="column1"></th>
+                                            <th scope="col" class="column2">
+                                                <div class="slds-truncate" title="Name">{headerName}</div>
+                                            </th>
+
+                                            <th scope="col" class="column3">
+                                                <div class="slds-truncate" title="County">Town</div>
+                                            </th>
+
+                                            <th scope="col" class="column5">
+                                                <div class="slds-truncate" title="Start Term">Start Term</div>
+                                            </th>
+                                            <th scope="col" class="column6">
+                                                <div class="slds-truncate" title="End Term">End Term</div>
+                                            </th>
+
+                                            <th scope="col" class="column7">
+                                                <div class="slds-truncate" title="Status">Status</div>
+                                            </th>
+
+                                            <th scope="col" class="column8">
+                                                <div class="slds-truncate" title="Name History"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tableBody">
+                                        <template for:each={contacts} for:item="contact">
+                                            <tr key={contact.Id}>
+                                                <td class="column1">
+                                                    <div class="slds-form-element__control">
+                                                        <span class="slds-radio">
+                                                            <input type="radio" id={contact.Id} name="contactSelection"
+                                                                value={contact.Id} data-contactid={contact.Id}
+                                                                data-name={contact.Name}
+                                                                data-position={contact.Position}
+                                                                data-startterm={contact.StartTerm}
+                                                                data-endterm={contact.EndTerm}
+                                                                onchange={handleRadioChange} />
+                                                            <label class="slds-radio__label" for={contact.Id}>
+                                                                <span class="slds-radio_faux"></span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td class="column2">
+                                                    <template if:true={contact.hasTermHistory}
+                                                        class="slds-button slds-button_icon slds-m-right_x-small"
+                                                        aria-expanded={contact.isExpanded}
+                                                        aria-controls="termHistory-{contact.Id}">
+                                                        <div class="slds-truncate" title={contact.Name}>
+                                                            <span
+                                                                class="slds-icon_container slds-icon-border-filled icon-border">
+                                                                <lightning-icon class={iconClass} data-id={contact.Id}
+                                                                    onclick={toggleDocument}
+                                                                    icon-name={contact.iconName} size="xx-small"
+                                                                    alternative-text="Toggle"></lightning-icon>
+                                                            </span>
+                                                            {contact.Name}
+                                                        </div>
+                                                    </template>
+
+                                                    <template if:false={contact.hasTermHistory}>
+                                                        <div class="slds-truncate" title={contact.Name}>{contact.Name}
+                                                        </div>
+                                                    </template>
+
+                                                </td>
+
+                                                <td class="column3">
+                                                    <div class="slds-truncate" title={contact.Town}>
+                                                        {contact.Town}</div>
+                                                </td>
+
+
+                                                <td class="column5">
+                                                    <div class="slds-truncate" title={contact.StartTerm}>
+                                                        {contact.StartTerm}</div>
+                                                </td>
+                                                <td class="column6">
+                                                    <div class="slds-truncate" title={contact.EndTerm}>
+                                                        {contact.EndTerm}</div>
+                                                </td>
+
+                                                <td class="column7">
+                                                    <div class="slds-truncate" title={contact.Status}>{contact.Status}
+                                                    </div>
+                                                </td>
+
+                                                <td class="column8">
+                                                    <button class="slds-button slds-button_base" data-id={contact.Id}
+                                                        onclick={openNameHistory}>
+                                                        <div class="slds-truncate" title={contact}>View Name History
+                                                        </div>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                            <template if:true={contact.isExpanded}>
+                                                <template for:each={contact.termHistory} for:item="term">
+                                                    <tr key={term.Id}>
+                                                        <td class="column1">
+                                                            <div class="slds-form-element__control">
+                                                                <span class="slds-radio">
+                                                                    <input type="radio" id={term.Id}
+                                                                        name="contactSelection" value={term.Id}
+                                                                        data-contactid={contact.Id}
+                                                                        data-name={contact.Name}
+                                                                        data-position={contact.Position}
+                                                                        data-startterm={term.Start_Term__c}
+                                                                        data-endterm={term.End_Term__c}
+                                                                        onchange={handleRadioChange} />
+                                                                    <label class="slds-radio__label" for={term.Id}>
+                                                                        <span class="slds-radio_faux"></span>
+                                                                    </label>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                        <td class="column2">
+                                                            <div class="slds-truncate" title={contact.Name}> --- </div>
+                                                        </td>
+                                                        <td class="column3">
+                                                            <div class="slds-truncate" title={contact.Town}>
+                                                                ---
+                                                            </div>
+                                                        </td>
+
+                                                        <td class="column5">
+                                                            <div class="slds-truncate" title={term.Start_Term__c}>
+                                                                {term.Start_Term__c}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column6">
+                                                            <div class="slds-truncate" title={term.End_Term__c}>
+                                                                {term.End_Term__c}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column7">
+                                                            <div class="slds-truncate" title={term.Status}>
+                                                                ---
+                                                            </div>
+                                                        </td>
+                                                        <td class="column8">
+                                                            <div></div>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </template>
+
+                                        </template>
+                                        <template if:true={noResults}>
+                                            <tr>
+                                                <td colspan="8">
+                                                    <p class="no-data-message">{errorMessage}</p>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </template>
+                    </lightning-modal-body>
+
+                    <lightning-modal-footer class="modalfooter">
+                        <lightning-button label="Cancel" variant="neutral" onclick={handleClose}>
+                        </lightning-button>
+                    </lightning-modal-footer>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Name History Modal -->
+    <template if:true={isNameHistoryModalOpen}>
+        <div class="modal-backdrop setTablePadding">
+            <div class="modal-content-wrapper">
+                <div class="custom-modal publicOfficial slds-modal__container">
+                    <lightning-modal-body data-modal="true" class="modalBody">
+                        <table class="slds-table slds-table_cell-buffer slds-table_fixed-layout">
+                            <thead class="tableHead">
+                                <tr>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="First Name">First Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Middle Name">Middle Name</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Last Name">Last Name</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tableBody">
+                                <template if:true={nameHistory.length}>
+                                    <template for:each={nameHistory} for:item="history">
+                                        <tr key={history.Id}>
+                                            <td>
+                                                <div class="slds-truncate" title={history.FirstName}>
+                                                    {history.FirstName}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={history.MiddleName}>
+                                                    {history.MiddleName}</div>
+                                            </td>
+                                            <td>
+                                                <div class="slds-truncate" title={history.LastName}>
+                                                    {history.LastName}</div>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </template>
+                                <template if:false={nameHistory.length}>
+                                    <tr>
+                                        <td colspan="3">
+                                            <p class="no-data-message">No name history found.</p>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </lightning-modal-body>
+
+                    <lightning-modal-footer class="modalfooter">
+                        <lightning-button label="Close" variant="neutral" onclick={closeNameHistoryModal}>
+                        </lightning-button>
+                    </lightning-modal-footer>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

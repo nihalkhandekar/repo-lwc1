@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-grid slds-wrap">       
+        <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12 resources">
+          <template for:each={rightResources} for:item="resource" for:index="ind">
+            <lightning-formatted-rich-text
+              value={resource.Right_pane_content__c}
+              key={resource.Id}
+              class="noteHeading"
+            ></lightning-formatted-rich-text>
+          </template>
+        </div>
+
+    </div>
+</template>

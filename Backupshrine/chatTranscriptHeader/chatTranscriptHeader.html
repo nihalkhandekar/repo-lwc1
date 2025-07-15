@@ -1,0 +1,26 @@
+<template>
+	<div class="c-container">
+		<lightning-card title="Highlights" icon-name={iconName}>
+			<div class="slds-form">
+				<lightning-record-form
+					record-id={recordId}
+					object-api-name={objectApiName}
+					fields={selectedSessionFields}
+					columns="3"
+					mode="view"
+					onsuccess={handleTranscriptSuccess}
+					density="compact">
+				</lightning-record-form>
+				<lightning-record-form
+					record-id={contactRecordId}
+					object-api-name="Contact"
+					fields={selectedContactFields}
+					columns="3"
+					mode="readonly"
+					density="compact"
+                    class="contact-fields">
+				</lightning-record-form>
+			</div>
+		</lightning-card>
+	</div>
+</template>

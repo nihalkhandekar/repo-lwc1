@@ -1,0 +1,26 @@
+<template>
+  <div class="checklist_naics">
+    <h6 class="itemTitle">{naicsdetails.subHeading}</h6>
+    <!-- <lightning-formatted-rich-text
+      value={naicsdetails.rteText}
+      class="itemText">
+    </lightning-formatted-rich-text> -->
+    
+    <div class={naicsdetails.subsectionId} lwc:dom="manual" 
+      onclick={handleRichTextClick} oncontextmenu={handleRichTextClick}>                         
+    </div>
+    <br/>
+    <template for:each={naicsdetails.dynamicData} for:item="data">
+      <div key={data.naicsCode} class="dataPair">
+        <p class="largeBold">{label.naicsCode}</p>
+        <p class="large">{data.naicsCode}</p>
+      </div>
+    
+      <div key={data.naicsCode} class="dataPair">
+        <p class="largeBold">{label.naicsSubCode}</p>
+        <p class="large">{data.naicsSubcode}</p>
+      </div>
+    
+    </template>
+  </div>
+</template>

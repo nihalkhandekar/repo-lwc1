@@ -1,0 +1,269 @@
+<template>
+    <div>
+      <div class="headerContainer">
+        <h5
+          class="titleCmp main-flow-wrapper"
+          aria-label={label.businessChecklist}
+         >
+          {label.businessChecklist}
+        </h5>
+      </div>
+      <div class="main-flow-wrapper">
+        <div class="slds-progress">
+          <ol class="slds-progress__list" role="tablist">
+            <template for:each={_progress} for:item="item" for:index="index">
+              <template if:true={item.isCurrentTab}>
+                <li
+                  class="slds-progress__item slds-is-active"
+                  key={item.title}
+                  data-id={item.title}
+                  onclick={handleClick}
+                  role="tab"
+				  aria-label={item.title}
+                  aria-selected="true"
+                >
+                  <button
+                    class="slds-button slds-button_icon slds-progress__marker slds-progress__marker_icon" tabindex="-1"
+                  >
+                    <template if:true={item.isCurrentTab}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="slds-button__icon"
+                      >
+                        <use xlink:href={activeIcon}></use>
+                      </svg>
+                    </template>
+                    <template if:false={item.isCurrentTab}>
+                      <template if:true={item.isSectionComplete}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="slds-button__icon"
+                        >
+                          ;
+                          <use xlink:href={successIcon}></use>
+                        </svg>
+                      </template>
+                    </template>
+                    <span class="slds-assistive-text">{item.title} - Active</span>
+                  </button>
+                  <div class="slds-text-align_center description progress-label tabfocus" tabindex="0" id={index} onkeypress={handleFocus}>
+                    <span>
+                      <template if:true={item.isCurrentTab}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="slds-icon">
+                          ;
+                          <use xlink:href={item.activeIconPath}></use>
+                        </svg>
+                      </template>
+                      <template if:false={item.isCurrentTab}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="slds-icon">
+                          ;
+                          <use xlink:href={item.passiveIconPath}></use>
+                        </svg>
+                      </template>
+                    </span>
+                    <span class="title">{item.title}</span>
+                  </div>
+                </li>
+              </template>
+              <template if:false={item.isCurrentTab}>
+                <template if:true={item.isSectionComplete}>
+                  <li
+                    class="slds-progress__item slds-is-complete"
+                    key={item.title}
+                    data-id={item.title}
+                    onclick={handleClick}
+                    role="tab"
+                    aria-selected="false"
+                    aria-label={item.title}
+                  >
+                    <button
+                      class="slds-button slds-button_icon slds-progress__marker slds-progress__marker_icon" tabindex="-1"
+                    >
+                      <template if:true={item.isCurrentTab}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="slds-button__icon"
+                        >
+                          <use xlink:href={activeIcon}></use>
+                        </svg>
+                      </template>
+                      <template if:false={item.isCurrentTab}>
+                        <template if:true={item.isSectionComplete}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="slds-button__icon"
+                          >
+                            ;
+                            <use xlink:href={successIcon}></use>
+                          </svg>
+                        </template>
+                        <span class="slds-assistive-text"
+                          >{item.title} - Complete</span
+                        >
+                      </template>
+                    </button>
+                    <div
+                      class="slds-text-align_center description progress-label tabfocus" tabindex="0" id={index} onkeypress={handleFocus}
+                    >
+                      <span>
+                        <template if:true={item.isCurrentTab}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="slds-icon"
+                          >
+                            ;
+                            <use xlink:href={item.activeIconPath}></use>
+                          </svg>
+                        </template>
+                        <template if:false={item.isCurrentTab}>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="slds-icon"
+                          >
+                            ;
+                            <use xlink:href={item.passiveIconPath}></use>
+                          </svg>
+                        </template>
+                      </span>
+                      <span class="title">{item.title}</span>
+                    </div>
+                  </li>
+                </template>
+                <template if:false={item.isSectionComplete}>
+                  <template if:true={item.isInProgress}>
+                    <li
+                      class="slds-progress__item is-started"
+                      key={item.title}
+                      data-id={item.title}
+                      onclick={handleClick}
+                      role="tab"
+                      aria-selected="false"
+                      aria-label={item.title}
+                    >
+                      <button
+                        class="slds-button slds-progress__marker" tabindex="-1"                    
+                      >
+					    <span class="slds-assistive-text"
+                        >{item.title} - Inactive</span
+                      ></button>
+                      <div
+                        class="slds-text-align_center description progress-label tabfocus" tabindex="0" id={index} onkeypress={handleFocus}
+                      >
+                        <span>
+                          <template if:true={item.isCurrentTab}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="slds-icon"
+                            >
+                              ;
+                              <use xlink:href={item.activeIconPath}></use>
+                            </svg>
+                          </template>
+                          <template if:false={item.isCurrentTab}>
+                            <template if:false={item.isCurrentTab}>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="slds-icon"
+                              >
+                                ;
+                                <use xlink:href={item.passiveIconPath}></use>
+                              </svg>
+                            </template>
+                          </template>
+                        </span>
+                        <span class="title">{item.title}</span>
+                      </div>
+                    </li>
+                  </template>
+                  <template if:false={item.isInProgress}>
+                    <li
+                      class="slds-progress__item"
+                      key={item.title}
+                      data-id={item.title}
+                      onclick={handleClick}
+                      role="tab"
+                      aria-selected="false"
+                      aria-label={item.title}
+                    >
+                      <button
+                        class="slds-button slds-progress__marker" tabindex="-1"
+                      >
+					    <span class="slds-assistive-text"
+                        >{item.title} - Inactive</span
+                      ></button>
+                      <div
+                        class="slds-text-align_center description progress-label tabfocus" tabindex="0" id={index} onkeypress={handleFocus}
+                      >
+                        <span>
+                          <template if:true={item.isCurrentTab}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              class="slds-icon"
+                            >
+                              ;
+                              <use xlink:href={item.activeIconPath}></use>
+                            </svg>
+                          </template>
+                          <template if:false={item.isCurrentTab}>
+                            <template if:false={item.isCurrentTab}>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="slds-icon"
+                              >
+                                ;
+                                <use xlink:href={item.passiveIconPath}></use>
+                              </svg>
+                            </template>
+                          </template>
+                        </span>
+                        <span class="title">{item.title}</span>
+                      </div>
+                    </li>
+                  </template>
+                </template>
+              </template>
+            </template>
+          </ol>
+          <div
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            role="progressbar"
+          ></div>
+          <div class="mobile-only slds-p-vertical_small">
+            <div class="slds-grid">
+              <div class="slds-col slds-size_2-of-12">
+                <div
+                  class="prev pointer slds-m-left_small"
+                  data-id={activeLabel}
+                  onclick={handleLeftClick}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="slds-icon">
+                    ;
+                    <use xlink:href={prevIcon}></use>
+                  </svg>
+                </div>
+              </div>
+              <div
+                class="slds-col slds-size_8-of-12 active-title slds-align_absolute-center"
+              >
+                {activeLabel}
+              </div>
+              <div class="slds-col slds-size_2-of-12">
+                <div
+                  class="next pointer slds-float_right slds-m-right_small"
+                  data-id={activeLabel}
+                  onclick={handleRightClick}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="slds-icon">
+                    ;
+                    <use xlink:href={nextIcon}></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>

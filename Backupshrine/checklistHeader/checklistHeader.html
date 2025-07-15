@@ -1,0 +1,267 @@
+<!--*********************************************************************************************
+ * NAME:  checklistHeader
+ * DESCRIPTION: Checklist header that is shown on the checklist container page
+ *
+ * @AUTHOR: Alayna Kelly
+ * @DATE: 05/06/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Alayna Kelly                    05/06/2020                         Created the first version
+ *
+*********************************************************************************************-->
+<template>
+  <template if:true={showSuccessMsg}>
+    <div class="success-msg slds-size_1-of-1 slds-large-size_3-of-12">
+      <p class="large">{label.Email_SuccessMessage}</p>
+      <span class="" onclick={handleClose}>
+        <img class="closeIcon" src={closeIcon} alt="Close Icon"
+      /></span>
+    </div>
+  </template>
+  <div class="header_bottomRow_row">
+    <div class="header_bottomRow_wrap">
+      <div class="headerContainer" if:true={header}>
+        <lightning-layout class="layoutContainer" multiple-rows="true">
+          <lightning-layout-item
+            size="12"
+            small-device-size="12"
+            medium-device-size="12"
+          >
+            <!--Static text that is pulled in from a custom label-->
+            <p class="small titleCmp">
+              {checklistStaticText}
+            </p>
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              large-device-size="12"
+              medium-device-size="12"
+            >
+              <!--Dynamic title the user enters during the Wizard flow-->
+              <h4 class="titleBusinessName">
+                {header.businessName}
+              </h4>
+            </lightning-layout-item>
+          </lightning-layout-item>
+          <lightning-layout-item
+            size="12"
+            small-device-size="12"
+            large-device-size="12"
+            medium-device-size="12"
+            class="questionaireWrapper"
+          >
+            <lightning-layout-item
+              size="12"
+              small-device-size="12"
+              medium-device-size="12"
+              large-device-size="5"
+              class="questionaireText"
+            >
+              <!--This is the questionnaire ID-->
+              <div class="idText">
+                <p class="description idHeader">{header.questionnaireName}</p>
+              </div>
+              <!--Questionnaires created date-->
+              <div class="createdDate">
+                <p class="small">
+                  {staticText_CreatedOn}:&nbsp;
+                  <lightning-formatted-date-time
+                    value={header.createdDate}
+                    year="numeric"
+                    month="numeric"
+                    day="numeric"
+                    hour="2-digit"
+                    minute="2-digit"
+                    time-zone="America/New_York"
+                    time-zone-name="short"
+                  >
+                  </lightning-formatted-date-time>
+                </p>
+              </div>
+            </lightning-layout-item>
+            <!--Abilities to save, delete(if logged in), download, print or email-->
+            <lightning-layout-item
+              class="paddingBtn"
+              size="12"
+              small-device-size="12"
+              medium-device-size="12"
+              large-device-size="5"
+            >
+              <template if:false={isLoggedIn}>
+                <div
+                  class="slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_4-of-12 saveContainer"
+                >
+                  <button
+                    class="slds-button slds-button_brand primaryBtn SaveBtn"
+                    onclick={handleClickSave}
+                  >
+                   {saveButton}
+                  </button>
+                </div>
+              </template>
+              <template if:true={isLoggedIn}>
+                <div
+                  class="slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12 saveContainer">
+                  <button class="slds-button slds-button_brand whiteBtn" onclick={showModal}>
+                    <p>{deleteButton}</p>
+                  </button>
+                </div>
+				<template if:true={deleteModalpop}>
+	                <c-modal
+	                  open={open}
+	                  onmodalclose={closeModal}
+	                  size={modalSize}
+	                >
+	                  <div slot="header" class="headerModal">
+	                    {deleteModalVerbiage}
+	                  </div>
+	                  <div slot="body" class="slds-m-vertical_x-small">
+	                    <p class="largeBold checklistModal">
+	                      {header.businessName}
+	                    </p>
+	                    <p class="description contentModal">
+	                      {header.questionnaireName}
+	                    </p>
+	                    <div class="description contentModalText">
+	                      <p>
+	                        {staticText_CreatedOn}:&nbsp;
+	                        <lightning-formatted-date-time
+	                          value={header.createdDate}
+	                          year="numeric"
+	                          month="numeric"
+	                          day="numeric"
+	                          hour="2-digit"
+	                          minute="2-digit"
+	                          time-zone="America/New_York"
+	                          time-zone-name="short"
+	                        >
+	                        </lightning-formatted-date-time>
+	                      </p>
+	                    </div>
+	                    <div class="warningBlock warningMobile slds-m-top_small">
+	                      <div class="warningBlock">
+	                        <img
+	                          class="warningIcon"
+	                          src={warningIcon}
+	                          alt="warning"
+	                        />
+	                      </div>
+	                      <div class="description contentModalText warningBlock">
+	                        {deleteWarningMessage}
+	                      </div>
+	                    </div>
+	                  </div>
+	                  <div
+	                    slot="actions"
+	                    class="slds-m-vertical_small leftAlign"
+	                  >
+	                    <button
+	                      title="Yes, delete page."
+	                      onclick={handleYesClick}
+	                      class="slds-button slds-button_brand slds-m-left_x-small slds-m-right_small deleteYesBtn"
+	                    >
+	                      <div
+						    class="description modalBtn slds-p-horizontal_medium slds-p-vertical_x-small"
+	                      >
+	                        {label_Yes}
+	                      </div>
+	                    </button>
+	                    <button
+	                      title="No, Dont Delete the page."
+	                      onclick={handleNoClick}
+	                      class="slds-button slds-button_brand slds-m-left_small deleteNoBtn"
+	                    >
+	                      <div
+	                        class="description modalBtn slds-p-horizontal_medium slds-p-vertical_x-small"
+						  >
+	                        {label_No}
+	                      </div>
+	                    </button>
+	                  </div>
+	                </c-modal>
+	              </template>
+              </template>
+            </lightning-layout-item>
+          </lightning-layout-item>
+          <lightning-layout-item class="whiteBtnRow" size="12" small-device-size="12" medium-device-size="12"
+            large-device-size="12">
+            <lightning-layout-item class="iconButtons" size="12" small-device-size="12" medium-device-size="12"
+              large-device-size="12">
+              <div
+                class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 iconBttnContainer">
+                <button class="slds-button whiteBtn slds-p-horizontal_medium slds-p-vertical_xx-small"
+                  onclick={emailClick}>
+                  <span class="alignIconLabel">
+                    <img src={mailIcon} alt="Mail" class="imgclass" />{label_Email}</span>
+                </button>
+              </div>
+              <div
+                class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 iconBttnContainer">
+                <button class="slds-button whiteBtn slds-p-horizontal_medium slds-p-vertical_xx-small"
+                  onclick={handleDownload}>
+                  <span class="alignIconLabel">
+                    <img src={printIcon} alt="Print" class="imgclass printIcon" />{label_Print}
+                  </span>
+                </button>
+              </div>
+              <div
+                class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 iconBttnContainer">
+                <button class="slds-button whiteBtn slds-p-horizontal_medium slds-p-vertical_xx-small"
+                  onclick={handleDownload}>
+                  <span class="alignIconLabel">
+                    <img src={downloadIcon} alt="Download" class="imgclass downloadIcon" />{label_Download}
+                  </span>
+                </button>
+              </div>
+            </lightning-layout-item>
+          </lightning-layout-item>
+                  <template if:true={emailModalpop}>
+                    <c-modal
+                      open={open}
+                      onmodalclose={closeModal}
+                      size={modalSize}
+                    >
+                      <div slot="header" class="headerModal">
+                        <h6>{emailModalVerbiage}</h6>
+                      </div>
+                      <div slot="body" class="slds-m-bottom_x-large slds-large-size_7-of-12 slds-size_1-of-1">
+                        <lightning-input
+                          label={label_Email}
+                          placeholder="user@domain.com"
+                          type="text"
+                          value={emailAddress}
+                          onchange={onEmailInputChange}
+                          class="email-input"
+                          onblur={handleCustomValidation}
+                        >
+                        </lightning-input>
+                      </div>
+                      <div
+                        slot="actions"
+                        class="slds-m-vertical_small leftAlign"
+                      >
+                        <button
+                          title={label_sendEmail}
+                          onclick={handleYesClickEmail}
+                          class="slds-button primaryBtn"
+                        >
+                          {label_sendEmail}   
+                        </button>
+                        <button
+                          title={label.label_cancelTitle}
+                          onclick={handleNoClick}
+                          class="slds-button secondaryBtn"
+                        >
+                          {label_cancel}
+                        </button>
+                      </div>
+                    </c-modal>
+                  </template>
+        </lightning-layout>
+      </div>
+    </div>
+  </div>
+</template>

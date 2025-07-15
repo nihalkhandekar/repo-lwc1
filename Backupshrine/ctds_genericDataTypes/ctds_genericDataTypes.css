@@ -1,0 +1,19 @@
+.error-msg {
+    color: #DB2426;
+    font-family: Karla;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    margin-bottom: 16px;
+}
+.helptext {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+.input1{
+    display: none;
+}

@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Inter-Org Transfer" icon-name="standard:product_transfer">
+        <div class="slds-m-horizontal_medium slds-align_absolute-center">
+            <lightning-layout>
+                <div class="slds-grid slds-grid_vertical">
+                    <template if:true={errors}>
+                        <div class="slds-col slds-align_absolute-center">
+                            <lightning-layout-item padding="around-small">
+                                <p class="slds-text-color_error">{errors}</p>
+                            </lightning-layout-item>
+                        </div>
+                    </template>
+                    <div class="slds-col slds-align_absolute-center">
+                        <template if:true={metadataRecords} for:each={metadataRecords} for:item="rec">
+                            <lightning-layout-item padding="around-small" key={rec.Id}>
+                                <lightning-button variant="neutral" label={rec.MasterLabel} title="Transfer customer" onclick={transferCustomer} value={rec.MasterLabel}></lightning-button>
+                            </lightning-layout-item>
+                        </template>
+                    </div>
+                </div>
+            </lightning-layout>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__FlowScreen</target>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="questionLabel" type="String" label="Question Label"/>
+            <property name="typeofData" type="String" label="Type of Data"/>
+            <property name="label" type="String" label="Label"/>
+            <property name="dateValueOutput" type="Date" label="Date Output"/>
+            <property name="placeholder" type="String" label="Placeholder"/>
+            <property name="textAreaOutput" type="String" label="Text Area Output"/>
+            <property name="checkboxOutput" type="String" label="Output"/>
+            <property name="required" type="boolean" label="required"/>
+            <property name="dateInfo" type="String" label="Date Value"/>
+            <property name="textInfo" type="String" label="Text Value"/>
+            <property name="maxCharText" type="String" label="Text Max Char"/>
+            <property name="maxCharTextArea" type="String" label="Text Area Max"/>
+            <property name="textPattern" type="String" label="Text Pattern"/>
+            <property name="showMaxCharText" type="String" label="Show Text Max Char"/>
+            <property name="currencyOutput" type="Integer" label="Currency Output"/>
+            <property name="showMaxCharTextArea" type="String" label="Show Text Area Max Char"/>
+            <property name="checkboxValue" type="boolean" label="Checkbox Output"/>
+            <property name="displayError" type="String" label="Error Message"/>
+			<property name="badInputDateMessage" type="String" label="Bad Input Error Message for Date"/>
+            <property name="precison" type="String" label="Decimal places up to Eg .01"/>
+            <property name="minDate" type="Date" description="Input a minimum date" label="Minimum date"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

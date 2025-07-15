@@ -1,0 +1,630 @@
+.containerDiv {
+  position: relative;
+}
+.navDesktop {
+  top: 62px;
+  position: sticky;
+  background-color: white;
+  z-index: 999;
+}
+.customContentDiv{
+  padding:40px 0px 32px 20px;
+  border-bottom: 2px solid #ecebeb;
+}
+.contentTitle{
+  font-family: 'Lato',sans-serif;
+  font-size: 43px;
+  font-weight: bold;
+  line-height: 50px;
+  letter-spacing: .30px;
+  color: #2d2c2c;
+}
+.contentBody{
+  font-family: 'Karla',sans-serif;
+  font-size: 18px;
+  padding-top:16px;
+}
+.contentDiv {
+  position: sticky;
+}
+
+.tabStyle.active .tabLabel {
+  color: #09538b;
+}
+.checkListTitle {
+  padding: 40px 0px;
+  border-bottom: 1px solid #ecebeb;
+  display: flex;
+}
+.checklistHeader {
+  color: #2d2c2c;
+  font-family: 'Lato',sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 44px;
+  margin-bottom: 32px;
+}
+.itemTitle {
+  color: #09538b;
+  font-family: 'Lato',sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+.itemText {
+  padding-bottom: 64px;
+  color: #2d2c2c;
+  text-align: left;
+}
+.header_bottomRow {
+  height: auto;
+  padding-left: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-top: 1px solid #ecebeb;
+  border-bottom: 1px solid #ecebeb;
+}
+.menu .slds-tabs_default__nav {
+  margin: auto;
+  border: none;
+  justify-content: space-between;
+  height: 70px;
+  align-items: flex-end;
+}
+.menu .slds-tabs_default__item {
+  margin: 0 15px 0 0;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+.headerModal {
+  margin-top: 10px;
+  font-family: 'Lato',sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 0.61px;
+  line-height: 28px;
+  text-align: left;
+}
+.checklistModal {
+  font-family: 'Karla',sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 25px;
+  letter-spacing: 0.12px;
+  text-align: left;
+}
+
+.contentModal {
+  color: #757575;
+font-family: 'Karla',sans-serif;
+  font-size: 14px;
+  line-height: 25px;
+  letter-spacing: 0.12px;
+  text-align: left;
+}
+
+.contentModalText {
+  font-family: 'Karla',sans-serif;
+  font-size: 14px;
+  line-height: 25px;
+  letter-spacing: 0.12px;
+  text-align: left;
+  margin-top: 5px;
+}
+.warningBlock {
+  display: inline-block;
+  margin-right: 10px;
+}
+.modalBtn {
+  font-family: 'Karla',sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+
+.slds-progress_vertical .slds-progress__item_content {
+  margin-top: 0;
+}
+.encircledImg {
+  background-color: #09538b;
+  justify-content: center;
+  border-radius: 50%;
+  display: table-cell;
+  vertical-align: middle;
+  width: 48px;
+  height: 48px;
+}
+.iconColorStyle {
+  fill: #09538b;
+  height: 30px;
+}
+.labelImage {
+  padding-right: 8px;
+  height: 40px;
+}
+.tabLabel {
+  text-transform: uppercase;
+  font-family: 'Karla',sans-serif;
+  font-weight: bold;
+  color: #678598;
+  letter-spacing: 1px;
+  padding-left: 8px;
+  white-space: nowrap;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 64px;
+}
+
+.buttonsWrapper, .singleButtonsWrapper {
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+.singleButtonsWrapper {
+  text-align: right;
+  padding-top: 16px;
+  justify-content: flex-end;
+  float: right;
+}
+
+.singleButtonsWrapper .largeBold {
+  margin-right: 16px;
+}
+.copyIcon {
+  align-items: center;
+}
+.emailIcon {
+  align-items: flex-end;
+}
+.iconBttns {
+  display: flex;
+  justify-content: flex-end;
+}
+.iconBttnContainer {
+  display: inherit;
+  width: auto;
+}
+.iconBttns .whiteBtn {
+  padding: 12px 40px;
+  min-width: 178px;
+  width: auto;
+  min-height: 40px;
+  height: auto;
+}
+.alignIconLabel {
+  margin: auto;
+  display: flex;
+}
+.prgrssItemCompleted:last-child {
+  padding-bottom: 0;
+}
+.prgrssItemCompleted .prgrssMarker {
+  background: #09538b;
+  border-color: #e0f2ff;
+}
+.prgrssVertical .prgrssMarker {
+  margin-left: 30px;
+  margin-right: 40px;
+}
+.prgrssItemCompleted:last-child::before {
+  bottom: 98%;
+  border-left: 2px dashed #d0cfcf;
+  margin-left: 30px;
+}
+.prgrssVertical .prgrssItemCompleted:before {
+  background-color: transparent;
+}
+.prgrssVertical .prgrssItemCompleted:after {
+  content: "";
+  top: 0;
+  bottom: 2px;
+  margin-left: 30px;
+  position: absolute;
+  left: calc(8px - 1px);
+  width: 0;
+  border-left: 2px dashed #d0cfcf;
+  background-color: transparent;
+}
+ 
+.showCheckbox .prgrssVertical .prgrssItemCompleted:before,
+.showCheckbox .prgrssVertical .prgrssItemCompleted:after {
+  display: none;
+}
+
+.prgrssItemCompleted {
+  padding-bottom: 32px;
+  align-items: flex-start;
+}
+.prgrssMarkerContainer {
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+.prgrssItemCompleted:first-child .prgrssMarkerContainer {
+  height: unset;
+  padding-top: 8px;
+  background-color: white;
+  z-index: 99;
+}
+.prgrssItemCompleted:last-child .prgrssMarkerContainer {
+  height: 28px;
+  padding-top: 0;
+  background-color: transparent;
+}
+.mobileBtns {
+  display: none;
+}
+.navBarDivMob {
+  display: none;
+}
+
+.prgrssItemCompleted .slds-grid_align-spread > div {
+  width: 100%;
+}
+
+.startSurvey {
+  position: fixed;
+  bottom: 48px;
+  right: 160px;
+  width: auto;
+  z-index:1000;
+}
+.secondaryBtn.slds-button {
+  padding: 0 40px;
+}
+.success-msg {
+  background-color: #E0F2FF;
+  border: 1px solid #3A95D3;
+  color: #2D2C2C;
+  margin: 0 auto;
+  display: flex;
+  padding: 16px;
+  justify-content: space-between;
+  position:fixed;
+  z-index: 9;
+  left:0;
+  right:0;
+  top: 80px;
+}
+.closeIcon {
+  width: 32px;
+  height: 32px;
+  float: right;
+}
+.tabfocus:focus {
+  outline: 2px solid #2d2c2c;
+}
+.slds-tabs_default__item:focus:after {
+  background-color: transparent;
+}
+
+.iconClass {
+  margin-right: 8px;
+  height: 16px;
+  margin-top: -2px;
+}
+
+.iconClass.printIcon {
+  height: 20px;
+}
+
+.iconClass.downloadIcon {
+  height: 19px;
+}
+
+.checkbox {
+  margin: auto;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1023px) {
+  .buttonContainer {
+    margin-bottom: 0;
+  }
+
+  .primaryBtn {
+    margin-right: 0;
+    margin-bottom: 8px;
+    justify-content: center;
+    width: 100%;
+  }
+  .secondaryBtn.slds-button {
+    justify-content: center;
+    margin-left: 0;
+    display: unset;
+    width: 100%;
+  }
+  .navBarDivMob {
+    top: 0;
+    position: sticky;
+    background-color: white;
+    z-index: 1;
+    display: block;
+    border-bottom: 1px solid #ecebeb;
+    border-top: 1px solid #ecebeb;
+  }
+  .customContentDiv{
+    padding: 40px 10px 32px;
+    border-bottom: 2px solid #ecebeb;
+  }
+  .contentTitle{
+    font-family: 'Lato',sans-serif;
+    font-size: 34px;
+    font-weight: bold;
+    line-height: 40px;
+    letter-spacing: .25px;
+    color: #2d2c2c;
+  }
+  .contentBody{
+    font-family: 'Karla',sans-serif;
+    font-size: 16px;
+    padding:15px 0;
+  }
+  .mobLabelHeading > span {
+    font-weight: bold;
+    color: #09538b;
+    font-family: 'Karla',sans-serif;
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .slds-accordion__summary-heading {
+    color: #09538b;
+    font-family: 'Karla',sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+  }
+  .slds-accordion__section {
+    padding: 24px 19px;
+  }
+  .tabStyle {
+    padding-top: 20px;
+  }
+  .tabLabel:hover {
+    font-weight: bold;
+  }
+  .tabLabel {
+    text-transform: capitalize;
+    font-family: 'Karla',sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 25px;
+    color: #2d2c2c;
+  }
+  .navDesktop {
+    display: none;
+  }
+  .iconPostion {
+    margin-top: -5px;
+    margin-left: -10px;
+	padding-right:10px;
+  }
+  .prgrssVertical .prgrssMarker {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .prgrssItemCompleted:last-child::before {
+    bottom: 99%;
+    border-left: 2px dashed #d0cfcf;
+    margin-left: 10px;
+  }
+  .prgrssVertical .prgrssItemCompleted:before {
+    background-color: transparent;
+  }
+  .prgrssVertical .prgrssItemCompleted:after {
+    content: "";
+    top: 0%;
+    bottom: 2px;
+    margin-left: 10px;
+    position: absolute;
+    left: calc(8px - 1px);
+    width: 0;
+    border-left: 2px dashed #d0cfcf;
+    background-color: transparent;
+  }
+
+  .showCheckbox .prgrssVertical .prgrssItemCompleted:before,
+  .showCheckbox .prgrssVertical .prgrssItemCompleted:after {
+    display: none;
+  }
+
+  .prgrssItemCompleted:first-child .prgrssMarkerContainer {
+    padding-top: 5px;
+  }
+  .encircledImg {
+    height: 32px;
+    width: 32px;
+  }
+  .desktop {
+    display: none;
+  }
+  .iconColorStyle {
+    height: 18px;
+    width: 18px;
+  }
+  .iconContainer {
+    margin-top: 8px;
+  }
+  .checklistHeader {
+    font-size: 28px;
+    line-height: 35px;
+    margin-bottom: 24px;
+  }
+  .itemTitle {
+    font-size: 20px;
+  }
+  .checkListTitle {
+    padding: 32px 0 32px 0;
+  }
+  .itemText {
+    padding-bottom: 14px;
+  }
+  .header_bottomRow {
+    width: 100%;
+  }
+  .tabSmallDevice {
+    display: flex;
+    flex-direction: column;
+  }
+  .mobileHide {
+    display: none;
+  }
+
+  .bigBtn {
+    text-transform: uppercase;
+    font-family: 'Karla',sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 15px;
+    text-align: center;
+    border-radius: 4px;
+    padding: 10px 117px;
+    border: 2px solid #09538b;
+    color: #09538b;
+  }
+  .iconBttns {
+    display: none;
+  }
+
+  .buttonsWrapper {
+    padding-top: 32px;
+    text-align: center;
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 32px;
+    width:auto;
+  }
+  .whiteBtn {
+    text-transform: uppercase;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    display: block;
+    margin-top: 25px;
+    padding: 5px 25px;
+    box-shadow: 2px 3px 4px #e7e9f2;
+    text-align: center;
+  }
+  .mobileBtns {
+    display: flex;
+    margin-bottom: 60px;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .display {
+    display: inherit;
+  }
+  .iconBtn.slds-button {
+    margin-right: 8px;
+    box-shadow: 0 2px 4px 0 #e7e9f2;
+  }
+  .display:last-child .iconBtn.slds-button {
+    margin-right: 0;
+  }
+  .iconButtons {
+    margin-bottom: 24px;
+  }
+  .iconClass {
+    width: 24px;
+    margin-right: 0;
+    margin-top: 0;
+  }
+
+  .iconClass,
+  .iconClass.printIcon,
+  .iconClass.downloadIcon {
+    height: unset;
+  }
+  .startSurvey {
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .checkbox {
+    margin-left: 35px;
+  }
+}
+
+.align-bottom {
+  display: flex;
+  justify-content: center;
+  vertical-align: bottom;
+  margin: auto;
+}
+.align-bottom .upArrow {
+  position: relative;
+  bottom: -5px;
+}
+
+/* Removing underline */
+.slds-tabs_default__item:hover::after,
+.slds-tabs--default__item:hover::after {
+  background-color: transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .headerContainer {
+    background: #f7f9fa
+      url(/resource/Ct_Assets/icons/BG_Hero_BusinessChecklist@2x.png) no-repeat;
+    background-color: left;
+    background-size: 300px 100px;
+    background-position: left 220px top -10px;
+    height: auto;
+  }
+
+  .warningMobile {
+    display: inline-flex;
+    margin-right: 10px;
+  }
+  .warningIcon {
+    margin-top: 8px;
+  }
+  .iconClass {
+    width: 28px;
+  }
+
+  .checkbox {
+    margin-left: 2px;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .prgrssVertical .prgrssMarker {
+    margin-left: 42px;
+    margin-right: 40px;
+  }
+  .prgrssVertical .prgrssItemCompleted:before,
+  .prgrssVertical .prgrssItemCompleted:after {
+    content: "";
+    top: 0%;
+    margin-left: 42px;
+    position: absolute;
+    left: calc(8px - 1px);
+    width: 0;
+    border-left: 2px dashed #d0cfcf;
+    background-color: transparent;
+  }
+
+  .showCheckbox .prgrssVertical .prgrssItemCompleted:before,
+  .showCheckbox .prgrssVertical .prgrssItemCompleted:after {
+    display: none;
+  }
+
+  .prgrssItemCompleted:first-child .prgrssMarkerContainer {
+    padding-top: 5px;
+  }
+
+  .checkbox {
+    margin-left: 35px;
+  }
+}

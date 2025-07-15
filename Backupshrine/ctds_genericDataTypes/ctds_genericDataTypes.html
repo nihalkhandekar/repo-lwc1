@@ -1,0 +1,69 @@
+<template>
+  <div class="slds-grid">
+    <div class="slds-col slds-size_12-of-12">
+      <div class="inputForm">
+          <!--Autoblur issue fix-->
+          <lightning-input variant="label-hidden" type="number" class="input1"></lightning-input>
+          <!-- for BRS-7153-->
+        <div class="text-area">
+          <template if:true={longtext}>
+            <lightning-textarea data-id="inputfields" value={textAreaOutput} placeholder={placeholder} label={label}
+              maxlength={maxCharTextArea} message-when-value-missing={labels.Please_provide_the_required_information}
+              onchange={handleTextArea} required={required} onblur={checkInputValidity}>
+            </lightning-textarea>
+            <template if:true={showMaxCharTextArea}>
+              <p class="helptext">{maxCharTextArea} {labels.MAXChaeacterLabel}</p>
+            </template>
+          </template>
+        </div>
+        <div class="slds-size_12-of-12 slds-large-size_12-of-12">
+          <template if:true={dateValue}>
+            <lightning-input type="date" class="brs-date-picker" label={label} value={dateValueOutput} placeholder={placeholder}
+              date-style="short" required={required} onchange={handleDate} data-id="inputfields"
+              onblur={checkInputValidity} format="MM/DD/YYYY" onkeydown={checkDateVal} message-when-bad-input={badInputDateMessage}>
+            </lightning-input>
+          </template>
+        </div>
+        <template if:true={sampletext}>
+          <lightning-formatted-rich-text if:true={showtextnote} value={textnotevalue}></lightning-formatted-rich-text>
+          <lightning-input type={typeofData} label={label} value={textInfo} placeholder={placeholder}
+            required={required} maxlength={maxCharText} onchange={handleText} data-id="inputfields"
+            pattern={textPattern} onblur={checkInputValidity}>
+          </lightning-input>
+          <template if:true={showMaxCharText}>
+            <p class="helptext">{maxCharText} {labels.MAXChaeacterLabel}</p>
+          </template>
+        </template>
+        <template if:true={emailValue}>
+          <lightning-input type="email" label={label} value={emailInfo} placeholder={placeholder} required={required}
+            onchange={handleEmail} data-id="inputfields" onblur={checkInputValidity}>
+          </lightning-input>
+        </template>
+        <template if:true={dateTimeValue}>
+          <lightning-input type="datetime" label={label} value={dateTimeInfo} placeholder={placeholder}
+            required={required} onchange={handleDateTime} data-id="inputfields" onblur={checkInputValidity} onkeydown={checkDateVal} message-when-bad-input={badInputDateMessage}>
+          </lightning-input>
+        </template>
+        <template if:true={currencyValue}>
+          <lightning-input type={typeofData} label={label} value={currencyOutput} placeholder={placeholder}
+            required={required} maxlength={maxCharText} onchange={handleCurrency} data-id="inputfields"
+            formatter={textPattern} onblur={checkInputValidity} message-when-step-mismatch={badInputDateMessage} min="1" onkeydown={checkCurrencyVal} step={precison} >
+          </lightning-input>
+        </template>
+        <template if:true={checkboxdata}>
+          <div class="theme1">
+            <div class="dec-checkbox">
+              <c-generic-multi-select list-data={checkboxOptions} value={isCheckboxChecked}
+                oncheckboxinputselection={handleCheckbox}>
+              </c-generic-multi-select>
+            </div>
+          </div>
+          <template if:true={showErrorMessage}>
+            <br>
+            <p class="error-msg">{displayError}</p>
+          </template>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,52 @@
+<template>
+  <div class="checklistaddress">
+    <h6 class="itemTitle">
+      {address.subHeading}
+    </h6>
+    <div class="checklistaddress__sub-item">
+      <!-- <p class="large checklistaddress__static-contenet">
+        <lightning-formatted-rich-text
+          class="itemText"
+          value={address.rteText}
+        ></lightning-formatted-rich-text>
+      </p> -->
+      <div class={address.subsectionId} lwc:dom="manual" 
+        onclick={handleRichTextClick}>                         
+      </div>
+
+      <template iterator:it={dynamicData}>
+        <div class="checklistaddress__sub-item__wrapper" key={it.value}>
+          <p class="largeBold checklistaddress__sub-item__title">
+            <a href={it.value.website} target="_blank">{it.value.addressTitle}
+            <span class="slds-icon slds-p-left_x-small">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="slds-icon link-icons"
+              >
+                <use xlink:href={linkIcon}></use>
+              </svg>
+            </span>
+          </a>
+          </p>
+          <p class="large checklistaddress__sub-item__address">
+            <lightning-formatted-address
+              disabled
+              street={it.value.address}
+              city={it.value.city}
+              province={it.value.state}
+              postal-code={it.value.zip}
+            >
+            </lightning-formatted-address>
+          </p>
+          <div class="checklistaddress__sub-item__contact">
+            <p class="large phone">
+              <lightning-formatted-phone
+                value={it.value.phoneNumber}
+              ></lightning-formatted-phone>
+            </p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</template>

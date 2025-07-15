@@ -1,0 +1,52 @@
+<template>
+    <div class="checklist__resources">
+        <h6 class="itemTitle">
+            {resources.subHeading}
+        </h6>
+        <div 
+            class={resources.subsectionId}
+            lwc:dom="manual" 
+            onclick={handleRichTextClick}
+            oncontextmenu={handleRichTextClick}>                         
+        </div>
+		<div class ="slds-m-bottom_x-large"></div>
+        <template iterator:resource={dynamicData} >
+            <div class="checklist__resources__sublist" key={resource.value.resourceTitle}>
+                <p class="largeBold checklist__resources__sublist__heading" if:true={resource.value.resourceTitle}>
+                    {resource.value.resourceTitle}:
+                </p>
+                <template iterator:it={resource.value.resources}>
+                    <div class="checklist__resources__sublist__item slds-grid slds-wrap" key={it.value.resourceURL}>
+                        <div class="checklist__resources__sublist__item__link slds-col slds-size_1-of-1 slds-small-size_12-of-12  slds-medium-size_8-of-12 slds-large-size_9-of-12">
+                            <div class="slds-col slds-size_full">
+                               <p class="large"> 
+                                   <a href={it.value.resourceURL} target="_blank">
+                                    {it.value.resourceLinkLabel}
+                                    </a>
+                                <span class="slds-p-left_small">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="slds-icon link-icons">
+                                        <use xlink:href={linkIcon}></use>
+                                    </svg>
+                                </span></p>
+                            </div>
+                            <div if:true={it.value.resourceDescription} class="slds-col slds-size_full checklist__resources__sublist__subheading">
+                                <p class="small">{it.value.resourceDescription}</p>
+                            </div>
+                        </div>
+                        <div class="checklist__resources__sublist__item__phone slds-col slds-size_1-of-1 slds-small-size_12-of-12  slds-medium-size_4-of-12 slds-large-size_3-of-12">
+                            <p class="large desktop">
+                                {it.value.resourceNumber}
+                            </p>
+                            <p class="large mobile">
+                                <a href={it.value.resourceTel}>{it.value.resourceNumber}</a>
+                            </p>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <template if:false={resource.last}>
+                <hr class="checklist__resource-seperator" key={resource.last}></hr>  
+            </template>
+        </template>
+    </div>
+</template>

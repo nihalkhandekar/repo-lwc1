@@ -1,0 +1,28 @@
+.itemText {
+  color: #2d2c2c;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+}
+.paddingBtm {
+  padding-bottom: 24px;
+}
+.large,
+.largeBold {
+  color: #2d2d2c;
+}
+.dataPair {
+  padding-bottom: 11px;
+}
+@media only screen and (max-width: 768px) {
+  .paddingBtm {
+    padding-bottom: 33px;
+  }
+  .dataPair {
+    padding-bottom: 17px;
+  }
+  .subHeadingDescription {
+    font-size: 14px;
+    line-height: 21px;
+  }
+ 
+}

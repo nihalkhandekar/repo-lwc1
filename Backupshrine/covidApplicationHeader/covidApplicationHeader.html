@@ -1,0 +1,157 @@
+<template>
+    <div class="header_wrapper">
+      <div class="header_topRow_wrapper">
+        <div class="header_topRow">
+          <div class="header-content">
+            <img
+              src={appLogo}
+              class="appLogo"
+              alt="appLogo"
+              title="appLogo"
+              tabindex="0"
+            />
+          </div>
+        </div>
+      </div>
+      <div if:true={showHeaderImage} class="header_bottomRow_row_banner">
+        <div class="header_bottomRow_wrap">
+          <div class="header_bottomRow_wrapper_banner">
+          </div>
+        </div>
+      </div>
+      <div if:false={showHeaderImage} class="header_bottomRow_row">
+        <div class="header_bottomRow_wrap">
+          <div class="header_bottomRow_wrapper">
+            <div class="checkList">Business checklist</div>
+            <template if:true={showCommHeader}>
+              <div class="header_bottomRow slds-tabs_default menu">
+                <ul class="slds-tabs_default__nav" role="tablist">
+                  <li
+                    class="slds-tabs_default__item slds-is-active first-item"
+                    title="Item One"
+                    role="presentation"
+                  >
+                    <a
+                      class="slds-tabs_default__link active"
+                      href="javascript:void(0);"
+                      role="tab"
+                      tabindex="0"
+                      aria-selected="true"
+                      aria-controls="tab-default-1"
+                      id="tab-default-1__item"
+                    >
+                      <img
+                        src={BusinessDetails}
+                        class="BusinessDetails"
+                        alt="BusinessDetails"
+                        title="BusinessDetails"
+                        tabindex="0"
+                      />
+                      <span class="mobHide">BUSINESS DETAILS</span>
+                    </a>
+                  </li>
+  
+                  <li
+                    class="slds-tabs_default__item"
+                    title="Item Two"
+                    role="presentation"
+                  >
+                    <a
+                      class="slds-tabs_default__link"
+                      href="javascript:void(0);"
+                      role="tab"
+                      tabindex="-1"
+                      aria-selected="false"
+                      aria-controls="tab-default-2"
+                      id="tab-default-2__item"
+                    >
+                      <img
+                        src={BusinessLocation}
+                        class="BusinessLocation"
+                        alt="BusinessLocation"
+                        title="BusinessLocation"
+                        tabindex="0"
+                      />
+                      <span class="mobHide">BUSINESS LOCATION</span>
+                    </a>
+                  </li>
+                  <li
+                    class="slds-tabs_default__item"
+                    title="Item Three"
+                    role="presentation"
+                  >
+                    <a
+                      class="slds-tabs_default__link"
+                      href="javascript:void(0);"
+                      role="tab"
+                      tabindex="-1"
+                      aria-selected="false"
+                      aria-controls="tab-default-3"
+                      id="tab-default-3__item"
+                    >
+                      <img
+                        src={LegalStructure}
+                        class="LegalStructure"
+                        alt="LegalStructure"
+                        title="LegalStructure"
+                        tabindex="0"
+                      />
+                      <span class="mobHide">LEGAL STRUCTURE</span>
+                    </a>
+                  </li>
+                  <li
+                    class="slds-tabs_default__item"
+                    title="Item Four"
+                    role="presentation"
+                  >
+                    <a
+                      class="slds-tabs_default__link"
+                      href="javascript:void(0);"
+                      role="tab"
+                      tabindex="-1"
+                      aria-selected="false"
+                      aria-controls="tab-default-4"
+                      id="tab-default-4__item"
+                    >
+                      <img
+                        src={Employees}
+                        class="Employees"
+                        alt="Employees"
+                        title="Employees"
+                        tabindex="0"
+                      />
+                      <span class="mobHide">EMPLOYEES</span>
+                    </a>
+                  </li>
+                  <li
+                    class="slds-tabs_default__item"
+                    title="Item Five"
+                    role="presentation"
+                  >
+                    <a
+                      class="slds-tabs_default__link"
+                      href="javascript:void(0);"
+                      role="tab"
+                      tabindex="-1"
+                      aria-selected="false"
+                      aria-controls="tab-default-5"
+                      id="tab-default-5__item"
+                    >
+                      <img
+                        src={Licenses}
+                        class="Licenses"
+                        alt="Licenses"
+                        title="Licenses"
+                        tabindex="0"
+                      />
+                      <span class="mobHide">LICENSES</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>

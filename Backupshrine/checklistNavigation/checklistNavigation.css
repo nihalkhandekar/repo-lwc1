@@ -1,0 +1,212 @@
+.text-center {
+    text-align: center;
+}
+
+.headerContainer{
+    position: relative;
+    display:flex;
+    vertical-align: middle;
+    background: #f7f9fa;
+}
+
+.titleCmp {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+    color: #2D2C2C;
+    background-image: var(--c-navigationBarBg);
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: center right;
+    min-height: 168px;
+    background-size: contain;
+}
+
+.slds-progress {
+    max-width: 100%;
+    position: relative;
+    min-height: 30px;
+    margin-top: -0.5rem;
+}
+
+.slds-progress__item::before {
+    content: '';
+    border: 1px solid #D0CFCF;
+    width: 100%;
+    vertical-align: middle;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.slds-progress__item::after {
+    content: '';
+    border: 1px solid #D0CFCF;
+    width: 100%;
+    vertical-align: middle;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+}
+
+.slds-progress__item {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 100%;
+    position: relative;
+    align-items: center;
+    margin-right: 4px;
+    cursor: pointer;
+    min-height: 16px;
+}
+
+.progress-label {
+    position: absolute;
+    top: -34px;
+    color: #09538B;
+    font-weight: bold;
+	width: 192px;
+}
+
+
+.progress-label svg {
+    height: 24px;
+    width: 24px;
+}
+
+.progress-label .title {
+    margin-left: 4px;
+    color: #678598;
+}
+
+.slds-is-active .progress-label .title {
+    color: #09538B;
+}
+
+.slds-is-complete .slds-progress__marker {
+    background: #678598;
+    border: 1px solid #678598;
+}
+
+.slds-is-active .slds-progress__marker {
+    background: #3A95D3;
+    border: 1px solid #3A95D3;
+}
+
+.slds-progress__item.is-started .slds-progress__marker{
+    border: 2px solid #678598;
+    color: #678598;
+}
+
+.slds-progress__item .slds-is-active .slds-progress__marker {
+    box-shadow: none;
+}
+
+.slds-progress__marker {
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    align-items: center;
+    align-content: center;
+    z-index: 4;
+    border: 2px solid #D8D8D8;
+    background: #fff;
+    width: 10px;
+    height: 10px;
+    margin: auto 0;
+}
+
+.slds-progress__list {
+    justify-content: space-around;
+    display: flex;
+    position: relative;
+}
+
+.slds-progress__item.slds-is-active::after,
+.slds-progress__item.slds-is-active::before {
+    border: 1px solid #3A95D3;
+    color: #3A95D3;
+}
+
+.slds-progress__item.slds-is-complete::after,
+.slds-progress__item.slds-is-complete::before {
+    border: 1px solid #678598;
+    color: #678598;
+}
+
+.slds-progress__item.is-started::after,
+.slds-progress__item.is-started::before {
+    border: 1px solid #678598;
+    color: #678598;
+}
+
+.slds-progress__item.slds-is-active .slds-progress__marker {
+    box-shadow: none;
+}
+
+.mobile-only {
+    display: none;
+}
+
+.mobile-only .slds-grid {
+    width: 100%;
+}
+
+.slds-is-active .slds-progress__marker.slds-progress__marker_icon,
+.slds-is-complete .slds-progress__marker.slds-progress__marker_icon {
+    height: 16px;
+    width: 16px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+.tabfocus:focus {
+  outline: 2px solid #2D2C2C;
+}
+
+/* CSS for Mobile */
+@media only screen and (max-width: 64rem) {
+    .title {
+        display: none;
+    }
+
+    .slds-progress{
+        padding: 0 var(--lwc-spacingSmall);
+        margin-top: -1rem;
+    }
+
+    .mobile-only {
+        display: flex;
+        width: 100%;
+    }
+
+    .progress-label svg {
+        height: 20px;
+    }
+
+    .slds-is-active .slds-progress__marker.slds-progress__marker_icon,
+    .slds-is-complete .slds-progress__marker.slds-progress__marker_icon {
+        height: 24px;
+        width: 24px;
+    }
+
+    .slds-progress__marker {
+        width: 10px;
+        height: 10px;
+    }
+
+    .titleCmp {
+        /* font-family: Karla; */
+         padding-left: 15px;
+      }
+
+    .headerContainer{
+        background-position: right;
+        background-size: 200px 100%;
+        background-attachment: inherit;
+    }  
+}

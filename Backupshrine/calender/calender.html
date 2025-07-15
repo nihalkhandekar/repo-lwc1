@@ -1,0 +1,264 @@
+<template>
+  <div class="calendar-component">
+    <div class="main" onclick={outSideOfComponentClicked}></div>
+    
+      <template if:true={showLoader}>
+        <div class="loader"></div> <!-- Replace with your actual loader HTML/CSS -->
+      </template>
+      <template if:false={showLoader}>
+        <div class="superCountainer" >
+      <lightning-card data-id="calenderCard" >
+          <div class="mainContainer" onfocusout={outSideOfComponentClicked}>
+    
+              <!-- Button logic -->
+              <div class="button_Container">
+              <div class="buttonRow">
+                <lightning-button title="Today" label={labels.Today} onclick={today} class="slds-m-left_x-small IndividualButton"></lightning-button>
+                <lightning-button title="This Week"  label={labels.ThisWeek} onclick={thisWeek} class="slds-m-left_x-small IndividualButton"></lightning-button>
+                <!-- <lightning-button title="This Week"  label="This Week" class="slds-m-left_x-small IndividualButton"></lightning-button> -->
+                <lightning-button title="This Month" label={labels.ThisMonth} onclick={thisMonth} class="slds-m-left_x-small IndividualButton"></lightning-button>
+              </div> 
+              
+              <div class="buttonRow">
+                <lightning-button title="This Quarter" label={labels.ThisQuarter} onclick={thisQuater} class="slds-m-left_x-small IndividualButton"></lightning-button>
+                <!-- <lightning-button title="This Biyearly" label="This Biyearly" onclick={thisBiyearly} class="slds-m-left_x-small IndividualButton"></lightning-button> -->
+                <lightning-button title="This Year" label={labels.ThisYear} onclick={thisYear} class="slds-m-left_x-small IndividualButton"></lightning-button>
+                
+              </div>
+              </div>
+    
+              <!-- calender logic -->
+    
+              <template if:true={twoMonthInputsVisibleForQuater}>
+                <div class="calenderLogic">
+                  <!-- start and end dates -->
+                  <div class="dateInput">
+                      <div class="dateInputIndividual">
+                        <lightning-input   name="valueStartQuater" label="From" value={valueStartQuater} onchange={valueStartQuaterChanged} read-only></lightning-input>
+                        <div class="QuaterMonth">
+                          <lightning-icon icon-name="utility:chevrondown" size="small" class="leftIcon"></lightning-icon>
+                        </div>
+                          <!-- <lightning-icon icon-name="utility:event" size="small" class="leftIcon"></lightning-icon> -->
+                      </div>
+                      <div class="dateInputIndividual">
+                        <lightning-input   name="valueEndQuater" label="To" value={valueEndQuater} onchange={valueEndQuaterChanged} read-only></lightning-input>
+                        <div class="QuaterMonth">
+                          <lightning-icon icon-name="utility:chevrondown" size="small" class="leftIcon"></lightning-icon>
+                        </div>
+                          <!-- <lightning-icon icon-name="utility:event" size="small" class="leftIcon"></lightning-icon> -->
+                      </div>
+                  </div>
+              </div>
+              </template>
+    
+    
+    
+    
+            <template if:true={twoMonthInputsVisible}>
+              <div class="calenderLogic">
+                <!-- start and end dates -->
+                <div class="dateInput">
+                    <div class="dateInputIndividual">
+                        <lightning-input    name="startDate" label="From" data-id="fromTwo" value={showStartHighlightingDate} read-only></lightning-input>
+                        <div class="DoubleInputFrom">
+                        <lightning-icon icon-name="utility:event" size="small" class="leftIcon"></lightning-icon>
+                      </div>
+                    </div>
+                    <div class="dateInputIndividual">
+                        <lightning-input   name="endDate" label="To" data-id="ToTwo" value={showEndHighlightingDate} read-only></lightning-input>
+                        <div class="DoubleInputFrom">
+                        <lightning-icon icon-name="utility:event" size="small" class="leftIcon"></lightning-icon>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </template>
+    
+    
+            <template if:true={SingleMonthInputsVisible}> 
+              <div class="calenderLogic">
+                <!-- start and end dates -->
+                <div class="dateInput single-input">
+                    <div class=" dateInputIndividual">
+                        <lightning-input label=" "   name="startDate"  data-id="FromOne" value={showCurrentDate} read-only></lightning-input>
+                        <div class="singleInputIcon">
+                        <lightning-icon icon-name="utility:event" size="small" class="leftIcon"></lightning-icon>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            </template>
+    
+            <template if:true={thisMonthClicked}> 
+              <div class="calenderLogic">
+            </div>
+            </template>
+    
+            <template if:true={thisYearClicked}> 
+              <div class="calenderLogic">
+            </div>
+            </template>
+    
+    
+              <!-- calender grid month -->
+              <div aria-hidden="false" aria-label="Date picker: June" class="slds-datepicker slds-dropdown slds-dropdown_left date " role="dialog">
+                
+                <div class="slds-datepicker__filter slds-grid">
+                  
+                  <!-- Months options --> 
+                    <div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+                      <div class="slds-align-middle">
+                        
+                        <lightning-button variant="base"  icon-name="utility:chevronleft" onclick={previousMonthButtonClickController}></lightning-button>
+                      </div>
+                      <h2 aria-atomic="false" aria-live="polite" class="slds-align-middle" id="rangeDefault_start-month">{currentSelectedMonth}</h2>
+                      <div class="slds-align-middle">
+                        
+                        <lightning-button variant="base"  icon-name="utility:chevronright" onclick={nextMonthButtonClickController}></lightning-button>
+                      </div>
+                    </div>
+    
+                    <!-- year picklist -->
+                    <!-- <div class="slds-shrink-none">
+                      <div class="slds-select_container" > -->
+    
+                        <div class="">
+                          <div class="" >
+                          <lightning-select name="Year" options={yearOptions} onchange={YearChanged} value={currentSelectedYear}></lightning-select>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <!-- date grid -->
+                  <table aria-multiselectable="true" class="slds-datepicker__month" role="grid">
+                    <!-- Days Name -->
+                    <thead>
+                      <tr id="rangeDefault_start-weekdays">
+                        <th id="rangeDefault_start-Sunday" scope="col">
+                          <abbr title="Sunday">Sun</abbr>
+                        </th>
+                        <th id="rangeDefault_start-Monday" scope="col">
+                          <abbr title="Monday">Mon</abbr>
+                        </th>
+                        <th id="rangeDefault_start-Tuesday" scope="col">
+                          <abbr title="Tuesday">Tue</abbr>
+                        </th>
+                        <th id="rangeDefault_start-Wednesday" scope="col">
+                          <abbr title="Wednesday">Wed</abbr>
+                        </th>
+                        <th id="rangeDefault_start-Thursday" scope="col">
+                          <abbr title="Thursday">Thu</abbr>
+                        </th>
+                        <th id="rangeDefault_start-Friday" scope="col">
+                          <abbr title="Friday">Fri</abbr>
+                        </th>
+                        <th id="rangeDefault_start-Saturday" scope="col">
+                          <abbr title="Saturday">Sat</abbr>
+                        </th>
+                      </tr>
+                    </thead>
+                    <!-- Actual Date Grid -->
+                    <tbody>
+                      <!-- <template for:each={calenderGrid} for:item="row" for:index="rowIdx">
+                        <tr key={row}> -->
+                            <!-- Iterate through the columns (days) in the row -->
+                            <!-- <template for:each={row} for:item="cell" for:index="colIdx">
+                                <td key={cell} onloadeddata={highlightIndexOrNot} value={cell}>
+                                    {cell} Display the day or empty cell -->
+                                <!-- </td>
+                            </template>
+                        </tr>
+                    </template> -->
+    
+    
+                    <template if:true={renderCalled}></template>
+                    <template for:each={calendarGrid} for:item="row" for:index="rowIdx">
+                      <tr key={row}>
+                        <template for:each={row} for:item="cell" for:index="colIdx">
+    
+                          
+    
+                          
+                          <template if:true={cell.highlight}>
+
+                            <template if:true={cell.startDate}>
+                              <template if:false={cell.endDate}>
+                                <td key={cell.date} class="leftCurve">
+                                  {cell.date}
+                                </td>
+                              </template>
+                            </template>
+
+                            <template if:true={cell.endDate}>
+                              <template if:false={cell.startDate}>
+                                <td key={cell.date} class="rightcurve">
+                                  {cell.date}
+                                </td>
+                              </template>
+                            </template>
+
+                            <template if:false={cell.startDate}>
+                              <template if:false={cell.endDate}>
+                                <td key={cell.date} class="backgroundChange">
+                                  {cell.date} <!-- Display the day or empty cell -->
+                                </td>
+                              </template>
+                              </template>
+
+                              <template if:true={cell.startDate}>
+                                <template if:true={cell.endDate}>
+                                  <td key={cell.date} class="backgroundChangeForToday">
+                                    {cell.date} <!-- Display the day or empty cell -->
+                                  </td>
+                                </template>
+                                </template>
+
+
+                              <!-- <template if:false={cell.endDate}>
+                                <template if:false={cell.startDate}>
+                                  <td key={cell.date} class="backgroundChange">
+                                    {cell.date} 
+                                  </td>
+                                </template>
+                                </template> -->
+                          </template>
+                          <!-- <template if:true={cell.startDate}>
+                            <td key={cell.date} class="leftCurve">
+                              
+                            </td>
+                          </template> -->
+    
+                          <!-- <template if:true={cell.endDate}>
+                            <td key={cell.date} class="rightcurve">
+                              
+                            </td>
+                          </template> -->
+    
+                          <template if:false={cell.highlight}>
+                          <td key={cell.date} >
+                            {cell.date} 
+                          </td>
+                        </template>
+    
+    
+    
+    
+                        </template>
+                      </tr>
+                    </template>
+                    </tbody>
+                    
+                  </table>
+                  <div class="applyButton">
+                  <lightning-button label="Apply" title="Non-primary action" onclick={apply} ></lightning-button>
+                </div>
+                  </div>
+              
+    
+          </div>   
+      </lightning-card>
+      </div>
+      </template>
+    
+  </div>
+  </template>

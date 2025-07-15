@@ -1,0 +1,352 @@
+<template>
+<template if:true={allowUser}>
+  <template if:true={showSuccessMsg}>
+    <div class="success-msg slds-size_1-of-1 slds-large-size_3-of-12">
+      <p class="large">{label.Email_SuccessMessage}</p>
+      <span class="" onclick={handleClose}>
+        <img class="closeIcon" src={closeIcon} alt="Close Icon"/></span>
+    </div>
+  </template>
+  <c-checklist-header header={headerData} onsaveclicked={saveClicked} languagemapping={languagemapping}>
+
+  </c-checklist-header>
+  <div class="containerDiv">
+    <div class="navBarDivMob">
+        <div class={contentDiv}>
+        <lightning-accordion allow-multiple-sections-open title="Select to view sections">
+          <lightning-accordion-section class="mobLabelHeading" label={label.headerLabel}>
+            <ul class="tabSmallDevice" role="tablist">
+              <template for:each={listchecklistWrapperList} for:item="tabDetails" for:index="index">
+                <li key={tabDetails.sectionTitle} class="tabStyle" data-label={tabDetails.sectionTitle} 
+                onclick={handleTabSelectMobile}>
+                  <span key={tabDetails.tabLabel} class="tabLabel">{tabDetails.referenceNo}. 
+                    {tabDetails.sectionTitle}</span
+                  >
+                </li>
+              </template>
+            </ul>
+          </lightning-accordion-section>
+        </lightning-accordion>
+      </div>
+    </div>
+    <div class="navDesktop">
+      <div class="header_bottomRow slds-tabs_default menu">
+        <ul class="slds-tabs_default__nav" role="tablist">
+          <template for:each={listchecklistWrapperList} for:item="tabDetails" for:index="index">
+            <li key={tabDetails.sectionTitle} class="slds-tabs_default__item tabStyle tabfocus" role="tab" tabindex="0"
+              data-label={tabDetails.sectionTitle} onclick={handleTabSelect} onkeypress={handleTabSelect}>
+              <img key={tabDetails.sectionTitle} src={tabDetails.navigationIcon} class="iconColorStyle"
+                alt={tabDetails.sectionTitle} title={tabDetails.sectionTitle}/>
+              <span key={tabDetails.sectionTitle} class="tabLabel">{tabDetails.referenceNo}. 
+                {tabDetails.sectionTitle}</span>
+              <div class="align-bottom">
+                <lightning-icon icon-name="utility:up" class="upArrow" size="x-small">
+                </lightning-icon>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </div>
+    </div>
+    <div class="customContentDiv">
+      <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+        <div class="slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_8-of-12">
+            <p class="contentTitle">
+              {customBusinessLabel}
+            </p>
+          </div>
+          <div class="slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_11-of-12">
+            <p class="contentBody">
+                {checklistStepsLabel}<br><br>
+                <template if:true={isLoggedIn}>
+                  {label.Message_AuthUser}
+                </template>
+                <template if:false={isLoggedIn}>
+                  <lightning-formatted-rich-text value={label.Message_UnAuthUser}></lightning-formatted-rich-text>
+                </template>
+            </p>
+          </div>
+        </div>
+      <div class="slds-align_absolute-center slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+        <img src={groupBuildingIcon} class="" alt="checklist image"/>
+      </div>
+    </div>
+
+    </div>
+    <div class={contentDiv}>
+      <template
+        for:each={listchecklistWrapperList}
+        for:item="tabDetails"
+        for:index="index"
+      >
+        <div
+          key={tabDetails}
+          data-name={tabDetails.sectionTitle}
+          class="checkListTitle"
+        >
+          <div class="slds-col slds-size_12-of-12 slds-large-size_10-of-12">
+            <div class="slds-grid">
+              <div
+                class="slds-col slds-large-size_1-of-12 slds-size_2-of-12 iconContainer"
+              >
+                <center class="iconPostion">
+                  <div class="encircledImg iconStyle">
+                      <img key={tabDetails.sectionTitle} src={tabDetails.finalsectionIcon} class="iconColorStyle"
+                        alt={tabDetails.sectionTitle} title={tabDetails.sectionTitle} />
+                    </div>
+                  </center>
+                </div>
+                <div class="slds-col">
+                  <h4 class="checklistHeader">
+                    {tabDetails.sectionTitle}
+                  </h4>
+                </div>
+              </div>
+          
+  
+  
+              <div class="slds-progress slds-progress_vertical prgrssVertical">
+                <ol class="slds-progress__list">
+                  <template for:each={tabDetails.subsection} for:item="itemDetails">
+                    <template if:true={itemDetails.staticType}>
+                      <li key={itemDetails} class="slds-progress__item slds-is-completed prgrssItemCompleted">
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_2-of-12 prgrssMarkerContainer">
+                          <template if:true={isLoggedIn}>
+                            <template if:true={itemDetails.isComplete}>
+                              <img src={checkIcon} onclick={saveProgress} data-id={itemDetails.subsectionId} tabindex="0" class="checkbox" alt="Item checked" title="Item checked" />                              
+                            </template> 
+                            <template if:false={itemDetails.isComplete}>
+                              <img src={uncheckIcon} onclick={saveProgress} data-id={itemDetails.subsectionId} tabindex="0" class="checkbox" alt="Item checked" title="Item checked" />                              
+                            </template> 
+                          </template>
+                          <template if:false={isLoggedIn}>
+                            <span class="slds-icon_container slds-icon-utility-success slds-progress__marker prgrssMarker"
+                            title="Complete"></span>
+                          </template>
+                        </div>
+                        <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                          <div>
+                            <h6 class="itemTitle">
+                              {itemDetails.subHeading}
+                            </h6>
+                            <!--<lightning-formatted-rich-text
+                              class="itemText"
+                              value={itemDetails.rteText}>
+                            </lightning-formatted-rich-text>-->
+                            <div class={itemDetails.subsectionId} lwc:dom="manual" onclick={handleRichTextClick}
+                              oncontextmenu={handleRichTextClick}>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </template>
+                    <template if:false={itemDetails.staticType}>
+                      <li key={itemDetails} class="slds-progress__item slds-is-completed prgrssItemCompleted">
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_2-of-12 prgrssMarkerContainer">
+                          <template if:true={isLoggedIn}>
+                            <template if:true={itemDetails.isComplete}>
+                              <img src={checkIcon} onclick={saveProgress} data-id={itemDetails.subsectionId} tabindex="0" class="checkbox" alt="Item checked" title="Item checked" />                              
+                            </template> 
+                            <template if:false={itemDetails.isComplete}>
+                              <img src={uncheckIcon} onclick={saveProgress} data-id={itemDetails.subsectionId} tabindex="0" class="checkbox" alt="Item checked" title="Item checked" />                              
+                            </template> 
+                          </template>
+                          <template if:false={isLoggedIn}>
+                            <span class="slds-icon_container slds-icon-utility-success slds-progress__marker prgrssMarker"
+                            title="Complete"></span>
+                          </template>
+                        </div>
+                        <div class="slds-progress__item_content slds-grid slds-grid_align-spread">
+                          <div>
+                            <template if:true={itemDetails.isNAICS}>
+                              <c-check-list-naics key={itemDetails.subsectionId} naicsdetails={itemDetails}>
+                              </c-check-list-naics>
+                            </template>
+                            <template if:true={itemDetails.isResources}>
+                              <c-checklist-resources resources={itemDetails}></c-checklist-resources>
+                            </template>
+                            <template if:true={itemDetails.isLicenses}>
+                              <!-- Licenses Component to be placed here -->
+                              <c-check-list-licenses licenses={itemDetails}></c-check-list-licenses>
+                            </template>
+                            <template if:true={itemDetails.isTowns}>
+                              <!-- Towns Component to be placed here -->
+                              <c-checklist-address-item address={itemDetails}></c-checklist-address-item>
+                            </template>
+                          </div>
+                        </div>
+                      </li>
+                    </template>
+                  </template>
+                </ol>
+              </div>
+              
+            </div>
+          </div>
+        </template>
+      </div>
+        <div class="buttonContainer">
+          <div class="buttonsWrapper">
+            <template if:false={isLoggedIn}>
+              <div class="secBttn">
+                <button class="slds-button secondaryBtn" onclick={handleClickSave}>
+                  <p>{saveButton}</p>
+                </button>
+              </div>
+            </template>
+            <template if:true={isLoggedIn}>
+              <div class="secBttn">
+                <button class="slds-button slds-button_outline-brand secondaryBtn" onclick={showModal}>
+                  <p>{deleteButton}</p>
+                </button>
+              </div>
+              <template if:true={deleteModalpop}>
+                <c-modal open={modalopen} onmodalclose={closeModal} size={modalSize}>
+                  <div slot="header" class="headerModal">
+                    {deleteModalVerbiage}
+                  </div>
+                  <div slot="body" class="slds-m-vertical_x-small slds-p-bottom_small">
+                    <p class="checklistModal">
+                      {headerData.businessName}
+                    </p>
+                    <p class="contentModal">
+                      {headerData.questionnaireName}
+                    </p>
+                    <div class="contentModalText">
+                      <p>
+                        {staticText_CreatedOn}:&nbsp;
+                        <lightning-formatted-date-time value={headerData.createdDate} year="numeric" month="numeric"
+                          day="numeric" hour="2-digit" minute="2-digit" time-zone="America/New_York"
+                          time-zone-name="short">
+                        </lightning-formatted-date-time>
+                      </p>
+                    </div>
+                    <div class="warningBlock slds-m-top_small">
+                      <div class="warningBlock slds-m-right_x-small">
+                        <img src={warningIcon} class="warning" alt="warning" title="Warning" />
+                      </div>
+                      <div class="contentModalText warningBlock">
+                        {deleteWarningMessage}
+                      </div>
+                    </div>
+                  </div>
+                  <div slot="actions" style="text-align: left;" class="slds-m-vertical_small">
+                    <button title="Yes, delete page." onclick={handleYesClick} style="background-color: #09538b;"
+                      class="slds-button slds-button_brand slds-m-left_x-small slds-m-right_small">
+                      <div style="color: white;" class="modalBtn slds-p-horizontal_medium slds-p-vertical_x-small">
+                        {label_Yes}
+                      </div>
+                    </button>
+                    <button title="No, Dont Delete the page." style="border-color: #09538b; background-color: white;"
+                      onclick={handleNoClick} class="slds-button slds-button_brand slds-m-left_small">
+                      <div style="color: #09538b;" class="modalBtn slds-p-horizontal_medium slds-p-vertical_x-small">
+                        {label_No}
+                      </div>
+                    </button>
+                  </div>
+                </c-modal>
+              </template>
+            </template>
+            <div class="iconBttns slds-large-size_9-of-12">
+              <div
+                class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 iconBttnContainer">
+                <button class="slds-button whiteBtn slds-m-right_small" onclick={emailClick}>
+                  <span class="alignIconLabel emailIcon">
+                    <img src={mailIcon} class="iconClass" alt="Email" title="EMAIL"
+                      aria-hidden="true" />{label_Email}</span>
+                </button>
+              </div>
+              <div
+                class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 iconBttnContainer">
+                <button class="slds-button whiteBtn slds-m-right_small" onclick={handleDownload}>
+                  <span class="alignIconLabel">
+                    <img src={printIcon} class="iconClass printIcon" alt="Print" title="PRINT"
+                      aria-hidden="true" />{label_Print}
+                  </span>
+                </button>
+              </div>
+              <div
+                class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 iconBttnContainer">
+                <button class="slds-button whiteBtn slds-m-right_small" onclick={handleDownload}>
+                  <span class="alignIconLabel">
+                    <img src={downloadIcon} class="iconClass downloadIcon" alt="Download" title="DOWNLOAD"
+                      aria-hidden="true" />{label_Download}
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <template if:false={guestUser}>
+            <div class="singleButtonsWrapper iconBttns">
+              <p class="slds-large-size_8-of-12 largeBold">{label.ChecklistCloneButtonText}</p>
+              <button class="slds-button whiteBtn slds-m-right_small" onclick={handleClone}>
+                <span class="alignIconLabel copyIcon">
+                  <img src={copyIcon} class="iconClass" alt="Create Copy" title="Create Copy"
+                    aria-hidden="true" />{label.CreateCopy}
+                </span>
+              </button>
+            </div>
+          </template>
+        </div>
+        <div class="slds-size_12-of-12 slds-small-size_12-of-12 slds-medium-size_12-of-12 mobileBtns">
+          <div class="slds-size_3-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 display">
+            <button class="slds-button iconBtn slds-p-vertical_xx-small" onclick={emailClick}>
+              <div>
+                <img src={mailIcon} alt="Mail" title="Mail" class="iconClass" />
+              </div>
+            </button>
+          </div>
+          <div class="slds-size_3-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 display">
+            <button class="slds-button iconBtn slds-p-vertical_xx-small" onclick={handleDownload}>
+              <div>
+                <img src={printIcon} alt="Print" title="Print" class="iconClass" />
+              </div>
+            </button>
+          </div>
+          <div class="slds-size_3-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 display">
+            <button class="slds-button iconBtn slds-p-vertical_xx-small" onclick={handleDownload}>
+              <div>
+                <img src={downloadIcon} alt="Download" title="Download" class="iconClass" />
+              </div>
+            </button>
+          </div>
+          <template if:false={guestUser}>
+            <div class="slds-size_3-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 display">
+              <button class="slds-button iconBtn slds-p-vertical_xx-small" onclick={handleClone}>
+                <div>
+                  <img src={copyIcon} alt="Create Copy" title="Create Copy" class="iconClass" />
+                </div>
+              </button>
+            </div>
+          </template>
+        </div>
+  
+      <template if:true={emailModalpop}>
+        <c-modal open={modalopen} onmodalclose={closeModal} size={modalSize}>
+          <div slot="header" class="headerModal">
+            <h6>{emailModalVerbiage}</h6>
+          </div>
+          <div slot="body" class="slds-m-bottom_x-large slds-large-size_7-of-12 slds-size_1-of-1">
+            <lightning-input label={label_Email} placeholder="user@domain.com" type="text" value={emailAddress}
+              onchange={onEmailInputChange} class="email-input" onblur={handleCustomValidation}>
+            </lightning-input>
+          </div>
+          <div slot="actions" style="text-align:left" class="slds-m-vertical_small">
+            <button title={label_sendEmail} onclick={handleYesClickEmail} class="slds-button primaryBtn">
+              {label_sendEmail}
+            </button>
+            <button title={label.label_cancelTitle} onclick={handleNoClick} class="slds-button secondaryBtn">
+              {label_cancel}
+            </button>
+          </div>
+        </c-modal>
+      </template>
+      <template if:true={showSurvey}>
+        <div class="slds-large-size_5-of-12 slds-size_12-of-12 startSurvey">
+          <c-start-survey onclosesurvey={handleCloseSurvey}></c-start-survey>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

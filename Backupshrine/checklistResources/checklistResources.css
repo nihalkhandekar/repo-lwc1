@@ -1,0 +1,75 @@
+.checklist__resources__sublist__heading {
+  color: #09538b;
+  padding-bottom: 32px;
+}
+
+.checklist__resources__sublist__subheading {
+  font-family: 'Karla',sans-serif;
+  font-size: 16px;
+}
+
+.checklist__resources__sublist__item {
+  margin-bottom: 16px;
+}
+
+.checklist__resources__sublist__item__link a {
+  text-decoration: underline;
+  color: #09538b;
+}
+
+
+.link-icons {
+  height: 20px;
+  width: 20px;
+  margin-bottom: 2px;
+}
+
+.checklist__resource-seperator {
+  box-sizing: border-box;
+  border: 1px dashed #ecebeb;
+  margin: 60px 0;
+}
+.itemText {
+  padding-bottom: 64px;
+  text-align: left;
+  color: #2d2c2c;
+}
+.desktop {
+  display: block;
+}
+.mobile {
+  display: none;
+}
+
+/* Media Queries for Desktop */
+@media only screen and (min-width: 768px) {
+  .checklist__resources__sublist__item__phone {
+    padding-left: 20px;
+  }
+}
+
+/* Media Queries for Mobile */
+@media only screen and (max-width: 768px) {
+  .checklist__resources__sublist__item__phone {
+    margin-top: 12px;
+  }
+
+  .checklist__resources__sublist__item {
+    padding: 32px 0;
+    border-bottom: 1px solid #ecebeb;
+    margin-bottom: 0;
+  }
+  .checklist__resources__sublist__item:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+  .checklist__resources__sublist__heading {
+    padding-bottom: 0;
+  }
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}

@@ -1,0 +1,22 @@
+<template>
+  <div class="checklist_licenses">
+    <h6 class="itemTitle">{licenses.subHeading}</h6>
+    <!-- <p class="large">
+      		<lightning-formatted-rich-text value={licenses.rteText} class="itemText">
+			</lightning-formatted-rich-text>
+    	</p> -->
+		<div class={licenses.subsectionId} lwc:dom="manual" onclick={handleRichTextClick}>
+		</div>
+		<template for:each={licenses.dynamicData} for:item="item">
+			<template if:true={item.licenseDetails}>
+				<!-- <p key={item.licenseDetails} class="large license-container">
+          			<lightning-formatted-rich-text value={item.licenseDetails}>
+					</lightning-formatted-rich-text>
+				</p> -->
+				<div key={item.licenseDetails} class="license-details large license-container" lwc:dom="manual" 
+					onclick={handleRichTextClick} oncontextmenu={handleRichTextClick}>
+				</div>
+      </template>
+    </template>
+  </div>
+</template>

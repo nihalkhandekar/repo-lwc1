@@ -1,0 +1,30 @@
+<template>
+    <div class="page-footer slds-grid slds-size_12-of-12">
+
+        <div class="slds-col button-wrapper slds-order_2">
+            <button class="slds-button secondary-btn higher goto-summary-button" onclick={handleGoToSummary} if:true={showGoToSummaryButton}>
+                {label.go_to_summary}
+            </button>
+            <button title={nextLabel} onclick={handleContinue} class="slds-button primaryBtnSmall alignButton">
+                {nextLabel} &nbsp;
+                <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse" size="x-small">
+                </lightning-icon>
+
+            </button>
+        </div>
+        <template if:false={hideBack}>
+            <template if:true={canPrev}>
+                <div class="slds-col slds-order_1">
+                    <button class="slds-button natural-button-large slds-button_natural"
+                        onclick={handleBack}>{prevLabel}</button>
+                </div>
+            </template>
+            <template if:false={canPrev}>
+                <div class="slds-col slds-order_1">
+                    <button class="slds-button natural-button-large slds-button_natural"
+                        onclick={handleBack}>{exitLabel}</button>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

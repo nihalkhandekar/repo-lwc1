@@ -1,0 +1,93 @@
+<template>
+  <c-modal open={openmodel} onmodalclose={handleCloseModal} size="medium">
+    <template if:true={checklist}>
+      <div slot="header" class="headerModal">
+        {label.deleteModalVerbiage}
+      </div>
+      <div slot="body" class="modal-body-content">
+        <p class="checklistModal">
+          {checklist.businessName}
+        </p>
+        <p class="contentModal">
+          {checklist.questionnaireName}
+        </p>
+        <div class="contentModalText">
+          <p>
+            {label.staticText_CreatedOn}:
+            <lightning-formatted-date-time
+              value={checklist.createdDate}
+              year="numeric"
+              month="numeric"
+              day="numeric"
+              hour="2-digit"
+              minute="2-digit"
+              time-zone="America/New_York"
+              time-zone-name="short"
+            >
+            </lightning-formatted-date-time>
+          </p>
+        </div>
+        <div class="warningBlock warningMobile slds-m-top_small">
+          <div class="warningBlockIcon">
+            <img class="warningIcon" src={warningIcon} alt="warning" />
+          </div>
+          <div class="contentModalText warningBlock">
+            {label.deleteWarningMessage}
+          </div>
+        </div>
+      </div>
+      <div
+        slot="actions"
+        style="text-align:left"
+        class="slds-m-vertical_xx-small"
+      >
+        <div class="desktop-only">
+          <button
+            title="Yes, delete page."
+            class="slds-button slds-button_brand slds-m-left_x-small primaryBtn"
+            onclick={handleChecklistRemoveConfirm}
+            aria-label="Yes"
+            aria-describedby="Yes, delete checklist."
+          >
+            {label.label_Yes}
+          </button>
+          <button
+            title="No, Dont Delete the page."
+            class="slds-button slds-button_outline-brand secondaryBtn"
+            onclick={handleCloseModal}
+            aria-label="No"
+            aria-describedby="No, Dont Delete the checklist."
+          >
+            {label.label_No}
+          </button>
+        </div>
+        <div class="mobile-only">
+          <div class="slds-grid">
+            <div class="slds-col slds-size_1-of-2 slds-p-right_x-small">
+              <button
+                title="Yes, delete page."
+                class="slds-button slds-button_brand primaryBtn"
+                onclick={handleChecklistRemoveConfirm}
+                aria-label="Yes"
+                aria-describedby="Yes, delete checklist."
+              >
+                {label.label_Yes}
+              </button>
+            </div>
+            <div class="slds-col slds-size_1-of-2 slds-p-left_x-small">
+              <button
+                title="No, Dont Delete the page."
+                class="slds-button slds-button_outline-brand secondaryBtn"
+                onclick={handleCloseModal}
+                aria-label="No"
+                aria-describedby="No, Dont Delete the checklist."
+              >
+                {label.label_No}
+              </button>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </template>
+  </c-modal>
+</template>

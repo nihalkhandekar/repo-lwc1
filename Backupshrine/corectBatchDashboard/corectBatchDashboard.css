@@ -1,0 +1,317 @@
+.fin-mainBody {
+    width: Fill (1, 920px)px;
+    height: Fill (1, 016px)px;
+    padding: 0px;
+}
+.buttoncontainerfilter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.slds-grid_align-start {
+    align-items: center;
+}
+
+.slds-p-left_small{
+    padding: 8px;
+}
+
+.right-buttons {
+    display: flex;
+    align-items: right;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+
+.totoalcountbadge{
+    background-color: #EEF4FF;
+    width: 78px;
+    height: 23px;
+    padding: 2px 8px;
+    gap: 10px;
+    border-radius: 23px;
+    align-items: center;
+    justify-content: center;
+}
+
+.slds-text-title_bold {
+    color: #033D68;
+}
+
+.left-button { 
+    margin-right: auto;
+    display: flex;
+}
+
+.custom-badge {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-badge:hover {
+    background-color: #4d4d4d;
+    color: #fff;
+}
+
+.custom-badge.active {
+    background-color: #4d4d4d;
+    color: #fff;
+}
+
+.slds-badge_inverse {
+    --slds-c-badge-color-background: #f3f3f3;
+    --slds-c-badge-text-color: #181818;
+}
+
+.slds-has-button-menu .slds-th__action {
+    background-color: #181818 !important;
+}
+
+/* hover sort icon code  */
+.custom-header .sort-icon {
+    visibility: hidden; 
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px; 
+}
+
+.no-border-row td {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.custom-table-container {
+    margin-top : 24px; 
+    margin-bottom: 24px;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  
+.custom-table-container {
+    margin-top : 24px; /* Adds padding around the table */
+    margin-bottom: 24px;
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  .custom-table {
+    width: 100%;
+    border: 1px solid #d8dde6; /* Adds a border to the table */
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  
+  .custom-table tbody tr.custom-column td {
+    font-weight: 400;
+    font-size: 14px;
+    color: #181818;
+    height: 40px; 
+    vertical-align: middle;
+    /* padding: 6px 12px 6px 12px; */
+    border-width: 1px 1px 0px 0px;
+    border-style: solid;
+    border-color: #E5E5E5;
+    overflow: hidden; 
+    box-sizing: border-box;
+    padding: 5px 12px 5px 12px !important;;
+    text-align: left;
+  }
+  
+  
+  
+  .custom-table thead tr.custom-header th:last-child,
+  .custom-table tbody tr.custom-column td:last-child {
+    border-right: none;
+  }
+
+  .custom-table th:nth-child(1),
+.custom-table td:nth-child(1),
+.custom-table th:nth-child(2),
+.custom-table td:nth-child(2),
+.custom-table th:nth-child(3),
+.custom-table td:nth-child(3),
+.custom-table th:nth-child(4),
+.custom-table td:nth-child(4),
+.custom-table th:nth-child(5),
+.custom-table td:nth-child(5),
+.custom-table th:nth-child(6),
+.custom-table td:nth-child(6) {
+    max-width: 120px;
+    min-width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.custom-table th:nth-child(7),
+.custom-table td:nth-child(7) {
+    max-width: 50px; 
+    min-width: 50px;
+}
+
+  
+
+.actionMenu{
+    align-items: center;    
+}
+
+.loader-row {
+    height: 400px; 
+}
+
+.custom-header th:hover .sort-icon {
+    visibility: visible;
+    --slds-c-icon-color-foreground-default:#768eb8; /* Custom color for the sort icon when sorted */
+    transform: scale(0.9);
+}
+
+.hide {
+    display: none;
+}
+
+.custom-header .sorted .sort-icon {
+    visibility: visible; 
+    --slds-c-icon-color-foreground-default: #253858;
+    transform: scale(0.9);
+}
+
+.custom-header .sorted:hover .sort-icon {
+    --slds-c-icon-color-foreground-default: #253858; 
+    visibility: visible; 
+}
+
+.mytable{
+    padding: 8px;
+    border-radius: 12px;
+    border: #e5e5e5;
+    border: 1px;
+}
+
+.firstName{
+    border-radius: 12px;
+}
+
+.action{
+    border-radius: 12px;
+}
+
+.searchbutton, .addnewbutton{
+    border-radius: 8px !important;
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+    --sds-c-button-brand-color-border-hover: rgb(169, 224, 240);
+}
+
+.editmode{
+    cursor: pointer;
+}
+
+.no-data-message {
+    font-size: 1rem;
+    color: #6B7078;
+    text-align: center;
+    padding: 1rem;
+}
+
+.inputclass{
+    border-radius: 8px;
+}
+
+lightning-input{
+    --slds-c-input-radius-border: 8px;
+}
+
+lightning-combobox{
+    --slds-c-input-radius-border: 8px;
+}
+
+.indefinite-term {
+    margin-top: 25px;
+}
+
+.custom-table th:nth-child(1),
+.custom-table td:nth-child(1) {
+    width: 30%; 
+}
+
+.custom-table th:nth-child(2),
+.custom-table td:nth-child(2) {
+    width: 15%; 
+}
+
+.custom-table th:nth-child(3),
+.custom-table td:nth-child(3) {
+    width: 8%; 
+}
+
+.custom-table th:nth-child(4),
+.custom-table td:nth-child(4) {
+    width: 8%; 
+}
+
+.custom-table th:nth-child(5),
+.custom-table td:nth-child(5) {
+    width: 10%;
+}
+
+.custom-table th:nth-child(6),
+.custom-table td:nth-child(6) {
+    width: 10%;
+}
+
+.custom-table th:nth-child(7),
+.custom-table td:nth-child(7) {
+    width: 10%;
+}
+
+.custom-table th:nth-child(8),
+.custom-table td:nth-child(8) {
+    width: 10%;
+}
+
+.custom-table th:nth-child(9),
+.custom-table td:nth-child(9) {
+    width: 20%;
+}
+/* Adjust the width of the Actions column */
+.custom-table th:last-child,
+.custom-table td:last-child {
+    width: 10%; 
+}
+
+.download-column {
+    width: 80px;
+    text-align: center;
+}
+
+.download-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 20px;
+    background-color: #d1d1d1;
+    margin: 0 5px;
+}
+
+.custom-download-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-download-icon:hover {
+    opacity: 0.7;
+}
