@@ -1,0 +1,94 @@
+<template>
+    <div class="landing-page">
+        <div class="landing-page-banner"></div>
+        <div class="flowContainer brs-wrapper">
+            <div class="landing-page-card">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12">
+                        <h2 if:false={isCopyRequest}>{labels.name_landing_heading}</h2>
+                        <h2 if:true={isCopyRequest}>{labels.copy_request_landing_heading}</h2>
+                        <p class="smallerBold completion-time mobile-show">
+                            <img src={timerIcon} alt="" class="time-icon" role="presentation" />
+                            {labels.name_landing_time}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 slds-align-bottom">
+                        <button class="slds-button slds-button_brand primaryBtn getStartedBtn slds-float--right"
+                            onclick={handleGetStartedClick}>
+                            {labels.LandingPage_Button}
+                            <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" role="presentation" />
+                        </button>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap desktop-show">
+                    <div class="slds-col slds-size_12-of-12">
+                        <p class="smallerBold completion-time">
+                            <img src={timerIcon} alt="" class="time-icon" role="presentation" />
+                            {labels.name_landing_time}
+                        </p>
+                    </div>
+                </div>
+                <div class="hr-line"></div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_7-of-12 slds-order_3 slds-large-order_1">
+                        <h6 class="small-heading" if:false={isCopyRequest}>{labels.name_landing_question}</h6>
+                        <h6 class="small-heading" if:true={isCopyRequest}>{labels.copy_request_question}</h6>
+                        <p class="small para-text top-gap" if:false={isCopyRequest}>
+                            {labels.name_landing_subheading}
+                        </p>
+                        <p class="small para-text top-gap" if:true={isCopyRequest}>
+                            {labels.request_copy_landing_subheading}
+                        </p>
+                        <p class="small para-text" if:false={isCopyRequest}>
+                            {labels.name_landing_text} <button class="slds-button slds-button_natural natural-button"
+                                onclick={handleClick}>{labels.name_landing_link}</button>
+                        </p>
+                        <p class="small para-text" if:true={isCopyRequest}>
+                            {labels.Important_Note}: </br>
+                            {labels.request_copy_landing_text} <button class="slds-button slds-button_natural natural-button"
+                                onclick={openBusinessSearch}>{labels.business_registry_search}</button> {labels.or} <button class="slds-button slds-button_natural natural-button"
+                                onclick={openLienSearch}>{labels.the_lien_record_search}</button>.
+                            </br></br>
+                            {labels.request_copy_landing_text1} <button class="slds-button slds-button_natural natural-button"
+                                onclick={openBusinessSearch}>{labels.business_registry_search}</button> {labels.or} <button class="slds-button slds-button_natural natural-button"
+                                onclick={openLienSearch}>{labels.the_lien_record_search}</button>{labels.request_copy_landing_text2}
+                        </p>
+                        <p class="small para-text">
+                            {labels.request_copy_landing_text3}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-order_2 slds-large-order_2">
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12 slds-order_2 slds-large-order_2">
+                        <c-brs_help-text headtext={helpTextHeader} bodytext={helpTextBody}>
+                        </c-brs_help-text>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!--Copy Request modal start here -->
+        <c-modal no-scroll open={openModal} onmodalclose={closeModal} size={modalSize}>
+            <div slot="header" class="headerModal slds-size_1-of-1">
+                <h6>{labels.select_filings_for_copy_request}</h6>
+            </div>
+            <div slot="body" class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 modelHeader pt-16">
+                        <c-generic-radio_brs data-id="filing-options" radio-options={filingOptions}
+                            onctbosdatachange={handleFilingOptions} name="filing-options" answer={selectedFilingOption}
+                            has-error={showErrorMessage}>
+                        </c-generic-radio_brs>
+                        <p class="error-text" if:true={showErrorMessage}>
+                            {labels.linkFindBiz_ValidationError_Cred}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div slot="actions" class="slds-size_1-of-1">
+                <button class="slds-button slds-button_brand higher primaryBtn" onclick={goToNextPage}>{labels.Next}
+                    <img src={chevronRightWhite} class="rightIcon" alt="" />
+                </button>
+            </div>
+        </c-modal>
+</template>

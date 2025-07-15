@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="flowType" type="String" label="flowType" description=""/>
+            <property name="newFilingId" type="String" label="newFilingId" description=""/>
+            <property name="SelectedAuthorizer" type="String" label="SelectedAuthorizer" description=""/>
+            <property name="lienType" type="String" label="lienType" description="specifies the Lien type selected for filling"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

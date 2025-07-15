@@ -1,0 +1,144 @@
+.mainheading {
+  color: #2D2C2C;
+  font-family: Lato;
+  font-size: 34px !important;
+  font-weight: bold;
+  letter-spacing: 0.31px;
+  line-height: 42px !important;
+  margin-bottom: 24px;
+}
+
+.sub-heading {
+  color: #2D2C2C;
+  font-family: Lato;
+  font-size: 22px !important;
+  font-weight: bold;
+  letter-spacing: 0.16px;
+  line-height: 27px !important;
+  margin-top: 32px;
+  margin-bottom: 36px;
+}
+
+.header-description {
+  color: #757575;
+  font-family: KarlaBold;
+  font-size: 22px;
+  letter-spacing: 0.02px;
+  line-height: 28px;
+  margin-bottom: 36px;
+}
+
+.header-container {
+  margin-bottom: 16px;
+}
+
+.theme1 .header-description{
+  margin-bottom: 32px;
+  line-height: 30px;
+}
+
+.scholar-font.active{
+  display: block;
+}
+
+@media only screen and (max-width: 1023px) {
+  .mainheading {
+    margin-left: 0;
+    letter-spacing: 0.24px;
+  }
+
+  .helptext-mob-header .grey-text{
+    font-size: 16px;
+    line-height: 18px ; 
+    color: #757575;
+    letter-spacing: .12px;
+    font-family: KarlaBold !important;
+}
+
+}
+
+@media only screen and (min-width: 1024px) {
+  .mainheading {
+    font-size: 43px !important;
+    line-height: 49px !important;
+    margin-bottom: 60px;
+  }
+
+  .sub-heading {
+    margin-top: 60px;
+    font-size: 28px !important;
+    letter-spacing: 0.2px;
+    line-height: 35px !important;
+  }
+
+  .header-description {
+    font-size: 22px;
+  }
+  .theme1 .header-description{
+    margin-bottom: 36px;
+    line-height: 28px;
+  }
+}
+
+.helptext-mob-header {
+  font-size: 16px;
+  line-height: 25px;
+  color: #757575;
+  letter-spacing: 0.12px;
+  margin-top: 24px;
+  font-family: KarlaBold !important;
+}
+
+.mob-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px 14px 12px;
+  border: solid 1px #ECEBEB;
+  font-size: 16px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 #E7E9F2;
+}
+
+.helpText-opened {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.chevron-icon svg.slds-icon {
+  width: 14px;
+}
+
+.scholar-font {
+  box-sizing: border-box;
+  padding: 24px;
+  border: 1px solid #ECEBEB;
+  border-radius: 4px;
+  background-color: #F7F9FA;
+  box-shadow: 0 2px 4px 0 #E7E9F2;
+  display: none;
+}
+
+.helptext-details {
+  border-top-width: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.chevron-up {
+  transform: rotate(180deg);
+}
+
+.theme1 .mainheading {
+  margin-bottom: 16px;
+}
+
+.theme1 .header-container {
+  margin-bottom: 0px;
+}
+
+@media print{
+  .header-container{
+    display: none;
+  }
+}

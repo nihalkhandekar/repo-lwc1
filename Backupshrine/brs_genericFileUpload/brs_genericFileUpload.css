@@ -1,0 +1,102 @@
+.brs-file-upload{
+    position: relative;
+    display: inline-block;
+}
+.file-upload-inner-div{
+    opacity: 0;
+    z-index: 2;
+    position: absolute;
+    display: inline;
+    width: 100%;
+    /* border: 1px solid red; */
+    overflow: hidden;
+    height: 70px;
+}
+.file-upload-custom-button{
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+}
+.upload-button{
+  border: 2px solid #09538B;
+  border-radius: 4px;
+  padding: 20px 56px;
+  background-color: #FFFFFF;
+  color: #09538B;
+  font-family: KarlaBold;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  line-height: 17px;
+  text-align: center;
+}
+
+.debtor-card-details {
+  box-sizing: border-box;
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 16px 0 #E7E9F2;
+  margin-top: 20px;
+}
+
+.title {
+  color: #757575;
+  font-family: KarlaBold;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  padding-top: 20px;
+  padding-left: 24px;
+}
+
+.body-bold-text {
+  color: #2D2C2C;
+  font-family: Lato;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0.16px;
+  line-height: 28px;
+  padding-top: 4px;
+  padding-left: 24px;
+}
+
+.body-text {
+  color: #757575;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  padding-top: 4px;
+  padding-left: 24px;
+  padding-bottom: 24px;
+}
+
+
+.bullet-points {
+  margin-top: 8px; 
+  padding: 0;
+}
+
+.bullet-points li {
+  margin-bottom: 4px;
+  padding: 0;
+  display: flex;
+  color: #2d2c2c;
+  align-items: start;
+}
+
+.bullet-points li:last-child {
+  margin-bottom: 0;
+}
+
+.bullet-points li .bullet-icon {
+  margin-right: 8px;
+  width: 6px;
+  margin-top: 6px;
+}
+
+@media only screen and (max-width: 768px) {
+  .upload-button,.brs-file-upload{
+    width: 100%;
+  }
+}

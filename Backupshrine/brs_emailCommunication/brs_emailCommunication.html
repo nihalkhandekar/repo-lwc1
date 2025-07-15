@@ -1,0 +1,29 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <c-qn-a_-question-help-text helptextnotes={topPleaseNoteSection} questionid={topPleaseNoteSection}>
+    </c-qn-a_-question-help-text>
+    <div class="dec-checkbox">
+        <c-generic-multi-select value={value} list-data={options} oncheckboxinputselection={handleChekboxSelection}
+            isfrommultiplequestion>
+        </c-generic-multi-select>
+    </div>
+    <p if:true={showError} class="error-text">{label.errorMessage}</p>
+
+    <div class="hr-line"></div>
+
+    <c-qn-a_-question-help-text helptextnotes={pleaseNoteSection} questionid={pleaseNoteSection}>
+    </c-qn-a_-question-help-text>
+
+    <div class="inputForm email-input">
+        <lightning-input type="email" label={emailLabel} value={emailAddress} disabled></lightning-input>
+        <div class="theme1">
+            <div class="dec-checkbox">
+                <c-generic-multi-select list-data={optOutEmailOptions} oncheckboxinputselection={handleEmailCheckbox}>
+                </c-generic-multi-select>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,127 @@
+.label {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.helptext {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+.name-not-available {
+    color: #DB2426;
+    font-family: KarlaBold;
+    display: inline-block;
+}
+.name-available {
+    color:#2D8D60;
+    font-family: KarlaBold;
+    display: inline-block;
+}
+.legal-des-message {
+    display: inline-block;
+}
+.available {
+    color: #2D8D60 !important;
+}
+
+.unAvailable {
+    color: #DB2426 !important;
+}
+
+.errorBorder{
+    border: 1px solid #DB2426 !important;
+}
+
+.business-legal-info {
+    padding-top: 28px;
+}
+
+.legal-info {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 14px;
+    letter-spacing: 0.01px;
+    line-height: 21px;
+}
+
+.business-legal-info-details {
+    padding-top: 24px;
+}
+
+.error-block {
+    color: red;
+    font-family: Karla;
+    font-size: 14px;
+}
+
+.tag-btn {
+    margin:0 16px 16px 0;
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding: 4px 16px;
+    border-radius: 2px;
+    box-shadow: none;
+    border: 1px solid #09538B;
+    border-radius: 2px;
+    background-color: #ffffff;
+    width: unset;
+}
+
+.tag-btn:hover {
+    background-color: #ffffff;
+}
+
+.tag-btn img {
+    height: 20px;
+    width: 20px;
+    margin-left: 16px;
+}
+
+.tag-btn .closeIcon,
+.tag-btn .closeGreyIcon {
+    display: none;
+}
+
+.tag-btn.disabled .closeGreyIcon,
+.tag-btn.active .closeIcon {
+    display: inline-block;
+}
+
+.tag-btn.active .closeGreyIcon,
+.tag-btn.active .addIcon {
+    display: none;
+}
+
+.tag-btn.disabled .addIcon,
+.tag-btn.disabled .closeIcon {
+    display: none;
+}
+
+.tag-btn.active {
+    border: 1px solid #09538B;
+    background-color: #E0F2FF;
+}
+
+.tag-btn.disabled {
+    border: 1px solid #D0CFCF;
+    color: #BAB6B6;
+    cursor: not-allowed;
+}
+
+.error-msg {
+    color: #DB2426;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    margin-bottom: 16px;
+}

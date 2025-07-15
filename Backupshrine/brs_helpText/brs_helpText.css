@@ -1,0 +1,30 @@
+.brs-helptext_container {
+  border: 1px solid #ecebeb;
+  border-radius: 4px;
+  background-color: #f7f9fa;
+  padding: 32px;
+  margin-bottom: 32px;
+  margin-top: 48px;
+}
+
+.header {
+  color: #2d2c2c;
+  font-family: Lato;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0.16px;
+  line-height: 28px;
+  margin-bottom: 12px;
+}
+
+.body {
+  color: #2d2c2c;
+  font-family: Karla;
+}
+
+@media only screen and (min-width: 1024px) {
+  .brs-helptext_container {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

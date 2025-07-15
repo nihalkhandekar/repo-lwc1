@@ -1,0 +1,118 @@
+.principal-list .principal-details {
+  border-top: 1px solid #ecebeb;
+  padding-top: 24px;
+}
+
+.principal-list {
+  border: 1px solid #d0cfcf;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px 0 #e7e9f2;
+  padding: 16px 24px;
+  margin-bottom: 14px;
+}
+
+.gap {
+  margin-bottom: 20px;
+}
+
+.principal-list .principal-header {
+  display: flex;
+  width: 100%;
+}
+
+.description {
+  color: #2d2c2c;
+  font-family: Karla;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+}
+
+.mainHeading {
+  color: #2d2c2c;
+  font-family: Lato;
+  font-size: 28px;
+  letter-spacing: 0.2px;
+  line-height: 35px;
+  font-weight: bold;
+  /* margin-bottom: 40px; */
+  /* margin-top: 40px; */
+}
+
+.gap {
+  margin-top: 40px;
+}
+
+.username {
+  color: #2d2c2c;
+  font-family: Lato;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 0.16px;
+  line-height: 28px;
+  padding-bottom: 28px;
+}
+
+.sub-title {
+  color: #757575;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  margin-bottom: 4px;
+}
+
+.sub-desc {
+  color: #2d2c2c;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.principal-list .details-row {
+  margin-bottom: 16px;
+}
+
+.details-row .slds-col {
+  padding: 0px;
+}
+
+.additional-details {
+  border-top: 1px solid #ecebeb;
+  margin-bottom: 32px;
+  margin-top: 32px;
+}
+
+.mobile-scholarcontent {
+  margin-bottom: 40px;
+}
+
+.cust-anchor {
+  color: #09538B;
+  font-family: Karla;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  text-decoration: underline;
+}
+
+@media print {
+  .gap {
+    display: none;
+  }
+  .filling-info-container {
+    width: 100%;
+  }
+  .filling-info-container .slds-col {
+    width: 50%;
+    float: left;
+  }
+
+  .mobile-scholarcontent {
+    display: none;
+  }
+}

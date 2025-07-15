@@ -1,0 +1,16 @@
+<template>
+    <div class="theme1">
+        <div class="dec-checkbox">
+            <c-generic-multi-select list-data={dataTypeCheckboxOptions} value={isDataTypeChecked}
+                oncheckboxinputselection={handleCheckbox}>
+            </c-generic-multi-select>
+        </div>
+    </div>
+    <template if:true={showErrorMessage}>
+        <p class="error-text error-msg">{labels.linkFindBiz_ValidationError_Cred}</p>
+    </template>
+                 <div class="inputForm text-area">
+    <lightning-textarea value={provisionValue} placeholder="" label={labels.Otherprovisions} onchange={handleProvision} maxlength="500"></lightning-textarea>
+    <p class="helptext">500 {labels.MAXChaeacterLabel}</p>
+</div>
+</template>

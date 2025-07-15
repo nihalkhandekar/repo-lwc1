@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+   <apiVersion>49.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="descriptionText1" type="String" label="Dont use this"/>
+            <property name="headingText" label="headingText" type="string"/>
+            <property name="subHeadingText" type="String" label="subHeadingText"/>
+            <property name="descriptionText" type="String" label="descriptionText"/>
+            <property name="descriptionTextSecondLine" type="String" label="Description Text 2nd line"/>
+            <property name="scholarContent" type="String" label="scholarContent"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

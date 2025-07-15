@@ -1,0 +1,71 @@
+<template>
+    <div class="cardContainer">
+        <div class="cardWrapper">
+            <div class="leftContent">
+                <div class="iconWrapper">
+                    <template if:true={liendata.activeLien}>
+                        <img src={activeIcon} class="icon" alt="active">
+                    </template>
+                    <template if:true={liendata.LapsedLien}>
+                        <img src={passiveIcon} class="icon" alt="not active">
+                    </template>
+                </div>
+                <div class="contentWrapper">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 ">
+                            <p class="small">{liendata.lienType}</p>
+                            <p class="largeBold">{liendata.lienNumber}</p> <!-- updated for BRS-2559 -->
+                            <p class="large">{label.lapse_Date}: {liendata.lapseDate}</p>
+                        </div>
+                        <div class="slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 middleContent">
+                            <p class="large">{label.filing_date}: {liendata.OFSFilingDate}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rightContent">
+                <div class="chevronContainer" onclick={handleExpand}>
+                    <template if:false={showExpand}>
+                        <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                            class="chevron-container-down"></lightning-icon>
+                    </template>
+                    <template if:true={showExpand}>
+                        <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevroup"
+                            class="chevron-container-down"></lightning-icon>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+        <template if:true={showExpand}>
+            <hr />
+            <template for:each={liendata.relatedFilingLst} for:item="item" for:index="index">
+                <div class="slds-grid slds-wrap cardDetails" key={item.filingNumber}>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 cardItem">
+                        <p class="small">{label.filing_numberNew}</p>
+                        <p class="small"><a tabindex="0" class="cust-anchor"
+                                onclick={handleFiling}>{item.filingNumber}</a></p>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 cardItem">
+                        <p class="small">{label.filing_date}</p>
+                        <p class="small">{item.filingDate}</p>
+                    </div>
+                    <div class="slds-size_12-of-12 slds-medium-size_3-of-12 slds-large-size_3-of-12 cardItem">
+                        <p class="small">{label.filing_type}</p>
+                        <p class="small">{item.filingType}</p>
+                    </div>
+                    <template if:true={item.showPageData}>
+                        <div class="slds-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 cardItem">
+                            <p class="small">{label.brs_Volume}</p>
+                            <p class="small">{item.volume}</p>
+                        </div>
+                        <div class="slds-size_12-of-12 slds-medium-size_2-of-12 slds-large-size_2-of-12 cardItem">
+                            <p class="small">{label.Recovery_Page}</p>
+                            <p class="small">{item.pages}</p>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

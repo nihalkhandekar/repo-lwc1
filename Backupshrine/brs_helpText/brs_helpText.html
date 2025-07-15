@@ -1,0 +1,14 @@
+<template>
+    <div class="brs-helptext_container">
+        <slot name="header">
+            <h6 class="header">
+                <lightning-formatted-rich-text value={headtext}></lightning-formatted-rich-text>
+            </h6>
+        </slot>
+        <slot name="body">
+            <p class="small body">
+                <lightning-formatted-rich-text value={bodytext}></lightning-formatted-rich-text>
+            </p>
+        </slot>
+    </div>
+</template>

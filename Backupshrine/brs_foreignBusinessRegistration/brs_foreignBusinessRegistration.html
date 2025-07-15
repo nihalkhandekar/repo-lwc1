@@ -1,0 +1,22 @@
+<template>
+    <template if:true={isState}>
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_12-of-12 slds-large-size_4-of-12 inputForm">
+                <lightning-input type="text" value={stateAppendedText}
+                    disabled label={label.BRS_Enter_ALEI}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_12-of-12 slds-large-size_5-of-12 inputForm nolabel">
+                <lightning-input type="text" variant="label-hidden" class="input-state" value={displayValue} onchange={handleChange} 
+                    placeholder={label.Brs_ALEI_Placeholder} onpaste={removeCopyPaste} autocomplete="off" onkeypress={onlyNumbers} max-length="20"></lightning-input>
+            </div>
+        </div>
+    </template>
+    <template if:false={isState}>
+        <div class="slds-grid slds-wrap slds-gutters form-row">
+            <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12 inputForm">
+                <lightning-input type="text" label={label.BRS_Enter_ALEI} class="input-country" value={displayValue} onchange={handleChange} 
+                    placeholder={label.Brs_ALEI_Placeholder} onpaste={removeCopyPaste} autocomplete="off" onkeypress={onlyAlphanumeric} max-length="20"></lightning-input>
+            </div>
+        </div>
+    </template>
+</template>

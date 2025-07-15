@@ -1,0 +1,51 @@
+<template>
+    <!-- <template if:true={showDebtor}> -->
+    <!-- <h5 class="slds-m-bottom_large">Debtors</h5> -->
+    <!-- <c-brs_sort-drop-down options={dropDownOpts} ></c-brs_sort-drop-down> -->
+    <!-- <template if:true={debtorList} for:each={debtorList} for:item="debtor" for:index="index">
+            <div key={debtor.Id}>
+                <c-brs_debtor-card carddata={debtor} countlabel={debtorLabel} onviewlienclick={showliens}></c-brs_debtor-card>
+            </div>
+        </template>
+    </template> -->
+    <!-- <template if:false={showDebtor}> -->
+    <template if:true={activeLienList.length}>
+        <h6 class="slds-m-bottom_medium">{labels.Active_Liens_Label}</h6>
+        <template for:each={activeLienList} for:item="activelien" for:index="ind">
+            <div key={activelien.Id}>
+                <c-brs_lien-card liendata={activelien} onfillingclick={viewFillingInfo} isactivelien></c-brs_lien-card>
+            </div>
+        </template>
+        <template if:true={activeLoadMore}>
+            <div class="showAllWrapper">
+                <div class="showAllContent" onclick={showMoreActive} tabindex="0" onkeydown={showMoreActiveKey}>
+                    <img class="showMore" src={showMore} alt="show more" />
+                    <p class="large">{labels.Show_More}</p>
+                </div>
+            </div>
+        </template>
+    </template>
+    <template if:false={activeLienList.length}>
+        <c-brs_no-data-card no-data-msg={labels.no_active_liens}></c-brs_no-data-card>
+    </template>
+    <template if:true={lapsedLienList.length}>
+        <h6 class="slds-m-bottom_medium">{labels.Lapsed_Liens_Label}</h6>
+        <template for:each={lapsedLienList} for:item="lapsedlien" for:index="ind">
+            <div key={lapsedlien.Id}>
+                <c-brs_lien-card liendata={lapsedlien} onfillingclick={viewFillingInfo}></c-brs_lien-card>
+            </div>
+        </template>
+        <template if:true={lapsedLoadMore}>
+            <div class="showAllWrapper">
+                <div class="showAllContent" onclick={showMoreLapsed} tabindex="0" onkeydown={showMoreLapsedKey}>
+                    <img class="showMore" src={showMore} alt="show more" />
+                    <p class="large">{labels.Show_More}</p>
+                </div>
+            </div>
+        </template>
+    </template>
+    <template if:false={lapsedLienList.length}>
+        <c-brs_no-data-card no-data-msg={labels.no_lapsed_liens}></c-brs_no-data-card>
+    </template>
+    <!-- </template> -->
+</template>

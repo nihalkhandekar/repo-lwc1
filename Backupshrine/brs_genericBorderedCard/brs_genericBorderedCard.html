@@ -1,0 +1,10 @@
+<template>
+    <div class="slds-grid slds-wrap border-card">
+        <p class="slds-col data-label slds-large-size_1-of-2 slds-size_1-of-1 largeBold">
+            {cardLabel}
+        </p>
+        <p class="slds-col data-value slds-large-size_1-of-2 slds-size_1-of-1 large">
+            <lightning-formatted-number value={cardValue} format-style="currency" currency-code="USD"></lightning-formatted-number>
+        </p>
+    </div>
+</template>

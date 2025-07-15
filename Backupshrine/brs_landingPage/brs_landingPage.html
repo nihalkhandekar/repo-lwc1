@@ -1,0 +1,73 @@
+<template>
+    <div class="header-image">
+        <div class="header_bottomRow_row_banner">
+            <div class="header_bottomRow_wrap">
+                <div class="header_bottomRow_wrapper_banner"></div>
+            </div>
+        </div> 
+        <div class="slds-box mainSection">
+            <div class="mainContainer slds-wrap">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12">
+                        <h2>{label.LandingPage_HeaderQuestion}</h2>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 slds-align-bottom">
+                        <button class="slds-button slds-button_brand primaryBtn getStartedBtn" onclick={handleGetStartedClick}>
+                            {label.BRS_Get_Started}&nbsp;&nbsp;
+                            <lightning-icon icon-name="utility:chevronright" size="xx-small"
+                                alternative-text="chevronright" title="chevronright" variant="inverse" aria-hidden=true>
+                            </lightning-icon>
+                        </button>
+                    </div>
+
+
+                </div>
+                
+                <hr class="hline slds-m-vertical_medium" />
+                <div class="slds-grid slds-wrap slds-m-vertical_xx-large">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12 slds-order_3 slds-large-order_1">
+                        <div class="slds-grid slds-grid_vertical">
+                            <div class="slds-col slds-m-bottom_x-large">
+                                <p class="small largeFontMobile">
+                                    {label.LandingPage_Intro}
+                                </p>
+                                <p class="small paragraph-text textContent">
+                                    {label.LandingPage_ProcessInfo}
+                                </p>
+                                <ul class="bullet-points">
+                                    <template for:each={splitLabel} for:item="item">
+                                        <li key={item}><img src={bulletIcon} class="bullet-icon"
+                                                alt="" />
+                                            <p class="small">
+                                                {item}
+                                            </p>
+                                        </li>
+                                    </template>
+                                </ul>
+                                <p class="small paragraph-text">
+                                    {label.LandingPage_BRS_ProcessInfo_textOne}
+                                </p>
+                                <p class="small paragraph-text textContent">
+                                    {label.LandingPage_BRS_ProcessInfo_textTwo}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-12 slds-order_2 slds-large-order_2">
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_5-of-12 slds-order_1 slds-large-order_3 slds-m-bottom_x-large">
+                        <div class="slds-box right">
+                            <h6 class="slds-m-bottom_large">{label.LandingPage_HelpTextHeading}</h6>
+                            <p class="helpText slds-grid slds-m-vertical_medium large">{label.LandingPage_HelpTextInfo}</p>
+                            <h6 class="slds-m-bottom_large">{label.How_long_does_approval_take}</h6>
+                            <p class="helpText slds-grid slds-m-vertical_medium large">
+                                <lightning-formatted-rich-text value={label.LandingPage_HelpTextExtraInfo}>
+                                </lightning-formatted-rich-text>                                
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

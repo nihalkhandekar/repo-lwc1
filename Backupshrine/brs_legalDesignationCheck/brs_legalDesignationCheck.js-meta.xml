@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="question" type="string" label="Question" description=""/>
+            <property name="accountrecord" label="Account" type="@salesforce/schema/Account"/>
+            <property name="value" type="string" label="Error Message" description=""/>
+            <property name="legalDesg" type="String" label="legalDesg" description=""/>
+            <property name="businessname" type="string" label="businessname" description=""/>
+            <property name="accountId" type="string" label="accountId" description=""/>
+            <property name="legalDesgList" type="String" label="options" description=""/>
+            <property name="isValid" type="boolean" label="isValid" description=""/>
+            <property name="isReserved" type="boolean" label="isReserved" description=""/>
+            <property name="oldBusinessname" type="string" label="oldBusinessname" description=""/>
+            <property name="IsMaintenanceFlow" type="boolean" label="Is Maintenance Flow" description=""/>
+            <property name="flowName" type="string" label="flowName" description=""/>
+            <property name="selectedLegalDesg" type="string" label="selectedLegalDesg" description=""/>
+            <property name="nameWithOutDesignator" type="string" label="nameWithOutDesignator" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

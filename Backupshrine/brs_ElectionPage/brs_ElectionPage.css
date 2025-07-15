@@ -1,0 +1,14 @@
+.error-msg {
+    margin-left: 32px;
+}
+.text-area{
+    margin-top: 20px;
+    margin-left: 32px;
+}
+.helptext {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}

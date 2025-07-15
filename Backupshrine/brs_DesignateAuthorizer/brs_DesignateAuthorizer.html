@@ -1,0 +1,20 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    
+    <h6 class="author-heading">{firstAuthozier}</h6>
+    <c-generic-radio_brs radio-options={securedPartyOptions} onctbosdatachange={handleRadioClick} name="authorizer"
+        answer={SelectedAuthorizer} has-error={showErrorMessage}>
+    </c-generic-radio_brs>
+    <h6 class="author-heading">{secondAuthozier}</h6>
+    <c-generic-radio_brs radio-options={debtorsOptions} onctbosdatachange={handleRadioClick} name="authorizer"
+        answer={SelectedAuthorizer} has-error={showErrorMessage}>
+    </c-generic-radio_brs>
+
+    <template if:true={showErrorMessage}>
+        <p class="error-text">{labels.Selection_Required}</p>
+    </template>
+
+</template>

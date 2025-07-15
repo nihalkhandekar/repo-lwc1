@@ -1,0 +1,145 @@
+.paragraph-text {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.textContent {
+    margin-top: 20px;
+}
+
+.timer{
+    padding-top: 30px;
+    padding-bottom: 60px;
+}
+.bullet-icon{
+    height: 20px;
+}
+
+/* landing page css*/
+.mainSection {
+    position: relative;
+    bottom: 12rem;
+    background-color: #fff;
+    box-shadow: none;
+}
+.cmptime {
+    font-family: 'KarlaBold',sans-serif;
+    color: #757575;
+}
+.createActnBtn {
+    color: #09538B;
+    font-family: 'Karla',sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+.checkIcon {
+    max-width: none;
+	height: 24px;
+}
+.showInMobile {
+    display: none;
+}
+.hideInMobile {
+    display: block;
+}
+.mainContainer {
+    padding: 4.5rem;
+}
+.primaryBtn {
+    float: right;
+}
+.helpText:last-child {
+    margin-bottom: 0;
+}
+.header_bottomRow_row_banner {
+    background: #F7F9FA var(--c-landingPageBg) no-repeat;
+    height: 20rem;
+    background-size: cover;
+}
+.header_bottomRow_wrap {
+    margin: 0 auto;
+}
+.slds-box.right {
+    border: 1px solid #ecebeb !important;
+    border-radius: 4px !important;
+    background-color: #f7f9fa !important;
+    padding: 1.5rem !important;
+}
+.large{
+    font-family: Karla !important;
+    font-size: 18px !important;
+    line-height: 27px !important;
+}
+
+.bullet-points {
+    margin-top: 20px; 
+    margin-bottom: 48px;
+    padding: 0;
+  }
+  
+  .bullet-points li {
+    margin-bottom: 22px;
+    padding: 0;
+    display: flex;
+    color: #2d2c2c;
+    align-items: start;
+  }
+  
+  .bullet-points li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .bullet-points li .bullet-icon {
+    margin-right: 16px;
+    width: 20px;
+    margin-top: 4px;
+  }
+
+@media only screen and (max-width: 1024px) {
+    .getStartedBtn {
+        margin-top: 30px;
+    }
+    .showInMobile {
+        display: block;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+    .hideInMobile {
+        display: none;
+    }
+    .mainContainer {
+        padding: 2rem 20px;
+    }
+    .slds-box {
+        border: none;
+        padding: 0;
+        background-color: whitesmoke;
+    }
+    .mainSection {
+        bottom: 0;
+    }
+    .primaryBtn {
+        float: left;
+    }
+    .largeFontMobile {
+        font-size: 18px!important;
+        line-height: 27px!important;
+    }
+    .hline {
+        display: none;
+    }
+    .header_bottomRow_row_banner {
+        background: #f7f9fa var(--c-landingPageBg) no-repeat;
+        height: 145px;
+        background-size: cover;
+    }
+    .large{
+        font-size: 17px !important;
+        line-height: 25px !important;
+    }
+}

@@ -1,0 +1,54 @@
+<template>
+    <c-generic-radio_brs data-id="radio" radio-options={radioOptions} name="radio-options" answer={value}
+        onctbosdatachange={handleRadioSelect} has-error={hasError} required={required}></c-generic-radio_brs>
+
+    <p class="error-text" if:true={hasError}>{label.Selection_Required}</p>
+
+    <c-brs_next-back-buttons nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate}
+        onhandleback={handleBack}></c-brs_next-back-buttons>
+
+    <c-modal open={showConfirmModal} onmodalclose={closeConfirmModal} size={modalSize}>
+        <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+            <h6 if:false={isAmendment}>
+                <template if:false={isAircraft}>
+                    {label.UccLien_HeaderText} {displayLabel}?
+                </template>
+                <template if:true={isAircraft}>
+                    {label.UccLien_HeaderTextAn} {displayLabel}?
+                </template>
+            </h6>
+            <h6 if:true={isAmendment}>
+                <template if:true={isDebtor}>
+                    {label.Ucclien_HeaderText_label} {debtorPluralLabel}?
+                </template>
+                <template if:true={isSecuredParty}>
+                    {label.Ucclien_HeaderText_label} {spPluralLabel}?
+                </template>
+                <template if:true={isCollteralOnly}>
+                    {label.Ucclien_HeaderText_label} {displayLabel}?
+                </template>
+            </h6>
+        </div>
+        <div slot="body"
+            class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+            <p if:false={isAmendment}>
+                {label.ucc1_flow_confirmation_subtext}
+            </p>
+            <p if:true={isAmendment}>
+                {label.Label_Subtext}
+            </p>
+        </div>
+        <div slot="actions" class="modal-footer slds-grid slds-m-vertical_small slds-size_1-of-1 sldsActionButtons">
+            <div class="slds-col button-wrapper slds-order_2">
+                <button class="slds-button primaryBtnSmall slds-float_right" onclick={handleNext}>
+                    {label.Confirm}
+                    <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" aria-hidden="true" />
+                </button>
+            </div>
+            <div class="slds-col slds-order_1">
+                <button class="slds-button slds-button_natural slds-float_left back-btn natural-button"
+                    onclick={closeConfirmModal}>{label.Cancel_Label}</button>
+            </div>
+        </div>
+    </c-modal>
+</template>

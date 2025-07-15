@@ -1,0 +1,24 @@
+.showAllWrapper {
+    border: 2px dashed #D0CFCF;
+    border-radius: 4px;
+    height: 125px;
+    margin-bottom: 60px;
+}
+
+.showAllWrapper,
+.showAllContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #09538B;
+}
+
+.showAllContent {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.showMore {
+    width: 30px;
+    padding-right: 8px;
+}

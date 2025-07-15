@@ -1,0 +1,129 @@
+<!--
+  @description       : created for Financial statement Lookup
+  @author            : sagpanda@deloitte.com
+  @group             : 
+  @last modified on  : 02-03-2021
+  @last modified by  : sagpanda@deloitte.com
+  Modifications Log 
+  Ver   Date         Author                               Modification
+  1.0   11-12-2020   sagpanda@deloitte.com               Initial Version
+-->
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="medium">
+            </lightning-spinner>
+        </template>
+    </div>
+    <div class="inputForm fin-input-div">
+        <lightning-input type="text" data-id="fillingName" label={label.Financial_Statement_Number}
+            placeholder={label.Number_Placeholder} name="fillingName" value={lienNumber} onchange={handlechange} required
+            message-when-value-missing={label.financial_number_error} onkeyup={checkEnter}>
+        </lightning-input>
+    </div>
+    <div class="look-up-button">
+        <button class="slds-button slds-button_stretch secondaryBtn higher" onclick={onSearch}>
+            <img src={searchIcon} class="searchIcon" alt="searchIcon" title="searchIcon" />&nbsp;&nbsp;{label.LookUp}
+        </button>
+    </div>
+    <template if:false={showFillingDetails}>
+        <div class="slds-p-around_xx-large noBizFound">
+            <img src={noLienImg} alt="searchIcon">
+            <div class="noLienFoundText">
+                <p class="largeBold">{label.preview_Text}</p>
+            </div>
+        </div>
+    </template>
+    <template if:true={showFillingDetails}>
+        <template for:each={fillingRecord} for:item="contact">
+            <div class="card-section" key={contact.Id}>
+                <div class="slds-m-around_large">
+                    <div class="splitSection">
+                        <p class="slds-float_left labelClass smallBold">{contact.Type__c}</p>
+                        <p class="slds-float_right pills">{contact.Status__c}</p>
+                    </div>
+                    <p class="body-bold-text">{contact.UCC_Lien_Number__c}</p>
+                    <div class="slds grid slds-wrap display">
+                        <div class="slds-size_11-of-12">
+                            <p class="body-text">{label.lapse_Date}:&nbsp;
+                                <template if:true={contact.Lapse_Date__c}>
+                                    <lightning-formatted-date-time value={contact.Lapse_Date__c} year="numeric"
+                                        month="2-digit" day="2-digit" time-zone="UTC">
+                                    </lightning-formatted-date-time>
+                                </template>
+                                <template if:false={contact.Lapse_Date__c}>
+                                    {label.None}
+                                </template>
+                            </p>
+                        </div>
+                        <div class="slds-size_1-of-12">
+                            <button data-name={index} class="arrow-button" onclick={onAccordianClick}
+                                aria-expanded="false">
+                                <template if:true={lien}>
+                                    <img src={arrowIcon} role="presentation" alt="" class="up"
+                                        aria-label="Show Principal details" width="24" height="24" />
+                                </template>
+                                <template if:false={lien}>
+                                    <img src={arrowIcon} role="presentation" alt="" aria-label="Show Principal details"
+                                        width="24" height="24" />
+                                </template>
+                            </button>
+                        </div>
+                    </div>
+                    <template if:true={lien}>
+                        <div class="principal-details">
+                            <template for:each={contact.UCC_Filings__r} for:item="filing">
+                                <div class="slds-grid slds-wrap details-row" key={filing.Id}>
+                                    <div class="slds-large-size_4-of-12 slds-size_12-of-12">
+                                        <p class="sub-title">{label.filing_numberNew}</p>
+                                        <p class="sub-desc"><a tabindex="0" class="cust-anchor"
+                                                onclick={handleFiling}>{filing.Filing_Number__c}</a>
+                                        </p>
+                                    </div>
+                                    <div class="slds-large-size_4-of-12 slds-size_12-of-12">
+                                        <p class="sub-title">{label.filing_date}</p>
+                                        <p class="sub-desc">
+                                            <lightning-formatted-date-time value={filing.Filing_Date__c} year="numeric"
+                                                month="2-digit" day="2-digit" time-zone="UTC">
+                                            </lightning-formatted-date-time>
+                                        </p>
+                                    </div>
+                                    <div class="slds-large-size_4-of-12 slds-size_12-of-12">
+                                        <p class="sub-title">{label.filing_type}</p>
+                                        <p class="sub-desc">{filing.Type__c}</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <div>
+            <c-generic-multi-select class={inputClassName} list-data={CheckboxOptions} value={isChecked}
+                oncheckboxinputselection={handleCheckBoxChange} add-class="acknowledgeField">
+            </c-generic-multi-select>
+            <p class="error-text" if:true={showCheckboxError}>
+                {label.select_Correct_Lien_Error}</p>
+            <p class="error-text" if:true={showLienTypeSelectionError}>
+                {label.lien_Type_Selection_Error}</p>
+            <p class="error-text" if:true={showLienNotActiveError}>
+                {label.lien_Not_Active_Error}</p>
+			<p class="error-text" if:true={showLapseDatePastError}>
+                {label.lien_lapse_date_past_error}</p>
+        </div>
+    </template>
+    <div class="page-footer slds-grid slds-size_12-of-12 customNextBtnDiv">
+        <div class="slds-col button-wrapper slds-order_2">
+            <button title={label.Next} onclick={validate} class="slds-button primaryBtnSmall">
+                {label.Next} &nbsp;
+                <lightning-icon icon-name="utility:chevronright" alternative-text="" variant="inverse" size="x-small">
+                </lightning-icon>
+            </button>
+        </div>
+        <div class="slds-col slds-order_1">
+            <a href="javascript:void(0);" tabindex="0" class="slds-button cust-anchor"
+                onclick={handleBack}>{label.Back}</a>
+        </div>
+    </div>
+</template>

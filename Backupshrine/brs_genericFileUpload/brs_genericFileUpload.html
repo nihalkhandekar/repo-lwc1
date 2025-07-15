@@ -1,0 +1,87 @@
+<!--*********************************************************************************************
+ * NAME:  brs_genericFileUpload.html
+ * DESCRIPTION: A generic component for uploading file
+ *
+ * @AUTHOR: Sagarika Panda
+ * @DATE:  12/07/2020       
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Sagarika Panda                     12/07/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <div class="brs-file-upload" if:false={showUploadedFiles}>
+        <div class="file-upload-inner-div">
+            <lightning-file-upload name="fileUploader" accept={acceptedFormats} onuploadfinished={handleUploadFinished}
+                record-id={recordId} disabled={disableUpload} id="inputfile" required={required} file-field-name="File_Type_fileupload__c"
+                file-field-value={fileValue}>
+            </lightning-file-upload>
+        </div>
+        <button class="upload-button">
+            <span>
+                <img src={uploadIcon} class="uploadIcon" alt="uploadIcon" title="uploadIcon" />
+            </span>&nbsp;&nbsp;&nbsp;{labels.Upload_Document}</button>
+            <ul class="bullet-points">
+                <li><img src={bulletIcon} class="bullet-icon" alt=" " />
+                    <p class="smaller">
+                        <lightning-formatted-rich-text value={labels.Max_File_Size}></lightning-formatted-rich-text>
+                    </p>
+                </li>
+                <li><img src={bulletIcon} class="bullet-icon" alt=" " />
+                    <p class="smaller">
+                        <lightning-formatted-rich-text value={labels.only_pdf_files_accepted}></lightning-formatted-rich-text>
+                    </p>
+                </li>
+                <template if:true={showOptionalText}>
+                    <li><img src={bulletIcon} class="bullet-icon" alt=" " />
+                        <p class="smaller">
+                            <lightning-formatted-rich-text value={labels.No_Confidential_Info}></lightning-formatted-rich-text>
+                        </p>
+                    </li>
+                    <li><img src={bulletIcon} class="bullet-icon" alt=" " />
+                        <p class="smaller">
+                            <lightning-formatted-rich-text value={labels.Public_Record}></lightning-formatted-rich-text>
+                        </p>
+                    </li>
+                </template>
+            </ul>
+        <p class="error-text" if:true={showError}>{errorMsg}</p>
+    </div>
+    <template if:true={showUploadedFiles}>
+        <template for:each={filesUploaded} for:item="file" for:index="index">
+            <div class="slds-large-size_12-of-12 slds-size_12-of-12 debtor-card-details" key={file.documentId}>
+                <div class="slds-large-size_12-of-12 slds-size_12-of-12 border">
+                    <p class="title">{labels.Attachment}</p>
+                    <p class="body-bold-text">{file.documentName}</p>
+                    <p class="body-text">{file.size} {labels.Size_Label}</p>
+                </div>
+                <div class="slds-large-size_12-of-12 slds-size_12-of-12 card-footer-btns">
+                    <button class="natural-button-with-icon slds-button slds-button_natural" data-id={index} onclick={handleRemove}
+                        data-name={file.documentName}>
+                        <img src={deleteIcon} alt="" class="icon" />
+                        <span class="footerBtns">{labels.Remove}</span>
+                    </button>
+                    <template if:false={disableView}>
+                        <button class="natural-button-with-icon slds-button slds-button_natural" data-id={index} onclick={preview}
+                            data-name={file.documentName}>
+                            <img src={viewIcon} alt="" class="icon" />
+                            <span class="footerBtns">{labels.View}</span>
+                        </button>
+                    </template>
+                </div>
+            </div>
+        </template>
+        <template if:false={hideRequiredError}>
+            <p class="error-text" if:true={isPassWordProtected}>{labels.password_protected_error}</p>
+            <p class="error-text" if:true={fileSizeExceeded}>{labels.file_size_error}</p>
+        </template>
+    </template>
+</template>

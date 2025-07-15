@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountRecord" label="Account" type="@salesforce/schema/Account"/>
+            <property name="filingId" label="Filing Id" type="String" description="Business Filing Id"/>
+            <property name="emailId" type="String" label="Email Id" description=""/>
+            <property name="phoneNumber" type="String" label="Phone Number" description=""/>
+            <property name="dueDate" type="Date" label="Due Date" description=""/>
+            <property name="dueDateInfo" type="String" label="Due Date of Report" description=""/>
+            <property name="changeAgentFlag" type="Boolean" label="Change Agent Flag" description=""/>
+            <property name="successMessage" type="String" label="Success Message" description=""/>
+            <property name="accountId" type="String" label="Account Id" description=""/>
+            <property name="firstReportInfo" type="String" label="First or Annual Check" description=""/>
+            <property name="isMaintainanceFlowOrNot" type="Boolean" label="Is Maintainance Flow Or Not" description=""/>
+            <property name="certTypes" type="String" label="certTypes" description=""/>
+            <property name="certificateResponse" type="String" label="certificateResponse" description="certificate ids"/>
+            <property name="effectiveDateEntered" type="Date" description="Effective date selected by User" label="Effective date entered by user"/>
+            <property name="withdrawalEffectiveTimeSelected" type="String" description="Effective Withdrawl time selected by User" label="Effective time entered by user"/>
+            <property name="flowtype" label="Flow Type" type="string"/>
+            <property name="description" label="Description" type="String"/>
+            <property name="showCustomDescription" label="Show Custom Description" type="Boolean"/>
+            <property name="showConfirmationSeparately" label="Show Confirmation Separately" type="Boolean"/>
+            <property name="fiilingRecord" label="Business filing" type="@salesforce/schema/Business_Filing__c"/>
+            <property name="linkBusinessToAccount" type="Boolean" label="Link Business To Account" description="Link business to account option check"/>
+            <property name="showThreeSteps" type="Boolean" label="showThreeSteps" description="showThreeSteps"/>
+            <property name="businessemailId" type="String" label="Business Email Id" description=""/>
+            <property name="workOrderId" type="String" label="workOrderId" description=""/>
+            <property name="isOnlyPlain" type="Boolean" label="isOnlyPlain" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

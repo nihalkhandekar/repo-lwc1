@@ -1,0 +1,171 @@
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+    </lightning-spinner>
+  </template>
+  <div class="success-container">
+    <div class={bgClassName}></div>
+    <div class="slds-grid slds-wrap slds-grid_align-center">
+      <div class="slds-size_12-of-12 slds-large-size_8-of-12">
+        <div class="success-container-card">
+          <div class="success-container-card-body">
+            <img src={successIcon} alt="success" class="success-icon" />
+            <h4 class="desc-bold" if:false={isHeaderSeparated}>{successMessage}</h4>
+            <template if:true={isHeaderSeparated}>
+              <h4 class="desc-bold congrats-text">{label.Congratulations}</h4>
+              <h4 class="desc-bold">{successMessageUpdated}</h4>
+            </template>
+            <template if:false={showCustomDescription}>
+              <p class="large slds-m-bottom_small">{emailLinkText}</p>
+            </template>
+            <p class="large slds-m-bottom_small" if:true={showCustomDescription}>{description}</p>
+            <template if:true={showPleaseNote}>
+              <div class="slds-m-bottom_x-large">
+                <c-qn-a_-question-help-text helptextnotes={pleaseNoteContent} questionid={pleaseNoteContent}>
+                </c-qn-a_-question-help-text>
+              </div>
+            </template>
+            <p>
+              <template if:false={isCertTypesPresent}>
+                <template if:true={isFilingApproved}>
+                  <!--Shreya | Download Nintex First Report-->
+                  <a class="download anchor-link" href={downloadUrl} download>
+                    <img src={downloadIcon} alt="download" />
+                    <span>{downloadLabel}</span>
+                  </a>
+                </template>
+              </template>
+              <!--Request for Info-->
+              <template if:true={isInfoRequest}> 
+                <a class="download anchor-link" href={downloadUrl} download>
+                  <img src={downloadIcon} alt="Download" />
+                  <span>{downloadLabel}</span>
+                </a>
+              </template>
+              <template if:true={isOnlyPlain}>
+                <template for:each={outputCerts} for:item="cert">
+                  <div class="cert-div" key={cert.filingId}>
+                    <a class="download anchor-link" href={cert.attachUrl} download>
+                      <img src={downloadIcon} alt="" class="download-icon" />
+                      {cert.downloadLabel}
+                    </a>
+                  </div>
+                </template>
+                <p tabindex="0" role="button" onclick={showAllCerts} if:true={showMore} class="show-more">
+                  {showMoreLabel}
+              </p>
+              </template>
+              <template if:true={isCertTypesPresent}> 
+                <!--Express Certificate-->
+                <template if:true={isExpress}>
+                  <div class="cert-div">
+                    <a class="download anchor-link" href={mapDownloadLinks.Express} download>
+                      <img src={downloadIcon} alt="download" class="download-icon" />
+                      {label.BRS_Express_Cert}
+                    </a>
+                  </div>
+                </template>  
+                <!--Standard Certificate-->
+                <template if:true={isStandard}>
+                  <div class="cert-div">
+                    <a class="download anchor-link" href={mapDownloadLinks.Standard} download>
+                      <img src={downloadIcon} alt="download" class="download-icon" />
+                      {label.BRS_Standard_Cert}
+                    </a>
+                  </div>
+                </template>
+                <!--Longform Certificate-->
+                <template if:true={isLongform}>
+                  <div class="cert-div">
+                    <a class="download anchor-link" href={mapDownloadLinks.Longform} download>
+                      <img src={downloadIcon} alt="download" class="download-icon" />
+                      {label.BRS_Longform_Cert}
+                    </a>
+                  </div>
+                </template>
+              </template>
+            </p>
+          </div>
+          <div class="next-step-container success-container-card-body">
+            <div class='msg-container' if:true={isFilingApproved}>
+              <div class='icon_holder'>
+                <img src={documentIcon} alt="document">
+              </div>
+              <div class='content_box'>
+                <h6>{label.request_certified_copy_heading}</h6>
+                <p class='large content_box_desc'>{label.request_certified_copy_sub_heading}</p>
+                <p class='large'>{label.request_certified_copy_paratext}</p>
+                <button class="slds-button secondary-btn higher access-button" onclick={goToCopyRequestFlow}>
+                  {label.get_certified_copy}
+                </button>
+              </div>
+            </div>
+            <h4 class="next-steps-heading">{label.Next_Steps}</h4>
+            <div if:true={showThreeSteps}>
+              <div class="next-steps">
+                <img src={nextStepIcon} class="step-icon" alt="nextstep" />
+                <div class="step-side-section">
+                  <h6 class="step-label"><span>{label.brs_step1} </span>{firstStep}</h6>
+                  <p class="large step-content">{firstStepText}</p>
+                  <button if:true={showlinkBusinessStep} class="slds-button secondary-btn higher access-button"
+                    onclick={linkBusiness}>
+                    {label.Link_business_to_account}
+                  </button>
+                </div>
+              </div>
+              <div class="next-steps">
+                <img src={nextStepIcon} class="step-icon" alt="nextstep" />
+                <div class="step-side-section">
+                  <h6 class="step-label"><span>{label.brs_step2} </span>{label.First_Report_Step2}</h6>
+                  <p class="large step-content">{label.First_Report_Step2_Text}</p>
+                  <button class="slds-button secondary-btn higher access-button"
+                  onclick={goToAccountPreferences}>
+                    {label.Notification_Text}
+                  </button>
+                </div>
+              </div>
+              <div class="next-steps">
+                <img src={nextStepIcon} class="step-icon" alt="nextstep" />
+                <div class="step-side-section">
+                  <h6 class="step-label"><span>{label.brs_step3} </span>{label.First_Report_Step3}</h6>
+                  <p class="large step-content">{label.First_Report_Step3_Text}</p>
+                  <button class="slds-button secondary-btn higher access-button"
+                  onclick={goToAccountDashboard}>
+                    {label.Access_Account_Dashboard}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div if:false={showThreeSteps}>
+              <div class="next-steps">
+                <img src={nextStepIcon} class="step-icon" alt="nextstep" />
+                <div class="step-side-section">
+                  <h6 class="step-label"><span>{label.brs_step1} </span>{label.First_Report_Step2}</h6>
+                  <p class="large step-content">{label.First_Report_Step2_Text}</p>
+                  <button class="slds-button secondary-btn higher access-button"
+                  onclick={goToAccountPreferences}>
+                    {label.Notification_Text}
+                  </button>
+                </div>
+              </div>
+              <div class="next-steps">
+                <img src={nextStepIcon} class="step-icon" alt="nextstep" />
+                <div class="step-side-section">
+                  <h6 class="step-label"><span>{label.brs_step2} </span>{label.First_Report_Step3}</h6>
+                  <p class="large step-content">{label.First_Report_Step3_Text}</p>
+                  <button class="slds-button secondary-btn higher access-button"
+                  onclick={goToAccountDashboard}>
+                    {label.Access_Account_Dashboard}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <template if:true={showConfirmationPopUp}>
+    <c-brs_link-business-confirmation show-confirmation-pop-up={showConfirmationPopUp} message={message} header={confirmationHeaderMsg} onmodalclose={closeModal}></c-brs_link-business-confirmation>
+  </template>
+</template>

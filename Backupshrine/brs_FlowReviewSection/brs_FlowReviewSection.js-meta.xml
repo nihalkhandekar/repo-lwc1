@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountrecord" label="Account" type="@salesforce/schema/Account" />
+            <property name="uccLienRecord" label="UCC Lien Record" type="@salesforce/schema/UCC_Lien__c" />
+            <property name="flowname" label="Flow Name" type="string" />
+            <property name="sectionandquestion" label="Section/Question Name" type="string[]" />
+            <property name="organizerOption" label="Organizer Option" type="string" />
+            <property name="organizer" label="Organizer" type="string" />
+            <property name="organizerType" label="Organizer Type" type="string" />
+            <property name="organizerName" label="Organizer Name" type="string" />
+            <property name="organizerTitle" label="Organizer Title" type="string" />
+            <property name="incorporator" label="Incorporator" type="string" />
+            <property name="incorporatorName" label="Incorporator Name" type="string" />
+            <property name="incorporatorTitle" label="Incorporator Title" type="string" />
+            <property name="signatoryName" label="Signatory Name" type="string" />
+            <property name="signatoryTitle" label="Signatory Title" type="string" />
+            <property name="showIncNameTitle" label="showIncNameTitle" type="Boolean" />
+            <property name="showOrgNameTitle" label="showOrgNameTitle" type="Boolean" />
+            <property name="showChooseOrganizer" label="showChooseOrganizer" type="Boolean" />
+            <property name="showManually" label="showManually" type="Boolean" />
+            <property name="showSelfNomination" label="showSelfNomination" type="Boolean" />
+            <property name="showCheckboxError" label="showCheckboxError" type="Boolean" />
+            <property name="uccFilingRecord" label="UCC Filing Record" type="@salesforce/schema/UCC_Filing__c" />
+            <!-- 
+                Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+                Change(s)/Modification(s) Made on : Adding condition : Added flow variables. 
+                -->
+            <property name="showChoosePrincipal" label="showChoosePrincipal" type="Boolean" />
+            <property name="isForeignBusinessAndShowSignatoryLLC" label="isForeignBusinessAndShowSignatoryLLC" type="Boolean" />
+            <property name="signatoryType" label="signatoryType" type="String" />
+            <property name="isForeignBusinessAndShowSignatory" label="isForeignBusinessAndShowSignatory" type="String" />
+            <property name="isForeignBusinessAndShowSignatoryAPI" label="isForeignBusinessAndShowSignatoryAPI" type="Boolean" />
+            <property name="businessName" label="businessName" type="String"/>
+            <property name="ackCheckValue" label="ackCheckValue" type="Boolean"/>
+            <property name="isClaimant" label="isClaimant" type="Boolean"/>
+            <property name="isJudgement" label="isJudgement" type="Boolean"/>
+            <property name="signatoryBusinessName" label="Signatory Business Name" type="string"/>
+			<property name="currentQuestiontoMove" label="currentQuestiontoMove" type="string"/>
+            <property name="businessFilingID" label="businessFilingID" type="string"/>
+			<property name="incorpPrincipalOrganizerName" label="incorpPrincipalOrganizerName" type="string"/>
+            <property name="goToDashBoardPage" label="goToDashBoardPage" type="Boolean"/>  
+            <property name="workOrderRecord" label="Work Order" type="@salesforce/schema/Work_Order__c"/>  
+            <property name="otherRequestRecord" label="Other Request" type="@salesforce/schema/Certficate__c"/>
+            <property name="isBizNameContainskeyword" label="Business Name Contains Keyword" type="Boolean"/>
+            <property name="isExpedite" label="Selected Expedite" type="Boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

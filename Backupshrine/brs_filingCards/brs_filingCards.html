@@ -1,0 +1,52 @@
+<template>
+    <div class="cardContainer">
+        <div class="cardWrapper">
+            <div class="leftContent">
+                <div class="iconWrapper">
+                    <template if:true={iconLink}>
+                        <a href={iconLink} target="_blank">
+                            <img src={activeIcon} class="icon" alt="">
+                        </a>
+                    </template>
+                    <template if:false={iconLink}>
+                        <img src={activeIcon} class="icon" alt="">
+                    </template>
+                </div>
+                <div class="contentWrapper">
+                    <p class="smallBold grey-text">{header}</p>
+                    <p class="largeBold">{cardname}</p>
+                    <div class="dateTimeWrapper">
+                        <p class="large grey-text">{carddatelabel}: {carddate}</p>
+                        <p class="large grey-text">{cardtimelabel}: {cardtime}</p>
+                    </div>
+                </div>
+                <div class="viewDetailsButton" if:true={showViewDetailsBtn}>
+                    <button class="slds-button naturalbutton slds-button_natural" onclick={onViewDetails}>
+                        <img src={cardIcon} alt="" class="icon" />
+                        {label.View_details}
+                    </button>
+
+                </div>
+            </div>
+            <div class="rightContent" if:false={noExpandCollapse}>
+                <div class="chevronContainer" onclick={handleExpand}>
+                    <template if:false={showExpand}>
+                        <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="add"
+                        class="chevron-container-down"></lightning-icon>
+                    </template>
+                    <template if:true={showExpand}>
+                        <lightning-icon icon-name="utility:dash" size="xx-small" alternative-text="dash"
+                                    class="chevron-container-down"></lightning-icon>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+        <template if:true={showExpand}>
+            <hr if:false={noExpandCollapse} />
+            <div class="slds-grid slds-wrap cardDetails">
+                <slot name="body"></slot>
+            </div>
+        </template>
+    </div>
+</template>

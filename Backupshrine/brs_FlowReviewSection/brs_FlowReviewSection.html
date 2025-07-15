@@ -1,0 +1,583 @@
+<!-- * ********************************************************************************************
+* NAME       :  brs_FlowReviewSection
+* DESCRIPTION:  This component display the complete data for all the other sections in readonly mode which inclules file
+, fields and question
+*
+* @AUTHOR Tamkanat
+* @DATE 11/18/2020
+*
+*
+* MODIFICATION LOG:
+* DEVELOPER                         DATE                               DESCRIPTION
+* ================================================================================
+* Tamkanat                        11/18/2020                       
+*
+********************************************************************************************* -->
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+    </lightning-spinner>
+  </template>
+  <div class="review-section-container lien-summary-screen">
+    <div class="slds-size_1-of-1 reviewSection">
+      <div class="slds-large-size_1-of-2 slds-size_1-of-1">
+        <div class="title">
+          <h1>{label.ReviewPage_BRS_heading}</h1>
+        </div>
+        <div class="sub-title" if:true={showCheckList}>
+          <h5>{reviewsubHeading}</h5>
+        </div>
+      </div>
+      <div class="slds-large-size_1-of-1 checkListContent" if:true={showCheckList}>
+        <div class="slds-large-size_7-of-12 slds-size_1-of-1">
+          <div class="list-heading">
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{reviewCheckcList1}</p>
+            </div>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <div if:false={nameRes}>
+                  <p class="small" if:false={showProceedToPayment}>{label.ReviewPage_BRS_listItem2}</p>
+                  <p class="small" if:true={showProceedToPayment}>{label.Revocation_Dissolution_checklist2}</p>
+              </div>
+              <p class="small" if:true={nameRes}>{label.Revocation_Dissolution_checklist2}</p>
+            </div>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{reviewCheckcList3}</p>
+            </div>
+          </div>
+        </div>
+        <div class="slds-large-size_4-of-12">
+          <img src={reviewCheckList} class="reviewCheckList" title="reviewCheckList" aria-hidden="true"
+            role="presentation" />
+        </div>
+      </div>
+    </div>
+    <template if:true={nameRes}>
+      <div class="slds-grid slds-wrap section sub-sections">
+        <div class="slds-large-size_1-of-1 slds-size_1-of-1 section-heading">
+          <div class="slds-large-size_9-of-12 slds-size_5-of-6 section-title">
+            {label.BusinessName_BusinessReservation}
+          </div>
+        </div>
+        <div class="slds-large-size_12-of-12 slds-size_1-of-1 question-wrapper">
+          <div class="question-container slds-large-size_12-of-12 slds-size_1-of-1 border">
+            <div class="slds-large-size_3-of-12 slds-size_1-of-1 question">
+              <!-- <img src={question.fieldimage} class="slds-m-right_small" role="presentation" aria-hidden="true" /> -->
+              <p class="largeBold">{label.ReservedName_BusinessReservation}
+              </p>
+              <p class="small question-description">{businessName}</p>
+            </div>
+            <div class="slds-size_1-of-12"></div>
+            <div class="slds-large-size_3-of-12 slds-size_6-of-6 answer">
+              <p class="largeBold">
+                {label.ReservationDate_BusinessReservation}</p>
+              <p class="small question-description">
+                <lightning-formatted-date-time value={newDate} year="numeric" month="2-digit" day="2-digit"
+                  time-zone="UTC">
+                </lightning-formatted-date-time>
+              </p>
+            </div>
+            <div class="slds-size_1-of-12"></div>
+            <div class="slds-large-size_3-of-12 slds-size_6-of-6 answer">
+              <p class="largeBold">
+                {label.ExpirationDate_BusinessReservation}</p>
+              <p class="small question-description">
+                <lightning-formatted-date-time value={expDate} year="numeric" month="2-digit" day="2-digit"
+                  time-zone="UTC">
+                </lightning-formatted-date-time>
+              </p>
+            </div>
+            <div class="slds-large-size_1-of-12 slds-size_6-of-6 answer">
+              <p class="small question-description">
+                <button class="edit-link slds-float_right slds-button slds-button_natural natural-button"
+                onclick={nameResEdit}>
+                  {label.edit}
+                  <img alt="edit" src={editLinkIcon} class="slds-m-left_small icon" role="presentation"
+                    aria-hidden="true" />
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+    <template if:false={nameRes}>
+      <template for:each={mapToShow} for:item="section">
+        <div key={section} class="slds-grid slds-wrap section sub-sections">
+          <div key={section} class="slds-large-size_1-of-1 slds-size_1-of-1 section-heading">
+            <div key={section} class="slds-large-size_9-of-12 slds-size_5-of-6 mobile-specific section-title">
+              {section.key}
+            </div>
+          </div>
+          <div class="slds-large-size_12-of-12 slds-size_1-of-1 question-wrapper">
+            <p class="section-main-title slds-hide">{label.debtor_information}</p>
+            <template for:each={section.value} for:item="question">
+              <div class="slds-size_1-of-1 slds-grid slds-wrap section-row border" key={question.id}>
+                <div key={question.questionLabel}
+                      class="slds-size_1-of-12 question section-icon-mobile  question-container">
+                      <img src={question.fieldimage} class="slds-m-right_small" role="presentation" aria-hidden="true" />
+                </div>
+                <div key={question.id} class="question-container slds-large-size_12-of-12 slds-size_11-of-12">
+                    <div key={question.questionLabel}
+                      class="slds-large-size_5-of-12 slds-size_1-of-1 question">
+                      <img src={question.fieldimage} class="section-icon-desktop slds-m-right_small" role="presentation" aria-hidden="true" />
+                      <span class="largeBold">{question.questionLabel}</span>
+                    </div>
+                    <div key={question.questionLabel} class="slds-large-size_1-of-12"></div>
+                    <template if:false={question.isElectionStatus}>
+                      <div if:false={question.isList} key={question.responseText}
+                        class="slds-large-size_4-of-12 slds-size_5-of-6 answer">
+                        <p class="small question-description" if:false={question.showDocument}>
+                          <lightning-formatted-rich-text value={question.responseText}></lightning-formatted-rich-text>
+                        </p>
+                        <p class="small question-description" if:true={question.showDocument}>
+                          <button class="edit-link slds-button slds-button_natural natural-button slds-text-align_left" data-id={question.documentId} onclick={previewDocument}>
+                            {question.responseText}
+                          </button>
+                        </p>
+                      </div>
+                      <div if:true={question.isList} key={question.responseText}
+                        class="slds-large-size_4-of-12 slds-size_5-of-6 answer">
+                        <template iterator:answer={question.displayResponseArray}>
+                          <template if:true={question.isLapseDate}>
+                            <div key={answer.value} class="">
+                              <p class="lapse-date small question-description">
+                                <span if:true={answer.first} class="previous-label">
+                                  {label.Previous}
+                                </span>
+                                <span if:true={answer.last} class="new-label">
+                                  {label.New}
+                                </span>
+                                <lightning-formatted-rich-text value={answer.value}></lightning-formatted-rich-text>
+                              </p>
+                            </div>
+                          </template>
+                          <template if:false={question.isLapseDate}>
+                            <div key={answer.value} class="answerList">
+                              <p class="small question-description">
+                                <lightning-formatted-rich-text value={answer.value}></lightning-formatted-rich-text>
+                              </p>
+                            </div>
+                          </template>
+                        </template>
+                      </div>
+                    </template>
+                    <template if:true={question.isElectionStatus}>
+                      <div key={question.responseText}
+                        class="slds-large-size_4-of-12 slds-size_5-of-6 answer">
+                        <p class="small">
+                          <template for:each={question.displayResponseArray} for:item="answer" for:index="index">
+                            <div key={answer}>
+                              <div if:false={index}>
+                                <lightning-input type="checkbox" label={label.Election_B_Corp_Status} disabled checked>
+                                </lightning-input>
+                              </div>
+                              <div if:true={index}>
+                                <div if:true={question.hasOtherProvision}>
+                                  <lightning-input type="textarea" value={answer} read-only=true>
+                                  </lightning-input>
+                                </div>
+                              </div>
+                            </div>
+                          </template>
+                        </p>
+                      </div>
+                    </template>
+                  <div class="slds-large-size_2-of-12 editContainer">
+                    <div class="slds-large-size_6-of-12 slds-size_1-of-6 answer arrow-icon-container">
+                      <div if:true={question.showDataTable} class="arrow-button-icon">
+                        <lightning-button-icon icon-name={iconName} onclick={hideAndShowStocks} size="medium"
+                          data-id={question.id} aria-label="dropdown icon">
+                        </lightning-button-icon>
+                      </div>
+                    </div>
+                    <div class="slds-large-size_6-of-12 slds-float_right button-wrapper" if:false={question.hideEditButton}>
+                      <button class="edit-link slds-button slds-button_natural natural-button"
+                      key={question.id} data-id={question.questionLabel} id={question.questionLabel}
+                        data-value={question.questionLabel} name={section.key} onclick={handleQuestionEdit}>
+                        {label.edit}
+                        <img src={editLinkIcon} class="slds-m-left_small icon" role="presentation" aria-hidden="true" />
+                      </button>
+                    </div>
+                </div>
+              </div>
+
+              </div>
+
+              <div data-id={question.id} key={question.id} class="slds-hide datatable-container">
+                <div class="slds-size_11-of-12 slds-large-size_12-of-12 mobile-table-layout" if:true={question.showDataTable}>
+                  <div class="slds-grid slds-wrap">
+                    <div key={question.id} class="slds-size_1-of-1 table-display">
+                      <c-generic-table tablecolumns={question.tablecolumns} tabledata={question.tabledata}
+                       customtable type={question.questionLabel}></c-generic-table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="slds-large-size_1-of-12 slds-size_1-of-6 mob"></div>
+        </div>
+      </template>
+    </template>
+    <template if:false={hideAcknowledgement}>
+      <div class="slds-grid slds-wrap section acknowledgeWrapper inputForm">
+        <div class="slds-size_1-of-1 section-heading">
+          <div class="slds-large-size_9-of-12 slds-size_5-of-6 section-title">
+            {label.ReviewPage_Acknowledgement}
+          </div>
+        </div>
+        <div class="slds-size_1-of-1 question-wrapper">
+          <div class="question-container slds-size_1-of-1 acknowledge-Checkboxes">
+            <!-- 
+            Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-1777
+            Change(s)/Modification(s) Made on : Added fixes , only render this block in domestic flow.
+            -->
+            <template if:false={isForeignBusiness}>
+              <div if:true={isLLC}>
+                <c-generic-multi-select class="cb" add-class="acknowledgeField" data-id="acknowledgeinput"
+                  list-data={businessLLCCheckboxOptions}></c-generic-multi-select>
+              </div>
+              <div if:true={isLLP}>
+                <c-generic-multi-select class="cb" data-id="acknowledgeinput" add-class="acknowledgeField"
+                  list-data={businessLLPCheckboxOptions}></c-generic-multi-select>
+              </div>
+            </template>
+            <div class="slds-p-bottom_medium">
+              <c-generic-multi-select class={inputClassName} data-id="acknowledgeinput" add-class="acknowledgeField"
+                list-data={acknowledgeCheckboxOptions} oncheckboxinputselection={acknowledgeCheckboxChange}>
+              </c-generic-multi-select>
+              <div class="slds-has-error" if:true={showCheckboxError}>
+                <span class="slds-form-element__help"> {label.Generic_Input_Error_Message}</span>
+              </div>
+            </div>
+            <div if:true={isLLC} class="radio-option slds-p-bottom_medium slds-grid slds-wrap">
+              <!-- 
+              Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+              Change(s)/Modification(s) Made on : Rendering the organizer block only when business type is domestic
+              -->
+              <template if:false={isForeignBusiness}>
+                <c-generic-radio-input class="slds-size_1-of-1" qid="organiser-options" radio-options={chooseOrganizerRadioOptions}
+                  value={organizerOption} onctbosdatachange={handleOrganizerRadio}></c-generic-radio-input>
+                <c-generic-radio-input class="slds-size_1-of-1" qid="organiser-options" radio-options={addOrganizerRadioOptions}
+                  value={organizerOption} onctbosdatachange={handleOrganizerRadio}></c-generic-radio-input>
+                <template if:true={showChooseOrganizer}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 gap slds-p-right_small">
+                    <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_chooseOrganizerRequired} options={organizerOptions} value={organizer} required
+                      onchange={handleOrganizerSelection}>
+                    </lightning-combobox>
+                  </div>
+                  <div class="slds-grid">
+                    <div class="slds-size_1-of-1">
+                      <div class="slds-large-size_2-of-3 slds-size_1-of-1 gap slds-p-right_small">
+                        <c-qn-a_-question-help-text helptextnotes={topPleaseNoteSection} questionid={topPleaseNoteSection}
+                          inputclassname="no-margin">
+                        </c-qn-a_-question-help-text>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+              </template>
+              <!-- 
+                Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+                Change(s)/Modification(s) Made on : Rendering the Signatory block only when business type is foreign
+                -->
+              <template if:true={isForeignBusiness}>
+                <c-generic-radio-input class="slds-size_1-of-1 slds-p-bottom_medium" data-id="organiser-options"
+                  radio-options={choosePrincipalRadioOptions} value={organizerOption}
+                  onctbosdatachange={handleOrganizerRadio} name="organiser-options">
+                </c-generic-radio-input>
+                <div if:true={showChoosePrincipal}
+                  class="slds-large-size_2-of-3 slds-size_1-of-1 slds-p-right_small slds-p-bottom_large inptForm">
+                  <label>{label.ReviewPage_choosePrincipalRequired}</label>
+                  <div class="slds-large-size_1-of-2 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" variant="label-hidden"
+                      label={label.ReviewPage_choosePrincipalRequired} options={organizerOptions} value={organizer} required
+                      onchange={handleOrganizerSelection}>
+                    </lightning-combobox>
+                  </div>
+                </div>
+                <!--Kyathi :::  Please look into this allignment I guess-->
+                <template if:true={isForeignBusinessAndShowSignatoryLLC}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                      onchange={handleSignatoryName} onblur={handleSignatoryNameBlur}>
+                    </lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                      onchange={handleSignatoryTitle} onblur={handleSignatoryTitleBlur}></lightning-input>
+                  </div>
+                </template>
+                <c-generic-radio-input class="slds-size_1-of-1" data-id="organiser-options"
+                  radio-options={addPrincipalRadioOptions} value={organizerOption}
+                  onctbosdatachange={handleOrganizerRadio} name="organiser-options">
+                </c-generic-radio-input>
+
+                <!-- Please look into this allignment I guess-->
+              </template>
+            </div>
+            <div if:true={showIncoporator} class="slds-grid slds-p-bottom_medium slds-wrap">
+              <!-- 
+              Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+              Change(s)/Modification(s) Description : Adding condition to render Choose Principal in case the business type is foreign
+              Change(s)/Modification(s) Made on : 2021-01-07
+              Change(s)/Modification(s) Made by : Avinash Shukla
+              -->
+              <template if:false={isForeignBusiness}>
+                <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                  <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" placeholder={label.SelectanOptionPlaceholder}
+                    label={label.ReviewPage_chooseIncorporator} options={incorporatorOptions} value={incorporator}
+                    required onchange={handleIncpSelection}>
+                  </lightning-combobox>
+                </div>
+                <template if:true={showIncNameTitle}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input data-id="acknowledgeinput" class="acknowledgeField" type="text"
+                      label={label.ReviewPage_nameIncorporator} value={incorporatorName} required
+                      onchange={handleIncpName}></lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input data-id="acknowledgeinput" class="acknowledgeField" type="text"
+                      label={label.ReviewPage_titleIncorporator} value={incorporatorTitle} required
+                      onchange={handleIncpTitle}></lightning-input>
+                  </div>
+                </template>
+              </template>
+              <template if:true={isForeignBusiness}>
+                <div class="slds-large-size_2-of-3 slds-size_1-of-1 slds-p-right_small inputForm">
+                  <label>{label.ReviewPage_choosePrincipalRequired}</label>
+                  <div class="slds-large-size_1-of-2 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" variant="label-hidden"
+                      label={label.ReviewPage_choosePrincipalRequired} options={organizerOptions} value={organizer} required
+                      onchange={handleOrganizerSelection}>
+                    </lightning-combobox>
+                  </div>
+                </div>
+                <!-- 
+                Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+                Change(s)/Modification(s) Made on : Adding condition : Signatory section to be visible only wheh business structure is Bcorp/Stock/NonStock and 
+                                                                       selected principal is of type 'Business' 
+                -->
+                <template if:true={isForeignBusinessAndShowSignatory}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                      onchange={handleSignatoryName} onblur={handleSignatoryNameBlur}>
+                    </lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                      onchange={handleSignatoryTitle} onblur={handleSignatoryTitleBlur}></lightning-input>
+                  </div>
+                </template>
+              </template>
+            </div>
+            <div if:true={isLLC} class="slds-grid slds-p-bottom_medium slds-wrap">
+              <div if:true={showManually} class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField"
+                  label={label.ReviewPage_typeOrganizer} options={organizerTypeOptions} value={organizerType} required
+                  onchange={handleOrganizerType}>
+                </lightning-combobox>
+              </div>
+              <template if:true={showOrgNameTitle}>
+                <!-- 
+                Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+                Change(s)/Modification(s) Made on : Rendering the organizer block only when business type is domestic
+                -->
+                <template if:false={isForeignBusiness}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_nameOrganizer} value={organizerName} required
+                      onchange={handleManualOrganizerName}></lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_titleOrganizer} value={organizerTitle} required
+                      onchange={handleOrganizerTitle}></lightning-input>
+                  </div>
+                </template>
+                <!-- 
+                Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-50
+                Change(s)/Modification(s) Made on : Rendering the Signatory block only when business type is foreign
+                -->
+                <!-- 
+            Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-1777
+            Change(s)/Modification(s) Made on :Added required label
+            -->
+                <template if:true={isForeignBusiness}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small slds-p-bottom_medium">
+                    <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_typeSignatoryRequired} options={organizerTypeOptions}
+                      value={signatoryType} required onchange={handleSignatoryType}>
+                    </lightning-combobox>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_nameSignatory} value={signatoryName} required
+                      onchange={handleSignatoryName} onblur={handleSignatoryNameBlur}>
+                    </lightning-input>
+                  </div>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                      onchange={handleSignatoryTitle} onblur={handleSignatoryTitleBlur}></lightning-input>
+                  </div>
+                </template>
+              </template>
+            </div>
+            <!--Name Reservation-->
+            <template if:true={nameRes}>
+
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small slds-p-bottom_large">
+                <lightning-combobox data-id="acknowledgeinput" class="acknowledgeField" placeholder={label.SelectanOptionPlaceholder}
+                  label={label.TypeLabel_ReservationReview} options={signatoryPicklistValues.values}
+                  value={signatoryType} required onchange={handleSignatoryType}>
+                </lightning-combobox>
+              </div>
+              <div class="display">
+                <template if:true={signatoryType}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" max-length="100" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.NameLabel_ReservationReview} value={signatoryName} required
+                      onchange={handleSignatoryName} onblur={handleSignatoryNameBlur}>
+                    </lightning-input>
+                    <template if:true={isSignatoryIndividual}>
+                      <lightning-input type="text" max-length="50" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.TitleLabel_ReservationReview} value={signatoryTitle} required
+                      onchange={handleSignatoryTitle} onblur={handleSignatoryTitleBlur}></lightning-input>
+                    </template>
+                  </div>
+                </template>
+                <template if:true={isSignatoryBusiness}>
+                  <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                    <lightning-input type="text" max-length="100" data-id="acknowledgeinput" class="acknowledgeField"
+                      label={label.businessProfile_bname} value={signatoryBusinessName} required
+                      onchange={handleSignatoryBusinessName} onblur={handleSignatoryBusinessNameBlur}>
+                    </lightning-input>
+                  </div>
+                </template>
+              </div>
+            </template>
+
+            <div if:true={isLLP} class="slds-grid slds-p-bottom_medium slds-wrap">
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                  label={label.ReviewPage_nameSignatory} value={signatoryName} required onchange={handleSignatoryName} onblur={handleSignatoryNameBlur}>
+                </lightning-input>
+              </div>
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                  label={label.ReviewPage_titleSignatory} value={signatoryTitle} required
+                  onchange={handleSignatoryTitle} onblur={handleSignatoryTitleBlur}></lightning-input>
+              </div>
+            </div>
+            <!-- Functionality for BRS-2285 -->
+            <div if:true={isClaimant}
+              class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small slds-p-bottom_large">
+              <lightning-combobox data-id="acknowledgeinput" class="climantOrJudgement acknowledgeField" label={label.ReviewPage_chooseClaimant}
+                options={organizerOptions} value={organizer} onchange={handleOrganizerSelection} data-isclaimant="true"
+                required message-when-value-missing={label.Select_Claimant}>
+              </lightning-combobox>
+            </div>
+            <div if:true={isJudgement}
+              class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small slds-p-bottom_large">
+              <lightning-combobox data-id="acknowledgeinput" class="climantOrJudgement acknowledgeField" label={label.ReviewPage_ChooseJudgmentCreditor}
+                options={organizerOptions} value={organizer} onchange={handleOrganizerSelection} data-isjudgement="true"
+                required message-when-value-missing={label.Select_Judgement}>
+              </lightning-combobox>
+            </div>
+            <!-- 
+            Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-1777
+            Change(s)/Modification(s) Made on : Added fixes , only render this block in domestic flow.
+            -->
+            <template if:false={isForeignBusiness}>
+              <template if:true={showSelfNomination}>
+                <c-generic-multi-select class="cb" data-id="acknowledgeinput" add-class="acknowledgeField"
+                  list-data={acceptNominationCheckbox}></c-generic-multi-select>
+              </template>
+            </template>
+            <div class="slds-grid slds-p-top_medium mobile-specific">
+              <div class="slds-large-size_1-of-3 slds-size_1-of-1 slds-p-right_small">
+                <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+                  label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slds-has-error" if:true={showCheckboxError}>
+        <span class="slds-form-element__help"> {label.acknowledgementErrorMsg}</span>
+      </div>
+      <div class="slds-has-error" if:true={showBusinessNameError}>
+        <span class="slds-form-element__help">
+          <template if:true={isForeignBusiness}>
+            {label.reviewBusinessNameError_Foreign}
+          </template>
+          <template if:false={isForeignBusiness}>
+            {label.reviewBusinessNameError_Domestic}
+          </template>         
+        </span>
+      </div>
+    </template>
+    <template if:true={showcopyCertAck}>
+      <div class="slds-grid slds-wrap section acknowledgeWrapper inputForm">
+        <div class="slds-size_1-of-1 section-heading">
+          <div class="slds-size_12-of-12 section-title">
+            {label.ReviewPage_Acknowledgement}
+          </div>
+        </div>
+        <div class="slds-p-top_medium">
+          <div class="slds-large-size_1-of-1 slds-size_1-of-1">
+            <lightning-input type="text" data-id="acknowledgeinput" class="acknowledgeField"
+              label={label.ReviewPage_signature} value={currentUser} disabled></lightning-input>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+<template if:true={showPriceModal}>
+  <c-modal open={showPriceModal} onmodalclose={closePriceModal} size="">
+    <div slot="header" class="slds-size_1-of-1 popup-header slds-text-align_left">
+      <h6>{label.expedite_modal_header}</h6>
+    </div>
+    <div slot="body">
+      <p class="large margin-b-32">
+        {label.expedite_modal_description}
+      </p>
+    </div>
+    <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+      <button class="slds-button primaryBtn higher yes-button" onclick={gotoPaymentScreenWithExpeditePrice}>
+        {label.Yes}
+      </button>
+      <button class="slds-button secondary-btn higher no-button" onclick={gotoPaymentScreen}>
+        {label.No}
+      </button>
+    </div>
+  </c-modal>
+</template>
+  <template if:true={isRegistratonFlow}>
+    <c-brs_next-back-buttons 
+        nextlabel={label.BRS_Proceed_Payment} prevlabel={label.Back} onhandlenext={validateReviewForm} onhandleback={handleBack}
+        ></c-brs_next-back-buttons>
+  </template>
+</template>

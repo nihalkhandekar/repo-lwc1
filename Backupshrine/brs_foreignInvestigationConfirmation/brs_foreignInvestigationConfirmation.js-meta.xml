@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+       <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="emailId" type="String" label="Email Id" description=""/>
+            <property name="phoneNumber" type="String" label="Phone Number" description=""/>
+            <property name="businessemailId" type="String" label="Business Email Id" description=""/>
+            <property name="Id" type="String" label="FI Id" description=""/>
+            <property name="noOfMonths" type="integer" label="Select number of months" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

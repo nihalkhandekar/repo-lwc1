@@ -1,0 +1,33 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+
+    <div class="success-container">
+        <div class="background"></div>
+        <div class="slds-grid slds-wrap slds-grid_align-center">
+            <div class="slds-size_12-of-12 slds-large-size_8-of-12">
+                <div class="success-container-card">
+                    <div class="success-container-card-body">
+                        <img src={successIcon} alt="" class="success-icon" />
+                        <h4 class="desc-bold congrats-text">{label.Congratulations}</h4>
+                        <h4 class="desc-bold">{successMessage}</h4>
+                        <p class="large slds-m-bottom_small email-word-break">{label.confirmationMessage_FI}</p>
+                        <div class="my-32 border"></div>
+                        <template if:true={showDuesTable} >
+                            <h6>{label.Outstanding_dues}</h6>
+                            <div class="my-32">
+                                <c-generic-table tablecolumns={tablecolumns} tabledata={tabledata}
+                                customtable></c-generic-table>
+                            </div>
+                        </template>
+                        <button onclick={goToAccountDashboard} class="slds-button slds-button_stretch primaryBtnSmall">
+                            {label.Access_Account_Dashboard}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

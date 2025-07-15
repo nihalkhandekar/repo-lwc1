@@ -1,0 +1,60 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner class="spinner-inner" alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <fieldset class="slds-form-element slds-form-element_address">
+        <label>{label.business_name}</label>
+        <template if:true={showBusName}>
+            <lightning-input data-id="input1" type="text" variant="label-hidden" required name="input1" max-length="100"
+                value={businessname} placeholder={label.Barbs_Placeholder} disabled={isDisabled}
+                onchange={businessNameChange} onblur={businessNameBlur} message-when-value-missing={label.Please_enter_a_business_name_max} autocomplete="off">
+            </lightning-input>
+        </template>
+        <div class="helptext">{label.Business_Name_Max_Characters}</div>
+        <!-- 
+        Change(s)/Modification(s) for TICKET/STORY/BUG FIX: BRS-1920
+        Change(s)/Modification(s) Description : Added name available and non availability error message
+        Change(s)/Modification(s) Made on : 2021-01-20
+        Change(s)/Modification(s) Made by : Avinash Shukla
+        -->
+        <template if:true={showAvailability}>
+            <!--labels to show when the business name is available and when it is not available-->
+            <template if:false={businessNameAvailable}>
+                <p class="helptext name-not-available">{label.brs_reserveNameError}&nbsp;</p>
+            </template>
+            <!--labels to show when the business name is available and when it is available-->
+            <template if:true={businessNameAvailable}>
+                <p class="helptext name-available">
+                    <span>{label.businessNameAvailableMessageFE}&nbsp;</span>
+                </p>
+            </template>
+        </template>
+        <template if:true={showLegalDesgMsg}>
+            <p class="helptext legal-des-message">{label.Add_Legal_Designation}</p>
+        </template>
+        <template if:false={hasLegalDesgAdded}>
+            <div class="business-legal-info">
+                <label class="legal-info">
+                    {label.Legal_Information_Message}
+                </label>
+            </div>
+            <div class="business-legal-info-details">
+                <template if:true={legalDesg}>
+                    <template for:each={legalDesg} for:item="leg">
+                        <button class="slds-button tag-btn" key={leg.value} value={leg.label}
+                            onclick={handleLegalLabelCheck}>
+                            {leg.label}
+                            <img src={plusIcon} alt="" class="addIcon" />
+                            <img src={closeIcon} alt="" class="closeIcon" />
+                            <img src={closeGreyIcon} alt="" class="closeGreyIcon" />
+                        </button>
+                    </template>
+                </template>
+            </div>
+        </template>
+    </fieldset>
+    <p class="error-text" if:true={showErrorMessage}>
+        {errorMessage}
+    </p>
+</template>

@@ -1,0 +1,114 @@
+.cardContainer {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+}
+
+.cardWrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0 0 20px;
+}
+
+.iconWrapper {
+    padding-top: 16px;
+}
+
+.contentWrapper {
+    margin-left: 20px;
+    margin-bottom: 16px;
+    width:58%;
+}
+
+.leftContent {
+    display: flex;
+    width: 100%;
+}
+
+.rightContent {
+    display: flex;
+    align-items: flex-end;
+}
+
+.chevronContainer {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    width: 19px;
+}
+
+.cardDetails {
+    padding: 0 60px 16px;
+}
+
+hr {
+    margin: 0 88px 32px 28px;
+}
+
+.viewDetailsButton {
+    margin-left: auto;
+    margin-top: auto;
+    padding-bottom: 16px;
+    padding-right: 20px;
+}
+
+.viewDetailsButton .icon {
+    width: 24px;
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+.naturalbutton {
+    color: #00528D;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+    font-family: Karla;
+    position: unset;
+}
+
+.naturalbutton:focus {
+    box-shadow: none;
+}
+
+.dateTimeWrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+@media only screen and (max-width: 1023px) {
+    .viewDetailsButton {
+        margin: -16px 0 16px 0;
+        padding: 0;
+    }
+
+    .leftContent,
+    .dateTimeWrapper{
+        flex-direction: column;
+    }
+
+    .contentWrapper {
+        margin-left: 0;
+    }
+
+    .iconWrapper {
+        padding-bottom: 12px;
+    }
+
+    hr {
+        margin: 0 60px 24px 20px;
+    }
+
+    .cardDetails {
+        padding: 0 20px;
+    }
+}

@@ -1,0 +1,180 @@
+.look-up-button{
+    padding-bottom: 48px;
+  }
+  .noBizFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px dashed #D0CFCF;
+    padding-top: 48px;
+    border-radius: 4px;
+}
+
+.noLienFoundText {
+    width: 80%;
+    margin-top: 16px;
+    text-align: center;
+}
+
+.body-bold-text {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-top: 12px;
+    padding-bottom: 20px;
+  }
+  
+  .body-text {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-bottom: 24px;
+  }
+
+  .card-section {
+    border-radius: 4px;
+    border: 1px solid #D0CFCF;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    width: 100%;
+}
+
+.splitSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.display {
+    display: flex;
+}
+
+.pills {
+    border-radius: 11.5px;
+    background-color: #ECEBEB;
+    padding: 4px 12px;
+    color:  #2D2C2C;;
+    font-size: 14px;
+    font-family: KarlaBold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+
+.labelClass {
+    color: #757575;
+    letter-spacing: 0.01px;
+    font-family: Karla;
+}
+
+.fin-input-div{
+    padding-bottom: 16px;
+}
+
+
+.customNextBtnDiv {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.page-footer {
+    display: flex;
+    align-items: center;
+    padding: 32px 0;
+    border-top: solid 1px #ECEBEB;
+    margin-top: 80px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cust-anchor {
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.13;
+    font-family: Karla;
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.card-section .principal-details {
+    border-bottom: 1px solid #ECEBEB;
+    padding-top: 24px;
+}
+
+.card-section .principal-details.no-border{
+    border:none;
+}
+
+.card-section .sub-title {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.card-section .sub-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-section .arrow-button {
+    height: 42px;
+    width: 42px;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    margin-left: auto;
+    padding:0;
+    flex: 0 0 42px;
+}
+
+.details-row {
+    margin-top: 20px;
+}
+
+.card-section .arrow-button img {
+    width: 24px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    margin: 0;
+}
+
+.card-section .arrow-button img.up {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+@media only screen and (max-width: 1023.9px) {
+    .page-footer {
+        flex-direction: column-reverse;
+        margin-top: 36px;
+        padding-top: 0;
+    }
+    .slds-button.primaryBtnSmall {
+        width: 100%;
+    }
+    .button-wrapper {
+        margin-bottom: 32px;
+        width: 100%;
+    }
+}
+
+.secondaryBtn{
+    background-color: #f7f9fa !important;
+}

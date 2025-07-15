@@ -1,0 +1,24 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="brs_filling_due">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_12-of-12">
+                <c-brs_table-with-showmore actiondata={details} oldestdetail={oldestDetailNo} queuedetail={queueDetailNo} upcomingdetail={upcomingDetailNo} hide-description={hideDescription}>
+                </c-brs_table-with-showmore>
+            </div>
+        </div>
+    </div>
+    <template if:true={showNoChangeErrorMessage}>
+        <p class="error-text">
+            {errorMessage}
+        </p>
+    </template>
+    <template if:true={isTempApis}>
+        <c-brs_next-back-buttons 
+            nextlabel={label.Next} prevlabel={label.Back} onhandlenext={validate} onhandleback={handleBack}
+            hide-back={hideBack} ongotosummary={gotoNextScreen}></c-brs_next-back-buttons>
+    </template>
+</template>

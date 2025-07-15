@@ -1,0 +1,39 @@
+<!--*********************************************************************************************
+ * NAME:  brs_header.html
+ * DESCRIPTION: Renders the header and subheading text for each page
+ *
+ * @AUTHOR: Sagarika Panda
+ * @DATE:  12/10/2020   
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Sagarika Panda                     12/10/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+    <div class={className}>
+        <div class="header-container">
+            <h1 class="mainheading"  tabindex="-1" if:false={showScholarOnly}>{headingText}</h1>
+            <template if:true={showScholarContent}>
+                <div class="helptext-mob-header mob-title slds-hide_large" onclick={toggleSection}>
+                    <p class="grey-text">Learn More</p>
+                    <lightning-button-icon icon-name="utility:chevrondown" variant="bare" class="chevron-icon"
+                        alternative-text="chevron" title="chevron"></lightning-button-icon>
+                </div>
+                <p class="scholar-font slds-hide_large" data-id="desc">
+                    <lightning-formatted-rich-text value={scholarContent}></lightning-formatted-rich-text>
+                </p>
+            </template>
+            <template if:false={showScholarOnly}>
+                <h5 class="sub-heading" if:true={showSubHeading}>{subHeadingText}</h5>
+                <p class="header-description">
+                    {descriptionText}
+                    <template if:true={showExtraDescriptionText}>
+                        {descriptionTextSecondLine}
+                    </template>
+                </p>
+            </template>
+        </div>
+    </div>
+</template>

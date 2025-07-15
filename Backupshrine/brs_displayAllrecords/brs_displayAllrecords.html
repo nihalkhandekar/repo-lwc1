@@ -1,0 +1,219 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <div class="slds-gutters slds-grid slds-wrap">
+        <div if:false={readFillingFromUrl} class="slds-col slds-large-size_1-of-12"></div>
+        <div class={className}>
+            <template if:true={filingInfo}>
+                <template if:false={readFillingFromUrl}>
+                    <div class="mainHeading gap">
+                        <h5>{label.filing_numberNew} "{filingInfo.FilingNumber}"</h5>
+                    </div>
+                </template>
+                <template if:true={readFillingFromUrl}>
+                    <div class="mainHeading">
+                        <h5>{label.filing_numberNew} "{filingInfo.FilingNumber}"</h5>
+                    </div>
+                </template>
+                <div class="additional-details"></div>
+                <div class="mobile-show mobile-scholarcontent">
+                    <c-brs_header scholar-content={scholarContent} show-scholar-only></c-brs_header>
+                </div>
+            </template>
+            <div class="principal-list">
+                <div class="slds-grid slds-wrap">
+                    <div class="principal-header">
+                        <div class="username">
+                            <p>{label.Filing_information_Label}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="principal-details" if:true={filingInfo}>
+                    <div class="slds-grid slds-wrap details-row">
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.lien_type}</p>
+                            <p class="sub-desc">{filingInfo.LienType}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.irs_number}</p>
+                            <p class="sub-desc">{filingInfo.IRSNumber}</p>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap details-row">
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.filing_type}</p>
+                            <p class="sub-desc">{filingInfo.Type}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.filing_numberNew}</p>
+                            <p class="sub-desc">{filingInfo.FilingNumber}</p>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap details-row">
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.filing_date}</p>
+                            <p class="sub-desc">
+                                <lightning-formatted-date-time value={filingInfo.FilingDate} year="numeric"
+                                    month="2-digit" day="2-digit" time-zone="UTC">
+                                </lightning-formatted-date-time>
+                            </p>
+                        </div>
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.lapse_Date}</p>
+                            <p class="sub-desc">
+                                <template if:true={isLapseDatePresent}>
+                                    <lightning-formatted-date-time value={filingInfo.LapseDate} year="numeric" month="2-digit"
+                                        day="2-digit" time-zone="UTC">
+                                    </lightning-formatted-date-time>
+                                </template>
+                                <template if:false={isLapseDatePresent}>
+                                    {filingInfo.LapseDate}
+                                </template>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="additional-details"></div>
+                    <div class="slds-grid slds-wrap details-row">
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.microfilm_Volume_Number}</p>
+                            <p class="sub-desc">{filingInfo.VolumeNumber}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.Start_page}</p>
+                            <p class="sub-desc">{filingInfo.StartPage}</p>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap details-row">
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                            <p class="sub-title">{label.page_s}</p>
+                            <p class="sub-desc">{filingInfo.Page}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12" if:true={viewLink}>
+                            <p class="sub-title">{label.brs_Digitalcopy}</p>
+                            <p class="sub-desc">
+                                <a class="cust-anchor" href={viewLink} target="_blank">{label.brs_ViewasPDF}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <template if:true={isdebtor}>
+                <div class="principal-list">
+                    <div class="slds-grid slds-wrap">
+                        <div class="principal-header">
+                            <div class="username">
+                                <p>{label.debtor_information}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <template for:each={debtorRecord} for:item="debtor" for:index="index">
+                        <div class="principal-details" key={debtor.Id}>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-col slds-size_12-of-12">
+                                    <p class="sub-title" if:false={index}>{label.debtor_name}</p>
+                                    <p class="sub-title" if:true={index}>{label.Adddebtor_name}</p>
+                                    <p class="sub-desc">{debtor.Name}</p>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.Label_Address}</p>
+                                    <p if:true={debtor.International_Address__c} class="sub-desc">
+                                        {debtor.InternationalAddress}, {debtor.Country}</p>
+                                    <p if:false={debtor.International_Address__c} class="sub-desc">{debtor.Street}
+                                    </p>
+                                </div>
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.Recovery_SelfCertify_PlaceholderCity}</p>
+                                    <p class="sub-desc">{debtor.City}</p>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.debtor_state}</p>
+                                    <p class="sub-desc">{debtor.State}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.Recovery_SelfCertify_PlaceholderBusinessZipCode}</p>
+                                    <p class="sub-desc">{debtor.Zipcode}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={isSecuredParty}>
+                <div class="principal-list">
+                    <div class="slds-grid slds-wrap">
+                        <div class="principal-header">
+                            <div class="username">
+                                <p>{label.securedParty_information}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <template for:each={securedPartyRecord} for:item="securedParty" for:index="index">
+                        <div class="principal-details" key={securedParty.Id}>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title" if:false={index}>{label.securedParty_name}</p>
+                                    <p class="sub-title" if:true={index}>{label.AddsecuredParty_name}</p>
+                                    <p class="sub-desc">{securedParty.Name}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.BRS_UCC_Assignor_Label}</p>
+                                    <p class="sub-desc">{securedParty.AssignorName}</p>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.Label_Address}</p>
+                                    <p if:true={securedParty.International_Address__c} class="sub-desc">
+                                        {securedParty.InternationalAddress}, {securedParty.Country}</p>
+                                    <p if:false={securedParty.International_Address__c} class="sub-desc">
+                                        {securedParty.Street}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.Recovery_SelfCertify_PlaceholderCity}</p>
+                                    <p class="sub-desc">{securedParty.City}</p>
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap details-row">
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.debtor_state}</p>
+                                    <p class="sub-desc">{securedParty.State}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                    <p class="sub-title">{label.Recovery_SelfCertify_PlaceholderBusinessZipCode}</p>
+                                    <p class="sub-desc">{securedParty.Zipcode}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </template>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 gap desktop-show">
+            <c-brs_helper-text>
+                <div slot="header">
+                    <h6>{label.help_head}</h6>
+                </div>
+                <div slot="body">
+                    <p class="small">{label.help_body}</p>
+                </div>
+                <div slot="links">
+                    <p class="small gap"><a href={label.amend_link} target="_blank"
+                            rel="noopener noreferrer">{label.help_amend}</a></p>
+                    <p class="small"><a href={label.amend_link} target="_blank"
+                            rel="noopener noreferrer">{label.help_request}</a></p>
+                </div>
+            </c-brs_helper-text>
+        </div>
+        <div if:false={readFillingFromUrl} class="slds-col slds-large-size_1-of-12"></div>
+    </div>
+
+</template>

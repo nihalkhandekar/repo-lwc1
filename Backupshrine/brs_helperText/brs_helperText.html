@@ -1,0 +1,17 @@
+<template>
+    <div class="slds-size_12-of-12 gap">
+        <div class="">
+            <div class="">
+                <img src={helperImg} alt="" class="helperImg">
+            </div>
+            <div class="">
+                <slot name="header"></slot>
+                <hr>
+                <slot name="body"></slot>
+                <div class="slds-m-top_medium helpLinks">
+                    <slot name="links"></slot>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="question" type="string" label="Question" description=""/>
+            <property name="accountrecord" label="Account" type="@salesforce/schema/Account"/>
+            <property name="value" label="Selected Group" type="string[]"/>
+            <property name="noneValue" label="None Selected" type="string[]"/>
+            <property name="preferValue" label="Prefer not to answer" type="string[]"/>
+            <property name="answer" label="Answer" type="string[]"/>
+            <property name="disableOptions" label="disableOptions" type="Boolean"/>
+            <property name="disableNone" label="disableNone" type="Boolean"/>
+            <property name="disablePrefer" label="disablePrefer" type="Boolean"/>
+            <property name="isTempHistory" label="Is Temp History" type="Boolean"/>
+            <property name="tempHistory" label="Temp History" type="@salesforce/schema/Temp_History__c"/>
+            <property name="topPleaseNoteSection" label="Top Please Note Section" type="string"/>
+            <property name="pleaseNoteSection" label="Bottom Please Note Section" type="string"/>
+            <property name="checkCheckBoxesOnload" label="Is Onload Checkboxes Check" type="Boolean"/>
+            <!--Bug fix BRs-4045 -->
+            <property name="Minority_Owned_Organization" label="Minority_Owned_Organization" type="Boolean"/>
+            <property name="None_of_the_listed_Organizations" label="None_of_the_listed_Organizations" type="Boolean"/>
+            <property name="Org_Owned_by_Person_s_with_disabilities" label="Org_Owned_by_Person_s_with_disabilities" type="Boolean"/>
+            <property name="Woman_Owned_Organization" label="Woman_Owned_Organization" type="Boolean"/>
+            <property name="varOrganization_is_LGBTQI_Owned" label="Boolean Organization_is_LGBTQI_Owned" type="Boolean"/>
+            <property name="varVeteran_Owned_Organization" label="Boolean Veteran_Owned_Organization" type="Boolean"/>
+            <property name="varPrefer_not_to_answer" label="Boolean Prefer_not_to_answer" type="Boolean"/>
+			<property name="surveyEmail" label="Survey Email Address" type="String"/>
+            <property name="optOutOption" label="Opt Out Option" type="Boolean"/>
+
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
