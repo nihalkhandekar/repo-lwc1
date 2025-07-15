@@ -1,0 +1,37 @@
+<template>
+    <div class={apostilleContainerClass}>
+        <div class="apostille-container">
+            <!-- Header Section -->
+            <div class="custom-card-header">
+                <lightning-icon icon-name="standard:contract_line_outcome" size="large" class="header-icon"></lightning-icon>
+                <div class="header-text">
+                    <h1 class="title">{labels.Confirmation}</h1>
+                </div>
+            </div>
+            
+            <!-- Confirmation and Request Details -->
+            <div class="slds-form-element">
+                <span class="slds-form-element__label"><b>{labels.ThankYou}, {firstName} {lastName}</b></span>
+                <span class="slds-form-element__label">
+                   {labels.YourapostillerequesthasbeensuccessfullysubmittedBelowarethedetailsofyourrequest}:
+                    <span class="request-details">
+                        {labels.WorkOrderNumber}: <b>{workOrderNumber}</b>
+                    </span>
+                </span>
+                <span class="slds-form-element__label">
+                    {labels.Youcantrackthetatusofyourrequestatanytimebyclickingthelinkbelow}:
+                    <span class="request-details">
+                        <p class="track-link" onclick={navigateToTrack} >{labels.TrackYourApostilleRequest}</p>
+                    </span>
+                </span>
+            </div>
+        </div>
+        
+        <!-- Button Section -->
+        <div class="button-container">
+            <lightning-button variant="neutral" class="button-text" label={labels.PrintApostilleSubmissionDocument} icon-name="utility:print" onclick={openPrintModal}></lightning-button>
+            <lightning-button variant="brand" class="button-text" label={labels.DownloadPaymentReceipt} icon-name="utility:download" onclick={openReceiptModal}></lightning-button>
+        </div>
+    </div>
+
+</template>

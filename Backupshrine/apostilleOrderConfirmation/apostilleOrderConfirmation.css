@@ -1,0 +1,458 @@
+@media only screen and  (min-width: 1025px) {
+    .mainpage{
+        padding: 10px;
+        }
+        
+        .submitsection{
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 5px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background-color: #F6F9FF;
+            border: 1px solid #F3F3F3;
+            padding-top: 10px;
+            padding-left: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            color: #333;
+            font-weight: bold; /* Make the text thicker */
+            margin-left: 65px; /* Space between icon and text */
+            margin-top: -53px; /* Adjust this value to align with the icon */
+        }
+        
+        .header p {
+            margin-left: 60px;
+            font-size: 12.5px;
+            color: #333;
+            margin-top: -5px;
+            padding: 5px;
+            line-height: 1.2;
+        }
+        
+        
+        .header lightning-icon {
+            margin-right: 10px; /* Add margin on the right side of the icon */
+        }
+        
+        .page{
+            padding: 10px;
+        }
+        
+        .content{
+            padding-bottom: 10px;
+        }
+        
+        .container {
+            margin-bottom: 10px;
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Ensures that children don't overflow outside the rounded corners */
+            background-color: #fff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        
+        .header1 {
+            display: flex; /* Arrange header items horizontally */
+            background-color: #F6F9FF; /* Background color for the header */
+            border: 1px solid #F3F3F3;
+            color: #333; /* Text color for the header */
+            padding: 10px; /* Padding inside the header */
+            font-weight: bold; /* Optional: make header text bold */
+        }
+        
+        .header-item {
+            flex: 1; /* Distributes space equally */
+            text-align: left; /* Center-aligns text */
+        }
+        
+        .content1 {
+            display: flex; /* Arrange content columns horizontally */
+        }
+        
+        .column {
+            flex: 1; /* Distributes space equally for columns */
+            padding: 5px; /* Padding inside each column */
+        }
+        
+        .column:last-child {
+            border-right: none; /* Remove the border from the last column */
+        }
+        
+        .note{
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-container {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px; /* Rounded corners */
+            background-color: #fff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        
+        .checkbox-container label {
+            display: flex;
+            align-items: center; /* Align checkbox and label text */
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and label text */
+        }
+        
+        .questionsection{
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 5px;
+        }
+        
+        .questioncontent{
+            padding: 10px;
+        }
+        
+        .updownspace{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .clicklink{
+            color:  rgb(11, 167, 202);
+            text-decoration: underline;
+            transition: background-color 0.3s ease; /* Optional: for smooth transition effect */   
+        }
+        
+        .clicklink:hover {
+            background-color: rgb(130, 197, 231);
+        }
+        
+        .line{
+            color:  hsla(0, 0%, 95%, 100);
+            font-weight: bolder;
+        }  
+        
+        .slds-notify {
+            position: fixed;
+            bottom: 25px; /* Adjust this value to control how far from the bottom it is */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; /* Make sure it's on top of other content */
+            width:600px; /* Set a fixed width */
+            max-width: 90vw; /* Ensure it doesn't exceed 90% of the viewport width */
+            border-radius: 10px; /* Set the border radius for rounded corners */
+        }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .mainpage{
+        padding: 10px;
+        }
+        
+        .submitsection{
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 5px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background-color: #F6F9FF;
+            border: 1px solid #F3F3F3;
+            padding-top: 10px;
+            padding-left: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            color: #333;
+            font-weight: bold; /* Make the text thicker */
+            margin-left: 65px; /* Space between icon and text */
+            margin-top: -53px; /* Adjust this value to align with the icon */
+        }
+        
+        .header p {
+            margin-left: 60px;
+            font-size: 12.5px;
+            color: #333;
+            margin-top: -5px;
+            padding: 5px;
+            line-height: 1.2;
+        }
+        
+        
+        .header lightning-icon {
+            margin-right: 10px; /* Add margin on the right side of the icon */
+        }
+        
+        .page{
+            padding: 10px;
+        }
+        
+        .content{
+            padding-bottom: 10px;
+        }
+        
+        .container {
+            margin-bottom: 10px;
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Ensures that children don't overflow outside the rounded corners */
+            background-color: #fff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        
+        .header1 {
+            display: flex; /* Arrange header items horizontally */
+            background-color: #F6F9FF; /* Background color for the header */
+            border: 1px solid #F3F3F3;
+            color: #333; /* Text color for the header */
+            padding: 10px; /* Padding inside the header */
+            font-weight: bold; /* Optional: make header text bold */
+        }
+        
+        .header-item {
+            flex: 1; /* Distributes space equally */
+            text-align: left; /* Center-aligns text */
+        }
+        
+        .content1 {
+            display: flex; /* Arrange content columns horizontally */
+        }
+        
+        .column {
+            flex: 1; /* Distributes space equally for columns */
+            padding: 5px; /* Padding inside each column */
+        }
+        
+        .column:last-child {
+            border-right: none; /* Remove the border from the last column */
+        }
+        
+        .note{
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-container {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px; /* Rounded corners */
+            background-color: #fff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        
+        .checkbox-container label {
+            display: flex;
+            align-items: center; /* Align checkbox and label text */
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and label text */
+        }
+        
+        .questionsection{
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 5px;
+        }
+        
+        .questioncontent{
+            padding: 10px;
+        }
+        
+        .updownspace{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .clicklink{
+            color:  rgb(11, 167, 202);
+            text-decoration: underline;
+            transition: background-color 0.3s ease; /* Optional: for smooth transition effect */   
+        }
+        
+        .clicklink:hover {
+            background-color: rgb(130, 197, 231);
+        }
+        
+        .line{
+            color:  hsla(0, 0%, 95%, 100);
+            font-weight: bolder;
+        }  
+        
+        .slds-notify {
+            position: fixed;
+            bottom: 25px; /* Adjust this value to control how far from the bottom it is */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; /* Make sure it's on top of other content */
+            width: 600px; /* Set a fixed width */
+            max-width: 90vw; /* Ensure it doesn't exceed 90% of the viewport width */
+            border-radius: 10px; /* Set the border radius for rounded corners */
+        }
+}
+
+@media only screen and (max-width: 600px) {
+    .mainpage{
+        padding: 10px;
+        }
+        
+        .submitsection{
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-right: 5px;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            font-family: 'Salesforce Sans', Arial, sans-serif;
+            background-color: #F6F9FF;
+            border: 1px solid #F3F3F3;
+            padding-top: 10px;
+            padding-left: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 20px;
+            color: #333;
+            font-weight: bold; /* Make the text thicker */
+            margin-left: 65px; /* Space between icon and text */
+            margin-top: -53px; /* Adjust this value to align with the icon */
+        }
+        
+        .header p {
+            margin-left: 60px;
+            font-size: 12.5px;
+            color: #333;
+            margin-top: -5px;
+            padding: 5px;
+            line-height: 1.2;
+        }
+        
+        
+        .header lightning-icon {
+            margin-right: 10px; /* Add margin on the right side of the icon */
+        }
+        
+        .page{
+            padding: 10px;
+        }
+        
+        .content{
+            padding-bottom: 10px;
+        }
+        
+        .container {
+            margin-bottom: 10px;
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Ensures that children don't overflow outside the rounded corners */
+            background-color: #fff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        
+        .header1 {
+            display: flex; /* Arrange header items horizontally */
+            background-color: #F6F9FF; /* Background color for the header */
+            border: 1px solid #F3F3F3;
+            color: #333; /* Text color for the header */
+            padding: 10px; /* Padding inside the header */
+            font-weight: bold; /* Optional: make header text bold */
+        }
+        
+        .header-item {
+            flex: 1; /* Distributes space equally */
+            text-align: left; /* Center-aligns text */
+        }
+        
+        .content1 {
+            display: flex; /* Arrange content columns horizontally */
+        }
+        
+        .column {
+            flex: 1; /* Distributes space equally for columns */
+            padding: 5px; /* Padding inside each column */
+        }
+        
+        .column:last-child {
+            border-right: none; /* Remove the border from the last column */
+        }
+        
+        .note{
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-container {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px; /* Rounded corners */
+            background-color: #fff; /* Background color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+        }
+        
+        .checkbox-container label {
+            display: flex;
+            align-items: center; /* Align checkbox and label text */
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            margin-right: 10px; /* Space between checkbox and label text */
+        }
+        
+        .questionsection{
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-left: 5px;
+        }
+        
+        .questioncontent{
+            padding: 10px;
+        }
+        
+        .updownspace{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .clicklink{
+            color:  rgb(11, 167, 202);
+            text-decoration: underline;
+            transition: background-color 0.3s ease; /* Optional: for smooth transition effect */   
+        }
+        
+        .clicklink:hover {
+            background-color: rgb(130, 197, 231);
+        }
+        
+        .line{
+            color:  hsla(0, 0%, 95%, 100);
+            font-weight: bolder;
+        } 
+        
+        .slds-notify {
+            position: fixed;
+            bottom: 25px; /* Adjust this value to control how far from the bottom it is */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000; /* Make sure it's on top of other content */
+            width: 600px; /* Set a fixed width */
+            max-width: 90vw; /* Ensure it doesn't exceed 90% of the viewport width */
+            border-radius: 10px; /* Set the border radius for rounded corners */
+        }
+}

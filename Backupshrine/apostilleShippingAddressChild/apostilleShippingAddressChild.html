@@ -1,0 +1,104 @@
+<template>
+    <template if:true={isLoading}>
+        <!-- Loader -->
+        <div class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:address" size="large" class="header-icon"></lightning-icon>
+            <div>
+                <h1 class="header-title">Shipping Address</h1>
+                <p class="header-subtitle">Please enter the contact information and mailing address for the delivery of the Apostille certificate.</p>
+            </div>
+        </div>
+
+        <!-- Input Fields Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <div class="input-radio-group">
+                    <label class="radioFont">Same as Contact Address</label>
+                    <lightning-input type="radio" name="contactAddressSame" label="Yes" variant="label-hidden" value="Yes" checked={issameAsContactAddressStringChecked} onchange={handleSameAddress} disabled={readOnly}></lightning-input>
+                    <label class={radioCssDes}>Yes &nbsp; </label>
+                    <lightning-input type="radio" name="contactAddressSame" label="No" variant="label-hidden" value="No" checked={isNotsameAsContactAddressStringChecked} onchange={handleSameAddress} disabled={readOnly}></lightning-input>
+                    <label class={radioCssDes}>No</label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <!-- <div class="form-group">
+                    <label class="input-title" for="businessName">Business Name</label>
+                    <lightning-input label="Business Name" variant="label-hidden" name="businessName" value={businessName}  placeholder={businessNamePlaceholder} class="singleinput-field" read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>
+                </div> -->
+                 <div class="form-group half-width">
+                    <label class="input-title" for="businessName"> Business Name</label>
+                    <lightning-input label="Business Name" class="input-field" name="businessName" variant="label-hidden" value={businessName} placeholder={businessNamePlaceholder} read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>
+                </div> 
+                <!-- <div class="form-group half-width" style="display: none;"></div>
+                    <label class="input-title"><span class="required-indicator">*</span> Test</label>
+                <lightning-input label="Last Name Test" class="input-field" name="lastNametest" variant="label-hidden" read-only={readOnly} onchange={handleInputChange}></lightning-input>
+                </div>  -->
+            </div>
+
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title"><span class="required-indicator">*</span> First Name</label>
+                    <lightning-input label="First Name" class="input-field" name="firstName" variant="label-hidden" value={firstName} required  read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="input-title"><span class="required-indicator">*</span> Last Name</label>
+                    <lightning-input label="Last Name" class="input-field" name="lastName" variant="label-hidden" value={lastName} required  read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>
+                </div>
+                
+            </div>
+
+            <div class="dotted-line"></div>
+
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title" for="addressLine1"><span class="required-indicator">*</span> Address Line 1 </label>
+                    <div class="icon-input-container"> 
+                        <lightning-icon icon-name="utility:home" size="x-small" class="left-icon"></lightning-icon>
+                        <lightning-input label="Address Line 1"  variant="label-hidden" name="addressLine1" value={addressLine1} required class="input-field" placeholder={addressLine1Placeholder} read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>                        
+                    </div>
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="input-title" for="suite"> Suite/Apartment/Floor </label>
+                        <lightning-input label="Suite/Apartment/Floor" variant="label-hidden" name="suite" value={suite} placeholder={suitePlaceholder}  class="input-field" read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-input>                      
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title" for="City"><span class="required-indicator">*</span> City</label>
+                        <lightning-combobox  label="City"  variant="label-hidden" name="city" value={city} required class="input-field" placeholder="Select city" read-only={isFieldReadOnly} options={cityOptions} onchange={handleInputChange}></lightning-combobox >                        
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="input-title" for="State"><span class="required-indicator">*</span> State </label> 
+                        <lightning-combobox  label="State" variant="label-hidden" name="state" value={state} placeholder="Select state" options={stateOptions} class="input-field" read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-combobox >                      
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title" for="zipCode"><span class="required-indicator">*</span> Zip Code</label>
+                        <lightning-input label="Zip Code"  variant="label-hidden" name="zipCode" value={zipCode} required class="input-field" placeholder={ZipPlaceholder} read-only={isFieldReadOnly}  onchange={handleInputChange}></lightning-input>                        
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="input-title" for="country"><span class="required-indicator">*</span> Country </label> 
+                        <lightning-combobox  label="Country" variant="label-hidden" name="country" value={country} placeholder="Select country" options={countryOptions} class="input-field" read-only={isFieldReadOnly} onchange={handleInputChange}></lightning-combobox >                      
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
+</template>

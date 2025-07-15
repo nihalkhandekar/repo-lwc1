@@ -1,0 +1,256 @@
+<template>
+<lightning-card title="Search By">
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Work Order Number"
+                id="ApplicationId"
+                type="text" 
+                value={ApplicationId} 
+                onchange={handleApplicationIdChange}
+                placeholder="Enter Work Order Number">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Requestor Name"
+                id="RequestorName"
+                type="text" 
+                value={RequestorName} 
+                onchange={handleRequestorNameChange}
+                placeholder="Enter Requestor Name">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Appostile Date"
+                id="AppliedDate"
+                type="date" 
+                value={AppliedDate} 
+                onchange={handleAppliedDateChange}
+                placeholder="Enter Appostile Date">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Appostile Number"
+                id="CertificateNumber"
+                type="text" 
+                value={CertificateNumber} 
+                onchange={handleCertificateNumberChange}
+                placeholder="Enter Appostile Number">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-combobox 
+                label="Signed By"
+                id="SignedBy"
+                value={SignedBy} 
+                options={SignedByOptions} 
+                onchange={handleSignedByChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-combobox 
+                label="Official Capacity"
+                id="Position"
+                value={Position} 
+                options={PositionOptions} 
+                onchange={handlePositionChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-col slds-size_3-of-12 slds-p-around_x-small">
+            <lightning-input 
+                label="Country"
+                id="Country"
+                type="text" 
+                value={Country} 
+                onchange={handleCountryChange}
+                placeholder="Enter Country Name">
+            </lightning-input>
+        </div>
+    </div>
+
+    <!-- BUTTON FOR SEARCH AND CANCEL -->
+    <div class="slds-grid slds-grid_align-end slds-m-top_medium">
+        <div class="slds-col slds-size_auto slds-p-around_small">
+            <lightning-button 
+                label="Clear all" 
+                onclick={handleClear}
+                class="slds-m-right_small">
+            </lightning-button>
+            <lightning-button 
+                label="Search" 
+                onclick={handleSearch} 
+                variant="brand">
+            </lightning-button>
+        </div>
+    </div>  
+</lightning-card>
+
+
+<lightning-card>
+    <!-- Filter Section -->
+    <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+        <div class="button-container">
+        
+            <div class="left-button slds-p-left_small">
+                <span class="slds-text-title_bold slds-m-right_x-small">Work Order:</span>
+                <lightning-badge
+                    label={recordCountValue}
+                    class="slds-badge_inverse">
+                </lightning-badge>
+            </div>
+
+            <div class="right-buttons">
+                <lightning-badge
+                    data-id="current-day"
+                    label="Current day"
+                    class={badgeClassCurrentDay}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-week" 
+                    label="This week"
+                    class={badgeClassThisWeek}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-month"
+                    label="This month"
+                    class={badgeClassThisMonth}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-quarter"
+                    label="This quarter"
+                    class={badgeClassThisQuarter}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>
+                <lightning-badge
+                    data-id="this-year"
+                    label="This year"
+                    class={badgeClassThisYear}
+                    onclick={handleBadgeClick}>
+                </lightning-badge>                   
+            
+                <lightning-button-menu
+                    icon-position="right"
+                    data-id="filterMenu"
+                    alternative-text="Filter By Status"
+                    title="Filter"
+                    tooltip="Filter by status"
+                    icon-name="utility:filterList"
+                    onselect={handleFilterSelect}
+                    class="slds-button_icon slds-button_icon-inverse custom-button-menu">
+                    <lightning-menu-item label="New" value="New"></lightning-menu-item>
+                    <lightning-menu-item label="Pending" value="Pending"></lightning-menu-item>
+                    <lightning-menu-item label="Accepted" value="Accepted"></lightning-menu-item>
+                    <lightning-menu-item label="Rejected" value="Rejected"></lightning-menu-item>
+                </lightning-button-menu>
+
+                <span class="slds-text-body_regular slds-m-right_small custom-label" onclick={handleFilterClick}>Filter by status</span>
+
+
+            <lightning-button
+                 label="Add New Order"
+                 icon-name="utility:add"
+                 onclick={handleNewOrderButton}
+                 variant="brand"
+                 class="slds-m-right_small">
+             </lightning-button>
+             <template if:true={isModalOpen}>
+                 <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+                     <div class="slds-modal__container custom-modal-container">
+                         <!-- Modal/Popup Header -->
+                         <header class="slds-modal__header">
+                             <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" 
+                                     title="Close" onclick={closeModal}>
+                                 <lightning-icon class="custom-close-icon" icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                                 <span class="slds-assistive-text">Close</span>
+                             </button>
+                             <h2 class="slds-text-heading_medium">Order Intake</h2>
+                         </header>
+     
+                         <!-- Modal/Popup Body -->
+                         <div class="slds-modal__content slds-p-around_medium ">
+                             <lightning-flow 
+                                 flow-api-name="Apostille_Add_New_Order" 
+                                 onstatuschange={handleStatusChange}
+                             ></lightning-flow>
+                         </div>
+     
+                         <!-- Modal/Popup Footer -->
+                         <footer class="slds-modal__footer">
+                             <lightning-button variant="neutral" label="Close" onclick={closeModal}></lightning-button>
+                         </footer>
+                     </div>
+                 </section>
+                 <div class="slds-backdrop slds-backdrop_open"></div>
+             </template>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+<!-- RELATED RESULT TO BE DISPLAYED HERE -->
+    <lightning-datatable
+    key-field="Id"
+    data={transformedRecords} 
+    columns={columns}
+    oncellclick={handleCellClick}
+    hide-checkbox-column>
+    </lightning-datatable>
+
+    <!-- Pagination component -->
+    <div class="pagination-container">
+        <!-- Records per page selector -->
+        <label for="recordsPerPage">Records/page:</label>
+            <select id="recordsPerPage" onchange={handlePageSizeChange}>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+            </select>
+            <!-- Left arrow button -->
+            <lightning-button-icon 
+                size="small" 
+                class="slds-p-around_small" 
+                variant="bare" 
+                disabled={disableLeftArrow} 
+                onclick={handlePrevious} 
+                icon-name="utility:chevronleft">
+            </lightning-button-icon>
+                
+            <!-- Input box for the page number -->
+                <input 
+                type="number" 
+                class="page-input" 
+                value={currentPage} 
+                min="1" 
+                max={totalPages} 
+                onchange={handlePageInput} />
+                
+            <span class="page-total">/ {totalPages}</span>
+                
+            <!-- Right arrow button -->
+            <lightning-button-icon 
+                size="small" 
+                class="slds-p-around_small" 
+                variant="bare" 
+                onclick={handleNext} 
+                disabled={disableRightArrow} 
+                icon-name="utility:chevronright">
+            </lightning-button-icon>
+    </div>
+
+
+
+
+</lightning-card>
+
+</template>

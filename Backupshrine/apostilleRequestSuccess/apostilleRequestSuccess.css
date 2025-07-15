@@ -1,0 +1,148 @@
+/* Apostille Container */
+
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Regular.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Bold.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.hidden {
+    display: none; /* This class hides the parent content */
+}
+
+
+.apostille-container {
+    margin-left: -5rem;
+    width: 59.3125rem;
+    height: 17rem;
+gap: 0px;
+border-radius: 12px 12px 12px 12px;
+border: 0.5px 0px 0px 0px;
+opacity: 0px;
+background: rgba(255, 255, 255, 1);
+border: 0.5px solid rgba(201, 201, 201, 1);
+box-shadow: 2px 2px 2px 2px rgba(30, 30, 30, 0.05);
+}
+
+/* Custom Card Header */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 0 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Header Title */
+.header-text .title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+    padding-left: 0.5rem;
+    font-family: 'SF Pro', sans-serif; 
+}
+
+.content{
+    width: Fill (1,200px)px;
+height: Hug (200px)px;
+padding: 12px 0px 0px 0px;
+gap: 24px;
+opacity: 0px;
+}
+
+.text1{
+    width: 1176px;
+    height: 20px;
+    gap: 0px;
+    opacity: 0px;
+    font-family: 'SF Pro';
+    font-size: 14px;
+    font-weight: 590;
+    line-height: 20px;
+    text-align: left;
+    color: rgba(24, 24, 24, 1);
+}
+
+.text2{
+    width: 1176px;
+height: 54px;
+gap: 0px;
+opacity: 0px;
+font-family: 'SF Pro';
+font-size: 14px;
+font-weight: 700;
+line-height: 20px;
+text-align: left;
+color: rgba(24, 24, 24, 1);
+}
+
+.text3{
+    width: 1176px;
+height: 54px;
+gap: 0px;
+opacity: 0px;
+font-family: 'SF Pro';
+font-size: 14px;
+font-weight: 400;
+line-height: 20px;
+text-align: left;
+}
+
+.slds-form-element {
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.slds-form-element__label {
+    font-size: 0.875rem;
+    color: rgba(24, 24, 24, 1);
+    margin-bottom: 1.5rem; 
+    margin-left: 0.75rem;
+    display: block; 
+}
+
+.slds-form-element__label:last-of-type {
+    margin-bottom: 0;
+}
+
+.button-container {
+    margin-top: 1rem;
+    margin-left: 15rem;
+}
+
+.button-container lightning-button {
+    margin-left: 1rem; 
+}
+
+.request-details {
+    display: block; /* Ensure this span takes up full width and starts on a new line */
+    margin-top: 0.5rem; /* Space above the bold text */
+    font-weight: normal; /* Ensure bold text has normal font weight */
+}
+
+.button-text{
+    font-size: 0.875rem;
+    font-family: 'SF Pro', sans-serif; 
+    font-weight: 400;
+}
+
+.track-link {
+    color: #0070d2;
+    /* text-decoration: none; */
+    font-weight: 400;
+    margin-bottom: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}

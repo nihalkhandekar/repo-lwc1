@@ -1,0 +1,278 @@
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Aligns the items to the left and right */
+    align-items: center; /* Centers items vertically */
+    width: 100%; /* Ensures the header takes the full width */
+    background: #EEF4FF;
+
+}
+
+.downloadbutton{
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --sds-c-button-brand-color-background: rgba(0, 58, 98, 1);
+    --sds-c-button-brand-text-color: #ffffff;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-font-weight: 400;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-start:6px;
+    --slds-c-button-spacing-inline-end:16px;
+    --slds-c-button-spacing-block-end:6px;
+    --slds-c-button-spacing-inline-start:16px;
+}
+
+.printbutton{
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --sds-c-button-brand-color-background: #ffffff;
+    --sds-c-button-brand-text-color: #7EBDE8;    ;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-font-weight: 400;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-start:6px;
+    --slds-c-button-spacing-inline-end:16px;
+    --slds-c-button-spacing-block-end:6px;
+    --slds-c-button-spacing-inline-start:16px;
+    margin-right: 16px;
+    
+}
+
+.popupheader{
+    --slds-c-modal-radius-border: 16px;
+}
+.popupfooter{
+    --slds-c-modal-radius-border: 16px;
+}
+
+.header-label {
+    /* Optional styling for the header label */
+    font-size: 18px;
+    font-weight: 590;
+    color: #0C7CCE;
+    align-items: center;
+}
+
+.close-icon{
+    cursor: pointer;
+}
+
+.page-title{
+    font-family: 'SF Pro', sans-serif; /* Font family: SF Pro */;
+}
+
+
+.heading {
+    font-size: 14px;
+    color: #181818;
+    font-weight: 590;
+    margin-bottom: 1.5rem;
+}
+
+.description {
+    font-size: 14px;
+    margin: 5px 0;
+    margin-bottom: 1rem;
+}
+
+.work-order {
+    font-size: 14px;
+    margin-bottom: 1.5rem;
+}
+
+.track-description{
+    font-size: 14px;
+    color: #181818;
+    margin-bottom: 1rem;
+}
+
+.track-link {
+    color: #0070d2;
+    /* text-decoration: none; */
+    font-weight: 400;
+    margin-bottom: 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* .track-link:hover {
+    text-decoration: underline;
+} */
+
+
+
+
+/* Header Section */
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    /* margin: 1rem; */
+    /* border-radius: 12px; */
+    box-sizing: border-box;
+    padding: 12px;
+    gap: 12px;
+    height: 68px;
+    margin-bottom: 12px;
+}
+
+.docTitle{
+font-size: 16px;
+font-weight: 700;
+line-height: 24px;
+text-align: left;
+color: #181818;
+}
+
+.docDescription{
+font-size: 12px;
+font-weight: 400;
+line-height: 18px;
+text-align: left;
+color: #5C5C5C;
+
+}
+
+.custom-table-container{
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.custom-header{
+    background-color: #F3F3F3;
+    border: 1px solid #E5E5E5;
+    overflow: hidden;
+}
+
+.docHeaderText .slds-truncate{
+font-size: 13px;
+font-weight: 700;
+line-height: 20px;
+text-align: left;
+color: #181818;
+
+}
+
+.docContentText .slds-truncate{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    color: #181818;
+    
+    }
+
+/* .documents-section {
+    margin: 1rem;
+    padding: 0.5rem;
+} */
+
+/* .documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+} */
+
+/* .table-header {
+    background-color: #f4f4f4;
+    color: #131212;
+} */
+
+/* .table-header-cell {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+} */
+
+/* .table-cell {
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400
+}
+
+.table-row {
+    background-color: #fff;
+} */
+
+.total-fee {
+    background-color: #EEF4FF;
+    border: 1px solid #F3F3F3;
+    padding: 8px;
+    
+}
+
+.total-fee-int{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.totalFees{
+    margin-left: 14px;
+}
+
+.mailing-section {    
+    border-radius: 12px;
+    border: 1px solid #E5E5E5;
+    margin-bottom: 12px;
+}
+
+
+.mailing-table-header{
+    background-color: #EAEDF06F;
+    padding: 8px;
+}
+
+.mailing-table-header-cell-left{
+    width: 50%;
+    padding: 8px;
+    color: #141414;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    border-top-left-radius: 12px;
+}
+
+.mailing-table-header-cell-right{
+    padding: 8px;
+    color: #333;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    border-top-right-radius: 12px;
+
+}
+
+
+.mailing-table-cell-left{
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom-left-radius: 12px;
+
+
+
+}
+
+.mailing-table-cell-right{
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    border-bottom-right-radius: 12px;
+}

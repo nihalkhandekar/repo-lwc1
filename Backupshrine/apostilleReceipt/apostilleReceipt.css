@@ -1,0 +1,23 @@
+:host {
+    --slds-c-modal-content-color-background:  rgba(255, 255, 255, 1);
+}
+
+.modal-text{
+    font-size: 14px;
+    color: rgba(24, 24, 24, 1);
+    margin-bottom: 0.75rem; 
+    margin-left: 0.5rem;
+    display: block; 
+    font-weight: 590;
+    line-height: 20px;
+}
+.work-order {
+    margin-bottom: 1.5rem; 
+}
+
+.total-amount {
+    margin-bottom: 0.75rem; 
+}
+.close-icon{
+    cursor: pointer;
+}

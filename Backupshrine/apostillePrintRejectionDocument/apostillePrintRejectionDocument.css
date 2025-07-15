@@ -1,0 +1,32 @@
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+}
+
+
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Aligns the items to the left and right */
+    align-items: center; /* Centers items vertically */
+    width: 100%; /* Ensures the header takes the full width */
+    background: #EEF4FF;
+    margin-top: -11px;
+
+}
+
+.header-label {
+    /* Optional styling for the header label */
+    font-size: 18px;
+    font-weight: 590;
+    color: #BA0517;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.close-icon{
+    cursor: pointer;
+}

@@ -1,0 +1,37 @@
+<template>
+    <div class="form-stack">
+        <div class="form-card">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="custom:custom17" size="large" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">Payment</h1>
+                <p class="description">Please Complete the payment below to finalize your order.</p>
+            </div>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <label class="checkbox-title">Payment Type:</label>
+            <div class="radio-stack">
+                <lightning-input type="radio" name="paymentType" label="Credit Card" value="Credit Card"></lightning-input>
+                <lightning-input type="radio" name="paymentType" label="Check" value="Check"></lightning-input></div>
+            </div>
+
+            <div class="total-amt"><div class="input-stack">
+            <p class="required-question"><span class="required-star">*</span> Total Amount Due</p></div></div>
+            <p class="price">$220.00</p>
+            <div class="input-group1">
+                <div class="field-stack">
+                <lightning-input label="Credit Card Number" required class="input-field" placeholder="4111 1111 1111 1111"></lightning-input></div>
+                <lightning-input label="Name on Card" required class="input-field" placeholder="John Doe"></lightning-input>
+            </div>
+
+            <div class="input-group">
+                <lightning-input label="Expiry Date" required class="input-field" placeholder="12/2026"></lightning-input>
+                <lightning-input label="CVV" required class="input-field" placeholder="***"></lightning-input>
+            </div>
+        </div>
+    </div>   
+    </div>
+</template>

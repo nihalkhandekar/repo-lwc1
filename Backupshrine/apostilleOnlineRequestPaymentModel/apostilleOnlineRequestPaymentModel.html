@@ -1,0 +1,182 @@
+<template>
+    <lightning-modal-header class="SE-ModalHeader">
+        <div class="SE-ModalHeaderTitle">
+            <h2>Add Payment</h2>
+        </div>
+        <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={cloeModels}
+            class="custom-modal__close"></lightning-button-icon>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="SE-modalMainBody">
+            <div class="SE-modalFormStack">
+                <div class="slds-grid SE-modalFormStackSectionInputRow75">
+                    <div class="slds-col SE-customCol">
+                        <label class="SE-inputLabel" for="workOrder">Work Order #</label>
+                        <lightning-input label="Work Order #" name="workOrder" variant="label-hidden" id="workOrder"
+                            value={workOrder} placeholder="e.g. 2024-10035" type="text" disabled></lightning-input>
+                    </div>
+                    <div class="slds-col SE-customCol">
+                        <label class="SE-inputLabel" for="dateOfPayment">Date of Payment</label>
+                        <lightning-input label="Date of Payment" name="dateOfPayment" variant="label-hidden"
+                            id="dateOfPayment" value={dateOfPayment} type="date"></lightning-input>
+                    </div>
+                    <div class="slds-col SE-customCol">
+                        <label class="SE-inputLabel" for="totalPaymentAmount">Total Payment Amount</label>
+                        <lightning-input label="Total Payment Amount" name="totalPaymentAmount" variant="label-hidden"
+                            value={totalAmountPayment} placeholder="e.g. $120.00" type="currency" disabled></lightning-input>
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSectionHeader">
+                    <div class="SE-modalFormStackSectionHeaderIcon">
+                        <lightning-icon icon-name="action:add_contact" size="small"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                        <h2 class="slds-text-heading_small headerTitle">Payment Details</h2>
+                        <p class="slds-text-body_small">Enter payment details to continue further.</p>
+                    </div>
+                    <div class="slds-grid slds-align_absolute-right slds-p-top_small">
+                        <lightning-button label="Add Payment" variant="brand" icon-name="utility:add"
+                            class="save-button" onclick={handleAddPayment}></lightning-button>
+                    </div>
+                </div>
+
+                <div class="SE-modalFormStackSectionContent">
+
+
+                        <template for:each={previousTrnxnPayment} for:item="trxnFee">
+                            <div key={trxnFee.Id}>
+
+                                <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel">Payment Type</label>
+                                        <lightning-input label="Payment Type" variant="label-hidden" value={trxnFee.Payment_Type__c} disabled></lightning-input>
+                                    </div>
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel">Payment Date</label>
+                                        <lightning-input label="Payment Date" variant="label-hidden" value={trxnFee.CreatedDate} disabled></lightning-input>
+                                    </div>
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel">Payment Amount</label>
+                                        <lightning-input label="Payment Amount" variant="label-hidden" value={trxnFee.Card_Number__c} disabled></lightning-input>
+                                    </div>
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel">Payment Amount</label>
+                                        <lightning-input label="Payment Amount" variant="label-hidden" value={trxnFee.TotalFeeAmount} disabled></lightning-input>
+                                    </div>                                </div> 
+                            </div>
+                        </template>        
+
+
+
+
+                    <template for:each={rows} for:item="row">
+                        <div key={row.id} data-row-id={row.id}>
+                                <template if:true={row.isRemovable}>
+                                    <div class="slds-col slds-size_1-of-1 slds-text-align_right">
+                                        <lightning-button 
+                                            variant="destructive-text" 
+                                            label="Remove" 
+                                            title="Remove Payment" 
+                                            icon-name="utility:dash" 
+                                            onclick={handleRemovePayment} 
+                                            data-row-id={row.id}>
+                                        </lightning-button>
+                                    </div>
+                                </template> 
+                            <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                <div class="slds-col SE-customCol">
+                                    <label class="SE-inputLabel" for="paymentType">
+                                        <span class="required-indicator">*</span>Payment Type
+                                    </label>
+                                    <lightning-combobox label="Payment Type" name="paymentType" variant="label-hidden"
+                                        value={row.Payment_Type__c} placeholder="e.g. Credit Card" options={paymentTypeOptions}
+                                        onchange={handleTypeChange} required>
+                                    </lightning-combobox>
+                                </div>
+
+                                <template if:true={row.isCreditCard}>
+                                    <!-- Card Type Field -->
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel" for="cardType">
+                                            <span class="required-indicator">*</span>Card Type
+                                        </label>
+                                        <lightning-combobox label="Card Type" name="cardType" variant="label-hidden"
+                                            data-row-id={row.id} value={row.cardType} placeholder="e.g. Visa"
+                                            options={cardTypeOptions} onchange={handleInputChange} required>
+                                        </lightning-combobox>
+                                    </div>
+
+                                    <!-- Last 4 Digits Field -->
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel" for="last4Digits">
+                                            <span class="required-indicator">*</span>Last 4 digits of Credit Card
+                                        </label>
+                                        <lightning-input label="Last 4 Digits" name="last4Digits" variant="label-hidden"
+                                            data-row-id={row.id} value={row.Card_Number__c} placeholder="e.g. 3421"
+                                            type="number" onchange={handleInputChange} required>
+                                        </lightning-input>
+                                    </div>
+
+                                    <!-- Payment Amount Field -->
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel" for="paymentAmount">
+                                            <span class="required-indicator">*</span>Payment Amount
+                                        </label>
+                                        <lightning-input label="Payment Amount" name="paymentAmount"
+                                            variant="label-hidden" data-row-id={row.id} value={row.TotalFeeAmount}
+                                            placeholder="e.g. $60.00" type="currency" onchange={handleInputChange} required>
+                                        </lightning-input>
+                                    </div>
+                                </template>
+
+                                <template if:true={row.isCheque}>
+
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel" for="chequeNumber">
+                                            <span class="required-indicator">*</span>Check #
+                                        </label>
+                                        <lightning-input label="Cheque Number" name="chequeNumber" variant="label-hidden"
+                                            data-row-id={row.id} value={row.checkNumber} placeholder="e.g 23890"
+                                            type="text" onchange={handleInputChange} required>
+                                        </lightning-input>
+                                    </div>
+
+                                    <div class="slds-col SE-customCol">
+                                        <label class="SE-inputLabel" for="paymentAmountCheck">
+                                            <span class="required-indicator">*</span>Payment Amount
+                                        </label>
+                                        <lightning-input label="Payment Amount" name="paymentAmountCheck"
+                                            variant="label-hidden" data-row-id={row.id} value={row.paymentAmountCheck}
+                                            placeholder="e.g. $60.00" type="currency" onchange={handleInputChange} required>
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col SE-customCol"></div>
+                                </template>
+                            </div>
+
+                        </div>
+                    </template>
+
+                </div>
+            </div>
+        </div>
+    </lightning-modal-body>
+
+    <lightning-modal-footer class="SE-modalFooter">
+        <div class="slds-button-group">
+            <div class="button-left-group">
+                <lightning-button label="Print Payment Receipt" variant="neutral" class="button-spacing print-buttons" disabled={showAfterSave}
+                    onclick={handlePrintPaymentReceipt}></lightning-button>
+            </div>
+            
+            <div class="button-right-group SE-modalFooterButtonGroup">
+                <button class="slds-button SE-borderLessButton" onclick={cloeModels}>Cancel</button>
+                <lightning-button variant="brand" label="Add" class="save-button"
+                    onclick={handleAdd}></lightning-button>
+            </div>
+        </div>
+    </lightning-modal-footer>
+       <c-toast-message-state-modal></c-toast-message-state-modal>
+</template>

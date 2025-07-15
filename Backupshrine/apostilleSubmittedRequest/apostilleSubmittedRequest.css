@@ -1,0 +1,953 @@
+/* submittedRequests.css */
+.dashboard-container {
+    padding: 1rem;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+}
+
+
+
+.breadcrumb-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.td .slds-truncate {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.popupheader{
+    border-radius: 16px 16px 0px 0px;
+}
+
+.popupfooter{
+    border-radius: 0px 0px 16px 16px;
+}
+
+.breadcrumb {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb a {
+    margin-right: 4px;
+    color: #09629F;
+    text-decoration: none;
+    font-size: 16px;
+font-weight: 510;
+line-height: 24px;
+}
+
+.subtextbox {
+    opacity: 1; /* make the subtextbox visible */
+    background: rgba(238, 244, 255, 1);
+    border: 0.4px solid rgba(7, 132, 218, 1);
+    padding: 4px 8px;
+    border-radius: 8px;
+    margin-left: 4px;
+    display: inline-block; /* make it an inline-block element */
+    vertical-align: middle; /* align it vertically with the icon */
+}
+.subtextbox span {
+    color: rgba(0, 22, 36, 1);
+font-size: 16px;
+font-weight: 510;
+line-height: 24px;
+}
+
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+
+.search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end; /* Align the search box to the right */
+    margin-bottom: 1rem;
+}
+
+.search-box-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.search-box {
+    padding: 0.5rem;
+    border: 1px solid #c9c9c9;
+    border-radius: 8px;
+    width: 350px; /* Adjust width as needed */
+    height: 40px;
+}
+
+.search-icon {
+    position: absolute;
+    top: 40%;
+    right: 24px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Disable clicking on the icon */
+    height: 15px;
+    width: 15px;
+}
+
+.dashboard-cards {
+    display: flex;
+    flex-direction: column;
+    padding: 0rem;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 2px 12px 0px #0000000A;
+    border: 1px solid #E5E5E5;
+    transition: transform 0.3s ease-in-out;
+    position: relative;
+    height: 100%;
+}
+
+/* .dashboard-card:hover {
+    transform: translateY(-5px);
+} */
+
+.dashboard-card {
+    background-color: #f6f9ff;
+    width: 1864px;
+    height: 78px;
+
+}
+
+.dashboard-card-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+
+    ;
+}
+
+.dashboard-card-icon {
+    margin-right: 1rem;
+    align-self: flex-start;
+}
+
+.dashboard-icon {
+    margin: 0;
+}
+
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #181818;
+    margin: 0;
+}
+
+.card-description {
+    font-size: 12px;
+    color: #5C5C5C;
+    margin-top: 0.1rem;
+    font-weight: 400;
+}
+
+
+.custom-table-container {
+    padding: 24px; /* Adds padding around the table */
+    table-layout: fixed;
+    width: 100%;
+}
+
+.custom-table {
+    border: 1px solid #d8dde6; /* Adds a border to the table */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-table thead tr.custom-header th {
+    background-color: #f6f9ff; /* Custom background color for the header */
+    font-weight: 700;
+    font-size: 14px;
+    color: #181818;
+    height: 32px; /* Fixed height for table header */
+    vertical-align: middle;
+}
+
+
+.custom-header {
+    width: 144px; /* Set the width */
+    height: 32px; 
+    background-color: #f6f9ff; /* Customize the background color of the header */
+    font-weight: 700;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.no-border {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.loader-row {
+    height: 100px; /* Adjust height as needed for proper loader centering */
+}
+
+.no-border-row td {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+.column1 {
+    max-width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 200px;
+}
+
+.column2 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.column3 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.column4 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.column5 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.column6 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.column7 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.column8 {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 150px;
+}
+
+.custom-column {
+    font-size: 14px;
+    height: 40px; /* Fixed height for table rows */
+    vertical-align: middle;
+    font-weight: 400;
+    max-width: 150px; /* Ensure the columns do not stretch with data */
+    min-width: 150px; /* Ensure minimum space is fixed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status-in-approve,
+.status-in-reject,
+.status-inProgress {
+    width: 93px; /* Set the width */
+    height: 22px; /* Set the height */
+    line-height: 22px; /* Align text vertically in the center */
+    border-radius: 23px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 0; /* Remove padding to ensure exact dimensions */
+}
+
+.status-in-approve {
+    color: #2e844a;
+}
+
+.status-in-reject {
+    color: #ba0517;
+}
+
+.status-inProgress {
+    color: #DD7A01;
+    
+}
+
+.sort-icon {
+    width: 7.87px;
+    height: 10.62px;
+    position: relative;
+    /* top: 0.69px; */
+    left: 2.08px;
+    gap: 0px;
+    fill: #747474;
+    margin-right: 4px;
+
+  }
+
+  .sort-icon svg.slds-icon {
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    top: 10px;
+    left: 120px;
+}
+
+
+.custom-column .actionView {
+    color: #003a62;
+    text-decoration: none;
+}
+
+
+  .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 24px; 
+      padding: 8px;
+      justify-content: center; 
+    margin-bottom: 24px;
+  }
+  
+.pagination-controls lightning-button {
+    --sds-c-button-radius-border: 8px;
+    background-color:white; 
+    color: white; 
+    border-radius: 8px; 
+    border: 1px;
+    width: 86px;
+    height: 32px;
+    transition: background-color 0.3s ease; 
+    margin-right: var(--prevButtonSetInAnotherLanguage,0px);
+}
+
+.pagination-controls lightning-button:hover {
+    background-color: #005bb5; 
+    margin-right: var(--prevButtonSetInAnotherLanguage,0px);
+}
+
+.pagination-controls lightning-button[disabled] {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed;
+    margin-right: var(--prevButtonSetInAnotherLanguage,0px);
+}
+.slds-button__icon {
+    width: 11.38px;
+    height: 9.23px;
+    position: relative;
+    top: 3.37px;
+    left: 2.3px;
+    gap: 0px;
+    opacity: 1; /* Make sure the icon is visible */
+}
+
+.paginationText {
+    color: #747474;
+    font-size: 14px;
+}
+
+
+.pagination-info {
+    color: #333; /* Text color */
+    font-size: 10px; /* Font size for pagination info */
+    margin-right: 1rem; /* Space between info and buttons */
+}
+
+.pagination-info span {
+    font-weight: bold; /* Make the current page number bold */
+}
+
+.custom-modal-container {
+    width: 70%;
+    height: 50%;
+    max-width: 95%;
+    max-height: 95%;
+    overflow: hidden; /* Ensure no scrollbars appear */
+    border-radius: 16px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between; /* Aligns the items to the left and right */
+    align-items: center; /* Centers items vertically */
+    width: 100%; /* Ensures the header takes the full width */
+    background: #fef1ee;
+    padding: 16px;
+
+}
+
+.header-label {
+    /* Optional styling for the header label */
+    font-size: 18px;
+    font-weight: 590;
+    color: #ba0517;
+    align-items: center;
+}
+
+.close-icon {
+    cursor: pointer;
+}
+
+.body-content {
+    height: 100px;
+}
+
+.body-matter {
+    font-weight: 400;
+    font-size: 16px;
+    columns: #181818;
+}
+
+.footer-content {
+    width: 100%; /* Ensures the header takes the full width */
+    height: 56px;
+    background: #f3f3f3;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+}
+
+.no-button {
+    width: 51px;
+    height: 32px;
+    border-radius: 8px;
+    background: #ffffff;
+    border: 1px solid #003a62;
+    color: #003a62;
+}
+
+.yes-button {
+    width: 56px;
+    height: 32px;
+    border-radius: 8px;
+    background: #ba0517;
+    color: #ffffff;
+    border: none;
+}
+
+.no-data-message {
+    font-size: 1rem;
+    color: #6b7078;
+    text-align: center;
+    padding: 1rem;
+}
+
+
+.input-field {
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
+    /*border: 1px solid #C9C9C9;*/
+    border-radius: 8px 8px 8px 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    opacity: 0px;
+    background-color: #FFFFFF;
+    --input-color-background:#FFFFFF;
+    --dxp-s-form-element-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight:400;
+    --dxp-s-form-element-text-line-height:20px;
+    --dxp-s-form-element-color-border:#C9C9C9;
+    --dxp-s-form-element-text-color:#181818;
+    --sds-c-input-color-border:#C9C9C9;
+    --border-width:1px;
+    --dxp-s-form-element-width-border:1px;
+    --dxp-c-input-width-border:1px;
+    --sds-c-input-radius-border:8px 8px 8px 8px;
+    --sds-c-input-color-background:#FFFFFF;
+}
+
+.input-field-combobox {
+    width: 100%;
+    background: rgba(255, 255, 255, 1);
+    /*border: 1px solid #C9C9C9;*/
+    border-radius: 8px 8px 8px 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 0px;
+    margin-top: -6px;
+    opacity: 0px;
+    background-color: #FFFFFF;
+    --input-color-background:#FFFFFF;
+    --dxp-s-form-element-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight:400;
+    --dxp-s-form-element-text-line-height:20px;
+    --dxp-s-form-element-color-border:#C9C9C9;
+    --dxp-s-form-element-text-color:#181818;
+    --sds-c-input-color-border:#C9C9C9;
+    --border-width:1px;
+    --dxp-s-form-element-width-border:1px;
+    --dxp-c-input-width-border:1px;
+    --sds-c-input-radius-border:8px 8px 8px 8px;
+    --sds-c-input-color-background:#FFFFFF;
+}
+
+
+.slds-combobox__form-element {
+    -webkit-box-flex: 1 !important;
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+    margin-top: -20px !important;
+}
+
+.custom-table-container {
+    /* margin-top : 24px; Adds padding around the table */
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  .custom-table {
+      width: 100%;
+      /* border: 1px solid #d8dde6; Adds a border to the table */
+      border-radius: 12px;
+      overflow: hidden;
+  }
+  
+  .custom-table thead tr.custom-header th {
+      background-color: #f6f9ff; /* Custom background color for the header */
+      font-weight: 700;
+      font-size: 14px;
+      color: #181818;
+      height: 32px; /* Fixed height for table header */
+      vertical-align: middle;
+  }
+
+  .custom-table tbody tr.custom-column td {
+    font-weight: 400;
+    font-size: 14px;
+    color: #181818;
+    height: 32px; 
+    vertical-align: middle;
+    /* border-width: 0px 1px 1px 0px;
+    border-style: solid;
+    border-color: #E5E5E5; */
+    /* padding: 6px 12px 6px 12px; */
+
+}
+
+.custom-table tbody tr.custom-column-child td {
+    font-weight: 400;
+    font-size: 14px;
+    color: #181818;
+    height: 40px; 
+    vertical-align: middle;
+}
+
+/* .custom-table thead tr.custom-header th:last-child,
+.custom-table tbody tr.custom-column td:last-child,
+.custom-table tbody tr.custom-column-child td:last-child {
+    border-right: none;
+} */
+
+.column1 {
+    max-width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 200px;
+}
+
+.column2 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column3 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column4 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column5 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column6 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column7 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column8 {
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.column9 {
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+
+.childcolumn1 {
+    border-top: 0px;
+    max-width: 200px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 200px;
+}
+
+.childcolumn2 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn3 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn4 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn5 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn6 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn7 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn8 {
+    border-top: 0px;
+    max-width: 125px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 125px;
+}
+
+.childcolumn9 {
+    border-top: 0px;
+    max-width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+
+.custom-column {
+    font-size: 14px;
+    height: 40px; /* Fixed height for table rows */
+    vertical-align: middle;
+    font-weight: 400;
+    max-width: 150px; /* Ensure the columns do not stretch with data */
+    min-width: 150px; /* Ensure minimum space is fixed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-column-child{
+    font-size: 14px;
+    height: 40px; /* Fixed height for table rows */
+    vertical-align: middle;
+    font-weight: 400; 
+    margin-right: 3px;   
+}
+
+.custom-label{
+    font-size: 13px;
+    font-weight: 400;
+    color: #5C5C5C;
+
+}
+
+/* Button Group Styling */
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 16px;
+    gap: 8px;
+    --sds-c-button-radius-border: 8px 8px 8px 8px;
+    --dxp-s-button-font-weigh : 400;
+    --dxp-s-button-font-size: 14px;
+    --dxp-s-button-line-height: 20px;
+    --slds-c-button-spacing-block-end: 6px;
+    --slds-c-button-spacing-block-start: 6px;
+    
+}
+
+
+/* Clear Button Styling */
+.slds-button_neutral {
+    background-color: #f4f6f9; /* Light background color */
+    border: 1px solid #dcdfe6; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    color: #0070d2; /* Blue text color */
+    font-size: 14px;
+}
+
+.slds-button_neutral:hover {
+    background-color: #e0e5eb; /* Slightly darker on hover */
+    font-size: 14px;
+}
+
+.slds-button_brand{
+    border: 1px solid #dcdfe6; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 14px;
+
+}
+
+
+.input-section {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0 0 1rem 1rem;
+    max-width: 100%;
+    border: 0px;
+}
+
+/* Input Group Styling */
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.half-width {
+    min-width: 0;
+    flex-basis: 19%; /* 30% width for Letter Text, Enclosure, and Proposed Use */
+}
+
+.tableTextChild{
+    border-top: 0px;
+    margin-left: 24px;
+}
+
+.border{
+    /* border: 0px solid #E5E5E5; */
+    border-left: 1px solid #E5E5E5;
+    border-right: 1px solid #E5E5E5;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+.doc-count {
+    background-color: #EEF4FF; /* Salesforce blue color */
+    color: #003A62;
+    border-radius: 32px;
+    display: inline-block;
+    text-align: center;
+    width: 32px;
+    height: 24px;
+    line-height: 1.5rem;
+    font-size: 12px;
+    margin-left: 0.5rem; /* Small margin to the left of the count */
+}
+
+.status-in-approve,
+.status-in-reject,
+.status-inProgress {
+   /* width: 172px;  Set the width */
+   /* height: 24px; /* Set the height */
+   /* line-height: 22px; /* Align text vertically in the center */
+   /* border-radius: 23px; */
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0; /* Remove padding to ensure exact dimensions */
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+@media screen and (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .button-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .column1, .column2, .column3, .column4, .column5, .column6, .column7, .column8 {
+        width: 100px; /* Or a percentage */
+        min-width: 100px; /* Maintain readability */
+    }
+
+
+}
+
+.upDownIcon{
+    height: 16px;
+    width: 14px;
+}
+
+.slds-icon-border-filled{
+    border-radius: 50%;
+    border:1px solid #181818;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    height: 16px;
+    width: 14px;
+}
+
+.column1 .slds-truncate {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 0.5rem;
+}
+
+ .classFortableBodyUpdationSpecificCss .tableTextChild {
+    border-top: 0px;
+    margin-left: 28px;
+}
+
+.childcolumn1 .tableTextChild {
+    border-top: 0px;
+    margin-left: 27px;
+}
+
+.status-in-approve, .status-in-reject, .status-inProgress {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    padding-left: 15px;
+    low: ellipsis;
+    overflow: hidden;
+}
+
+.status-in-approve {
+    color: #2e844a;
+    background-color: #effceb;
+    width: 88%;
+    margin-left: 0px;
+    padding-left: 5px;
+    border-radius: 10px;
+    /* left: 1px; */
+    /* padding-left: 3px; */
+    /* padding-left: 28px; */
+    /* display: flex; */
+    /* justify-content: right; */
+}
+
+
+.status-in-reject {
+    color: #ba0517;
+    background-color: #fef1ee;
+    width: 88%;
+    margin-left: 0px;
+    padding-left: 5px;
+    border-radius: 10px;
+}
+
+.status-inProgress{
+    color: #dd7a01;
+    background-color: #fbf3e0;
+    width: 88%;
+    margin-left: 0px;
+    padding-left: 5px;
+    border-radius: 10px;
+}
+
+/* .column2 .slds-truncate, .column3 .slds-truncate, .column4 .slds-truncate, .column5 .slds-truncate, .column6 .slds-truncate, .column7 .slds-truncate{
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 4px;
+}
+
+.column9 .actionView{
+    color: #003a62;
+    text-decoration: none;
+    margin-left: 4px;
+} */
+
+.margin-Label{
+    margin-top: 4px;
+}
+
+.margin-label1 {
+    padding-top: 3px;
+}
+.margin-Label2 {
+    padding-top: 2px;
+}

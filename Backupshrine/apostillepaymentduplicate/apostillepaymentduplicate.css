@@ -1,0 +1,195 @@
+/* Importing SF Pro Font */
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Regular.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Bold.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.form-stack {
+    width: Fixed (1,200px)px;
+    height: Hug (459px)px;
+    padding: 2px 0px 0px 0px;
+    gap: 20px;
+    opacity: 0px;
+}
+.form-card {
+    width: 1196px;
+    height: 403px;
+    gap: 0px;
+    border-radius: 12px 0px 0px 0px;
+    border: 1px solid #F3F3F3;
+    box-shadow: 0px 2px 12px 0px #0000000A;
+    opacity: 0; 
+}
+
+
+/* Custom Card Header */
+.custom-card-header {
+    width: Fill (1,196px)px;
+    height: Hug (71px)px;
+    padding: 12px 16px 12px 16px;
+    gap: 12px;
+    border: 0px 0px 1px 0px;
+    opacity: 0px;
+    background: #F6F9FF;
+    border-bottom: 1px solid #F3F3F3
+}
+
+/* Header Title */
+.header-text .title {
+    width: 71px;
+height: 24px;
+gap: 0px;
+opacity: 0px;
+font-weight: bold;
+font-family: 'SF Pro';
+font-size: 16px;
+font-weight: 700;
+line-height: 24px;
+text-align: left;
+color: #181818;
+}
+
+/* Header Description */
+.header-text .description {
+    width: 382px;
+height: 21px;
+gap: 0px;
+opacity: 0px;
+font-family:' SF Pro';
+font-size: 14px;
+font-weight: 400;
+line-height: 21px;
+text-align: left;
+color: #747474;
+}
+
+/* Input Section */
+.input-section {
+    width: Fill (1,196px)px;
+height: Hug (332px)px;
+padding: 12px 0px 0px 0px;
+gap: 16px;
+opacity: 0px;
+
+}
+
+/* Input Group */
+.input-group {
+    width: Fill (1,172px)px;
+    height: Fixed (40px)px;
+    padding: 8px 0px 8px 0px;
+    gap: 12px;
+    opacity: 0px;    
+}
+
+.checkbox-title{
+    width: 98px;
+height: 20px;
+gap: 0px;
+opacity: 0px;
+font-family:' SF Pro';
+font-size: 14px;
+font-weight: 400;
+line-height: 20px;
+text-align: left;
+color: #181818;
+}
+
+.radio-stack{
+    width: Hug (184px)px;
+height: Hug (20px)px;
+gap: 16px;
+opacity: 0px;
+}
+
+.total-amt{
+    width: Fixed (1,164px)px;
+height: Hug (60px)px;
+gap: 32px;
+opacity: 0px;
+}
+
+.input-stack{
+    width: Fixed (196px)px;
+height: Hug (60px)px;
+gap: 2px;
+opacity: 0px;
+}
+
+/* Input Field */
+.input-field {
+    flex: 1;
+    font-family: 'SF Pro', sans-serif; /* Ensuring SF Pro is used */
+}
+
+/* Organization Field */
+.organization-field {
+    width: 49.5%;
+    margin-bottom: 1.5rem;
+    font-family: 'SF Pro', sans-serif; /* Ensuring SF Pro is used */
+}
+
+/* Dotted Line */
+.dotted-line {
+    border-top: 1px dotted #dcdcdc;
+    margin: 1.5rem 0;
+}
+.required-question {
+    width: 105px;
+height: 18px;
+gap: 0px;
+opacity: 0px;
+font-family: 'SF Pro';
+font-size: 12px;
+font-weight: 590;
+line-height: 18px;
+text-align: left;
+color: #5C5C5C;
+  }
+  
+.required-star {
+font-family: 'SF Pro';
+font-size: 12px;
+font-weight: 700;
+line-height: 18px;
+text-align: left;
+    /* vertical-align: super;  */
+    background: #BA0517;
+}
+.price{
+    width: Fill (196px)px;
+height: Fixed (40px)px;
+padding: 6px 0px 6px 0px;
+gap: 8px;
+border-radius: 8px 0px 0px 0px;
+opacity: 0px;
+font-family: 'SF Pro';
+font-size: 14px;
+font-weight: 400;
+line-height: 20px;
+text-align: left;
+color: #181818;
+}
+.input-group1{
+    width: Fixed (1,164px)px;
+height: Fixed (80px)px;
+gap: 32px;
+opacity: 0px;
+}
+.field-stack{
+    width: Fill (566px)px;
+height: Hug (60px)px;
+gap: 2px;
+opacity: 0px;
+}

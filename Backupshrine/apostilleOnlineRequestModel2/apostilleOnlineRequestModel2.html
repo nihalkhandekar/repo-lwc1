@@ -1,0 +1,673 @@
+<template>
+    <lightning-modal-header class="SE-ModalHeader">
+        <div class="SE-ModalHeaderTitle">
+            <h2>{headerText}</h2>
+            <!-- Conditionally render the Edit button when in view mode -->
+            <template if:true={isReadOnly}>
+                <lightning-button icon-name="utility:edit" alternative-text="Edit" class="edit-button"
+                    onclick={handleEditClick} title="Edit" variant="base" aria-label="Edit"
+                    label="Edit"></lightning-button>
+            </template>
+        </div>
+        <lightning-button-icon icon-name="utility:close" size="large" alternative-text="Close" onclick={cloeModels}
+            class="custom-modal__close">
+        </lightning-button-icon>
+    </lightning-modal-header>
+
+    <lightning-modal-body>
+        <div class="SE-modalMainBody">
+            <div class="SE-modalFormStack">
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSectionHeader">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:user" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small headerTitle">Apostille Request Details</h2>
+                            <p class="slds-text-body_small">Enter customer's contact and organization details to
+                                proceed.Fields marked with an asterisk(*) are mandatory.</p>
+                        </div>
+                    </div>
+                    <div class="SE-modalFormStackSectionContent">
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="workOrderNumber"><span
+                                        class="required-indicator">*</span>Work Order #</label>
+                                <lightning-input label="Work Order #" name="workOrderNumber" variant="label-hidden"
+                                    id="workOrderNumber" placeholder={workOrderNumber} value={workOrderNumber} required
+                                    disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="lastName"><span
+                                        class="required-indicator">*</span>Last Name</label>
+                                <div class={lastNameErrorClass}>
+                                    <lightning-input label="Last Name" name="lastName" variant="label-hidden"
+                                        id="lastName" placeholder={lastName} value={lastName} required
+                                        disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="firstName"><span
+                                        class="required-indicator">*</span>First Name</label>
+                                <div class={firstNameErrorClass}>
+                                    <lightning-input label="First Name" name="firstName" variant="label-hidden"
+                                        id="firstName" placeholder={firstName} value={firstName} required
+                                        disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="organizationName">Organization Name</label>
+                                <lightning-input label="Organization Name" name="organizationName"
+                                    variant="label-hidden" id="organizationName" placeholder={organizationName}
+                                    value={organizationName} disabled={isReadOnly}
+                                    onchange={handleInputChange}></lightning-input>
+                            </div>
+                        </div>
+
+                        <div class="slds-grid SE-modalFormStackSectionInputRow75">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="emailAddress"><span
+                                        class="required-indicator">*</span>Email Address</label>
+                                <lightning-input label="Email Address" name="emailAddress" variant="label-hidden"
+                                    id="emailAddress" placeholder={emailAddress} value={emailAddress} required
+                                    disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="phoneNumber"><span
+                                        class="required-indicator">*</span>Phone Number</label>
+                                <lightning-input label="Phone Number" name="phoneNumber" variant="label-hidden"
+                                    id="phoneNumber" placeholder={phoneNumber} value={phoneNumber} required
+                                    disabled={isReadOnly} onchange={handleInputChange}></lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="workOrderStatus">Work Order Status</label>
+                                <lightning-combobox label="Work Order Status" name="workOrderStatus"
+                                    variant="label-hidden" placeholder={wordOrderStatus} options={statusOptions}
+                                    value={workOrderStatus} disabled={isReadOnly}
+                                    onchange={handleInputChange}></lightning-combobox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="SE-modalFormStackSection">
+                    <div class="SE-modalFormStackSection">
+                        <div class="SE-modalFormStackSectionHeader">
+                            <div class="SE-modalFormStackSectionHeaderIcon">
+                                <lightning-icon icon-name="standard:article" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                                <h2 class="slds-text-heading_small headerTitle">Work Order Transaction</h2>
+                                <p class="slds-text-body_small">
+                                    Enter customer's contact and organization details to proceed. Fields
+                                    marked with an asterisk (*) are mandatory.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="SE-modalFormStackSectionContent">
+                            <div class="slds-grid SE-modalFormStackSectionInputRow">
+                                <div class="document-table">
+                                    <div class="slds-scrollable_x">
+                                        <table class="slds-table slds-table_cell-buffer slds-table_bordered table1">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="slds-document-header">
+                                                        <div class="slds-truncate" title="Question">Question</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate" title="Response">Response</div>
+                                                    </th>
+                                                    <template if:true={isDestinationCountrySame}>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Destination Country</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div class="slds-truncate">Hague Status</div>
+                                                        </th>
+                                                    </template>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div
+                                                            title="Is the destination country for all the document(s) the same?">
+                                                            Is the destination country for all the document(s) the same?
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-radio-group" style="width: 90px;">
+                                                            <lightning-input type="radio"
+                                                                name="destinationCountrySameString" label="Yes"
+                                                                variant="label-hidden" value="yes"
+                                                                checked={isDestinationCountrySame}
+                                                                onchange={handleInputChangeDocument}
+                                                                disabled={isReadOnly}></lightning-input>
+                                                            <label class={radioCssDes}>Yes</label>
+                                                            <lightning-input type="radio"
+                                                                name="destinationCountrySameString" label="No"
+                                                                variant="label-hidden" value="no"
+                                                                checked={isNotDestinationCountrySame}
+                                                                onchange={handleInputChangeDocument}
+                                                                disabled={isReadOnly}></lightning-input>
+                                                            <label class={radioCssCheckedDes}>No</label>
+                                                        </div>
+                                                    </td>
+                                                    <template if:true={isDestinationCountrySame}>
+                                                        <td>
+                                                            <div class="input-radio-group">
+                                                                <lightning-combobox variant="label-hidden"
+                                                                    name="selectedCountry" value={selectedCountry}
+                                                                    placeholder={selectCountry} options={countryOptions}
+                                                                    required onchange={handleInputChangeDocument}
+                                                                    disabled={isReadOnly}></lightning-combobox>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-radio-group">
+                                                                <lightning-input type="radio" name="selectedHagueStatus"
+                                                                    label="Yes" variant="label-hidden" value="Yes"
+                                                                    onchange={handleInputChangeDocument}
+                                                                    class="radioButton" checked={isHagueStatusYes}
+                                                                    disabled={isReadOnly}></lightning-input>
+                                                                <label class="radioOptions">Yes</label>
+                                                                <lightning-input type="radio" name="selectedHagueStatus"
+                                                                    label="No" variant="label-hidden" value="No"
+                                                                    onchange={handleInputChangeDocument}
+                                                                    class="radioButton" checked={isHagueStatusNo}
+                                                                    disabled={isReadOnly}></lightning-input>
+                                                                <label class="radioOptions">No</label>
+                                                            </div>
+                                                        </td>
+                                                    </template>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </br>
+                            <div class="input-radio-group">
+                                <label class="boldFont">Would you like to expedite the request?</label>
+                                <lightning-input type="radio" name="expediteRequestString" label="Yes" value="yes"
+                                    variant="label-hidden" checked={isExpediteSelected}
+                                    onchange={handleInputChangeDocument} class="radioButton"
+                                    disabled={isReadOnly}></lightning-input>
+                                <label class={radioCssExp}>Yes</label>
+                                <lightning-input type="radio" name="expediteRequestString" label="No" value="no"
+                                    variant="label-hidden" checked={isNotExpediteSelected}
+                                    onchange={handleInputChangeDocument} class="radioButton"
+                                    disabled={isReadOnly}></lightning-input>
+                                <label class={radioCssCheckedExp}>No</label>
+                                <template if:true={isExpediteSelected}>
+                                    <span>(+ ${expediteFee}.00 on each document)</span>
+                                </template>
+                            </div>
+
+                            <div class="add-document-container" if:false={isReadOnly}>
+                                <lightning-button label="Add Document" variant="brand" onclick={handleAddDocument}
+                                    icon-name="utility:add" icon-position="left"
+                                    class="add-document-button"></lightning-button>
+                            </div>
+
+                            <div class="document-table">
+                                <div class="slds-scrollable_x">
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="slds-document-header">
+                                                    <div class="slds-truncate">Type of Document</div>
+                                                </th>
+
+                                                <template if:false={isDestinationCountrySame}>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Destination Country</div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate">Hague Status</div>
+                                                    </th>
+                                                </template>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Name of the Person Listed</div>
+                                                    <div class="slds-truncate">on the Document</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Title of Official Signing </div>
+                                                    <div class="slds-truncate">the document</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Name of the Notary Public/ </div>
+                                                    <div class="slds-truncate">Public Official</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Status</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Rejection/Cancellation Reason</div>
+                                                </th>
+
+                                                <th scope="col">
+                                                    <div class="slds-truncate">Fee</div>
+                                                </th>
+                                                <th scope="col" if:false={isReadOnly}
+                                                    class="slds-document-header-action">
+                                                    <div class="slds-truncate"></div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template if:true={documents.length}>
+                                                <template for:each={documents} for:item="doc">
+                                                    <tr key={doc.id}>
+                                                        <td class="table-cell">
+                                                            <template if:true={isReadOnly}>
+                                                                {doc.typeOfDocument}
+                                                            </template>
+                                                            <template if:false={isReadOnly}>
+                                                                <lightning-combobox variant="label-hidden"
+                                                                    name="typeOfDocument" value={doc.typeOfDocument}
+                                                                    placeholder={documentType} options={documentTypes}
+                                                                    data-id={doc.id} onchange={handleDocumentChange}
+                                                                    class="align-combobox"></lightning-combobox>
+                                                            </template>
+                                                        </td>
+
+                                                        <template if:false={isDestinationCountrySame}>
+                                                            <td class="table-cell">
+                                                                <template if:true={isReadOnly}>
+                                                                    {doc.destinationCountry}
+                                                                </template>
+                                                                <template if:false={isReadOnly}>
+                                                                    <lightning-combobox variant="label-hidden"
+                                                                        name="destinationCountry"
+                                                                        value={doc.destinationCountry}
+                                                                        placeholder={destinationCountry}
+                                                                        options={countryOptions} data-id={doc.id}
+                                                                        onchange={handleDocumentChange}
+                                                                        class="align-combobox"></lightning-combobox>
+                                                                </template>
+                                                            </td>
+                                                            <td class="table-cell">{doc.hague}</td>
+                                                        </template>
+
+                                                        <td class="table-cell">
+                                                            <template if:true={isReadOnly}>
+                                                                {doc.personName}
+                                                            </template>
+                                                            <template if:false={isReadOnly}>
+                                                                <lightning-input label="personName"
+                                                                    variant="label-hidden" name="personName"
+                                                                    class="align-input" value={doc.personName}
+                                                                    placeholder={personName} data-id={doc.id}
+                                                                    onchange={handleDocumentChange}></lightning-input>
+                                                            </template>
+                                                        </td>
+                                                        
+                                                        <td class="table-cell">
+                                                            <template if:true={isReadOnly}>
+                                                                {doc.signedByPosition}
+                                                            </template>
+                                                            <template if:false={isReadOnly}>
+                                                                <lightning-combobox variant="label-hidden"
+                                                                    name="signedByPosition" value={doc.signedByPosition}
+                                                                    placeholder="Select Position"
+                                                                    options={signedByPositionOptions}
+                                                                    onchange={handleDocumentChange}
+                                                                    class="align-combobox"></lightning-combobox>
+                                                            </template>
+                                                        </td>
+
+                                                        <td class="table-cell">
+                                                            <template if:true={isReadOnly}>
+                                                                {doc.signedByName}
+                                                            </template>
+                                                            <template if:false={isReadOnly}> 
+                                                                <div class="slds-form-element slds-input-has-icon slds-input-has-icon_right">
+                                                                    <lightning-input label="signedByName"
+                                                                        variant="label-hidden" name="signedByName"
+                                                                        class="align-input" value={doc.signedByName}
+                                                                        placeholder={signedByName} data-id={doc.id}
+                                                                        onchange={handleDocumentChange} onclick={handleSearch}>
+                                                                    </lightning-input>
+                                                                    <lightning-icon icon-name="utility:search"
+                                                                        size="xx-small" alternative-text="Search icon"
+                                                                        class="slds-input__icon slds-input__icon_right slds-icon-text-default signedByNameField"
+                                                                        data-id={doc.id}
+                                                                        onclick={handleSearch}>
+                                                                    </lightning-icon>
+                                                                </div>
+                                                            </template>
+                                                        </td>
+
+                                                        <td class="table-cell">
+                                                            <template if:true={isReadOnly}>
+                                                                {doc.status}
+                                                            </template>
+                                                            <template if:false={isReadOnly}>
+                                                                <lightning-combobox variant="label-hidden" name="status"
+                                                                    value={doc.status} placeholder="Status"
+                                                                    options={statusOptions} data-id={doc.id}
+                                                                    onchange={handleDocumentChange}
+                                                                    class="align-combobox"></lightning-combobox>
+                                                            </template>
+                                                        </td>
+
+                                                        <td class="table-cell">
+                                                            <template if:true={isReadOnly}>
+                                                                {doc.rejectionReason}
+                                                            </template>
+                                                            <template if:false={isReadOnly}>
+                                                                <lightning-input label="rejectionReason"
+                                                                    variant="label-hidden" name="rejectionReason"
+                                                                    class="align-input" value={doc.rejectionReason}
+                                                                    placeholder={rejectionReason} data-id={doc.id}
+                                                                    onchange={handleDocumentChange}></lightning-input>
+                                                            </template>
+                                                        </td>
+
+                                                        <td class="table-cell">{doc.feeDisplay}</td>
+                                                        <td if:false={isReadOnly} class="table-cell">
+                                                            <lightning-button-icon class="delete-button"
+                                                                variant="label-hidden" icon-name="utility:delete"
+                                                                alternative-text="Remove" onclick={handleRemoveDocument}
+                                                                data-id={doc.id}></lightning-button-icon>
+                                                        </td>
+                                                    </tr>
+                                                </template>
+                                            </template>
+
+                                            <template if:false={documents.length}>
+                                                <tr>
+                                                    <td colspan="6" class="no-documents">No documents added yet. Click
+                                                        "Add Document" to start.</td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <template if:true={documents.length}>
+                                <div class="total-fee">
+                                    <template if:true={isExpediteSelected}>
+                                        <span>Total: {formattedTotalFee} (Expedite: {formattedExpediteFee})</span>
+                                    </template>
+                                    <template if:false={isExpediteSelected}>
+                                        <span>Total: {formattedTotalFee}</span>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="SE-modalFormStackSection">
+
+                    <div class="SE-modalFormStackSectionHeader">
+                        <div class="SE-modalFormStackSectionHeaderIcon">
+                            <lightning-icon icon-name="standard:person_account" size="medium"></lightning-icon>
+                        </div>
+                        <div class="slds-media__body SE-modalFormStackSectionHeaderTitle">
+                            <h2 class="slds-text-heading_small headerTitle">Individual/Agency Mailing the Document(s)
+                            </h2>
+                            <p class="slds-text-body_small">Enter the individual name and address or agency name and
+                                address mailing the document(s).</p>
+                        </div>
+                    </div>
+
+                    <!-- Same as Contact Address -->
+                    <div class="slds-grid SE-modalFormStackSectionInputRow">
+                        <!-- <div class="input-group">
+                            <div class="input-radio-group">
+                                <label class="radioFont" style="font-weight: bold;">Same as Contact Address</label>
+                                <lightning-input type="radio" name="contactAddressSame" label="Yes"
+                                    variant="label-hidden" value="Yes" checked={issameAsContactAddressStringChecked}
+                                    onchange={handleAgencySameAddress} disabled={readOnly}></lightning-input>
+                                <label class={radioCssDes}>Yes &nbsp; </label>
+                                <lightning-input type="radio" name="contactAddressSame" label="No"
+                                    variant="label-hidden" value="No" checked={isNotsameAsContactAddressStringChecked}
+                                    onchange={handleAgencySameAddress} disabled={readOnly}></lightning-input>
+                                <label class={radioCssDes}>No</label>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <!-- Form Fields Layout -->
+                    <div class="SE-modalFormStackSectionContent">
+                        <!-- First Row -->
+                        <div class="slds-grid SE-modalFormStackSectionInputRow">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="businessName">Business Name</label>
+                                <lightning-input label="Business Name" name="businessName" variant="label-hidden"
+                                    id="businessName" value={businessName} placeholder={businessName}
+                                    disabled={isReadOnly} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="firstNameindividual"><span
+                                        class="required-indicator">*</span>First
+                                    Name</label>
+                                <lightning-input label="First Name" name="firstNameindividual" variant="label-hidden"
+                                    id="firstNameindividual" value={firstNameindividual}
+                                    placeholder={firstNameindividual} disabled={isReadOnly}
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="lastNameindividual"><span
+                                        class="required-indicator">*</span>Last
+                                    Name</label>
+                                <lightning-input label="Last Name" name="lastNameindividual" variant="label-hidden"
+                                    id="lastNameindividual" value={lastNameindividual} placeholder={lastNameindividual}
+                                    disabled={isReadOnly} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="emailAddressindividual"><span
+                                        class="required-indicator">*</span>Email
+                                    Address</label>
+                                <lightning-input label="Email Address" name="emailAddressindividual"
+                                    variant="label-hidden" id="emailAddressindividual" value={emailAddressindividual}
+                                    placeholder={emailAddressindividual} disabled={isReadOnly}
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+
+                        <!-- Second Row -->
+                        <div class="slds-grid SE-modalFormStackSectionInputRow40">
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="cellPhoneNumber"><span
+                                        class="required-indicator">*</span>Cell Phone
+                                    Number</label>
+                                <lightning-input label="Cell Phone Number" name="cellPhoneNumber" variant="label-hidden"
+                                    id="cellPhoneNumber" value={cellPhoneNumber} placeholder={cellPhoneNumber}
+                                    disabled={isReadOnly} onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-col SE-customCol">
+                                <label class="SE-inputLabel" for="emailReceivingApostille">Email address of the person
+                                    receiving the Apostille</label>
+                                <lightning-input label="Email Address" name="emailReceivingApostille"
+                                    variant="label-hidden" id="emailReceivingApostille" value={emailReceivingApostille}
+                                    placeholder={emailReceivingApostille} disabled={isReadOnly}
+                                    onchange={handleInputChange}>
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </lightning-modal-body>
+    <lightning-modal-footer class="SE-modalFooter">
+        <div class="slds-button-group">
+            <div class="button-left-group">
+                <template if:true={isReadOnly}>
+                    <lightning-button label="Print Payment Receipt" variant="neutral"
+                        class="button-spacing print-buttons" onclick={handlePrintPaymentReceipt}></lightning-button>
+                    <lightning-button label="Print Apostille Submission Document" variant="neutral"
+                        class="button-spacing print-buttons" onclick={handleModalCertificateAction}></lightning-button>
+                </template>
+            </div>
+
+            <div class="button-right-group SE-modalFooterButtonGroup">
+                <template if:true={isReadOnly}>
+                    <button class="slds-button SE-borderLessButton" onclick={cloeModels}>Cancel</button>
+                    <lightning-button label="Cancel Work Order" variant="destructive"
+                        class="slds-button_cancelWorkOrder" onclick={handleCancelWorkOrder}></lightning-button>
+                </template>
+
+                <template if:false={isReadOnly}>
+                    <button class="slds-button SE-borderLessButton" onclick={cloeModels}>Cancel</button>
+                    <lightning-button variant="brand" label="Save" class="save-button"
+                        onclick={handleAdd}></lightning-button>
+                </template>
+            </div>
+        </div>
+    </lightning-modal-footer>
+
+    <c-toast-message-state-modal></c-toast-message-state-modal>
+
+    <c-pdf-generator data-id="pdfgenerator" signed-by={signedBy} person-name={fullName}
+        judicial-district={judicialDistrict} letter-type={letterType} wet-sign={wetSign} position={position}>
+    </c-pdf-generator>
+
+
+    <template if:true={isModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header headerClass">
+                    <div class="headerContainer">
+                        <h2 class="headingClass" title="Upload Additional Shipping Label">Upload Additional Shipping
+                            Label</h2>
+                        <div class="fileUploadClose">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton"
+                                title="Close" onclick={closeUploadModal}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium modalContent">
+                    <div class="internalheading">
+                        <span class="textClass">Upload Multiple Prepaid Shipping Label</span>
+                        <span style="color:     red;">*</span>
+                    </div>
+
+                    <div class="internalBorder ">
+                        <lightning-input type="file" class="fileUploadContainer"
+                            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" multiple label="Attachment"
+                            onchange={handleUploadFinished}></lightning-input>
+                    </div>
+
+                    <template if:true={uploadedFiles.length}>
+                        <div class="uploaded-files">
+                            <template for:each={uploadedFiles} for:item="file" for:index="index">
+                                <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                                    <div class="fileNameClass">
+                                        <span class="fileContainer">
+                                            <lightning-icon icon-name="utility:document_preview"
+                                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); "
+                                                alternative-text="File" size="x-small"
+                                                onclick={handleFileDownload}></lightning-icon>
+                                            <span class="fileNameContainer" title={file.name}>{file.name}</span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="deleteButtonArea">
+                                            <lightning-button-icon class="deleteButtonContainer"
+                                                icon-name="utility:delete" size="x-small" alternative-text="Delete"
+                                                title="Delete" data-index={index}
+                                                onclick={handleDeleteFile}></lightning-button-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <footer class="footerContainer">
+                    <div class="footerButtonContainer">
+                        <button class="slds-button slds-button_neutral cancelButtonFooter"
+                            onclick={closeUploadModal}>Cancel</button>
+                        <button class="slds-button slds-button_brand uploadButtonFooter"
+                            onclick={handleUpload}>Upload</button>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <template if:true={isModalOpen2}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open modalContainer">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header headerClass">
+                    <div class="headerContainer">
+                        <h2 class="headingClass" title="Upload Additional Shipping Label">Upload Additional Shipping
+                            Label</h2>
+                        <div class="fileUploadClose">
+                            <button class="slds-button slds-button_icon slds-button_icon-inverse closeButton"
+                                title="Close" onclick={closeUploadModal2}>
+                                <lightning-icon icon-name="utility:close" alternative-text="close"
+                                    size="small"></lightning-icon>
+                                <span class="slds-assistive-text">Close</span>
+                            </button>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium modalContent">
+                    <div class="internalheading">
+                        <span class="textClass">e-Apostille customer upload</span>
+                        <span style="color:     red;">*</span>
+                    </div>
+                    <div class="internalBorder ">
+                        <lightning-input type="file" class="fileUploadContainer"
+                            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf" multiple label="Attachment"
+                            onchange={handleUploadFinished2}></lightning-input>
+                    </div>
+                    <template if:true={uploadedFileApostille.length}>
+                        <div class="uploaded-files">
+                            <template for:each={uploadedFileApostille} for:item="file" for:index="index">
+                                <div key={file.documentId} style="width: 38rem" class="uploaded-file">
+                                    <div class="fileNameClass">
+                                        <span class="fileContainer">
+                                            <lightning-icon icon-name="utility:document_preview"
+                                                style="--slds-c-icon-color-foreground-default: rgb(1, 118, 211); "
+                                                alternative-text="File" size="x-small"></lightning-icon>
+                                            <span class="fileNameContainer" title={file.filename}>{file.filename}</span>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="deleteButtonArea">
+                                            <lightning-button-icon class="deleteButtonContainer"
+                                                icon-name="utility:delete" size="x-small" alternative-text="Delete"
+                                                title="Delete" data-index={index}
+                                                onclick={handleDeleteFile2}></lightning-button-icon>
+                                        </span>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+                <footer class="footerContainer">
+                    <div class="footerButtonContainer">
+                        <button class="slds-button slds-button_neutral cancelButtonFooter"
+                            onclick={closeUploadModal2}>Cancel</button>
+                        <button class="slds-button slds-button_brand uploadButtonFooter"
+                            onclick={handleUpload2}>Upload</button>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

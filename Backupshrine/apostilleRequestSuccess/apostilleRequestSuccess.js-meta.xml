@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+         <target>lightning__Tab</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+                <property name="recordId" type="String" label="Record Id" description="record Id from flow" />
+                <property name="firstName" type="String" label="firstName" description="First Name from flow" />
+                <property name="lastName" type="String" label="lastName" description="rLast Name from flow" />
+                <property name="workOrderNumber" type="String" label="Work Order Number" description="Work Order Number from flow" />
+                <property name="price" type="String" label="price" description="Total price" />
+                <property name="authCode" type="String" label="Authentication Code" description="Authentication Code" />
+                <property name="PaymentDate" type="String" label="Payment Date" description="Payment Date" />
+                <property name="paymentMethod" type="String" label="payment Method" description="payment Method" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

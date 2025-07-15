@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="contentVersionIds" type="String[]" label="Content Version Ids" role="outputOnly"/>
+            <property name="uploadedFilesID" type="String[]" label="uploadedFiles ID" />
+            <property name="uploadedFileApostilleID" type="String[]" label="uploadedFileApostilleID"/>
+            <property name="recordId" type="String" label="Record Id" description="record Id from flow" />
+            <property name="readOnly" type="Boolean" label="readOnly" description="ReadOnly Field" />
+            <property name="showfirstOption" type="Boolean" label="showfirstOption" description="showfirstOption Field" />
+            <property name="showThirdOption" type="Boolean" label="showThirdOption" description="showThirdOption Field" />
+            <property name="isOption2Checked" type="Boolean" label="isOption2Checked" description="ReadOnly2 Field" />
+            <property name="isOption3Checked" type="Boolean" label="isOption3Checked" description="ReadOnly3 Field" />
+            <property name="isOption4Checked" type="Boolean" label="isOption4Checked" description="ReadOnly4 Field" />
+            <property name="pre_paid_shipping_label" type="Boolean"  label="pre_paid_shipping_label"/>
+            <property name="documentPickedUp" type="Boolean" label="documentPickedUp"/>
+            <property name="e_Apostille_customer_upload" type="Boolean" label="e_Apostille_customer_upload"/>
+            <property name="uploadedFiles" type="String[]" label="uploadedFiles" />
+            <property name="uploadedFileApostille" type="String[]" label="uploadedFileApostille" />
+            <property name="titleuploadedFiles" type="String[]" label="titleuploadedFiles" />
+            <property name="titleuploadedFileApostille" type="String[]" label="titleuploadedFileApostille" />
+            <property name="isReadOnly" type="Boolean" label="isReadOnly" description="ReadOnly Field" />
+            <property name="shippingMethod" type="String" label="shippingMethod" description="shippingMethod" />
+            <property name="businessName" type="String" label="Business Name" description="Name of the business or organization" />
+            <property name="firstName" type="String" label="First Name" description="First Name of the user" />
+            <property name="lastName" type="String" label="Last Name" description="Last Name of the user" />
+            <property name="email" type="String" label="Email Address" description="User's email address" />
+            <property name="phone" type="String" label="Cell Phone Number" description="User's cell phone number" />
+            <property name="emailRequestor" type="String" label="Email Requester Address" description="Requester email address" />
+            <property name="sameAddress" type="Boolean" label="Same as Contact Address" description="Indicates if the address is the same as the contact address" />
+            <property name="sameAddressString" type="String" label="Same as Contact Address String" description="Indicates if the address is the same as the contact address String" />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

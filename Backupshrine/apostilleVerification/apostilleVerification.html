@@ -1,0 +1,141 @@
+<template>
+
+    <div class="breadcrumb-container">
+        <div class="breadcrumb">
+            <a href="#" onclick={navigateToDashboard}>{labels.ApostilleVerification}</a>
+        </div>
+        <!-- <div class="search-container">
+            <div class="search-box-wrapper">
+                <input type="text" placeholder="Search" class="search-box" />
+                <span class="search-icon">
+                    <lightning-icon icon-name="utility:search" alternative-text="Search"
+                        size="small"></lightning-icon>
+                </span>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="apostille-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:warranty_term" size="large" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="title">{labels.ApostilleVerification}</h1>
+                <p class="description">{labels.VerifyApostillebysearchingwithapostillecertificatenumber}</p>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <label class="custom-label" for="certificateNumber">{labels.ApostilleCertificate}</label>
+            <div class="input-group">
+                <lightning-input label="Apostille Certificate #" variant="label-hidden" value={certificateNumber}
+                    onchange={handleInputChange} name="certificateNumber" class="input-field">
+                </lightning-input>
+            </div>
+            <div class="button-group">
+                <lightning-button label={labels.Clear} onclick={handleClear} variant="neutral" icon-name="utility:clear"
+                    icon-position="left" class="slds-m-right_x-small slds-button_neutral">
+                </lightning-button>
+                <lightning-button label={labels.Search} onclick={handleSearch} variant="brand" icon-name="utility:search"
+                    icon-position="left" class="searchButton">
+                </lightning-button>
+            </div>
+        </div>
+
+
+
+        <!-- Results Section -->
+        <template if:true={showResults}>
+            <template if:true={isLoading}>
+                <div class="spinner-container">
+                    <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+                </div>
+            </template>
+            <template if:true={searchResult}>
+                <div class="results-section">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                        <thead>
+                            <tr class="custom-header">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Apostille Certificate #">{labels.ApostilleCertificate}</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Apostille Issue Date">{labels.ApostilleIssueDate}</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Signed By">{labels.SignedBy}</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Official Capacity">{labels.OfficialCapacity}</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="The Country to be Used ">{labels.TheCountrytobeUsed}</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Signing Authority">{labels.SigningAuthority}</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={isRecordsLoading}>
+                                <!-- Show loader centered in the table without top and bottom borders -->
+                                <tr class="no-border-row">
+                                    <td colspan="6" class="slds-text-align_center loader-row">
+                                        <lightning-spinner alternative-text="Loading records..." variant="brand"
+                                            size="large"></lightning-spinner>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template if:false={isRecordsLoading}>
+                                <template for:each={paginatedResult} for:item="row">
+                                    <tr key={row.Id} class="custom-column">
+                                        <td>
+                                            <div class="slds-truncate" title={row.certificateNumber}>{row.certificateNumber}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.approvedDate}>{row.approvedDate}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.signedBy}>{row.signedBy}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.officialCapacity}>{row.officialCapacity}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.countryToBeUsed}>{row.countryToBeUsed}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.signingAutority}>
+                                                {row.signingAutority}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </template>
+                           
+                        </tbody>
+                    </table>
+                </div>
+                <template if:true={showPages}>
+                    <div class="pagination-controls">
+                        <lightning-button label={labels.Prev} icon-name="utility:jump_to_left" icon-position="left"
+                            onclick={handlePreviousPage} variant="neutral" disabled={isPreviousDisabled}>
+                        </lightning-button>
+
+                        <span class="paginationText">{startRecord} - {endRecord} of {totalRecords} | Page {currentPage}
+                            of {totalPages}</span>
+
+                        <lightning-button label={labels.Next} icon-name="utility:jump_to_right" icon-position="right"
+                            onclick={handleNextPage} variant="neutral" disabled={isNextDisabled}>
+                        </lightning-button>
+                    </div>
+                </template>
+            </template>
+            <template if:false={searchResult}>
+                <p class="no-data-message">{labels.Nocertificatesavailableatthemoment}</p>
+            </template>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,99 @@
+<template>
+        <div class="slds-grid slds-wrap  mainpage">
+            <!-- Submit Section -->
+            <div class="slds-col slds-size_8-of-12">
+                <div class="submitsection">
+                    <div class="header">
+                        <div>
+                            <lightning-icon icon-name="standard:contract_line_outcome" size="large"></lightning-icon>
+                            <h1><strong>Submit</strong></h1>
+                            <p>
+                                Please review all information entered before proceeding. If changes are needed, click on
+                                "Request information" to go back and make your edits.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="page">
+                        <p class="content">
+                            By clicking "File online", you are allowing your apostile or authentication request to be submitted to the Connecticut Office of the Secretary of the State.
+                            <br/><br/>
+                            To complete this request, you must send your original signed document(s) to our office. 
+                        </p>
+
+                        <div class="container">
+                            <div class="header1">
+                                <div class="header-item">Preferred Method:</div>
+                                <div class="header-item">Mailing Address:</div>
+                            </div>
+                            <div class="content1">
+                                <div class="column">Hand delivery of original document(s), or send via FedEx, UPS, or DHL: </div>
+                                <div class="column">Secretary of the State, Authentication and Apostille Unit, 165 Capitol Avenue Suite 1000, Hartford, CT 06106</div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="header1">
+                                <div class="header-item">First Class or Priority Mail</div>
+                                <div class="header-item">Mailing Address:</div>
+                            </div>
+                            <div class="content1">
+                                <div class="column">First Class or Priority Mail through the US Postal Service</div>
+                                <div class="column">Secretary of the State, Authentication and Apostille Unit, P.O. Box 150470, Hartford, CT 06115-0470</div>
+                            </div>
+                        </div>
+
+                        <p class="note">
+                            <strong>Don't Forget:</strong> Upload or include a pre-paid return shipping label.<br/>
+                            If a pre-paid return envelope or label is not provided, the Office of the Secretary of the State will return the document(s) via standard mail to the mailing address provided with this request.<br/><br/>
+                            We are not responsible for the lost document(s).<br/><br/>
+                            <strong>Your order will be processed only after we receive and approve your document(s). If we don't receive your document(s) within 60 business days, your order may be canceled and payment refunded.</strong>
+                        </p>
+
+                    </div>
+                </div>
+                <div class="checkbox-container">
+                    <label>
+                        <input type="checkbox" checked={isChecked} onchange={handleCheckboxChange}/>
+                        I have read and agree to the terms of this online submission.<strong style="color: red;">*</strong>
+                    </label>
+                    <label>
+                        <input type="checkbox" checked={isDocumentsChecked} onchange={handleCheckboxChange}/>
+                        I confirm that all required documents have been included with my submission.<strong style="color: red;">*</strong>
+                    </label>
+                </div>   
+            </div>
+
+            <!-- Question Section answer_best--> 
+            <div class="slds-col slds-size_4-of-12">
+                <div class="questionsection">
+                    <div class="header">
+                        <div>
+                            <lightning-icon icon-name="standard:answer_best" size="large"></lightning-icon>
+                            <h1><strong>Questions? Contact Us?</strong></h1>
+                            <p>
+                                Contact us if you have any query as per given mentioned detail below.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="questioncontent">
+                        <p><strong>Timing: </strong> 8:30 am to 4:00 pm</p>
+                        <p class="updownspace"><strong>Email: </strong><a class="clicklink" href="#" onclick={handleClickMail}>bsd@ct.gov</a>
+                            <template if:true={notify}>
+                                <div class="slds-notify slds-notify_alert slds-alert_offline" role="alert">
+                                    <span class="slds-assistive-text">offline</span>
+                                    <span class="slds-icon_container slds-icon-utility-offline slds-m-right_x-small">
+                                    </span>
+                                    <h2>"mailto:bsd@ct.gov?subject=bsd%40ct.gov" copied to your clipboard</h2>
+                                </div>
+                            </template>
+                        </p>
+                        <p class="line">---------------------------------------------------------</p>
+                        <p class="updownspace">Click to <a class="clicklink" href="#" onclick={handleClickSupport}>Create a Support Ticket:</a></p>
+                        <p>Support tickets go directly to our office and an agent will reospond to you by email. </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</template>

@@ -1,0 +1,166 @@
+<template>
+    <template if:true={isLoading}>
+        <!-- Loader -->
+        <div class="slds-spinner slds-spinner_medium slds-spinner_brand">
+            <div class="slds-spinner__dot-a"></div>
+            <div class="slds-spinner__dot-b"></div>
+        </div>
+    </template>
+    <template if:false={isLoading}>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:account" size="large" class="header-icon"></lightning-icon>
+            <div>
+                <h1 class="header-title">Apostille Request Form</h1>
+                <p class="header-subtitle">Enter your contact and organization details to ensure accurate processing of your Apostille request. Fields marked with an asterisk (*) are mandatory.</p>
+            </div>
+        </div>
+
+        <!-- Input Fields Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title">
+                        <span class="required-indicator">*</span> First Name
+                    </label>
+                    <div class={firstNameErrorClass}>
+                        <lightning-input 
+                            label="First Name" 
+                            class="input-field" 
+                            name="firstName" 
+                            variant="label-hidden" 
+                            value={firstName} 
+                            read-only={readOnly} 
+                            aria-describedby="firstNameError" 
+                            aria-invalid={isFirstNameInvalid} 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="firstNameError" if:true={isFirstNameInvalid}>
+                            First Name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="input-title">
+                        <span class="required-indicator">*</span> Last Name
+                    </label>
+                    <div class={lastNameErrorClass}>
+                        <lightning-input 
+                            label="Last Name" 
+                            class="input-field" 
+                            name="lastName" 
+                            variant="label-hidden" 
+                            value={lastName} 
+                            read-only={readOnly} 
+                            aria-describedby="lastNameError" 
+                            aria-invalid={isLastNameInvalid} 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="lastNameError" if:true={isLastNameInvalid}>
+                            Last Name is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title"><span class="required-indicator">*</span> Organization Name</label>
+                    <div class={organizationNameErrorClass}>
+                        <lightning-input 
+                            label="Organization Name" 
+                            class="input-field" 
+                            name="organizationName" 
+                            variant="label-hidden" 
+                            value={organizationName}  
+                            read-only={readOnly} 
+                            aria-describedby="organizationNameError" 
+                            aria-invalid={isOrganizationNameInvalid} 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="organizationNameError" if:true={isOrganizationNameInvalid}>
+                            Organization Name is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email and Phone Inputs with Icons Inside -->
+            <div class="input-group">
+                <div class="form-group half-width">
+                    <label class="input-title" for="email"><span class="required-indicator">*</span> Email Address </label>
+                    <div class={emailErrorClass}>
+                        <div class="icon-input-container"> 
+                            <lightning-icon icon-name="utility:email" size="x-small" class="left-icon"></lightning-icon>
+                            <lightning-input 
+                                label="Email Address"  
+                                variant="label-hidden" 
+                                name="email" 
+                                value={email} 
+                                class="input-field email-field" 
+                                read-only={readOnly} 
+                                aria-describedby="emailError" 
+                                aria-invalid={isEmailInvalid} 
+                                onchange={handleInputChange}>
+                            </lightning-input>                        
+                        </div>
+                        <div class="slds-form-element__help" id="emailError" if:true={isEmailInvalid}>
+                            Email is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group half-width">
+                    <label class="input-title" for="phone"><span class="required-indicator">*</span> Cell Phone Number </label>
+                    <div class={phoneErrorClass}>
+                        <div class="icon-input-container"> 
+                            <lightning-icon icon-name="utility:call" size="x-small" class="left-icon"></lightning-icon>
+                            <lightning-input 
+                                label="Cell Phone Number" 
+                                variant="label-hidden" 
+                                name="phone" 
+                                value={phone} 
+                                class="input-field phone-field" 
+                                read-only={readOnly} 
+                                aria-describedby="phoneError" 
+                                aria-invalid={isPhoneInvalid} 
+                                onchange={handleInputChange}>
+                            </lightning-input>                      
+                        </div>
+                        <div class="slds-form-element__help" id="phoneError" if:true={isPhoneInvalid}>
+                            Phone number is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dotted-line"></div>
+
+            <!-- Address Fields -->
+            <div class="input-group"></div>
+                <div class="form-group full-width">
+                    <label class="input-title">
+                        <span class="required-indicator">*</span> Address
+                    </label>
+                    <lightning-input-address
+                        address-label="Address"
+                        street-label="Street"
+                        city-label="City"
+                        country-label="Country"
+                        province-label="State/Province"
+                        postal-code-label="Zip/Postal Code"
+                        street={addressLine1}
+                        city={city}
+                        country={country}
+                        province={state}
+                        postal-code={zipCode}
+                        onchange={handleAddressChange}
+                        show-address-lookup>
+                    </lightning-input-address>
+            </div>
+        </div>
+    </div>
+    </template>
+</template>

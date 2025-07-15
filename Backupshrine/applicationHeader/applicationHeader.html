@@ -1,0 +1,25 @@
+<template>
+  <div class="header_wrapper">
+    <div class="header_topRow_wrapper">
+      <div class="header_topRow">
+        <div class="header-content">
+          <img
+            src={appLogo}
+            class="appLogo"
+            alt="appLogo"
+            title="appLogo"
+            tabindex="0"
+          />
+        </div>
+        <div class="links slds-text-align_right">
+          <button class="slds-button myaccount" onclick={navigateToAccount}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="link-icons">
+              <use xlink:href={userIcon}></use>
+            </svg>
+            &nbsp;My Account
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

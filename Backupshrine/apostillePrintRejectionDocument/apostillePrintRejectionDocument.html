@@ -1,0 +1,183 @@
+<template>
+
+    <!-- Spinner Loader -->
+    <template if:true={isLoading}>
+        <div class="spinner-container">
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </div>
+    </template>
+
+    <lightning-modal-header>
+        <div class="header-content">
+            <div class="header-label">
+                <lightning-icon  icon-name="action:reject" size="small" class="reject-icon"></lightning-icon>
+                <span>Apostille Rejection Letter</span>
+            </div>
+            <lightning-icon class="close-icon" icon-name="utility:close" size="small"
+                onclick={handleCancel}></lightning-icon>
+        </div>
+    </lightning-modal-header>
+
+    <!-- <lightning-modal-body class="capture-target">
+        <div class="slds-p-around_small">
+            <div class="header">
+                <h1 class="heading"><strong>Thank You, {customerName}</strong></h1>
+                <p class="description">Your apostille request has been successfully submitted. Below are the details of
+                    your request:</p>
+                <p class="work-order">Work Order Number:<strong> {workOrderNumber}</strong> </p>
+                <p class="track-description">You can track the status of your request at any time by clicking the link
+                    below:</p>
+                <p class="track-link" >Track Your Apostille Request</p>
+            </div>
+        </div>
+
+        <div class="custom-card-header">
+            <lightning-icon icon-name="standard:contract_line_outcome" size="large"
+                class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <p class="docTitle">Document Requested</p>
+                <p class="docDescription">Below listed are all the documents(s) you have applied for the apostille.</p>
+            </div>
+        </div>
+
+        <div class="slds-scrollable_x custom-table-container">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                <thead class="custom-header">
+                    <tr >
+                        <th scope="col" class="docHeaderText">
+                            <div class="slds-truncate" title="Type of Document">Type of Document
+                            </div>
+                        </th>
+                        <th scope="col" class="docHeaderText">
+                            <div class="slds-truncate" title="Destination Country">Destination Country
+                            </div>
+                        </th>
+                        <th scope="col" class="docHeaderText">
+                            <div class="slds-truncate" title="Name of the Person Listed on the Document">Name of the
+                                Person Listed on the Document
+                            </div>
+                        </th>
+                        <th scope="col" class="docHeaderText">
+                            <div class="slds-truncate" title="Hague Status">Hague Status
+                            </div>
+                        </th>
+                        <th scope="col" class="docHeaderText">
+                            <div class="slds-truncate" title="Fee">Fee
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={documentsRequested} for:item="doc">
+                        <tr key={doc.id} class="custom-column">
+                            <td class="docContentText">
+                                <div class="slds-truncate" title={doc.documentType}>{doc.documentType}
+                                </div>
+                            </td>
+                            <td class="docContentText">
+                                <div class="slds-truncate" title={doc.country}>{doc.country}</div>
+                            </td>
+                            <td class="docContentText">
+                                <div class="slds-truncate" title={doc.requesterName}>{doc.requesterName}</div>
+                            </td>
+                            <td class="docContentText">
+                                <div class="slds-truncate" title={doc.hagueStatus}>{doc.hagueStatus}</div>
+                            </td>
+                            <td class="docContentText">
+                                <div class="slds-truncate" title={doc.fees}>{doc.fees}
+                                    <span if:true={expediteFee}> (+ $50.00)</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+            <div class="total-fee">
+                <p class="total-fee-int">
+                    <span class="totalFees">Total: {totalFee} </span>
+                    <span class="right-content">
+                        <span>{totalFee}</span>
+                        <span if:true={expediteFee}>(Expedite: {expediteFee})</span>
+                    </span>
+                </p>
+            </div>
+        </div>
+        
+        <template if:true={showPages}>
+            <div class="pagination-controls">
+                <lightning-button label="Prev" icon-name="utility:jump_to_left" icon-position="left"
+                    onclick={handlePreviousPage} variant="neutral" disabled={isPreviousDisabled}>
+                </lightning-button>
+
+                <span class="paginationText">{startRecord} - {endRecord} of {totalRecords} | Page {currentPage}
+                    of {totalPages}</span>
+
+                <lightning-button label="Next" icon-name="utility:jump_to_right" icon-position="right"
+                    onclick={handleNextPage} variant="neutral" disabled={isNextDisabled}>
+                </lightning-button>
+            </div>
+        </template> 
+
+         <div class="custom-card-header">
+            <lightning-icon icon-name="standard:email_chatter" size="large" class="header-icon"></lightning-icon>
+            <div class="header-text">
+                <h1 class="docTitle">Mailing Information</h1>
+                <p class="docDescription">To complete this request, you must send your original document(s) to our office.
+                </p>
+            </div>
+        </div>
+
+        <div class="mailing-section">
+            <table class="mailing-table">
+                <thead class="mailing-table-header">
+                    <tr >
+                        <th class="mailing-table-header-cell-left"><strong>Preferred Method:</strong></th>
+                        <th class="mailing-table-header-cell-right"><strong>Mailing Address:</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row">
+                        <td class="mailing-table-cell-left">
+                            <p class="description">{mailingInfo.preferredMethod.method}</p>
+                        </td>
+                        <td class="mailing-table-cell-right">
+                            <p class="mailing-address">{mailingInfo.preferredMethod.address}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mailing-section">
+            <table class="mailing-table">
+                <thead>
+                    <tr class="mailing-table-header">
+                        <th class="mailing-table-header-cell-left">First Class or Priority Mail</th>
+                        <th class="mailing-table-header-cell-right"><strong>Mailing Address:</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row">
+                        <td class="mailing-table-cell-left">
+                            <p class="description">{mailingInfo.firstClass.method}</p>
+                        </td>
+                        <td class="mailing-table-cell-right">
+                            <p class="mailing-address">{mailingInfo.firstClass.address}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+
+    <!-- </lightning-modal-body> -->
+
+    <lightning-modal-footer class="footer-content">
+        <lightning-button variant="neutral" label="Print Apostille Submission Document" icon-name="utility:print"
+            onclick={printApostilleSubmissionDocument}></lightning-button>
+        <lightning-button variant="brand" label="Download Submission Document" icon-name="utility:download"
+            onclick={downloadApostilleSubmissionDocument}></lightning-button>
+    </lightning-modal-footer>
+    <!-- <c-pdf-example data-id="pdfExample"></c-pdf-example> -->
+    <!-- <c-pdf-genrator data-id="pdfGenerator" documents-requested={documentsRequested} customer-name={customerName} work-order-num={workOrderNumber} 
+        total-fee={totalFee} expedite-fee={expediteFee}></c-pdf-genrator> -->
+</template>
