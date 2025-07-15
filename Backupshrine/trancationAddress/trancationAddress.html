@@ -1,0 +1,15 @@
+<template>
+    <lightning-input-address
+        address-label={addressLabel}
+        street-label="Street"
+        city-label="City"
+        country-label="Country"
+        province-label="Province"
+        postal-code-label="PostalCode"
+        street={addressDetail.street}
+        city={addressDetail.city}
+        country={addressDetail.country}
+        province={addressDetail.province}
+        postal-code={addressDetail.postalCode}
+        onchange={handleAddressChange} ></lightning-input-address>
+</template>

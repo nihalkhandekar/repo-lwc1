@@ -1,0 +1,34 @@
+<template>
+  <div class="slds-box mainSection">
+  <lightning-layout class="align slds-wrap mainContainer">
+    <lightning-layout-item
+    class="slds-medium-size_12-of-12 slds-large-size_12-of-12">
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 headingSection">
+          <h1>You are self-certified</h1>
+        </div>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 content">
+        <h2>Thank you for self-certifying your business</h2>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 contentdata">
+        <h3>Click <lightning-formatted-url value={pdfLink} label="here"></lightning-formatted-url> to download the signage and self-certification badge. You are under no obligation to use these materials - it is voluntary.</h3>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 contentdata">
+        <h3>An email has been sent to you at {businessowneremail}. If you did not receive the email, please check your spam folder or Promotions tab.</h3>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 contentdata">
+         <h3>We encourage you to provide us with feedback on the rules and guidelines associated with the state's reopening process. Click <lightning-formatted-url value={feedback} label="here"></lightning-formatted-url> to provide your feedback.</h3>
+      </div>
+      <div class="nav-button">
+        <lightning-button
+          label="Business Recovery Home Page"
+          onclick={submit}
+          variant="brand"
+          class="primaryBtn">
+        </lightning-button>
+      </div>
+      </lightning-layout-item>           
+  </lightning-layout>
+  </div>
+</template>

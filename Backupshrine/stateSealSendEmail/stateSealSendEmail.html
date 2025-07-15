@@ -1,0 +1,147 @@
+<template>
+    <div class="document-info-container">
+        <!-- Header Section -->
+        <div class="input-section">
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="email"><span class="required-indicator">*</span>To</label>
+                    <div class={toEmailErrorClass}>
+                        <lightning-input 
+                            label="To Email"
+                            type="toEmail"
+                            name="toEmail" 
+                            variant="label-hidden"
+                            id="toEmail" 
+                            placeholder="e.g johndoe@gmail.com"
+                            value={toEmail} 
+                            class="input-field" 
+                            message-when-bad-input="Please enter a valid email address."
+                            message-when-value-missing="Email is required."
+                            read-only={isReadOnly} 
+                            aria-describedby="emailError"
+                            aria-invalid={isEmailInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="toEmailError" if:true={isToEmailInvalid}>
+                            Email is required and must be valid.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="email">CC</label>
+                    <div class={ccEmailErrorClass}>
+                        <lightning-input 
+                            label="CC Email"
+                            type="ccEmail"
+                            name="ccEmail" 
+                            variant="label-hidden"
+                            id="ccEmail" 
+                            placeholder="e.g johndoe@gmail.com"
+                            value={ccEmail} 
+                            class="input-field" 
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="ccEmailError" if:true={isCCEmailInvalid}>
+                            Email is required and must be valid.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="lastName"><span class="required-indicator">*</span>Subject</label>
+                    <div class={subjectErrorClass}>
+                        <lightning-input 
+                            label="Subject"
+                            name="subject" 
+                            variant="label-hidden"
+                            id="subject" 
+                            placeholder="e.g Doe"
+                            value={subject}                      
+                            class="input-field" 
+                            read-only={isReadOnly} 
+                            aria-describedby="subjectError"
+                            aria-invalid={issubjectInvalid}
+                            onchange={handleInputChange}>
+                        </lightning-input>
+                        <div class="slds-form-element__help" id="lastNameError" if:true={issubjectInvalid}>
+                            Last Name is required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <div class="form-group quarter-width">
+                    <label class="custom-label" for="uploadSealArm"><span class="required-indicator">*</span>Upload Seal/Arm</label>
+                    <div class={sealArmErrorClass}>
+                        <lightning-input type="file" 
+                            class="fileUploadContainer"
+                            accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf"
+                            multiple
+                            variant="label-hidden"
+                            label="Attachment" onchange={handleUpload}>
+                        </lightning-input>
+                    </div>
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+
+                <div class="form-group quarter-width">
+                </div>
+            </div>
+
+            <div class="input-groups">
+                <div class="form-group">
+                    <label class="custom-label" for="description"><span class="required-indicator">*</span>Description</label>
+                    <lightning-textarea
+                        name="description"
+                        label="Description"
+                        id="description"
+                        read-only={isReadOnly}
+                        variant="label-hidden"
+                        placeholder="Enter description..."
+                        value={description}
+                        class="input-field"
+                        onchange={handleInputChange}>
+                    </lightning-textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,10 @@
+/* Custom CSS to style the action link as a button-like text */
+.slds-datatable .slds-text-link {
+    cursor: pointer;
+    color: #0070d2; /* Salesforce blue color */
+    text-decoration: underline;
+}
+
+.slds-datatable .slds-text-link:hover {
+    color: #005fb2; /* Darker blue on hover */
+}

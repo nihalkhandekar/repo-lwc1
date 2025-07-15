@@ -1,0 +1,31 @@
+.slds-step {
+    position: relative;
+    padding: 1rem 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.slds-step:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #d8dde6;
+    transform: translateX(-50%);
+}
+
+.slds-step:last-of-type:before {
+    display: none;
+}
+
+.slds-step .slds-text-heading_small {
+    font-size: 1rem; /* Default font size */
+}
+
+.slds-is-active {
+    color: #0070d2; /* Blue color for active step */
+    font-size: 1.25rem; /* Larger text for active step */
+    font-weight: bold;
+}

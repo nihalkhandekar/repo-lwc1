@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    height: 100vh; /* Full screen height */
+}
+
+.left-section {
+    flex: 2; /* 2/3 of the screen width */
+    background-color: #f0f0f0; /* Optional: Background color for differentiation */
+    display: flex;
+    align-items: stretch; /* Ensure child elements stretch to full height */
+    padding: 0; /* Remove default padding */
+}
+
+.right-section {
+    flex: 1; /* 1/3 of the screen width */
+    background-color: #e0e0e0; /* Optional: Background color for differentiation */
+    display: flex;
+    align-items: stretch; /* Ensure child elements stretch to full height */
+    padding: 0; /* Remove default padding */
+}
+
+.full-height {
+    height: 100%; /* Make the lightning-card take full height of the parent container */
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.25rem; /* Adjust as needed */
+    font-weight: bold;
+}
+
+.description {
+    margin: 0;
+    font-size: 0.875rem; /* Adjust as needed */
+    color: #6c6c6c; /* Light color for description */
+}

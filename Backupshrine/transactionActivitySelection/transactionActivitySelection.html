@@ -1,0 +1,50 @@
+<template>
+    <!-- <lightning-card title="Real Time Custom Dependent Picklist From Record Field Values" icon-name="custom:custom63"> -->
+        <template if:true={showpicklist}>
+            <!-- <div class="slds-grid slds-gutters"> -->
+                <div class="slds-col">
+                    <lightning-combobox label={controllerFieldLabel}
+                                name={controllerFieldLabel}
+                                options={controllingPicklist} 
+                                value={selectedControlling}
+                                onchange={fetchDependentValue}
+                                required
+                                >
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col">
+                    <lightning-combobox label={dependentFieldLabelSubActivity}
+                                name={dependentFieldLabelSubActivity}
+                                options={finalDependentValSubActivity} 
+                                value={selectedControlling}
+                                disabled={dependentDisabledSubActivity}
+                                onchange={handleDependentPicklistSubActivity}                                  
+                                >
+                    </lightning-combobox>
+                </div>
+                <div class="slds-col">
+                    <lightning-combobox label={dependentFieldLabelProgramCode}
+                                name={dependentFieldLabelProgramCode}
+                                options={finalDependentValProgramCode} 
+                                value={selectedControlling}
+                                disabled={dependentDisabledProgramCode}
+                                onchange={handleDependentPicklistProgramCode}                                 
+                                >
+                    </lightning-combobox>
+                </div>
+            <!-- </div> -->
+            <template if:true={isNotaryPublicFlag}>
+                <!-- <div class="slds-grid slds-gutters"> -->
+                    <div class="slds-col">
+                       <lightning-input type="text" label="Notary First Name" value={firstname} onchange={handleFirstNameChange} required></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="text" label="Notary Last Name" value={lastname} onchange={handleLastNameChange} required></lightning-input>
+                    </div>
+                <!-- </div> -->
+            </template>
+            
+        </template>
+      
+    <!-- </lightning-card> -->
+</template>

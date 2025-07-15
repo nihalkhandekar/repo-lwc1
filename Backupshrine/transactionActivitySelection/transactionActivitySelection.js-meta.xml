@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__Tab</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="selectActivityValue" type="String" label="Select Activity Value" role="outputOnly"/>
+            <property name="selectSubActivityValue" type="String" label="Select Sub Activity Value" role="outputOnly"/>
+            <property name="selectProgramCodeValue" type="String" label="Select Program Code Value" role="outputOnly"/>
+            <property name="firstname" type="String" label="Notary First Name" role="outputOnly"/>
+            <property name="lastname" type="String" label="Notary Last Name" role="outputOnly"/>
+            <property name="lastnamea" type="String[]" label="Last Name" role="outputOnly"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

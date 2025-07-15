@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Stepper Example">
+        <div class="slds-grid slds-grid_vertical slds-grid_align-center">
+            <template for:each={steps} for:item="step" for:index="index">
+                <div 
+                    key={step.value}
+                    class={step.class}
+                    onclick={handleStepClick}
+                    data-id={index}
+                >
+                    <span class="slds-text-heading_small">{step.label}</span>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

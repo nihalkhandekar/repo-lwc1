@@ -1,0 +1,9 @@
+<template>
+    <div class="edit-card" if:true={showCard}>
+        <p class="large">{value}</p>
+        <div class="edit-btn" tabindex="0" role="button" onclick={handleEdit} onkeypress={handleEdit}>
+            <img class="slds-m-right_small" src={editIcon} alt="Edit Icon" aria-hidden="true" />
+            <span>{label}</span>
+        </div>
+    </div>
+</template>

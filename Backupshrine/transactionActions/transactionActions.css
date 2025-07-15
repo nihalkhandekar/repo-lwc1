@@ -1,0 +1,38 @@
+.button-container {
+    display: flex;
+    align-items: center;
+}
+
+.view-text {
+    color: #0070d2; /* Brand color */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.view-text:hover {
+    text-decoration: underline;
+}
+
+.print-text {
+    color: #28a745; /* Professional green */
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.print-text:hover {
+    text-decoration: underline;
+}
+
+.refund-text {
+    color: #f2b50d;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.refund-text:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    margin: 0 2.5px;
+}

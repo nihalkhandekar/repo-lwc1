@@ -1,0 +1,15 @@
+<template>
+    <template if:true={data}>
+        <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            onrowaction={handleRowAction}
+            hide-checkbox-column>
+        </lightning-datatable>
+    </template>
+    <template if:true={error}>
+        <p>No History Found</p>
+    </template>
+
+</template>

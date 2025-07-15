@@ -1,0 +1,22 @@
+<template>
+    <template if:true={editCustomer}>
+        <lightning-button 
+            variant="neutral" 
+            label="View Transaction"
+            title="View Transaction"
+            class="slds-m-left_x-small"
+            onclick={handleClick}>
+        </lightning-button>
+    </template>
+    
+    <template if:false={editCustomer}>
+        <lightning-button 
+            variant="neutral" 
+            label="Edit Customer"
+            title="Edit Customer"
+            class="slds-m-left_x-small"
+            onclick={handleClick}>
+        </lightning-button>
+    </template>
+    
+</template>

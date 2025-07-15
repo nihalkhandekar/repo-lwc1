@@ -1,0 +1,57 @@
+<template>
+    <div class="slds-grid slds-gutters">
+        <template if:false={apostilleAddReciept}>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input 
+                    label="Customer Id"
+                    value={customerId}
+                    data-field="customerId"
+                    onchange={handleNameChange}
+                    readonly
+                >
+                </lightning-input>
+            </div>
+        </template>
+
+        <div class="slds-col slds-size_1-of-4">
+            <lightning-input 
+            label="First Name"
+            value={firstName}
+            data-field="firstName"
+            onchange={handleNameChange}
+        >
+        </lightning-input>    
+        </div>
+
+        <div class="slds-col slds-size_1-of-4">
+            <lightning-input 
+            label="Last Name"
+            value={lastName}
+            data-field="lastName"
+            onchange={handleNameChange}
+        >
+        </lightning-input>    
+        </div>
+
+        <div class="slds-col slds-size_1-of-4">
+            <lightning-input 
+                label="Email"
+                value={email}
+                data-field="email"
+                onchange={handleNameChange}
+            >
+            </lightning-input>
+        </div>
+        <template if:true={apostilleAddReciept}>
+            <div class="slds-col slds-size_1-of-4">
+                <lightning-input 
+                    label="Phone"
+                    value={phone}
+                    data-field="phone"
+                    onchange={handleNameChange}
+                >
+                </lightning-input>
+            </div>
+        </template>
+    </div>
+</template>

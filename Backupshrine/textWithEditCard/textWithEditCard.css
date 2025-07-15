@@ -1,0 +1,62 @@
+.edit-card {
+    background-color: #f7f9fa;
+    display: flex;
+    border: 1px solid #D0CFCF;    
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.edit-card p {
+    flex-grow:1;
+    padding: 12px 16px;
+    background: #fff;
+    word-break: break-all;
+    margin: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+.edit-card .edit-btn {
+    padding: 12px 8px;
+    display: flex;
+    align-items: center;
+    color: #09538B;
+    font-family: Karla;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.edit-card .edit-btn img {
+    width: 24px;
+    height: 24px;
+    margin-right: 4px;
+    max-width: none;
+    margin-top: 2px;
+}
+
+.edit-card .edit-btn span {
+    display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+    .edit-card .edit-btn span {
+        display: block;
+    }
+
+    .edit-card p {
+        padding: 24px;
+    }
+
+    .edit-card .edit-btn {
+        padding: 24px;
+    }
+
+    .edit-card .edit-btn img {
+        margin-top: 0px;
+    }
+}
