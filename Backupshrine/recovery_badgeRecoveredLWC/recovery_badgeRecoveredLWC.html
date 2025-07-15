@@ -1,0 +1,27 @@
+<template>
+  <div class="slds-box mainSection">
+  <lightning-layout class="align slds-wrap mainContainer">
+    <lightning-layout-item
+    class="slds-medium-size_12-of-12 slds-large-size_12-of-12 paddingbottom" >      
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 content">
+        <h1>{label.label_badgeConfirmation}</h1>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 contentdata">
+        <h2>{label.label_click} <lightning-formatted-url value={pdfLink} label={label.label_here}></lightning-formatted-url> {label.label_mssgPart1}</h2>
+      </div>
+      <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 contentdata">
+        <h3>{label.label_mssgPart5} {label.label_click} <lightning-formatted-url value={feedback} label={label.label_here}></lightning-formatted-url> {label.label_mssgPart4}</h3>
+      </div>
+      <div style="padding-bottom: 1rem"></div>
+      <div class="nav-button">
+        <lightning-button
+          label={label.label_submitBttn}
+          onclick={submit}
+          variant="brand"
+          class="primaryBtn">
+        </lightning-button>
+      </div>
+    </lightning-layout-item>           
+  </lightning-layout>
+</div>
+</template>

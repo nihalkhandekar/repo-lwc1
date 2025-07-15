@@ -1,0 +1,57 @@
+<template>
+    <template if:true={open}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class={modalStyle}>
+            <div class="slds-modal__container">
+                <div class="slds-modal__content hPadding" id="modal-content-id-1">
+                    <div class="header">
+                        <template if:false={showdelete}>
+                        <template if:true={colid}>
+                            <h5>{label.rc_Edit_Collection}</h5>
+                        </template>
+                        <template if:false={colid}>
+                        <h5>{label.rcNewCollection}</h5>
+                        </template>
+                        </template>
+                        <template if:true={showdelete}>
+                            <h5>{label.rc_collectiondeletion}</h5>
+                        </template>
+                        <button
+                            class="closeWrapper slds-button slds-button_icon slds-button_icon-inverse mobile-close slds-col slds-size_1-of-12 tabfocus"
+                            title="Close" onclick={handleClose}>
+                            <lightning-icon size="x-small" icon-name="utility:close" alternative-text="Close">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">{label.labelClose}</span>
+                        </button>
+                    </div>
+                    <template if:false={showdelete}>
+                        <p class="largeBold helpText">{label.rc_New_Collection_Content}</p>
+                        <p class="large">{label.rc_Collection_Name}</p>
+                        <input class="collNameInp" placeholder={label.rc_placeholder_new_coll} value={name} maxlength=40 />
+                        <template if:true={showErrorTxt}>
+                            <p class="small errorText">{label.rc_Collection_Limit_Error}</p>
+                        </template>
+                    </template>
+                    <hr>
+                    <template if:false={showdelete}>
+                    <template if:true={colid}>
+                            <button class="primaryBtn slds-button"
+                                onclick={editCollection}>{label.rc_Edit_Collection}</button>
+                    </template>
+                    <template if:false={colid}>
+                            <button class="primaryBtn slds-button"
+                                onclick={createCollection}>{label.rc_Start_Collection}</button>
+                        </template>
+                    </template>
+                    <template if:true={showdelete}>
+                        <button class="slds-button deleteBtn secondaryBtn" onclick={handleClose}>{label.checklistPage_No}</button>
+                        <button class="slds-button deleteBtn slds-button_brand primaryBtn" onclick={handleYes}>{label.checklistPage_Yes}</button>
+                    </template>
+                </div>
+            </div>
+        </section>
+        <template if:true={open}>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </template>
+</template>

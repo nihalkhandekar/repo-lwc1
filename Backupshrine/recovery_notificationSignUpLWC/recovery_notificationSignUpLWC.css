@@ -1,0 +1,115 @@
+.SignupHeader{
+    background-color: #f7f9fa;
+    min-height: calc(100vh - 80px);
+    padding-top: 4rem;
+}
+.containerDiv {
+    padding: 0 1rem;
+}
+.mainSection {
+    background-color: #fff;
+    box-shadow: none;
+}
+.headerText {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 43px !important;
+    line-height: 49px;
+    font-weight: bold;
+    letter-spacing: 0.31px;
+    margin-top: 0.5rem;
+}
+.subHeaderText {
+    color: #2D2C2C;
+    font-family: myFirstFont;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    margin-top: 0.5rem;
+}
+.card-section{
+    margin: 5rem auto;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+}
+.mainContainer {
+    padding: 3rem;
+}
+.headingSection{
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 28px !important;
+    font-weight: bold;
+    letter-spacing: 0.2px;
+    line-height: 35px;
+}
+.labelText{
+    color: #2D2C2C;
+    font-family: myFirstFont;
+    font-size: 18px !important;
+    font-weight: bold;
+    letter-spacing: 0.13px;
+}
+.subLabelErrText{
+    color: #DB2426;
+    font-family: myFirstFont;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 0.13px;
+    line-height: 21px;
+}
+.subLabelText{
+    color: #2D2C2C;
+    font-family: myFirstFont;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+.borderClass{
+    border-bottom: 1px solid #ECEBEB
+}
+
+.bttnsWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4.5rem;
+}
+.bttnContainer {
+    display: inherit;
+}
+.bttnsWrapper .primaryBtnSignup, .bttnsWrapper .secondaryBtnSignup{
+    width: 100%;
+}
+.mobileBtns {
+    display: none;
+}
+.error-msg-wrapper {
+    text-align: right;
+}
+
+@media only screen and (max-width: 64rem){
+    .headerText {
+        color: #2D2C2C;
+        font-family: Lato;
+        font-size: 34px;
+        line-height: 40px;
+        font-weight: bold;
+        letter-spacing: 0.24px;
+    }
+    .mainContainer {
+        padding: 2rem 20px;
+    }
+    .headingSection{
+        color: #2D2C2C;
+        font-family: Lato;
+        font-size: 20px;
+        font-weight: bold;
+        letter-spacing: 0.2px;
+    }
+    .bttnsWrapper {
+        display: inline;
+    }  
+    .desktopBtns{
+        display: none;
+    }
+}

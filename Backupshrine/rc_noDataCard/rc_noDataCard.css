@@ -1,0 +1,35 @@
+.noDataHead {
+    margin-top: 40px;
+}
+
+.subHeading {
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+    line-height: 27px;
+    margin: 16px 0px 32px 0px;
+}
+
+.noDataFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px dashed #d0cfcf;
+    margin-top: 20px;
+}
+
+.noDataFoundText {
+    width: 80%;
+    margin-top: 16px;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1023px) {
+    .subHeading {
+        font-size: 17px;
+        line-height: 25px;
+    }
+
+    .noDataFound {
+        padding: 32px 16px;
+    }
+}

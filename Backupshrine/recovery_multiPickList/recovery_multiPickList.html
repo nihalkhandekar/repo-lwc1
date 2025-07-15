@@ -1,0 +1,71 @@
+<template>
+    <div class="slds-size_12-of-12 slds-form-element">
+        <template if:true={labelValue}>
+            <label class="inputTextStyle slds-form-element__label">
+                <abbr title="required" class="slds-required">*</abbr>
+                {labelValue}
+            </label>
+        </template>
+        <div class="slds-size_12-of-12 slds-form-element__control">
+            <div class="slds-combobox_container">
+                <div id="ms-picklist-dropdown" class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-picklist ms-picklist-dropdown" aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                    <div class="slds-combobox_form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+                        <input class="slds-input slds-combobox__input inputTextStyle ms-input" id="ms-input" aria-describedby="help-text-13" aria-controls="ms-dropdown-items" role="textbox" type="text"  value={_selectedItems} placeholder={placeholderValue} autocomplete="off" aria-autocomplete="none" required readonly/>
+                        <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right" title="Click to open the dropdown">
+                            <lightning-icon icon-name="utility:chevrondown" size="x-small" alternative-text="Click here" class="slds-icon slds-icon--selected slds-icon_x-small slds-icon-text-default slds-m-right--x-small utilityIcon"></lightning-icon>
+                        </span>
+                    </div>                    
+                    <div id="ms-dropdown-items" class="te" role="listbox">
+                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid slds-dropdown_left slds-dropdown_length-with-icon-5" role="presentation">
+                            <template for:each={_mOptions} for:item="item">
+                                <li title={item.key} role="presentation" key={item.key} class="slds-listbox__item ms-list-item" data-id={item.key} data-name={item.value} onclick={handleItemSelected}>
+                                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_center slds-media_small slds-listbox__option_plain" role="option">
+                                        <span class="slds-media__figure slds-listbox__option-icon">
+                                            <lightning-icon icon-name="utility:check" size="x-small" alternative-text="Selected" class="slds-icon slds-icon--selected slds-icon--x-small slds-icon-text-default slds-m-right--x-small"></lightning-icon>
+                                        </span>
+                                        <span class="slds-media__body">
+                                            <span title={item.key}>{item.key}</span>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template> 
+                        </ul>
+                    </div>
+                </div>                
+            </div>
+            <template if:true={showSelectedArray}>
+                <div class="slds-m-top_small selectedItemContainer">
+                    <template for:each={yourSelectedValues} for:item="item">
+                        <span key={item.key} class="pills" id={item.key}>
+                            {item.key}
+                            <img
+                                src={closeIcon}
+                                class="closeIcon tabfocus"
+                                alt="closeIcon"
+                                tabindex="0"
+                                id={item.key}
+                                title={item.key}
+                                onclick={handleClose}
+                            />
+                        </span>
+                    </template>
+                </div>
+                <div if:true={showUIError} class="slds-float_left error-container">
+                    <div class="slds-float_left error-msg-wrapper" role="alert">
+                      <section
+                        aria-label="Error Message"
+                        class="errorMssg"
+                        role="dialog"
+                      >
+                        <div class="error-msg">
+                          <p class="small">
+                            {label.Recovery_SignupMorethan3IndustryError}
+                          </p>
+                        </div>
+                      </section>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>    
+</template>

@@ -1,0 +1,40 @@
+.slds-modal__container,
+.slds-modal__content {
+    width: 100%;
+    position: relative;
+}
+
+iframe {
+    padding: 24px;
+    width: 100%;
+    height: 427px;
+}
+
+.slds-modal__content {
+    position: relative;
+    overflow: unset;
+}
+
+.closeWrapper {
+    box-sizing: border-box;
+    height: 56px;
+    width: 56px;
+    border: 1px solid #ECEBEB;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px;
+    right: -25px;
+}
+
+@media only screen and (max-width: 1023px) {
+    iframe {
+        margin: auto;
+        /* width: 90%; */
+    }
+
+    .slds-modal__container,
+    .slds-modal__content {
+        width: auto;
+    }
+}

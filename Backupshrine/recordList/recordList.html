@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Records List">
+        <div class="slds-p-around_medium">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th>Record Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={records} for:item="record">
+                        <tr key={record.id}>
+                            <td>{record.name}</td>
+                            <td>{record.status}</td>
+                            <td>
+                                <lightning-button 
+                                    label="View" 
+                                    variant="brand" 
+                                    data-id={record.id}
+                                    onclick={handleView}>
+                                </lightning-button>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+</template>

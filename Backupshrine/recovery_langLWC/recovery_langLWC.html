@@ -1,0 +1,8 @@
+<template>
+    <template if:true={showPill}>
+        <lightning-button label={label.label_bttnText} onclick={handleClick}></lightning-button>
+    </template>
+    <template if:false={showPill}>
+        <lightning-button label={label.label_bttnText} onclick={handleClick}></lightning-button>
+    </template>
+</template>

@@ -1,0 +1,76 @@
+.filterComboBox{
+    line-height: 27px;
+    outline: none;
+    color: #09538B;
+    font-family: Karla;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .filterType input{
+    border-color: transparent;
+  }
+  
+  .search-box{
+    border-radius: 4px;
+    border: 1px solid #d0cfcf;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 #e7e9f2;
+    display: flex;
+  }
+  .search-box input[type="text"] {
+    font-size: 18px;
+    line-height: 24px;
+    margin-left: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    outline: none;
+  }
+  .search-box input {
+    border-color: transparent;
+    padding: 24px;
+    width: 100%;
+  }
+  .input[type="text"] {
+    font-family: karla;
+  }
+  .search-icon-wrapper {
+    margin: auto 24px;
+  }
+  .accordionWrapper{
+    margin: 2rem;
+  }
+  .filterBox{
+    box-sizing: border-box;
+    border: 1px solid #ECEBEB;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+  }
+  .filterHeader{
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 28px;
+    margin: 2.5rem;
+  }
+  .applyFilterLink{
+    color: #2D2C2C;
+    font-family: Lato;
+    margin: 2.5rem;
+  }
+  .slds-select{
+  border-color: white;
+  }
+  .sectorFilterClass, .countyFilterClass{
+    color: #2D2C2C !important;
+    font-family: Lato;
+    font-size: 16px !important;
+    letter-spacing: 0.01px;
+    line-height: 24px
+  }
+  .filterSectionInnerWrapper{
+    display: flex;
+    justify-content: space-between;
+  }

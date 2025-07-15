@@ -1,0 +1,304 @@
+<!--*********************************************************************************************
+ * NAME:  recovery_bosAccCOVIDGuidelineLWC.cmp
+ * DESCRIPTION: Covid-19 Rules and guidlines Registration Form. 
+ *
+ * @AUTHOR: Devesh Murdiya
+ * @DATE: 12/05/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Devesh Murdiya                    12/05/2020                         Created the first version
+ * 
+*********************************************************************************************-->
+<template>
+  <div class="mainContainerDiv">
+    <template if:true={isRegister}>
+     <div class="slds-box mainSection">
+       <lightning-layout class="align slds-wrap mainContainer">
+         <lightning-layout-item
+         class="slds-medium-size_12-of-12 slds-large-size_12-of-12">
+           <div class="slds-grid slds-wrap">
+             <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 headingSection">
+               <h1 class="main-title">{label.label_Title}</h1> 
+             </div>
+             <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 reviewHeading" if:true={isReview}>
+               <h1 class="page-title">{label.label_IntroPart1}</h1>
+             </div>
+             <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <p class="para-style">{label.label_IntroPart2}</p>
+               <p class="para-style headingPadding"><lightning-formatted-url value={sectorrules} label={label.label_IntroPart5}></lightning-formatted-url></p>
+               <p class="para-style headingPadding">{label.label_IntroPart3}</p>
+               <p class="para-style subHeadingPadding">{label.label_IntroPart4}</p>
+             </div>
+           </div>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_BusinessSectorHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-combobox
+               name="sector"
+               value={regRecord.Sector__c}
+               label={label.label_BusinessSector}
+               placeholder={label.label_PlaceholderBusinessSector}
+               options={sectorValues}
+               onchange={handleChange} required>
+             </lightning-combobox>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_BusinessIndustryHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-combobox
+               name="businessType"
+               value={regRecord.Business_Type__c}
+               label={label.label_BusinessIndustry}
+               placeholder={label.label_PlaceholderBusinessselect}
+               options={buisnessTypeValues}
+               onchange={handleChange} required>
+             </lightning-combobox>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_BusinessNameHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-input
+               type="text"
+               name="businessName"
+               value={regRecord.Business_Name__c}
+               label={label.label_BusinessName}
+               max-length=255
+               onchange={handleChange} required>
+             </lightning-input>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_BusinessAddressHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-input
+               name="businessAddress"
+               value={regRecord.Business_Address_Street__c}
+               label={label.label_BusinessAddress}
+               placeholder={label.label_PlaceholderStreetAddress}
+               max-length=255
+               onchange={handleChange} required>
+       </lightning-input>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-input
+               name="aptNumber"
+               value={aptNumber}
+               placeholder={label.label_Placeholderapartment}
+               max-length=255
+               onchange={handleChange}>
+       </lightning-input>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout>
+           <lightning-layout-item class="questionfields">
+             <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <lightning-input
+                 type="text"
+                 name="city"
+                 value={regRecord.Business_Address_City__c}
+                 onchange={handleChange}
+                 max-length=255
+                 placeholder={label.label_PlaceholderCity} required></lightning-input>
+             </div>
+           </lightning-layout-item>
+           <lightning-layout-item class="questionfields">
+             <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <lightning-combobox
+                 name="country"
+                 value={regRecord.Business_Address_County__c}
+                 placeholder={label.label_PlaceholderBusinessCountry}
+                 options={countryValues}
+                 onchange={handleChange} required></lightning-combobox>
+             </div>
+           </lightning-layout-item>
+         </lightning-layout>
+         <lightning-layout>
+           <lightning-layout-item class="questionfields">
+             <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <lightning-combobox
+                 name="state"
+                 value={state}
+                 options={stateValues}
+                 onchange={handleChange} required></lightning-combobox>
+             </div>
+           </lightning-layout-item>
+           <lightning-layout-item class="questionfields">
+             <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <lightning-input type="text" name="zipCode" value={regRecord.Business_Address_Zip_Code__c} onchange={handleChange} max-length=5 
+               placeholder={label.label_PlaceholderBusinessZipCode} pattern="[0-9]{5}" required></lightning-input>
+             </div>
+           </lightning-layout-item>
+         </lightning-layout>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_WomenOwnedBusinessHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+            <lightning-combobox
+              name="womenBusiness"
+              value={regRecord.WBE_Women_Owned_Business__c}
+              options={womanOwnedBusiness}
+              placeholder={label.label_PlaceholderSelectOption}
+              label={label.label_WomenOwnedBusiness}
+              onchange={handleChange}>
+           </lightning-combobox>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_MinorityOwnedBusinessHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+            <lightning-combobox
+              name="minorityBusiness"
+              value={regRecord.MBE_Minority_Business_Enterprise__c}
+              placeholder={label.label_PlaceholderSelectOption}
+              options={mbeOwnedValues}
+              label={label.label_MinorityOwnedBusiness}
+              onchange={handleChange}>
+           </lightning-combobox>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_VeteranOwnedBusinessHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+            <lightning-combobox
+              name="veteranBusiness"
+              value={regRecord.Veteran_Owned_Business__c}
+              options={veteranOwnedBusiness}
+              placeholder={label.label_PlaceholderSelectOption}
+              label={label.label_VeteranOwnedBusiness}
+              onchange={handleChange}>
+           </lightning-combobox>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_BusinessEmailHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+            <lightning-input
+              type="email"
+              name="emailAddress"
+              value={regRecord.Email_Address__c}
+              label={label.label_BusinessEmail}
+              onchange={handleChange} required>
+        </lightning-input>
+           </div>
+         </lightning-layout-item>	
+         <lightning-layout-item class="questionfields">
+           <legend class="questionHeading">{label.label_BusinessPhoneHeader}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-input
+               type="tel"
+               name="phone1"
+               pattern="[0-9]{10}"
+               label={label.label_BusinessPhone}
+               value={regRecord.Contact_Phone_Number_1__c}
+               onchange={handleChange} required max-length=10></lightning-input>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields" if:true={isSector}>
+           <legend class="questionHeading">{label.label_RulesPart1}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <span class="span-style">{label.label_RulesPart2} </span><a class="link-style" href={pdfValue} target="_blank">{pdfValueLabel}</a><span class="span-style"> {label.label_RulesPart3}</span>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields" if:true={isReview}>
+           <legend class="questionHeading">{label.label_SelfCertPart1}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <span class="span-style">{label.label_SelfCertPart2}</span>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields" if:true={isReview}>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 checkboxField">
+             <lightning-input
+               type="checkbox"
+               name="acknowledgement"
+               value={regRecord.Attestation_Acknowledgement__c}
+               onchange={handleChange}
+               label={label.label_CheckboxLabel} required>
+             </lightning-input>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields" if:true={isReview}>
+           <legend class="questionHeading">{label.label_BusinessRepPart1}</legend>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <span class="span-style">{label.label_BusinessRepPart2}</span>
+           </div>
+         </lightning-layout-item>
+       <lightning-layout if:true={isReview}>
+           <lightning-layout-item class="questionfields">
+             <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <lightning-input
+                 type="text"
+                 name="firstName"
+                 label={label.label_BusinessRepFName}
+                 max-length=255
+                 value={regRecord.Representative_First_Name__c}
+                 onchange={handleChange} required></lightning-input>
+             </div>
+           </lightning-layout-item>
+           <lightning-layout-item class="questionfields">
+             <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+               <lightning-input
+                 type="text"
+                 name="lastName"
+                 label={label.label_BusinessRepLName}
+                 value={regRecord.Representative_last_Name__c}
+                 max-length=255
+                 onchange={handleChange} required></lightning-input>
+             </div>
+           </lightning-layout-item>
+       </lightning-layout>
+         <lightning-layout-item class="questionfields" if:true={isReview}>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12">
+             <lightning-input
+               type="date"
+               name="date"
+               value={regRecord.Date__c}
+               onchange={handleChange}
+               label={label.label_DateHeader} required>
+             </lightning-input>
+           </div>
+         </lightning-layout-item>
+         <lightning-layout-item class="questionfields" if:true={isReview}>
+           <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 checkboxFieldSubscription">
+             <lightning-input
+               type="checkbox"
+               name="subscription"
+               value={subscription}
+               onchange={handleChange}
+               label={label.label_Recovery_SubscriptionOptIn}>
+             </lightning-input>
+           </div>
+         </lightning-layout-item>
+         </lightning-layout-item>
+       </lightning-layout>
+       <div class="nav-button" if:false={isReview}>
+         <lightning-button
+           label={label.label_ReviewBttn}
+           onclick={validate}
+           variant="brand"
+           class="primaryBtn">
+         </lightning-button>
+       </div>
+       <div class="nav-button" if:true={isReview}>         
+		    <center>
+        <c-re-Captcha-Certification></c-re-Captcha-Certification>
+         <lightning-button
+           label={label.label_CertifyBttn}
+           onclick={submit}
+           variant="brand"
+           class="primaryBtn">
+         </lightning-button>
+         </center>
+       </div>
+     </div>
+    </template>
+    <template if:false={isRegister}>
+    <c-recovery_thankyou-L-W-C businessowneremail={regRecord.Email_Address__c} verification={verificationMessage}></c-recovery_thankyou-L-W-C>
+    </template>
+  </div>
+</template>

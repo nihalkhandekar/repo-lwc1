@@ -1,0 +1,80 @@
+<template>
+    <template if:false={isSubmit}>
+        <div class="SignupHeader">
+            <div class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_UnsubscribePageHeader}
+            </div>
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer borderClass">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 slds-grid slds-wrap">
+                            <div class="slds-col headingSection">
+                                {label.Recovery_UnsubscribePageQuestion}
+                            </div>
+                        </div>
+                        <lightning-layout-item>
+                            <div class="slds-p-top_xx-large slds-col slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 labelText">
+                                <lightning-input
+                                    type="email"
+                                    message-when-value-missing={label.Recovery_SignupEmailError}
+                                    name="emailAddress"
+                                    label={label.Recovery_Email} 
+                                    value={emailValue}
+                                    onchange={handleChange}
+                                    placeholder={label.Recovery_SignupPageLabel2}
+                                    class="inputTextStyle" required>
+                                </lightning-input>
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout class="align slds-wrap slds-p-top_x-large slds-p-bottom_x-large">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="bttnsWrapper slds-large-size_6-of-12 slds-float_right desktopBtns">                 
+                            <div class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 slds-m-right_x-large bttnContainer">
+                                <button
+                                    class="slds-button slds-button_neutral slds-float_right slds-m-right_small secondaryBtnSignup"
+                                    onclick={exitButton}
+                                >
+                                    {label.Recovery_UnsubscribePageButtonCancel}
+                                </button>
+                            </div>
+                            <div class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 bttnContainer">
+                                <button
+                                    class="slds-button slds-button_brand slds-float_right slds-m-right_small primaryBtnSignup"
+                                    onclick={submitButton}
+                                >
+                                    {label.Recovery_UnsubscribePageButton}                                  
+                                </button>
+                            </div>
+                        </div>
+                        <center>
+                            <div class="bttnsWrapper slds-size_12-of-12 mobileBtns">                 
+                                <div class="slds-size_12-of-12 bttnContainer">
+                                    <button
+                                        class="slds-button slds-button_neutral secondaryBtnSignup"
+                                        onclick={exitButton}
+                                    >
+                                        {label.Recovery_UnsubscribePageButtonCancel}                                        
+                                    </button>
+                                </div>
+                                <div class="slds-size_12-of-12 bttnContainer">
+                                    <button
+                                        class="slds-button slds-button_brand slds-m-top_small primaryBtnSignup"
+                                        onclick={submitButton}
+                                    >
+                                        {label.Recovery_UnsubscribePageButton} 
+                                    </button>
+                                </div>
+                            </div>
+                        </center>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+    <template if:true={isSubmit}>
+        <c-recovery_unsubscribe-response-L-W-C email-found={emailFound} user-email={emailValue}></c-recovery_unsubscribe-response-L-W-C>
+    </template>
+</template>

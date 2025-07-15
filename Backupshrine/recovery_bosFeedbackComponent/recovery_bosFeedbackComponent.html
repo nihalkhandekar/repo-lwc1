@@ -1,0 +1,194 @@
+<template>
+  <div class="mainContainerDiv">
+  <template if:true={isRegister}>
+    <div class="slds-box mainSection">
+      <lightning-layout class="align slds-wrap mainContainer">
+        <lightning-layout-item
+          class="slds-medium-size_12-of-12 slds-large-size_12-of-12"
+        >
+          <div class="slds-grid slds-wrap">
+            <div
+              class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 headingSection"
+            >
+              <h1 class="main-title">{label.label_feedback_Title}</h1>
+            </div>
+            <div
+              class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 questionHeading"
+            >
+              <h2 class="page-title">
+                {label.label_feedback_Intro}
+              </h2>
+            </div>
+          </div>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">{label.label_feedback_businessSectorLabel}</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-combobox
+                name="sector"
+                value={feedRecord.Your_business_sector__c}
+                label={label.label_feedback_businessSector}
+                placeholder={label.label_feedback_PlaceholderBusinessSector}
+                options={sectorValues}
+                onchange={handleChange}
+                required
+              >
+              </lightning-combobox>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">{label.label_feedback_businessIndustryLabel}</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-combobox
+                name="businessType"
+                value={feedRecord.Your_business_industry__c}
+                label={label.label_feedback_businessIndustry}
+                placeholder={label.label_feedback_PlaceholderBusinessselect}
+                options={buisnessTypeValues}
+                onchange={handleChange}
+                required
+              >
+              </lightning-combobox>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">{label.label_feedback_safetyGuidelines}</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-combobox
+                name="radioGroup"
+                value={feedRecord.safety_guidelines_complete__c}
+                options={safetyGuidelinesValues}
+                label={label.label_feedback_guidelines}
+                placeholder={label.label_PlaceholderSelectOption}
+                onchange={handleChange}
+                required
+              >
+              </lightning-combobox>
+            </div>
+          </lightning-layout-item>
+
+          <lightning-layout-item>
+            <legend class="questionHeading">{label.label_feedback_topics}</legend>
+            <label class="slds-form-element__label">{label.label_feedback_topicsPart1}</label>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-checkbox-group
+                name="checkboxTwo"
+                options={Checkbox2options}
+                value={value}
+                onchange={handleCheckboxTwoChange}
+              >
+              </lightning-checkbox-group>
+            </div>
+          </lightning-layout-item>
+
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">{label.label_feedback_title}</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-textarea
+                name="feedback"
+                label={label.label_feedback_topicsPart2}
+                onchange={handleChange}
+                value={feedRecord.Feedback__c}
+                required
+              >
+              </lightning-textarea>
+
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">{label.label_feedback_businessNameLabel} ({label.label_optional})</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="text"
+                name="businessName"
+                value={feedRecord.Business_Name__c}
+                label={label.label_feedback_businessName}
+                max-length="255"
+                onchange={handleChange}
+              >
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">
+              {label.label_feedback_businessEmailAddressLabel} ({label.label_optional})
+            </legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="email"
+                name="emailAddress"
+                value={feedRecord.Business_Email_Address__c}
+                label={label.label_feedback_businessEmailAddress}
+                onchange={handleChange}
+              >
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">
+              {label.label_feedback_businessPhoneNmbrLabel} ({label.label_optional})
+            </legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="tel"
+                name="phone1"
+                pattern="[0-9]{10}"
+                label={label.label_feedback_businessPhoneNmbr}
+                value={feedRecord.Business_Phone_Number__c}
+                onchange={handleChange}
+                max-length=10>
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">
+              {label.label_feedback_businessRepPart1} ({label.label_optional})
+            </legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="text"
+                name="repName"
+                label={label.label_feedback_businessRepPart2}
+                value={feedRecord.Business_Representative_Name__c}
+                onchange={handleChange}
+              >
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+        </lightning-layout-item>
+      </lightning-layout>
+      <div class="nav-button">
+        <div></div>
+        <center>
+          <c-re-Captcha-Certification></c-re-Captcha-Certification>
+          <lightning-button
+            name="Submit"
+            label={label.label_feedback_submitbutoon_c}
+            onclick={validate}
+            variant="brand"
+            class="primaryBtn"
+          >
+          </lightning-button>  
+        </center>      
+      </div>
+    </div>
+  </template>
+</div>
+</template>

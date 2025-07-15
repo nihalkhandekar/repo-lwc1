@@ -1,0 +1,134 @@
+.SignupHeader{
+    background-color: #f7f9fa;
+    min-height: calc(100vh - 80px);
+    padding-top: 60px;
+}
+.containerDiv {
+    padding: 0 1rem;
+}
+.mainSection {
+    background-color: #fff;
+    box-shadow: none;
+}
+.headerText {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 43px;
+    line-height: 49px;
+    font-weight: bold;
+    letter-spacing: 0.31px;
+    margin-top: 0.5rem;
+}
+.subHeaderText {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 18px;
+    line-height: 27px;
+    letter-spacing: 0.13px;
+    margin-top: 0.5rem;
+}
+.card-section{
+    margin: 5rem auto;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+}
+.mainContainer {
+    padding: 3rem;
+}
+.contentSection{
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+.linkStyle{
+    text-decoration: underline;
+}
+.grpClass{
+    height: 16rem;
+}
+.grpClassWarning{
+    height: 15rem;
+}
+.primaryBtn button.slds-button{
+    background-color: #09538b;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: 'myFirstFont',sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 0.6px;
+    line-height: 17px;   
+    text-align: center;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+}
+.bttnPaddingClass{
+    padding-top: 6rem;
+}
+.errorBttnPaddingClass{
+    padding-top: 3rem;
+}
+.container {
+    border: 1px solid #f6a053;
+    border-radius: 4px;
+    background-color: #fff8f2;
+    padding: 12px 24px;
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+.note{
+  color: #2d2c2c;
+}
+.notePara{
+    color: #2D2C2C;
+    font-family: myFirstFont;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+@media only screen and (max-width: 64rem){
+    .headerText {
+        color: #2D2C2C;
+        font-family: Lato;
+        font-size: 34px;
+        line-height: 40px;
+        font-weight: bold;
+        letter-spacing: 0.24px;
+    }
+    .mainContainer {
+        padding: 2rem 20px;
+    }
+    .contentSection{
+        color: #2D2C2C;
+        font-family: Lato;
+        font-size: 20px;
+        line-height: 40px;
+        font-weight: bold;
+        letter-spacing: 0.2px;
+    }
+    .grpClass{
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        margin: auto
+    }
+    .grpClassWarning{
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        margin: auto
+    }
+    .bttnPaddingClass{
+        padding: 0rem;
+    }
+}

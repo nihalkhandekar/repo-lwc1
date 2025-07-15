@@ -1,0 +1,95 @@
+/* .ms-dropdown{
+    max-height: 500px;
+    overflow-y: auto;
+}
+.ms-clear-icon{
+    position: absolute;
+}
+.ms-refresh-icon{
+    position: absolute;
+}
+.ms-input{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(217, 219, 221);
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+}
+.ms-filter-input{
+    margin: 0px 5%;
+    width: 50%;
+    height: 30px;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: thin;
+    border-color: darkgray;
+    padding: 2px 5px;
+} */
+.inputTextStyle{
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+.inputTextStyle.slds-form-element__label{
+    color: #2D2C2C;
+    font-family: myFirstFont;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+  }
+.selectedItemContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+.closeIcon {
+    margin-right: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: -1px;
+    max-width: unset;
+    outline: none;
+}
+.tabfocus:focus {
+    outline: 2px solid #2D2C2C;
+}
+.pills {
+    border-radius: 11.5px;
+    background-color: #e0f2ff;
+    padding: 4px 0;
+    padding-left: 12px;
+    color: #09538b;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: myFirstFont;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: left;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.slds-picklist .slds-dropdown {
+    width: 100% !important;
+}
+.error-msg-wrapper {
+    text-align: left;
+}
+.errorBorderClass{
+    border-color: rgb(194, 57, 52) !important;
+    box-shadow: rgb(194, 57, 52) 0px 0px 0px 1px inset !important;
+    background-clip: padding-box !important;
+}
+
+@media only screen and (max-width: 64rem) {
+    .pills {
+      margin-top: 5px;
+    }
+}

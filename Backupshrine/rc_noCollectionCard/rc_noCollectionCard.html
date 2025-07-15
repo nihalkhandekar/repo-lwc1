@@ -1,0 +1,26 @@
+<template>
+
+    <div class="noCollectionContent">
+        <div class="noCollectionLeftContent">
+            <h6>{label.rc_No_Collection_Msg}</h6>
+            <div class="ncListItem">
+                <span class="blueCircle">1</span>
+                <p class="small">{label.rc_No_Collection_Step1}</p>
+            </div>
+            <div class="ncListItem">
+                <span class="blueCircle">2</span>
+                <p class="small">{label.rc_No_Collection_Step2}</p>
+            </div>
+			<div class="ncListItem">
+                <span class="blueCircle">3</span>
+                <p class="small">
+                    <lightning-formatted-rich-text value={label.rc_No_Collection_Step3}>
+                    </lightning-formatted-rich-text></p>
+            </div>
+        </div>
+        <div class="noCollectionRightContent">
+            <img src={noCollectionImg} class="noCollectionImg">
+        </div>
+    </div>
+
+</template>

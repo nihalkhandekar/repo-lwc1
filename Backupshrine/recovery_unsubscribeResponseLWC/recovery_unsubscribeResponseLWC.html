@@ -1,0 +1,84 @@
+<template>
+    <template if:true={emailFound}>
+        <div class="SignupHeader">
+            <div class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_UnsubscribeResponse1PageHeader}
+            </div>
+            <h3 class="subHeaderText containerDiv mainContainerDiv">
+                {label.Recovery_UnsubscribeResponse1PageSubHeader}
+            </h3>
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-p-top_x-large slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <div class="contentSection">
+                                    <h1>{label.Recovery_UnsubscribeResponse1PageContent}&nbsp;
+                                        <a class="linkStyle" href="/recovery/s/signup">{label.Recovery_UnsubscribeResponse1PageContent2}</a>
+                                    </h1>
+                                </div>
+                                <div class="bttnPaddingClass">
+                                    <lightning-button
+                                        label={label.Recovery_UnsubscribeResponse1PageButton}
+                                        variant="brand"
+                                        onclick={submit}
+                                        class="primaryBtn bttnPadding">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_1-of-12"></div>                    
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <img src={groupBuildingIcon} class="grpClass" alt="image"/>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>    
+
+    <template if:false={emailFound}>
+        <div class="SignupHeader">
+            <div class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_UnsubscribeResponse2PageHeader}
+            </div>
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-p-top_x-large slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <div class="contentSection">
+                                    <h1>{label.Recovery_UnsubscribeResponse2PageContent1}&nbsp;
+                                        <a href="mailto:{userEmail}?">{userEmail}</a>&nbsp;{label.Recovery_UnsubscribeResponse2PageContent2}
+                                    </h1>
+                                    
+                                    <div class="slds-box slds-box_x-small container">
+                                        <span class="note">
+                                            <p class="notePara">{label.Recovery_UnsubscribeResponse2PageContent3}&nbsp;
+                                                <a href="mailto:{label.Recovery_FeedbackSupportEmail}?">{label.Recovery_FeedbackSupportEmail}</a>.
+                                            </p>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="errorBttnPaddingClass">
+                                    <lightning-button
+                                        label={label.Recovery_backbutton}
+                                        variant="brand"
+                                        onclick={goBack}
+                                        icon-position="left"
+                                        icon-name="utility:chevronleft"
+                                        class="primaryBtn bttnPadding">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_1-of-12"></div>                    
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <img src={warningImage} class="grpClassWarning" alt="image"/>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>    
+</template>

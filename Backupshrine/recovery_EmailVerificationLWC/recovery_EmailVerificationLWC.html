@@ -1,0 +1,116 @@
+<template>
+    <template if:true={isVerified}>
+        <div class="SignupHeader">
+            <div class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_VerificationSuccessPageHeader}
+            </div>
+            <h3 class="subHeaderText containerDiv mainContainerDiv">
+                {label.Recovery_ExistingSubscriberPageSubHeader}
+            </h3>
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-p-top_x-large slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <div class="contentSection">
+                                    <h1>{label.Recovery_VerificationSuccessPageContent}</h1>
+                                </div>
+                                <div class="bttnPaddingClass">
+                                    <lightning-button
+                                        label={label.Recovery_thankYouPageButton}
+                                        variant="brand"
+                                        onclick={submit}
+                                        class="primaryBtn bttnPadding">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_1-of-12"></div>                    
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <img src={groupBuildingIcon} class="grpClass" alt="image"/>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+    <template if:true={isAlreadyVerified}>
+        <div class="SignupHeader">
+            <div class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_EmailAlreadyVerifiedPageHeader}
+            </div>
+            <h3 class="subHeaderText containerDiv mainContainerDiv">
+                {label.Recovery_EmailAlreadyVerifiedPageSubHeader}
+            </h3>
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-p-top_x-large slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <div class="contentSection">
+                                    <h1>{label.Recovery_EmailAlreadyVerifiedPageContent1} &nbsp;
+                                        <a href="mailto:{userEmail}?">{userEmail}</a>,&nbsp;
+                                        {label.Recovery_EmailAlreadyVerifiedPageContent2}
+                                    </h1>
+                                </div>
+                                <div class="bttnPaddingClass">
+                                    <lightning-button
+                                        label={label.Recovery_thankYouPageButton}
+                                        variant="brand"
+                                        onclick={submit}
+                                        class="primaryBtn bttnPadding">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_1-of-12"></div>                    
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <img src={warningIcon} class="grpClass" alt="image"/>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+    <template if:true={isExpired}>
+        <div class="SignupHeader">
+            <div if:false={isInvalid} class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_ExpiredLinkPageHeader}
+            </div>
+            <div if:true={isInvalid} class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_InvalidURLPageHeader}
+            </div>
+            <h3 if:false={isInvalid} class="subHeaderText containerDiv mainContainerDiv">
+                {label.Recovery_ExpiredLinkPageSubHeader}
+            </h3>
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-p-top_x-large slds-size_1-of-1 slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_6-of-12">
+                                <div if:false={isInvalid} class="contentSection">
+                                    <h1>{label.Recovery_ExpiredLinkPageContent1}</h1>
+                                </div>
+                                <div if:true={isInvalid} class="contentSection">
+                                    <h1>{label.Recovery_InvalidURLPageContent}</h1>
+                                </div>                                    
+                                <div class="bttnPaddingClass">
+                                    <lightning-button
+                                        label={label.Recovery_ExpiredLinkPageButton}
+                                        variant="brand"
+                                        onclick={submitOnExpired}
+                                        class="primaryBtn bttnExpiredPadding">
+                                    </lightning-button>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_1-of-12"></div>                    
+                            <div class="slds-col slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                                <img src={warningIcon} class="grpClass" alt="image"/>
+                            </div>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+</template>

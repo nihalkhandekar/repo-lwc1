@@ -1,0 +1,93 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url('/resource/CT_Assets/fonts/karla/Karla-Regular.ttf');
+  }
+.content {
+    font-family: Lato;
+    padding-top: 60px;
+    font-size: 35px !important;
+    font-weight: bold !important;
+}
+
+.buttonPadding{
+    padding-top: 2rem;
+    padding-left: 50px;
+}
+
+.contentdata {
+    font-family: Lato;
+    padding-top: 30px;
+    font-size: 20px !important;
+    font-weight: bold !important;
+}
+.contentdata1 {
+    font-family: Lato;
+    padding-top: 30px;
+    font-size: 20px !important;
+}
+.mainContainer {
+    padding: 4.5rem;
+    font-family: Lato;
+}
+.mainSection {
+    position: relative;
+    bottom: 6rem;
+    background-color: #fff;
+    box-shadow: none;
+}
+.headingSection{
+    font-size: 45px !important;
+    font-weight: bold !important;
+    line-height: 50px !important;
+    font-family: Lato;
+    border-bottom: 1px solid #ecebeb;
+    padding-bottom: 15px;
+}
+  .nav-button {
+    font-family: Lato;
+    padding-top: 25px;
+    padding-bottom: 45px;
+    border-top: 1px solid #ecebeb;
+    text-align: center;
+  }
+.mainContainer {
+    padding: 3rem;
+}
+.primaryBtn {
+    padding-left: 20px;
+}
+.primaryBtn1 {
+    text-align: right;
+    
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Lato;
+    text-align: center;
+}
+
+@media only screen and (max-width: 64rem){
+    .mainContainer {
+        padding: 2rem 20px;
+    }
+    .mainSection {
+        bottom: 0;
+    }
+    .primaryBtn {
+        float: center;
+    }
+    .nav-button {
+        margin-top: 60px;
+        border-top: 1px solid #ecebeb;
+        padding-top: 24px
+    }
+    .slds-box {
+        border: none;
+        padding: 0;
+    }
+    .content {
+        bottom: 0;
+    }
+    .contentdata{
+        bottom: 0;
+    }
+}

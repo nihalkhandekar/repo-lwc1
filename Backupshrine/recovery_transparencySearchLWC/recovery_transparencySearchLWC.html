@@ -1,0 +1,92 @@
+<template>
+    <div>
+        <div class="headerLabel">{label.label_Header}</div>
+
+        <div class="containerDiv">
+            <div class="mobileSearchDiv">
+                <div class="slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                    <lightning-combobox
+                            name="filterType"
+                            value={selectedFilterType}
+                            options={filterType}
+                            onchange={handleFilterType}
+                            class="filterComboBox"
+                        >
+                    </lightning-combobox>
+                </div>
+                <div class="slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+                    <div
+                        class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-m-top_large slds-m-bottom_xx-large search-box"
+                        role="combobox"
+                        aria-expanded="false"
+                        aria-owns="ex1-listbox"
+                        aria-haspopup="listbox"
+                        id="ex1-comboboxMob"
+                    > 
+                        <input
+                            type="text"
+                            placeholder={label.label_searchPlaceholder}
+                            class="searchBox"
+                            data-id="search-inputi12"
+                            aria-autocomplete="list"
+                            aria-controls="ex1-listbox"
+                            id="ex1-inputMob"
+                            role="textbox"   
+                            value={inputValue}
+                            onkeyup={handleSearchValue}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div class="desktopSearchDiv">   
+                <div
+                    class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-m-top_large slds-m-bottom_xx-large search-box"                    
+                >
+                    <lightning-combobox
+                        name="filterType"
+                        value={selectedFilterType}
+                        options={filterType}
+                        onchange={handleFilterType}
+                        class="slds-size_3-of-12 filterComboBox"
+                    >
+                    </lightning-combobox>
+
+                    <input
+                        type="text"
+                        placeholder={label.label_searchPlaceholder}
+                        class="searchBox"
+                        data-id="search-inputi12"
+                        aria-autocomplete="list"
+                        aria-controls="ex1-listbox"
+                        id="ex1-input"
+                        role="textbox"   
+                        value={inputValue}
+                        onkeyup={handleSearchValue}
+                    />
+                    
+                    <template if:true={searchIconSymbol}>
+                        <span class="search-icon-wrapper">
+                            <img
+                                class="slds-m-right_x-small"
+                                src={searchIcon}
+                                alt="Search Icon"
+                            />
+                        </span>
+                    </template>
+                    <template if:false={searchIconSymbol}>
+                        <span class="search-icon-wrapper">
+                            <img
+                                class="slds-m-right_xx-small"
+                                src={closeIcon}
+                                alt="Close Icon"
+                                onclick={handleClearClick}
+                            />
+                        </span>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <hr class="hline slds-m-vertical_medium">
+    </div>
+</template>

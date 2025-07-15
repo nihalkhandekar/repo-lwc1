@@ -1,0 +1,58 @@
+<template>
+<div class="mainContainerDiv">
+  <template if:false={isSubmit}>
+  <div class="slds-box mainSection">
+    <lightning-layout class="align slds-wrap mainContainer">
+      <lightning-layout-item>
+        <div class="slds-grid slds-wrap">
+          <div class="slds-col slds-size_1-of-1 headingSection">
+            <h1 class="main-title">{label.label_badgemssgPart1}</h1>
+          </div>
+          <div class="slds-col slds-size_1-of-1 reviewHeading">
+            <h1 class="page-title">{label.label_badgemssgPart2}</h1>
+          </div>
+        </div>
+      </lightning-layout-item>
+      <lightning-layout-item class="questionfields">
+        <lightning-input
+          type="email"
+          name="emailAddress"
+          placeholder={label.label_email}
+          label={label.label_BusinessEmail}
+          onchange={handleChange}
+          value={emailId}
+        >
+        </lightning-input>
+      </lightning-layout-item>
+    </lightning-layout>
+    <div class="nav-button">  
+      <div class="slds-float_left slds-m-left_large" leftbtn>
+      <lightning-button
+         label={label.label_backBttn}
+         onclick={back}
+         variant="base"
+         class="secondaryBtn">
+       </lightning-button>  
+      </div>     
+      <center>
+      <c-re-Captcha-Certification></c-re-Captcha-Certification>
+       <lightning-button
+         label={label.label_subBttn}
+         onclick={submit}
+         variant="brand"
+         class="primaryBtn">
+       </lightning-button>
+       </center>
+     </div>
+  </div>
+  </template>
+  <template  if:true={isSubmit}>
+    <template if:true={isEmailfound}>
+      <c-recovery_badge-Recovered-L-W-C></c-recovery_badge-Recovered-L-W-C>
+    </template>
+    <template if:false={isEmailfound}>
+      <c-recovery_badgenot-Recovered-L-W-C businessowneremail={emailId}></c-recovery_badgenot-Recovered-L-W-C>
+    </template>
+    </template>
+</div>
+</template>

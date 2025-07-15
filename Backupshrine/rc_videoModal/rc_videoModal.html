@@ -1,0 +1,28 @@
+<template>
+    <template if:true={open}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class={modalStyle}>
+            <div class="slds-modal__container">
+                <div class="slds-modal__content hPadding" id="modal-content-id-1">
+                    <button
+                        class="closeWrapper slds-button slds-button_icon sld s-modal__close slds-button_icon-inverse mobile-close slds-col slds-size_1-of-12 tabfocus"
+                        title="Close" onclick={handleClose}>
+                        <lightning-icon size="x-small" icon-name="utility:close" alternative-text="Close">
+                        </lightning-icon>
+                        <span class="slds-assistive-text">{label.labelClose}</span>
+                    </button>
+                    <!-- <div class="closeWrapper" onclick={handleClose}>
+                    <lightning-icon size="x-small" icon-name="utility:close" alternative-text="Close">
+					</lightning-icon>
+                    <span class="slds-assistive-text">{label.labelClose}</span>
+                </div> -->
+                    <iframe src={videoUrl}>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+        <template if:true={open}>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </template>
+</template>

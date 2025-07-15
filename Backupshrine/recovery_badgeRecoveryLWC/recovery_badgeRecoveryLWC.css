@@ -1,0 +1,166 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url('/resource/CT_Assets/fonts/karla/Karla-Regular.ttf');
+  }
+.mainContainer {
+    padding: 4.5rem;
+    font-family: Lato;
+}
+.mainSection {
+    position: relative;
+    bottom: 6rem;
+    background-color: #fff;
+    box-shadow: none;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 3rem;
+}
+.leftbtn{
+    margin-left: 400px;
+}
+p.para-style{
+    font-family: myFirstFont;
+    font-size: 16px;
+    line-height: 24px
+}
+.headingSection{
+    font-size: 45px !important;
+    font-weight: bold !important;
+    line-height: 50px !important;
+    font-family: Lato;
+    border-bottom: 1px solid #ecebeb;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.questionHeading{
+    font-weight: 700 !important;
+    font-family: myFirstFont;
+    padding-top: 15px;
+    color:rgb(45, 44, 44);
+    font-size:18px;
+}
+.questionfields{
+    font-size: 14px !important;
+    font-family: Lato;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+    width: 25rem;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
+    border-top: 1px solid #ecebeb;
+}
+.checkboxField{
+    padding-top: 25px;
+    font-family: Lato;
+}
+.nav-button {
+    font-family: Lato;
+    padding-top: 25px;
+    padding-bottom: 45px;
+    border-top: 1px solid #ecebeb;
+  }
+.mainContainer {
+    padding: 3rem;
+}
+.primaryBtn button.slds-button{
+    background-color: #09538b;
+    border-radius: 4px;
+    color: #ffffff;
+    font-family: myFirstFont;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 0.6px;
+    line-height: 17px;   
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.secondaryBtn .slds-button{
+    border-radius: 4px;
+    font-family: myFirstFont;
+    font-size: 14px;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 0.6px;
+    line-height: 17px;   
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.primaryBtn {
+    float: right;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Lato;
+}
+.headingPadding{
+    padding-top: 10px;
+}
+.subHeadingPadding{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+[role=combobox] input[readonly],input[type="text"]{
+    font-family: myFirstFont;
+    font-size:16px;
+}
+.main-title{
+    font-size:51px;
+}
+a.link-style,.span-style{
+    font-family:myFirstFont;
+}
+.page-title{
+    font-size:28px;
+    line-height:35px;
+}
+.reviewHeading{
+    font-weight: bold !important;
+    font-family: Lato;    
+    margin-bottom:1.5rem;    
+}
+@media only screen and (max-width: 64rem){
+    .mainContainer {
+        padding: 2rem 20px;
+    }
+    .mainSection {
+        bottom: 0;
+        padding: 0;
+    }
+    .primaryBtn {
+        float: left;
+    }
+    .nav-button {
+        margin-top: 60px;
+        border-top: 1px solid #ecebeb;
+        padding-top: 24px
+    }
+    .headingSection{        
+        font-size: 1.5rem 12px !important;
+        font-weight: bold !important;
+        line-height: 2.5rem !important;
+        width: 21rem;
+        padding-bottom: 2rem;        
+    }
+    .questionfields{
+        font-size: 1rem 10px !important;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+        padding-right: 2rem;
+        width: 100%;
+    }
+    .THIS .questionfields div .slds-form-element__control{
+        width:100%;
+    }
+    .slds-box {
+        border: none;
+        padding: 0;
+    }
+}

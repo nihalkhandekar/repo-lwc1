@@ -1,0 +1,89 @@
+.slds-modal__container {
+    text-align: left;
+}
+
+.hPadding {
+    padding: 32px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.helpText {
+    color: #999999;
+    margin-bottom: 28px;
+}
+
+.collNameInp {
+    box-sizing: border-box;
+    height: 60px;
+    width: 100%;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+    padding: 0 24px;
+    font-size: 18px;
+    font-family: 'Karla', sans-serif;
+}
+
+.collNameInp::placeholder {
+    color: #757575;
+    font-family: 'Karla', sans-serif;
+    font-size: 18px;
+}
+
+.collNameInp:focus {
+    outline: none;
+}
+
+.slds-button.primaryBtn:hover {
+    color: #FFFFFF;
+}
+
+.slds-button.primaryBtn {
+    height: 56px;
+    width: 100%;
+    display: inline-grid;
+}
+
+.errorText {
+    color: #DB2426;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.deleteBtn.secondaryBtn,
+.deleteBtn.primaryBtn {
+    width: 48%;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: auto;
+}
+
+.deleteBtn.primaryBtn {
+    margin-left: 20px;
+}
+
+.closeWrapper {
+    width: auto;
+    height: auto;
+    align-items: baseline;
+    padding-top: 4px;
+}
+
+@media only screen and (max-width: 1023px) {
+
+    .deleteBtn.secondaryBtn,
+    .deleteBtn.primaryBtn {
+        width: 100%;
+    }
+
+    .deleteBtn.primaryBtn {
+        margin-left: 0;
+        margin-top: 16px;
+    }
+}

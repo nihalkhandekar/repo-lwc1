@@ -1,0 +1,38 @@
+<template>           
+    <H6 class="slds-large-size_1-of-3 filterHeader">{label.label_Filter}</H6>
+    <div class="accordionWrapper">             
+        <lightning-accordion allow-multiple-sections-open>
+            <lightning-accordion-section name="A" label={label.label_Sector}>
+                <div class="slds-clearfix">
+                    <div if:true={showClearSectorFilter} class="slds-float_right">
+                        <lightning-button variant="base" label={label.label_Clear} onclick={handleSectorClear} class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+                <lightning-checkbox-group
+                    name="sectorFilter"
+                    options={sectorValues}
+                    value={selectedSectorValues}
+                    onchange={handleSectorFilterChange}
+                    class="sectorFilterClass"
+                >
+                </lightning-checkbox-group>
+            </lightning-accordion-section>
+
+            <lightning-accordion-section name="B" label={label.label_County}>
+                <div class="slds-clearfix">
+                    <div if:true={showClearCountyFilter} class="slds-float_right">
+                        <lightning-button variant="base" label={label.label_Clear} onclick={handleCountyClear} class="slds-m-left_x-small"></lightning-button>
+                    </div>
+                </div>
+                <lightning-checkbox-group
+                    name="countyFilter"
+                    options={countyValues}
+                    value={selectedCountyValues}
+                    onchange={handleCountyFilterChange}
+                    class="countyFilterClass"
+                >
+                </lightning-checkbox-group>
+            </lightning-accordion-section>
+        </lightning-accordion>
+    </div>
+</template>

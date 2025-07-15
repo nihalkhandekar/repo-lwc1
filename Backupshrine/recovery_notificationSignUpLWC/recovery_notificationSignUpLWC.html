@@ -1,0 +1,164 @@
+<template>
+    <template if:false={isSubmit}>
+        <div class="SignupHeader">
+            <div class="headerText containerDiv mainContainerDiv">
+                {label.Recovery_SignupPageHeader}
+            </div>
+            <h3 class="subHeaderText containerDiv mainContainerDiv">
+                {label.Recovery_SignupPageSubHeader}
+            </h3>        
+            <div class="card-section mainSection mainContainerDiv">
+                <lightning-layout class="align slds-wrap mainContainer borderClass">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 slds-grid slds-wrap">
+                            <div class="slds-col headingSection">
+                                {label.Recovery_SignupPageQuestion1}
+                            </div>
+                        </div>
+                        <lightning-layout-item>
+                            <div class="slds-p-top_xx-large slds-col slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 labelText">
+                                <lightning-input
+                                    type="email"
+                                    message-when-value-missing={label.Recovery_SignupEmailError}
+                                    name="emailAddress"
+                                    label={label.Recovery_Email} 
+                                    value={subscriptionRecord.Email__c}
+                                    onchange={handleChange}
+                                    placeholder={label.Recovery_SignupPageLabel2}
+                                    class="inputTextStyle" required>
+                                </lightning-input>
+                            </div>
+                        </lightning-layout-item>
+
+                        <lightning-layout-item>
+                            <div class="slds-p-top_xx-large slds-col slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 labelText">
+                                <lightning-input
+                                    type="tel"
+                                    name="phoneNumber"
+                                    pattern="[0-9]{10}"
+                                    label={label.Recovery_SignupPageLabel3}
+                                    value={subscriptionRecord.Phone__c}
+                                    onchange={handleChange} 
+                                    placeholder={label.Recovery_SignupPageLabel4}
+                                    class="inputTextStyle" max-length=10>
+                                </lightning-input>
+                            </div>
+                            <div class="slds-p-bottom_xx-large slds-form-element__help borderClass subLabelText" role="alert">
+                                {label.Recovery_SignupPageLabel1}
+                            </div>
+                        </lightning-layout-item>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 slds-p-top_xx-large slds-grid slds-wrap">
+                            <div class="slds-col headingSection">
+                                {label.Recovery_SignupPageQuestion2}
+                            </div>
+                        </div>
+                        <lightning-layout-item>
+                            <div class="slds-p-top_xx-large slds-col slds-small-size_1-of-1 slds-medium-size_7-of-12 slds-large-size_7-of-12 labelText">
+                                <c-recovery_multi-pick-list 
+                                    label-value={labelValue}
+                                    placeholder-value={placeholderValue}
+                                    sobject-type-name={sobjectTypeName}
+                                    picklist-field-api-name={picklistFieldApiName}
+                                    onitemselected={handleOnItemSelected}
+                                >
+                                </c-recovery_multi-pick-list>                                    
+                            </div>
+                            <div if:false={showIndustryError} class="slds-p-bottom_xx-large borderClass subLabelText">
+                            </div>
+                            <div if:true={showIndustryError} class="slds-form-element__help slds-p-bottom_xx-large borderClass subLabelErrText">
+                                {label.Recovery_SignupIndustryError}
+                            </div>
+                        </lightning-layout-item>                    
+                        
+                        <lightning-layout-item>
+                            <div class="slds-p-top_xx-large slds-col slds-small-size_1-of-1 slds-medium-size_10-of-12 slds-large-size_10-of-12 labelText">
+                                <lightning-input
+                                    type="checkbox"
+                                    name="acknowledgement"
+                                    value={subscriptionRecord.Attestation_Acknowledgement__c}
+                                    onchange={handleChange}
+                                    label={label.Recovery_SignupPageLabel7}
+                                    class="inputChckboxStyle"
+                                    message-when-value-missing={label.Recovery_SignupAttestationError} required>
+                                </lightning-input>
+                            </div>
+                        </lightning-layout-item>              
+                    </lightning-layout-item>
+                </lightning-layout>
+
+                <lightning-layout class="align slds-wrap slds-p-top_x-large slds-p-bottom_x-large">
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="bttnsWrapper slds-large-size_6-of-12 slds-float_right desktopBtns">                 
+                            <div class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 slds-m-right_x-large bttnContainer">
+                                <button
+                                    class="slds-button slds-button_neutral slds-float_right slds-m-right_small secondaryBtnSignup"
+                                    onclick={exitButton}
+                                >
+                                    {label.Recovery_SignupPageButtonExit}
+                                </button>
+                            </div>
+                            <div class="slds-size_4-of-12 slds-small-size_3-of-12 slds-medium-size_3-of-12 slds-large-size_4-of-12 bttnContainer">
+                                <button
+                                    class="slds-button slds-button_brand slds-float_right slds-m-right_small primaryBtnSignup"
+                                    onclick={submitButton}
+                                >
+                                    {label.Recovery_SignupPageButtonSave}                                    
+                                </button>
+                            </div>
+                        </div>
+                        <center>
+                            <div class="bttnsWrapper slds-size_12-of-12 mobileBtns">                 
+                                <div class="slds-size_12-of-12 bttnContainer">
+                                    <button
+                                        class="slds-button slds-button_neutral secondaryBtnSignup"
+                                        onclick={exitButton}
+                                    >
+                                        {label.Recovery_SignupPageButtonExit}                                        
+                                    </button>
+                                </div>
+                                <div class="slds-size_12-of-12 bttnContainer">
+                                    <button
+                                        class="slds-button slds-button_brand slds-m-top_small primaryBtnSignup"
+                                        onclick={submitButton}
+                                    >
+                                        {label.Recovery_SignupPageButtonSave}
+                                    </button>
+                                </div>
+                            </div>
+                        </center>
+                    </lightning-layout-item>
+                    <lightning-layout-item class="slds-small-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+                        <div class="bttnsWrapper slds-large-size_7-of-12 slds-float_right">
+                            <template if:true={showUIError} class="error-container">
+                                <div class="error-msg-wrapper" role="alert">
+                                    <section
+                                    aria-label="Error Message"
+                                    class="errorMssg"
+                                    role="dialog"
+                                    >
+                                    <div class="error-msg">
+                                        <p class="small">
+                                        {label.Recovery_SignupPageError}
+                                        </p>
+                                    </div>
+                                    </section>
+                                </div>
+                            </template>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </div>
+    </template>
+    <template if:true={isSubmit}>
+        <template if:true={isVerified}>
+            <c-recovery_notification-existing-subscriber-L-W-C></c-recovery_notification-existing-subscriber-L-W-C>
+        </template>
+        <template if:false={isVerified}>
+            <c-recovery_notification-Thank-You--L-W-C></c-recovery_notification-Thank-You--L-W-C>
+        </template>
+    </template>
+</template>
