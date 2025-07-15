@@ -1,0 +1,123 @@
+.dashboard-container {
+  margin: 1rem;
+  top: 30%;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.dashboard-title {
+  font-size: 24px;
+  font-weight: 590;
+  color: var(--dxp-g-brand); /* Updated */
+  flex-grow: 1;
+}
+
+.start-request-button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  --sds-c-button-radius-border: 8px 8px 8px 8px;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(425px, 1fr));
+  gap: 32px;
+}
+
+:host {
+  --dxp-s-button-font-weight: 400 !important;
+  --dxp-s-button-font-size: 14px !important;
+}
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem;
+  background-color: white !important;
+  border-radius: 0.7rem;
+  box-shadow: 0px 2px 12px 0px #0000000a;
+  border: 1px solid var(--dxp-s-form-element-color-background-active); /* Updated */
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  height: 100%;
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.card-content,
+.card-title,
+.card-description {
+  text-decoration: none !important;
+}
+
+.dashboard-card-content {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+  text-transform: none;
+}
+
+.dashboard-card-icon {
+  margin-right: 1rem;
+  align-self: flex-start;
+}
+
+.dashboard-icon {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dxp-s-body-text-color); /* Updated */
+  margin: 0;
+  margin-bottom: 0.2rem;
+}
+
+.card-description {
+  font-size: 14px;
+  color: var(--dxp-s-body-small-text-color); /* Updated */
+  font-weight: 400;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.divider {
+  border: none;
+  border-top: 1px dashed var(--dxp-s-form-element-color-border); /* Updated */
+  margin: 0.75rem 0;
+  margin-top: auto;
+}
+
+.view-link {
+  color: var(--dxp-s-link-text-color); /* Updated */
+  font-weight: bold;
+  font-size: 0.8rem;
+  text-decoration: none;
+  text-align: center;
+  align-self: center;
+  cursor: pointer;
+  transition: text-decoration 0.3s ease-in-out;
+}
+
+.view-link:hover {
+  text-decoration: underline !important;
+}

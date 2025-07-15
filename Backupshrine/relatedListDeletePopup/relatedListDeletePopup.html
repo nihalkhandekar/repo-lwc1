@@ -1,0 +1,23 @@
+<template>
+ 
+    <template if:true={showModal}>
+      
+        <c-modal onclosedialog={handleDialogClose} open onmodalclose={handleClose}
+        sobject-label={sobjectLabel}>
+       
+            <div slot="header">{header}</div>
+            <div slot="body">
+                <br/> 
+                {body}
+                <br/> <br/>
+            </div>
+            <!-- <slot class="slds-align_absolute-center">
+               
+            </slot> -->
+            <div slot="actions">
+                <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleClose} ></lightning-button>
+                <lightning-button variant="brand" label="Delete" title="Delete" onclick={handleDelete} class="slds-m-left_x-small"></lightning-button>
+            </div>
+        </c-modal>
+    </template>
+</template>

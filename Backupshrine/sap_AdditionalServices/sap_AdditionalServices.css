@@ -1,0 +1,39 @@
+/* Container for the Delivery Instructions */
+
+
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Regular.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SF Pro';
+    src: url('/path-to-your-font/SFPro-Bold.woff2') format('woff2'),
+         url('/path-to-your-font/SFPro-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.input-section {
+    background-color: #ffffff;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 0 0 1rem 1rem;
+    max-width: 100%;
+    border: 1px solid #FAFCFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 0 0;
+    box-sizing: border-box;
+    border: 1px solid #FAFCFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

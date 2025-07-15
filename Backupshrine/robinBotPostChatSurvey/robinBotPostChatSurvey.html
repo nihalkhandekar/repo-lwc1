@@ -1,0 +1,72 @@
+<template>
+    <template if:true={displaySurvey}>
+        <lightning-layout vertical-align="center" horizontal-align="center" multiple-rows class="survey-container">
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <lightning-icon 
+                    icon-name="utility:answer" 
+                    alternative-text="Thanks for chatting!"
+                    size="large">
+                </lightning-icon>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <div class="slds-text-heading_large">
+                    Thanks for chatting!
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <div class="slds-text-heading_small">
+                    How well did Robin help you today?
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <c-five-star-rating onratingchange={submitResponse}></c-five-star-rating>
+            </lightning-layout-item>
+            <template if:true={loading}>
+                <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+            </template>
+        </lightning-layout>
+    </template>
+    <template if:true={displayError}>
+        <lightning-layout vertical-align="center" multiple-rows class="survey-container">
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <lightning-icon 
+                    icon-name="utility:answer" 
+                    alternative-text="Thanks for chatting!"
+                    size="large">
+                </lightning-icon>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <div class="slds-text-heading_small slds-text-color_error">
+                    Sorry, there was an error submitting your survey response.
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <div class="slds-text-heading_small">
+                    <a href={surveyLink} target='_blank'>I'd like to provide more feedback.</a>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+    <template if:true={displayThankYouMessage}>
+        <lightning-layout vertical-align="center" multiple-rows class="survey-container">
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <lightning-icon 
+                    icon-name="utility:answer" 
+                    alternative-text="Thanks for chatting!" 
+                    size="large" 
+                    class="success-answer-icon">
+                </lightning-icon>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <div class="slds-text-heading_large">
+                    Thank you for your feedback.
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="12" padding="around-medium" flexibility="auto">
+                <div class="slds-text-heading_small">
+                    <a href={surveyLink} target='_blank'>I'd like to provide more feedback.</a>
+                </div>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

@@ -1,0 +1,170 @@
+<template>
+<template if:true={showModal}>
+
+
+
+    <c-pocmodal onclosedialog={handleDialogClose} show-modal={showModal} size='large'>
+        <span slot="header">{header}</span>
+        
+        <div if:true={showRecordType}>
+        <lightning-card title="Record Type Selector in Lightning Web Component">
+            <lightning-layout multiple-rows="true" vertical-align="end">
+                <lightning-layout-item size="6" small-device-size="2" medium-device-size="4" large-device-size="4" padding="around-small">
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <lightning-combobox name="recordTypes"
+                                                    label="Account Record Types"
+                                                    value={selectedValue}
+                                                    placeholder="-Select-"
+                                                    options={options}
+                                                    onchange={handleChange} ></lightning-combobox>
+                            </div>
+                        </div>
+                </lightning-layout-item>
+            </lightning-layout><br/>
+        <div style="margin-left:3%;">
+            <div if:true={selectedValue}>
+                Selected Record Type Id: <b>{selectedValue}</b>
+            </div>
+        </div>
+        </lightning-card>
+    </div>
+    <!-- {childRecordTypeid}
+    <template if:true={childRecordTypeid}>
+       {isBusinessFilingObject}
+        <div if:true={isBusinessFilingObject}>
+            {isBusinessFilingObject}
+        <c-brs_-backoffice-types recordtypeid ={childRecordTypeid} onftypechange={handlefTypeChange}
+        ontypechange={handleTypeChange}></c-brs_-backoffice-types>
+    </div>
+    </template> -->
+        <!--- <slot>
+
+           <template if:true={showCustom}>
+            <lightning-record-edit-form
+                            record-id={recordId}
+                            object-api-name={sobjectApiName}
+                            layout-type="Full" 
+                            columns="2"
+                            density="compact"
+                            mode="edit"
+                            onsuccess={handleSuccess}
+                            record-type-id={childRecordTypeid}>
+                            
+                            <template for:each={allfields} for:item="field" key={field.fieldName}>
+                                <lightning-input-field  field-name={field.fieldName} class="slds-form-element__control" value={field.value} key={field.fieldName}> </lightning-input-field>
+                            </template>
+
+            </lightning-record-edit-form>
+        </template>
+        <template if:true={showStandard}>
+            <lightning-record-form
+            class="record-form"
+            record-id={recordId}
+            object-api-name={sobjectApiName}
+            layout-type="Full" 
+            columns="2"
+            density="compact"
+            mode="edit"
+            onsuccess={handleSuccess}
+            record-type-id={childRecordTypeid}>
+        </lightning-record-form>
+        </template>
+        <template if:true={showEdit}>
+            <lightning-record-form
+            class="record-form"
+            record-id={recordId}
+            object-api-name={sobjectApiName}
+            layout-type="Full" 
+            columns="2"
+            density="compact"
+            mode="edit"
+            onsuccess={handleSuccess}
+            >
+        </lightning-record-form>
+        </template>
+
+        </slot>!-->
+     <slot>
+            <template if:true={saved}>
+                <div class="record-layout-container">
+                    <lightning-record-edit-form object-api-name={sobjectApiName} record-type-id={childRecordTypeid}
+                    onsuccess={handleSuccess} onsubmit={handleFormSubmit} data-id="myForm" record-id={recordId} onerror ={handlerror}>
+                    <div>
+                    <lightning-messages class ={className}></lightning-messages>
+                  
+                    </div>
+                
+                   
+                        <template for:each={layoutSections} for:item="section">
+        
+                           <c-dmv_collapsemodal key={section.label} title={section.label} show-section={section.displaySection}>
+                          
+                
+                               
+                            <div class="slds-section__content test-id__section-content slds-section__content section__content slds-p-top--none slds-p-horizontal_small">
+                                <lightning-layout class="slds-form__row slds-grid slds-size_1-of-1">
+                                   
+                                    <template for:each={section.lstFields} for:item="field">
+        
+                                        <lightning-layout-item size={section.columnsize} key={field.fieldName} padding="around-small"  flexibility="auto">
+                                            <template if:true={field.fieldName}>
+                                                <div if:false={field.isReadOnly} >
+                                                    <div if:true={inputModeBool}>
+                                                        <div if:true={isNewRecord}>
+                                                           <div if:true={field.isValueAvailable}>
+                                                            <lightning-input-field  required={field.isRequired} value={field.fieldvalue} field-name={field.fieldName} class="slds-form-element__control combobox-height-set"> </lightning-input-field>
+                                                           </div>
+                                                           <div if:false={field.isValueAvailable}>
+                                                            <lightning-input-field  required={field.isRequired}  field-name={field.fieldName} class="slds-form-element__control combobox-height-set"> </lightning-input-field>
+                                                           </div>
+
+                                                        
+                                                        </div>
+                                                    </div >
+                                                    <div if:true={inputModeBool}>
+                                                        <div if:false={isNewRecord}>
+                                                        <lightning-input-field  required={field.isRequired}  field-name={field.fieldName} class="slds-form-element__control combobox-height-set"> </lightning-input-field>
+                                                        </div>
+                                                    </div >
+                                                    <div if:false={inputModeBool} class="slds-grid slds-grid">
+                                                        <lightning-output-field field-name={field.fieldName}  class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                                        <lightning-button-icon icon-name="utility:edit" variant="bare"
+                                                                              alternative-text="edit"
+                                                                              onclick={handleToggle} class="colorbutton test-id__inline-edit-trigger slds-shrink-none inline-edit-trigger slds-button slds-button_icon-bare"></lightning-button-icon>
+                                                    </div>
+                                                </div>
+                                                <div if:true={field.isReadOnly} class="slds-grid slds-size_1-of-1 label-inline">
+                                                    <lightning-output-field field-name={field.fieldName} class="slds-form-element slds-hint-parent test-id__output-root slds-form-element_edit  slds-form-element_horizontal"></lightning-output-field>
+                                                </div>
+                                            </template>
+                                        </lightning-layout-item>
+                                    </template>
+                                    
+                                </lightning-layout>
+                            </div>
+                       
+                           </c-dmv_collapsemodal>
+                        </template>
+                        <div class="slds-align_absolute-center slds-docked-form-footer">
+        
+                            <lightning-button label="Cancel" title="Cancel" onclick={handleCancel} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button type="submit" variant="brand" label="Save" onclick={handleSubmit}  title="save" class="slds-m-left_x-small"></lightning-button>
+                            </div>
+                
+                            
+                        
+                          
+                        </lightning-record-edit-form>  
+                </div>
+                    </template>
+     </slot>
+      <!-- <span slot="footer">
+            <lightning-button variant="neutral" label="Cancel" title="Cancel" onclick={handleClose} ></lightning-button>
+            <lightning-button variant="brand" label="Save" title="Save" onclick={handleSave} class="slds-m-left_x-small"></lightning-button>
+        </span>!-->
+        
+    </c-pocmodal>
+</template>
+
+</template>

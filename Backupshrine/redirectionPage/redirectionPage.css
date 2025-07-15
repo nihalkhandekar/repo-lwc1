@@ -1,0 +1,14 @@
+.header_bottomRow_row_banner {
+    background: #F7F9FA var(--c-redirectionPageBg) no-repeat;
+    height: 540px;
+    background-size: cover;
+}
+
+.gov-logo {
+    text-align: center;
+}
+
+.gov-logo img {
+    position: absolute;
+    top: 125px;
+}

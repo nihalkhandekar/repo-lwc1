@@ -1,0 +1,33 @@
+<template>
+  <div class="header_wrapper">
+      <div class="header_topRow_wrapper">
+          <div class="header_topRow">
+              <div class="header-content">
+                  <img
+                      src={appLogo}
+                      class="appLogo"
+                      alt="appLogo"
+                      title="appLogo"
+                      tabindex="0"
+                      onclick={redirectToPortal}
+                  />
+              </div>                
+              <div class="lang">
+                  <c-recovery_lang-L-W-C></c-recovery_lang-L-W-C> 
+              </div>
+          </div>
+      </div>
+      <div if:true={showHeaderImage} class="header_bottomRow_row_banner">
+          <div class="header_bottomRow_wrap">
+              <div class="header_bottomRow_wrapper_banner">
+                  <div class="mainText">
+                    {label.Label_MainText}
+                  </div>
+                  <div class="subText">
+                    {label.Label_SubText}
+                  </div>
+              </div>
+          </div>
+      </div>     
+  </div>
+</template>

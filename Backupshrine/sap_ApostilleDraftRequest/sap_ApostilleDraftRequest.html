@@ -1,0 +1,196 @@
+<template>
+    <div class="dashboard-container">
+        <template if:true={isLoading}>
+            <div class="spinner-container">
+                <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+            <!-- Breadcrumb Navigation -->
+            <div class="breadcrumb-container">
+                <div class="breadcrumb">
+                    <a href="#" onclick={navigateToDashboard}>{labels.MyDashboard}</a> 
+                    <lightning-icon class="chevron-icon custom-color slds-icon_x-small" icon-name="utility:chevronright" size="x-small" alternative-text="Chevron Right"></lightning-icon> 
+                    <div class="subtextbox">
+                        <span>{labels.Drafts}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Drafts Card -->
+            <div class="dashboard-cards">
+                <div class="dashboard-card">
+                    <div class="dashboard-card-content">
+                        <div class="dashboard-card-icon">
+                            <lightning-icon icon-name="standard:account" size="large" class="dashboard-icon"></lightning-icon>
+                        </div>
+                        <div class="card-content">
+                            <h2 class="card-title">{labels.Drafts}</h2>
+                            <p class="card-description">
+                                {labels.AccessDrafts}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <template if:true={paginatedResult}>
+                    <div class="slds-scrollable_x custom-table-container">
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered custom-table">
+                            <thead>
+                                <tr class="custom-header classForTheadOfDraftRequest">
+                                    <th class="column1" scope="col" onclick={sortByField} data-field="ApplicationID">
+                                        <div class="slds-truncate" title="Draft #">{labels.Draft} #
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th class="column2" scope="col" onclick={sortByField} data-field="requestorName">
+                                        <div class="slds-truncate" title="Requester Name"> {labels.RequestorName}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th class="column3" scope="col" onclick={sortByField} data-field="address">
+                                        <div class="slds-truncate" title="Address">{labels.Address}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th class="column4" scope="col" data-field="documentType">
+                                        <div class="slds-truncate" title="documentType">{labels.DocumentType}
+                                        
+                                        </div>
+                                    </th>
+                                    <th class="column5" scope="col" onclick={sortByField} data-field="Expedited">
+                                        <div class="slds-truncate" title="Expedited">{labels.Expedited}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th class="column6" scope="col" onclick={sortByField} data-field="CreatedDate">
+                                        <div class="slds-truncate" title="Created Date">{labels.CreatedDateTime}
+                                            <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small" class="sort-icon"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th class="column7" scope="col">
+                                        <div class="slds-truncate" title="Action">{labels.Action}</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template if:true={isRecordsLoading}>
+                                    <tr class="no-border-row">
+                                        <td colspan="7" class="slds-text-align_center loader-row">
+                                            <lightning-spinner alternative-text="Loading records..." variant="brand" size="large"></lightning-spinner>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template if:false={isRecordsLoading}>
+                                    <template for:each={paginatedResult} for:item="row">
+                                        <tr key={row.Id} class="custom-column classForTbodyOfDraftRequest">
+
+                                            <td class={row.clickable} data-id={row.Id} onclick={toggleDocument}>
+                                                <div class="slds-truncate" title={row.ApplicationID}>
+                                                    <template if:true={row.hasDocuments}
+                                                        class="slds-button slds-button_icon slds-m-right_x-small"
+                                                        aria-expanded={row.isExpanded}
+                                                        aria-controls="documents-{row.Id}">
+                                                        <span
+                                                            class="slds-icon_container slds-icon-border-filled icon-border">
+                                                            <lightning-icon class="upDownIcon" icon-name={row.iconName} size="xx-small"
+                                                                alternative-text="Toggle"></lightning-icon>
+                                                        </span>
+                                                    </template>
+                                                    <template if:true={row.hasDocuments}>
+                                                        <span class="tableText">{row.ApplicationID}</span>
+                                                        <template if:false={row.isExpanded}>
+                                                            <span class="doc-count">+{row.docCount}</span>
+                                                        </template>
+                                                    </template>
+                                                    <template if:false={row.hasDocuments}>
+                                                        <span class="tableTextChild">{row.ApplicationID}</span>
+                                                    </template>
+                                                </div>
+                                            </td>
+
+                                            <td class="column2">
+                                                <div class="slds-truncate" title={row.requestorName}>{row.requestorName}</div>
+                                            </td>
+                                            <td class="column3">
+                                                <div class="slds-truncate" title={row.address}>{row.address}</div>
+                                            </td>
+                                            <td class="column4">
+                                                <div class="slds-truncate" title={row.documentType}>{row.documentType}</div>
+                                            </td>
+                                            <td class="column5">
+                                                <div class={row.expeditedClass} title={row.Expedited}>{row.expeditedText}</div>
+                                            </td>
+                                            <td class="column6">
+                                                <div class="slds-truncate" title={row.CreatedDate}>{row.CreatedDate}</div>
+                                            </td>
+                                            <td class="column7">
+                                                <a href="javascript:void(0)" class="actionView" onclick={handleViewAction} data-id={row.Id}>{labels.View}</a>
+                                            </td>
+                                        </tr>
+
+                                            <template if:true={row.isExpanded}>
+                                                <template for:each={row.documents} for:item="document">
+                                                    <tr key={document.Id} class="custom-column-child">
+                                                        <td class="column1">
+                                                            <div class="slds-truncate tableTextChild"
+                                                                title={document.ApplicationID}>
+                                                                {document.ApplicationID}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column2">
+                                                            <div class="slds-truncate" title={document.requestorName}>
+                                                                {document.requestorName}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column3">
+                                                            <div class="slds-truncate" title={row.address}>
+                                                                {row.address}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column4">
+                                                            <div class="slds-truncate" title={document.documentType}>
+                                                                {document.documentType}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column5">
+                                                            <div class={row.expeditedClass} title={row.Expedited}>
+                                                                {row.expeditedText}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column6">
+                                                            <div class="slds-truncate" title={row.CreatedDate}>
+                                                                {row.CreatedDate}
+                                                            </div>
+                                                        </td>
+                                                        <td class="column7"></td>
+                                                    </tr>
+                                                </template>
+                                            </template>
+                                       
+                                    </template>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Pagination controls -->
+                    <template if:true={showPages}>
+                        <div class="pagination-controls">
+                            <lightning-button label={labels.Prev} icon-name="utility:jump_to_left" icon-position="left"
+                                onclick={handlePreviousPage} variant="neutral" disabled={isPreviousDisabled}>
+                            </lightning-button>
+
+                            <span class="paginationText">{startRecord} - {endRecord} of {totalRecords} | Page {currentPage} of {totalPages}</span>
+
+                            <lightning-button label={labels.Next} icon-name="utility:jump_to_right" icon-position="right"
+                                onclick={handleNextPage} variant="neutral" disabled={isNextDisabled}>
+                            </lightning-button>
+                        </div>
+                    </template>
+                </template>
+                <template if:false={paginatedResult}>
+                    <p class="no-data-message">{labels.Youhavenosaveddraftrequests}</p>
+                </template>
+            </div>
+        </template>
+    </div>
+</template>

@@ -1,0 +1,27 @@
+.error-msg-wrapper {
+    text-align: center;
+}
+
+.keywords {
+    color: #757575;
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 21px;
+}
+
+.keywords:focus {
+    font-weight: normal;
+}
+
+.results {
+    color: #2D2C2C;
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+    line-height: 50px;
+    margin-left: 24px;
+}
+.lookup-option-container {
+    max-height: 245px;
+}

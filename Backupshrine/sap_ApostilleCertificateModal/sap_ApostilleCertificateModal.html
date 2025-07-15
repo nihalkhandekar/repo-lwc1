@@ -1,0 +1,222 @@
+<template>
+  <template if:true={isLoading}>
+    <div class="spinner-container">
+      <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+  </template>
+
+  <template if:false={isLoading}>
+    <div class="custom-modal">
+      <lightning-modal-header class="popupheader">
+        <div class="header-content">
+          <span class="header-label">{labels.OrderDetailsReport}</span>
+          <lightning-icon class="close-icon" icon-name="utility:close" size="small" onclick={handleCancel}> </lightning-icon>
+        </div>
+      </lightning-modal-header>
+
+      <lightning-modal-body>
+        <img src={certificateImageUrl} alt="Certificate Image" class="certiImg" />
+        <div class="header-body">
+          {labels.CUSTOMERRECEIPT} <br />
+          {labels.ORDERDETAILSREPORT}
+        </div>
+        <div class="slds-grid slds-wrap slds-gutters slds-m-top_large">
+          <div class="slds-col slds-size_1-of-2">
+            <div class="slds-text-align_left contentMain">
+              {labels.DateProcessed}:
+              <span class="spantext">{appliedDate}</span>
+            </div>
+          </div>
+          <div class="slds-col slds-size_1-of-2">
+            <div class="slds-text-align_right contentMain">
+              {labels.WorkOrderNumber}:
+              <span class="spantext">{workOrderNumber}</span>
+            </div>
+          </div>
+        </div>
+        <div class="slds-text-align_left slds-m-top_large contentMain">
+          <div>{individualName}</div>
+          <div>{addressLine}</div>
+          <div>{city}, {state} {zipCode}</div>
+        </div>
+        <div class="slds-text-align_left slds-m-top_large spantext">
+          {labels.ThankyouforpresentingyourdocumentsotheConnecticutSecretaryoftheStatePleasefindtheorderdetailsbelow}:
+        </div>
+        <div class="slds-text-align_left slds-m-top_large contentMain">{labels.OrderDetails}:</div>
+
+        <div class="slds-scrollable_x slds-m-top_large custom-container">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+            <thead class="custom-header">
+              <tr>
+                <th scope="col" class="contentMain" style="max-width: 200px">
+                  <div class="slds-truncate" title="Name on Document">{labels.NameonDocument}</div>
+                </th>
+                <th scope="col" class="contentMain" style="max-width: 200px">
+                  <div class="slds-truncate" title="Country">{labels.Country}</div>
+                </th>
+                <th scope="col" class="contentMain" style="max-width: 200px">
+                  <div class="slds-truncate" title="Hague Status">{labels.HagueStatus}</div>
+                </th>
+                <th scope="col" class="contentMain" style="max-width: 200px">
+                  <div class="slds-truncate" title="Status">{labels.Status}</div>
+                </th>
+                <th scope="col" class="contentMain" style="max-width: 200px">
+                  <div class="slds-truncate" title="Rejection Reason">{labels.RejectionReason}</div>
+                </th>
+                <th scope="col" class="contentMain" style="max-width: 200px">
+                  <div class="slds-truncate" title="Notes">{labels.Notes}</div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={itemDetails} for:item="row">
+                <tr key={row.Id} class="custom-column">
+                  <td class="spantext" style="max-width: 200px">
+                    <div class="slds-truncate" title={row.nameDisplay}>{row.nameDisplay}</div>
+                  </td>
+                  <td class="spantext" style="max-width: 200px">
+                    <div class="slds-truncate" title={row.countryDisplay}>{row.countryDisplay}</div>
+                  </td>
+                  <td class="spantext" style="max-width: 200px">
+                    <div class="slds-truncate" title={row.hagueStatusDisplay}>{row.hagueStatusDisplay}</div>
+                  </td>
+                  <td class="spantext" style="max-width: 200px">
+                    <div class="slds-truncate" title={row.statusDisplay}>{row.statusDisplay}</div>
+                  </td>
+                  <td class="spantext" style="max-width: 200px">
+                    <div class="slds-truncate rejectionReasonCss" title={row.rejectionReasonDisplay}>{row.rejectionReasonDisplay}</div>
+                    <div class="slds-truncate" title={row.customRejectionReason}>{row.customRejectionReason}</div>
+                  </td>
+                  <td class="spantext" style="max-width: 200px">
+                    <div class="slds-truncate" title={row.notesDisplay}>{row.notesDisplay}</div>
+                  </td>
+                </tr>
+              </template>
+
+              <!-- <tr if:true={itemDetails}>
+                            <td class="spantext">
+                                <div class="slds-truncate" title={itemDetails.name}>{itemDetails.name}</div>
+                            </td>
+                            <td class="spantext">
+                                <div class="slds-truncate" title={itemDetails.country}>{itemDetails.country}</div>
+                            </td>
+                            <td class="spantext">
+                                <div class="slds-truncate" title={itemDetails.hagueStatus}>{itemDetails.hagueStatus}</div>
+                            </td>
+                            <td class="spantext">
+                                <div class="slds-truncate" title={itemDetails.status}>{itemDetails.status}</div>
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr> -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="slds-text-align_left slds-m-top_large contentMain">
+          *Rejected Documents:
+          <span class="spantext">{labels.Onceyouhavcorrectedtheissueswithyou}</span>
+        </div>
+        <br />
+        <div class="slds-text-align_left payment-details-container">
+          <div class="contentMain">{labels.WorkOrderPaymentDetails}:</div>
+          <template if:true={paymentDetails}>
+            <template for:each={paymentDetails} for:item="payment">
+              <div key={payment.Id}>
+                <div class="payment-grid-row">
+                  <span class="payment-label">{labels.TotalReceived}</span>
+                  <span class="payment-value">${payment.TotalFeeAmount}</span>
+                  <span class="payment-method">{payment.Payment_Method__c}</span>
+                </div>
+                <div class="payment-grid-row">
+                  <span class="payment-label">{labels.PartialRefund}</span>
+                  <span class="payment-value">---</span>
+                  <span class="payment-method">---</span>
+                </div>
+              </div>
+            </template>
+          </template>
+        </div>
+        <!-- <div class="slds-text-align_left slds-m-top_large contentMain">
+                    Work Order Payment Details:
+                </div>
+
+                <div class="slds-scrollable_x slds-m-top_large payment-container">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered payment-table">
+                        <thead class="custom-header">
+                            <tr>
+                                <th scope="col" class="contentMain column-1">
+                                    <div class="slds-truncate" title="Medium">Medium
+                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                                        class="sort-icon" data-my-icon></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" class="contentMain column-2">
+                                    <div class="slds-truncate" title="Total Received">Total Received
+                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                                        class="sort-icon" data-my-icon></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" class="contentMain column-3">
+                                    <div class="slds-truncate" title="Partial Refund">Partial Refund
+                                        <lightning-icon icon-name={sortIcon} alternative-text="Sort" size="x-small"
+                                        class="sort-icon" data-my-icon></lightning-icon>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr if:true={itemDetails}>
+                                    <td class="spantext">
+                                        <div class="slds-truncate" title={itemDetails.paymentMethod}>{itemDetails.paymentMethod}</div>
+                                    </td>
+                                    <td class="spantext">
+                                        <div class="slds-truncate" title={itemDetails.TotalFeeAmount}>{itemDetails.TotalFeeAmount}</div>
+                                    </td>
+                                    <td class="spantext">
+                                        <div class="slds-truncate"></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                </div> -->
+
+        <div class="slds-text-align_left slds-m-top_large spantext">{labels.OnJanuary12025theConnecticutSec}</div>
+        <div class="slds-text-align_left slds-m-top_large spantext">{labels.Documentslegalizedforuseinc}</div>
+        <div class="slds-text-align_left slds-m-top_large contentMain">{labels.Apostillescannotbeissued}</div>
+        <div class="slds-text-align_left slds-m-top_large spantext">
+          {labels.Receivingpartiesmayverifytheissuance}:
+          <p class="track-link" onclick={navigateToTrack}>{labels.LinktoSOTSWebsiteVerifyapostille}</p>
+        </div>
+        <div class="slds-text-align_left slds-m-top_large spantext">
+          <div>{labels.ThankYou},</div>
+          <div>{labels.SecretaryOfTheState}</div>
+          <div>{labels.AuthenticationsAndApostilleUnit}</div>
+          <div>165 Capitol Ave Suite 100,</div>
+          <div>Hartford, CT 06106</div>
+          <div class="linkText">bsd@ct.gov</div>
+        </div>
+      </lightning-modal-body>
+
+      <lightning-modal-footer class="popupfooter">
+        <div class="slds-grid slds-grid_align-end">
+          <button class="slds-button slds-m-right_small custom-hover-button" onclick={handleCancel}>{labels.Cancel}</button>
+          <lightning-button variant="brand" label={labels.PrintOrderDetailsReport} class="printbutton1 slds-m-right_small" onclick={handlePrint}></lightning-button>
+          <lightning-button variant="brand" label={labels.DownloadOrderDetailsReport} class="downloadbutton" onclick={handleDownload}></lightning-button>
+        </div>
+      </lightning-modal-footer>
+      <c-sap_-pdf-genrator
+        data-id="pdfGenerator"
+        applied-date={appliedDate}
+        work-order-number={workOrderNumber}
+        address-line={addressLine}
+        city={city}
+        state={state}
+        zip-code={zipCode}
+        individual-name={individualName}
+        item-details={itemDetails}
+        payment-details={paymentDetails}>
+      </c-sap_-pdf-genrator>
+    </div>
+  </template>
+</template>

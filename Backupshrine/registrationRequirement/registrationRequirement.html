@@ -1,0 +1,243 @@
+<template>
+  <div class="spinner">
+      <template if:true={isLoading}>
+           <lightning-spinner alternative-text="Loading" variant="neutral" size="large">
+           </lightning-spinner>
+      </template>
+  </div>
+    <!-- display the selected business item from the list -->
+    <template if:true={showResult}>
+      <div class="SelectItemContainer">
+        <div class="content">{result}</div>
+        <div class="edit tabfocus" tabindex="0" onclick={handleEdit} onkeypress={handleEdit}>
+          <img class="slds-m-right_small" src={editIcon} alt="Edit Icon" aria-hidden=true>{label.edit}
+        </div>
+      </div>
+    </template>
+    <!-- search and browse tabs -->
+    <template if:true={showTabs}>
+      <div class="wrapper">
+        <lightning-tabset
+          class="tab"
+          active-tab-value={selectedTab}
+          role="tablist"
+        >
+          <lightning-tab
+            label={label.label_search}
+            value={label.label_search}
+            class="search"
+            role="tab"
+          >
+             <div
+            class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right search-box"
+            role="combobox"
+            aria-expanded="false"
+            aria-owns="ex1-listbox"
+            aria-haspopup="listbox"
+            id="ex1-combobox"
+            tabindex="0"
+			      onmousedown={handleMouseClick}
+            onkeydown={handleKeyDown}
+          >
+            <input
+              type="text"
+              placeholder={SearchPlaceholder}
+              onchange={handleSearchTermChange}
+              onkeyup={handleSearchTermPress}
+              class="searchBox"
+              value={inputValue}
+              data-id="search-inputi12"
+              aria-autocomplete="list"
+              aria-controls="ex1-listbox"
+              id="ex1-input"
+              role="textbox"
+            />
+              <span class="search-icon-wrapper" onclick={handleSearchTermChange}>
+                <img
+                  class="slds-m-right_small"
+                  src={searchIcon}
+                  alt="Search Icon"
+                />
+              </span>
+            </div>
+            
+            <ul
+              class="Hid lookup-option-container slds-p-horizontal_x-small slds-p-bottom_x-small Hide"
+              role="listbox"
+              id="ex1-listbox"
+           >
+              <template if:true={data}>
+                <span class="results">{data.length} {label.searchResults} "{inputValue}" </span>
+                <template for:each={data} for:item="Record">
+                <li
+                    key={Record.id}
+                    class="data-list"
+                    data-files={Record.id}
+                    id={Record.id}
+                    data-id={Record.id}
+                    onclick={populateValue}
+                    onmousedown={populateValue}
+                    role="option"
+                    onkeydown={populateValueWithFocus}
+                    onkeypress={populateValueWithFocus}
+                  >
+                    <lightning-formatted-rich-text value={Record.name}></lightning-formatted-rich-text>
+                    <br>
+                    <lightning-formatted-rich-text class="keywords" value={Record.keywords}></lightning-formatted-rich-text>
+                    <p lwc:dom="manual" class="search-list-heading"></p>
+                    <p lwc:dom="manual" class="search-list-text"></p>
+                </li>
+                </template>
+              </template>
+              <template if:false={data.length}>
+                <div class="data-list">
+                  {label.label_noResults}
+                </div>
+              </template>
+          </ul>
+         <template if:true={showError} class="error-container">
+              <div class="error-msg-wrapper" role="alert">
+                <section
+                  aria-label="Error Message"
+                  class="slds-popover slds-nubbin_top"
+                  role="dialog"
+                >
+                  <div class="slds-popover__body error-msg">
+                  <p class="small">
+                      {label.label_pleaseSelectType}
+                    </p>
+                  </div>
+                </section>
+              </div>
+            </template>
+          </lightning-tab>
+        <lightning-tab
+          label={label.label_browse}
+          value={label.label_browse}
+          role="tab"
+        >
+          <ul class="browse-container">
+              <nav
+                if:true={showNav}
+                role="navigation"
+                aria-label="Breadcrumbs"
+                class="breadcrumb_wrapper"
+              >
+                <ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+                  <template for:each={breadcrumVal} for:item="selectedItem">
+                    <li
+                    class="breadcrumb tabfocus"
+                      key={selectedItem.level}
+                      id={selectedItem.level}
+                      value={selectedItem.level}
+                    tabindex="0"
+                      onclick={updateLevel}
+                    onkeypress={updateLevel}
+                      title={selectedItem.header}
+                    >
+                      <img
+                        src={chevronRight}
+                        class="chevronRight"
+                        alt="chevronRight"
+                      />
+                      <a class="breadcrumb-name">{selectedItem.header}</a>
+                      <a class="ellipsis">...</a>
+                    </li>
+                  </template>
+                </ol>
+                <div class="category-name">
+                  {target}
+                </div>
+              </nav>
+
+              <template for:each={showCategories} for:item="category">
+                <template if:false={topLevel}>
+                  <li
+                    key={category.BusinessType}
+                    id={category.Id}
+                    value={category.level}
+                    title={category.BusinessType}
+                    onclick={handleClick}
+                  onkeypress={handleClick}
+                  class="list-item tabfocus"
+                    tabindex="0"
+                  >
+                  <div class="li-content">
+                    <p class="large li-name">{category.BusinessType}</p>
+                    <img
+                      src={chevronRightGrey}
+                      class="chevronright-icon"
+                      alt="chevronRightGrey"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div class="separator" key={category.Id}></div>
+                  </li>
+                </template>
+                <template if:true={topLevel}>
+                  <li
+                    key={category.Id}
+                    id={category.Id}
+                    value={category.CategoryWithCode}
+                    onclick={handleCheckBusiness}
+                  onkeypress={handleCheckBusiness}
+                  class="list-item tabfocus"
+                    title={category.CategoryWithCode}
+                    tabindex="0"
+                  >
+                  <div class="li-content">
+                  <p class="large li-name">{category.CategoryWithCode}</p>
+                    <div class="radio">
+                      <input
+                        class="radio-custom"
+                        name="radio-group"
+                        type="radio"
+                        checked={category.selected}
+                        aria-hidden="true"
+                      />
+                      <span class="radio-custom-label">
+                        <img
+                          src={radioChecked}
+                          class="radio-checked"
+                          alt="radioChecked"
+                        />
+                        <img
+                          src={radioUnchecked}
+                          class="radio-unchecked"
+                          alt="radioUnchecked"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </div>
+                  </div>
+                  <div class="separator" key={category.Id}></div>
+                  </li>
+                </template>
+              </template>
+          </ul>
+            <template if:true={showError} class="error-container">
+              <div class="error-msg-wrapper" role="alert">
+                <section
+                  aria-label="Error Message"
+                  class="slds-popover slds-nubbin_top"
+                  role="dialog"
+                >
+                  <div class="slds-popover__body error-msg">
+                  <p class="small">
+                      {label.label_pleaseSelectType}
+                    </p>
+                  </div>
+                </section>
+              </div>
+            </template>
+          </lightning-tab>
+        </lightning-tabset>
+      </div>
+    </template>
+    <p class="error-text" if:true={showErrorMessage}>
+    {errorMessage}
+  </p>
+  <p class="error-text" if:true={showMaintenanceError}>
+      {label.NAICS_Maintenance_Error}
+  </p>
+</template>

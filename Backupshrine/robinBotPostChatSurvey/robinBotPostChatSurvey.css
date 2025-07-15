@@ -1,0 +1,7 @@
+.survey-container {
+    padding-top: 50px;
+    text-align: center;
+}
+.success-answer-icon {
+    --sds-c-icon-color-foreground-default: green;
+}

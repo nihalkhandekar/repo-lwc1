@@ -1,0 +1,257 @@
+<template>
+    <lightning-card title="Reports">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="3" padding="around-small">
+                <lightning-combobox label=" Report" value={selectedValue} options={options}
+                    onchange={handleChange} placeholder="Check Listing">
+                </lightning-combobox>
+            </lightning-layout-item>
+
+            <template if:true={isCheckListing}>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="date" variant="standard" name="Completed_Date__c" value={completedDate} title="Completed Date"
+                        placeholder="Transaction Start Date" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="date" variant="standard" name="Completed_Date__c" title="Completed Date"
+                        placeholder="Transaction End Date" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+            </template>
+
+            <!-- Check Listing Checkbox Group -->
+            <template if:true={isCheckListing}>
+                <lightning-layout-item size="12" padding="around-small">
+                    <div class="checkbox-group-container">
+                        <lightning-input type="checkbox" label="All" onchange={handleSelectAll}>
+                        </lightning-input>
+                        <template for:each={checkListingOptions} for:item="option" for:index="index">
+                            <div key={option.value} class="checkbox-item">
+                                <lightning-input type="checkbox" label={option.label} value={option.value}
+                                    onchange={handleCheckListingChange}>
+                                </lightning-input>
+                            </div>
+                        </template>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12">
+                    <div style="display: flex; justify-content: flex-end;padding-right: 20px;">
+                        <lightning-button variant="standard" label="Clear" onclick={handleclear}
+                            style="margin-right: 10px;">
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Download PDF" onclick={handlePdf}
+                            style="margin-right: 10px;">
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Download Excel" onclick={handleExcel}>
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </template>
+
+            <!-- Refund Request History Fields -->
+            <template if:true={isRefundRequestHistory}>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="date" variant="standard" name="Completed_Date__c" title="Completed Date"
+                        placeholder="Completed Date" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="text" variant="standard" name="Payer__c" title="Payer" placeholder="Payer"
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="text" variant="standard" name="Refund_Denied_Reason__c"
+                        title="Refund/Denied Reason" placeholder="Refund/Denied Reason" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="text" variant="standard" name="Work_Order_Number__c"
+                        placeholder="Work Order Number" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="text" variant="standard" name="Refund_Status__c" title="Refund Status"
+                        placeholder="Refund Status" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="number" variant="standard" name="Requested_By__c" title="Requested By"
+                        placeholder="Requested By" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="number" variant="standard" name="Payment_Number__c" title="Payment No"
+                        placeholder="Payment No" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" padding="around-small">
+                    <div style="display: flex; justify-content: flex-end;">
+                        <lightning-button variant="neutral" label="Clear All" onclick={handleClear}>
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Search" onclick={fetchRecords}
+                            style="margin-left: 10px;">
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </template>
+
+            <!-- Other Report Templates -->
+            <template if:true={isCreditBalance}>
+                <div>
+                    <h1>Credit Balance Report</h1>
+                </div>
+            </template>
+
+            <template if:true={isAging}>
+                <div>
+                    <h1>Aging Report</h1>
+                </div>
+            </template>
+
+            <template if:true={isUnclosedUser}>
+                <!-- Template for Unclosed User -->
+            </template>
+
+            <!-- Template for User Closeout -->
+            <template if:true={isUserCloseout}>
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="text" variant="standard" name="closeout_Name" value={closeout_Name} title="Name" placeholder="Name"
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="number" variant="standard" name="closeout_Work_Order_Number" value={closeout_Work_Order_Number}
+                        placeholder="Work Order Number / Invoice Number" onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="3" padding="around-small">
+                    <lightning-input type="date" variant="standard" name="closeout_Date" value={closeout_Date} placeholder="Date"
+                        onchange={handleInputChange}>
+                    </lightning-input>
+                </lightning-layout-item>
+
+                <lightning-layout-item size="12" padding="around-small">
+                    <div style="display: flex; justify-content: flex-end;">
+                        <lightning-button variant="neutral" label="Clear All" onclick={handleClear}>
+                        </lightning-button>
+                        <lightning-button variant="brand" label="Search" onclick={handleSearchClick}
+                            style="margin-left: 10px;">
+                        </lightning-button>
+                    </div>
+                </lightning-layout-item>
+            </template>
+
+            <template if:true={isCheckSummary}>
+                <!-- Template for Check Summary -->
+            </template>
+
+            <template if:true={isCoreCTDepositSummary}>
+                <!-- Template for Core CT Deposit Summary -->
+            </template>
+
+            <template if:true={isCustomerListing}>
+                <!-- Template for Customer Listing -->
+            </template>
+
+            <template if:true={isDailyTransactionListing}>
+                <!-- Template for Daily Transaction Listing -->
+            </template>
+
+            <template if:true={isDepositSummary}>
+                <!-- Template for Deposit Summary -->
+            </template>
+
+            <template if:true={isCoreCTBankDepositDateListing}>
+                <!-- Template for Core CT Bank Deposit Date Listing -->
+            </template>
+
+            <template if:true={isCreditSummary}>
+                <!-- Template for Credit Summary -->
+            </template>
+
+            <template if:true={isForfeitureFees}>
+                <!-- Template for Forfeiture Fees -->
+            </template>
+        </lightning-layout>
+    </lightning-card>
+
+    <!-- Refund Request History - Additional Content -->
+    <template if:true={isRefundRequestHistory}>
+        <lightning-card>
+            <!-- Filter Section -->
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium" if:false={inViewFlow}>
+                <div class="button-container">
+                    <div class="left-button slds-p-left_small">
+                        <span class="slds-text-title_bold slds-m-right_x-small">Search Results:</span>
+                        <lightning-badge label={transactionsFoundLabel} class="slds-badge_inverse">
+                        </lightning-badge>
+                    </div>
+                    <div class="right-buttons">
+                        <lightning-badge data-id="current-day" label="Current day" class={badgeClassCurrentDay}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-week" label="This week" class={badgeClassThisWeek}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-month" label="This month" class={badgeClassThisMonth}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-quarter" label="This quarter" class={badgeClassThisQuarter}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-year" label="This year" class={badgeClassThisYear}
+                            onclick={handleBadgeClick}>
+                        </lightning-badge>
+
+                        <lightning-button-menu icon-position="right" data-id="filterMenu"
+                            alternative-text="Filter By Amount" title="Filter" tooltip="Filter by amount"
+                            icon-name="utility:filterList" onselect={handleFilterSelect}
+                            class="slds-button_icon slds-button_icon-inverse custom-button-menu">
+                            <lightning-menu-item label="$0 - $100" value="0-100"></lightning-menu-item>
+                            <lightning-menu-item label="$101 - $500" value="101-500"></lightning-menu-item>
+                            <lightning-menu-item label="$501 - $1000" value="501-1000"></lightning-menu-item>
+                            <lightning-menu-item label="$1001 and above" value="1001+"></lightning-menu-item>
+                        </lightning-button-menu>
+                        <span class="slds-text-body_regular slds-m-right_small custom-label"
+                            onclick={handleFilterClick}>
+                            Filter by amount
+                        </span>
+                        <lightning-button label="Export Result" onclick={handleExportResultButtonClick} variant="brand"
+                            class="slds-m-right_small">
+                        </lightning-button>
+                    </div>
+                </div>
+
+                <template if:true={errorMessage}>
+                    <div class="slds-text-color_error slds-m-top_medium">
+                        {errorMessage}
+                    </div>
+                </template>
+            </div>
+
+            <template if:false={inViewFlow}>
+                <c-transaction-data-table key-field="Id" columns={columns} data={TrxnfeeItems} onview={handleOnView}
+                    onprint={handleOnPrint} onrefund={handleOnRefund} onsort={handleSort} sorted-by={sortedBy}
+                    sorted-direction={sortedDirection} hide-checkbox-column>
+                </c-transaction-data-table>
+            </template>
+
+            <!-- Pagination component -->
+            <c-pagination page-size={pageSize} totalrecords={totalRecords} onpagination={handlePagination}>
+            </c-pagination>
+
+            <!-- PDF Generator Component -->
+            <c-pdf-genrator data-id="pdfGenerator"></c-pdf-genrator>
+        </lightning-card>
+    </template>
+
+    <!-- User Closeout - Additional Content -->
+    <template if:true={isUserCloseout}>
+        <c-user-closeout-component name={closeout_Name} date={closeout_Date}> </c-user-closeout-component>
+    </template>
+</template>

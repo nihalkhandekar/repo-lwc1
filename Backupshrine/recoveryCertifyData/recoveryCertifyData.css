@@ -1,0 +1,83 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url('/resource/CT_Assets/fonts/karla/Karla-Regular.ttf');
+  }
+  .csvBttn{
+    padding-bottom: 2rem;
+  }
+  .csvOffsetFont{
+      font-size: 13px;
+  }
+  .headerLabel{
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Lato;
+  }
+  .customPagination {
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3px;
+}
+.customPagination>a:link{ 
+    text-decoration: underline;
+    color: black;
+}
+.paginationNumber {
+    padding: 5px 10px;
+    font-size: 18px;
+}
+.tableheader{
+    padding-top: 1rem;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f8f8f8;
+}
+.resultheader{
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    font-size: 18px;
+    font-weight: bold;
+}
+.noResult{
+    font-size: 24px;
+    font-weight: bold;
+}
+.filterBox{
+    box-sizing: border-box;
+    border: 1px solid #ECEBEB;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+}
+.leftPadding{
+    padding-left: 2.5rem;
+}
+.mainContainer {
+    padding: 0.75rem 5.75rem;
+    font-family: Lato;
+}
+.datatablebox{
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+}
+.currentPageItem{
+    text-align: center;
+    font-size: 16px;
+}
+@media only screen and (max-width: 64rem){
+    .slds-box {
+        border: none;
+        padding: 0;
+    }
+    .mainContainer {
+        padding-left: 0rem;
+        padding-right: 0rem;
+        font-family: Lato;
+    }
+}
+@media only screen and (max-width: 768px) {
+    .leftPadding{
+        padding-left: 0;
+    }
+}

@@ -1,0 +1,96 @@
+.header_topRow_wrapper {
+  font-family: myFirstFont;
+  background-color: #09538B;
+}
+.lang{
+  background-color: #F7F9FA;
+}
+.header_topRow {
+  width: 1124px;
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 0;
+}
+
+.header-content {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 35px;
+  padding-top: 2px;
+  font-weight: bold;
+}
+
+.appLogo {
+  width: 140px;
+}
+
+.header_bottomRow_row_banner {
+  background: #F7F9FA
+  url(/recovery/resource/COVID/Header/Busrecoverybannerimage.jpg) no-repeat;
+  /* url(/recovery/resource/COVID/Header/COVID-Comp-background-x1.png) no-repeat; */
+  height: 14rem;
+  background-size: cover;
+  background-color: #053756;
+}
+
+.mainText{
+  font-family: Lato;
+  font-size: 42px;
+  font-weight: bold;
+  line-height: 48px;  
+  color: #FFFFFF;
+  padding-top: 4rem;
+  padding-left: 15rem;
+}
+
+.subText{
+  font-family: Lato;
+  font-size: 18px;
+  line-height: 26px;  
+  color: #FFFFFF;
+  padding-left: 15rem;
+}
+
+@media only screen and (max-width: 768px) {
+
+  .header_topRow {
+      width: auto;
+      height: 64px;
+      padding: 17px 21px 17px 19px;
+  }
+
+  .header_bottomRow_row_banner {
+      background: #F7F9FA
+      /* url(/recovery/resource/COVID/Header/Busrecoverybannerimage.jpg) no-repeat; */
+      url(/recovery/resource/COVID/Header/Busrecoverybannerimage.jpg) no-repeat;
+      height: 4.5rem;
+      background-size: cover;
+  }
+  .lang{
+      width: 10rem;
+      font-size: xx-small;
+  }
+
+  .mainText{
+    font-family: Lato;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #FFFFFF;
+    padding-top: 1rem;
+    padding-left: 0.5rem;
+    width: 100%;
+  }
+  
+  .subText{
+    font-family: Lato;
+    font-size: 12px;
+    line-height: 20px;
+    color: #FFFFFF;
+    padding-left: 0.5rem;
+    width: 100%;
+  }
+}

@@ -1,0 +1,56 @@
+<template>
+    <div>
+        <div class="main" onclick={outSideOfComponentClicked}></div>
+        
+            <lightning-card class="superContainer">
+                <template if:true={isLoading}>
+                    <div class="full-page-loader">
+                        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                    </div>
+                </template>
+                <template if:false={isLoading}>
+                <div class="mainContainer">
+                    <div class="buttonContainer">
+                        <lightning-button variant="Neutral" label={labels.Submissions} title="Submissions" onload={SubmissionsButtonController} onclick={SubmissionsButtonController} data-id="Submissions" class="slds-m-left_x-small Submission"></lightning-button>
+                        <lightning-button variant="Neutral" label={labels.Payments} title="Payments" onclick={PaymentsButtonController} class="slds-m-left_x-small paymentsButton"></lightning-button>
+                        <lightning-button variant="Neutral" label={labels.Alerts} title="Alerts" onclick={AlertsButtonController} class="slds-m-left_x-small AlertsButton"></lightning-button>
+                        <lightning-button variant="Neutral" label={labels.AllRead} title="All Read" onclick={AllReadButtonController} class="slds-m-left_x-small AllRead"></lightning-button>
+                    </div>
+    
+                    <!-- Loader for Dashboard Section -->
+                    <template if:true={isDashboardLoading}>
+                        <div class="loader-container">
+                            <lightning-spinner alternative-text="Loading Dashboard" size="medium"></lightning-spinner>
+                        </div>
+                    </template>
+    
+                    <!-- Dashboard Cards -->
+                    <template if:false={isDashboardLoading}>
+                        <div class="dashboard-cards slds-scrollable_y">
+                            <template lwc:if={dashboardItems} for:each={dashboardItems} for:item="item">
+                                <a key={item.id} class="dashboard-card" onclick={redirectToMoreDetailsMethodCalled} data-value={item.Type__c} data-id={item.object_Id_For_Notification__c}>
+                                    <div class="dashboard-card-content">
+                                        <div class="dashboard-card-icon">
+                                            <lightning-icon icon-name={item.iconName__c} size="small" class="dashboard-icon"></lightning-icon>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="tittle_with_checkSign">
+                                                <h2 class="card-title">{item.title__c}</h2>
+                                                <template if:true={item.bluetick}>
+                                                    <lightning-icon icon-name="utility:check" size="small" class="dashboard-icon"></lightning-icon>
+                                                </template>
+                                            </div>
+                                            <p class="card-description">{item.description__c}</p>
+                                            <p class="card-description card-timming">{item.timming}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            </lightning-card>
+        </div>   
+    
+</template>

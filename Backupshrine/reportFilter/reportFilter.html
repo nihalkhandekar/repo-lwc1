@@ -1,0 +1,18 @@
+<template>
+    <lightning-card title="Filter Report">
+        <div class="slds-m-around_medium">
+            <!-- User filter inputs -->
+
+            <lightning-input type="date" label="From Date" value={fromDate} onchange={handleFromDateChange}></lightning-input>
+            <lightning-input type="date" label="To Date" value={toDate} onchange={handleToDateChange}></lightning-input>
+
+            <lightning-button label="Search" onclick={handleSearch}></lightning-button>
+        </div>
+    </lightning-card>
+
+    <template if:true={generatedUrl}>
+        <lightning-card title="Filtered Report">
+            <iframe src={generatedUrl} width="100%" height="600" frameborder="0"></iframe>
+        </lightning-card>
+    </template>
+</template>

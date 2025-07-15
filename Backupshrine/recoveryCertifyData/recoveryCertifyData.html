@@ -1,0 +1,145 @@
+<!--*********************************************************************************************
+ * NAME:  recoveryCertifyData.cmp
+ * DESCRIPTION: Business Certification Reopen Data for site. 
+ *
+ * @AUTHOR: Devesh Murdiya
+ * @DATE: 06/05/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Devesh Murdiya                    06/05/2020                         Created the first version
+ * 
+*********************************************************************************************-->
+<template>
+    <div class="mainContainerDiv">
+    <div class="mainContainer">
+        <c-recovery_transparency-Search-L-W-C oninputvaluechange={hanldeInputValueChange}
+            onselectedfiltertypechange={handleSelectedFilterTypeChange}></c-recovery_transparency-Search-L-W-C>
+        <div class="slds-grid slds-wrap slds-m-vertical_xx-large">
+            <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12 filterBox">
+                <c-recovery_transparency-Filter-L-W-C onselectedcountyvalueschange={handleSelectedCountyValuesChange}
+                    onselectedsectorvalueschange={handleSelectedSectorValuesChange}>
+                </c-recovery_transparency-Filter-L-W-C>
+            </div>
+            <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12 leftPadding">
+                <div if:false={offsetExceeded}>
+                    <div if:true={offsetHelpText} class="headerLabel">
+                        <legend>{label.Recovery_CertifyDataOffsetHelpText}</legend>
+                    </div>
+
+                    <lightning-layout class="resultheader" if:true={isResult}>
+                        <lightning-layout-item size="7" large-device-size="7" medium-device-size="7" small-device-size="12"
+                            if:true={isAll}>
+                            <legend>{totalRecords} {label.label_Recovery_Found}</legend>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="7" large-device-size="7" medium-device-size="7" small-device-size="12"
+                            if:true={isSearch}>
+                            <legend>{totalRecords} {label.label_Recovery_SearchResultsFor} "{searchtext}"</legend>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="3" large-device-size="3" medium-device-size="3" small-device-size="3">
+                            <legend>{label.label_Recovery_CertifyDataResultsPerPage}</legend>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="2" large-device-size="2" medium-device-size="2" small-device-size="2"
+                            class="recLimitbox">
+                            <lightning-combobox name="recLimitValue" value={selectedRecLimit} options={listOfRecLimits}
+                                onchange={handleRecLimitValue} class="recLimitCombobox"></lightning-combobox>
+                        </lightning-layout-item>
+                    </lightning-layout>
+
+                    <div if:true={isResult} class="slds-float--right csvBttn">
+                        <lightning-button 
+                            icon-name="utility:download" 
+                            label={label.Recovery_CertifyDataDownload}
+                            title={label.Recovery_CertifyDataDownload}
+                            onclick={downloadCSVFile} 
+                            variant="brand"
+                        >
+                        </lightning-button>
+                    </div>
+                    <div class="datatablebox" if:true={isResult}>
+                        <table>
+                            <thead class="tableheader">
+                                <th class="slds-large-size_1-of-12 slds-p-left_large slds-p-top_large">
+                                    {label.label_busniessName}</th>
+                                <th class="slds-large-size_1-of-12 slds-p-left_xx-small slds-p-top_large">{label.label_city}
+                                </th>
+                                <th class="slds-large-size_1-of-12 slds-p-left_xx-small slds-p-top_large">
+                                    {label.label_county}</th>
+                                <th class="slds-large-size_1-of-12 slds-p-left_small slds-p-top_large">{label.label_sector}
+                                </th>
+                                <th class="slds-large-size_1-of-12 slds-p-left_medium slds-p-top_large">
+                                    {label.label_zipcode}</th>
+                            </thead>
+                        </table>
+                        <lightning-datatable key-field="id" data={certifyRecords} columns={columns}
+                            hide-checkbox-column="true" max-row-selection="3" hide-table-header="true">
+                        </lightning-datatable>
+                    </div>
+                    <div class="customPagination" style="text-align: center" if:true={isResult}>
+                        <lightning-button variant="base" label={label.label_Recovery_Previous} title="Previous Page"
+                            onclick={handlePrevious} class="paginationNumber" if:true={isPrevious}></lightning-button>
+                        <template for:each={paginationRange} for:item="pageNumber">
+                            <a onclick={handlePaginationClick} key={pageNumber} data-target-number={pageNumber}
+                                class="paginationNumber" onselect={test}>{pageNumber}</a>
+                        </template>
+                        <!-- <label class="paginationNumber" if:false={isLastPage}>to</label>
+                        <a onclick={handlePaginationClick} key={totalPageNumber} data-target-number={totalPageNumber}
+                            class="paginationNumber" if:false={isLastPage}>{totalPageNumber}</a> -->
+                        
+                            <lightning-button variant="base" label={label.label_Recovery_Next} title="Next Page"
+                            onclick={handlePaginationClick} class="paginationNumber" if:true={isNext}></lightning-button>
+                        
+                            <!-- <lightning-button variant="base" label={label.label_Recovery_Last} title="Last Page"
+                            onclick={handleLast} class="paginationNumber"></lightning-button> -->
+                    </div>
+                    <div if:true={isResult}>
+                        <!-- <legend class="currentPageItem">{label.label_Recovery_Page} {currentPage} {label.label_Recovery_Of}
+                            {totalPageNumber}</legend> -->
+                        <legend class="currentPageItem">{label.label_Recovery_Page} {currentPage}</legend>
+                    </div>
+                
+                    <lightning-layout class="resultheader" if:false={isResult}>
+                        <lightning-layout-item class="slds-size_9-of-12 slds-medium-size_10-of-12 slds-large-size_10-of-12">
+                            <legend>0 {label.label_Recovery_SearchResults}</legend>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <div class="slds-box" if:true={isNoResult}>
+                        <legend class="noResult">{label.label_Recovery_NoResultMessage} "{searchtext}"</legend>
+                    </div>
+                    <div class="slds-box" if:false={isfilter}>
+                        <legend class="noResult">{label.label_Recovery_FilterError}</legend>
+                    </div>
+                </div>
+                <div if:true={offsetExceeded}>
+                    <lightning-layout class="resultheader">
+                        <lightning-layout-item size="6" large-device-size="6" medium-device-size="6" small-device-size="12">
+                            <legend>{totalRecords} {label.label_Recovery_Found}</legend>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6" large-device-size="6" medium-device-size="6" small-device-size="12" class="slds-float--right csvBttn">
+                            <lightning-button 
+                                icon-name="utility:download" 
+                                label={label.Recovery_CertifyDataDownload}
+                                title={label.Recovery_CertifyDataDownload}
+                                onclick={downloadCSVFile}
+                                variant="brand"
+                                class="csvOffsetFont"
+                            >
+                            </lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                    <div class="slds-box">
+                        <legend class="noResult">{label.Recovery_CertifyDataOffsetError}</legend>
+                    </div>
+                    <div class="customPagination" style="text-align: center">
+                        <lightning-button variant="base" label={label.label_Recovery_Previous} title="Previous Page"
+                            onclick={handlePrevious} class="paginationNumber" if:true={isPrevious}>
+                        </lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
