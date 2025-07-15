@@ -1,0 +1,229 @@
+.radio-label lightning-formatted-rich-text {
+    font-family: "Karla", sans-serif !important;
+}
+
+input[type="radio"] {
+    height: 1.5em;
+    width: 1.5em;
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+}
+
+.errorBorder {
+    border: 1px solid #DB2426 !important;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+}
+
+.radioError {
+    border-color: #DB2426 !important
+}
+
+.radio-label {
+    vertical-align: middle;
+    color: #2d2c2c;
+    padding: 24px;
+    width: 100%;
+}
+
+.radio-option-bold {
+    font-family: KarlaBold;
+    padding-right: 10px;
+    color: #2d2c2c;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #D0CFCF;
+    cursor: pointer;
+    font-size: 18px;
+    margin: auto;
+}
+
+.checkmark:hover {
+    border: 2px solid #09538b;
+}
+
+/* When the radio button is checked, add a blue background */
+input[type="radio"]:checked~.checkmark {
+    background-color: #09538b;
+    border-color: #09538b;
+}
+
+input[type="radio"]:checked~.radio-wrapper .checkmark {
+    background-color: #09538b;
+    border-color: #09538b;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Show the indicator (dot/circle) when checked */
+input[type="radio"]:checked~.radio-wrapper .checkmark:after {
+    display: block;
+}
+
+input[type="radio"]:checked~.checkmark:after {
+    display: block;
+}
+
+input[type="radio"]+span.checkmark {
+    margin-top: 0;
+    z-index: 200;
+}
+
+input[type="radio"]~.radio-label {
+    width: 100%;
+    line-height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    padding-right: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    box-shadow: none;
+    background: unset;
+    margin-bottom: 0;
+}
+
+label.ct-bos-input-label_radio.checked {
+    border-radius: 0.3125em;
+    background-size: 2.75em 0.8125em;
+}
+
+label.ct-bos-input-label_radio.radio-error {
+    border: solid 1px #db2426;
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+}
+
+label:focus {
+    outline: 2px solid #2d2c2c;
+}
+
+.mouseClick:focus {
+    outline: none !important;
+}
+
+.checkmark.containerTheme {
+    display: none;
+}
+
+label.ct-bos-input-label_radio {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.radio-wrapper {
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+    border: 1px solid #d0cfcf;
+    border-radius: 4px !important;
+    display: flex;
+    width: 100%;
+}
+
+.borderBox {
+    box-shadow: 0 4px 8px 0 #E7E9F2;
+    border: 1px solid #d0cfcf;
+}
+
+.addressIcon {
+    height: 16px;
+    margin: auto 0;
+    margin-right: 8px;
+}
+
+.description {
+    text-transform: uppercase;
+}
+
+.labelFirstRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.containerSpacing {
+    padding: 16px 30px 16px 16px;
+}
+
+.checkmark-container {
+    padding: 16px 0;
+    background-color: #F7F9FA;
+    margin: 1px;
+    border-top: none;
+    border-right: 1px solid #d0cfcf;
+    padding: 16px;
+    display: flex;
+}
+
+.combo-container {
+    border-top: 1px solid #ECEBEB;
+    margin-top: 32px;
+    padding-top: 16px;
+   
+}
+
+.combobox-element {
+    width: 244px;
+}
+
+@media only screen and (max-width: 1023px) {
+    input[type="radio"]~.radio-label {
+        padding: 0 24px 0 60px;
+        width: 100%;
+        border: none;
+        margin-bottom: 0;
+        box-shadow: none;
+    }
+
+    input[type="radio"]+span.checkmark {
+        margin-left: 16px;
+        margin-top: 0;
+    }
+
+    label.ct-bos-input-label_radio {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        position: relative;
+    }
+
+    .radio-wrapper {
+        flex-direction: column-reverse;
+    }
+
+    .checkmark-container {
+        border-top: 1px solid #d0cfcf;
+        border-right: none;
+        margin: 0;
+    }
+
+    .labelFirstRow {
+        flex-direction: column;
+    }
+
+    .labelId {
+        margin-bottom: 16px;
+    }
+    .combobox-element {
+        width: 100%;
+    }
+}

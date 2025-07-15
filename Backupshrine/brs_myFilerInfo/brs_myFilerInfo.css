@@ -1,0 +1,34 @@
+.filer-address-heading{
+    margin-bottom: 32px;
+}
+.filer-name-block{
+    margin-bottom: 48px;
+}
+.filer-btn{
+    margin-top: 40px;
+}
+.filer-card-details {
+    box-sizing: border-box;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    /* margin-top: 20px; */
+}
+.iconCls {
+    height: 17px;
+}
+.inner-card{
+    padding: 24px;
+}
+.header-margin{
+    margin-top: 16px;
+}
+@media only screen and (min-width: 1024px) {
+    .filer-name-block{
+        margin-bottom: 72px;
+    }
+    .filer-btn{
+        margin-top: 48px;
+    }
+}

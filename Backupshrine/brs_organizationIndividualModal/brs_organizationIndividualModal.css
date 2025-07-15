@@ -1,0 +1,32 @@
+.address-label{
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+.location-address {
+    color: #757575;
+    display: flex;
+    align-items: flex-start;
+}
+
+.location-address img {
+    width: 16px;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+
+.confirmation-label{
+    margin-bottom: 24px;
+}
+
+.member-label{
+    margin-bottom: 4px;
+}
+
+.member-name{
+    margin-bottom: 12px;
+}
+
+.margin-top-space{
+    margin-top: -12px;
+}

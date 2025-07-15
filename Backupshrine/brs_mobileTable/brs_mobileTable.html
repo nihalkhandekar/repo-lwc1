@@ -1,0 +1,15 @@
+<template>
+  <div class="mobile-table-container">
+    <template for:each={finalTableData} for:item="tableData"  for:index="index">
+      <div key={tableData} class="data-container">
+        <template for:each={tableData} for:item="data">
+          <div key={data} class="row-container">
+            <p class="data-element data-column">{data.key}</p>
+            <p class="data-element data-value" if:false={data.showLink}>{data.value}</p>
+            <button if:true={data.showLink} class=" edit-link data-element data-value slds-button slds-button_natural slds-float_left back-btn" onclick={handleRowAction} data-index ={index}>{data.value}</button>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</template>

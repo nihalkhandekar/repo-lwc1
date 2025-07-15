@@ -1,0 +1,25 @@
+<template>
+  <c-modal open={showPopup} onmodalclose={closePopup} size={modalSize}>
+    <div slot="header" class="headerModal slds-size_1-of-1 slds-text-align_left">
+      <h6>{label.Confirm_Details}</h6>
+    </div>
+    <div slot="body">
+      <p class="large">{label.Confirm_Payment_Continue}</p>
+      <div class="payment-table">
+
+        <c-generic-table tablecolumns={tablecolumns} tabledata={tabledata} customtable></c-generic-table>
+      </div>
+    </div>
+    <div slot="actions" class="modal-footer slds-grid slds-m-vertical_small slds-size_1-of-1 sldsActionButtons">
+      <div class="slds-col button-wrapper slds-order_2">
+        <button class="slds-button primaryBtnSmall slds-float_right higher" onclick={handleModalConfirm}>
+          {label.Confirm}
+        </button>
+      </div>
+      <div class="slds-col slds-order_1">
+        <button class="slds-button slds-button_natural slds-float_left back-btn natural-button"
+          onclick={closePopup}>{label.CancelButton}</button>
+      </div>
+    </div>
+  </c-modal>
+</template>

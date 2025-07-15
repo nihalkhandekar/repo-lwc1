@@ -1,0 +1,27 @@
+.owner-fields {
+    margin-bottom: 24px;
+}
+
+.link-btn {
+    text-decoration: underline;
+    color: #09538B;
+    margin-top: 18px
+}
+
+.slds-grid {
+    flex-direction: column;
+}
+
+@media only screen and (min-width: 1023px) {
+    .owner-fields {
+        margin-bottom: 32px;
+    }
+
+    .slds-grid {
+        flex-direction: row;
+    }
+
+    .chng-btn {
+        margin-top: 16px;
+    }
+}

@@ -1,0 +1,139 @@
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+    </lightning-spinner>
+  </template>
+  <div class="review-section-container lien-summary-screen">
+    <div class="slds-size_1-of-1 reviewSection">
+      <div class="slds-large-size_1-of-2 slds-size_1-of-1">
+        <div class="title">
+          <h1>{label.ReviewPage_BRS_heading}</h1>
+        </div>
+        <div class="sub-title">
+          <h5>{label.brs_checkMistakesLabel}</h5>
+        </div>
+      </div>
+      <div class="slds-large-size_1-of-1 checkListContent">
+        <div class="slds-large-size_7-of-12 slds-size_1-of-1">
+          <div class="list-heading">
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{label.ReviewPage_BRS_listItem1}</p>
+            </div>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{label.Annual_Checklist2}</p>
+            </div>
+          </div>
+          <div class="slds-large-size_8-of-12 slds-size_1-of-1 list">
+            <div class="list-icon">
+              <div class="inner-circle"></div>
+            </div>
+            <div class="list-content">
+              <p class="small">{label.ReviewPage_BRS_listItem3}</p>
+            </div>
+          </div>
+        </div>
+        <div class="slds-large-size_4-of-12">
+          <img src={reviewCheckList} class="reviewCheckList" title="reviewCheckList" aria-hidden="true"
+            role="presentation" />
+        </div>
+      </div>
+    </div>
+    <template for:each={mapToShow} for:item="section">
+      <div key={section} class="slds-grid slds-wrap section sub-sections">
+        <div key={section} class="slds-large-size_1-of-1 slds-size_1-of-1 section-heading">
+          <div key={section} class="slds-large-size_9-of-12 slds-size_5-of-6 mobile-specific section-title">
+            <h5>{section.title}</h5>
+          </div>
+        </div>
+        <div class="slds-large-size_12-of-12 slds-size_1-of-1 question-wrapper">
+          <template for:each={section.value} for:item="question">
+            <div class="slds-size_1-of-1 slds-grid slds-wrap section-row border" key={question.id}>
+              <div key={question.questionLabel}
+                class="slds-size_1-of-12 question section-icon-mobile  question-container">
+                <img src={question.fieldimage} class="slds-m-right_small" role="presentation" aria-hidden="true" />
+              </div>
+              <div key={question.id} class="question-container slds-large-size_12-of-12 slds-size_11-of-12">
+                <div key={question.questionLabel} class="slds-large-size_5-of-12 slds-size_1-of-1 question">
+                  <img src={question.fieldimage} class="section-icon-desktop slds-m-right_small" role="presentation"
+                    aria-hidden="true" />
+                  <span class="largeBold">{question.questionLabel}</span>
+                </div>
+                <div key={question.questionLabel} class="slds-large-size_1-of-12"></div>
+                <div if:false={question.isList} key={question.responseText}
+                  class="slds-large-size_4-of-12 slds-size_5-of-6 answer">
+                  <p class="small question-description" if:false={question.showDocument}>
+                    <lightning-formatted-rich-text value={question.responseText}></lightning-formatted-rich-text>
+                  </p>
+                  <p class="small question-description" if:true={question.showDocument}>
+                    <button class="edit-link slds-button slds-button_natural natural-button slds-text-align_left"
+                      data-id={question.documentId} onclick={previewDocument}>
+                      {question.responseText}
+                    </button>
+                  </p>
+                </div>
+                <div class="slds-large-size_2-of-12 editContainer">
+                  <div class="slds-large-size_6-of-12 button-wrapper"
+                    if:false={question.hideEditButton}>
+                    <button class="edit-link slds-button slds-button_natural natural-button" key={question.id}
+                      data-id={question.questionLabel} id={question.questionLabel} data-value={question.questionLabel}
+                      data-name={question.questionLabel} onclick={handleQuestionEdit}>
+                      {label.edit}
+                      <img src={editLinkIcon} class="slds-m-left_small icon" role="presentation" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div data-id={question.id} key={question.id} class="slds-hide datatable-container">
+              <div class="slds-size_11-of-12 slds-large-size_12-of-12 mobile-table-layout"
+                if:true={question.showDataTable}>
+                <div class="slds-grid slds-wrap">
+                  <div key={question.id} class="slds-size_1-of-1 table-display">
+                    <c-generic-table tablecolumns={question.tablecolumns} tabledata={question.tabledata} customtable
+                      type={question.questionLabel}></c-generic-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+        <div class="slds-large-size_1-of-12 slds-size_1-of-6 mob"></div>
+      </div>
+    </template>
+  </div>
+  <template if:true={showPriceModal}>
+    <c-modal open={showPriceModal} onmodalclose={closePriceModal} size="">
+      <div slot="header" class="slds-size_1-of-1 popup-header slds-text-align_left">
+        <h6>{label.expedite_modal_header}</h6>
+      </div>
+      <div slot="body">
+        <p class="large margin-b-32">
+          {label.expedite_modal_description}
+        </p>
+      </div>
+      <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+        <button class="slds-button primaryBtn higher yes-button" onclick={gotoPaymentScreenWithExpeditePrice}>
+          {label.Yes}
+        </button>
+        <button class="slds-button secondary-btn higher no-button" onclick={gotoPaymentScreenWithOutExpeditePrice}>
+          {label.No}
+        </button>
+      </div>
+    </c-modal>
+  </template>
+  <c-brs_next-back-buttons nextlabel={label.BRS_Proceed_Payment} prevlabel={label.Back} onhandlenext={handleNext}
+    onhandleback={handleBack}>
+  </c-brs_next-back-buttons>
+</template>

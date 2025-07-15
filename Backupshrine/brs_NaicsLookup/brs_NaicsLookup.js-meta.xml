@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>48.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="question" type="string" label="Question" description=""/>
+            <property name="selectedcategory" type="string" label="selectedcategory" description=""/>
+            <property name="required" type="boolean" label="Required"/>
+            <property name="errorMessage" type="string" label="Error Message"/>
+            <property name="isMaintenance" type="Boolean" label="isMaintenance"/>
+            <property name="isDataNotModified" type="Boolean" label="isDataModified"/>
+            <property name="SelectedcategoryOld" type="string" label="SelectedcategoryOld" description=""/>
+            <!-- please do not push the below property to higher env -Priyanka --><property name="showSummaryButton" type="Boolean" label="Show Summary Button" description=""/>
+            <property name="goToSummary" type="Boolean" label="Go to summary page" description=""/>
+            <property name="isDataModified" type="string" label="isDataModified"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

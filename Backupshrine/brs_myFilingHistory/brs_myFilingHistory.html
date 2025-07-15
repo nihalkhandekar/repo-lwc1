@@ -1,0 +1,226 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <div class="mainContainer">
+        <div class="dashboard-filter desktop-show">
+            <c-brs_advance-search-filters onfilterselection={handleFilterSelection} filters={filtersArray}
+                onclearfilter={resetFilters} onshowall={showAllFilters}>
+            </c-brs_advance-search-filters>
+        </div>
+        <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-large-size_9-of-12 slds-size_12-of-12">
+                <div class="breadcrumb-container">
+                    <c-brs_bread-crumb items={breadcrumbList} onbreadcrumbclick={handleBreadCrumbClick}>
+                    </c-brs_bread-crumb>
+                </div>
+                <div class="maincontent">
+                    <h4>{label.my_filings}</h4>
+                    <p class="filing-description">{label.filings_desc}</p>
+                    <div class="mobile-show mobile-scholarcontent">
+                        <c-brs_header scholar-content={scholarContent} show-scholar-only></c-brs_header>
+                    </div>
+                    <div class="mobile-show">
+                        <c-brs_advance-search-filters onfilterselection={handleFilterSelection} filters={filtersArray}
+                            onclearfilter={resetFilters} onshowall={showAllFilters}>
+                        </c-brs_advance-search-filters>
+                    </div>
+                    <div class="sorting-div">
+                        <c-brs_sort-drop-down options={sortOptions} onsortselected={handleSort}
+                            selected-sort={selectedSort}>
+                        </c-brs_sort-drop-down>
+                    </div>
+                    <template if:true={resultspage}>
+                        <div if:true={hasResults}>
+                            <template if:true={filingsList.length}>
+                                <template for:each={updatedData} for:item="filing" for:index="index">
+                                    <div key={filing.workOrderNum} class="member-card">
+                                        <c-brs_simple-card theme="theme1" has-footer={filing.showLinks}>
+                                            <div slot="header">
+                                                <div class="slds-grid slds-wrap slds-gutters">
+                                                    <div class="slds-col slds-size_12-of-12">
+                                                        <div class="slds-grid slds-wrap slds-gutters">
+                                                            <div
+                                                                class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 workorder-div">
+                                                                <p class="member-label smallBold grey-text">
+                                                                    {filing.workOrderNum}
+                                                                </p>
+                                                            </div>
+                                                            <div
+                                                                class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 status-div">
+                                                                <div class="status-inner-div">
+                                                                    <c-brs_badges class-name={filing.badgeClassName}
+                                                                        text={filing.Status}>
+                                                                    </c-brs_badges>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                                                        <h5 class="member-label">{filing.displayName}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-gutters">
+                                                    <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                                                        <p class="small member-date grey-text bold">
+                                                            {label.ChecklistPage_headerStaticText}:
+                                                            {filing.createdDate}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="slds-grid slds-wrap slds-gutters"
+                                                    if:false={filing.isViewCertificate}>
+                                                    <template if:false={filing.isCopyRequest}>
+                                                        <div
+                                                            class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                                                            <p class="small grey-text">{label.filing_type}</p>
+                                                            <p class="small bold">{filing.filingOrCertType}</p>
+                                                        </div>
+                                                        <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 right-container"
+                                                            if:true={filing.filingDate}>
+                                                            <p class="small grey-text">{label.filing_date}</p>
+                                                            <p class="small bold">{filing.filingDate}</p>
+                                                        </div>
+                                                    </template>
+                                                    <template if:true={filing.isCopyRequest}>
+                                                        <div
+                                                            class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                                                            <p class="small grey-text">{label.Copy_type}</p>
+                                                            <p class="small bold">{filing.filingOrCertType}</p>
+                                                        </div>
+                                                        <div
+                                                            class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 right-container">
+                                                            <p class="small grey-text">{label.Certificate_no}</p>
+                                                            <p class="small bold">{filing.certNum}</p>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                <div class="slds-grid slds-wrap slds-gutters"
+                                                    if:true={filing.isViewCertificate}>
+                                                    <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                                                        <p class="small grey-text" if:false={filing.isCopyRequest}>{label.BRS_Certificate_Type}</p>
+                                                        <p class="small grey-text" if:true={filing.isCopyRequest}>{label.Copy_type}</p>
+                                                        <p class="small bold">{filing.filingOrCertType}</p>
+                                                    </div>
+                                                    <div
+                                                        class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 right-container">
+                                                        <p class="small grey-text">{label.Certificate_no}</p>
+                                                        <p class="small bold">{filing.certNum}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div slot="footer" class={filing.footerClassName}>
+                                                <template if:true={filing.isAcceptanceNotice}>
+                                                    <button
+                                                        class="natural-button-with-icon slds-button slds-button_natural"
+                                                        onclick={viewAcceptanceNotice} data-id={index}>
+                                                        <img src={viewIcon} alt="" class="icon" />
+                                                        <span>{label.View_acceptance_notice}</span>
+                                                    </button>
+                                                    <button
+                                                        class="natural-button-with-icon slds-button slds-button_natural"
+                                                        onclick={viewFiling} data-id={index}>
+                                                        <img src={viewIcon} alt="" class="icon" />
+                                                        <span
+                                                            if:true={filing.isRequestForInfo}>{label.View_information_request}</span>
+                                                        <span
+                                                            if:false={filing.isRequestForInfo}>{label.View_filing}</span>
+                                                    </button>
+                                                </template>
+                                                <template if:true={filing.isRejectionNotice}>
+                                                    <button
+                                                        class="natural-button-with-icon slds-button slds-button_natural"
+                                                        onclick={viewRejectioneNotice} data-id={index}>
+                                                        <img src={viewIcon} alt="" class="icon" />
+                                                        <span>{label.View_rejection_notice}</span>
+                                                    </button>
+                                                    <button
+                                                        class="slds-button natural-button-with-icon slds-float_right"
+                                                        onclick={continueOrResubmitFiling} data-id={index}
+                                                        if:true={filing.isResubmit}>
+                                                        {label.Resubmit_filing}
+                                                        <img src={arrowForward} class="rightIcon" alt="rightIcon"
+                                                            role="presentation" />
+                                                    </button>
+                                                </template>
+                                                <button class="natural-button-with-icon slds-button slds-button_natural"
+                                                    onclick={viewCertificate} data-id={index}
+                                                    if:true={filing.isViewCertificate}>
+                                                    <img src={viewIcon} alt="" class="icon" />
+                                                    <span>{label.View_certificate}</span>
+                                                </button>
+                                                <button class="natural-button-with-icon slds-button slds-button_natural"
+                                                    onclick={viewReport} data-id={index} if:true={filing.isViewReport}>
+                                                    <img src={viewIcon} alt="" class="icon" />
+                                                    <span>{label.View_report}</span>
+                                                </button>
+                                                <button class="natural-button-with-icon slds-button slds-button_natural"
+                                                    onclick={openDeleteModal} if:true={filing.isDeleteable}
+                                                    data-id={index}>
+                                                    <img src={deleteIcon} alt="" class="icon" />
+                                                    <span>Remove</span>
+                                                </button>
+                                                <div class="right-section">
+                                                    <button
+                                                        class="slds-button natural-button-with-icon slds-float_right"
+                                                        onclick={continueOrResubmitFiling}
+                                                        if:true={filing.isContinueFiling} data-id={index}>
+                                                        {label.Continue_Filing}
+                                                        <img src={arrowForward} class="rightIcon" alt="rightIcon"
+                                                            role="presentation" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </c-brs_simple-card>
+                                    </div>
+                                </template>
+                                <div class="pagination-container">
+                                    <c-generic-data-table generickey="id" genericdata={filingsList}
+                                        class="mydatatable slds-table_striped" generichidecheckbox="false"
+                                        no-of-records-per-page='10' button-limit='4'
+                                        onpaginationchange={updatePaginatedData} current-page={pageNo}>
+                                    </c-generic-data-table>
+                                </div>
+                            </template>
+                            <div if:false={filingsList.length}>
+                                <c-brs_no-data-card no-data-msg={label.narrow_your_filters}></c-brs_no-data-card>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-col slds-large-size_2-of-12 desktop-show scholarcontent">
+                <c-brs_link_help-text scholar-content={scholarContent}></c-brs_link_help-text>
+            </div>
+        </div>
+    </div>
+
+    <c-modal open={showDeleteModal} onmodalclose={closeDeleteModal} size={modalSize} theme="theme1">
+        <div slot="header" style="text-align:left" class="slds-size_1-of-1 popup-header">
+            <h6>{label.remove_this_filing}</h6>
+        </div>
+        <div slot="body" class="slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+            <p class="largeBold">{deletableFiling.displayName}</p>
+            <p class="smallerBold grey-text second-text">{deletableFiling.filingOrCertType}</p>
+            <p class="smallerBold grey-text third-text">
+                {label.ChecklistPage_headerStaticText}:&nbsp;{deletableFiling.createdDate}</p>
+            <div class="warningBlock slds-m-top_small slds-m-bottom_large">
+                <img src={warningIcon} class="warning-icon" alt="" />
+                <p class="small grey-text bold">{label.Removing_this_filing_cannot_be_undone}</p>
+            </div>
+        </div>
+        <div slot="actions" class="modal-footer slds-grid slds-m-vertical_small slds-size_1-of-1">
+            <button class="slds-button primaryBtnSmall slds-float_right yes-button" onclick={handleDelete}>
+                {label.AgentYes}
+            </button>
+            <div class="no-button">
+                <button class="slds-button secondary-btn higher slds-float_left"
+                    onclick={closeDeleteModal}>{label.AgentNo}</button>
+            </div>
+        </div>
+    </c-modal>
+</template>

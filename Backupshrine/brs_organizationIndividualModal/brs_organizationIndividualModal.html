@@ -1,0 +1,263 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={labels.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <template if:true={addOrEditPopUp}>
+        <section role="dialog" tabindex="-1" aria-label="dialog" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content" class="slds-modal slds-fade-in-open slds-modal_small page-scroll-popup">
+            <div class="slds-modal__container">
+                <!-- First Screen Starts Here -->
+                <template if:true={showFirstScreen}>
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="title">{labels.Add_an} {memberType}</p>
+                                <p class="desc">{labels.you_can_add_more_than_one} {memberType} {labels.to_the_lien}</p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label role="button" aria-label={labels.modal_close} tabindex="0" class="closePopup slds-float_right"
+                                    onclick={closeMemberModal} onkeypress={handleAddMemberModalClose}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body" id="modal-content">
+                        <p class="question-heading">
+                            {labels.is_the} {memberType} {labels.an_organization_or_an_individual}
+                        </p>
+                        <c-generic-radio_brs name="member-options" radio-options={memberOptions}
+                            onctbosdatachange={onRadioCheck} answer={memberDetails.type__c} has-error={showTypeError}>
+                        </c-generic-radio_brs>
+                        <p class="error-text" if:true={showTypeError}>
+                            {labels.UCC_Flow_Select_Lien} {memberType}
+                            {labels.UCC_Flow_Select_Lien_Type}
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col">
+                                <button class="slds-button_stretch primaryBtn higher slds-button slds-button_brand"
+                                    onclick={gotoIndividualOrOrganization}>{labels.Next}
+                                    <img src={chevronRightWhite} class="rightIcon" alt="" />
+                                </button>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+                <!-- First Screen Ends Here -->
+
+                <!-- Second Screen Starts Here -->
+                <template if:true={showSecondScreen}>
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <template if:false={isEdit}>
+                                    <p class="title"> {labels.Add_an} {memberDetails.type__c} {labels.as_an_label}
+                                        {memberType}
+                                    </p>
+                                    <p class="desc">{labels.you_can_add_more_than_one} {memberType} {labels.to_the_lien}
+                                    </p>
+                                </template>
+                                <p class="title" if:true={isEdit}>{labels.edit_Header} {editHeaderName}
+                                </p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label role="button" aria-label={labels.modal_close} tabindex="0" class="closePopup slds-float_right"
+                                    onclick={closeMemberModal} onkeypress={handleAddMemberModalClose}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body">
+                        <template if:true={isOrganization}>
+                            <p class="question-heading" if:false={isEdit}>{labels.organizations} {labels.Information}
+                            </p>
+                            <p class="question-heading margin-top-space" if:true={isEdit}>{labels.organizations}
+                                {labels.Information}</p>
+                            <div class="slds-grid slds-gutters slds-wrap form-row">
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_4-of-12 formCol inputForm">
+                                    <lightning-input class="member-input" label={labels.organizations_name} type="text"
+                                        data-id="Org_Name__c" value={memberDetails.Org_Name__c} max-length="255" required
+                                        message-when-value-missing={labels.NameMandatory} onchange={onInputChange} onblur={validateInputs}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <p class="question-heading address-label">{labels.location}</p>
+                        </template>
+
+                        <template if:false={isOrganization}>
+                            <p class="question-heading" if:false={isEdit}>{labels.individuals} {labels.Name}</p>
+                            <p class="question-heading margin-top-space" if:true={isEdit}>{labels.individuals}
+                                {labels.Name}</p>
+                            <div class="slds-grid slds-gutters slds-wrap form-row">
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                    <lightning-input class="member-input" type="text" label={labels.surNameLabel}
+                                        data-id="Individual_SurName__c" maxlength="80" required
+                                        message-when-value-missing={labels.Surname_is_mandatory}
+                                        value={memberDetails.Individual_SurName__c} onchange={onInputChange}
+                                        onblur={validateInputs}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                    <lightning-input type="text" label={labels.firstNameLabel}
+                                        data-id="Individual_First_Name__c" maxlength="80"
+                                        value={memberDetails.Individual_First_Name__c} onchange={onInputChange} onblur={onInputBlur}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                    <lightning-input type="text" label={labels.middleNameLabel}
+                                        data-id="Individual_Middle_Name__c" maxlength="80"
+                                        value={memberDetails.Individual_Middle_Name__c} onchange={onInputChange} onblur={onInputBlur}>
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 formCol inputForm">
+                                    <lightning-input type="text" label={labels.suffixLabel} data-id="Suffix__c"
+                                        maxlength="80" value={memberDetails.Suffix__c} onchange={onInputChange} onblur={onInputBlur}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <p class="question-heading address-label">{labels.individuals} {labels.Label_Address}</p>
+                        </template>
+
+                        <c-brs_address address-type={getAddressType} can-be-outside-us source={source}
+                            class="addressFields" unitlabel="Unit/Apt" autocomplete
+                            set-retained-address={addressFields} accept-po></c-brs_address>
+
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap modal-footer-section">
+                            <div class="slds-col slds-order_2">
+                                <button class="slds-button primaryBtn higher slds-button_brand"
+                                    onclick={gotoSecuredPartiesScreen}>{labels.Next}
+                                    <img src={chevronRightWhite} class="rightIcon" alt="" />
+                                </button>
+                            </div>
+                            <div class="slds-col slds-order_1" if:false={isEdit}>
+                                <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                    onclick={backToRadioOptionsScreen}>{labels.Back}</button>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+                <!-- Second Screen Ends Here -->
+
+                <!-- Third Screen Starts Here -->
+                <template if:true={showThirdScreen}>
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="title" if:true={isAssignee}>{labels.Select_Assignors}</p>
+                                <p class="title" if:false={isAssignee}>{labels.select_an_assignee}</p>
+
+                                <p class="desc" if:true={isAssignee}>
+                                    <template if:true={isJudgment}>
+                                        {labels.select_Judgment_Creditors_As_Assignee}
+                                    </template>
+                                    <template if:false={isJudgment}>
+                                        {labels.select_Secured_Party_As_Assignee}
+                                    </template>
+                                </p>
+                                <p class="desc" if:false={isAssignee}>{labels.Select_SecuredParty}</p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label role="button" aria-label={labels.modal_close} tabindex="0" class="closePopup slds-float_right"
+                                    onclick={closeMemberModal} onkeypress={handleAddMemberModalClose}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body">
+                        <p class="question-heading" if:true={isAssignee}>
+                            <template if:true={isJudgment}>
+                                {labels.judgment_Creditor_s_Assignor}
+                            </template>
+                            <template if:false={isJudgment}>
+                                {labels.secured_party_Assignor}
+                            </template>
+                        </p>
+                        <p class="question-heading" if:false={isAssignee}>
+                            {labels.Secured_Party_Assignee_Question}
+                        </p>
+                        <c-generic-multi-select_brs listdata={allSecuredParties} show-error={showSecuredPartyError}
+                            oncheckboxinputselection={onSecuredPartySelect}
+                            onuncheckboxinputselection={onSecuredPartyDeSelect} name="theme3"
+                            value={selectedSecuredParties} is-secured-party>
+                        </c-generic-multi-select_brs>
+                        <p class="error-text" if:true={showSecuredPartyError}>
+                            <template if:true={isJudgment}>
+                                {labels.please_select_judgment_creditor}
+                            </template>
+                            <template if:false={isJudgment}>
+                                {labels.please_select_secured_parties}
+                            </template>
+                        </p>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap modal-footer-section">
+                            <div class="slds-col slds-order_2">
+                                <button class="slds-button primaryBtn higher slds-button_brand"
+                                    onclick={handleSubmit}>{labels.Confirm}
+                                </button>
+                            </div>
+                            <div class="slds-col slds-order_1">
+                                <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                    onclick={backAddressScreen}>{labels.Back}</button>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+                <!-- Third Screen Ends Here -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+
+    <template if:true={showConfirmationPopUp}>
+        <c-modal open={showConfirmationPopUp} onmodalclose={closeMemberModal} size="">
+            <div slot="header" class="headerModal slds-size_1-of-1">
+                <h6 class="confirm-header">
+                    {labels.Confirm_you_want_to_add} {memberType}?
+                </h6>
+            </div>
+            <div slot="body" class="slds-m-bottom_large">
+                <p class="large confirmation-label" if:true={isJudgment}>
+                    {labels.assignee_match_judgment_creditors}
+                </p>
+                <p class="large confirmation-label" if:false={isJudgment}>
+                    {confirmationDesc}
+                </p>
+                <c-brs_simple-card>
+                    <div slot="header">
+                        <div class="slds-grid slds-wrap slds-gutters">
+                            <div class="slds-col slds-size_12-of-12">
+                                <p class="member-label smallBold grey-text">{labels.Name}</p>
+                                <h6 class="member-name">{matchedSecuredParty.name}</h6>
+                                <p class="location-address small">
+                                    <img src={locationIcon} alt="" />
+                                    <span>
+                                        {matchedSecuredParty.fullAddress}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </c-brs_simple-card>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+                <div class="buttons-wrapper">
+                    <button onclick={closeMemberModal} class="slds-button natural-button slds-button_natural">
+                        {labels.Cancel_Label}
+                    </button>
+                    <button onclick={createOrUpdateMember} class="slds-button primaryBtn higher">
+                        {labels.Confirm}
+                    </button>
+                </div>
+            </div>
+        </c-modal>
+    </template>
+</template>

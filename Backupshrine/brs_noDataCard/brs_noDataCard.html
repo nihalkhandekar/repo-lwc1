@@ -1,0 +1,38 @@
+<template>
+    <div class="slds-p-around_xx-large noDataFound" if:true={defaultTheme}>
+        <img src={noDataImg} alt="">
+        <div class="noDataFoundText">
+            <p class="largeBold">{noDataMsg}</p>
+        </div>
+    </div>
+    <template if:true={noResultsTheme1}>
+        <div class="theme1">
+            <div class="header-content" if:true={showHeading}>
+                <h4>{noResultsHeader}</h4>
+                <p>{noResultsSubHeader}</p>
+            </div>
+            <div class="slds-p-around_x-large noBizFound">
+                <img src={noDataImg} alt="searchIcon">
+                <div class="noBizFoundText">
+                    <p class="largeBold">{noResultsFoundContent1}</p>
+                    <p class="large">{noResultsFoundContent2}</p>
+                </div>
+            </div>
+        </div>
+    </template>
+     <template if:true={noResultsTheme2}>
+         <div class="theme2">
+            <div class="header-content" if:true={showHeading}>
+                <h4>{noResultsHeader}</h4>
+                <p>{noResultsSubHeader}</p>
+            </div>
+            <div class="slds-p-around_x-large noBizFound">
+                <img src={noDataImg} alt="searchIcon">
+                <div class="noBizFoundText">
+                    <p class="largeBold">{noResultsFoundContent1}</p>
+                    <p class="large">{noResultsFoundContent2}</p>
+                </div>
+            </div>
+         </div>
+    </template>
+</template>

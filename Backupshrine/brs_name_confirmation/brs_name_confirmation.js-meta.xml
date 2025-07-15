@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="emailId" type="String" label="Email Id" description=""/>
+            <property name="phoneNumber" type="String" label="Phone Number" description=""/>
+            <property name="dueDate" type="Date" label="Due Date" description=""/>
+            <property name="dueDateInfo" type="String" label="Due Date of Report" description=""/>
+            <property name="changeAgentFlag" type="Boolean" label="Change Agent Flag" description=""/>
+            <property name="successMessage" type="String" label="Success Message" description=""/>
+            <property name="accountId" type="String" label="Account Id" description=""/>
+            <property name="firstReportInfo" type="String" label="First or Annual Check" description=""/>
+            <property name="isMaintainanceFlowOrNot" type="Boolean" label="Is Maintainance Flow Or Not" description=""/>
+            <property name="pin" type="String" label="pin" description=""/>
+            <property name="filingRecord" label="Business filing" type="@salesforce/schema/Business_Filing__c"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

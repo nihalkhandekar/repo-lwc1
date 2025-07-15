@@ -1,0 +1,167 @@
+.mainContainer {
+    padding: 0 20px;
+    margin-top: 0px;
+  }
+.member-label{
+    margin-bottom: 8px;
+}
+
+.member-date{
+    margin-bottom: 20px;
+}
+
+.bold{
+    font-weight: bold;
+}
+.member-card {
+    margin-bottom: 24px;
+}
+
+.member-container .member-card:last-child{
+    margin-bottom: 0;
+}
+.filing-description{
+    font-family: KarlaBold;
+    font-style: normal;
+    color: #757575;
+    font-size: 20px;
+    line-height: 30px;
+    padding-top: 16px;
+    padding-bottom: 32px;
+}
+.sorting-div{
+    display: flex;
+    padding-bottom: 32px;
+    padding-top: 32px;
+}
+.workorder-div{
+    order: 2;
+}
+.status-div{
+    order: 1;
+    padding-bottom: 20px;
+}
+.footer-container-one{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.mobile-scholarcontent{
+    margin-bottom: 32px;
+  }
+.breadcrumb-container{
+    margin-top: 28px;
+}
+.rightIcon{
+    margin-left: 12px;
+    width: 8px;
+}
+.pagination-container{
+    padding-bottom: 22px;
+}
+.right-container{
+    padding-top: 30px;
+}
+.warningBlock {
+    display: flex;
+    margin-top: 24px;
+  }
+.warning-icon{
+    margin-right: 10px;
+}
+.popup-header{
+    padding-top: 16px;
+}
+.no-button{
+    margin-left: 24px;
+}
+
+p.second-text,
+p.third-text{
+    margin-top: 4px;
+}
+
+.footer-container-two .right-section .slds-float_right{
+    margin-top: -16px;
+}
+
+@media only screen and (min-width: 1024px) {
+    .status-inner-div{
+        float: right;
+    }
+    .dashboard-filter{
+        min-width: 200px;
+        padding-top: 60px;
+        padding-right: 30px;
+    }
+    .maincontent{
+        padding-top: 48px;
+    }
+    .scholarcontent{
+        padding-top: 60px;
+    }
+    .mainContainer {
+        max-width: 1440px;
+        width: auto;
+        display: flex;
+        background-color: #f7f9fa;
+        margin: auto;
+        padding-top: 32px;
+    }
+    .filing-description{
+        font-size: 22px;
+        line-height: 28px; 
+        padding-bottom: 44px;
+    }
+    .sorting-div{
+        padding-top: 0px;
+    }
+    .continue-div{
+        display: flex;
+        align-items: flex-end;
+    }
+    .workorder-div{
+        order: 1;
+    }
+    .status-div{
+        order: 2;
+        padding-bottom: 0px;
+    }
+    .footer-container-one{
+        flex-direction: initial;
+        align-items: unset;
+    }
+    .breadcrumb-container{
+        margin-top: 0px;
+    }
+    .pagination-container{
+        padding-bottom: 108px;
+    }
+    .right-container{
+        padding-top: 0px;
+    }
+    .right-section{
+        margin-left: auto;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+
+    .member-date {
+        margin-bottom: 25px;
+    }
+
+    .no-button{
+        margin-left: 8px;
+        width: 100%;
+    }
+
+    p.second-text{
+        margin-top: 2px;
+    }
+    
+    p.third-text{
+        margin-top: 8px;
+    }
+
+}

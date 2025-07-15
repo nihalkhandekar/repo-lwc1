@@ -1,0 +1,268 @@
+<!--*********************************************************************************************
+ * NAME:  brs_QuestionInputMultiple.html
+ * DESCRIPTION: Renders a single question and recursively iterates all the child questions 
+ *
+ * @AUTHOR: Piyush Bajoria
+ * @DATE: 23/10/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+ * Piyush Bajoria                     23/10/2020                         Created the first version by cloning QnA_QuestionInputMultiple
+ *
+*********************************************************************************************-->
+<template>
+    <!--Parent Question block-->
+    <div if:true={questionlist}>
+   
+      <div class={flowwrapper}>
+        <div if:true={spinner}>{label.loadingText}...</div>
+        <lightning-layout class="align slds-wrap">
+          <lightning-layout-item
+            class="slds-medium-size_12-of-12 slds-large-size_7-of-12 questionContainer"
+          >
+          <template
+              for:each={_allquestionlist}
+              for:item="question"
+              for:index="ind">
+             
+              <div if:true={question.visible} key ={question.id}>
+           
+              <lightning-formatted-rich-text 
+                value={question.questionBody}
+                class="Question"
+              ></lightning-formatted-rich-text>
+            
+            <lightning-layout-item class="QuestionInput" key ={question.id}>
+              <!--TODO: Generate component dynamically if there too many types-->
+              
+              <div  key={question.id} if:true={question.isRequired}>
+                <div if:true={question.showRadioGroup} key={question.id}> 
+                  <div class="radio-option" key={question.showRadioName}>
+                    <c-generic-radio-input
+                      qid={question.showRadioName}
+                      radio-options={question.options}
+                      name={question.id}
+                      isfrommultiplequestion=true
+                      answer={question.responseText}
+                      required={question.isRequired}
+                      question={question}
+                     
+                      onctbosmultidatachange={handleRadioClick}
+                    ></c-generic-radio-input>
+                  </div>
+                </div>
+                <div if:true={question.showCheckBox}>
+                  <c-generic-multi-select
+                    list-data={question.options}
+                    isfrommultiplequestion=true
+                    name={question.id}
+                    question={question}
+                    value={question.multiselectedOptions}
+                    required={question.isRequired}
+                    oncheckboxinputselection={handlecheckboxResult}
+                  ></c-generic-multi-select>
+                </div>
+                <lightning-combobox
+                  if:true={question.showComboBox}
+                  placeholder="Choose Status"
+                  value={question.responseText}
+                  onchange={onAnswerChange}
+                  options={question.options}
+                  data-id={question.json}
+                  readonly={readonly}
+          
+                  variant="label-hidden"
+                  required
+                >
+                </lightning-combobox>
+                <lightning-input
+                data-id={question.json}
+                  type={question.datatype}
+                  if:true={question.showInput}
+                  variant="label-hidden"
+                  value={question.responseText}
+                  required
+                 
+                  onblur={checkAnswerValidity}
+                  readonly={readonly}
+                  class="text slds-icon_container"
+                  
+                  max-length="100"
+                >
+                </lightning-input>
+  
+                <div if:true={question.showInput} class="inputCharLimit">
+                  <span if:true={showCharLimit}> {inputCharLimit}</span>
+                </div>
+                <!-- Placeholder if LWC is selected as an option-->
+                <div if:true={question.showLWC}>
+
+                </div>
+                <!-- Placeholder if LWC is selected as an option-->
+                <lightning-dual-listbox
+                  name="quesMultiSelect"
+                  if:true={question.showMultiSelect}
+                  value={answer}
+                  source-label="Available"
+                  selected-label="Selected"
+                  options={question.options}
+                  min="1"
+                  onchange={onAnswerChange}
+                >
+                </lightning-dual-listbox>
+                <div if:true={question.showInputSearch}>
+                  <c-generic-look-up
+                    list-items={question.picklistOptions}
+                    isfrommultiplequestion=true
+                    question={question}
+                    onsearchinputselection={handleSearchResult}
+                    onsearchinputremove={handleSearchResult}
+                    answer={question.responseText}
+                  ></c-generic-look-up>
+                </div>
+                <div if:true={question.showCategorySearchBrowse}>
+                  <c-registration-requirement
+                    selectedcategory={question.responseText}
+                    isfrommultiplequestion=true
+                    question={question}
+                    onselectedcategory={handleSelectedCategory}
+                  ></c-registration-requirement>
+                </div>
+              </div>
+  
+  
+              <!-- if question is not marked as required -->
+              <div if:false={question.isRequired} key={question.id}>
+                <div if:true={question.showSearchBrowse}>
+                  <c-business-service
+                    previousservice={question.responseText}
+                    onserviceselected={handleSelectedService}
+                  ></c-business-service>
+                </div>
+                <div if:true={question.showRadioGroup} class="radio-option">
+                  <c-generic-radio-input
+                    qid={question.showRadioName}
+                    value={question.responseText}
+                    radio-options={question.options}
+                    name={question.id}
+                    question={question}
+                    isfrommultiplequestion=true
+                    required={question.isRequired}
+                    onctbosmultidatachange={handleRadioClick}
+                  ></c-generic-radio-input>
+                </div>
+                <div if:true={question.showCheckBox}>
+                  <c-generic-multi-select
+  
+                    list-data={question.options}
+                    name={question.id}
+                    question={question}
+                    isfrommultiplequestion=true
+                    value={question.multiselectedOptions}
+                    required={question.isRequired}
+                    oncheckboxinputselection={handlecheckboxResult}
+                  ></c-generic-multi-select>
+                </div>
+                <lightning-combobox
+                data-id={question.json}
+                  if:true={question.showComboBox}
+                  placeholder="Choose Status"
+                  value={question.responseText}
+                  onchange={onAnswerChange}
+                  options={question.options}
+                  readonly={readonly}
+                  variant="label-hidden"
+                >
+                </lightning-combobox>
+                <lightning-input
+                data-id={question.json}
+                  type={question.datatype}
+                  if:true={question.showInput}
+                  variant="label-hidden"
+                  value={question.responseText}
+                  label="Red"
+                  
+                  onblur={checkAnswerValidity}
+                  readonly={readonly}
+                  class="text"
+                  checked
+                >
+                </lightning-input>
+                <!-- Placeholder if LWC is selected as an option-->
+                <div if:true={question.showLWC}>
+
+                </div>
+                <!-- Placeholder if LWC is selected as an option-->
+                <lightning-dual-listbox
+                  name="quesMultiSelect"
+                  if:true={question.showMultiSelect}
+                  value={question.responseText}
+                  source-label="Available"
+                  selected-label="Selected"
+                  options={question.options}
+                  onchange={onAnswerChange}
+                >
+                </lightning-dual-listbox>
+  
+                <div if:true={question.showInputSearch}>
+                  <c-generic-look-up
+                    list-items={question.picklistOptions}
+                    search-place-holder={searchPlaceHolder}
+                    onsearchinputselection={handleSearchResult}
+                    onsearchinputremove={handleSearchResult}
+                    isfrommultiplequestion=true
+                    question={question}
+                    answer={question.responseText}
+                  ></c-generic-look-up>
+                </div>
+                <div if:true={question.showCategorySearchBrowse}>
+                  <c-registration-requirement
+                    selectedcategory={question.responseText}
+                    isfrommultiplequestion=true
+                    question={question}
+                    onselectedcategory={handleSelectedCategory}
+                  ></c-registration-requirement>
+                </div>
+              </div>
+              
+  
+  
+  
+            </lightning-layout-item>
+         
+     
+  </div>
+          </template>
+  
+          </lightning-layout-item>
+  
+  
+          <!-- New styling for helptext-->
+          <div
+            class="slds-medium-size_1-of-12 slds-large-size_1-of-12 emptyContainer"
+             ></div>
+          <lightning-layout-item
+            class="slds-medium-size_4-of-12 slds-large-size_4-of-12 helpTextContainer"
+          >
+           
+            <div class="helpTextSec">
+             
+                <div class="helpTextContent" if:true={helptextdetails}>
+                  <c-qn-a_-subsection-help-text
+                    helptextstatic={helptextdetails.subsectionHelpTextStatic}
+                    helptextlinklabel={helptextdetails.subsectionHelpTextLinkLabels}
+                    helptextlinkurls={helptextdetails.subsectionHelpTextLinkUrls}
+                    
+                  ></c-qn-a_-subsection-help-text>
+                </div>
+              
+             
+            </div>
+          </lightning-layout-item>
+        </lightning-layout>
+        <!--/div-->
+      </div>
+    </div>
+  </template>

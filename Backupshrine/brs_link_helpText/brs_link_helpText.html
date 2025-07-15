@@ -1,0 +1,23 @@
+<!--*********************************************************************************************
+ * NAME:  brs_link_helpText.html
+ * DESCRIPTION: Renders the right side helpText
+ *
+ * @AUTHOR: Sagarika Panda
+ * @DATE: 12/10/2020  
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Sagarika Panda                     12/10/2020                         Created the first version
+*********************************************************************************************-->
+<template>
+  <div class="realId-wrapper">
+    <div class="realId-image-wrapper slds-show_large">
+      <img src={helperImg} alt={label.need_help}>
+    </div>
+    <p class="realId-font slds-show_large" data-id='desc'>
+      <lightning-formatted-rich-text value={scholarContent} class="realId-font"></lightning-formatted-rich-text>
+    </p>
+  </div>
+</template>

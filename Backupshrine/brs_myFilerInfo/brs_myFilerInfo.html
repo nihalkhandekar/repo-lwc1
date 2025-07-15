@@ -1,0 +1,72 @@
+<template>
+    <!--Show if data has to be entered -->
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="slds-grid slds-wrap header-margin">
+        <div class="slds-col slds-size_12-of-12 slds-large-size_8-of-12">
+            <template if:true={showInfo}>
+                <c-brs_header heading-text={label.my_filer_info} scholar-content={scholarContent}></c-brs_header>
+                <div class="filer-card-details">
+                    <div class="inner-card">
+                        <div>
+                            <h6 class="name-member">{filerName}</h6>
+                        </div>
+                        <div>
+                            <p class="addressClass small">
+                                <img class="slds-m-bottom_xxx-small iconCls" src={locationIcon} alt="address"
+                                    aria-hidden="true" />
+                                <span>{fullAddress}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slds-large-size_12-of-12 slds-size_12-of-12 card-footer-btns">
+                        <div class="slds-grid slds-grid_align-spread">
+                            <div class="slds-col">
+                                <button class="natural-button-with-icon slds-button  slds-button_natural"
+                                    data-id={index} onclick={handleEdit}>
+                            <img src={editIcon} alt="" class="icon" />
+                            <span>{label.Edit}</span>
+                        </button>
+                    </div>
+<div class="slds-col">
+                                <button class="natural-button-with-icon slds-button  slds-button_natural"
+                                    data-id={index} onclick={showConfirmationDialog}>
+                                    <img src={removeIcon} alt="" class="icon" />
+                                    <span>{label.Remove}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <template if:false={showInfo}>
+                <c-brs_header heading-text={label.my_filer_info}
+                    sub-heading-text={label.my_filer_info_subheading}
+                    scholar-content={scholarContent}></c-brs_header>
+                <div class="slds-grid slds-wrap filer-name-block">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_6-of-12 inputForm">
+                        <lightning-input max-length=255 type="text" label={label.filer_name} onchange={onNameChange}
+                            value={filerName} onblur={onNameBlur}>
+                        </lightning-input>
+                    </div>
+                </div>
+                <h6 class="filer-address-heading">{label.filer_address}</h6>
+                <c-brs_address can-be-outside-us source={source} class="mailingAddressOrganisation"
+                    unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={filerAddressFields}
+                    onaddresschange={handleAddressChange} fieldreq={iaAddressRequired}>
+                </c-brs_address>
+                <div class="filer-btn">
+                    <button onclick={saveFilerInfo} class="slds-button primaryBtnSmall">
+                        {label.save}
+                    </button>
+                </div>
+            </template>
+        </div>
+        <div class="slds-col slds-large-size_2-of-12"></div>
+        <div class="slds-col slds-large-size_2-of-12 desktop-show scholarcontent">
+            <c-brs_link_help-text scholar-content={scholarContent}></c-brs_link_help-text>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,9 @@
+.gap{
+    margin-top: 48px;
+}
+
+@media only screen and (min-width: 1023px){
+    .gap{
+        margin-top: 56px;
+    }
+}

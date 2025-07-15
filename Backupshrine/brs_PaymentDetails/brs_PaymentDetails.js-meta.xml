@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="busType" label="FlowType" type="string"/>
+            <property name="feeAmt" label="feeAmt" type="string" default="0"/>
+            <property name="parentRecordId" label="Parent Record Id" type="string" default="0"/>
+            <property name="parentObjectName" label="Parent Object Name" type="string" default="0"/>
+            <property name="workorderRecord" label="Work Order" type="@salesforce/schema/Work_Order__c"/>
+            <property name="workorderId" label="Work Order Id" type="String"/>
+            <property name="customerId" label="Customer Id" type="string"/>
+            <property name="finalAmount" label="Final Amount" type="Integer"/>
+            <property name="balancededucted" label="Voucher Balance Deducted" type="Integer"/>
+            <property name="voucherId" label="Voucher Id" type="String"/>
+            <property name="showHistoryTable" label="Show Payment History" type="Boolean"/>
+			<property name="paymentAck" label="Payment Acknowledgement" type="Boolean"/>
+            <property name="selectedPaymentMethod" label="selected Payment Method" type="string"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
+            <property name="showHistoryTable" label="Show Payment History" type="Boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

@@ -1,0 +1,92 @@
+.landing-page .brs-container  {
+    background: none;
+    padding: 0px;
+  }
+  
+  .landing-page-banner {
+    background: var(--c-closeBusinessBg) no-repeat;
+    height: 145px;
+    background-size: cover;
+  }
+  
+  .landing-page-card {
+    background-color: #ffffff;
+    padding: 32px 20px;
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+  
+  .completion-time {
+    margin-top: 24px;
+    font-family: KarlaBold;
+    color: #757575;
+    margin-bottom: 24px;
+    text-transform : uppercase;
+  }
+  
+  .completion-time .time-icon {
+    width: 18px;
+    margin-right: 8px;
+  }
+  
+  .hr-line {
+    height: 3px;
+    opacity: 0.18;
+    background-color: #d8d8d8;
+    margin-bottom: 60px;
+    display: none;
+  }
+  
+  .small-heading {
+    color: #2d2c2c;
+  }
+  
+  .heading-margin{
+    margin-bottom: 32px;
+  }
+  
+  .para-text {
+    margin-bottom: 32px;
+    color: #2d2c2c;
+  }
+  .mobile-scholarcontent{
+    margin-top: 48px;
+    margin-bottom:32px;
+  }
+  
+  .revoke-text {
+    margin-bottom: 24px;
+  }
+  .desc-text-1 {
+    padding-top: 16px;
+  }
+  .biz_link{
+      text-decoration: underline;
+      color: #00528d;
+  }
+  @media only screen and (min-width: 1024px) {
+    .landing-page-banner {
+      height: 316px;
+    }
+  
+    .landing-page-card {
+      border-radius: 4px 4px 0 0;
+      box-shadow: 0 4px 8px 0 #e7e9f2;
+      padding: 68px 80px 48px 80px;
+      margin-top: -190px;
+      margin-bottom: 190px;
+    }
+  
+    .completion-time {
+      margin-top: 18px;
+      margin-bottom: 60px;
+    }
+    
+    .hr-line {
+      display: block;
+    }
+    .getStartedBtn{
+      width: 228px;
+      height:56px;
+    }
+  }

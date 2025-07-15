@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="flowname" label="Flow Name" type="string" />
+            <property name="accountrecord" label="Account" type="@salesforce/schema/Account" />
+            <property name="businessrecord" label="Account" type="@salesforce/schema/Business_Filing__c" />
+            <property name="businessFilingID" label="businessFilingID" type="string"/>
+            <property name="isExpedite" label="Selected Expedite" type="Boolean"/>
+            <property name="sectionedited" label="Sectiion Edited" type="string"/>
+            <property name="iseditclicked" label="Is Edit Clicked" type="Boolean"/>
+            <property name="showExpeditePopUp" label="show Expedite Pop Up" type="Boolean"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

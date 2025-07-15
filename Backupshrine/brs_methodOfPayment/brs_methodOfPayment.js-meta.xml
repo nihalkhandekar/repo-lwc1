@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>51.0</apiVersion>
+     <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="foreignInvRec" label="Foreign Inv Record" type="@salesforce/schema/Foreign_Investigation__c"/>
+            <property name="totalAmount" type="integer" label="Total Amount" description=""/>
+            <property name="noOfMonths" type="integer" label="Select number of months" description=""/>
+            <property name="selectedPayment" type="String" label="Method of Payment" description=""/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

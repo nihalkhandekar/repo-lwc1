@@ -1,0 +1,135 @@
+<template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Page is loading..."></lightning-spinner>
+    </div>
+    <div class="slds-grid slds-wrap headerWrapper headerMargin">
+        <div class="slds-size_1-of-1 slds-large-size_6-of-12 ">
+            <p class="large slds-m-bottom_small">{label.CurrentBalance}</p>
+            <h4>${currentBalance}*</h4>
+        </div>
+        <div class="slds-size_1-of-1 slds-large-size_6-of-12 ">
+            <div class="voucherWrapper">
+                <button class="slds-button slds-button_brand secondaryBtn"
+                    onclick={handleRedeemVoucher}>{label.RedeemVoucher}</button>
+                <template if:true={showHistoryTable}>
+                    <!--<p class="large slds-show_large"> <a href={label.ph_Gotissue_link}>{label.ph_Gotissue}</a></p>-->
+                </template>
+            </div>
+            <div class="smalldescription slds-m-top_small ">{label.BalanceRedeemtext}</div>
+            <template if:true={showHistoryTable}>
+                <p class="large slds-m-top_medium slds-hide_large"> <a href={label.ph_Gotissue_link}
+                        target="_blank">{label.ph_Gotissue}</a></p>
+            </template>
+
+        </div>
+    </div>
+    <template if:false={showHistoryTable}>
+        <div class="slds-grid slds-wrap">
+            <h3 class="slds-size_1-of-1 pageTitle">{label.PaymentDetails}</h3>
+            <h5 class="pageSubTitle">{label.PaymentAlmostFinished}</h5>
+            <div class="slds-size_1-of-1 slds-large-size_6-of-12 slds-grid slds-wrap paymentTable">
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3 slds-show_large">
+                    <p class="smallBold colName">{label.Transaction}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3 slds-show_large">
+                    <p class="smallBold colName">{label.Amount}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.profileCard_Filing_Fee}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${filingFeeAmount}</p>
+                </div>
+                <template if:true={showFranchiseTax}>
+                    <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                        <p class="large">{label.FRANCHISE_TAX}</p>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                        <p class="largeBold">${franchiseTax}</p>
+                    </div>
+                </template>
+                <template if:true={showExpeditedFees}>
+                    <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                        <p class="large">{label.ExpeditedFee}</p>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                        <p class="largeBold">${expeditedFees}</p>
+                    </div>
+                </template>
+                <hr />
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.TotalAmount}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${totalFee}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.Balancededucted}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">-${balancededucted}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.Balanceremaining}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${balanceremaining}</p>
+                </div>
+                <hr />
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <h6>{label.FinalAmount}</h6>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${finalAmount}</p>
+                </div>
+            </div>
+            <div class="slds-large-size_1-of-12"></div>
+            <div class="slds-size_1-of-1 slds-large-size_5-of-12 checkboxAcknowledgement">
+                <c-generic-multi-select list-data={paymentTerms} oncheckboxinputselection={onAcceptTerms}>
+                </c-generic-multi-select>
+                <p class="error-text pl-32" if:true={showErrorMsg}>{label.Termsandondition}</p>
+            </div>
+        </div>
+        <hr class="block-separator">
+        <!-- payment method selection block start-->
+        <h6 class="mb-32">{label.Select_a_payment_method}</h6>
+        <div class="theme3 theme5 theme4">
+            <c-generic-radio_brs data-id="radio" show-image radio-options={radioOptions} name="theme7"
+                answer={selectedPaymentMethod} onctbosdatachange={handleRadioSelect} show-error={hasError} required>
+            </c-generic-radio_brs>
+            <p class="error-text" if:true={hasError}>{label.Select_a_Payment_method_to_continue}</p>
+        </div>  
+        <!-- payment method selection block end-->
+
+        <c-brs_next-back-buttons nextlabel={label.ContinuetoPayment} prevlabel={label.Back} onhandlenext={validateNext}
+            onhandleback={handleBack}></c-brs_next-back-buttons>
+    </template>
+    <template if:true={showHistoryTable}>
+        <c-brs_payment-history tablecolumns={tablecolumns} tabledata={tabledata} onfilterdate={handleDateFilter}
+            from-date={dateFrom} to-date={dateTo}></c-brs_payment-history>
+    </template>
+    <template if:true={isModalOpen}>
+        <c-modal open={isModalOpen} onmodalclose={closeModal} size={modalSize}>
+            <div slot="header" class="headerModal">
+                <h6>{label.RedeemVoucherSentenceCase}</h6>
+            </div>
+            <div slot="body" class="slds-m-bottom_x-large slds-large-size_12-of-12 slds-size_1-of-1">
+                <p class="large slds-m-bottom_large">{label.InvalidVoucherErrorMessage}
+                </p>
+                <c-bos_help-Text class="slds-m-bottom_large" headtext={label.Please_note_Label}
+                    bodytext={label.BalanceRedeemtext}>
+                </c-bos_help-Text>
+                <p class="large slds-m-top_x-large">{label.VoucherCode}</p>
+                <lightning-input type="text" required onchange={handleVoucherCode} placeholder="E.g. 123456"
+                    class="slds-large-size_1-of-2 slds-size_1-of-1 codeInput" variant="label-hidden">
+                </lightning-input>
+            </div>
+            <div slot="actions" class="slds-m-vertical_small footerContent">
+                <button class="slds-button slds-button_natural slds-float_left back-btn natural-button-large"
+                    onclick={closeModal}> {label.CancelButton}</button>
+                <button class="slds-button slds-button_brand primaryBtn" onclick={submitVoucherDetails}
+                    title="Apply">{label.Apply}</button>
+            </div>
+        </c-modal>
+    </template>
+</template>

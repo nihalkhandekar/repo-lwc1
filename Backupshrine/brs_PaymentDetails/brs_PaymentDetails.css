@@ -1,0 +1,166 @@
+.pl-32 {
+    padding-left: 32px;
+}
+
+.headerWrapper {
+    background-color: #FFFFFF;
+    padding: 42px 72px 24px 72px;
+    margin: -32px -7% 0;
+}
+
+.secondaryBtn,
+.primaryBtn {
+    height: auto;
+    min-height: 56px;
+}
+
+.smalldescription {
+    max-width: 256px;
+    font-family: Karla;
+    font-size: 12px;
+    line-height: 18px;
+    color: #2D2C2C;
+}
+
+.secondaryBtn {
+    padding: 0 56px;
+}
+
+.paymentTable {
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px #E7E9F2;
+    border-radius: 4px;
+    padding: 24px;
+    padding-bottom: 8px;
+}
+
+.paymentTable .slds-size_1-of-1 {
+    padding-bottom: 16px;
+}
+
+hr {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 16px;
+    border-color: #ECEBEB;
+}
+
+.pageTitle {
+    margin-top: 48px;
+    margin-bottom: 60px;
+}
+
+.pageSubTitle {
+    margin-bottom: 60px;
+}
+
+.headerModal {
+    text-align: left;
+}
+
+.backBtn {
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.footerContent {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+
+}
+
+.footerContent .primaryBtn {
+    margin-bottom: 32px;
+}
+
+.footerContent .back-btn {
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.014286px;
+}
+
+.voucherWrapper {
+    display: flex;
+}
+
+.voucherWrapper a {
+    margin-left: 20px;
+    text-decoration: underline;
+    color: #09538b;
+}
+
+.voucherWrapper p.large {
+    margin: auto 0;
+}
+
+.error {
+    color: #DB2426;
+}
+
+.colName {
+    color: #757575;
+}
+
+h3 {
+    letter-spacing: 0.31px;
+}
+
+h6 {
+    letter-spacing: 0.16px;
+}
+
+.block-separator{
+    margin: 56px 0px;
+}
+.mb-32{
+    margin-bottom: 32px;
+}
+
+@media only screen and (max-width: 1023.99px) {
+    .headerWrapper {
+        padding: 40px 20px 24px;
+        margin: 0 -20px;
+}
+
+    .headerWrapper .secondaryBtn {
+        margin-top: 24px;
+}
+
+    .paymentTable {
+        margin-bottom: 28px;
+}
+
+    .paymentTable .slds-size_1-of-1 {
+        padding-bottom: 4px;
+}
+
+    .paymentTable .largeBold {
+        padding-bottom: 12px;
+}
+
+    .pageTitle {
+        margin-top: 52px;
+        margin-bottom: 40px;
+}
+    .pageSubTitle {
+        margin-bottom: 36px;
+    }
+
+    .smalldescription {
+        max-width: unset;
+    }
+
+    .footerContent {
+        flex-direction: column-reverse;
+    }
+
+    .footerContent .back-btn {
+        justify-content: center;
+    }
+
+    .block-separator{
+        margin: 48px 0px;
+    }
+}

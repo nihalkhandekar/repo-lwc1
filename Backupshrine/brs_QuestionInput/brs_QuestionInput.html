@@ -1,0 +1,310 @@
+<!--*********************************************************************************************
+ * NAME:  brs_QuestionInput.html
+ * DESCRIPTION: Renders a single question and recursively iterates all the child questions 
+ *
+ * @AUTHOR: Piyush Bajoria
+ * @DATE: 23/10/2020
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Piyush Jogdand                     23/10/2020                         Created the first version by cloning QnA_QuestionInput
+*********************************************************************************************-->
+<template>
+  <!--Parent Question block-->
+  <div if:true={visible} class="wrapper">
+    <div class={flowwrapper}>
+      <div if:true={spinner}>{label.loadingText}...</div>
+      <lightning-layout class="align slds-wrap">
+        <lightning-layout-item class="slds-medium-size_12-of-12 slds-large-size_7-of-12 questionContainer">
+          <lightning-layout-item class="qInput" aria-label={question.questionBody}>
+            <div if:true={haserror} class="slds-text-color_error">
+              {errorMessage}
+            </div>
+            <h6>{currentSubsectionTitle}</h6>
+            <h4 class="Question" aria-label={question.questionBody} tabindex="0">{question.questionBody}</h4>
+          </lightning-layout-item>
+          <div class="helpTextContainer_mob">
+            <!-- Div for label More Information in Mobile -->
+            <div class="toolTip" onclick={showDiv}>
+              <a href="#info" class="infoLink">{label.helpMeAnswer}</a>
+              <template if:false={showHelp}>
+                <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                  title="chevrondown" class="chevron-container-down"></lightning-icon>
+              </template>
+              <template if:true={showHelp}>
+                <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevronup"
+                  title="chevronup" class="chevron-container-up"></lightning-icon>
+              </template>
+            </div>
+            <!-- Div for Content of More Information in Mobile -->
+            <template if:true={showHelp}>
+              <div if:false={separatequestions}>
+                <div class="helpTextContent">
+                  <c-qn-a_-subsection-help-text helptextstatic={helptextdetails.subsectionHelpTextStatic}
+                    helptextlinklabel={helptextdetails.subsectionHelpTextLinkLabels}
+                    helptextlinkurls={helptextdetails.subsectionHelpTextLinkUrls} questionid={question.id}
+                    response={response} sectiontitle={title}></c-qn-a_-subsection-help-text>
+                </div>
+              </div>
+              <div if:true={separatequestions}>
+                <div class="helpTextContent">
+                  <c-qn-a_-subsection-help-text helptextstatic={question.subsectionHelpTextStatic}
+                    helptextlinklabel={question.subsectionHelpTextLinkLabels}
+                    helptextlinkurls={question.subsectionHelpTextLinkUrls} questionid={question.id} response={response}
+                    sectiontitle={title}></c-qn-a_-subsection-help-text>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div if:true={showQuestionHelpText}>
+            <c-qn-a_-question-help-text helptextnotes={question.headingHelpTextNotes}
+              headinghelptext={question.headingHelpText} questionid={question.id}>
+            </c-qn-a_-question-help-text>
+          </div>
+          <lightning-layout-item>
+            <!--TODO: Generate component dynamically if there too many types-->
+
+            <div if:true={question.isRequired}>
+              <div if:true={showRadioGroup}>
+                <div class="radio-option">
+                  <c-generic-radio-input qid={showRadioName} radio-options={options} name={question.id} answer={answer}
+                    required={question.isRequired} onctbosdatachange={handleRadioClick}></c-generic-radio-input>
+                </div>
+              </div>
+              <div if:true={showCheckBox}>
+                <c-generic-multi-select list-data={options} name={question.id} value={answer}
+                  required={question.isRequired} oncheckboxinputselection={handlecheckboxResult}>
+                </c-generic-multi-select>
+              </div>
+              <lightning-combobox if:true={showComboBox} placeholder="Choose Status" value={answer}
+                onchange={onAnswerChange} options={options} readonly={readonly} variant="label-hidden" required>
+              </lightning-combobox>
+               <div if:true={showDateType}>
+                <lightning-input
+                  type={question.datatype}
+                  if:true={showInput}
+                  variant="label-hidden"
+                  required
+                  onchange={handleRegionDate}
+                  class="text slds-icon_container"
+                  checked
+                  placeholder={question.placeholder}
+                  date-style="short"
+                >
+                </lightning-input>
+              </div>
+              <div if:true={otherDateType}>
+                <lightning-input
+                  type={question.datatype}
+                  if:true={showInput}
+                  variant="label-hidden"
+                  value={answer}
+                  required
+                  onchange={onAnswerChange}
+                  onblur={checkAnswerValidity}
+                  readonly={readonly}
+                  class="text slds-icon_container"
+                  checked
+                  placeholder={placeHolderInput}
+                  max-length="100"
+                  
+                >
+                </lightning-input>
+              </div>
+
+              <div if:true={showInput} class="inputCharLimit">
+                <span if:true={showCharLimit}> {inputCharLimit}</span>
+              </div>
+              <lightning-dual-listbox name="quesMultiSelect" if:true={showMultiSelect} value={answer}
+                source-label="Available" selected-label="Selected" options={options} min="1" onchange={onAnswerChange}>
+              </lightning-dual-listbox>
+              <div if:true={showInputSearch}>
+                <c-generic-look-up list-items={picklistOptions} search-place-holder={searchPlaceHolder}
+                  onsearchinputselection={handleSearchResult} onsearchinputremove={handleSearchResult} answer={answer}>
+                </c-generic-look-up>
+              </div>
+              <div if:true={showCategorySearchBrowse}>
+                <c-registration-requirement selectedcategory={answer} onselectedcategory={handleSelectedCategory}>
+                </c-registration-requirement>
+              </div>
+              <!-- Placeholder if LWC is selected as an option-->
+              <div if:true={showLWC}>
+                <div if:true={showBusinessEmail}>
+                  <c-generic-input type="email" answer={answer} onvalueupdate={handleValUpdate}>
+                  </c-generic-input>
+                </div>
+                <!-- Display business Contact comp-->
+                <div if:true={showStockClassification}>
+                  <c-brs_stock-Classification onstockupdate={handleStockSelection} accountrecord={accountrecord}></c-brs_stock-Classification>
+			          </div>
+                <div if:true={showBusinessReservation}>
+                  <c-brs_business-reservation onbusinessreservation={handleBusinessReservation} businessname={reservedBusinessName}></c-brs_business-reservation>
+                </div>
+                <div if:true={showLegalDesignation}>
+                  <c-brs_legal-designation-check  businessname={businessName} accountrecord={accountrecord} onbusinessnameselected={handleBusinessNameSelection} ></c-brs_legal-designation-check>
+                </div>
+        <!-- Display business Contact comp-->
+              <!--Dispay Principal Comp -->
+              <div if:true={showPrincipalPopup}>
+                <c-brs_add-principal
+                  accountrecord={accountrecord}
+                  answer={answer} onaddprincipal={handleAddPrincipal}
+                  ></c-brs_add-principal>
+              </div>
+              <!--Dispay Principal Comp -->
+                <div if:true={showAgent}>
+                  <c-brs_add-agent-details accountrecord={accountrecord} answer={answer}
+                    onaddbusinessagent={handlebusinessAgentSelection}></c-brs_add-agent-details>
+                </div>
+                <div if:true={showBusinessAddress}>
+                  <c-brs_business-address  accountrecord={accountrecord}
+                  answer={answer} onbusinessaddress={handlebusinessAddress}></c-brs_business-address>
+                </div>                
+              </div>
+              <!-- Placeholder if LWC is selected as an option-->
+			  <!-- Display email preference comp-->
+                <div if:true={showEmailPreference}>
+                  <c-brs_email-communication
+                    accountrecord={accountrecord}
+                    answer={answer}
+                    onoptoutselection={handleOptoutSelection} 
+                    ongroupselection={handlegroupselection}></c-brs_email-communication>
+                </div>
+                <!-- Display email preference comp-->
+
+            </div>
+            <!-- if question is not marked as required -->
+            <div if:false={question.isRequired}>
+              <div if:true={showSearchBrowse}>
+                <c-business-service qid={showServiceName} previousservice={answer}
+                  onserviceselected={handleSelectedService}></c-business-service>
+              </div>
+              <div if:true={showRadioGroup} class="radio-option">
+                <c-generic-radio-input qid={showRadioName} value={answer} radio-options={options} name={question.id}
+                  required={question.isRequired} onctbosdatachange={handleRadioClick}></c-generic-radio-input>
+              </div>
+              <div if:true={showCheckBox}>
+                <c-generic-multi-select list-data={options} name={question.id} value={answer}
+                  required={question.isRequired} oncheckboxinputselection={handlecheckboxResult}>
+                </c-generic-multi-select>
+              </div>
+              <lightning-combobox if:true={showComboBox} placeholder="Choose Status" value={answer}
+                onchange={onAnswerChange} options={question.options} readonly={readonly} variant="label-hidden">
+              </lightning-combobox>
+              <div if:true={showDateType}>
+                  <lightning-input
+                    type={question.datatype}
+                    if:true={showInput}
+                    variant="label-hidden"
+                    value={answer}
+                    onchange={handleRegionDate}
+                    class="text"
+                    checked
+                  >
+                  </lightning-input>
+                </div>
+                <div if:true={otherDateType}>
+                  <lightning-input
+                    type={question.datatype}
+                    if:true={showInput}
+                    variant="label-hidden"
+                    value={answer}
+                    label="Red"
+                    onchange={onAnswerChange}
+                    readonly={readonly}
+                    class="text"
+                    checked
+                  >
+                  </lightning-input>
+                </div>
+              <lightning-dual-listbox name="quesMultiSelect" if:true={showMultiSelect} value={answer}
+                source-label="Available" selected-label="Selected" options={question.options} onchange={onAnswerChange}>
+              </lightning-dual-listbox>
+
+              <div if:true={showInputSearch}>
+                <c-generic-look-up list-items={picklistOptions} search-place-holder={searchPlaceHolder}
+                  onsearchinputselection={handleSearchResult} onsearchinputremove={handleSearchResult} answer={answer}>
+                </c-generic-look-up>
+              </div>
+              <div if:true={showCategorySearchBrowse}>
+                <c-registration-requirement selectedcategory={answer} onselectedcategory={handleSelectedCategory}>
+                </c-registration-requirement>
+              </div>
+              <!-- Placeholder if LWC is selected as an option-->
+              <div if:true={showLWC}>
+                <div if:true={showBusinessEmail}>
+                  <c-generic-input type="email" answer={answer}  onvalueupdate={handleValUpdate}>
+                  </c-generic-input>
+                </div>
+                <div if:true={showBusinessReservation}>
+                  <c-brs_business-reservation onbusinessreservation={handleBusinessReservation} businessname={reservedBusinessName}></c-brs_business-reservation>
+                </div>
+                <div if:true={showLegalDesignation}>
+                  <c-brs_legal-designation-check  businessname={businessName} accountrecord={accountrecord} onbusinessnameselected={handleBusinessNameSelection} ></c-brs_legal-designation-check>
+                </div>
+      <!-- Display business Contact comp-->
+                <!--Dispay Principal Comp -->
+                <div if:true={showPrincipalPopup}>
+                  <c-brs_add-principal
+                    accountrecord={accountrecord}
+                    answer={answer} 
+                    onaddprincipal={handleAddPrincipal}
+                    ></c-brs_add-principal>
+                </div>
+                <!--Dispay Principal Comp -->
+                <div if:true={showAgent}>
+                  <c-brs_add-agent-details accountrecord={accountrecord} answer={answer}
+                    onaddbusinessagent={handlebusinessAgentSelection}></c-brs_add-agent-details>
+                </div>
+                <div if:true={showBusinessAddress}>
+                  <c-brs_business-address  accountrecord={accountrecord}
+                  answer={answer} onbusinessaddress={handlebusinessAddress}></c-brs_business-address>
+                </div>  
+
+              </div>
+              <!-- Placeholder if LWC is selected as an option-->
+			  <!-- Display email preference comp-->
+                <div if:true={showEmailPreference}>
+                  <c-brs_email-communication
+                    accountrecord={accountrecord}
+                    answer={answer}
+                    onoptoutselection={handleOptoutSelection} 
+                    ongroupselection={handlegroupselection}></c-brs_email-communication>
+                </div>
+                <!-- Display email preference comp-->
+                <div if:true={showStockClassification}>
+                  <c-brs_stock-Classification onstockupdate={handleStockSelection} accountrecord={accountrecord}></c-brs_stock-Classification>
+                </div>
+            </div>
+          </lightning-layout-item>
+        </lightning-layout-item>
+        <!-- New styling for helptext-->
+        <div class="slds-medium-size_1-of-12 slds-large-size_1-of-12 emptyContainer"></div>
+        <lightning-layout-item class="slds-medium-size_4-of-12 slds-large-size_4-of-12 helpTextContainer">
+          <!-- displaying helptext at Question Level -->
+          <div class="helpTextSec">
+            <div if:false={separatequestions}>
+              <div class="helpTextContent">
+                <c-qn-a_-subsection-help-text helptextstatic={helptextdetails.subsectionHelpTextStatic}
+                  helptextlinklabel={helptextdetails.subsectionHelpTextLinkLabels}
+                  helptextlinkurls={helptextdetails.subsectionHelpTextLinkUrls} questionid={question.id}
+                  response={response} sectiontitle={title}></c-qn-a_-subsection-help-text>
+              </div>
+            </div>
+            <div if:true={separatequestions}>
+              <div class="helpTextContent">
+                <c-qn-a_-subsection-help-text helptextstatic={question.subsectionHelpTextStatic}
+                  helptextlinklabel={question.subsectionHelpTextLinkLabels}
+                  helptextlinkurls={question.subsectionHelpTextLinkUrls} questionid={question.id} response={response}
+                  sectiontitle={title}></c-qn-a_-subsection-help-text>
+              </div>
+            </div>
+          </div>
+        </lightning-layout-item>
+      </lightning-layout>
+      <!--/div-->
+    </div>
+  </div>
+</template>

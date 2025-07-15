@@ -1,0 +1,51 @@
+.page-footer {
+    display: flex;
+    align-items: center;
+    padding: 32px 0;
+    border-top: solid 1px #ECEBEB;
+    margin-top: 80px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.alignButton {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.natural-button-large{
+    text-transform: uppercase;
+}
+
+@media only screen and (max-width: 1023.9px) {
+    .page-footer {
+        flex-direction: column-reverse;
+        margin-top: 60px;
+        padding: 24px 0;
+    }
+    .slds-button.primaryBtnSmall {
+        width: 100%;
+        margin-left: 0;
+    }
+    .button-wrapper {
+        margin-bottom: 32px;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    .goto-summary-button{
+        order:2;
+        justify-content: center;
+        margin-top: 16px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .goto-summary-button{
+        margin: unset;
+        margin-right: 12px;
+    }
+}

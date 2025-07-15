@@ -1,0 +1,16 @@
+<template>
+    <template if:true={headerText}>
+        <h5 class="owner-fields">{headerText}</h5>
+    </template>
+    <div class="slds-grid">
+        <div class="theme3 theme5 theme4 notopMargin">
+            <c-generic-radio_brs data-id="radio" show-image radio-options={accPaymentOpts} name="theme7"
+                answer={selectedPaymentType} onctbosdatachange={handleAccOwnerSelect} show-error={hasError} required>
+            </c-generic-radio_brs>
+        </div>
+        <div if:true={showChangeOpts} class="chng-btn">
+            <!-- <a class="link-btn">Change</a> -->
+            <button class="slds-button natural-button-large slds-button_natural" onclick={onChange}>{label.Change}</button>
+        </div>
+    </div>
+</template>

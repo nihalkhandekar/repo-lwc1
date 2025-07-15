@@ -1,0 +1,39 @@
+.realId-title {
+  font-size: 18px;
+  line-height: 22px;
+  color: #757575;
+  letter-spacing: 0.13px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  font-family: KarlaBold !important;
+}
+
+.realId-link-wrapper {
+  margin-top: 16px;    
+}
+
+.realId-link {
+  font-size: 12px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+  color: #09538B;
+}
+
+.realId-image-wrapper img {
+  margin-bottom: 24px;
+  width: 88px;
+  height: 76px; 
+}
+
+.description {
+  color: #2D2C2C;
+  font-family: Karla;
+  font-size: 14px;
+  letter-spacing: 0.1px;
+  line-height: 21px;
+}
+
+.realId-font *{
+  padding-top: 8px;
+  font-family: Karla !important;
+}

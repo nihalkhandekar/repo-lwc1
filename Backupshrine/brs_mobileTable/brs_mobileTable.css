@@ -1,0 +1,48 @@
+.data-element {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  word-break: break-word;
+  min-height: 25px;
+  padding: 8px;
+  text-align: left;
+}
+
+.data-value {
+  background: #fff;
+  color: #2d2c2c;
+  font-family: Karla;
+  font-size: 12px;
+  letter-spacing: 0.01px;
+  line-height: 18px;
+}
+
+.data-container {
+  border: solid 1px #ecebeb;
+  background: #f7f9fa;
+  margin-bottom: 11px;
+  border-radius: 4px;
+}
+
+.data-column {
+  color: #757575;
+  font-family: KarlaBold;
+  font-size: 14px;
+  border-right: 1px solid #ECEBEB;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+}
+
+.edit-link {
+  text-decoration: underline;
+  color: #09538b;
+}
+
+.row-container {
+  display: flex;
+  border-bottom: 1px solid #ECEBEB;
+}
+
+.data-container .row-container:last-child {
+  border-bottom: none;
+}

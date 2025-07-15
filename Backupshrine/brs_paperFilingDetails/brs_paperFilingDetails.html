@@ -1,0 +1,48 @@
+<template> 
+    <div class="slds-grid slds-wrap">
+        <div class="slds-size_12-of-12 slds-large-size_9-of-12">
+            <div if:true={showCitizenshipDropdown}>
+                <c-generic-select-dropdown label={citizenshipLabel} selected-option={citizenship}
+                    dropdown-options={citizenshipOptions} placeholder={placeHolder}
+                    ondropdownchange={onCitizenShipChange} required>
+                </c-generic-select-dropdown>
+            </div>
+            <div class="gap">
+                <c-generic-select-dropdown label={businessTypeLabel} selected-option={businessType}
+                    dropdown-options={businessTypeOptions} placeholder={placeHolder}
+                    ondropdownchange={onbusinessTypeChange} required>
+                </c-generic-select-dropdown>
+            </div>
+<div if:true={isModalOpen}>
+    
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                <div class="slds-modal__content slds-modal_full-content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-formatted-rich-text  value={label.Paper_Filing_Details_Alert_Message}></lightning-formatted-rich-text>
+                </div>
+                <div class="slds-modal__footer">
+                <button class="slds-button slds-button_brand" onclick={closeModal}>Continue</button>
+                </div>
+                </div>
+                </section>
+                <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        
+        </div>
+            <div if:true={showlegalStructureDropdown} class="gap">
+                <c-generic-select-dropdown label={legalstructureLabel} selected-option={legalStructure}
+                    dropdown-options={legalStructureOptions} placeholder={placeHolder}
+                    ondropdownchange={onLegalStructureChange} required disabled={isDisabled}>
+                </c-generic-select-dropdown>
+            </div>
+            <div if:true={showbusinessSubTypesDropdown} class="gap">
+                <c-generic-select-dropdown label={businessSubTypeLabel} selected-option={businessSubType}
+                    dropdown-options={businessSubTypeOptions} placeholder={placeHolder}
+                    ondropdownchange={onBusinessSubTypeChange} required disabled={isDisabled}>
+                </c-generic-select-dropdown>
+            </div>
+            <p if:true={showError} class="error-text">{label.Please_select_filing_details}</p>
+            <c-brs_next-back-buttons hide-back="true" nextlabel={label.Next} onhandlenext={validate}>
+            </c-brs_next-back-buttons>
+        </div>
+    </div>
+</template>

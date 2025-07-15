@@ -1,0 +1,18 @@
+<template>
+    <div class="page-footer slds-grid slds-size_12-of-12 customNextBtnDiv">
+        <div class="slds-col button-wrapper slds-order_2">
+            <button class="slds-button secondary-btn higher goto-summary-button" onclick={onGoToSummary} if:true={showSummary}>
+                {gotosummarylabel}
+            </button>
+            <button onclick={onNext} class="slds-button primaryBtnSmall" disabled={disablenextbutton}>
+                {nextlabel}
+                <img src={chevronRightWhite} class="rightIcon" alt="" if:false={disablenextbutton} />
+                <img src={chevronRightGrey} class="rightIcon" alt="" if:true={disablenextbutton} />
+            </button>
+        </div>
+        <div class="slds-col slds-order_1">
+            <button class="slds-button natural-button-large slds-button_natural"
+                onclick={onBack} if:false={hideBack}>{prevlabel}</button>
+        </div>
+    </div>
+</template>

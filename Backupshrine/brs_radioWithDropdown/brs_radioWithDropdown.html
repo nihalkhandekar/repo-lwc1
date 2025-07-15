@@ -1,0 +1,46 @@
+<template>
+    <fieldset class="radio-main-wrapper" id={name} data-id="radio" role="radiogroup">
+        <template for:each={radioOptions} for:item="radioOption" for:index="index">
+            <label role="radio" tabindex="0" class="ct-bos-input-label_radio" data-id="radio-label"
+                if:true={radioOption.show} key={radioOption.label} onmousedown={handleMouseClick}
+                onkeydown={handleKeyDown} id={index} onkeypress={changeRadioFieldonTabHandler}
+                data-name={radioOption.id}>
+                <input data-id={index} type="radio" name={name} value={radioOption.value}
+                    onchange={changeRadioFieldHandler} disabled={disabled} autocomplete="off" required={required}
+                    title={radioOption.id} aria-hidden="true" tabindex="-1" />
+                <div class="radio-wrapper">
+                    <p class="checkmark-container">
+                        <span class="checkmark"></span>
+                    </p>
+                    <div class="radio-label boxShadow">
+
+                        <div class="labelFirstRow">
+                            <h6 class="labelId">{radioOption.type}</h6>
+                            <template if:true={radioOption.amount}>
+                                <p class="large">
+                                    <span class="largeBold"> <lightning-formatted-number value={radioOption.amount} format-style="currency" currency-code="USD"></lightning-formatted-number></span>
+                                    <template if:true={radioOption.amountLabel}>
+                                        / {radioOption.amountLabel}
+                                    </template>
+                                </p>
+                            </template>
+                        </div>
+                        <template if:true={radioOption.dropDownOpts}>
+                            <div class="combo-container">
+                                <p class="large">{label.Select_number_of_months}</p>
+                                <div class="combobox-element">
+                                    <lightning-combobox name="progress" variant="label-hidden" value={sortValue}
+                                        placeholder="" options={radioOption.dropDownOpts} onchange={handleSortChange}
+                                        data-id={radioOption.id}>
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                </div>
+                <div class="ct-bos-multi-container-individual-checked"></div>
+            </label>
+        </template>
+    </fieldset>
+</template>

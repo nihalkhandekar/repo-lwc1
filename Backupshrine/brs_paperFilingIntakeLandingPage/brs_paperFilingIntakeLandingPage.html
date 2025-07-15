@@ -1,0 +1,52 @@
+<template>
+    <div class="landing-page">
+        <div class="landing-page-banner"></div>
+        <div class="brs-container  brs-wrapper">
+            <div class="landing-page-card">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_9-of-12">
+                        <h2>{labels.bizDash_IntakeFiling}</h2>
+                        <p class="smallerBold completion-time mobile-show">
+                            <img src={timerIcon} alt="" class="time-icon" role="presentation" />
+                            {labels.CompletionTime}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_3-of-12 slds-align-bottom">
+                        <button class="slds-button slds-button_brand primaryBtn getStartedBtn slds-float--right"
+                            onclick={handleGetStartedClick}>
+                            {labels.LandingPage_Button}
+                            <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" role="presentation" />
+                        </button>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap desktop-show">
+                    <div class="slds-col slds-size_12-of-12">
+                        <p class="smallerBold completion-time">
+                            <img src={timerIcon} alt="" class="time-icon" role="presentation" />
+                            {labels.CompletionTime}
+                        </p>
+                    </div>
+                </div>
+                <div class="hr-line"></div>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_8-of-12 slds-order_3 slds-large-order_1">
+                        <p class="small para-text">
+                            {labels.Description}
+                        </p>
+                        <p class="small para-text">
+                            {labels.Description1}&nbsp;
+                            <span><a href={labels.AccountDashboard_comparable}
+                                    class="biz_link">{labels.Business_Center_scholar}</a></span>
+                            &nbsp;{labels.Description3}
+                        </p>
+                        <p class="small para-text">
+                            {labels.Description2}
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-12 slds-order_2 slds-large-order_2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

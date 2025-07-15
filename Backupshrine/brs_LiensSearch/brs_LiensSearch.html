@@ -1,0 +1,104 @@
+<template>
+    <c-brs_search-fields-banner urlstring={urlstring} onsearchlien={onSearchLien} has-results={showDataSharingOptions}
+        show-print-button={showPrintOption} selected-filters={selectedFilters}
+        formatted-search-string={formattedInput}></c-brs_search-fields-banner>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <template if:true={resultspage}>
+        <div class="brs-container bread-crumb">
+            <c-brs_bread-crumb items={breadcrumbList} if:true={resultspage} onbreadcrumbclick={handleBreadCrumbClick}>
+            </c-brs_bread-crumb>
+            <div class="slds-gutters slds-grid slds-wrap search-content">
+                <template if:true={showFilterSection}>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_3-of-12 no-col-lpadding">
+                        <template if:true={zeroOrMoreThanOneResults}>
+                            <h6 class="results-text-mobile" if:true={isLien}>{resLength} {label.results_found_for}
+                                “{searchTerm}”</h6>
+                            <h6 class="results-text-mobile" if:true={isIndividualOrOrganization}>{resLength} {label.debtors_found_for}
+                                    “{searchTerm}”</h6>
+                        </template>
+                        <template if:false={zeroOrMoreThanOneResults}>
+                                <h6 class="results-text-mobile" if:true={isLien}>{resLength} {label.result_for}
+                                    “{searchTerm}”</h6>
+                                <h6 class="results-text-mobile" if:true={isIndividualOrOrganization}>{resLength} {label.debtor_found_for}
+                                        “{searchTerm}”</h6>
+                        </template>
+                        <c-brs_advance-search-filters onfilterselection={handleFilterSelection} filters={filtersArray}
+                            onclearfilter={resetFilters}>
+                        </c-brs_advance-search-filters>
+                    </div>
+                    <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+                        <template if:true={zeroOrMoreThanOneResults}>
+                            <h6 class="results-text-desktop" if:true={isLien}>{resLength} {label.results_found_for}
+                                “{searchTerm}”</h6>
+                            <h6 class="results-text-desktop" if:true={isIndividualOrOrganization}>{resLength} {label.debtors_found_for}
+                                    “{searchTerm}”</h6>
+                        </template>
+                        <template if:false={zeroOrMoreThanOneResults}>
+                            <h6 class="results-text-desktop" if:true={isLien}>{resLength} {label.result_for}
+                                “{searchTerm}”</h6>
+                            <h6 class="results-text-desktop" if:true={isIndividualOrOrganization}>{resLength} {label.debtor_found_for}
+                                    “{searchTerm}”</h6>
+                        </template>
+                        <template if:true={isLien}>
+                            <template if:false={showFillingInfoPage}>
+                                <h5 class="results-title">Liens</h5>
+                                <template if:true={results.length}>
+                                    <template for:each={results} for:item="item" for:index="index">
+                                        <c-brs_lien-card key={item.lienNumber} liendata={item}
+                                            onfillingclick={viewFillingInfo} isactivelien={item.activeLien}>
+                                        </c-brs_lien-card>
+                                    </template>
+                                </template>
+                                <template if:false={results.length}>
+                                    <c-brs_no-data-card no-data-msg={label.noDataText}></c-brs_no-data-card>
+                                </template>
+                            </template>
+                        </template>
+                        <template if:true={isIndividualOrOrganization}>
+                            <h5 class="results-title">{label.Debtors_Plural_Label}</h5>
+                            <template if:true={results.length}>
+                                <template if:true={showResults}>
+                                    <template for:each={updatedData} for:item="item" for:index="index">
+                                        <c-brs_debtor-card key={item.debtorId} carddata={item}
+                                            onviewlienclick={viewLiens} isorgsearch={isOrganization}>
+                                        </c-brs_debtor-card>
+                                    </template>
+                                    <c-generic-data-table generickey="id" genericdata={results}
+                                        class="mydatatable slds-table_striped" generichidecheckbox="false"
+                                        no-of-records-per-page='8' button-limit='4'
+                                        onpaginationchange={updatePaginatedData} messageheader={label.messageheader}
+                                        messagetext={label.messagetext} searchlength={searchResultLength}
+                                        actuallength={actuallength}>
+                                    </c-generic-data-table>
+                                </template>
+                            </template>
+                            <template if:false={results.length}>
+                                <c-brs_no-data-card no-data-msg={label.noDataText}></c-brs_no-data-card>
+                            </template>
+                        </template>
+                    </div>
+                </template>
+                <template if:false={showFilterSection}>
+                    <template if:true={showFillingInfoPage}>
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_12-of-12">
+                            <c-brs_display-allrecords -filing-number={fillingId} scholar-content={scholarContent}
+                                read-filling-from-url>
+                            </c-brs_display-allrecords>
+                        </div>
+                    </template>
+                    <template if:true={showLiensPage}>
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_9-of-12">
+                            <c-brs_lien-search-results lien-list={lienResults} ondebtorfilling={viewFillingInfo}>
+                            </c-brs_lien-search-results>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </template>
+</template>

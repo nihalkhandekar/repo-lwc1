@@ -1,0 +1,39 @@
+<template>
+    <template if:true={showConfirmationPopUp}>
+        <section role="dialog" tabindex="-1" aria-label={label.Business_successfully_linked} aria-modal="true"
+            aria-describedby="confirmation-title-content"
+            class="slds-modal slds-fade-in-open no-button-margin page-scroll-popup">
+            <div class="slds-modal__container" id="confirmation-title-content">
+                <header class="slds-modal__header slds-modal__header_empty">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                            <h6 id="confirmation-title">{header}</h6>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                            <label role="button" tabindex="0" aria-label={label.modal_close} class="closePopup slds-float_right"
+                                onclick={closeConfirmationPopup}>
+                                <img src={closeIcon} class="closeIcon" alt="" />
+                            </label>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium popup-body">
+                    <p class="large">
+                        {message}
+                    </p>
+                </div>
+      
+                <footer class="slds-modal__footer">
+                    <div class="slds-grid slds-wrap modal-footer-section">
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={closeConfirmationPopup}>{btntext}
+                            </button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+</template>

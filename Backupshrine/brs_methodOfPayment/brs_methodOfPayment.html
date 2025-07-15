@@ -1,0 +1,18 @@
+<template>
+  <div class="slds-grid slds-wrap">
+    <div class="slds-col slds-size_1-of-1">
+      <c-brs_radio-with-dropdown radio-options={radioOptions} onctbosdatachange={handlePaymentSelection}
+        name="agent-options" answer={selectedPayment} value={selectedPayment} onpicklistchange={handlePicklistChange} sort-value={noOfMonths}
+        show-error={showErrorMessage}></c-brs_radio-with-dropdown>
+      <p class="error-text" if:true={showErrorMessage}>
+        {errorMessage}</p>
+    </div>
+    <div class="slds-col slds-size_1-of-1">
+      <c-brs_next-back-buttons nextlabel={label.Next} prevlabel={label.Back} onhandlenext={handleNext}
+        onhandleback={handleBack}></c-brs_next-back-buttons>
+    </div>
+    <c-brs_payment-confirmation-modal onmodalconfirm={handleModalConfirm} show-popup={showPopup}
+      onmodalclose={handleCloseModal} tablecolumns={tablecolumns} tabledata={tabledata}>
+    </c-brs_payment-confirmation-modal>
+  </div>
+</template>

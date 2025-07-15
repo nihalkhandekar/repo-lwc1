@@ -1,0 +1,142 @@
+<template>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Page is loading..."></lightning-spinner>
+    </div>
+    <div class="wrapper">
+        <h3 class="titleText">{labels.ph_mypayments}</h3>
+        <div class="slds-grid slds-wrap csvElementsContainer">
+            <div class=" slds-size_12-of-12 slds-large-size_4-of-12 sortContainer">
+                <div class="sort">
+                    <p class="smallBold">{labels.Sort_by}:&nbsp;</p>
+                    <p class="small">{selectedSort}</p>
+                    <div class="chevron-wrapper"  onclick={handleExpandSort}>
+                        <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+                            title="chevrondown" class="chevron-container-down"></lightning-icon>
+                    </div>
+                </div>
+                <template if:true={expandSort}>
+                    <div class="sortOptions">
+                        <div class="sortoptionWrapper">
+                            <div class="oneSort" data-id={labels.accountdashboard_sortNewToOld} onclick={handleSort}>
+                                <p class="large">{labels.accountdashboard_sortNewToOld}</p>
+                            </div>
+                            <div class="oneSort" data-id={labels.accountdashboard_sortOldToNew} onclick={handleSort}>
+                                <p class="large">{labels.accountdashboard_sortOldToNew}</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="slds-size_12-of-12 slds-large-size_8-of-12 slds-grid slds-wrap cssvBlock">
+                <div class="dateContainer">
+                    <label class="business-label">{labels.From}</label>
+                    <lightning-input type="date" variant="label-hidden" value={fromDate} placeholder="MM/DD/YYYY"
+                        date-style="short" required={isRequired} onchange={handleFromDate} data-id="inputfields"
+                        class="brs-date-picker fromDate" message-when-value-missing={isRequiredValidationMessage}
+                        message-when-bad-input={badInputMessage} format="MM/DD/YYYY">
+                    </lightning-input>
+                </div>
+                <div class="dateContainer">
+                    <label class="business-label">{labels.TO}</label>
+                    <lightning-input type="date" variant="label-hidden" value={toDate} placeholder="MM/DD/YYYY"
+                        date-style="short" required={isRequired} onchange={handleToDate} data-id="inputfields"
+                        class="brs-date-picker toDate" message-when-value-missing={isRequiredValidationMessage}
+                        message-when-bad-input={badInputMessage} format="MM/DD/YYYY">
+                    </lightning-input>
+                </div>
+                <div class="buttonContainer">
+                    <button class="slds-button slds-button_brand secondaryBtn" onclick={ExportCsv}>{labels.ph_export_as_csv}</button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap results-table-grid">
+            <div class="slds-size_12-of-12 results-table">
+                <template if:true={tabledata.length}>
+                <div class="desktop">
+                    <table class="table-bordered slds-table slds-table_bordered slds-border_left slds-border_right">
+                        <thead>
+                            <tr>
+                                <template for:each={tablecolumns} for:item="row">
+                                    <th key={row.label}>
+                                        {row.label}
+                                    </th>
+                                </template>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template if:true={updatedData} for:each={updatedData} for:item="pay" for:index="index">
+                                <tr key={pay.id}>
+                                    <td>{pay.transactionDate}</td>
+                                    <td>{pay.transactionType}</td>
+                                    <td>{pay.filingType}</td>
+                                    <td>{pay.workorderId}</td>
+                                    <td>{pay.filingNumber}</td>
+                                    <td>{pay.amount}</td>
+                                    <td>
+                                        <template if:true={pay.isComplete}><span class="status complete">{pay.status}</span></template>
+                                        <template if:true={pay.isPending}><span class="status pending">{pay.status}</span></template>
+                                        <template if:true={pay.isFailed}><span class="status failed">{pay.status}</span></template>
+                                        <template if:true={pay.isOther}>{pay.status}</template>
+                                    </td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="mobile">
+                    <template if:true={updatedData} for:each={updatedData} for:item="pay" for:index="index">
+                        <div class="each-result custom-radio" key={pay.id}>
+                            <div class="each-row">
+                                <p class="each-column">{labels.date}</p>
+                                <p class="each-column">{pay.transactionDate}</p>
+                            </div>
+                            <div class="each-row">
+                                <p class="each-column">{labels.ph_transactionType}</p>
+                                <p class="each-column">{pay.transactionType}</p>
+                            </div>
+                            <div class="each-row">
+                                <p class="each-column">{labels.ph_FilingType}</p>
+                                <p class="each-column">{pay.filingType}</p>
+                            </div>
+                            <div class="each-row">
+                                <p class="each-column">{labels.ph_WO}</p>
+                                <p class="each-column">{pay.workorderId}</p>
+                            </div>
+                            <div class="each-row">
+                                <p class="each-column">{labels.ph_Filing}</p>
+                                <p class="each-column">{pay.filingNumber}</p>
+                            </div>
+                            <div class="each-row">
+                                <p class="each-column">{labels.ph_Amount}</p>
+                                <p class="each-column">{pay.amount}</p>
+                            </div>
+                            <div class="each-row">
+                                <p class="each-column">{labels.ph_Status}</p>
+                                <p class="each-column">{pay.status}</p>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                </template>
+                <template if:false={tabledata.length}>
+                <div class="bordered_wrapper">
+                    <div class="iconWrapper">
+                        <img src={icon} class="noDataIcon" alt="Business Image" />
+                    </div>
+                    <div class="contentWrapper">
+                        <h6>{labels.ph_nodataHeader}</h6>
+                        <p class="large slds-m-top_x-small">{labels.ph_nodataSubHeader}</p>
+                    </div>
+                </div>
+                </template>
+            </div>
+            <c-generic-data-table if:true={tabledata.length} generickey="id" genericdata={tabledata}
+                class="mydatatable slds-table_striped" generichidecheckbox="false"
+                no-of-records-per-page={recordsPerPage} button-limit="4" onpaginationchange={updatePaginatedData}
+                modal-theme onscrolltotop={handleTableScrollToTop} searchlength={resultLength}
+                actuallength={resultLength}>
+            </c-generic-data-table>
+        </div>
+    </div>
+</template>

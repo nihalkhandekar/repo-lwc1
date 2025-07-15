@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>52.0</apiVersion>
+    <isExposed>true</isExposed>
+     <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+        <target>lightningCommunity__Page</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="businessTypeOptions" type="String" label="Business Type Options" description=""/>
+            <property name="foreignOptions" type="String" label="Foreign Business sub types" description=""/>
+            <property name="domesticOptions" type="String" label="Domestic Business sub types" description=""/>
+            <property name="reinstatementOptions" type="String" label="Reinstatement options" description=""/>
+            <property name="revDissolutionOptions" type="String" label="Revocation of Dissolution options" description=""/>
+            <property name="citizenshipOptions" type="String" label="citizenship Options" description=""/>
+            <property name="businessTypeLabel" type="string" label="label for Business Type dropdown" description=""/>
+            <property name="legalstructureLabel" type="string" label="label for Legal Structure dropdown" description=""/>
+            <property name="businessSubTypeLabel" type="string" label="label for Business Subtype dropdown" description=""/>
+            <property name="citizenshipLabel" type="string" label="label for citizenship dropdown" description=""/>
+            <property name="placeHolder" type="String" label="Place Holder"/>
+            <property name="showlegalStructureDropdown" type="boolean" label="show legal structure dropdown"/>
+            <property name="showCitizenshipDropdown" type="boolean" label="show citizenship dropdown"/>
+            <property name="showbusinessSubTypesDropdown" type="boolean" label="show business sub type dropdown"/>
+            <property name="businessType" type="String" label="selected Business Type"/>
+            <property name="legalStructure" type="String" label="selected legal structure"/>
+            <property name="citizenship" type="String" label="selected citizenship"/>
+            <property name="businessSubType" type="String" label="selected Business SubType"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

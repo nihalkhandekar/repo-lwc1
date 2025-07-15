@@ -1,0 +1,164 @@
+<!--*********************************************************************************************
+ * NAME:  brs_link_genericRadioInput.html
+ * DESCRIPTION: Renders the card with inputs
+ *
+ * @AUTHOR: Sagarika Panda
+ * @DATE: 16/01/2020  
+ *
+ *
+ * MODIFICATION LOG:
+ * DEVELOPER                         DATE                               DESCRIPTION
+ * _____________________________________________________________________________________________
+* Sagarika Panda                     16/01/2020                        Created the first version from link_genericRadioInput
+*********************************************************************************************-->
+<template>
+  <fieldset class="radio-main-wrapper" id={name} data-id="radio" role="radiogroup">
+    <template for:each={radioOptions} for:item="radioOption" for:index="index">
+      <label role="radio" tabindex="0" class="ct-bos-input-label_radio" data-id="radio-label" key={radioOption.label}
+        onmousedown={handleMouseClick} onkeydown={handleKeyDown} id={index} onkeypress={changeRadioFieldonTabHandler}>
+        <input data-id={index} aria-label="Option" type="radio" name={name} value={radioOption.value}
+          onchange={changeRadioFieldHandler} disabled={disabled} autocomplete="off" required={required}
+          title={radioOption.value} aria-hidden="true" tabindex="-1" if:false={domHasMultipleRadios} />
+        <input data-id={index} aria-label="Option" type="radio" name={inputName} value={radioOption.value}
+          onchange={changeRadioFieldHandler} disabled={disabled} autocomplete="off" required={required}
+          title={radioOption.value} aria-hidden="true" tabindex="-1" if:true={domHasMultipleRadios} />
+        <template if:false={themeImage}>
+          <span class="checkmark"></span>
+          <p class="largeBold radio-label boxShadow slds-m-bottom_small">
+            <lightning-formatted-rich-text value={radioOption.label}></lightning-formatted-rich-text>
+          </p>
+        </template>
+        <template if:true={themeImage}>
+          <div class="radio-wrapper">
+            <template if:false={theme4}>
+              <div class="radio-label boxShadow">
+                <p class="labelFirstRow">
+                  <span class="labelId"><b>{radioOption.ConnecticutAlei}</b></span>
+                  <template if:true={radioOption.status}>
+                    <span class="description"><b>{radioOption.status}</b></span>
+                  </template>
+                </p>
+                <span class="labelBoldContent">{radioOption.boldLabel}</span>
+                <span class="labelcontent"> {radioOption.label}</span>
+                <p class="small">{radioOption.subtext}</p>
+                <template if:true={radioOption.address}>
+                  <p class="small labelId"><img src={fileimage} class="addressIcon" alt=""> {radioOption.address}</p>
+                </template>
+                <div class="slds-grid slds-wrap finalRow">
+                  <div class="slds-size_11-of-12 display">
+                      <div class="slds-col slds-large-size_9-of-12 slds-medium-size_9-of-12 slds-size_12-of-12 ">
+                        <template if:false={showForeignId}>
+                          <template if:true={radioOption.fillingsDue}>
+                            <template if:true={radioOption.isReportDue}>
+                              <p class="small labelId">{label.filling_Due}</p>
+                              <p class="small displayTextId">{radioOption.fillingsDue}</p>
+                            </template>
+                            <template if:false={radioOption.isReportDue}>
+                              <p class="alertText"><img src={checkMarkImg} class="alertIcon" alt="">{radioOption.fillingsDue}
+                              </p>
+                            </template>
+                          </template>
+                        </template>
+                      </div>
+                    <template if:false={iscertificateinfo}>
+                      <template if:false={showForeignId}>
+                        <template if:false={maintain}>
+                          <div
+                            class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_12-of-12 agent-div">
+                            <p class="small labelId">{label.Agent}</p>
+                            <p class="small displayTextId">{radioOption.agent}</p>
+                          </div>
+                        </template>
+                      </template>
+                    </template>
+                  </div>
+                  <template if:false={iscertificateinfo}>
+                    <template if:true={maintain}>
+                      <div class="slds-size_1-of-12">
+                        <button data-name={index} class="arrow-button" onclick={onAccordianClick} aria-expanded="false">
+                          <template if:true={radioOption.showDetails}>
+                            <img src={arrowIcon} role="presentation" alt="" class="up" aria-label="Show details"
+                              width="24" height="24" />
+                          </template>
+                          <template if:false={radioOption.showDetails}>
+                            <img src={arrowIcon} role="presentation" alt="" aria-label="Hide details" width="24"
+                              height="24" />
+                          </template>
+                        </button>
+                      </div>
+                    </template>
+                  </template>
+                  <template if:true={iscertificateinfo}>
+                    <div class="slds-size_12-of-12 certificate-container slds-wrap slds-gutters">
+                      <div class="slds-col certificate-container-detail slds-size_12-of-12 slds-large-size_8-of-12">
+                        <p class="small grey-text">{label.BRS_Certificate_Type}</p>
+                        <p class="small">{radioOption.certificateType}</p>
+                      </div>
+                      <div class="slds-col certificate-container-detail slds-size_12-of-12 slds-large-size_4-of-12">
+                        <p class="small grey-text">{label.BRS_Date_Generated}</p>
+                        <p class="small"> <lightning-formatted-date-time value={radioOption.dateGenerated} year="numeric"
+                          month="2-digit" day="2-digit" time-zone="UTC"></lightning-formatted-date-time></p>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+                <template if:false={showForeignId}>
+                  <div class={radioOption.subStatusClassName}  if:true={radioOption.isReportDue}>
+                    <div class="slds-size_1-of-6 slds-large-size_1-of-12 icon-div">
+                      <img src={radioOption.iconName} class="alertIcon" alt='alert'>
+                    </div>
+                    <div class="slds-size_5-of-6 slds-large-size_11-of-12 report-details">
+                        <p class={radioOption.subStatusTextClassName}>
+                          {radioOption.businessSubStatus}
+                        </p>
+                    </div>
+                </div>
+                </template>
+                <template if:true={radioOption.showDetails}>
+                  <div class="principal-details">
+                    <div class="slds-grid slds-wrap details-row slds-gutters">
+                      <div class="slds-size_12-of-12 slds-large-size_6-of-12 slds-col">
+                        <p class="sub-title">{label.principal_radio}</p>
+                        <p class="sub-desc rowMobile">{radioOption.principalName}
+                          <template if:false={radioOption.hasZeroPrincipal}>
+                            <span class="number">
+                              ( +{radioOption.principalCount})
+                            </span>
+                          </template>
+                        </p>
+                      </div>
+                      <div class="slds-size_12-of-12 slds-large-size_6-of-12 slds-col">
+                        <p class="sub-title">{label.Agent}</p>
+                        <p class="sub-desc">
+                          {radioOption.agent}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </template>
+                <template if:true={showForeignId}>
+                  <div class="principal-details">
+                    <div class="slds-grid slds-wrap details-row slds-gutters">
+                      <div class="slds-size_12-of-12 slds-large-size_6-of-12 slds-col">
+                        <p class="small greyText">{label.Foreign_Investigation_ID}</p>
+                        <p class="labelBoldContent">{radioOption.fiName}</p>
+                      </div>
+                    </div>
+                    </div>
+                </template>
+              </div>
+            </template>
+            <template if:true={theme4}>
+              <img class="sectionImage" src={radioOption.imgSrc} alt="" />
+              <div class="label-section">{radioOption.label}</div>
+            </template>
+            <p class="checkmark-container">
+              <span class="checkmark containerTheme"></span>
+            </p>
+          </div>
+        </template>
+        <div class="ct-bos-multi-container-individual-checked"></div>
+      </label>
+    </template>
+  </fieldset>
+</template>

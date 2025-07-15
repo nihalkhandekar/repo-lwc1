@@ -1,0 +1,64 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text={label.loading_brs} variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="success-container">
+        <div class="background"></div>
+        <div class="slds-grid slds-wrap slds-grid_align-center">
+            <div class="slds-size_12-of-12 slds-large-size_8-of-12">
+                <div class="success-container-card">
+                    <div class="success-container-card-body">
+                        <img src={successIcon} alt="" class="success-icon" />
+                        <h4 class="desc-bold">{label.congratulations_ack}<br>{label.filing_submitted_text}
+                        </h4>
+                        <p class="slds-m-bottom_medium">{label.paper_filing_confirm_subheading}&nbsp;{emailId}.
+                            &nbsp;{label.paper_filing_confirm_subheading2}
+                        </p>
+                    </div>
+                    <div class="next-step-container success-container-card-body">
+                        <h4 class="next-steps-heading">{label.Next_Steps}</h4>
+                        <div>
+                            <div class="next-steps">
+                                <img src={nextStepIcon} alt="" class="step-icon" />
+                                <div class="step-side-section">
+                                    <p class="step-label">{label.brs_step1} {label.link_business_to_ct_gov}</p>
+                                    <p class="step-content">{label.link_business_to_ct_gov_desc}</p>
+                                    <button class="slds-button secondary-btn higher access-button"
+                                        onclick={linkBusiness}>
+                                        {label.Link_business_to_account}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="next-steps">
+                                <img src={nextStepIcon} alt="" class="step-icon" />
+                                <div class="step-side-section">
+                                    <p class="step-label">{label.brs_step2} {label.First_Report_Step2}</p>
+                                    <p class="step-content">{label.First_Report_Step2_Text}</p>
+                                    <button class="slds-button secondary-btn higher access-button"
+                                        onclick={goToAccountPreferences}>
+                                        {label.Notification_Text}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="next-steps">
+                                <img src={nextStepIcon} alt="" class="step-icon" />
+                                <div class="step-side-section">
+                                    <p class="step-label">{label.brs_step3} {label.First_Report_Step3}</p>
+                                    <p class="step-content">{label.First_Report_Step3_Text}</p>
+                                    <button class="slds-button secondary-btn higher access-button"
+                                        onclick={goToAccountDashboard}>
+                                        {label.Access_Account_Dashboard}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <template if:true={showConfirmationPopUp}>
+        <c-brs_link-business-confirmation show-confirmation-pop-up={showConfirmationPopUp} message={message} header={confirmationHeaderMsg} onmodalclose={closeModal}></c-brs_link-business-confirmation>
+    </template>
+</template>
