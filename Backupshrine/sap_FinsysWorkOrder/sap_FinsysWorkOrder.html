@@ -1,0 +1,27 @@
+<template>
+  <lightning-card>
+    <div class="SE-mainBody">
+      <div class="SE-content">
+        <div class="SE-top">
+          <div class="SE-linkLable">Work Order</div>
+        </div>
+        <div class="buttonContainer">
+          <lightning-button variant="Neutral" label="All Work Order Transaction" title="workOrderTransaction" class={transactionClass} onclick={handleNavigation}>
+          </lightning-button>
+          <lightning-button variant="Neutral" label="Refunds" title="refunds" class={refundClass} onclick={handleNavigation}> </lightning-button>
+          <lightning-button variant="Neutral" label="Returned Checks Processing" title="returnedCheck" class={returnCheckClass} onclick={handleNavigation}> </lightning-button>
+        </div>
+
+        <template if:true={showWorkOrderTransaction}>
+          <c-sap_-finsys-work-order-transaction></c-sap_-finsys-work-order-transaction>
+        </template>
+        <template if:true={showRefunds}>
+          <c-sap_-finsys-work-order-refund></c-sap_-finsys-work-order-refund>
+        </template>
+        <template if:true={showReturnedChecksProcessing}>
+          <c-sap_-finsys-work-order-check-processing></c-sap_-finsys-work-order-check-processing>
+        </template>
+      </div>
+    </div>
+  </lightning-card>
+</template>

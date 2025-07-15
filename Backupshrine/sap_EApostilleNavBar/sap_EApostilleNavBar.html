@@ -1,0 +1,43 @@
+<template>
+    <div class="header">
+        <div class="header-content">
+            <nav class="nav-links">
+                <template if:true={isLoggedIn}>
+                <button data-button-id="dashboard" onclick={navigateToDashboard} class="nav-button">
+                    {labels.Dashboard}
+                </button>
+                <button data-button-id="eApostilleform" onclick={navigateToForm} class="nav-button">
+                    {labels.AuthenticationForm}
+                </button>
+                <button data-button-id="apostillerequest" onclick={navigateToRequests} class="nav-button">
+                    {labels.TrackApostilleRequests}
+                </button>
+                <button data-button-id="apostilleverification" onclick={navigateToVerification} class="nav-button">
+                    {labels.ApostilleVerification}
+                </button>
+                </template>
+                <template if:false={isLoggedIn}>
+                    <button data-button-id="apostilleverification" onclick={navigateToVerification} class="nav-button">
+                        {labels.ApostilleVerification}
+                    </button>
+                </template>
+            </nav>
+        </div>
+        <template if:true={isLoggedIn}>
+        <div class="nav-notification">
+                <lightning-button variant="base" icon-name="utility:notification" icon-size="large" onclick={notification}></lightning-button>
+                <!-- <template if:true={unreadNotificationisThere}>
+                    <div class="unreadNotifications">
+                        <p>{noOfUnreadNotifications}</p>
+                    </div>
+                </template> -->
+        </div>
+        </template>
+    </div>
+    <template if:true={notificationClicked}>
+        <c-sap_-apostille-dashboard-notifications data-id="notification1" onclosenotification={handleCloseRequestController} onclosenotificationpopup={handleCloseRequestController}></c-sap_-apostille-dashboard-notifications>
+    </template>
+    <template if:false={notificationClicked}>
+        <!-- <c-sap_-apostille-dashboard-notifications  data-id="notification1"></c-sap_-apostille-dashboard-notifications> -->
+    </template>
+</template>

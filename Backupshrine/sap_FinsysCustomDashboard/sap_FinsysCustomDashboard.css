@@ -1,0 +1,234 @@
+.dashboard-container {
+  background: #f8fafc;
+}
+
+.stats-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid #e5e5e5;
+  height: 100%;
+}
+.stats-card-green-color {
+  border-inline-start-color: #2e844a;
+  border-inline-start-width: 5px;
+}
+
+.stats-card-blue-color {
+  border-inline-start-color: #09629f;
+  border-inline-start-width: 5px;
+}
+
+.stats-card-red-color {
+  border-inline-start-color: #ba0517;
+  border-inline-start-width: 5px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.green-title {
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+  color: #194e31;
+}
+.blue-title {
+  color: #003a62;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+}
+.red-title {
+  color: #8e030f;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+}
+
+.amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.green-text {
+  color: #2e844a;
+  background-color: #effceb;
+  border: 1px solid #2e844a;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+}
+
+.blue-text {
+  color: #09629f;
+  background-color: #eef4ff;
+  border: 1px solid #09629f;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+}
+
+.red-text {
+  color: #ba0517;
+  background-color: #fef1ee;
+  border: 1px solid #ba0517;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+}
+
+.date-range-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.date-input {
+  font-size: 0.875rem;
+  min-width: 0;
+}
+
+.date-input lightning-input,
+.batch-select lightning-combobox {
+  --slds-c-input-spacing-horizontal-start: 0.5rem;
+  --slds-c-input-spacing-horizontal-end: 0.5rem;
+  --slds-c-input-height: 32px;
+}
+
+.date-input label,
+.batch-select label {
+  font-size: 0.75rem;
+}
+
+/* Filter icon CSS */
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  color: #0176d3;
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  color: #02447a;
+}
+
+.filter-text {
+  font-size: 0.875rem;
+  color: #0176d3;
+}
+
+.filter-text:hover {
+  color: #02447a;
+}
+
+.filter-icon {
+  color: #0176d3 !important;
+}
+
+.filter-icon:hover {
+  color: #02447a;
+}
+
+.calendar-overlay {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  background: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9000;
+}
+.chart-wrapper {
+  position: relative;
+  height: 400px;
+  width: 100%;
+}
+
+.chart-canvas-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9000;
+  background: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chart-container {
+  position: relative;
+  top: 0px !important;
+}
+
+.modal-content {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  background: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-10%); /* Move up by 100% of its height /
+    margin-top: 0px;  / Add a small gap from the filter icon */
+}
+
+.chart-filter-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 9000;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.slds-card__footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #d8dde6;
+  margin-top: auto;
+}
+
+.slds-button_brand {
+  text-transform: none;
+  font-weight: normal;
+}
+
+.custom-card__footer {
+  padding: 8px 0px 16px 8px;
+  border-top: 1px solid #e5e5e5;
+}
+
+.custom-footer_container {
+  margin-top: 21px;
+}
+
+.graph-header {
+  color: #181818;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'SF Pro', sans-serif;
+}

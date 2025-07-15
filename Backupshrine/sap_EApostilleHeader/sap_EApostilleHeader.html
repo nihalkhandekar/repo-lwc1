@@ -1,0 +1,50 @@
+<template>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-title">
+                <span class="title" style="width: 26px;height: 44px;font-family: SALESFORCE SANS;font-size: 36px;font-weight: 700;line-height: 44px;letter-spacing: -0.02em;text-align: left;">C</span>
+                <span class="title" style="width: 76px;height: 30px;font-family: SALESFORCE SANS;font-size: 20px;font-weight: 700;line-height: 30px;text-align: left;padding-left:8px;">CT.GOV</span>
+                <span class="title" style="width: 1px;height: 22px;background: #FFFFFF80;margin-left:10px"></span>
+                <span class="title" style="font-family: SALESFORCE SANS;font-size: 20px;font-weight: 700;line-height: 30px;text-align: left;padding-left:8px">{labels.Apostille}</span>
+            </div>
+            <div class="header-actions">
+                <!--<button class="language-button">Language</button>-->
+
+                <!-- <div class="LanguageCssChanges"> -->
+                    <!-- <template if:true={english}> -->
+                        <!-- <lightning-icon icon-name="custom:custom68" alternative-text="User Icon" size="small" class="icon"></lightning-icon>
+                        <button class="language" onclick={changeLanguage}>English</button> -->
+                    <div class="SE-searchCardHeaderTitle searchInputFieldsAndComboboxContainer">
+                        <div class="SE-searchToggle languageToggleOptions">
+                            <span class="language-button">English</span>
+                            <lightning-input type="toggle" label="Language Toggle" name="languageToggle"
+                                checked={spainishLanguageEnabled} onchange={handleToggleChange}
+                                variant="label-hidden" class="toggleButtonForLanguageChange"></lightning-input>
+                            <span class="language-button">Spanish</span>
+                        </div>
+                    </div>
+                    <!-- </template>
+                    <template if:false={english}>
+                        <lightning-icon icon-name="custom:custom68" alternative-text="User Icon" size="small" class="icon"></lightning-icon>
+                        <button class="language" onclick={changeLanguage}>
+                            Spanish</button> -->
+                       <!-- <button class="sign-up-button" onclick={navigateToSignup}>Sign Up</button> -->
+                    <!-- </template> -->
+                <!-- </div> -->
+
+                <!-- Conditional rendering based on user login status -->
+                <template if:true={isLoggedIn}>
+                    <lightning-icon icon-name="action:user" alternative-text="User Icon" size="small" class="icon"></lightning-icon>
+                    <button class="logout-button" onclick={handleLogout}>Logout</button>
+                </template>
+                <template if:false={isLoggedIn}>
+                    <lightning-icon icon-name="action:user" alternative-text="User Icon" size="small" class="icon"></lightning-icon>
+                    <button class="sign-in-button" onclick={navigateToLogin}>Sign in</button>
+                   <!-- <button class="sign-up-button" onclick={navigateToSignup}>Sign Up</button> -->
+                </template>
+
+                <!--<lightning-icon icon-name="utility:search" alternative-text="Search" size="small" class="search-icon"></lightning-icon>-->
+            </div>
+        </div>
+    </div>
+</template>

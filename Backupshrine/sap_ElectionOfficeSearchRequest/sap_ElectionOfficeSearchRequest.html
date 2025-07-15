@@ -1,0 +1,788 @@
+<template>
+    <div class="publicofficial-container">
+        <h1 class="page-heading">Election Office</h1>
+        <div class="search-info-container firstDivForSearching">
+            <div class="custom-card-header searchTitleHeader">
+                <lightning-icon icon-name="standard:search" size="small" class="header-icon"></lightning-icon>
+                <div class="header-text">
+                    <h1 class="title">Search</h1>
+                </div>
+            </div>
+            <div class="input-section searchInputFieldsAndComboboxContainer">
+                <div class="input-group">
+                    <div class="form-group quarter-width">
+                        <label class="custom-label" for="electionOfficeBy">Election Office by</label>
+                        <lightning-combobox 
+                                variant="label-hidden"
+                                name="electionOfficeBy" 
+                                class="input-field comboboxItemBackgroundColorChange"
+                                value={electionOfficeBy}
+                                placeholder="Election Office by" 
+                                options={electionOfficeByOptions} 
+                                onchange={handleInputChangeElectionOffice}
+                        ></lightning-combobox>
+                    </div>                    
+                </div>
+                <template if:true={isTown}>
+                    <div class="input-group">
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="townsElectionOffice">Towns/Election Office</label>
+                            <lightning-combobox 
+                                    variant="label-hidden"
+                                    name="townsElectionOffice" 
+                                    class="input-field comboboxItemBackgroundColorChange"
+                                    value={townsElectionOffice}
+                                    placeholder="Election Office by" 
+                                    options={townsElectionOfficeOptions} 
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="electionHeldIn">Election Held In</label>
+                            <lightning-combobox 
+                                    variant="label-hidden"
+                                    name="electionHeldIn" 
+                                    class="input-field comboboxItemBackgroundColorChange"
+                                    value={electionHeldIn}
+                                    placeholder="Election Office by" 
+                                    options={electionHeldInOptions} 
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="congressionalDist">Congressional Dist</label>
+                            <lightning-input 
+                                label="Congressional Dist"
+                                name="congressionalDist" 
+                                variant="label-hidden"
+                                id="congressionalDist" 
+                                value={congressionalDist} 
+                                onkeydown={handleKeyPress}
+                                class="input-field" 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="houseAssemblyDist">House Assembly Dist</label>
+                            <lightning-input 
+                                label="House Assembly Dist"
+                                name="houseAssemblyDist" 
+                                variant="label-hidden"
+                                id="houseAssemblyDist" 
+                                value={houseAssemblyDist} 
+                                onkeydown={handleKeyPressA}
+                                class="input-field" 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="senatorialDist">Senatorial Dist</label>
+                            <lightning-input 
+                                label="Senatorial Dist"
+                                name="senatorialDist" 
+                                variant="label-hidden"
+                                id="senatorialDist" 
+                                onkeydown={handleKeyPressA}
+                                value={senatorialDist}                             
+                                class="input-field" 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                    </div>
+                </template>
+                <template if:true={isState}>
+                    <div class="input-group">
+
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="stateElectionOffice">State Election Office</label>
+                            <lightning-combobox 
+                                    variant="label-hidden"
+                                    name="stateElectionOffice" 
+                                    class="input-field comboboxItemBackgroundColorChange"
+                                    value={stateElectionOffice}
+                                    placeholder="Election Office by" 
+                                    options={stateElectionOfficeOptions} 
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="city">City</label>
+                            <lightning-input 
+                                name="city" 
+                                variant="label-hidden"
+                                value={city} 
+                                class="input-field" 
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="zip">Zip</label>
+                            <lightning-input 
+                                name="zip" 
+                                variant="label-hidden"
+                                value={zip} 
+                                class="input-field" 
+                                pattern="[0-9]{0,5}" 
+    title="Please enter a valid 5-digit ZIP code"
+    onkeydown={handleKeyPress}
+                                onchange={handleInputChange}>
+                            </lightning-input>
+                        </div>
+                        <div class="form-group quarter-width"></div>
+                        <div class="form-group quarter-width"></div>
+
+                    </div>
+                </template>
+                <template if:true={isBoroughCity}>
+                    <div class="input-group">
+
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="boroughCityElectionOffice">Borough/City Election Office</label>
+                            <lightning-combobox 
+                                    variant="label-hidden"
+                                    name="boroughCityElectionOffice" 
+                                    class="input-field comboboxItemBackgroundColorChange"
+                                    value={boroughCityElectionOffice}
+                                    placeholder="Election Office by" 
+                                    options={boroughCityElectionOfficeOptions} 
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+                        </div>
+
+                        <div class="form-group quarter-width">
+                            <label class="custom-label" for="electionHeldIn">Election Held In</label>
+                            <lightning-combobox 
+                                    variant="label-hidden"
+                                    name="electionHeldIn" 
+                                    class="input-field comboboxItemBackgroundColorChange"
+                                    value={electionHeldIn}
+                                    placeholder="Election Office by" 
+                                    options={electionHeldInOptions} 
+                                    onchange={handleInputChange}
+                            ></lightning-combobox>
+
+                        </div>
+                        <div class="form-group quarter-width">
+
+                        </div>
+                        <div class="form-group quarter-width">
+
+                        </div>
+                        <div class="form-group quarter-width">
+
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+            <div class="button-group">
+
+                <div class="clear-all" onclick={handleClear}>
+                    <span class="clear-icon-wrapper">
+                        <lightning-icon icon-name="utility:close" size="xx-small" class="clear-icon"></lightning-icon>
+                    </span>
+                    <span class="clear-text">Clear All</span>
+                </div>
+                <lightning-button 
+                    label="Search" 
+                    onclick={handleSearch} 
+                    variant="brand" 
+                    icon-name="utility:search" 
+                    icon-position="left"
+                    class="slds-button_brand searchbutton">
+                </lightning-button>
+            </div>
+        </div>
+        <template if:true={isLoading}>
+            <div class="spinner-container">
+                <lightning-spinner alternative-text="Loading..." variant="brand" size="large"></lightning-spinner>
+            </div>
+        </template>
+        <template if:false={isLoading}>
+
+
+        <div class="dashboard-cards secondDivForDataTable">
+            <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                <div class="buttoncontainerfilter">
+                    <div class="left-button slds-p-left_small">
+                        <span class="slds-text-title_bold slds-m-right_x-small search-css">{SearchResult}</span>
+                        <lightning-badge label={transactionsFoundLabel} class="slds-badge_inverse result-no-css"></lightning-badge>
+                    </div>
+                        <div class="right-buttons">
+                            <lightning-badge data-id="current-day" label="Today" class={badgeClassCurrentDay}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-week" label="This Week" class={badgeClassThisWeek}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-month" label="This Month" class={badgeClassThisMonth}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-quarter" label="This Quarter" class={badgeClassThisQuarter}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+                            <lightning-badge data-id="this-year" label="This Year" class={badgeClassThisYear}
+                                onclick={handleBadgeClick}>
+                            </lightning-badge>
+
+                            <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonClick}>
+                                <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                                <span>Export to Excel</span>
+                            </div>
+        
+                            <lightning-button variant="brand" icon-name="utility:add" label={buttonLabel} title="Primary action" onclick={openSealAddModal}
+                                class="slds-m-left_x-small slds-button_brand addnewbutton">
+                            </lightning-button>
+                        </div>
+                </div>
+            </div>
+
+
+            <template if:true={showTown}>
+                <div class="slds-scrollable_x custom-table-wrapper ">
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                        <thead>
+                            <tr class="custom-header TrHoverBackGroundColorChange">
+                                <th scope="col" data-field="SAP_Id__c" class={sortedClassId} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Town ID
+                                        <lightning-icon icon-name={sortIcons.SAP_Id__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Name__c" class={sortedClassName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Towns/ Elections Office
+                                        <lightning-icon icon-name={sortIcons.SAP_Name__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_Line_1__c" class={sortedClassAddress} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Address
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_Line_1__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_State__c" class={sortedClassState} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        State
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_State__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_Zip__c" class={sortedClassZip} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Zip Code
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_Zip__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Election_Held_In__c" class={sortedClassElection} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Election Held In
+                                        <lightning-icon icon-name={sortIcons.SAP_Election_Held_In__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th> 
+                                <th scope="col" data-field="congressionalDist">
+                                    <div class="slds-truncate">Congressional District</div>
+                                </th>
+                                <th scope="col" data-field="houseAssemblyDist">
+                                    <div class="slds-truncate">House Assembly District</div>
+                                </th>
+                                <th scope="col" data-field="senatorialDist">
+                                    <div class="slds-truncate">Senatorial District</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate">
+                                        Actions
+                                    </div>
+                                </th>                 
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <template for:each={paginatedResult} for:item="row">
+                                <tr key={row.Id} data-id={row.Id} data-name={row.SAP_Name__c} onclick={handleRowClick}>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Id__c}>{row.SAP_Id__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Name__c}>{row.SAP_Name__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_Line_1__c}>{row.SAP_Mailing_Address_Line_1__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_State__c}>{row.SAP_Mailing_Address_State__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_Zip__c}>{row.SAP_Mailing_Address_Zip__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Election_Held_In__c}>{row.SAP_Election_Held_In__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.congressionalDist}>{row.congressionalDist}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.houseAssemblyDist}>{row.houseAssemblyDist}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.senatorialDist}>{row.senatorialDist}</div>
+                                    </td>
+                                    <td>
+                                        <lightning-button-menu alternative-text="Actions"
+                                            class="slds-button_icon slds-button_icon-inverse custom-button-menu" 
+                                            variant="bare"
+                                            icon-name="utility:threedots_vertical" 
+                                            onselect={handleMenuSelect} 
+                                            menu-alignment="auto"
+                                            data-id={row.Id}>
+                                                <lightning-menu-item label="View" value="view_request"></lightning-menu-item>
+                                                <lightning-menu-item label="Edit" value="edit_request"></lightning-menu-item>
+                                                <lightning-menu-item label="Delete" value="delete_request"></lightning-menu-item>
+                                        </lightning-button-menu>
+                                    </td>
+                                </tr>
+                            </template>
+
+                        </tbody>
+
+
+                    </table>
+                </div>
+
+            </template>
+
+
+            <template if:true={showState}>
+                <div class="slds-scrollable_x custom-table-wrapper ">  
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table">
+                        <thead>
+                            <tr class="custom-header">
+                                <th scope="col" data-field="SAP_Id__c" class={sortedClassId} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        State ID
+                                        <lightning-icon icon-name={sortIcons.SAP_Id__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Name__c" class={sortedClassName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        State/ Elections Office
+                                        <lightning-icon icon-name={sortIcons.SAP_Name__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Title__c" class={sortedClassTitle} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Title
+                                        <lightning-icon icon-name={sortIcons.SAP_Title__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_Line_1__c" class={sortedClassAddress} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Address
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_Line_1__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_City__c" class={sortedClassCity} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        City
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_City__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_Zip__c" class={sortedClassZip} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Zip Code
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_Zip__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate">
+                                        Actions
+                                    </div>
+                                </th>             
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <template for:each={paginatedResult} for:item="row">
+                                <tr key={row.Id} data-id={row.Id} data-name={row.SAP_Name__c} onclick={handleRowClick}>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Id__c}>{row.SAP_Id__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Name__c}>{row.SAP_Name__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Title__c}>{row.SAP_Title__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_Line_1__c}>{row.SAP_Mailing_Address_Line_1__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_State__c}>{row.SAP_Mailing_Address_City__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_Zip__c}>{row.SAP_Mailing_Address_Zip__c}</div>
+                                    </td>
+                                    <td>
+
+                                        <lightning-button-menu alternative-text="Actions"
+                                            class="slds-button_icon slds-button_icon-inverse custom-button-menu" 
+                                            variant="bare"
+                                            icon-name="utility:threedots_vertical" 
+                                            onselect={handleMenuSelect} 
+                                            menu-alignment="auto"
+                                            data-id={row.Id}>
+                                                <lightning-menu-item label="View" value="view_request"></lightning-menu-item>
+                                                <lightning-menu-item label="Edit" value="edit_request"></lightning-menu-item>
+                                                <lightning-menu-item label="Delete" value="delete_request"></lightning-menu-item>
+                                        </lightning-button-menu>
+                                    </td>
+                                </tr>
+                            </template>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </template>
+
+            
+
+
+            <template if:true={showBoroughCity}>
+                <div class="slds-scrollable_x custom-table-wrapper ">  
+                    <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-table ">
+                        <thead>
+                            <tr class="custom-header">
+                                <th scope="col" data-field="SAP_Id__c" class={sortedClassId} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Borough/City ID
+                                        <lightning-icon icon-name={sortIcons.SAP_Id__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Name__c" class={sortedClassName} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Borough/City/ Elections Office
+                                        <lightning-icon icon-name={sortIcons.SAP_Name__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_Line_1__c" class={sortedClassAddress} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Address
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_Line_1__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_State__c" class={sortedClassState} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        State
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_State__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Mailing_Address_Zip__c" class={sortedClassZip} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Zip Code
+                                        <lightning-icon icon-name={sortIcons.SAP_Mailing_Address_Zip__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th>
+                                <th scope="col" data-field="SAP_Election_Held_In__c" class={sortedClassElection} onclick={handleSort}>
+                                    <div class="slds-truncate">
+                                        Election Held In
+                                        <lightning-icon icon-name={sortIcons.SAP_Election_Held_In__c} class="sort-icon" size="x-small"></lightning-icon>
+                                    </div>
+                                </th> 
+                                <th scope="col">
+                                    <div class="slds-truncate">
+                                        Actions
+                                    </div>
+                                </th>             
+
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <template for:each={paginatedResult} for:item="row">
+                                <tr key={row.Id} data-id={row.Id} data-name={row.SAP_Name__c} onclick={handleRowClick}>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Id__c}>{row.SAP_Id__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Name__c}>{row.SAP_Name__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_Line_1__c}>{row.SAP_Mailing_Address_Line_1__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_State__c}>{row.SAP_Mailing_Address_State__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Mailing_Address_Zip__c}>{row.SAP_Mailing_Address_Zip__c}</div>
+                                    </td>
+                                    <td>
+                                        <div class="slds-truncate" title={row.SAP_Election_Held_In__c}>{row.SAP_Election_Held_In__c}</div>
+                                    </td>
+                                    <td>
+
+                                        <lightning-button-menu alternative-text="Actions"
+                                            class="slds-button_icon slds-button_icon-inverse custom-button-menu" 
+                                            variant="bare"
+                                            icon-name="utility:threedots_vertical" 
+                                            onselect={handleMenuSelect} 
+                                            menu-alignment="auto"
+                                            data-id={row.Id}>
+                                                <lightning-menu-item label="View" value="view_request"></lightning-menu-item>
+                                                <lightning-menu-item label="Edit" value="edit_request"></lightning-menu-item>
+                                                <lightning-menu-item label="Delete" value="delete_request"></lightning-menu-item>
+                                        </lightning-button-menu>
+                                    </td>
+                                </tr>
+                            </template>
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </template>
+
+
+            <template if:true={noResults}>
+                <div class="no-result-found">
+                    <h1 class="no-result-found-label">No Results Found</h1>
+                </div>
+            </template>
+
+
+            <template if:false={noResults}>
+                <div class="pagination-container">
+                    <lightning-button class="pagination-button" label="<< Prev" onclick={handlePreviousPage}
+                        disabled={isPreviousDisabled} variant="neutral">
+                    </lightning-button>
+                
+                    <div class="page-info">
+                        <span class="page-range">{startRange}-{endRange} of {transactionsFoundLabel} &nbsp;</span>
+                        <span class="page-text"> | Page &nbsp;
+                            <lightning-input 
+                                type="number" 
+                                value={currentPage} 
+                                label="Current Page" 
+                                variant="label-hidden"
+                                class="current-page-input"
+                                onchange={handlePageChange}>
+                            </lightning-input> &nbsp;
+                            of {totalPages}
+                        </span>
+                    </div>      
+                
+                    <lightning-button class="pagination-button" label="Next >>" onclick={handleNextPage}
+                        disabled={isNextDisabled} variant="neutral">
+                    </lightning-button>
+                </div>
+        </template>
+
+
+        </div>
+
+
+        <template if:true={isShowOfficial}>
+            <div class="dashboard-cards secondDivForDataTable">
+                <div class="slds-grid slds-grid_align-end slds-m-bottom_medium">
+                    <div class="buttoncontainerfilter">
+                    <div class="left-button slds-p-left_small">
+                        <span class="slds-text-title_bold slds-m-right_x-small search-css">{searchLabel}</span>
+                        <lightning-badge label={officialTransactionsFoundLabel} class="slds-badge_inverse result-no-css"></lightning-badge>
+                    </div>
+                    <div class="right-buttons">
+                        <lightning-badge data-id="current-day" label="Today" class={officialBadgeClassCurrentDay}
+                            onclick={officialHandleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-week" label="This Week" class={officialBadgeClassThisWeek}
+                            onclick={officialHandleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-month" label="This Month" class={officialBadgeClassThisMonth}
+                            onclick={officialHandleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-quarter" label="This Quarter" class={officialBadgeClassThisQuarter}
+                            onclick={officialHandleBadgeClick}>
+                        </lightning-badge>
+                        <lightning-badge data-id="this-year" label="This Year" class={officialBadgeClassThisYear}
+                            onclick={officialHandleBadgeClick}>
+                        </lightning-badge>
+
+                        <div class="export-button" title="Export to Excel" onclick={handleExportResultButtonOfficialClick}>
+                            <lightning-icon icon-name="doctype:excel" size="xx-small" alternative-text="Excel Icon"></lightning-icon>
+                            <span>Export to Excel</span>
+                        </div>
+
+                        <lightning-button variant="brand" label=" + Add New Official" title="Primary action" onclick={handleNavigateToAdd}
+                            class="slds-m-left_x-small slds-button_brand addnewbutton">
+                        </lightning-button>
+
+                    </div>
+                </div>
+                </div>
+
+
+                <template if:true={officialShowResults}>    
+                    <div class="slds-scrollable_x custom-table-wrapper TrHoverBackGroundColorChange">                   
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered custom-tables">
+                            <thead>
+                                <tr class="custom-header">
+                                    <th scope="col" data-field="SAP_Title__c" class={sortedClassOfficialTitle} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Title
+                                            <lightning-icon icon-name={officialsortIcons.SAP_Title__c} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="SAP_Party__c" class={sortedClassParty} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Party
+                                            <lightning-icon icon-name={officialsortIcons.SAP_Party__c} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="LastName" class={sortedClassLastName} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Last Name
+                                            <lightning-icon icon-name={officialsortIcons.LastName} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="FirstName" class={sortedClassFirstName} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            First Name
+                                            <lightning-icon icon-name={officialsortIcons.FirstName} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="SAP_Start_Term__c" class={sortedClassStartTerm} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Start Term
+                                            <lightning-icon icon-name={officialsortIcons.SAP_Start_Term__c} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="SAP_End_Term__c" class={sortedClassEndTerm} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            End Term
+                                            <lightning-icon icon-name={officialsortIcons.SAP_End_Term__c} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="HomePhone" class={sortedClassHomePhone} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Home Phone
+                                            <lightning-icon icon-name={officialsortIcons.HomePhone} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="Phone" class={sortedClassPhone} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Business Phone
+                                            <lightning-icon icon-name={officialsortIcons.Phone} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col" data-field="SAP_Extension__c" class={sortedClassExtension} onclick={officialHandleSort}>
+                                        <div class="slds-truncate">
+                                            Extension
+                                            <lightning-icon icon-name={officialsortIcons.SAP_Extension__c} class="sort-icon" size="x-small"></lightning-icon>
+                                        </div>
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate">
+                                            Actions
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={officialPaginatedResult} for:item="row">
+                                    <tr key={row.Id}>
+                                        <td>
+                                            <div class="slds-truncate" title={row.SAP_Title__c}>{row.SAP_Title__c}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.SAP_Party__c}>{row.SAP_Party__c}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.LastName}>{row.LastName}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.FirstName}>{row.FirstName}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.formattedStartDate}>{row.formattedStartDate}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.formattedEndDate}>{row.formattedEndDate}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.HomePhone}>{row.HomePhone}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.Phone}>{row.Phone}</div>
+                                        </td>
+                                        <td>
+                                            <div class="slds-truncate" title={row.SAP_Extension__c}>{row.SAP_Extension__c}</div>
+                                        </td>
+                                        <td>
+
+                                            <lightning-button-menu alternative-text="Actions"
+                                                class="slds-button_icon slds-button_icon-inverse custom-button-menu" 
+                                                variant="bare"
+                                                icon-name="utility:threedots_vertical" 
+                                                onselect={officialHandleMenuSelect} 
+                                                menu-alignment="auto"
+                                                data-id={row.Id}>
+                                                    <lightning-menu-item label="View" value="official_view_request"></lightning-menu-item>
+                                                    <lightning-menu-item label="Edit" value="official_edit_request"></lightning-menu-item>
+                                                    <lightning-menu-item label="Delete" value="official_delete_request"></lightning-menu-item>
+                                            </lightning-button-menu>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                        
+                    </div>      
+                </template>
+
+                
+                
+                <template if:false={officialShowResults}>
+                    <div class="no-result-found">
+                        <h1 class="no-result-found-label">No Officials Found</h1>
+                    </div>
+                </template>
+
+                <template if:true={officialShowResults}>
+                <div class="pagination-container">
+                    <lightning-button class="pagination-button" label="<< Prev" onclick={officialHandleNextPage}
+                        disabled={isOfficialPreviousDisabled} variant="neutral">
+                    </lightning-button>
+                
+                    <div class="page-info">
+                        <span class="page-range">{officialStartRange}-{officialEndRange} of {officialTransactionFound}</span>
+                        <span class="page-text"> | Page {officialCurrentPage} of {officialTotalPages}</span>
+                    </div>
+                
+                    <lightning-button class="pagination-button" label="Next >>" onclick={officialHandlePreviousPage}
+                        disabled={isOfficialNextDisabled} variant="neutral">
+                    </lightning-button>
+                </div>
+            </template>
+            </div>
+
+
+
+
+
+        </template>
+        </template>
+
+
+
+        <c-sap_-public-official-export-to-excel></c-sap_-public-official-export-to-excel>
+
+    </div>
+    
+</template>

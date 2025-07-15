@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="contentVersionIds" type="String[]" label="Content Version Ids" role="outputOnly"/>
+            <property name="uploadedFiles" type="String[]" label="uploadedFiles"/>
+            <property name="isReadOnly" type="Boolean" label="readOnly" description="ReadOnly Field"/>
+            <property name="documentsJson" type="String" label="Documents JSON" description="JSON string containing document information"/>
+            <property name="oldDocumentsJson" type="String" label="Old Documents JSON" description="Previous JSON string containing document information"/>
+            <property name="newDocumentsJson" type="String" label="New Documents JSON" description="Updated JSON string containing document information"/>
+            <property name="businessName" type="String" label="Business Name" description="Name of the business or organization"/>
+            <property name="firstName" type="String" label="First Name" description="First Name of the user"/>
+            <property name="lastName" type="String" label="Last Name" description="Last Name of the user"/>
+            <property name="email" type="String" label="Email Address" description="User's email address"/>
+            <property name="phone" type="String" label="Cell Phone Number" description="User's cell phone number"/>
+            <property name="emailRequestor" type="String" label="Email Requester Address" description="Requester email address"/>
+            <property name="sameAddress" type="Boolean" label="Same as Contact Address" description="Indicates if the address is the same as the contact address"/>
+            <property name="destinationCountrySame" type="Boolean" label="Destination Country Same" description="Indicates if the address is the same as the contact address"/>
+            <property name="expediteRequest" type="Boolean" label="Expedite Request" description="Indicates if the address is the same as the contact address"/>
+            <property name="expediteRequestString" type="String" label="Expedite Request String" description="Indicates if the address is the same as the contact address String"/>
+            <property
+        name="destinationCountrySameString"
+        type="String"
+        label="Destination Country Same String"
+        description="Indicates if the address is the same as the contact address String"/>
+            <property
+        name="sameAddressString"
+        type="String"
+        label="Same as Contact Address String"
+        description="Indicates if the address is the same as the contact address String"/>
+            <property name="selectedCountry" type="String" label="Selected Country" description="Indicates if the address is the same as the contact address String"/>
+            <property name="selectedHagueStatus" type="String" label="Selected Hague Status" description="Select Hague Status"/>
+            <property name="totalAmount" type="String" label="Total Amount" description="Total amount for the selected documents"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

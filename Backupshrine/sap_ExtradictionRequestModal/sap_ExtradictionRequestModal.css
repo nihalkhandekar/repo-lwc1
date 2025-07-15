@@ -1,0 +1,376 @@
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+  }
+  
+
+  .SE-ModalHeaderMain{
+    background-color: #EEF4FF;
+    height: 48px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    padding: 8px 12px;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+}
+
+.custom-modal__back {
+    position: absolute;
+    /* top: 0.5rem; */
+    /* right: 0.5rem; */
+    --lwc-borderWidthThin: 0px;
+    display: flex;
+    align-items: start;
+    background: white;
+    border-radius: 8px;
+}
+
+.SE-ModalHeader{
+    padding: 48px 12px 12px 12px !important;
+    border-radius: 0px !important;
+    min-height: calc(100vh - 120px);
+}
+
+.edit-button {
+    background-color: #EEF4FF; /* White background */
+    border: 0px solid #d8dde6; /* Light border */
+    cursor: pointer; /* Pointer cursor on hover */
+    padding: 8px 16px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 590;
+}
+
+/* Content body to allow scrolling */
+.custom-modal-body {
+    max-height: calc(85vh - 120px); /* Adjust based on header and footer height */
+    padding-right: 0.5rem; /* Add padding to avoid overlapping with scrollbar */
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.SE-modalFormStackSectionContent{
+    padding: 12px 12px 12px 12px
+}
+
+.footer{
+    background-color: #F3F3F3;
+    /* height: 56px; */
+    border-radius: 0 0 8px 8px;
+    padding: 8px 12px;
+    /* margin-top: -24px; */
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+    bottom: 0;
+}
+
+
+.extradicted-from{
+    width: 25%;
+}
+
+.slds-modal__footer {
+    margin-top: 1.5rem;
+    border-top: 1px solid #dddbda;
+    border-radius: 0px 0px 16px 16px;
+}
+
+.esq-align{
+    --slds-c-checkbox-color-border: rgb(201,201,201);
+    --slds-c-checkbox-radius-border: 4px;
+}
+.slds-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}
+
+.esq-align {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0.5rem;
+}
+
+.reason-inline {
+    display: flex;
+}
+
+.wetsign-inline {
+    display: flex;
+    padding-top: 1.5rem;
+}
+
+.boldFont {
+    font-weight: 590;
+    font-size: 12px;
+    padding-right: 0.5rem;
+}
+
+.personal-info-section,
+.official-detail-info-section,
+.account-status-info-section,
+.generate-info-section,
+.table-info-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border: 1px solid #dddbda;
+    border-radius: 12px;
+}
+
+.custom-space {
+    padding: 12px 16px;
+    background-color: #FFFFFF;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.slds-button-group {
+    justify-content: space-between;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f3f2f2;
+    font-size: 13px;
+
+}
+
+.button-left-group {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.button-right-group {
+    display: flex;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.edit-button::after {
+    text-decoration: none; 
+}
+
+.full-width {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.address {
+    --sds-c-textarea-color-background: #FFFFFF;
+    --textarea-color-background: #FFFFFF;
+    --sds-c-input-color-background: #FFFFFF;
+    --input-color-background: #FFFFFF;
+    --dxp-c-textarea-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --dxp-s-form-element-text-line-height: 20px;
+    --dxp-s-form-element-text-font-size: 14px;
+    --dxp-s-form-element-color-border: #C9C9C9;
+    --sds-c-textarea-text-color: #181818;
+    --dxp-s-form-element-text-color: #181818;
+    --lwc-borderWidthThin: 1px;
+    --lwc-formLabelFontSize: 12px;
+    --slds-g-color-neutral-base-30: rgba(92, 92, 92, 1);
+    --slds-c-input-color-background: #FFFFFF;
+    --slds-c-input-color-border: #C9C9C9;
+    --slds-c-input-radius-border: 8px 8px 8px 8px;
+    --sds-c-textarea-radius-border: 8px 8px 8px 8px;
+    --slds-c-textarea-color-background: #FFFFFF;
+    --slds-c-textarea-color-border: #C9C9C9;
+    --sds-c-input-text-color: #181818;
+    --sds-c-textarea-color-border: #C9C9C9;
+    --dxp-c-textarea-width-border: 1px;
+    --sds-c-input-color-border: #C9C9C9;
+    --slds-c-textarea-radius-border: 8px 8px 8px 8px;
+    --dxp-c-input-text-font-size: 14px;
+    --dxp-s-form-element-text-font-weight: 400;
+    --sds-c-input-radius-border: 8px 8px 8px 8px;
+    --dxp-s-form-element-label-font-size: 12px;
+    --dxp-s-form-element-label-font-weight: 590;
+    --dxp-s-form-element-label-color: rgba(92, 92, 92, 1);
+    --dxp-c-input-width-border: 1px;
+}
+
+.address .slds-form-element__control input[name="state"],
+.address .slds-form-element__control input[name="country"],
+.address .slds-form-element__control input[name="city"],
+.address .slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+.slds-form-element__control input[name="state"],
+.slds-form-element__control input[name="country"],
+.slds-form-element__control input[name="city"],
+.slds-form-element__control input[name="postalCode"] {
+    width: 50%;
+}
+
+lightning-input {
+    --slds-c-input-radius-border: 8px;
+}
+
+lightning-combobox {
+    --slds-c-input-radius-border: 8px;
+}
+
+lightning-textarea {
+    --slds-c-textarea-radius-border: 8px;
+}
+
+.save-button {
+    --sds-c-button-brand-color-background: #003A62;
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background-hover: rgb(169, 224, 240);
+    --sds-c-button-brand-color-border-hover: rgb(169, 224, 240);
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.custom-modal__close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    --lwc-borderWidthThin: 0px;
+}
+
+.clear-font {
+    color: #747474;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+.print-buttons {
+    --sds-c-button-brand-color-border: #003A62;
+    --sds-c-button-brand-color-background: #ffffff;
+    --slds-c-button-text-color: #003A62;
+    --lwc-buttonBorderRadius: 8px;
+}
+
+@media (min-width: 48rem) {
+    :host {
+        --slds-c-modal-sizing-medium: 80vw;
+    }
+}
+
+.custom-label {
+    font-size: 12px;
+    font-weight: 590;
+    font-family: "SF Pro", sans-serif;
+    color: #5c5c5c;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.required-indicator {
+    color: red;
+    margin-right: 0.2rem;
+}
+
+.esqclassalignment,
+.indefinitetermalignment {
+    margin-top: 4.5px;
+}
+
+.document-info-container {
+    background-color: #ffffff;
+    font-family: 'SF Pro', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+}
+
+.custom-card-header {
+    display: flex;
+    align-items: center;
+    background-color: #F6F9FF;
+    border: 1px solid #F3F3F3;
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 0 0;
+    box-sizing: border-box;
+}
+
+.header-text .title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+    padding-left: 0.5rem;
+}
+
+.header-text .description {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(92, 92, 92, 1);
+    padding-left: 0.5rem;
+}
+
+.custom-table-container {
+    padding: 24px;
+}
+
+.custom-table {
+    border: 1px solid #d8dde6;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.custom-table thead tr.custom-header th {
+    background-color: #f3f3f3;
+    font-weight: bold;
+}
+
+.custom-header {
+    width: 144px;
+    height: 32px;
+    background-color: #f3f3f3;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.custom-column {
+    font-size: 13px;
+}
+
+.custom-table td {
+    border-right: 1px solid #d8dde6;
+}
+
+.custom-table td:last-child {
+    border-right: none;
+}
+
+.spacing {
+    padding: 3px 0;
+}
+
+.firstComponent {
+    top: 40px;
+    position: relative;
+}
+
+.secoundComponent {
+    position: relative;
+    top: 40px;
+}
+
+.thirdComponent {
+    position: relative;
+    top: 40px;
+    padding-bottom: 60px;
+}
+
+.customInputFieldHeightSet{
+    height:80px;
+}
+
+.customGroupOFInputFieldMarginSet{
+    margin-bottom: 6px;
+}
