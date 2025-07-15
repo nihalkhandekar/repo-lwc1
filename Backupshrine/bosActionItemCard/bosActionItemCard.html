@@ -1,0 +1,289 @@
+<template>
+  <template if:true={showSort}>
+    <div class="sort" onclick={handleExpandSort}>
+      <p class="smallBold">{label.sort_by}:&nbsp;</p>
+      <p class="small">{selectedSort}</p>
+      <div class="chevron-wrapper">
+        <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+          title="chevrondown" class="chevron-container-down"></lightning-icon>
+      </div>
+    </div>
+    <template if:true={expandSort}>
+      <div class="sortOptions">
+        <div class="sortoptionWrapper">
+          <div class="oneSort" data-id={label.name} onclick={handleSort}>
+            <p class="large">{label.name}</p>
+          </div>
+          <div class="oneSort" data-id={label.date} onclick={handleSort}>
+            <p class="large">{label.date}</p>
+          </div>
+        </div>
+      </div>
+    </template>
+  </template>
+  <div class="slds-grid  slds-wrap tab_wrapper">
+    <template if:true={itemData.length}>
+    <template for:each={itemData} for:item="actionObject" for:index="index">
+        <div key={actionObject} onclick={handleAIClick} data-id={actionObject.Account__c} data-name={actionObject.Id}
+          class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 parentWrapper">
+          <!-- <template if:true={actionObject.isClosed}>
+            <div class="closeCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="card_content_wrapper">
+              <div class="iconContainer">
+                <img src={closeIcon} class="cardIcon" />
+              </div>
+              <div class="card_content">
+			   <div class="iconContainer_mob">
+                  <img src={closeIcon} class="cardIcon" />
+                </div>
+                <p class="largeBold">{actionObject.Name}</p>
+                <p class="large duedate">
+                  {label.due_Date}: {actionObject.Due_Date__c}
+                </p>
+                <div class="large card_desc">
+                  {actionObject.Description__c}
+                </div>
+              </div>
+            </div>
+          </div>
+          </template> -->
+        <template if:true={actionObject.isUpcoming}>
+            <div class="upcomingCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+              <div class="card_content_wrapper slds-large-size_7-of-12 slds-size_5-of-6">
+              <div class="cardIcon_Wrapper">
+                <div class="colorBar"></div>
+                <div class="iconContainer">
+                  <img src={upcomingIcon} class="cardIcon" />
+                </div>
+              </div>
+              <div class="card_content">
+                <div class="iconContainer_mob">
+                  <img src={upcomingIcon} class="cardIcon" />
+                </div>
+                  <p class="largeBold">{actionObject.Action_Item_Name__c}</p>
+                <p class="large duedate">
+                  {label.due_Date}: {actionObject.Due_Date__c}
+                </p>
+                <template if:true={actionObject.Credential_Number__c}>
+                    <template if:false={isdashboard}>
+                  <p class="large">Credential Number: {actionObject.Credential_Number__c}</p>
+                </template>
+                    <template if:true={isdashboard}>
+                      <p class="large slds-p-top_x-small">#: {actionObject.Credential_Number__c}</p>
+                    </template>
+                  </template>
+                  <template if:true={actionObject.businessName}>
+                    <p class="large">
+                      <a class="bName" data-id={actionObject.Account__c} data-name={actionObject.Id} onclick={handleAIClick}>{actionObject.businessName}</a>
+                    </p>
+                  </template>
+                  <template if:true={actionObject.Description__c}>
+                <div class="large card_desc">
+                  {actionObject.Description__c}
+                </div>
+                  </template>
+                <div class="card_link_mob">
+                    <a href={actionObject.cardHref} onclick={handleLinkClick} class="renewal_link" target={actionObject.tabTarget}>
+                      <p class="large">
+                        <img src={actionObject.iconSrc} class="link_icon" />{actionObject.cardLink}
+                      </p>
+                    </a>
+                </div>
+              </div>
+            </div>
+              <div class="card_content_wrapper slds-large-size_5-of-12 slds-size_1-of-6">
+              <div class="card_link">
+                  <a href={actionObject.cardHref} class="renewal_link" target={actionObject.tabTarget} onclick={handleLinkClick}><span class="imgLinkContainer">
+                    <img src={actionObject.iconSrc} class="link_icon" />
+                    <p class="large">{actionObject.cardLink}</p>
+                    </span></a>
+              </div>
+             
+            </div>
+          </div>
+        </template>
+        <template if:true={actionObject.isToDo}>
+          <template if:true={actionObject.isPastDue}>
+              <div class="pastDue_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                <div class="card_content_wrapper slds-large-size_7-of-12 slds-size_5-of-6">
+                <div class="cardIcon_Wrapper">
+                  <div class="colorBar"></div>
+                  <div class="iconContainer">
+                    <img src={pastdueIcon} class="cardIcon" />
+                  </div>
+                </div>
+                <div class="card_content">
+                  <div class="iconContainer_mob">
+                    <img src={pastdueIcon} class="cardIcon" />
+                  </div>
+                    <p class="largeBold">{actionObject.Action_Item_Name__c}</p>
+                  <p class="large duedate">
+                    {label.due_Date}: {actionObject.Due_Date__c}
+                  </p>
+                  <template if:true={actionObject.Credential_Number__c}>
+                      <template if:false={isdashboard}>
+                    <p class="large">Credential Number: {actionObject.Credential_Number__c}</p>
+                  </template>
+                      <template if:true={isdashboard}>
+                        <p class="large slds-p-top_x-small">#: {actionObject.Credential_Number__c}</p>
+                      </template>
+                    </template>
+                    <template if:true={actionObject.businessName}>
+                      <p class="large">
+                        <a class="bName" data-id={actionObject.Account__c} data-name={actionObject.Id} onclick={handleAIClick}>{actionObject.businessName}</a>
+                      </p>
+                    </template>
+                    <template if:true={actionObject.Description__c}>
+                  <div class="large card_desc">
+                    {actionObject.Description__c}
+                  </div>
+                    </template>
+                  <div class="card_link_mob">
+                      <a href={actionObject.cardHref} class="renewal_link" target={actionObject.tabTarget} onclick={handleLinkClick}>
+                        <p class="large">
+                          <img src={actionObject.iconSrc} class="link_icon" />{actionObject.cardLink}
+                        </p>
+                      </a>
+                  </div>
+                </div>
+              </div>
+                <div class="card_content_wrapper slds-large-size_5-of-12 slds-size_1-of-6">
+                <div class="card_link">
+                    <a href={actionObject.cardHref} class="renewal_link" target={actionObject.tabTarget} onclick={handleLinkClick}><span class="imgLinkContainer">
+                      <img src={actionObject.iconSrc} class="link_icon" />
+                      <p class="large">{actionObject.cardLink}</p>
+                      </span></a>
+                </div>
+                  
+              </div>
+            </div>
+          </template>
+          <template if:false={actionObject.isPastDue}>
+              <div class="todoCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                <div class="card_content_wrapper slds-large-size_7-of-12 slds-size_5-of-6">
+                <div class="cardIcon_Wrapper">
+                  <div class="colorBar"></div>
+                  <div class="iconContainer">
+                    <img src={todoIcon} class="cardIcon" />
+                  </div>
+                </div>
+                <div class="card_content">
+                  <div class="iconContainer_mob">
+                    <img src={todoIcon} class="cardIcon" />
+                  </div>
+                    <p class="largeBold">{actionObject.Action_Item_Name__c}</p>
+                  <p class="large duedate">
+                    {label.due_Date}: {actionObject.Due_Date__c}
+                  </p>
+                  <template if:true={actionObject.Credential_Number__c}>
+                      <template if:false={isdashboard}>
+                    <p class="large">Credential Number: {actionObject.Credential_Number__c}</p>
+                  </template>
+                      <template if:true={isdashboard}>
+                        <p class="large slds-p-top_x-small">#: {actionObject.Credential_Number__c}</p>
+                      </template>
+                    </template>
+                    <template if:true={actionObject.businessName}>
+                      <p class="large">
+                        <a class="bName" data-id={actionObject.Account__c} data-name={actionObject.Id} onclick={handleAIClick}>{actionObject.businessName}</a>
+                      </p>
+                    </template>
+                    <template if:true={actionObject.Description__c}>
+                  <div class="large card_desc">
+                    {actionObject.Description__c}
+                  </div>
+                    </template>
+                  <div class="card_link_mob">
+                      <a href={actionObject.cardHref} class="renewal_link" target={actionObject.tabTarget} onclick={handleLinkClick}>
+                        <p class="large">
+                          <img src={actionObject.iconSrc} class="link_icon" />{actionObject.cardLink}
+                        </p>
+                      </a>
+                  </div>
+                </div>
+              </div>
+                <div class="card_content_wrapper slds-large-size_5-of-12 slds-size_1-of-6">
+                <div class="card_link">
+                    <a href={actionObject.cardHref} class="renewal_link" target={actionObject.tabTarget} onclick={handleLinkClick}><span class="imgLinkContainer">
+                      <img src={actionObject.iconSrc} class="link_icon" />
+                      <p class="large">{actionObject.cardLink}</p>
+                      </span></a>
+                </div>
+                 
+              </div>
+            </div>
+          </template>
+        </template>
+      </div>
+    </template>
+    </template>
+    <template if:false={itemData.length}>
+      <template if:true={noDataActionCard}>
+        <div class="closeCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+          <div class="noAction_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="leftContent  slds-col slds-large-size_3-of-12 slds-size_12-of-12">
+            <img src={buildingGroup} class="buildingGroup" />
+          </div>
+            <div class="rightContent slds-col slds-large-size_9-of-12 slds-size_12-of-12">
+              <div>
+                <h5 class="nodataContent">{label.business_action_item_no_link_items}</h5>
+              </div>
+            <div>
+              <p class="large">
+                  {label.AddYour} <a href={label.LinkCredentialLink}>{label.Dashboard_credentials}</a> {label.or} <a onclick={goToOnlineServices}>{label.dashboard_onlineBizService}</a> {label.dashboard_nobiz_endText}
+              </p>
+            </div>
+          </div>
+        </div>
+       </div>
+      </template>
+      <template if:true={noToDoData}>
+        <div class="closeCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+          <div class="noAction_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="leftContent noDataIcon slds-col slds-large-size_3-of-12 slds-size_4-of-12">
+              <img src={notodo} class="buildingGroup" />
+              <img src={yellowcheckmark} class="yellowCheckmark" />
+            </div>
+            <div class="rightContent slds-col slds-large-size_9-of-12 slds-size_12-of-12">
+              <div>
+                <h5 class="nodataContent">{label.businessProfile_notodo_title}</h5>
+              </div>
+              <div>
+                <p class="large">
+                  {label.businessProfile_notodo_desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <template if:true={noUpcomingData}>
+        <div class="closeCard_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+          <div class="noAction_wrapper slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+            <div class="leftContent noDataIcon slds-col slds-large-size_3-of-12 slds-size_4-of-12">
+              <img src={noupcoming} class="buildingGroup" />
+              <img src={yellowcheckmark} class="yellowCheckmark" />
+            </div>
+            <div class="rightContent slds-col slds-large-size_9-of-12 slds-size_12-of-12">
+              <div>
+                <h5 class="nodataContent">{label.businessProfile_noupcoming_title}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </template>
+  </div>
+  <template if:true={loadMoreBlock}>
+    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+      onclick={handleLoadMore}>
+      <p class="small">{label.bizDashboard_MoreAI}</p>
+    </div>
+</template>
+  <template if:true={showLess}>
+    <div class="loadmore_Block slds-col slds-large-size_12-of-12 slds-size_12-of-12" tabindex="0"
+      onclick={handleShowLess}>
+      <p class="small">{label.bizDashboard_LessAI}</p>
+    </div>
+  </template>
+</template>

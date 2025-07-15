@@ -1,0 +1,663 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <template if:false={getAgentDetailsData}>
+        <button class="slds-button slds-button_natural add-agent-button" onclick={handleAddAgentPopup}>
+            <img src={addIcon} class="addIcon" alt="addIcon" />
+            {label.Add_Agent_Details}
+        </button>
+    </template>
+    <template if:true={FirstReportName}>
+        <button class="slds-button slds-button_natural change-agent-button" onclick={handleAddAgentPopup}>
+            <img src={changeUser} class="changeuser" alt="changeuser" />
+            {label.Change_Agent_Label}
+        </button>
+    </template>
+    <template if:true={changeAgentName}>
+        <button class="slds-button slds-button_natural change-agent-button" onclick={handleChangeAgentPopup}>
+            <img src={changeUser} class="changeuser" alt="changeuser" />
+            {label.Change_Agent_Label}
+        </button>
+    </template>
+    <!-- This is for to show the agent record with edit and remove buttons -->
+    <div class="principal-list border-fix" if:true={agentRecord}>
+        <div class="slds-grid slds-wrap">
+            <div class="principal-header">
+                <div class="username">
+                    <label>{label.Name}</label>
+                    <p>{getAgentDetailsData.Name__c}</p>
+                </div>
+            </div>
+        </div>
+        <div class="principal-details">
+            <div class="slds-grid slds-wrap details-row" if:true={addAgentRecordData.showBusinessId}>
+                <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                    <p class="small sub-title">{label.Business_ID}</p>
+                    <p class="small sub-desc">{addAgentRecordData.businessId}</p>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap details-row">
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12">
+                    <p class="small sub-title">{label.Mobile_Number}</p>
+                    <p class="small sub-desc">{addAgentRecordData.Agent_Phone__n}</p>
+                </div>
+                <div
+                    class="slds-col slds-size_1-of-1 slds-medium-size_12-of-12 slds-large-size_5-of-12 emailAddressDiv">
+                    <p class="small sub-title">{label.Email_Address}</p>
+                    <p class="small sub-desc email-word-break">{getAgentDetailsData.Email__c}</p>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap details-row">
+                <div class="slds-col slds-size_12-of-12">
+                    <p class="small sub-title">{label.brs_Business_Address}</p>
+                    <p class="small sub-desc">{addAgentRecordData.Business_Address__c}</p>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap details-row" if:true={addAgentRecordData.Residence_Street__div}>
+                <div class="slds-col slds-size_12-of-12">
+                    <p class="small sub-title">{label.brs_ConnecticutResidenceAddress}</p>
+                    <p class="small sub-desc">{addAgentRecordData.Residence_Address__c}</p>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap details-row" if:true={addAgentRecordData.Mailing_Address__div}>
+                <div class="slds-col slds-size_12-of-12">
+                    <p class="small sub-title">{label.Connecticut_Mailing_Address}</p>
+                    <p class="small sub-desc">{addAgentRecordData.Mailing_Address__c}</p>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap addingClass" if:true={domesticForigenFlowBtns}>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size_12-of-12 agentCardButtons">
+                    <button onclick={editAgentData} class="edit-btn slds-button slds-button_natural">
+                        <img src={editIcon} alt="editIcon" role="presentation" />
+                        {label.Edit}
+                    </button>
+                    <button onclick={deleteAgent} class="delete-btn slds-button slds-button_natural" data-name="0"
+                        data-id={getAgentDetailsData.Id}>
+                        <img src={deleteIcon} alt="deleteIcon" role="presentation" />
+                        {label.Remove}
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap addingClass" if:true={firstAndAnnualFlowBtns}>
+            <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 agent-action-btns">
+                <button onclick={editAgentData} class="edit-btn slds-button slds-button_natural">
+                    <img src={editIcon} alt="editIcon" role="presentation" />
+                    {label.Edit}
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- For Secretary of state -->
+    <div class="principal-list" if:true={secretaryRecord}>
+        <div class="slds-grid slds-wrap">
+            <div class="principal-header">
+                <div class="username">
+                    <label>{label.Name}</label>
+                    <p>{label.Secretary_Of_State}</p>
+                </div>
+            </div>
+        </div>
+        <div class="principal-details no-border">
+            <div class="slds-grid slds-wrap details-row">
+                <div class="slds-col slds-size_12-of-12">
+                    <p class="small sub-title">{label.brs_Business_Address}</p>
+                    <p class="small sub-desc">{label.Secretary_Of_State_Address}</p>
+                </div>
+            </div>
+        </div>
+        <div class="slds-grid slds-wrap" if:false={isFlowReport}>
+            <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 agent-action-btns has-border">
+                    <button onclick={deleteAgent} class="delete-btn slds-button slds-button_natural noMargin"
+                        data-name="0" data-id={getAgentDetailsData.Id}>
+                        <img src={deleteIcon} alt="deleteIcon" role="presentation" />
+                        {label.Remove}
+                    </button>
+            </div>
+        </div>
+    </div>
+    <template if:true={changegentMainPopup}>
+        <section role="dialog" aria-label="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-modal__header_empty">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12">
+                            <h5><b>{label.Agent_Confirm_Header}</b></h5>
+                            <p class="small">{label.Agent_Confirm_Subheader}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                            <label aria-label={label.close} tabindex="0" role="button" class="closePopup slds-float_right" onclick={closeConfirmChangeAgent} onkeypress={closeConfirmChangeAgentKeyPress}>
+                                <img src={closeIcon} class="closeIcon" alt="" />
+                            </label>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-10">
+                    <div class="slds-grid slds-wrap changeAgentContent">
+                        <div class="slds-col slds-large-size_8-of-12 slds-size_12-of-12">
+                            <div class="principal-list" if:false={secretaryRecord}>
+                                <div class="slds-grid slds-wrap">
+                                    <div class="principal-header">
+                                        <div class="username">
+                                            <label>{label.Name}</label>
+                                            <p>{getAgentDetailsData.Name__c}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="principal-details no-border">
+                                    <div class="slds-grid slds-wrap details-row"
+                                        if:true={addAgentRecordData.showBusinessId}>
+                                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                                            <p class="small sub-title">{label.Business_ID}</p>
+                                            <p class="small sub-desc">{addAgentRecordData.businessId}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap details-row">
+                                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                            <p class="small sub-title">{label.Mobile_Number}</p>
+                                            <p class="small sub-desc">{addAgentRecordData.Agent_Phone__n}</p>
+                                        </div>
+                                        <div class="slds-col slds-large-size_5-of-12 slds-size_11-of-12">
+                                            <p class="small sub-title">{label.Email_Address}</p>
+                                            <p class="small sub-desc email-word-break">{getAgentDetailsData.Email__c}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap details-row">
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <p class="small sub-title">{label.brs_Business_Address}</p>
+                                            <p class="small sub-desc">{addAgentRecordData.Business_Address__c}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap details-row"
+                                        if:true={addAgentRecordData.Residence_Street__div}>
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <p class="small sub-title">{label.brs_ConnecticutResidenceAddress}
+                                            </p>
+                                            <p class="small sub-desc">{addAgentRecordData.Residence_Address__c}</p>
+                                        </div>
+                                    </div>
+                                    <div class="slds-grid slds-wrap details-row"
+                                        if:true={addAgentRecordData.Mailing_Address__div}>
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <p class="small sub-title">{label.Connecticut_Mailing_Address}</p>
+                                            <p class="small sub-desc">{addAgentRecordData.Mailing_Address__c}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="principal-list" if:true={secretaryRecord}>
+                                <div class="slds-grid slds-wrap">
+                                    <div class="principal-header">
+                                        <div class="username">
+                                            <label>{label.Name}</label>
+                                            <p>{label.Secretary_Of_State}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="principal-details no-border">
+                                    <div class="slds-grid slds-wrap details-row">
+                                        <div class="slds-col slds-size_12-of-12">
+                                            <p class="small sub-title">{label.brs_Business_Address}</p>
+                                            <p class="small sub-desc">{label.Secretary_Of_State_Address}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <div class="slds-grid slds-wrap modal-footer-section">
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={goToIndividualBusinessOptions}>{label.Confirm}
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1" if:true={showBackButton}>
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={closeConfirmChangeAgent}>{label.Cancel_Label}</button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={addAgentMainPopup}>
+        <section role="dialog" aria-label="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1"
+            class="slds-modal slds-fade-in-open principal-popup slds-modal_small page-scroll-popup">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header slds-modal__header_empty">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader"
+                            if:true={addAgentData}>
+                            <p class="title" id="modal-heading-02">{label.Add_Agent}</p>
+                            <p class="desc">{label.Agent_Select_Option}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader"
+                            if:true={addAgentDataIndividual}>
+                            <p class="title" id="modal-heading-03">{label.Manual_Add_Individual_Agent}</p>
+                            <p class="desc">{label.Agent_fields_Mandatory}</p>
+                        </div>
+                        <div class={getHeaderClassName}
+                            if:true={individualBusinessAddress}>
+                            <p class="title" id="modal-heading-04">{label.Manual_Add_Individual_Agent}</p>
+                            <p class="desc" if:false={isAddressChange}>{label.Agent_fields_Mandatory}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader"
+                            if:true={searchAgentBusiness}>
+                            <p class="title" id="modal-heading-05">{label.Search_Business_Agent}</p>
+                            <p class="desc">{label.Search_Business_Agent_Description}</p>
+                        </div>
+                        <div class={getHeaderClassName}
+                            if:true={addBusinessAgentInfo}>
+                            <p class="title" id="modal-heading-07">{agentBusinessHeader}</p>
+                            <p class="desc" if:false={isAddressChange}>{label.Agent_fields_Mandatory1}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader"
+                            if:true={addSecretaryState}>
+                            <p class="title" id="modal-heading-09">{label.Secretary_Header}</p>
+                            <p class="desc">{label.Secretary_Description}
+                            </p>
+                        </div>
+                        <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                            <label tabindex="0" role="button" aria-label={label.close} class="closePopup slds-float_right" onclick={closeAddAgentMainPopup} onkeypress={closeAddAgentMainPopupKeyPress}>
+                                <img src={closeIcon} class="closeIcon" alt="" />
+                            </label>
+                        </div>
+
+
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-2"
+                    if:true={addAgentData}>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_12-of-12">
+                            <c-generic-radio_brs data-id="agent-options" radio-options={agentOptions}
+                                onctbosdatachange={handleAgentOptions} name="agent-options" answer={selectedAgentOption}
+                                has-error={agentData.Type__c_Error}>
+                            </c-generic-radio_brs>
+                        </div>
+                    </div>
+                    <p class="error-text" if:true={agentData.Type__c_Error}>
+                        {label.brs_Add_Incorporator_SelectType}
+                    </p>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-3"
+                    if:true={addAgentDataIndividual}>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 please-note" if:true={showPleaseNote}>
+                            <h6 class="please-note-copy-1">{label.Please_Note}</h6>
+                            <p class="please-note-copy-2">{label.Agent_Appointed_Description}</p>
+                        </div>
+                        <div class="slds-large-size_12-of-12 slds-size_12-of-12 addressFields">
+                            <form id="theForm">
+                                <div class="slds-grid slds-wrap slds-gutters">
+                                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                        <lightning-input label={label.First_Name_Required}
+                                            class="agent-inputs" type="text" value={AgentFirstName}
+                                            autocomplete="off" max-length="40"
+                                            placeholder={label.First_Name_Placeholder} onchange={handleAgentFirstName} onblur={handleAgentFirstNameBlur}
+                                            disabled={readonlyAgentDetails} required>
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                        <lightning-input label={label.Last_Name_Required}
+                                            class="agent-inputs" type="text" value={AgentLastName}
+                                            autocomplete="off" max-length="40" disabled={readonlyAgentDetails}
+                                            placeholder={label.Last_Name_Placeholder} onchange={handleAgentLastName} onblur={handleAgentLastNameBlur}
+                                            required>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap slds-gutters" style="margin-top: 16px;">
+                                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                        <lightning-input type="text" name="phone"
+                                            class="agent-inputs" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                            placeholder={label.Mobilenumber_Placeholder} onkeypress={onMobileNumberKeyPress} autocomplete="off"
+                                            message-when-pattern-mismatch={label.Com_PhoneAlert} onpaste={removeCopyPaste}
+                                            label={label.Mobile_Number_Required} value={AgentPhone} onchange={mobileHandler}
+                                            max-length="12" required onblur={handlePhoneBlur}>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                                <div class="slds-grid slds-wrap addressFields slds-gutters">
+                                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                        <lightning-input label={label.Email_Address_Required}
+                                            class="agent-inputs" type="email" id="input-box1"
+                                            autocomplete="off" max-length="225"
+                                            message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                            pattern={emailPattern} value={AgentEmail} required
+                                            placeholder={label.Email_Placeholder} onchange={handleEmail} checked>
+                                        </lightning-input>
+                                    </div>
+                                    <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                        <lightning-input label={label.Confirm_Email} onchange={handleConfirmEmail}
+                                            message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                            pattern={emailPattern} class="confirm-email-individual"
+                                            autocomplete="off" type="email" value={AgentConfirmEmail} max-length="225"
+                                            data-id="input-box2" placeholder={label.Email_Placeholder} required
+                                            onpaste={removeCopyPaste} checked>
+                                        </lightning-input>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-4"
+                    if:true={individualBusinessAddress}>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 please-note" if:true={showPleaseNote}>
+                            <h6 class="please-note-copy-1">{label.Please_Note}</h6>
+                            <p class="please-note-copy-2">{label.Agent_Appointed_Description}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                            <div class="slds-grid slds-wrap addressFields">
+                                <c-generic-table class="individualTable" tablecolumns={getIndividualColumns}
+                                    tabledata={agentIndividualTableData}></c-generic-table>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 check-box-section">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-size_12-of-12 slds-large-size_3-of-12">
+                                    <p class="largeBold">{label.brs_Business_Address}</p>
+                                </div>
+                                <div class="slds-size_12-of-12 slds-large-size_9-of-12" if:true={showPrincipalCheckbox}>
+                                    <div class="theme1">
+                                        <div class="dec-checkbox">
+                                            <c-generic-multi-select list-data={principalOfficeAddressCheckboxOptions}
+                                                value={isSameAsPrincipalChecked}
+                                                oncheckboxinputselection={onCopyPrincipalAddressCheck}>
+                                            </c-generic-multi-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="addressFields">
+                                <c-brs_address source={source} can-be-outside-us class="busniessAddress"
+                                    unitlabel={label.AddressUnit_Apt} autocomplete callonsetvalues fieldreq={businessRequired}
+                                    set-retained-address={businessAddressFields} disabled={copyPrincipalAddressCheck}
+                                    onaddresschange={addresschange}>
+                                </c-brs_address>
+                            </div>
+                            <div class="slds-grid slds-wrap check-box-section">
+                                <div class="slds-size_12-of-12 slds-large-size_5-of-12">
+                                    <p class="largeBold">{label.brs_ConnecticutResidenceAddress}</p>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_7-of-12" if:true={hidecheckbox}>
+                                    <div class="theme1">
+                                        <div class="dec-checkbox">
+                                            <c-generic-multi-select class="selectedCheckBox"
+                                                list-data={businessAddressCheckboxOptions}
+                                                value={isBusinessAddressChecked}
+                                                oncheckboxinputselection={onCopyBusinessAddressCheck}>
+                                            </c-generic-multi-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- default-state='CT' -->
+                            <div class="slds-grid slds-wrap addressFields">
+                                <c-brs_address source={source} class="residentialAddress" unitlabel={label.AddressUnit_Apt}
+                                    autocomplete retainedresadd={residenceAddressFields}
+                                    set-retained-address={residenceAddressFields} default-state={label.CT}
+                                    disabled={copyBusinessAddressCheck}>
+                                </c-brs_address>
+                            </div>
+                            <div class="slds-grid slds-wrap check-box-section" if:true={showMailingAddress}>
+                                <div class="slds-size_12-of-12 slds-large-size_5-of-12">
+                                    <p class="largeBold">{label.Connecticut_Mailing_Address}</p>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_7-of-12" if:true={hidecheckbox}>
+                                    <div class="theme1">
+                                        <div class="dec-checkbox">
+                                            <c-generic-multi-select class="selectedCheckBox"
+                                                list-data={businessAddressCheckboxOptions}
+                                                value={isMailingChecked}
+                                                oncheckboxinputselection={onCopyMailingAddressCheck}>
+                                            </c-generic-multi-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- default-state='CT' -->
+                            <div class="slds-grid slds-wrap addressFields" if:true={showMailingAddress}>
+                                <c-brs_address source={source} class="mailingAddress" unitlabel={label.AddressUnit_Apt} autocomplete
+                                    retainedresadd={mailingAddressFields} accept-po={acceptPoBox}
+                                    set-retained-address={mailingAddressFields} default-state={label.CT}
+                                    disabled={copyMailingAddressCheck}>
+                                </c-brs_address>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="error-text margin-t-0" if:true={isEditedAddressFields}>{label.address_error_message}</p>
+                </div>
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options biz-result-modal"
+                    id="modal-content-id-5" if:true={searchAgentBusiness}>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col  please-note" if:true={showPleaseNote}>
+                            <h6 class="please-note-copy-1">{label.Please_Note}</h6>
+                            <p class="please-note-copy-2">{label.Agent_Appointed_Description}</p>
+                        </div>
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 addressFields">
+                            <div class="slds-grid slds-wrap" style="margin-top: 16px;">
+                                <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                                    <c-brs_business-search-table onbusinessselect={onPrincipalListRadioCheck}
+                                        onsearchbusiness={handleSearchBusiness} search-key={searchKey}
+                                        business-list={principalList} added-business-list ={principalList} show-mailing-address
+                                        ongetbusinessresults={handleGetResults} selected-radio-value={selectedRadio}>
+
+                                    </c-brs_business-search-table>
+
+                                    <p class="error-message-text" if:true={errorMessageForSearch}>
+                                        {errorMessageForSearch}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-7"
+                    if:true={addBusinessAgentInfo}>
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 please-note" if:true={showPleaseNote}>
+                        <h6 class="please-note-copy-1">{label.Please_Note}</h6>
+                        <p class="please-note-copy-2">{label.Agent_Appointed_Description}</p>
+                    </div>
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 businessMailingInfoTable">
+
+                        <div class="margin-b-24">
+                            <c-generic-table tablecolumns={getBusinessPrincipalColumns}
+                                tabledata={businessPrincipalTableData}></c-generic-table>
+                        </div>
+                        <p class="error-text" if:true={businessErrorValidation}>
+                            {businessErrorValidation}
+                        </p>
+                        <template if:false={showAddressFormWhenAnyFieldMiss}>
+                            <button if:true={editAddInfoBtn} class="slds-button slds-button_natural natural-btn" onclick={handleClickeventForEditInfo}>
+                                <img class="button-edit-icon" src={editIcon} alt="" />
+                                <span>{label.EDIT_ADDRESS_INFO}</span>
+                            </button>
+                            <button if:false={editAddInfoBtn} class="slds-button slds-button_natural natural-btn" onclick={handleClickeventForCancelInfo}>
+                                <img src={closeIcon} class="button-close-icon" alt="" />
+                                <span>{label.CANCEL_EDITING}</span>
+                            </button>
+                        </template>
+                        <div class="slds-grid slds-wrap" if:true={editInfoDetails}>
+                            <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 newBusiness">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                                        <p class="largeBold">{label.Connecticut_Business_Address}</p>
+                                    </div>
+                                    <div class="slds-large-size_12-of-12 slds-size_12-of-12 addressFields">
+                                        <c-brs_address source={source} class="editBusinessAddress" unitlabel={label.AddressUnit_Apt}
+                                            autocomplete retainedresadd={businessAddressFields} default-state={label.CT}
+                                            set-retained-address={businessAddressFields} onaddresschange={onCTAddressChange}>
+                                        </c-brs_address>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 newMailing"
+                                if:true={showMailingAddress}>
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+                                        <p class="largeBold">{label.Connecticut_Mailing_Address}</p>
+                                    </div>
+                                    <div class="slds-large-size_12-of-12 slds-size_12-of-12 addressFields">
+                                        <c-brs_address source={source} class="editMailingAddress" unitlabel={label.AddressUnit_Apt}
+                                            default-state={label.CT} autocomplete retainedresadd={mailingAddressFields}
+                                            accept-po={acceptPoBox} set-retained-address={mailingAddressFields} onaddresschange={onCTAddressChange}>
+                                        </c-brs_address>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                        <div class="slds-grid slds-wrap slds-gutters input-grid">
+                            <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                <div class="margin-b-24">
+                                    <lightning-input type="email" class="business-inputs"
+                                        value={agentBusinessEmailAddress} label={label.Email_Address_Required} max-length="225"
+                                        message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                        pattern={emailPattern} onchange={handleChangeAgentInfoEmailAddress}
+                                        autocomplete="off" placeholder={label.Email_Placeholder} required disabled={isAddressChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                <div class="margin-b-24">
+                                    <lightning-input type="email" class="confirm-business-email"
+                                        value={agentBusinessConfirmEmailAddress} autocomplete="off"
+                                        label={label.Confirm_Email} data-id="input-box3" max-length="225"
+                                        message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                        pattern={emailPattern} onchange={handleChangeConfirmEmailAddress}
+                                        onpaste={removeCopyPaste} placeholder={label.Email_Placeholder} required disabled={isAddressChange}>
+                                    </lightning-input>
+                                </div>
+
+                            </div>
+                            <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 inputForm">
+                                <div class="margin-b-24">
+                                    <lightning-input type="text" name="phone1"
+                                        class="business-inputs" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                        placeholder={label.Mobilenumber_Placeholder} onkeypress={onMobileNumberKeyPress} autocomplete="off"
+                                        message-when-pattern-mismatch={label.Com_PhoneAlert} label={label.Mobile_Number_Required}
+                                        value={agentBusinessPhoneNumber} onchange={mobileHandlerBusiness} onpaste={removeCopyPaste}
+                                        max-length="12" required onblur={handlePhoneBlurBusiness} disabled={isAddressChange}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secretery of state -->
+                <div class="slds-modal__content slds-p-around_medium popup-body radio-options" id="modal-content-id-9"
+                    if:true={addSecretaryState}>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12 addressFields">
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-large-size_12-of-12 slds-size_12-of-12">
+                                    <c-generic-table tablecolumns={secretaryColumns}
+                                    tabledata={secretaryData}></c-generic-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <div class="slds-grid slds-wrap modal-footer-section">
+                        <div class="slds-col">
+                            <button class="slds-button_stretch  primaryBtn higher slds-button slds-button_brand  "
+                                onclick={redirectManualAddAgentDetails} if:true={addAgentData}>{label.Next}
+                                <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" role="presentation" />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap modal-footer-section" if:true={addAgentDataIndividual}>
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={handleAgentDataIndividual}>{label.Next}
+                                <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" role="presentation" />
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1" if:true={showBackButton}>
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={goBackManualAgent}>{label.Back}</button>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap modal-footer-section" if:true={individualBusinessAddress}>
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={handleIndividualAgent}>
+                                <template if:false={showUpdateButton}>
+                                    {label.Confirm}
+                                </template>
+                                <template if:true={showUpdateButton}>
+                                    {label.Update}
+                                </template>
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1" if:true={showBackButton}>
+
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={goBackAgentIndividual}>{label.Back}</button>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap modal-footer-section" if:true={addSecretaryState}>
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={handleSecretaryStateAgent}>{label.Confirm}
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1">
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={goBackSecretaryState}>{label.Back}</button>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap modal-footer-section" if:true={searchAgentBusiness}>
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={handleSearchAgentBusiness}>{label.Next}
+                                <img src={chevronRightWhite} class="rightIcon" alt="rightIcon" role="presentation" />
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1" if:true={showBackButton}>
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={goBackaddAgentDataIndividual}>{label.Back}</button>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-wrap modal-footer-section" if:true={addBusinessAgentInfo}>
+                        <div class="slds-col slds-order_2">
+                            <button class="slds-button primaryBtn higher slds-button_brand"
+                                onclick={handleBusinessAgentInfo}
+                                >
+                                <template if:false={showUpdateButton}>
+                                    {label.Confirm}
+                                </template>
+                                <template if:true={showUpdateButton}>
+                                    {label.Update}
+                                </template>
+                            </button>
+                        </div>
+                        <div class="slds-col slds-order_1" if:true={showBackButton}>
+                            <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                onclick={goBackSearchAgentBusiness}>{label.Back}</button>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <p if:true={showAgentErrorMessage} class="error-text">{errorText}</p>
+</template>

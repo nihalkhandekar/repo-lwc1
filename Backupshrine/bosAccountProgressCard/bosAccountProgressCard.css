@@ -1,0 +1,159 @@
+.progress_card{
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 16px 0 #E7E9F2;
+}
+
+.link-icons{
+    height: 18px;
+    width: 18px;
+}
+
+.icon {
+    padding-right: 6px;
+}
+
+.delete-action a{
+  color: #757575;
+  font-family: 'Karla',sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.13px;
+  line-height: 27px;
+  text-decoration: underline;
+}
+
+.delete-action{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+
+.status-action{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+.status-action a{
+    color: #09538B;
+    font-family: 'Karla',sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-align: right;
+    text-decoration: underline;
+  padding-right: 4px;
+}
+
+.delete-action .icon {
+  padding-right: 8px;
+}
+.status-action .icon {
+  margin-right: -4px;
+  padding-right: 0;
+}
+.status-text {
+  color: #757575;
+  font-family: 'Karla',sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.6px;
+  line-height: 17px;
+  text-transform: uppercase;
+}
+.status .icons {
+  padding-right: 8px;
+}
+
+.check-complete{
+    fill:#3A95D3
+}
+
+.questionnare-name{
+    color: #757575;
+    font-family: 'Karla',sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-bottom: 4px;
+}
+
+.checklist-name{
+  color: #000000;
+  font-family: 'Lato',sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 0.2px;
+  line-height: 35px;
+  padding-bottom: 8px;
+  overflow-wrap: break-word;
+}
+
+.created-date{
+  color: #757575;
+  font-family: 'Karla',sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  padding-bottom: 32px;
+}
+
+.progress_card__footer {
+  border-top: 1px solid #ecebeb;
+  padding: 16px 32px;
+}
+
+.slds-card__body_inner {
+  padding: 32px;
+  padding-bottom: 40px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .containerDiv {
+    padding: 0 24px;
+  }
+
+  .delete-action .link-icons,
+  .status-action .link-icons {
+    display: none;
+  }
+
+  .delete-action a {
+    color: #757575;
+    font-family: 'Karla',sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.12px;
+    line-height: 25px;
+  }
+  .delete-action .icon {
+    padding-right: 0;
+  }
+  .status-action a {
+    color: #09538b;
+    font-family: 'Karla',sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.12px;
+    line-height: 25px;
+    text-align: right;
+  }
+
+  .progress_card__footer {
+    padding: 16px;
+  }
+
+  .slds-card__body_inner {
+    padding: 16px;
+    padding-bottom: 32px;
+  }
+
+  .icon {
+    padding-right: 0;
+  }
+
+  .status-action .icon {
+    padding-left: 0;
+  }
+}

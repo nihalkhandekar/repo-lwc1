@@ -1,0 +1,134 @@
+.mainContainer {
+    padding: 4.5rem;
+    font-family: Lato;
+}
+.mainSection {
+    position: relative;
+    bottom: 12rem;
+    background-color: #fff;
+    box-shadow: none;
+}
+.headingSection{
+    font-size: 45px !important;
+    font-weight: bold !important;
+    line-height: 50px !important;
+    font-family: Lato Karla;
+    border-bottom: 1px solid #ecebeb;
+    padding-bottom: 15px;
+}
+p.para-style{
+    font-family: myFirstFont;
+    font-size: 16px;
+    line-height: 24px
+}
+.main-title{
+    font-size:51px;
+}
+a.link-style,.span-style{
+    font-family:myFirstFont;
+}
+.page-title{
+    font-size:28px;
+    line-height:35px;
+}
+.reviewHeading{
+    font-weight: bold !important;
+    font-family: Lato;    
+    margin-bottom:1.5rem;    
+}
+.questionHeading{
+    font-weight: 700 !important;
+    font-family: myFirstFont;
+    padding-top: 15px;
+    color:rgb(45, 44, 44);
+    font-size:18px;
+}
+.questionfields{
+    font-size: 14px !important;
+    font-family: Lato;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
+    width: 50rem;
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+    letter-spacing: 2px;
+    border-top: 1px solid #ecebeb;
+}
+.checkboxField{
+    padding-top: 25px;
+    font-family: Lato;
+}
+  .nav-button {
+    font-family: Lato;
+    padding-top: 25px;
+    padding-bottom: 45px;
+    border-top: 1px solid #ecebeb;
+  }
+.mainContainer {
+    padding: 3rem;
+}
+.primaryBtn {
+    float: right;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: Lato;
+}
+.headingPadding{
+    padding-top: 10px;
+}
+.reviewHeading{
+    font-weight: bold !important;
+    font-family: Lato;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    font-size: 25px !important;
+}
+
+.slds-textarea {
+    height: 9rem !important;
+} 
+
+@media only screen and (max-width: 64rem){
+    .mainContainer {
+        padding: 2rem 20px;
+    }
+    .mainSection {
+        bottom: 0;
+    }
+    .primaryBtn {
+        float: left;
+    }
+    .nav-button {
+        margin-top: 60px;
+        border-top: 1px solid #ecebeb;
+        padding-top: 24px
+      }
+    .mainContainer {
+        padding: 2rem 20px;
+    } 
+    .headingSection{        
+        font-size: 1.5rem 12px !important;
+        font-weight: bold !important;
+        line-height: 2.5rem !important;
+        width: 21rem;
+        padding-bottom: 2rem;
+    }
+    .questionfields{
+        font-size: 1rem 10px !important;
+        padding-top: 0.5rem;
+        padding-bottom: 1rem;
+        padding-right: 2rem;
+        width: 100%;
+    }
+    .slds-box {
+        border: none;
+        padding: 0;
+    }
+    .mainSection {
+        bottom: 0;
+    }
+}

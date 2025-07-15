@@ -1,0 +1,225 @@
+<template>
+    <div class="spinner">
+        <template if:true={isLoading}>
+            <lightning-spinner class="spinner-inner" alternative-text="Loading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    </div>
+    <template if:false={hideAddButton}>
+        <button class="slds-button slds-button_natural add-incorporator-button" onclick={handleAddPopup}>
+            <img src={addIcon} class="addIcon" alt="addIcon" role="presentation" />
+            <template if:false={hasIncorporators}>
+                {label.brs_Add_Incorporator}
+            </template>
+            <template if:true={hasIncorporators}>
+                {label.brs_Add_More}
+            </template>
+        </button>
+    </template>
+
+    <template if:true={showErrorMessage}>
+        <p class="error-text">{label.brs_Add_Incorporator_ErrorMsg}</p>
+    </template>
+
+    <template if:true={hasIncorporators}>
+        <template for:each={incorporatorListData} for:item="incorporator" for:index="index">
+            <div class="card-list" key={incorporator.Id}>
+                <div class="slds-grid slds-wrap">
+                    <div class="card-header">
+                        <div class="username">
+                            <label>{label.Name}</label>
+                            <template if:true={incorporator.isIndividual}>
+                                <p>{incorporator.FirstName} {incorporator.LastName}</p>
+                            </template>
+                            <template if:false={incorporator.isIndividual}>
+                                <p>{incorporator.Business_Name__c}</p>
+                            </template>
+                        </div>
+                        <button data-name={index} class="arrow-button" onclick={onAccordianClick} aria-expanded="false">
+                            <template if:true={incorporator.showDetails}>
+                                <img src={arrowIcon} role="presentation" alt="" class="up"
+                                    aria-label={label.Show_incorporator_details} />
+                            </template>
+                            <template if:false={incorporator.showDetails}>
+                                <img src={arrowIcon} role="presentation" alt=""
+                                    aria-label={label.Show_incorporator_details} />
+                            </template>
+                        </button>
+                    </div>
+                </div>
+                <template if:true={incorporator.showDetails}>
+                    <div class="card-details">
+                        <div class="slds-grid slds-wrap details-row">
+                            <div class="slds-size_12-of-12">
+                                <p class="sub-title">{label.Email_Address}</p>
+                                <p class="sub-desc">{incorporator.Email}</p>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-wrap details-row">
+                            <div class="slds-size_12-of-12">
+                                <p class="sub-title">{label.Label_Address}</p>
+                                <p class="sub-desc">{incorporator.Business_Address_1__c}</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-size_12-of-12">
+                        <button onclick={editIncorporator} class="edit-btn slds-button slds-button_natural"
+                            data-id={incorporator.Id} data-name={index}>
+                            <img src={editIcon} alt="editIcon" role="presentation" />
+                            {label.Edit}
+                        </button>
+                        <button onclick={deleteIncorporator} class="delete-btn slds-button slds-button_natural"
+                            data-name={index} data-id={incorporator.Id}>
+                            <img src={deleteIcon} alt="deleteIcon" role="presentation" />
+                            {label.Remove}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </template>
+
+    <template if:true={showAddIncorporatorPopup}>
+        <section role="dialog" tabindex="-1" aria-label={label.Incorporator_modal} aria-modal="true"
+            aria-describedby="incorporator-modal-content"
+            class="slds-modal slds-fade-in-open incorporator-popup slds-modal_small page-scroll-popup">
+            <div if:true={spinner}>
+                <div class="popup-spinner">
+                    <lightning-spinner alternative-text="Page is loading..."></lightning-spinner>
+                </div>
+            </div>
+            <div class="slds-modal__container">
+                <template if:true={showFirstScreen}>
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="title" id="modal-heading-01">{label.brs_Add_Incorporator}</p>
+                                <p class="desc">{label.brs_Add_Incorporator_OptionSelectionDesc}</p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label role="button" aria-label={label.modal_close} tabindex="0" class="closePopup slds-float_right"
+                                    onclick={handleAddPopup} onkeypress={handleAddPopupClose}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body"
+                        id="incorporator-modal-content">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-size_12-of-12">
+                                <c-generic-radio_brs name="incorporator-options" radio-options={incorporatorOptions}
+                                onctbosdatachange={onRadioCheck} answer={incorporator.Type__c} has-error={incorporator.Type__c_Error}>
+                                </c-generic-radio_brs>
+                            </div>
+                        </div>
+                        <template if:true={incorporator.Type__c_Error}>
+                            <p class="error-text">
+                                {label.brs_Add_Incorporator_SelectType}
+                            </p>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col">
+                                <button class="slds-button_stretch primaryBtn higher slds-button slds-button_brand"
+                                    onclick={gotoSecondScreen}>{label.Next}
+                                    <img src={chevronRightWhite} class="rightIcon" alt="rightIcon"
+                                        role="presentation" />
+                                </button>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+                <template if:true={showSecondScreen}>
+                    <header class="slds-modal__header slds-modal__header_empty">
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-large-size_11-of-12 slds-size_11-of-12 modelHeader">
+                                <p class="title"> {label.brs_Add_Incorporator_Manually}</p>
+                                <p class="desc">{label.fields_Mandatory}</p>
+                            </div>
+                            <div class="slds-col slds-large-size_1-of-12 slds-size_1-of-12">
+                                <label role="button" aria-label={label.modal_close} tabindex="0" class="closePopup slds-float_right"
+                                    onclick={handleAddPopup} onkeypress={handleAddPopupClose}>
+                                    <img src={closeIcon} class="closeIcon" alt="" />
+                                </label>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium popup-body">
+                        <div class="slds-grid slds-wrap slds-gutters form-row">
+
+                            <template if:true={isIndividualFlow}>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_4-of-12 inputForm">
+                                    <lightning-input max-length="40" class="incorporator-input" type="text" label={label.First_Name_Required} required
+                                        onchange={handleFirstName} value={incorporator.FirstName} placeholder={label.First_Name_Placeholder} autocomplete="off"
+                                        onblur={handleBlur} data-id="FirstName">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_4-of-12 inputForm">
+                                    <lightning-input max-length="80" class="incorporator-input" type="text" label={label.Last_Name_Required} required
+                                        onchange={handleLastName} value={incorporator.LastName} placeholder={label.Last_Name_Placeholder} autocomplete="off"
+                                        onblur={handleBlur} data-id="LastName">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_4-of-12 inputForm">
+                                    <lightning-input max-length="80" type="text" label={label.Email_Address}
+                                        message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                        pattern={emailPattern} class="incorporator-email" onchange={onEmailChange}
+                                        value={incorporator.Email} onblur={hasEmailError} autocomplete="off" placeholder={label.EmailPlaceHolder}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+                            <template if:false={isIndividualFlow}>
+                                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12 inputForm">
+                                    <lightning-input max-length="80" class="incorporator-input" onchange={onBusinessNameChange}
+                                        type="text" label={label.Business_Name_Required} value={incorporator.Business_Name__c}
+                                        placeholder={label.business_name_placeholder} autocomplete="off" required
+                                        onblur={handleBlur} data-id="Business_Name__c">
+                                    </lightning-input>
+                                </div>
+                                <div class="slds-col slds-large-size_6-of-12 slds-size_12-of-12 inputForm">
+                                    <lightning-input max-length="80" type="text" label={label.Email_Address}
+                                        message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                                        pattern={emailPattern} class="incorporator-email" onchange={onEmailChange}
+                                        value={incorporator.Email} autocomplete="off" placeholder={label.EmailPlaceHolder}>
+                                    </lightning-input>
+                                </div>
+                            </template>
+
+
+                        </div>
+                        <c-brs_address can-be-outside-us source={source} class="businessAddress" unitlabel={label.AddressUnit_Apt}
+                            autocomplete set-retained-address={businessAddressFields}>
+                        </c-brs_address>
+                        <template if:false={editMode}>
+                            <button class="slds-button slds-button_natural add-incorporator-button"
+                                onclick={onAddMoreIncorporator}>
+                                <img src={addIcon} class="addIcon" alt="addIcon" role="presentation" />
+                                {label.brs_Add_More}
+                            </button>
+                        </template>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <div class="slds-grid slds-wrap modal-footer-section">
+                            <div class="slds-col slds-order_2">
+                                <button class="slds-button primaryBtn higher slds-button_brand"
+                                    onclick={submitIncorporatorForm}>{label.Confirm}
+                                </button>
+                            </div>
+                            <div class="slds-col slds-order_1">
+                                <template if:false={editMode}>
+                                    <button class="slds-button slds-button_natural slds-float_left back-btn"
+                                        onclick={gotoFirstScreen}>{label.Back}</button>
+                                </template>
+                            </div>
+                        </div>
+                    </footer>
+                </template>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

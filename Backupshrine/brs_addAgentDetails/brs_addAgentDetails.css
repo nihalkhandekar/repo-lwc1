@@ -1,0 +1,552 @@
+.add-agent-button {
+    margin-bottom: 24px;
+    color: #09538B;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.02px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+.individualTable{
+    width: 100% !important;
+}
+.change-agent-button {
+    margin-bottom: 24px;
+    color: #09538B;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+
+.iconsize {
+    height: 16px;
+    width: 16px;
+}
+
+.add-agent-button img {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+.slds-backdrop {
+    opacity: 0.27;
+    background-color: #000000;
+}
+
+.list-item {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.11px;
+    line-height: 21px;
+}
+
+.label2 {
+    padding-top: 16px;
+}
+
+.principal-popup .popup-body.radio-options {
+    padding-top: 0;
+    padding-bottom: 24px;
+}
+
+.border-button {
+    color: #09538B;
+    border: 2px solid #09538B;
+    padding: 11px 40px 9px 40px;
+    background-color: #ffffff;
+}
+
+.label-bold {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.left-padding {
+    padding-left: 16px;
+}
+
+.right-padding {
+    padding-right: 16px;
+}
+
+.margin-b-24 {
+    margin-bottom: 24px;
+}
+
+.margin-b-16 {
+    margin-bottom: 16px;
+}
+
+.check-box-section {
+    margin-top: 30px;
+}
+
+.checkbox-title {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    margin-right: 16px;
+}
+
+.subTitle {
+    color: rgb(117, 117, 117);
+    font-family: karla;
+    font-size: 14px;
+    font-weight: normal !important;
+    letter-spacing: 0.16px;
+    line-height: 27px;
+    margin-bottom: 16px;
+}
+
+.individual {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.must-reside-in-conne {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.11px;
+    line-height: 21px;
+    padding-left: 24px;
+    padding-top: 20px;
+}
+
+.business {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.modelHeader {
+    padding-bottom: 24px !important;
+}
+
+.please-note {
+    box-sizing: border-box;
+    border: 1px solid #F6A053;
+    border-radius: 4px;
+    background-color: #FFF8F2;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 12px;
+    padding-bottom: 16px;
+}
+
+.businesses-must-be {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.11px;
+    line-height: 21px;
+    padding-left: 24px;
+    padding-top: 20px;
+}
+
+.please-note-copy-1 {
+    color: #8A5321;
+    font-family: KarlaBold !important;
+    font-size: 16px !important;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.slds-icon-text-default {
+    padding: 10px;
+    margin-right: 20px;
+}
+
+.please-note-copy-2 {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.addressFields {
+    padding-top: 16px;
+}
+
+.label-names {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.principal-list {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+}
+
+.principal-list:nth-last-of-type(1) {
+    margin-bottom: 24px;
+}
+
+.principal-list .username p {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.principal-list .edit, .principal-list .delete {
+    text-align: center;
+    background: #F7F9FA;
+    padding: 28px 24px 26px 27px;
+}
+
+.principal-list img {
+    width: 16px;
+    margin-right: 8px;
+}
+
+.principal-list .edit button, .principal-list .delete button {
+    color: #09538B;
+    font-family: KarlaBold;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.error-message-text {
+    color: #DB2426;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    margin-top: 16px;
+}
+
+.error-message {
+    color: #DB2426;
+    font-family: Karla;
+}
+
+.agent-list {
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px 0 #E7E9F2;
+    padding: 16px;
+}
+
+.agent-name {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    padding-top: 16px;
+}
+
+.agent-heaader {
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.agent-header-details {
+    padding-bottom: 20px;
+}
+
+.agent-action-btns {
+    padding-top: 16px;
+}
+
+.agent-mailing-address {
+    color: #2D2C2C;
+    font-family: KarlaBold;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    padding-top: 20px;
+    padding-bottom: 24px;
+}
+
+.agentBts {
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+}
+
+.getAgentEmail .agentBusinessAddress .agentResidenceAddress {
+    padding-top: 36px;
+}
+
+.agent-corp {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+}
+
+.rectangle-copy {
+    width: 90%;
+    box-sizing: border-box;
+    border: 1px solid #ECEBEB;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    padding: 12px;
+}
+
+.no-results {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 12px;
+    letter-spacing: 0.09px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.changeAgentContent {
+    padding-top: 40px;
+}
+
+.principal-agent-data-table {
+    padding-top: 40px;
+    padding-bottom: 24px;
+}
+
+.businessMailingInfoTable {
+    padding-top: 36px
+}
+
+.newBusiness {
+    padding-top: 36px;
+}
+
+.newMailing {
+    padding-top: 32px;
+    padding-bottom: 20px;
+}
+
+.natural-btn{
+    color: #09538B;
+    font-family: KarlaBold;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+}
+.natural-btn .button-edit-icon {
+    margin-right: 8px;
+    height: 16px;
+    height: 16px;
+}
+.natural-btn .button-close-icon {
+    margin-right: 8px;
+    height: 12px;
+    height: 12px;
+}
+
+.principal-list {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+}
+
+.principal-list .principal-header {
+    display: flex;
+    width: 100%;
+}
+
+.principal-list .principal-header .username {
+    width: 100%;
+}
+
+.principal-list .username label {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 14px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.principal-list .username p {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.14px;
+    line-height: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.principal-list .arrow-button {
+    height: 42px;
+    width: 42px;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    margin-left: auto;
+    margin-top: 36px;
+}
+
+.principal-list .arrow-button img {
+    height: 24px;
+    width: 24px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    margin: 0;
+}
+
+.principal-list .arrow-button img.up {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+.principal-list .sub-title {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.principal-list .sub-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.principal-list .sub-desc.email-word-break {
+    word-break: break-all;
+}
+
+.principal-list .details-row {
+    margin-bottom: 24px;
+}
+
+.principal-list .principal-details {
+    border-bottom: 1px solid #ECEBEB;
+    padding-top: 24px;
+}
+
+.principal-list.border-fix .principal-details {
+    border-bottom: 0px;
+}
+.principal-list.border-fix .addingClass {
+    border-top: 1px solid #ECEBEB;
+}
+
+.principal-list button img {
+    width: 18px;
+    margin-right: 8px;
+}
+
+.principal-list button.delete-btn img {
+    width: 18px;
+}
+
+.principal-list button.edit-btn, .principal-list button.delete-btn {
+    font-family: Karla;
+    margin-top: 16px;
+    color: #00528D;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+
+.principal-list button.delete-btn {
+    margin-left: 24px;
+}
+
+.noMargin {
+    margin-left: 0px !important;
+}
+
+.details-row .slds-col {
+    padding: 0px;
+}
+.agentCardButtons{
+    display: flex;
+}
+.page-scroll-popup .slds-modal__content.popup-body.biz-result-modal {
+    padding-left :0;
+    padding-right: 0;
+}
+.biz-result-modal .please-note{
+    margin: 0 16px;
+}
+.biz-result-modal .error-message-text{
+    margin: 16px 16px 0 16px;
+}
+.principal-list .principal-details.no-border {
+    border: none;
+}
+.principal-list .agent-action-btns .has-border {
+    border-top: 1px solid #ecebeb;
+}
+.margin-t-0 {
+    margin-top:0;
+}
+.error-text {
+    margin-bottom: 16px;
+    margin-top: 0;
+}
+
+@media only screen and (max-width:767.9px) {
+    .emailAddressDiv{
+        margin-top: 24px;
+    }
+    .biz-result-modal .please-note{
+        margin: 0 16px;
+    }
+    .slds-modal_large .slds-modal__container{
+        margin: 80px 20px;
+     }
+}
+@media only screen and (min-width:1024px) {
+    .biz-result-modal .please-note{
+        margin: 0 32px;
+    }
+    .biz-result-modal .error-message-text{
+        margin: 0 32px;
+    }
+
+    .principal-list .username label {
+        font-size: 16px;
+    }
+
+    .principal-list .username p {
+        letter-spacing: 0.14px;
+    }
+
+    .input-grid{
+        align-items: baseline;
+    }
+}

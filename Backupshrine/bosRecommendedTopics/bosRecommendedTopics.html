@@ -1,0 +1,96 @@
+<template>
+    <!-- <template if:false={alltopics}> -->
+	<template if:true={topicCardArr.length}>
+        <div class="noCollectionHeader">
+            <template if:false={alltopics}>
+            <template if:true={isLoggedIn}>
+                    <template if:true={dashboard}>
+                        <h6>{label.HelpfulResourceTopics}</h6>
+                    </template>
+                    <template if:false={dashboard}>
+            <h4>{label.rc_Recommended_topics}</h4>
+            </template>
+                </template>
+            <template if:false={isLoggedIn}>
+                <h4>{label.Popular_topics}</h4>
+            </template>
+                <template if:true={dashboard}>
+                    <div class="noCollectionLink">
+                        <a href="javascript:void(0);" onclick={NavigateToRC}>
+                            <p class="small">{label.GoToResourceCenter}</p>
+                        </a>
+                        <img src={blueArrow} class="blueArrow" onclick={NavigateToAllTopics}>
+                    </div>
+                </template>
+                <template if:false={dashboard}>
+            <div class="noCollectionLink">
+                <a href="javascript:void(0);" onclick={NavigateToAllTopics}>
+                    <p class="small">{label.rc_View_All_Topics}</p>
+                </a>
+                <img src={blueArrow} class="blueArrow" onclick={NavigateToAllTopics}>
+            </div>
+            </template>
+            </template>
+
+            <template if:true={alltopics}>
+                <h4>{label.rc_All_topics}</h4>
+            </template>
+        </div>
+        <div class="slds-grid slds-gutters slds-wrap collectionCardWrapper">
+            <template if:true={topicCardArr.length}>
+                <template for:each={topicCardArr} for:item="ftopic">
+                    <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 slds-large-size_4-of-12"
+                        key={ftopic}>
+                        <div onclick={navigateTopicPage} data-id={ftopic.id} data-name={ftopic.name} class="topicCard" tabindex="0" onkeydown={navigateTopicPageKey}>
+                            <img src={ftopic.imgSrc} class="topicImg">
+                            <div class="topicContent">
+                                <p class="largeBold">{ftopic.name}</p>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </template>
+            <template if:true={isMob}>
+                <template if:true={showMoreCards}>
+                <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 showAllWrapper">
+                        <div class="showAllContent" onclick={showMoreTopics} tabindex="0" onkeydown={showMoreTopicsKey}>
+                        <img class="showMore" src={showMore} />
+                        <p class="large">{label.rc_Show_more_topics}</p>
+                    </div>
+                </div>
+            </template>
+                <template if:false={showMoreCards}>
+                    <div class="slds-col slds-size_12-of-12 slds-medium-size_6-of-12 showAllWrapper">
+                        <div class="showAllContent" onclick={showLessTopics} tabindex="0" onkeydown={showLessTopicsKey}>
+                            <img class="showMore" src={showMore} />
+                            <p class="large">Show Less Topics</p>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </template>
+    <!-- </template> -->
+    <!-- <template if:true={alltopics}>
+    <div class="noCollectionHeader">
+        <h4>All topics</h4>
+    </div>
+    <div class="slds-grid slds-gutters slds-wrap collectionCardWrapper">
+        <template if:true={topicCardArr.length}>
+            <template for:each={topicCardArr} for:item="ftopic">
+                <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12" key={ftopic}>
+                    <div onclick={navigateTopicPage} data-id={ftopic.id} data-name={ftopic.name} class="topicCard">
+                        <img src={ftopic.imgSrc} class="topicImg">
+                        <div class="topicContent">
+                            <p class="largeBold">{ftopic.name}</p>
+                        </div>
+                    </div>
+                </div>
+    </template>
+</template>
+    </div>
+</template> -->
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+</template>

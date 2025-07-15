@@ -1,0 +1,180 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-large-size_8-of-12 slds-size_12-of-12">
+            <c-brs_payment-opts show-change-opts header-text={label.Your_selected_payment_method} selected-payment-type="ACH">
+            </c-brs_payment-opts>
+        </div>
+    </div>
+    <hr class="block-separator">
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-large-size_8-of-12 slds-size_12-of-12">
+            <h6 class="owner-fields">{label.Select_the_account_owner}</h6>
+            <div class="theme3 theme5 theme4">
+                <c-generic-radio_brs data-id="radio" radio-options={accOwnerOptions} name="theme8"
+                    answer={selectedAccOwnerType} onctbosdatachange={handleAccOwnerSelect} show-error={hasError} required>
+                </c-generic-radio_brs>
+                <p class="slds-form-element__help radio-error" if:true={hasError}>{label.Generic_Input_Error_Message}</p>
+            </div>
+        </div>
+    </div>
+    <hr class="block-separator">
+    <div class="slds-grid slds-wrap content-block">
+        <div class="slds-col slds-large-size_9-of-12 slds-size_12-of-12 input-block">
+            <div class="slds-grid slds-wrap fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-combobox label={label.Account_type_required} value={selectedAccType} onchange={handleTypeSelection}
+                        options={accTypeOptions} class="ach-inputs" autocomplete="off" required>
+                    </lightning-combobox>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap slds-gutters fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.Account_number_required} type="text" autocomplete="off" max-length="21"
+                        class="ach-inputs" value={accNo} required onchange={handleAccNo}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.Confirm_account_number_required} onchange={handleConfirmAccNo} autocomplete="off"
+                        data-id="acc-input" class="ach-inputs" type="text" value={accNoConfirm} max-length="21"
+                        required>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.Routing_number_required} type="text" autocomplete="off" max-length="15"
+                        class="ach-inputs" value={routingNo} required onchange={handleRoutingNo} onkeydown={onRoutingInputBlur}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.Bank_name_required} type="text" autocomplete="off" value={bankName} required
+                        class="ach-inputs" onchange={handleBankName}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap slds-gutters fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.First_Name_Required} type="text" autocomplete="off" max-length="20"
+                        class="ach-inputs" value={firstName} required onchange={handleFirstName}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.Last_Name_Required} onchange={handleLastName} autocomplete="off" type="text"
+                        class="ach-inputs" value={lastName} max-length="20" required>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap slds-gutters fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm" if:true={showCompanyName}>
+                    <lightning-input label={label.Company_name_required} type="text" autocomplete="off" max-length="50"
+                        class="ach-inputs" value={companyName} required onchange={handleCompanyName}>
+                    </lightning-input>
+                </div>
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input label={label.Attention} onchange={handleAttention} autocomplete="off" type="text"
+                        class="ach-inputs" value={attention} max-length="80">
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-large-size_10-of-12 slds-size_12-of-12 inputForm">
+                    <c-brs_address can-be-outside-us source={source} class="accountAddress"
+                        unitlabel={label.AddressUnit_Apt} autocomplete set-retained-address={businessAddressFields}
+                        onaddresschange={onBusinessAddressChange} callonsetvalues>
+                    </c-brs_address>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input type="text" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="ach-inputs"
+                        onkeypress={onMobileNumberKeyPress} autocomplete="off"
+                        message-when-pattern-mismatch={label.Com_PhoneAlert} onpaste={removeCopyPaste}
+                        label={label.Phone_number_required} value={phone} onchange={mobileHandler} max-length="12" required
+                        onblur={handlePhoneBlur}>
+                    </lightning-input>
+                </div>
+            </div>
+            <div class="slds-grid slds-wrap fields-separator">
+                <div class="slds-col slds-large-size_5-of-12 slds-size_12-of-12 inputForm">
+                    <lightning-input max-length="255" type="email" name="email" label={label.Email_Address_Required} data-my-id="input-box1"
+                        class="ach-inputs" message-when-pattern-mismatch={label.GenericInput_Invalid_Email}
+                        onchange={onEmailChange} value={email} pattern={emailPattern} onblur={validateEmail}
+                        autocomplete="off" required>
+                    </lightning-input>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-large-size_3-of-12 slds-size_12-of-12 card-block" if:true={filingObj}>
+            <div class="slds-grid slds-wrap paymentTable">
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.profileCard_Filing_Fee}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${filingObj.filingFee}</p>
+                </div>
+                <template if:true={filingObj.showFranchiseTax}>
+                    <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                        <p class="large">{label.FRANCHISE_TAX}</p>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                        <p class="largeBold">${filingObj.franchiseTax}</p>
+                    </div>
+                </template>
+                <template if:true={filingObj.showExpeditedFees}>
+                    <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                        <p class="large">{label.ExpeditedFee}</p>
+                    </div>
+                    <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                        <p class="largeBold">${filingObj.expeditedFees}</p>
+                    </div>
+                </template>
+                <hr />
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.TotalAmount}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${filingObj.totalFee}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.Balancededucted}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">-${filingObj.balancededucted}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <p class="large">{label.Balanceremaining}</p>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${filingObj.balanceremaining}</p>
+                </div>
+                <hr />
+                <div class="slds-size_1-of-1 slds-large-size_2-of-3">
+                    <h6>{label.FinalAmount}</h6>
+                </div>
+                <div class="slds-size_1-of-1 slds-large-size_1-of-3">
+                    <p class="largeBold">${filingObj.finalAmount}</p>
+                </div>
+            </div>
+            <p class="large">{label.Check_Draft_Instructions}</p>
+            <a class="large-link" href="https://www.dir.ct.gov/best/eLicense/ACH-Routing-Number.png
+            " target="_blank">{label.Where_is_Account_and_Routing}</a>
+        </div>
+    </div>
+    <template if:true={showConfirmationPopUp}>
+        <c-brs_link-business-confirmation show-confirmation-pop-up={showConfirmationPopUp} message={message}
+            header={confirmationHeaderMsg} onmodalclose={closeModal} btntext="Ok"></c-brs_link-business-confirmation>
+    </template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-large-size_12-of-12 slds-size_12-of-12">
+            <c-brs_next-back-buttons nextlabel="Submit Payment" prevlabel={label.Back} onhandlenext={validate}
+                onhandleback={handlePropagateBack} hide-back>
+            </c-brs_next-back-buttons>
+        </div>
+    </div>
+</template>

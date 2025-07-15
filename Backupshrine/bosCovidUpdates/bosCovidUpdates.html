@@ -1,0 +1,182 @@
+<template>
+    <h4 class="titleText">{label.covidUpdateTitle}</h4>
+    <lightning-layout multiple-rows="true">
+        <lightning-layout-item size="12" small-device-size="12" large-device-size="8">
+            <lightning-layout multiple-rows="true">
+                 <lightning-layout-item size="12" small-device-size="12" large-device-size="12" medium-device-size="12">
+                    <div class="boxDisplay slds-grid slds-wrap boxPaddingTop">
+                        <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                            <p class="largeBold cardIconWrapper">
+                                <img src={newspaperIcon} class="cardIcon" />
+                                {label.covidUpdates_line1}
+                            </p>
+                        </div>
+                        <div class="slds-size_12-of-12">
+                            <div class="slds-p-top_x-small">
+                                <p class="small">{label.covidUpdates_line2}</p>
+                            </div>
+                        </div>
+                        <div class="slds-size_12-of-12">
+                            <div class="slds-grid slds-p-top_x-small">
+                                <input class="slds-input zipcode" placeholder={label.covidUpdates_EnterZipCode} type="search" onkeyup={checkValidations} onkeypress={handleEnterKey}/>
+                                <button class="slds-button primaryBtn" type="submit" onclick={checkZip} onkeypress={handleEnterKey}>{label.covidUpdates_GoButton}</button>
+                            </div>
+                            <template if:true={showError}>
+                                <p class="slds-error">
+                                   {label.covidUpdates_zipErrorMsg}
+                                </p>
+                            </template>
+                            <div class="slds-p-top_x-small">
+                                <p class="small">
+                                    <a target="_blank" href={label.covid_scheduling_opts}>{label.covidUpdates_line3}</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item  size="12" small-device-size="12" large-device-size="6" medium-device-size="6">
+                    <div onclick={clickResponse} class="boxDisplay slds-grid slds-wrap bigBoxPadding">
+                        <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                            <p class="largeBold cardIconWrapper">
+                                <img src={newspaperIcon} class="cardIcon"/>
+                                {label.covidResponse}
+                            </p>
+                        </div>
+                        <div class="slds-size_12-of-12 ">
+                            <div class="slds-p-top_x-small">
+                                <p class="small spacingContent">{label.covidRspContent}</p>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item  size="12" small-device-size="12" large-device-size="6" medium-device-size="6">
+                    <div onclick={clickRecovery} class="boxDisplay slds-grid slds-wrap bigBoxPadding">
+                        <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                            <p class="largeBold cardIconWrapper">
+                                <img src={newspaperIcon} class="cardIcon"/>
+                                {label.covidRecovery}
+                            </p>
+                        </div>
+                        <div class="slds-size_12-of-12">
+                            <div class="slds-p-top_x-small">
+                                <p class="small">{label.covidRcvContent}</p>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                
+                <lightning-layout-item  size="12" small-device-size="12" large-device-size="12">
+                    <div class="bigBoxDisplay slds-grid slds-wrap bigBoxPadding">
+                        <div class="innerBox slds-grid slds-wrap slds-size_12-of-12">
+                            <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                                <p class="largeBold cardIconWrapper">
+                                    <img src={newspaperIcon} class="cardIcon"/>
+                                    {label.covidCTMap}
+                                </p>
+                                
+                            </div>
+                            <div class="slds-align_absolute-center slds-size_12-of-12 slds-m-top_medium">
+                                <iframe 
+                                aria-label="Map" id="data-chart" 
+                                src={label.covidMapSrc}
+                                scrolling="no" frameborder="0"
+                                class="iframeDisplay"></iframe>
+                            </div>
+                        </div>
+                        <div class="slds-size_12-of-12">
+                            <hr>
+                            <div class="slds-p-left_large slds-p-bottom_medium">
+                                <a href="https://portal.ct.gov/Coronavirus/COVID-19-Data-Tracker" target="_blank">
+                                    <p class="small" style="text-decoration: underline;">
+                                    {label.covidUpdateConent}
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" large-device-size="12">
+                    <div onclick={clickCovidUpdates} class="bigBoxDisplay cursorBox slds-grid slds-wrap bigBoxPadding">
+                        <div class="innerBox slds-grid slds-wrap slds-size_12-of-12">
+                            <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                                <p class="largeBold cardIconWrapper">
+                                    <img src={newspaperIcon} class="cardIcon"/>
+                                    {label.covidSummary}
+                                </p>
+                                
+                            </div>
+                            <div class="slds-align_absolute-center slds-size_12-of-12 slds-m-top_medium">
+                                <iframe 
+                                aria-label="Map" id="covid-summary" 
+                                src="https://datawrapper.dwcdn.net/GiAkG/15/"
+                                scrolling="no" frameborder="0"
+                                class="iframeDisplayData"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" large-device-size="12">
+                    <div onclick={clickCovidUpdates} class="bigBoxDisplay cursorBox slds-grid slds-wrap bigBoxPadding">
+                        <div class="innerBox slds-grid slds-wrap slds-size_12-of-12">
+                            <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                                <p class="largeBold cardIconWrapper">
+                                    <img src={newspaperIcon} class="cardIcon"/>
+                                    {label.covidAgeGroupNumbers}
+                                </p>
+                            </div>
+                            <div class="slds-align_absolute-center slds-size_12-of-12 slds-m-top_medium">
+                                <iframe 
+                                aria-label="Map" id="age-group" 
+                                src="https://datawrapper.dwcdn.net/VzC1t/4/"
+                                scrolling="no" frameborder="0"
+                                class="iframeDisplayData"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="12" small-device-size="12" large-device-size="12">
+                    <div onclick={clickCovidUpdates} class="bigBoxDisplay cursorBox slds-grid slds-wrap bigBoxPadding">
+                        <div class="innerBox slds-grid slds-wrap slds-size_12-of-12">
+                            <div class="slds-large-size_12-of-12 slds-p-top_xx-small slds-p-left_xx-small">
+                                <p class="largeBold cardIconWrapper">
+                                    <img src={newspaperIcon} class="cardIcon"/>
+                                    {label.covidCountyNumbers}
+                                </p>
+                            </div>
+                            <div class="slds-align_absolute-center slds-size_12-of-12 slds-m-top_medium">
+                                <iframe 
+                                aria-label="Map" id="county-chart" 
+                                src="https://datawrapper.dwcdn.net/8cZIE/7/"
+                                scrolling="no" frameborder="0"
+                                class="iframeDisplayData"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </lightning-layout-item>
+                <lightning-layout-item  size="12" small-device-size="12" large-device-size="3">
+                    <div class="slds-grid slds-wrap">
+                        <div class="resourcepadding slds-large-size_12-of-12 slds-medium-size_4-of-12">
+                            <c-ct_resources componentname={componentName}></c-ct_resources>
+                        </div>
+                        <div class="signUp slds-large-size_12-of-12 slds-medium-size_4-of-12" style="border-radius: 4px;">
+                           <div style="position:absolute;">
+                                <img class="covidImg" src={covidSignUp}>
+                            </div>
+                            <div class="contentSignup">
+                                <h5>{label.signUpCovidTitle}</h5>
+                                
+                                <p class="small slds-p-top_x-small slds-p-bottom_large">
+                                    {label.signUpCovidContent}
+                                </p>
+                                    <button class="slds-button slds-button_brand whiteOutlineBtn" onclick={signUpCovid}>{label.signUp}
+                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                </lightning-layout-item>
+    </lightning-layout>
+
+</template>

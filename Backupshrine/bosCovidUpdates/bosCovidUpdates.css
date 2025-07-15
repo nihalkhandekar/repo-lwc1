@@ -1,0 +1,192 @@
+.titleText {
+    margin-top: 16px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #D0CFCF;
+}
+
+.cardIconWrapper {
+    display: flex;
+}
+
+.cardIcon {
+    margin-right: 12px;
+    height: 24px;
+}
+
+.covidUpdate {
+    margin-left: -15px;
+}
+
+.cursorBox {
+    cursor: pointer;
+}
+
+.boxDisplay {
+    border: 1px solid #CACACA;
+    border-radius: 4px;
+    padding: 16px 25px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.bigBoxDisplay {
+    border: 1px solid #CACACA;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.boxPaddingTop {
+    margin-top: 40px;
+    margin-right: 24px;
+}
+
+.bigBoxPadding {
+    margin-top: 16px;
+    margin-right: 24px;
+}
+
+.innerBox {
+    padding: 16px 25px;
+}
+
+.spacingContent {
+    padding-bottom: 24px;
+}
+
+.resourcepadding {
+    margin-top: -30px;
+}
+
+.iframeDisplay {
+    width: inherit;
+    height: 560px;
+    border: none;
+}
+
+.iframeDisplayData {
+    height: 450px;
+    width: inherit;
+}
+
+.signUp {
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+hr {
+    margin-bottom: 16px;
+}
+
+.contentSignup {
+    padding: 24px 24px 128px 24px;
+    position: relative;
+
+}
+
+.contentSignup .small,
+.contentSignup h5,
+.contentSignup {
+    color: white;
+}
+
+.whiteOutlineBtn.slds-button {
+    background-color: transparent;
+    border-radius: 4px;
+    color: #ffffff;
+    border-color: #ffffff;
+    font-family: 'Karla', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+    text-align: center;
+    text-transform: uppercase;
+    min-height: 60px;
+    height: auto;
+    width: 100%;
+}
+
+.whiteOutlineBtn.slds-button:hover {
+    background-color: white;
+    color: #09538b
+}
+
+.zipcode {
+    margin-right: 8px;
+}
+
+.slds-error {
+    padding-top: 8px;
+    color: #db2426;
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .slds-button.primaryBtn {        
+        width: 30%;
+        display: block;
+    }
+
+    .covidUpdate {
+        margin-left: 10px;
+    }
+
+    .contentSignup {
+        padding: 20px 20px 80px 20px;
+    }
+
+    .covidImg {
+        width: 270px;
+    }
+
+    .iframeDisplay {
+        height: 395px;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .iframeDisplay {
+        height: 535px;
+    }
+
+    .iframeDisplayData {
+        height: 350px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .iframeDisplay {
+        height: 355px;
+    }
+
+    .iframeDisplayData {
+        width: fit-content;
+        height: 460px;
+    }
+
+    .boxPaddingTop {
+        margin-right: 0px;
+    }
+
+    .boxPadding {
+        margin-top: 16px;
+        margin-right: 0px;
+    }
+
+    .bigBoxPadding {
+        margin-right: 0px;
+    }
+
+    .signUp {
+        margin-top: 32px;
+        margin-left: 0px;
+    }
+
+    .covidUpdate {
+        margin-left: 10px;
+    }
+
+    .covidImg {
+        width: 330px;
+    }
+}

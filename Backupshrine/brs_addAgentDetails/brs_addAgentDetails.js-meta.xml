@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>50.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
+        <target>lightning__Tab</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__RecordPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__FlowScreen</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__FlowScreen">
+            <property name="accountrecord" type="@salesforce/schema/Account"/>
+            <property name="getAgentDetailsData" type="@salesforce/schema/Agent__c"/>
+            <property name="principalOptions" type="String" label="principalOptions" description=""/>
+            <property name="agentOptionsWithSec" type="String" label="agentOptionsWithSec" description=""/>
+            <property name="agentOptionsWithoutSec" type="String" label="agentOptionsWithoutSec" description=""/>
+            <property name="flowName" type="String" label="flowName" description=""/>
+            <property name="businessFiling" type="String" label="businessFiling" description=""/>
+            <property name="showAgent" type="String" label="showAgent" description=""/>
+            <property name="showTemp" type="String" label="showTemp" description=""/>
+            <property name="showTempValue" type="Boolean" label="showTempValue" description=""/>
+            <property name="filingId" type="String" label="Filing Id" description=""/>
+            <property name="tempId" type="String" label="Temp Id" description=""/>
+            <property name="isAddressChange" type="Boolean" label="Address Change" description=""/>
+            <property name="isAgentChanged" type="Boolean" label="Agent Changed" description=""/>
+            <property name="isAgentChangeFlow" type="Boolean" label="isAgentChangeFlow" description=""/>
+            <property name="AgentChangeError" type="Boolean" label="AgentChangeError" description=""/>
+            <property name="showAgentErrorMessageNew" type="Boolean" label="showAgentErrorMessageNew" description=""/>
+            <property name="varNewFilingId" type="String" label="Clone Business Filing Id Responce" description=""/>
+            <property name="isTempDeleted" type="Boolean" label="Temp record deleted" description=""/>
+            <property name="tempHistory" label="Temp History Account" type="@salesforce/schema/Temp_History__c"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

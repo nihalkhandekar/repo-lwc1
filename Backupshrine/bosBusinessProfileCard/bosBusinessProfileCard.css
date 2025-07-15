@@ -1,0 +1,223 @@
+.businessProfileCard_Wrapper {
+  /* margin: 40px 82px 58px 158px; */
+  position: relative;
+}
+
+.businessNameRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.businessName {
+  display: flex;
+}
+
+.chevron-wrapper {
+  display: flex;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.chevron-container-down {
+  line-height: normal;
+  font-size: 32px;
+  /* margin: auto; */
+}
+
+.vertical-ellipsis {
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  /* background-color: #ffffff; */
+  box-shadow: 0 2px 4px 0 #e7e9f2;
+  /* padding: 19px 25px; */
+  height: 56px;
+  width: 56px;
+  cursor: pointer;
+}
+
+.ellipsis-icon {
+  transform: rotate(90deg);
+  width: 20px;
+  margin: auto;
+}
+
+.ellipsis-active {
+  border: 1px solid #09538b;
+}
+
+.allBusiness_wrapper {
+  border: 1px solid #d0cfcf;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px 0 #e7e9f2;
+  position: absolute;
+  min-width: 576px;
+  top: 48px;
+  z-index: 2;
+}
+
+.one_business {
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.one_business:hover {
+  background-color: #f7f9fa;
+}
+
+.ellipsis_expand {
+  border: 1px solid #d0cfcf;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 16px 0 #e7e9f2;
+  padding: 25px;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  cursor: pointer;
+}
+
+.status {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+
+.status-desc {
+  margin-top: 8px;
+}
+
+.status-row {
+  border: 1px solid #ecebeb;
+  border-radius: 11.5px;
+  /* background-color: #ffffff; */
+  padding: 0.5px 12.5px;
+  display: inline-flex;
+  background-color: #ECEBEB;
+}
+
+.status-dot {
+  height: 8px;
+  width: 8px;
+  background-color: #2d8d60;
+  border-radius: 50%;
+  margin: auto 0;
+  margin-right: 12px;
+}
+
+.status-message {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.businessInfoRow {
+  display: flex;
+  margin-top: 32px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.contentTitle {
+  color: #757575;
+}
+
+/* .toggleDetails {
+  display: none;
+} */
+.mob_Element {
+  display: none;
+}
+
+.slds-button.primaryBtn {
+  width: 100%;
+}
+.separator {
+  background-color: #ecebeb;
+  padding-top: .5px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+.infoLabel {
+  color: #757575;
+}
+
+@media only screen and (max-width: 1023px) {
+  .businessInfoRow {
+    flex-direction: column;
+  }
+
+  .businessName {
+    justify-content: space-between;
+    padding-right: 16px;
+  }
+
+  .businessInfoRow {
+    margin-top: 0;
+    display: none;
+  }
+
+  .status-desc {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+
+  .status-row {
+    /* margin-bottom: 24px; */
+    margin: auto 0 0;
+  }
+
+  .show {
+    display: block;
+    border-top: 1px solid #ecebeb;
+  }
+
+  .businessProfileCard_Wrapper {
+    padding: 24px 0;
+    margin: 0 20px;
+  }
+
+  .allBusiness_wrapper {
+    min-width: unset;
+    top: 68px;
+
+  }
+
+  .vertical-ellipsis {
+    display: none;
+  }
+
+  .contentWrapper {
+    padding-top: 16px;
+  }
+
+  /* .toggleDetails {
+    display: block;
+    border-top: 1px solid #ecebeb;
+    padding-top: 16px;
+    color: #09538b;
+  } */
+  .mob_Element {
+    display: flex;
+    height: 44px;
+    width: 44px;
+    cursor: pointer;
+    /* padding: 30px 0;
+    color: #09538b; */
+  }
+
+  .ellipsis_expand {
+    top: 178px;
+    z-index: 2;
+    box-shadow: none;
+  }
+  .separator {
+    margin: 20px 0 0;
+  }
+}

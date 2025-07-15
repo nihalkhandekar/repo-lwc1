@@ -1,0 +1,17 @@
+<template>
+    <h6 class="title">{label.IWantToLabel}</h6>
+    <hr>
+    <div class="slds-grid slds-wrap">
+        <template for:each={actionsData} for:item="actions">
+            <div class="actionsWrapper slds-col slds-size_12-of-12 slds-large-size_6-of-12" key={actions}>
+                <p class="smallBold">
+                    <a href={actions.Label_URL__c} target="_blank">{actions.Label_Name__c}</a>
+                </p>
+                <!-- <p class="smaller">{actions.Label_Description__c}</p> -->
+            </div>
+        </template>
+    </div>
+    <div if:true={spinner}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+    </div>
+</template>

@@ -1,0 +1,13 @@
+.divPadding{
+    margin-left:-40px;
+    margin-top:-20px;
+    padding-bottom: 15px;
+}
+
+@media only screen and (max-width: 1020px) {
+    .divPadding{
+        margin-left:0px;
+        margin-top:0px;
+    }
+
+}

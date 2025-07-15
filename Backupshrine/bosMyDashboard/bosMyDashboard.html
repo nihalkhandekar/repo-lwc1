@@ -1,0 +1,226 @@
+<template>
+  <!--Modal creation SCBCG-211-->
+  <c-modal-popup></c-modal-popup>
+  <h4 class="titleText">{label.MyDashboard}</h4>
+    <div class="slds-grid slds-wrap dashboardContainer">
+    <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_9-of-12">
+      <h6 class="secondaryTitleText">{label.Myservices}</h6>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12 cardMainWrapper">
+          <div class="cardWrapper business" tabindex="0" role="link">
+            <template if:true={showEmptyBusiness}>
+              <div class="cardImageWrap">
+                <p class="largeBold cardTitle bcenter">
+                  <img src={businessIcon} class="cardIcon" alt=""/>
+                  {label.BusinessCenter}</p>
+                <p class="largeBold cardTitle welcome">{label.welcome} </p>
+              </div>
+            </template>
+            <template if:false={showEmptyBusiness}>
+                <p class="largeBold cardTitle bcenter">
+                  <img src={businessIcon} class="cardIcon">
+                  {label.BusinessCenter}</p>
+            </template>
+            <div class="business_mob">
+              <p class="largeBold">
+                <img src={businessIcon} class="cardIcon">
+                {label.BusinessCenter}</p>
+              <template if:true={showBusinessCenter}>
+                <lightning-icon icon-name="utility:chevrondown" size="x-small" alternative-text="chevrondown"
+                  class="chevron-container-down" onclick={handleBusinessExpand}>
+                </lightning-icon>
+              </template>
+              <template if:false={showBusinessCenter}>
+                <lightning-icon icon-name="utility:chevronright" size="x-small" alternative-text="chevronright"
+                  class="chevron-container-down" onclick={handleBusinessExpand}>
+                </lightning-icon>
+              </template>
+            </div>
+
+            <div class="businessContent">
+              <template if:true={showEmptyBusiness}>
+                <p class="small">{label.AddYour} <a onclick={goToCredential}>{label.Dashboard_credentials}</a> {label.or} <a onclick={goToOnlineServices}>{label.dashboard_onlineBizService}</a> {label.toYourAccount}</p>
+              </template>
+              <template if:false={showEmptyBusiness}>
+                <p class="small"><b>{businessCount} {label.businesse_s}</b> {label.linked}</p>
+                <p class="small"><a onclick={goToBusiness}>{label.SeeAll}</a></p>
+                <hr class="separator">
+                <template if:true={hasCredentials}>
+                  <p class="small"><b>{credCount} {label.professionalCredentials}</b> {label.linked}</p>
+                  <p class="small"><a onclick={goToCredential}>{label.SeeAll}</a></p>
+                </template>
+                <template if:false={hasCredentials}>
+                  <p class="small"> {label.LinkYou} <a onclick={goToCredential}>{label.professionalCredentials}</a>&nbsp;{label.toGetUpdates} </p>
+                </template>
+              </template>
+            </div>
+          </div>
+          <div class="cardWrapper clickCards" onclick={gotoFilings} onkeypress={gotoFilings} tabindex="0" role="link">
+            <p class="largeBold">
+              <img src={filingsIcon} class="cardIcon" alt="" />
+              {label.my_filings}</p>
+            <p class="small">{label.filings_desc}</p>
+          </div>
+          <div class="cardWrapper clickCards" onclick={gotoPayments} onkeypress={gotoPayments} tabindex="0" role="link">
+            <p class="largeBold">
+              <img src={paymentsIcon} class="cardIcon" alt=""/>
+              {label.ph_mypayments}</p>
+            <p class="small">{label.payment_desc}</p>
+          </div>
+          <template if:false={dashboardResult.length}>
+            <div class="cardWrapper footerCard" tabindex="0" role="link">
+              <p class="largeBold label">
+                <img src={checkListIcon} class="cardIcon" alt=""/>
+                {label.Checklists}</p>
+              <div class="checklist_mob">
+                <p class="largeBold cardTitle">
+                  <img src={checkListIcon} class="cardIcon" alt=""/>
+                  {label.Checklists}</p>
+                <template if:true={showChecklist}>
+                  <lightning-icon icon-name="utility:chevrondown" size="x-small" alternative-text="chevrondown"
+                    class="chevron-container-down" onclick={handleExpandChecklist}>
+                  </lightning-icon>
+                </template>
+                <template if:false={showChecklist}>
+                  <lightning-icon icon-name="utility:chevronright" size="x-small" alternative-text="chevronright"
+                    class="chevron-container-down" onclick={handleExpandChecklist}>
+                  </lightning-icon>
+                </template>
+              </div>
+              <template if:false={hasChecklist}>
+                <div class="checklistContent">
+                  <p class="small">{label.StartingBusinessLabel}</p>
+                </div>
+                <div class="seeAllLink checkListFooter">
+                  <p class="small"><a onclick={gotoChecklist}>{label.GetCustomChecklist}</a></p>
+                </div>
+              </template>
+              <template if:true={hasChecklist}>
+                <div class="checklistContent">
+                  <template for:each={newCheckListArray} for:item="checklist">
+                    <div class="checklist" key={checklist.id}>
+                      <div class="checklistLabel">
+                        <p class="smallBold checklistName">
+                          <a href={checklist.navigateURL}>{checklist.businessName}</a>
+                        </p>
+                        <p class="description helpText">{label.launchBusiness}</p>
+                      </div>
+                      <div><img src={checklistCheckmark}></div>
+                    </div>
+                  </template>
+                </div>
+                <div class="seeAllLink checkListFooter">
+                  <p class="small"><a onclick={gotoChecklist}>{label.SeeAllChecklist}</a></p>
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_6-of-12 cardMainWrapper">
+         <!-- <div class="cardWrapper covidSection slds-grid slds-wrap slds-size_12-of-12">
+            <div class="covidSectionContainer slds-grid slds-wrap slds-size_12-of-12">
+            <div class="slds-large-size_1-of-12 slds-p-top_xx-small slds-p-left_xx-small slds-m-right_small">
+              <img src={newspaperIcon}/>
+            </div>
+            <div class="slds-large-size_10-of-12">
+              <p class="largeBold">{label.covidUpdateBox}</p>
+            </div>
+            <div class="slds-align_absolute-center slds-size_12-of-12 slds-m-top_medium">
+              <iframe aria-label="Map" id="data-chart" src={label.covidMapSrc} scrolling="no" frameborder="0"
+                class="iframeDisplay"></iframe>
+            </div>
+          </div>
+            <div class="seeMoreLinkDashboard">
+              <p class="small"><a onclick={goToCovidUpdates}>{label.See_more_COVID_updates}</a></p>
+            </div>
+          </div>-->
+          <!--SCBCG-176-Addition of new tile,File Your Annual Report-->
+          <div class="cardWrapper" >
+            <p class="largeBold">
+              <img src={filingsIcon} class="cardIcon" alt="" />
+              {label.File_Your_Annual_Report}
+            </p>
+            <p class="small">
+              <lightning-formatted-rich-text value={label.Annual_Report_Description}>
+              </lightning-formatted-rich-text>
+              </p>
+          </div>
+          <div class="cardWrapper clickCards" onclick={goToPreferencePage}>
+            <p class="largeBold">
+              <img src={settingsIcon} class="cardIcon">
+              {label.ManageAlerts}</p>
+            <p class="small">{label.RealTimeAlerts}</p>
+          </div>
+          <div class="cardWrapper clickCards" onclick={gotoCollections}  onkeypress={gotoCollections} tabindex="0" role="link">
+            <p class="largeBold">
+              <img src={collectionsIcon} class="cardIcon" alt=""/>
+              {label.myCollections}</p>
+            <p class="small">{label.DiscoverResources}</p>
+          </div>
+        </div>
+      </div>
+      <div class="slds-grid">
+        <c-bos-actionable-items></c-bos-actionable-items>
+      </div>
+      <div class="slds-grid helpResourceSection">
+        <c-bos-recommended-topics dashboard={enhancedDashboard}>
+        </c-bos-recommended-topics>
+      </div>
+    </div>
+    <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_3-of-12">
+      <div class=" slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12">
+        <div class="actionItemContainer">
+          <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_10-of-12 helpSection">
+
+
+              <template if:true={firstThreeCard.length}>
+                <div class="columnWrapper">
+                  <div class="sectionHeader_mob">
+                    <div class="redBorderMob"></div>
+                    <h6>{label.ActionItems}</h6>
+                    <template if:true={showAllActionItems}>
+                      <lightning-icon icon-name="utility:chevrondown" size="x-small" alternative-text="chevrondown"
+                        class="chevron-container-down" onclick={handleExpandSection}>
+                      </lightning-icon>
+                    </template>
+                    <template if:false={showAllActionItems}>
+                      <lightning-icon icon-name="utility:chevronright" size="x-small" alternative-text="chevronright"
+                        class="chevron-container-down" onclick={handleExpandSection}>
+                      </lightning-icon>
+                    </template>
+                  </div>
+                  <h6 class="sectionHeader">{label.ActionItems}</h6>
+                  <div class="toggleSection sectionWrapper">
+                    <div class="redBorder"></div>
+                    <c-bos-action-item-card actiondata={firstThreeCard} section="overview" nodatasection={overviewData} isdashboard={dashboard} onaicardclick={handleAIClick}>
+                    </c-bos-action-item-card>
+                    <div class="seeAllLink"><a onclick={gotoActionItems}>{label.SeeAll}</a></div>
+                  </div>
+                </div>
+              </template>
+              <template if:false={firstThreeCard.length}>
+                <div class="columnWrapper noDataSection">
+                  <h6>{label.ActionItems}</h6>
+                  <div class="toggleSection">
+                    <c-bos-action-item-card actiondata={firstThreeCard} section="overview" nodatasection={overviewData}
+                    ongotobizservices={goToOnlineServices}>
+                  </c-bos-action-item-card>
+                  </div>
+                </div>
+              </template>
+
+              <div class="columnWrapper">
+                <c-bos-highlights-news></c-bos-highlights-news>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div if:true={spinner}>
+    <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+  </div>
+</template>

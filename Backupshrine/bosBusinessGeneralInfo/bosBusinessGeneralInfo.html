@@ -1,0 +1,177 @@
+<template>
+  <div>
+    <div class="deskDescrip">
+      <p class="small">
+        {label.label_desc} &nbsp;
+        <a class="info_description" href={label.BRS_businessinformation}>
+          {label.label_link1}</a>
+      </p>
+    </div>
+    <div class="mobileDescrip slds-grid slds-wrap">
+      <div class="slds-col slds-small-size_12-of-12">
+        <p class="small">
+          {label.label_desc}
+        </p>
+      </div>
+      <div class="slds-col slds-small-size_12-of-12 ">
+        <p class="info_description small">
+        <a href={label.BRS_businessinformation} >
+          {label.label_link1}</a>
+      </p>
+      </div>
+    </div>
+  </div>
+  <template for:each={generalData} for:item="generalinfo" for:index="index">
+    <div key={generalinfo} class="slds-grid slds-wrap businessInfo_wrapper">
+      <div class="slds-col slds-size_12-of-12">
+        <h6>{label.generalInfo}</h6>
+      </div>
+      <div class="slds-col slds-size_12-of-12 separator"></div>
+      <div
+        class="slds-col slds-large-size_5-of-12 slds-medium-size_5-of-12 slds-size_12-of-12 data-pairs firstCol"
+      >
+        <p class="small infoLabel">{label.businessName}</p>
+        <p class="small">{generalinfo.name}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 secondCol data-pairs"
+      >
+        <p class="small infoLabel">{label.bstatus}</p>
+        <p class="small">{generalinfo.statusMessage}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_12-of-12 data-pairs"
+      >
+        <p class="small infoLabel">{label.bdate}</p>
+        <p class="small">{generalinfo.dateOfFormation}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_5-of-12 slds-medium-size_5-of-12 slds-size_12-of-12 data-pairs firstCol"
+      >
+        <p class="small infoLabel">{label.bid}</p>
+        <p class="small">{generalinfo.IdNumber}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 secondCol data-pairs"
+      >
+        <p class="small infoLabel">{label.naics}</p>
+        <p class="small">{generalinfo.naicsCode}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_12-of-12 data-pairs"
+      >
+        <p class="small infoLabel">{label.citizenship}</p>
+        <p class="small">{generalinfo.citizenship}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_5-of-12 slds-medium-size_5-of-12 slds-size_12-of-12 data-pairs firstCol"
+      >
+        <p class="small infoLabel">{label.email}</p>
+        <p class="small">{generalinfo.businessEmail}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 secondCol data-pairs"
+      >
+        <p class="small infoLabel">{label.naicsSub}</p>
+        <p class="small">{generalinfo.naicsSubCode}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_12-of-12 data-pairs"
+      >
+        <p class="small infoLabel">{label.state}</p>
+        <p class="small">{generalinfo.state}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_5-of-12 slds-medium-size_5-of-12 slds-size_12-of-12 data-pairs firstCol"
+      >
+        <p class="small infoLabel">{label.baddress}</p>
+        <p class="small">{generalinfo.businessAddress1}</p>
+        <p class="small">{generalinfo.businessAddress2}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 secondCol data-pairs"
+      >
+        <p class="small infoLabel">{label.maddress}</p>
+        <p class="small">{generalinfo.mailingAddress1}</p>
+        <p class="small">{generalinfo.mailingAddress2}</p>
+      </div>
+    </div>
+  </template>
+  <template if:true={principalData.length}>
+    <div class="slds-grid slds-wrap businessInfo_wrapper">
+      <div class="slds-col slds-size_12-of-12">
+        <h6>{label.principal}</h6>
+      </div>
+      <template for:each={principalData} for:item="principalInfo" for:index="index">
+        <div class="slds-col slds-size_12-of-12 separator" key={principalInfo}></div>
+        <div class="slds-col slds-size_12-of-12" key={principalInfo}>
+          <div class="slds-col slds-size_12-of-12 slds-grid slds-wrap">
+          <div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12">
+            <div class="slds-col data-pairs firstCol">
+        <p class="small infoLabel">{label.name}</p>
+        <p class="small">{principalInfo.name}</p>
+      </div>
+            <div class="slds-col secondCol data-pairs">
+        <p class="small infoLabel">{label.title}</p>
+        <p class="small">{principalInfo.title}</p>
+      </div>
+            <div class="slds-col secondCol data-pairs">
+              <p class="small infoLabel">{label.type}</p>
+              <p class="small">{principalInfo.type}</p>
+            </div>
+          </div>
+          <div class="slds-col slds-large-size_8-of-12 slds-medium-size_8-of-12 slds-size_12-of-12">
+            <div class="slds-col data-pairs firstCol">
+        <p class="small infoLabel">{label.baddress}</p>
+              <p class="small">{principalInfo.businessAddress1}, {principalInfo.businessAddress2}</p>
+      </div>
+            <div class="slds-col secondCol data-pairs">
+        <p class="small infoLabel">{label.maddress}</p>
+              <p class="small">{principalInfo.mailingAddress1}, {principalInfo.mailingAddress2}</p>
+            </div>
+      </div>
+        </div>
+        </div>
+      </template>
+    </div>
+  </template>
+  <template for:each={agentData} for:item="agentInfo" for:index="index">
+    <div key={agentInfo} class="slds-grid slds-wrap businessInfo_wrapper">
+      <div class="slds-col slds-size_12-of-12">
+        <h6>{label.businessProfile_agent}</h6>
+      </div>
+      <div class="slds-col slds-size_12-of-12 separator"></div>
+        <div
+          class="slds-col slds-large-size_5-of-12 slds-medium-size_5-of-12 slds-size_12-of-12 data-pairs firstCol"
+        >
+          <p class="small infoLabel">{label.name}</p>
+          <p class="small">{agentInfo.name}</p>
+        </div>
+      <div class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 secondCol data-pairs">
+        <p class="small infoLabel">{label.type}</p>
+        <p class="small">{agentInfo.type}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_5-of-12 slds-medium-size_5-of-12 slds-size_12-of-12 data-pairs firstCol"
+      >
+        <p class="small infoLabel">{label.baddress}</p>
+        <p class="small">{agentInfo.businessAddress1}</p>
+        <p class="small">{agentInfo.businessAddress2}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_4-of-12 slds-medium-size_4-of-12 slds-size_12-of-12 data-pairs secondCol"
+      >
+        <p class="small infoLabel">{label.maddress}</p>
+        <p class="small">{agentInfo.mailingAddress1}</p>
+        <p class="small">{agentInfo.mailingAddress2}</p>
+      </div>
+      <div
+        class="slds-col slds-large-size_3-of-12 slds-medium-size_3-of-12 slds-size_12-of-12 data-pairs"
+      >
+        <p class="small infoLabel">{label.raddress}</p>
+        <p class="small">{agentInfo.residenceAddress1}</p>
+        <p class="small">{agentInfo.residenceAddress2}</p>
+      </div>
+    </div>
+  </template>
+</template>

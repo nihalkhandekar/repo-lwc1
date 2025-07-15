@@ -1,0 +1,138 @@
+.add-incorporator-button {
+    margin-bottom: 24px;
+    color: #00528D;
+    font-family: Karla;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+}
+
+.add-incorporator-button img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.card-list {
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+    padding: 16px 24px;
+    margin-bottom: 16px;
+}
+
+.card-list .card-header {
+    display: flex;
+    width: 100%;
+}
+
+.card-list .username label {
+    color: #757575;
+    font-family: KarlaBold;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.card-list .username p {
+    color: #2D2C2C;
+    font-family: Lato;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.16px;
+    line-height: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #ECEBEB;
+}
+
+.card-list .arrow-button {
+    height: 42px;
+    width: 42px;
+    border: 1px solid #D0CFCF;
+    border-radius: 4px;
+    background-color: #F7F9FA;
+    margin-left: auto;
+    margin-top: 36px;
+    padding: 0px;
+}
+
+.card-list .arrow-button img {
+    height: 24px;
+    width: 24px;
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    margin: 0;
+}
+
+.card-list .arrow-button img.up {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+.card-list .sub-title {
+    color: #757575;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.card-list .sub-desc {
+    color: #2D2C2C;
+    font-family: Karla;
+    font-size: 16px;
+    letter-spacing: 0.01px;
+    line-height: 24px;
+}
+
+.card-list .details-row {
+    margin-bottom: 24px;
+}
+
+.card-list .card-details {
+    border-bottom: 1px solid #ECEBEB;
+    padding-top: 24px;
+}
+
+.card-list button img {
+    width: 18px;
+    margin-right: 8px;
+}
+
+.card-list button.delete-btn img {
+    width: 18px;
+}
+
+.card-list button.edit-btn,
+.card-list button.delete-btn {
+    font-family: Karla;
+    margin-top: 16px;
+    color: #00528D;
+    font-size: 18px;
+    letter-spacing: 0.13px;
+    line-height: 27px;
+    text-decoration: underline;
+    display: inline;
+    width: auto;
+}
+
+.card-list .card-header .username {
+    width: 85%;
+}
+
+.card-list button.delete-btn {
+    margin-left: 24px;
+}
+
+.popup-spinner{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+}

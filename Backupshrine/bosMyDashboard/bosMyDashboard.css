@@ -1,0 +1,454 @@
+.columnWrapper {
+    border: 1px solid #CACACA;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+}
+
+.cardImageWrap {
+    background-image: url(/business/resource/CT_New_Assets/images/Dashboard/business_owner.jpg);
+    background-size: cover;
+    background-position: 28px 0;
+}
+
+.cardMainWrapper:first-child .cardWrapper:first-child.business {
+    padding-top: 0;
+}
+
+.welcome {
+    padding-bottom: 20px;
+}
+
+.bcenter {
+    padding-top: 16px;
+}
+
+.cardMainWrapper {
+    padding-right: 20px;
+}
+
+.cardWrapper {
+    min-height: 100px;
+    height: auto;
+    border: 1px solid #CACACA;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    padding: 24px;
+    margin-bottom: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.cardMainWrapper:first-child .cardWrapper:first-child {
+    height: 250px;
+}
+
+.checklistContent {
+    /* height: 124px; */
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.covidSection {
+    padding: 0;
+}
+
+.covidSectionContainer {
+    padding: 16px 24px 35px;
+    height: 520px;
+    overflow: hidden;
+}
+
+.clickCards {
+    cursor: pointer;
+}
+
+.cardMainWrapper:first-child .cardWrapper:first-child,
+.footerCard {
+    padding: 22px 0 0 0;
+    position: relative;
+}
+
+.footerCard{
+    height: 280px;
+}
+
+.businessContent,
+.checklistContent {
+    padding: 0 24px;
+    margin-bottom: 10px;
+}
+
+.businessContent .largeBold {
+    padding-bottom: 8px;
+}
+
+.cardWrapper .seeAllLink {
+    background-color: #FFFFFF;
+    padding: 12px 24px;
+    border-top: 1px solid #CACACA;
+}
+
+.cardTitle {
+    margin-bottom: 12px;
+}
+
+.cardTitle,
+.footerCard .largeBold {
+    padding-left: 24px;
+}
+
+.cardWrapper a {
+    text-decoration: underline;
+    color: #09538B
+}
+
+.cardIcon {
+    margin-right: 12px;
+    height: 24px;
+}
+
+.iframeDisplay {
+    width: inherit;
+    height: 460px;
+    border: none;
+}
+
+.cardWrapper p.small {
+    padding-top: 12px;
+}
+
+.seeAllLink p.small,
+.businessContent p.small {
+    padding-top: 0;
+}
+
+/* .cardWrapper p:first-child {
+    padding-top: 0;
+} */
+hr {
+    margin-top: 20px;
+    margin-bottom: 16px;
+}
+
+.actionItemContainer h6,
+.secondaryTitleText {
+    padding-bottom: 16px;
+}
+
+.actionItemContainer .columnWrapper {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+}
+
+.cardWrapper .largeBold {
+    display: flex;
+}
+
+.cardWrapper .largeBold.label {
+    padding: 0 24px 8px;
+}
+
+.actionItemContainer {
+    /* margin: 0 28px; */
+}
+
+.actionItemContainer .slds-grid .slds-col {
+    padding: 0;
+}
+
+.titleText {
+    padding: 16px 0;
+}
+
+.dashboardContainer {
+    padding-top: 40px;
+}
+
+.redBorder,
+.redBorderMob {
+    border-radius: 4px 4px 0 0;
+    background-color: #DB2426;
+    height: 5.5px;
+}
+
+.seeAllLink {
+    border-top: 1px solid #d0cfcf;
+    padding: 12px;
+    border-radius: 0 0 4px 4px;
+    text-decoration: underline;
+}
+
+.seeMoreLinkDashboard {
+    border-top: 1px solid #d0cfcf;
+    border-radius: 0 0 4px 4px;
+    text-decoration: underline;
+    padding: 20px 0 12px 24px;
+    width: 100%;
+}
+
+.seeMoreLinkDashboard p.small {
+    padding-top: 0;
+}
+
+.sectionWrapper {
+    box-shadow: 0 6px 12px 0 #E7E9F2;
+    background-color: #fff;
+}
+
+.helpSection {
+    margin-left: 32px;
+}
+
+.sectionHeader_mob,
+.redBorderMob,
+.business_mob,
+.checklist_mob {
+    display: none;
+}
+
+.sectionHeader {
+    display: block;
+}
+
+.chevron-container-down {
+    line-height: normal;
+    font-size: 32px;
+    margin: auto;
+    margin-right: 24px;
+}
+
+.bannerSection {
+    margin-top: 40px;
+}
+
+.bannerImg {
+    position: relative;
+    width: 100%;
+    margin-right: 20px;
+    height: 216px
+}
+
+.covidBanner {
+    padding: 30px;
+    position: absolute;
+}
+
+.covidBanner,
+.covidBanner .small,
+.covidBanner h5 {
+    color: #ffffff;
+}
+
+.covidBanner .small {
+    padding-top: 8px;
+    padding-bottom: 28px;
+}
+
+.covidBanner .secondaryBtn {
+    background-color: transparent;
+    border-color: white;
+    color: white;
+    min-height: 40px;
+    height: auto;
+    padding: 20px 108px;
+}
+
+.checklist {
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkListFooter {
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+}
+
+.checklist .checklistLabel {
+    padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.checklistLabel .checklistName {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-left: 0;
+}
+
+.cardWrapper p.helpText {
+    padding-top: 0;
+    font-size: 14px;
+}
+
+@media only screen and (max-width: 1024px) {
+    .cardWrapper p.helpText {
+        font-size: 12px;
+    }
+}
+
+
+@media only screen and (max-width: 1023px) {
+    .dashboardContainer {
+        padding-top: 24px;
+    }
+    .secondaryTitleText {
+        padding-bottom: 24px;
+    }
+    .iframeDisplay {
+        height: 535px;
+    }
+    .covidSectionContainer{
+        height: 600px;
+     }
+
+    .slds-gutters .slds-col,
+    .cardMainWrapper:first-child .cardWrapper:first-child,
+    .footerCard,
+    .cardTitle,
+    .footerCard .largeBold {
+        padding: 0;
+    }
+
+    .slds-gutters,
+    .actionItemContainer,
+    .cardWrapper .seeAllLink {
+        margin: 0;
+    }
+
+    .actionItemContainer .sectionHeader {
+        padding: 28px 24px 24px 28px;
+    }
+
+    .business_mob,
+    .checklist_mob {
+        padding: 19px 0 16px 28px;
+        border-bottom: 1px solid #ECEBEB;
+    }
+
+    .cardWrapper .largeBold {
+        margin: auto 0;
+    }
+
+    .toggleSection.sectionWrapper {
+        display: none;
+        padding-top: 12px;
+    }
+
+    .businessContent,
+    .checklistContent {
+        padding: 24px;
+        margin-bottom: 0;
+        display: none;
+    }
+
+    .checkListFooter {
+        display: none;
+    }
+
+    .sectionHeader_mob,
+    .redBorderMob,
+    .show,
+    .toggleSection.sectionWrapper.show {
+        display: block;
+    }
+
+    .sectionHeader,
+    .redBorder,
+    .cardWrapper .cardTitle,
+    .cardWrapper.footerCard .largeBold.label {
+        display: none;
+    }
+
+    .checklist_mob .cardTitle,
+    .business_mob,
+    .checklist_mob {
+        display: flex;
+    }
+
+
+    .columnWrapper {
+        border-radius: 4px;
+        background-color: #FFFFFF;
+        /* box-shadow: 0 6px 12px 0 #E7E9F2; */
+    }
+
+    .columnWrapper.noDataSection {
+        box-shadow: none
+    }
+
+    .redBorderMob {
+        width: 5.5px;
+        height: unset
+    }
+
+    .sectionHeader_mob {
+        display: flex;
+        background-color: #fff;
+        border-radius: 4px 4px 0 0;
+        border-bottom: 1px solid #ECEBEB;
+    }
+
+    .sectionHeader_mob h6 {
+        padding: 28px 24px 24px 28px;
+    }
+
+    .sectionWrapper {
+        box-shadow: none;
+    }
+
+    .seeAllLink {
+        margin-top: 12px;
+        padding: 24px;
+    }
+
+    .actionItemContainer h6 {
+        padding-bottom: 24px;
+    }
+
+    .cardMainWrapper:first-child .cardWrapper:first-child,
+    .footerCard,
+    .covidSection {
+        height: unset;
+        min-height: unset;
+    }
+
+    .helpSection {
+        margin-left: 0;
+    }
+
+    .checkListFooter {
+        position: initial;
+        bottom: 0;
+    }
+
+    .bannerImg {
+        height: 276px;
+    }
+
+    .covidBanner {
+        padding: 24px;
+        margin-right: 20px;
+    }
+
+    .covidBanner .small {
+        padding-top: 16px;
+        padding-bottom: 24px;
+    }
+    .cardMainWrapper {
+        padding-right: 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .iframeDisplay{
+        height: 355px;
+    }
+    .covidSectionContainer {
+        height: 450px;
+    }
+}

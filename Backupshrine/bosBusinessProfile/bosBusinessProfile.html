@@ -1,0 +1,193 @@
+<template>
+  <div class="businessProfile_Page">
+    <template if:true={hideAllBusiness}>
+      <div class="profileCard_Container">
+        <c-bos-business-profile-card profiledata={businessProfileData} allbusiness={businessList}
+          onbusinesschange={handleNewBusiness} onbusinessunlink={handleBusinessUnlink} bizdetails={actionData}>
+        </c-bos-business-profile-card>
+      </div>
+      <div class="navBarDivMob">
+        <div class="contentDiv">
+          <lightning-accordion allow-multiple-sections-open title="Select to view sections">
+            <lightning-accordion-section class="mobLabelHeading accWidth" label={selectedTabName}>
+              <ul class="tabSmallDevice" role="tablist">
+                <li class="slds-tabs--scoped__item slds-text-heading--label slds-active"
+                  role="presentation" data-id="Overview" onclick={handleTabSelect}>
+                  <span class="slds-tabs--scoped__link" role="tab" aria-selected="true"
+                    aria-controls="tab-scoped-1">{label.businessProfile_OverviewTitle}</span>
+                </li>
+                <li class="slds-tabs--scoped__item slds-text-heading--label" role="presentation"
+                  data-id="Business_Details" onclick={handleTabSelect}>
+                  <span class="slds-tabs--scoped__link" role="tab" aria-selected="false"
+                    aria-controls="tab-scoped-2">{label.businessProfile_BusinessDetails}</span>
+                </li>
+                <li class="slds-tabs--scoped__item slds-text-heading--label" role="presentation"
+                  data-id="Action_items" onclick={handleTabSelect}>
+                  <span class="slds-tabs--scoped__link" role="tab" aria-selected="false"
+                    aria-controls="tab-scoped-3">{label.businessProfile_ActionItemsTitle}</span>
+                </li>
+                <li class="slds-tabs--scoped__item slds-text-heading--label" role="presentation"
+                  data-id="Credentials" onclick={handleTabSelect}>
+                  <span class="slds-tabs--scoped__link" role="tab" aria-selected="false"
+                    aria-controls="tab-scoped-4">{label.businessProfile_CredentialsTitle}</span>
+                </li>
+                <!-- <template
+                  for:each={listchecklistWrapperList}
+                  for:item="tabDetails"
+                  for:index="index"
+                  >
+                <li
+                  class="slds-tabs--scoped__item slds-text-heading--label"
+                  title="Item four"
+                  role="presentation"
+                  data-id="Credentials"
+                  onclick={handleTabSelect}
+                >
+                  <span
+                    class="slds-tabs--scoped__link"
+                    role="tab"
+                    aria-selected="false"
+                    aria-controls="tab-scoped-4"
+                    >Credentials</span
+                  >
+                </li>
+                </template> -->
+              </ul>
+            </lightning-accordion-section>
+          </lightning-accordion>
+        </div>
+      </div>
+
+      <div class="side-nav">
+        <div class="slds-tabs--scoped">
+          <ul class="slds-tabs--scoped__nav" role="tablist">
+ 		    <li class="header">{label.GUEST_PROFILE}</li>
+            <li class="slds-tabs--scoped__item slds-text-heading--label slds-active"
+              role="presentation" data-id="Overview" onclick={handleTabSelect}>
+              <a class="slds-tabs--scoped__link" href="#void" role="tab" aria-selected="true"
+                aria-controls="tab-scoped-1" id="tab-scoped-1__item">
+				<img class="tabIcon" src={overviewTabIcon} />
+				{label.businessProfile_OverviewTitle}
+				</a>
+            </li>
+            <li class="slds-tabs--scoped__item slds-text-heading--label" role="presentation"
+              data-id="Business_Details" onclick={handleTabSelect}>
+              <a class="slds-tabs--scoped__link" href="#void" role="tab" aria-selected="false"
+                aria-controls="tab-scoped-2" id="tab-scoped-2__item">
+				<img class="tabIcon" src={bdTabIcon} />
+				{label.businessProfile_BusinessDetails}
+				</a>
+            </li>
+            <li class="slds-tabs--scoped__item slds-text-heading--label" role="presentation"
+              data-id="Action_items" onclick={handleTabSelect}>
+              <a class="slds-tabs--scoped__link" href="#void" role="tab" aria-selected="false"
+                aria-controls="tab-scoped-3" id="tab-scoped-3__item">
+				<img class="tabIcon" src={aiTabIcon} />
+				{label.businessProfile_ActionItemsTitle}
+				</a>
+            </li>
+            <li class="slds-tabs--scoped__item slds-text-heading--label" role="presentation"
+              data-id="Credentials" onclick={handleTabSelect}>
+              <a class="slds-tabs--scoped__link" href="#void" role="tab" aria-selected="false"
+                aria-controls="tab-scoped-4" id="tab-scoped-4_item"><img class="tabIcon" src={credTabIcon} />
+				{label.businessProfile_CredentialsTitle}
+				</a>
+            </li>
+          </ul>
+          <div id="tab-scoped-1" class="slds-tabs--scoped__content slds-show" role="tabpanel"
+            aria-labelledby="tab-scoped-1__item" title="Overview">
+            <h5 class="slds-m-bottom_x-small">{label.businessProfile_ActionItemsTitle}</h5>
+            <p class="slds-m-bottom_x-large large">{label.actionItemsSubHeadingNote}</p>
+            <div class="slds-grid slds-wrap">
+              <div class="slds-col slds-large-size_9-of-12 slds-size_12-of-12 headerTable">
+                <div class="slds-col slds-size_12-of-12 headerRow">
+                  <div class="slds-col slds-size_11-of-12 headWrapper slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 header_count">
+                    <div class="pastDueDot"></div>
+                      <p class="large marginCls"> {pastDueCount} {label.businessProfile_PastDue}</p>
+                  </div>
+                    <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 header_count">
+                    <div class="dueSoonDot"></div>
+                      <p class="large marginCls"> {dueSoonCount} {label.businessProfile_DueSoon}</p>
+                  </div>
+                    <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 header_count">
+                    <div class="upcomingDot"></div>
+                      <p class="large marginCls"> {upcomingCount} {label.businessProfile_upcoming}</p>
+                  </div>
+                </div>
+                </div>
+                <c-bos-action-item-card actiondata={firstThreeCard} section="overview" nodatasection={overviewData}>
+                </c-bos-action-item-card>
+                <template if:true={showAIFooter}>
+                  <div class="slds-col slds-size_12-of-12 footerRow" onclick={NavigateToActionTab} tabindex="0"
+                    onkeydown={NavigateToActionTabKey}>
+                    <p class="small">
+                      {label.businessProfile_toActionItem_link}
+                    </p>
+                  </div>
+                </template>
+                <h5 class="slds-col slds-size_12-of-12 slds-m-bottom_large sectionTitle">{label.businessProfile_CredentialsTitle}</h5>
+                <div class="slds-col slds-size_12-of-12 headerRow">
+                  <div class="slds-col slds-size_11-of-12 headWrapper slds-grid slds-wrap">
+                    <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 header_count">
+                      <div class="dueSoonDot"></div>
+                      <p class="large marginCls"> {pendingCount} {label.businessProfile_credentialsPending}</p>
+                    </div>
+                    <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 header_count">
+                      <div class="activeDot"></div>
+                      <p class="large marginCls"> {activeCount} {label.businessProfile_credentialsActive}</p>
+                    </div>
+                    <div class="slds-col slds-large-size_4-of-12 slds-size_12-of-12 header_count">
+                      <div class="upcomingDot"></div>
+                      <p class="large marginCls"> {inactiveCount} {label.businessProfile_credentialsInactive}</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- <template for:each={firstThreeCredCard} for:item="cObject" for:index="index"> -->
+                <c-bos-overview-credentials-card credcard={firstThreeCredCard} current-id={currentAccId}>
+                </c-bos-overview-credentials-card>
+                <!-- </template> -->
+                <template if:true={showCredFooter}>
+                  <div class="slds-col slds-size_12-of-12 footerRow" onclick={NavigateToCredTab} tabindex="0"
+                    onkeydown={NavigateToCredTabKey}>
+                    <p class="small">
+                      {label.businessProfile_toCredential_link}
+                    </p>
+                  </div>
+                </template>
+              </div>
+              <div class="slds-large-size_3-of-12 slds-size_12-of-12">
+                <c-ct_resources componentname={componentName}></c-ct_resources>
+              </div>
+            </div>
+          </div>
+          <div id="tab-scoped-2" class="slds-tabs--scoped__content slds-hide" role="tabpanel"
+            aria-labelledby="tab-scoped-2__item" title="Business_Details">
+            <h4 class="slds-m-bottom_x-large">{label.businessProfile_BusinessDetails}</h4>
+            <div class="slds-grid slds-wrap generalInfo">
+              <div class="slds-col slds-size_12-of-12">
+                <c-bos-business-general-info general-info={businessProfileData}></c-bos-business-general-info>
+              </div>
+            </div>
+          </div>
+          <div id="tab-scoped-3" class="slds-tabs--scoped__content actionItemsTab slds-hide" role="tabpanel"
+            aria-labelledby="tab-scoped-3__item" title="Action_items">
+            <h4 class="slds-m-bottom_x-small">{label.businessProfile_ActionItemsTitle}</h4>
+            <c-bos-business-action-item firsttab={todoData} secondtab={upcomingData} firstcount={pastDueCount}
+              secondcount={dueSoonCount} thirdcount={upcomingCount} activetab={activeActionTab}>
+            </c-bos-business-action-item>
+          </div>
+          <div id="tab-scoped-4" class="slds-tabs--scoped__content slds-hide" role="tabpanel"
+            aria-labelledby="tab-scoped-4__item" title="Credentials">
+            <h4 class="slds-m-bottom_x-large">{label.businessProfile_CredentialsTitle}</h4>
+            <c-bos-credentials onunlinkedcred={handleUnlinkCred} credarray={credentialArray} current-id={currentAccId}>
+            </c-bos-credentials>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+  <div if:true={spinner}>
+    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+  </div>
+</template>

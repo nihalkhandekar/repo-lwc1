@@ -1,0 +1,31 @@
+.location-address {
+    color: #757575;
+    display: flex;
+    align-items: flex-start;
+}
+
+.location-address img {
+    width: 16px;
+    margin-right: 4px;
+    margin-top: 4px;
+}
+
+.member-label{
+    margin-bottom: 4px;
+}
+
+.member-name{
+    margin-bottom: 12px;
+}
+
+.multiple-member-label{
+    margin-top: 16px;
+}
+
+.member-card {
+    margin-bottom: 20px;
+}
+
+.member-container .member-card:last-child{
+    margin-bottom: 0;
+}

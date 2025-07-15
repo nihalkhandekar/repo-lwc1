@@ -1,0 +1,276 @@
+.businessProfile_Page {
+  position: relative;
+}
+
+.profileCard_Container {
+  background-color: white;
+  padding: 40px 82px 58px 300px;
+  /* min-height: 280px; */
+}
+
+/* .side-nav {
+} */
+.slds-tabs--scoped {
+  display: flex;
+}
+
+.slds-tabs--scoped__nav {
+  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 #e7e9f2;
+  border: none;
+}
+
+.slds-tabs--scoped__item {
+  width: 100%;
+  text-transform: unset;
+  display: flex;
+  align-items: center;
+  padding: 1px 0;
+}
+
+.slds-tabs--scoped__item:hover {
+  background-color: #F7F9FA;
+  color: #00528D;
+}
+
+.slds-active .slds-tabs--scoped__link {
+  color: #00528D;
+  background-color: #f7f9fa;
+  border-top: solid 1px #ecebeb;
+  border-bottom: solid 1px #ecebeb;
+}
+
+.slds-tabs--scoped__link,
+.slds-tabs--scoped__link:focus {
+  border: none;
+  overflow: inherit;
+  text-decoration: none;
+  height: unset;
+  line-height: 17px;
+  font-size: 14px;
+  padding: 18px 24px;
+  width: 100%;
+  /* border-bottom: 1px solid #FFF; */
+}
+
+.tabIcon {
+  padding-right: 16px;
+}
+
+.slds-tabs--scoped__content {
+  background-color: transparent;
+  width: 100%;
+  /* text-align: center; */
+  /* min-height: 20rem;*/
+  margin-left: 244px;
+  border: none;
+  padding: 60px 75px;
+  background-image: url("/business/resource/CT_Assets/icons/businessProfileBg.png");
+  background-repeat: no-repeat;
+  background-attachment: local;
+  background-size: 248px 260px;
+  background-position: right -75px top 760px;
+}
+
+.generalInfo {
+  padding-right: 12px;
+}
+
+.navBarDivMob {
+  display: none;
+}
+
+.side-nav ul {
+  display: block;
+  width: 244px;
+  height: 100%;
+}
+
+.side-nav .header {
+  color: #2D2C2C;
+  font-family: 'Karla', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 27px;
+  padding: 24px;
+}
+
+.contentDiv {
+  position: sticky;
+}
+
+.headerTable {
+  border-radius: 4px;
+  max-width: 900px;
+  margin-top: 24px;
+}
+
+.headerRow {
+  padding: 20px 32px;
+  display: flex;
+  background-color: #f7f9fa;
+  margin: 1px 0;
+  border: 1px solid #d0cfcf;
+  border-bottom: none;
+  border-radius: 4px 4px 0 0;
+}
+
+.headWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header_count {
+  font-size: 18px;
+  text-transform: uppercase;
+  display: flex;
+  max-width: 200px;
+}
+
+.header_count .large {
+  padding-left: 12px;
+}
+
+.sectionTitle {
+  margin-top: 100px;
+}
+
+.pastDueDot,
+.dueSoonDot,
+.upcomingDot,
+.activeDot {
+  width: 8px;
+  height: 8px;
+  display: inline-table;
+  border-radius: 50%;
+  margin: 9px 0 auto 0;
+}
+
+.pastDueDot {
+  background-color: #db2426;
+}
+
+.dueSoonDot {
+  background-color: #f6a053;
+}
+
+.upcomingDot {
+  background-color: #97abb8;
+}
+
+.activeDot {
+  background-color: #2D8D60
+}
+
+.footerRow {
+  padding: 16px;
+  background-color: white;
+  border: 1px solid #d0cfcf;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  color: #09538b;
+  font-size: 16px;
+  letter-spacing: 0.01px;
+  line-height: 24px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.footerRow .small {
+  text-align: center;
+}
+
+a .large {
+  color: #09538b;
+}
+
+@media only screen and (max-width: 1023px) {
+  .slds-tabs--scoped__content {
+    margin-left: 0;
+    padding: 32px 0;
+    background-image: none;
+  }
+
+  .actionItemsTab.slds-tabs--scoped__content {
+    padding: 32px 0;
+  }
+
+  .side-nav ul {
+    display: none;
+  }
+
+  .navBarDivMob {
+    display: block;
+    top: 0;
+    position: sticky;
+    background-color: white;
+    z-index: 1;
+    border-bottom: 1px solid #ecebeb;
+    border-top: 1px solid #ecebeb;
+    margin: 0 -20px;
+  }
+
+  .mobLabelHeading>span {
+    font-weight: bold;
+    color: #09538b;
+    font-family: "Karla", sans-serif;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .slds-accordion__summary-heading {
+    color: #09538b;
+    font-family: "Karla", sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    line-height: 17px;
+  }
+
+  .accWidth .slds-accordion__summary-heading {
+    margin-left: 24px;
+  }
+
+  .slds-accordion__section {
+    padding: 24px 20px;
+  }
+
+  .generalInfo {
+    padding-right: 0;
+  }
+
+  .tabStyle {
+    padding-top: 20px;
+  }
+
+  .tabLabel:hover {
+    font-weight: bold;
+  }
+
+  .tabLabel {
+    text-transform: capitalize;
+    font-family: "Karla", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 25px;
+    color: #2d2c2c;
+  }
+
+  .headerRow {
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .profileCard_Container {
+    padding: 0;
+    margin: 0 -20px;
+  }
+
+  .marginCls {
+    margin-bottom: 10px;
+  }
+}

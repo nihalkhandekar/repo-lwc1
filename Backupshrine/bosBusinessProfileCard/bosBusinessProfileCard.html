@@ -1,0 +1,160 @@
+<template>
+  <template if:true={showSuccessMsg}>
+    <div class="success-msg slds-size_1-of-1 slds-large-size_3-of-12">
+      <p class="large">Business Unlinked</p>
+      <span class="" onclick={handleClose}> * /></span>
+    </div>
+  </template>
+  <template for:each={businessProfileData} for:item="bpObject" for:index="index">
+    <div class="slds-grid slds-wrap businessProfileCard_Wrapper" key={bpObject}>
+      <div class=" slds-large-size_12-of-12 slds-size_12-of-12 businessNameRow">
+        <div class=" slds-large-size_7-of-12 slds-size_6-of-6">
+          <div class=" slds-large-size_12-of-12 slds-size_6-of-6 businessName">
+          <h4>{bpObject.name}</h4>
+
+            <div class="chevron-wrapper" data-id={bpObject.accId} onclick={handleExpandBusiness} tabindex=0
+              onkeydown={handleExpandBusinessOnTab}>
+              <template if:false={showAllBusiness}>
+              <lightning-icon icon-name="utility:chevrondown" size="xx-small" alternative-text="chevrondown"
+               class="chevron-container-down"></lightning-icon>
+              </template>
+              <template if:true={showAllBusiness}>
+                <lightning-icon icon-name="utility:chevronup" size="xx-small" alternative-text="chevronup"
+                class="chevron-container-down"></lightning-icon>
+              </template>
+        </div>
+      </div>
+      <template if:true={showAllBusiness}>
+        <template if:true={tempBusiness.length}>
+              <div class="slds-large-size_7-of-12 slds-size_12-of-12 allBusiness_wrapper">
+                <template for:each={tempBusiness} for:item="allProfile" for:index="index">
+                  <div class="one_business" key={allProfile} data-id={allProfile.accId} onclick={handleChangeBusiness}
+                    tabindex=0 onkeydown={handleChangeBusinessOnTab}>
+              <p class="small">{allProfile.name}</p>
+            </div>
+          </template>
+        </div>
+      </template>
+      </template>
+        </div>
+        <div class="slds-large-size_1-of-12 slds-size_1-of-6 vertical-ellipsis" onclick={handleExpandEllipsis}
+          tabindex=0 onkeydown={handleExpandEllipsisOnTab}>
+          <img src={ellipsisIcon} class="ellipsis-icon" />
+        </div>
+      </div>
+
+      <template if:true={showEllipsis}>
+        <div class="ellipsis_expand" data-id={bpObject.accId} onclick={handleUnlink} tabindex=0
+          onkeydown={handleUnlinkOnTab}>
+          <p class="small">{label.businessProfile_UnlinkBusiness}</p>
+        </div>
+      </template>
+      <template if:true={unlinkPopUp}>
+        <c-modal open={modalopen} onmodalclose={closeModal} size={modalSize}>
+          <div slot="header" style="text-align:left" class="headerModal slds-size_1-of-1">
+            <!--<h6>Are you sure you want to unlink this business?</h6>-->
+            <h6>{label.businessProfile_unlink1}</h6>
+          </div>
+          <div slot="body"
+            class="slds-m-bottom_large slds-large-size_12-of-12 slds-medium-size_12-of-12 slds-size_1-of-1">
+            <p class="large">
+              {label.businessProfile_unlink2}
+            </p>
+          </div>
+          <div slot="actions" class="slds-m-vertical_small slds-size_1-of-1">
+            <button title="Send email" onclick={handleUnlinkButton}
+              class="slds-button primaryBtn slds-align_absolute-center">
+              {label.businessProfile_unlink}
+            </button>
+          </div>
+        </c-modal>
+      </template>
+      <div class="slds-large-size_12-of-12 slds-size_12-of-12 address">
+        <p class="small">
+          <template if:true={bpObject.businessAddress1.length}>
+            <template if:true={bpObject.businessAddress2.length}>
+          {bpObject.businessAddress1}, {bpObject.businessAddress2}
+            </template>
+            <template if:false={bpObject.businessAddress2.length}>
+              {bpObject.businessAddress1}
+            </template>
+          </template>
+          <template if:false={bpObject.businessAddress1.length}>
+            <template if:true={bpObject.businessAddress2.length}>
+              {bpObject.businessAddress2}
+            </template>
+          </template>
+        </p>
+      </div>
+      <div class="slds-large-size_12-of-12 slds-size_12-of-12 status">
+        <div class="status-desc">
+      <div class="status-row">
+        <p class="small status-message">{bpObject.statusMessage}</p>
+          </div>
+          <div class="slds-size_1-of-6 vertical-ellipsis mob_Element" onclick={handleExpandEllipsis} tabindex=0
+            onkeydown={handleExpandEllipsisOnTab}>
+            <img src={ellipsisIcon} class="ellipsis-icon" />
+          </div>
+        </div>
+        <div class="status-desc">
+          <p class="small">{bpObject.statusDescription}</p>
+        </div>
+      </div>
+      <!--
+      <div class=" slds-size_12-of-12 businessInfoRow">
+        <div class="slds-large-size_3-of-12 slds-size_12-of-12 contentWrapper">
+          <p class="small contentTitle">{label.baddress}</p>
+          <p class="small">{bpObject.businessAddress1}</p>
+          <p class="small">{bpObject.businessAddress2}</p>
+        </div>
+        <div class=" slds-large-size_2-of-12 slds-size_12-of-12 contentWrapper">
+          <p class="small contentTitle">{label.bid}</p>
+          <p class="small">{bpObject.IdNumber}</p>
+        </div>
+        <div class=" slds-large-size_3-of-12 slds-size_12-of-12 contentWrapper">
+          <p class="small contentTitle">{label.businessProfile_bDesignation}</p>
+          <p class="small">124006103</p>
+        </div>
+        <div class=" slds-large-size_4-of-12 slds-size_12-of-12 contentWrapper">
+          <p class="small contentTitle">{label.email}</p>
+          <p class="small">{bpObject.businessEmail}</p>
+        </div>
+        <a href="#void" class="unlink_mob"
+          ><p class="small">{label.businessProfile_UnlinkBusiness}</p></a
+        >
+      </div>
+      -->
+      <!-- <div class=" slds-size_12-of-12 toggleDetails" onclick={toggleDetails}>
+        <p class="small">{toggleDetailsValue}</p>
+      </div> -->
+
+      <template if:true={principalData.length}>
+        <div class="slds-grid slds-wrap ">
+          <div class="slds-col slds-size_8-of-12 slds-var-m-top_medium slds-var-m-bottom_none">
+            <h6>Principal Details</h6>
+          </div>
+          <template for:each={principalData} for:item="principalInfo" for:index="index">
+            <div class="slds-col slds-size_8-of-12 separator" key={principalInfo}></div>
+            <div class="slds-col slds-size_12-of-12" key={principalInfo}>
+              <div class="slds-col slds-size_12-of-12 slds-grid slds-wrap">
+              <div class="slds-col slds-large-size_2-of-12 slds-medium-size_2-of-12 slds-size_12-of-12">
+                <div class="slds-col">
+            <p class="infoLabel">Name</p>
+            <p class="small">{principalInfo.name}</p>
+          </div>
+   
+              </div>
+              <div class="slds-col slds-large-size_6-of-12 slds-medium-size_6-of-12 slds-size_12-of-12">
+                <div class="slds-col">
+            <p class="infoLabel">address</p>
+                  <p class="small">{principalInfo.businessAddress1}, {principalInfo.businessAddress2}</p>
+                </div>        
+              </div>
+            </div>
+           </div>
+          </template>
+        </div>
+      </template>
+    </div>
+  </template>
+</template>

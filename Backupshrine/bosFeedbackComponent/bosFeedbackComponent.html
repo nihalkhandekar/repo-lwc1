@@ -1,0 +1,220 @@
+<template>
+  <template if:true={isRegister}>
+    <div class="slds-box mainSection">
+      <lightning-layout class="align slds-wrap mainContainer">
+        <lightning-layout-item
+          class="slds-medium-size_12-of-12 slds-large-size_12-of-12"
+        >
+          <div class="slds-grid slds-wrap">
+            <div
+              class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 headingSection"
+            >
+              <h1 class="main-title">Feedback</h1>
+            </div>
+            <div
+              class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 questionHeading"
+            >
+              <h2 class="page-title">
+                We encourage you to provide us with feedback on the rules and guidelines associated with the state’s reopening process
+              </h2>
+            </div>
+          </div>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">Business Sector</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-combobox
+                name="sector"
+                value={feedRecord.Your_business_sector__c}
+                label="Choose a sector that closely aligns to your business"
+                placeholder="--Select Sector--"
+                options={sectorValues}
+                onchange={handleChange}
+                required
+              >
+              </lightning-combobox>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">Business Industry</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-combobox
+                name="businessType"
+                value={feedRecord.Your_business_industry__c}
+                label="Choose the industry that closely aligns to your business"
+                placeholder="--Select Business--"
+                options={buisnessTypeValues}
+                onchange={handleChange}
+                required
+              >
+              </lightning-combobox>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">Are the safety guidelines clear and complete?</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-combobox
+                name="radioGroup"
+                value={feedRecord.safety_guidelines_complete__c}
+                options={radioOptions}
+                label="Please select"
+                onchange={handleChange}
+                required
+              >
+              </lightning-combobox>
+            </div>
+          </lightning-layout-item>
+
+          <lightning-layout-item>
+            <legend class="questionHeading">Please choose the topic that you want to provide feedback on?</legend>
+            <label class="slds-form-element__label">Please select atleast one topic</label>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-checkbox-group
+                name="checkboxTwo"
+                options={Checkbox2options}
+                value={value}
+                onchange={handleCheckboxTwoChange}
+              >
+              </lightning-checkbox-group>
+            </div>
+          </lightning-layout-item>
+
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">Feedback</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-textarea
+                name="feedback"
+                label="Please provide feedback"
+                onchange={handleChange}
+                value={feedRecord.Feedback__c}
+                required
+              >
+              </lightning-textarea>
+
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">Business Name (Optional)</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="text"
+                name="businessName"
+                value={feedRecord.Business_Name__c}
+                label="Please specify your registered business name"
+                max-length="255"
+                onchange={handleChange}
+              >
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">
+              Business Email Address (Optional)
+            </legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="email"
+                name="emailAddress"
+                value={feedRecord.Business_Email_Address__c}
+                label="Choose an active email address where you receive all business correspondence"
+                onchange={handleChange}
+              >
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">
+              Business Phone Number (Optional)
+            </legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="tel"
+                name="phone1"
+                pattern="[0-9]{10}"
+                label="Choose the number for your business communication"
+                value={feedRecord.Business_Phone_Number__c}
+                onchange={handleChange}
+              >
+              </lightning-input>
+            </div>
+          </lightning-layout-item>
+          <lightning-layout-item class="questionfields">
+            <legend class="questionHeading">
+              Business Authorized Representative Name (Optional)
+            </legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <lightning-input
+                type="text"
+                name="repName"
+                label="Provide the name of the owner or individual representing the business"
+                value={feedRecord.Business_Representative_Name__c}
+                onchange={handleChange}
+              ></lightning-input>
+            </div>
+          </lightning-layout-item>
+
+          <lightning-layout-item class="questionfields" if:true={isSector}>
+            <legend class="questionHeading">Rules and Guidelines</legend>
+            <div
+              class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12"
+            >
+              <span>Please click on the link </span
+              ><a href={pdfValue} target="_blank">{regRecord.Sector__c}</a
+              ><span>
+                to view the rule and guidelines to open and operate your
+                business.</span
+              >
+            </div>
+          </lightning-layout-item>
+          <!--  <div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 questionHeading">
+              <h1>Self-Certification</h1>
+            </div><div class="slds-col slds-size_1-of-1 slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 checkboxField">
+        <h2>As a representative of this business, I understand that the most important consideration will be the health and safety of the employees and customers of my represented business. I have read these rules and would ensure strict adherence to the protocols listed.</h2>
+            </div>
+        <lightning-layout-item class="questionfields">
+          <div class="slds-col slds-size--6-of-7 slds-medium-size--8-of-9 slds-large-size--11-of-12 checkboxField">
+            <lightning-input
+              type="checkbox"
+              name="acknowledgement"
+              value={regRecord.Attestation_Acknowledgement__c}
+              onchange={handleChange}
+        label="By Selecting the checkbox, I certify that my business will follow the rules and guidelines specified above" required>
+            </lightning-input>
+          </div>
+        </lightning-layout-item> -->
+        
+        </lightning-layout-item>
+      </lightning-layout>
+      <div class="nav-button">
+        <div></div>
+        <center>
+          <lightning-button
+            name="Submit"
+            label="SUBMIT"
+            onclick={validate}
+            variant="brand"
+            class="primaryBtn"
+          >
+          </lightning-button>  
+        </center>      
+      </div>
+    </div>
+  </template>
+</template>

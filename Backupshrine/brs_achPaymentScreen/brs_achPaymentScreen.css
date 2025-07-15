@@ -1,0 +1,50 @@
+.block-separator{
+    margin: 32px 0px;
+}
+.fields-separator,
+.owner-fields{
+    margin-bottom: 24px;
+}
+.paymentTable {
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px #E7E9F2;
+    border-radius: 4px;
+    padding: 24px;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+hr {
+    width: 100%;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border-color: #ECEBEB;
+}
+.content-block{
+    display: flex;
+}
+.input-block{
+    order: 2;
+}
+.card-block{
+    order: 1;
+    margin-bottom: 32px;
+}
+.radio-error{
+    font-size: 14px;
+}
+
+@media only screen and (min-width: 1023px) {
+    .fields-separator{
+        margin-bottom: 40px;
+    }
+    .owner-fields{
+        margin-bottom: 32px;
+    }
+    .input-block{
+        order: 1;
+    }
+    .card-block{
+        order: 2;
+        margin-bottom: 0px;
+    }
+}

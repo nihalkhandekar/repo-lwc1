@@ -1,0 +1,88 @@
+<template>
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" variant="brand" size="large">
+        </lightning-spinner>
+    </template>
+<div class="member-container">
+    <c-brs_header heading-text={pageTitle} description-text={pageDescription} theme="theme1"></c-brs_header>
+
+    <button class="slds-button slds-button_natural link-icon large-link" onclick={handleMemberModal}>
+        <img src={addIcon} class="icon" alt="" />
+        <template if:false={hasMoreMembers}>
+            {labels.Add_L} 
+        </template>
+        <template if:true={hasMoreMembers}>
+             {labels.Add_Another} {feMemberType}
+        </template>
+    </button>
+
+    <template for:each={allMembersList} for:item="eachMember" for:index="index">
+        <div key={eachMember.uccAssignor.Id} class="member-card">
+            <c-brs_simple-card has-footer>
+                <div slot="header">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <div class="slds-col slds-size_12-of-12">
+                            <div class="slds-grid slds-wrap slds-gutters">
+                                <div class="slds-col slds-large-size_6-of-12">
+                                    <p class="member-label smallBold grey-text">{feMemberType}</p>
+                                </div>
+                                <div class="slds-col slds-large-size_6-of-12">
+                                    <div if:true={eachMember.isDuplicate}>
+                                        <span
+                                        class="slds-badge slds-theme_warning statusText  slds-float_right">{labels.Duplicate}</span>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_6-of-12">
+                            <h6 class="member-name">{eachMember.uccAssignor.displayName}</h6>
+                            <p class="location-address small">
+                                <img src={locationIcon} alt="" />
+                                <span>{eachMember.uccAssignor.fullAddress}</span>
+                            </p>
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_1-of-12">
+                        </div>
+                        <div class="slds-col slds-size_12-of-12 slds-large-size_5-of-12">
+                            <p class="grey-text small multiple-member-label" if:true={isAssignee}>{labels.BRS_UCC_Assignor_Label}</p>
+                            <p class="grey-text small multiple-member-label" if:false={isAssignee}>{labels.Assignee_Label}</p>
+                            <template for:each={eachMember.uccAssignees} for:item="assignee">
+                                <p key={assignee.Id} class="small">
+                                        {assignee.displayName}                                   
+                                </p>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div slot="footer">
+                    <button class="natural-button-with-icon slds-button slds-button_natural" onclick={editMember} data-name={index}>
+                        <img src={editIcon} alt="" class="icon" />
+                        <span>{labels.Edit}</span>
+                    </button>
+                    <button class="natural-button-with-icon slds-button slds-button_natural" data-name={index} onclick={duplicateMember}>
+                        <img src={duplicate} alt="" class="icon" />
+                        <span>{labels.Duplicate}</span>
+                    </button>
+                    <button class="natural-button-with-icon slds-button slds-button_natural" data-name={index} onclick={removeMember}>
+                        <img src={deleteIcon} alt="" class="icon" />
+                        <span>{labels.Remove}</span>
+                    </button>
+                </div>
+            </c-brs_simple-card>
+        </div>
+    </template>
+
+    <c-brs_organization-individual-modal if:true={showMemberModal} member-type={feMemberType} original-type={membertype}
+        onhandleclosemembermodal={handleCloseMemberModal} new-uccid={newUCCId} onhandlesubmit={handleSubmit}
+        is-edit={isEdit} member-data-on-edit={memberDataOnEdit} is-assignee={isAssignee}>
+    </c-brs_organization-individual-modal>
+
+    <p class="error-text" if:true={showErrorMessage}>
+        {errorMessage}
+    </p>
+
+    <c-brs_next-back-buttons nextlabel={labels.Next} prevlabel={labels.Back} onhandlenext={validate}
+        show-summary={showGoToSummaryButton} gotosummarylabel={labels.go_to_summary} ongotosummary={handleGoToSummary}
+        onhandleback={handlePropagateBack}></c-brs_next-back-buttons>
+    </div>
+</template>

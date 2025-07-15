@@ -1,0 +1,13 @@
+.progress-bar__value_inprogess{
+    display: block;
+    height: 100%;
+    background: #F6A053;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+}
+
+.progress-bar__value_complete{
+    display: block;
+    height: 100%;
+    background-color: #3A95D3;
+    box-shadow: 0 2px 4px 0 #E7E9F2;
+}

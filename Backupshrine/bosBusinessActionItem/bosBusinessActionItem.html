@@ -1,0 +1,34 @@
+<template>
+  <div class="actionItem_Wrapper">
+    <div class="dueIcons_Row">
+      <div class="icon_container">
+        <img src={pastdue} />
+        <p class="large"><b>{firstcount} {label.businessProfile_PastDue}</b></p>
+      </div>
+      <div class="icon_container">
+        <img src={duesoon} />
+        <p class="large">{secondcount} {label.businessProfile_DueSoon}</p>
+      </div>
+      <div class="icon_container">
+        <img src={upcoming} />
+        <p class="large">{thirdcount} {label.businessProfile_upcoming}</p>
+      </div>
+    </div>
+    <div class="slds-grid slds-wrap">
+      <lightning-tabset
+        class=" slds-col slds-large-size_11-of-12 slds-medium-size_12-of-12 slds-size_12-of-12 actionItems_tabs"
+        active-tab-value={activeTabName}>
+        <lightning-tab label={label.businessProfile_tabToDo} value={label.businessProfile_tabToDo}>
+          <p class="small tabDesc" aria-label={label.businessProfile_Todo_Desc}><lightning-formatted-rich-text value={label.businessProfile_Todo_Desc}></lightning-formatted-rich-text></p>
+          <c-bos-action-item-card actiondata={firstTab} tabname={label.businessProfile_tabToDo}
+            nodatasection={noToDoData}></c-bos-action-item-card>
+        </lightning-tab>
+        <lightning-tab label={label.businessProfile_upcoming} value={label.businessProfile_upcoming}>
+          <p class="small tabDesc" aria-label={label.businessProfile_Todo_Desc}><lightning-formatted-rich-text value={label.businessProfile_Todo_Desc}></lightning-formatted-rich-text></p>
+          <c-bos-action-item-card actiondata={secondTab} tabname={label.businessProfile_upcoming}
+            nodatasection={noUpcomingData}></c-bos-action-item-card>
+        </lightning-tab>
+      </lightning-tabset>
+    </div>
+  </div>
+</template>
